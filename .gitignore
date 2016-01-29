@@ -5,6 +5,9 @@ Resource.designer.cs
 bin
 obj
 
+packages/
+!packages/repositories.config
+
 *.pidb
 *.userprefs
 *.swp
