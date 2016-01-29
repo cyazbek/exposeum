@@ -1,1 +1,9 @@
-﻿<Properties StartupItem="Exposeum\Exposeum.csproj" />
+﻿<Properties StartupItem="Exposeum\Exposeum.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus_5_API_23_x86" />
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Exposeum AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

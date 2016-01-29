@@ -1,26 +1,28 @@
-using Android.App;
-using Android.Widget;
-using Android.OS;
-
-namespace Exposeum
+﻿namespace Exposeum
 {
-	[Activity (Label = "Exposeum", MainLauncher = true, Icon = "@mipmap/icon")]
-	public class MainActivity : Activity
-	{
-		int count = 1;
+	using Android.App;
+	using Android.Content;
+	using Android.OS;
+	using Android.Views;
+	using Android.Widget;
 
-		protected override void OnCreate (Bundle savedInstanceState)
+	/// <summary>
+	///   The main activity is implemented as a ListActivity. When the user
+	///   clicks on a item in the ListView, we will display the appropriate activity.
+	/// </summary>
+	[Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/ic_launcher")]
+	public class MainActivity : ListActivity
+	{
+		protected override void OnCreate (Bundle bundle)
 		{
-			Xamarin.Insights.Initialize (XamarinInsights.ApiKey, this);
-			base.OnCreate (savedInstanceState);
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-			};
+			base.OnCreate (bundle);
+			ListAdapter = new MainMenuAdapter (this);
+		}
+
+		protected override void OnListItemClick (ListView l, View v, int position, long id)
+		{
+			Intent startActivity = (Intent)ListAdapter.GetItem (position);
+			StartActivity (startActivity);
 		}
 	}
 }
