@@ -20,7 +20,6 @@ namespace Exposeum
 		private float _lastTouchY;
 		private float _posX;
 		private float _posY;
-		private float _rotation = 0.0f;
 		private float _scaleFactor = 1.0f;
 
 		public MapView (Context context) : base(context, null, 0)
@@ -92,7 +91,6 @@ namespace Exposeum
 			base.OnDraw (canvas);
 			canvas.Save ();
 			canvas.Translate (_posX, _posY);
-			canvas.Rotate (_rotation);
 			canvas.Scale (_scaleFactor, _scaleFactor);
 			_icon.Draw (canvas);
 
