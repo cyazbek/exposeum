@@ -90,6 +90,7 @@ namespace Exposeum
 		{
 			base.OnDraw (canvas);
 			canvas.Save ();
+			canvas.Translate (_scaleFactor * -_map.IntrinsicWidth / 2, _scaleFactor * -_map.IntrinsicHeight / 2);
 			canvas.Translate (_posX, _posY);
 			canvas.Scale (_scaleFactor, _scaleFactor);
 			_map.Draw (canvas);
