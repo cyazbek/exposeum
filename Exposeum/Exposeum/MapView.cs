@@ -24,6 +24,9 @@ namespace Exposeum
 		private float _scaleFactor = 1.0f;
 		private Paint _pointColour = new Paint();
 
+		//test u,v coordinates for points to be drawn on map
+		private float[] uvPointCoordinates = new float[4]{0.50f, 0.50f, 0.75f, 0.75f};
+
 		public MapView (Context context) : base(context, null, 0)
 		{
 			_map = context.Resources.GetDrawable (Resource.Drawable.metro_map);
