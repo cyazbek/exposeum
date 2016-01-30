@@ -13,7 +13,7 @@ namespace Exposeum
 	public class MapView : View
 	{
 		private static readonly int InvalidPointerId = -1;
-		private readonly Drawable _icon;
+		private readonly Drawable _map;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
 		private float _lastTouchX;
@@ -24,8 +24,8 @@ namespace Exposeum
 
 		public MapView (Context context) : base(context, null, 0)
 		{
-			_icon = context.Resources.GetDrawable (Resource.Drawable.metro_map);
-			_icon.SetBounds (0, 0, _icon.IntrinsicWidth, _icon.IntrinsicHeight);
+			_map = context.Resources.GetDrawable (Resource.Drawable.metro_map);
+			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 		}
 
@@ -92,7 +92,7 @@ namespace Exposeum
 			canvas.Save ();
 			canvas.Translate (_posX, _posY);
 			canvas.Scale (_scaleFactor, _scaleFactor);
-			_icon.Draw (canvas);
+			_map.Draw (canvas);
 
 			canvas.Restore ();
 		}
@@ -122,5 +122,7 @@ namespace Exposeum
 				return true;
 			}
 		}
+
+
 	}
 }
