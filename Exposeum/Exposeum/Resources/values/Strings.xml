@@ -5,4 +5,8 @@
   <string name="beacon_activity" >Beacons</string>
   <string name="map_activity">Map</string>
   <string name="language_activity">Language</string>
+  <string name="b_activity">Beacon Activity</string>
+  <string name="l_activity">Language Activity</string>
+  <string name="m_activity">Map Activity</string>
+  
 </resources>
