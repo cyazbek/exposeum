@@ -46,6 +46,7 @@ namespace Exposeum
 
 			switch (action) {
 			case MotionEventActions.Down:
+				Log.Debug ("touchdown-uvcoords", getUVFromScreenCoords (ev.GetX (), ev.GetY ()));
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -136,5 +137,31 @@ namespace Exposeum
 			}
 		}
 
+		//return screen touch coordinates in uv coordinates of map
+		//takes translation and zooming into account
+		private string getUVFromScreenCoords(float screenX, float screenY){
+
+			float u = ((screenX - _posX)/_scaleFactor + _map.IntrinsicWidth/2)/_map.IntrinsicWidth;
+
+			string ustr = u.ToString ();
+			if (u > 1.0f) {
+				ustr = "greater than 1.0";
+			}
+			if (u < 0.0f) {
+				ustr = "less than 0.0";
+			}
+
+			float v = ((screenY - _posY)/_scaleFactor + _map.IntrinsicHeight/2)/_map.IntrinsicHeight;
+
+			string vstr = v.ToString ();
+			if (v > 1.0f) {
+				vstr = "greater than 1.0";
+			}
+			if (v < 0.0f) {
+				vstr = "less than 0.0";
+			}
+
+			return string.Format ("({0}, {1})", ustr, vstr);
+		}
 	}
 }
