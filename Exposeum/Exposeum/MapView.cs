@@ -13,6 +13,7 @@ namespace Exposeum
 	public class MapView : View
 	{
 		private static readonly int InvalidPointerId = -1;
+		private static readonly int POINT_RADIUS = 50;
 		private readonly Drawable _map;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
