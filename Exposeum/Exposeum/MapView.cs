@@ -1,5 +1,6 @@
 namespace Exposeum
 {
+	using System.Collections.Generic;
 	using Android.Content;
 	using Android.Graphics;
 	using Android.Graphics.Drawables;
@@ -13,7 +14,6 @@ namespace Exposeum
 	public class MapView : View
 	{
 		private static readonly int InvalidPointerId = -1;
-		private static readonly int POINT_RADIUS = 50;
 		private readonly Drawable _map;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
@@ -22,10 +22,9 @@ namespace Exposeum
 		private float _posX;
 		private float _posY;
 		private float _scaleFactor = 1.0f;
-		private Paint _pointColour = new Paint();
 
-		//test u,v coordinates for points to be drawn on map
-		private float[] uvPointCoordinates = new float[4]{0.50f, 0.50f, 0.75f, 0.75f};
+		//test points to be drawn on map
+		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
 
 		public MapView (Context context) : base(context, null, 0)
 		{
@@ -33,8 +32,9 @@ namespace Exposeum
 			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
-			_pointColour.SetStyle (Paint.Style.Fill);
-			_pointColour.Color = Color.OrangeRed;
+			//push some sample points to draw on our map
+			samplePoints.Add(new PointOfInterest(0.50f, 0.50f));
+			samplePoints.Add(new PointOfInterest(0.75f, 0.75f));
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
@@ -103,8 +103,8 @@ namespace Exposeum
 			_map.Draw (canvas);
 
 			//draw pins on top of map
-			for (int i = 0; i < uvPointCoordinates.Length; i += 2)
-				canvas.DrawCircle (uvPointCoordinates[i] * _map.IntrinsicWidth, uvPointCoordinates [i + 1] * _map.IntrinsicHeight, POINT_RADIUS, _pointColour);
+			foreach (PointOfInterest poi in samplePoints)
+				poi.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);
 
 			canvas.Restore ();
 		}
