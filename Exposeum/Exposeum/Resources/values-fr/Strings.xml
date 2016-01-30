@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<resources>
+  <string name="app_name" >Exposeum</string>
+  <string name="beacon_activity" >Beacons</string>
+  <string name="map_activity">Carte</string>
+  <string name="language_activity">Langue</string>
+</resources>
