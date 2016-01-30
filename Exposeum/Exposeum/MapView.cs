@@ -103,6 +103,10 @@ namespace Exposeum
 			canvas.Scale (_scaleFactor, _scaleFactor);
 			_map.Draw (canvas);
 
+			//draw pins on top of map
+			for (int i = 0; i < uvPointCoordinates.Length; i += 2)
+				canvas.DrawCircle (uvPointCoordinates[i] * _map.IntrinsicWidth, uvPointCoordinates [i + 1] * _map.IntrinsicHeight, POINT_RADIUS, _pointColour);
+
 			canvas.Restore ();
 		}
 			
@@ -131,7 +135,6 @@ namespace Exposeum
 				return true;
 			}
 		}
-
 
 	}
 }
