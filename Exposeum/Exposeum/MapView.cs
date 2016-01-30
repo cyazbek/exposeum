@@ -141,7 +141,7 @@ namespace Exposeum
 		//takes translation and zooming into account
 		private string getUVFromScreenCoords(float screenX, float screenY){
 
-			float u = ((screenX - _posX)/_scaleFactor + _map.IntrinsicWidth/2)/_map.IntrinsicWidth;
+			float u = (screenX-_posX)/(_map.IntrinsicWidth*_scaleFactor) + 0.50f;
 
 			string ustr = u.ToString ();
 			if (u > 1.0f) {
@@ -151,7 +151,7 @@ namespace Exposeum
 				ustr = "less than 0.0";
 			}
 
-			float v = ((screenY - _posY)/_scaleFactor + _map.IntrinsicHeight/2)/_map.IntrinsicHeight;
+			float v = (screenY-_posY)/(_map.IntrinsicHeight*_scaleFactor) + 0.50f;
 
 			string vstr = v.ToString ();
 			if (v > 1.0f) {
