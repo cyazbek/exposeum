@@ -21,12 +21,16 @@ namespace Exposeum
 		private float _posX;
 		private float _posY;
 		private float _scaleFactor = 1.0f;
+		private Paint _pointColour = new Paint();
 
 		public MapView (Context context) : base(context, null, 0)
 		{
 			_map = context.Resources.GetDrawable (Resource.Drawable.metro_map);
 			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
+
+			_pointColour.SetStyle (Paint.Style.Fill);
+			_pointColour.Color = Color.OrangeRed;
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
