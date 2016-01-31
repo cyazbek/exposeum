@@ -33,8 +33,15 @@ namespace Exposeum
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
 			//push some sample points to draw on our map
-			samplePoints.Add(new PointOfInterest(0.50f, 0.50f));
-			samplePoints.Add(new PointOfInterest(0.75f, 0.75f));
+			samplePoints.Add(new PointOfInterest(0.53f, 0.46f));
+			samplePoints.Add(new PointOfInterest(0.62f, 0.64f));
+			samplePoints.Add(new PointOfInterest(0.60f, 0.82f));
+			samplePoints.Add(new PointOfInterest(0.85f, 0.88f));
+			samplePoints.Add(new PointOfInterest(0.925f, 0.55f));
+			samplePoints.Add(new PointOfInterest(0.77f, 0.265f));
+			samplePoints.Add(new PointOfInterest(0.56f, 0.19f));
+			samplePoints.Add(new PointOfInterest(0.346f, 0.886f));
+			samplePoints.Add(new PointOfInterest(0.241f, 0.266f));
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)

@@ -8,7 +8,7 @@ namespace Exposeum
 		private float u;
 		private float v;
 		private String label;
-		private float radius = 50;
+		private float radius = 30;
 		private Paint paint = new Paint();
 
 		public PointOfInterest ()
