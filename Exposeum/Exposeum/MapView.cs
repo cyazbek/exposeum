@@ -1,6 +1,7 @@
 namespace Exposeum
 {
 	using System.Collections.Generic;
+	using System;
 	using Android.Content;
 	using Android.Graphics;
 	using Android.Graphics.Drawables;
@@ -33,15 +34,15 @@ namespace Exposeum
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
 			//push some sample points to draw on our map
-			samplePoints.Add(new PointOfInterest(0.53f, 0.46f));
-			samplePoints.Add(new PointOfInterest(0.62f, 0.64f));
-			samplePoints.Add(new PointOfInterest(0.60f, 0.82f));
-			samplePoints.Add(new PointOfInterest(0.85f, 0.88f));
-			samplePoints.Add(new PointOfInterest(0.925f, 0.55f));
-			samplePoints.Add(new PointOfInterest(0.77f, 0.265f));
-			samplePoints.Add(new PointOfInterest(0.56f, 0.19f));
-			samplePoints.Add(new PointOfInterest(0.346f, 0.886f));
-			samplePoints.Add(new PointOfInterest(0.241f, 0.266f));
+			samplePoints.Add(new PointOfInterest(0.53f, 0.46f, "site 1"));
+			samplePoints.Add(new PointOfInterest(0.62f, 0.64f, "site 2"));
+			samplePoints.Add(new PointOfInterest(0.60f, 0.82f, "site 3"));
+			samplePoints.Add(new PointOfInterest(0.85f, 0.88f, "site 4"));
+			samplePoints.Add(new PointOfInterest(0.925f, 0.55f, "site 5"));
+			samplePoints.Add(new PointOfInterest(0.77f, 0.265f, "site 6"));
+			samplePoints.Add(new PointOfInterest(0.56f, 0.19f, "site 7"));
+			samplePoints.Add(new PointOfInterest(0.346f, 0.886f, "site 8"));
+			samplePoints.Add(new PointOfInterest(0.241f, 0.266f, "site 9"));
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
@@ -53,6 +54,7 @@ namespace Exposeum
 
 			switch (action) {
 			case MotionEventActions.Down:
+				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -140,6 +142,24 @@ namespace Exposeum
 				_view.Invalidate ();
 				return true;
 			}
+		}
+
+		private PointOfInterest selectedPOI(float screenX, float screenY){
+
+			PointOfInterest clicked = null;
+
+			foreach (PointOfInterest poi in samplePoints) {
+				float poiX = _posX + (_scaleFactor * _map.IntrinsicWidth * poi.U) - ((_scaleFactor * _map.IntrinsicWidth) / 2);
+				float poiY = _posY + (_scaleFactor * _map.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.IntrinsicHeight) / 2);
+
+				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius*_scaleFactor) {
+					clicked = poi;
+					poi.setTouched();
+					continue;
+				}
+			}
+				
+			return clicked;
 		}
 	}
 }
