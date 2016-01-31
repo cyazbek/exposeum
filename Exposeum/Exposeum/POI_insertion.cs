@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Widget;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Android.Content;
 
 namespace Exposeum
 {
@@ -24,17 +25,15 @@ namespace Exposeum
             btnSubmit.Click += (sender, e) =>
             {
                 POI poi = new POI { name_fr = "Firas", name_en = "Firas", dscription_fr = "Prettier than Oli", dscription_en = "Plus Beau que Oli" };
-                AddStock(conn, poi);
+                AddPoi(conn, poi);
                 var textView = FindViewById<TextView>(Resource.Id.displayNum);
-                var table = conn.Table<POI>();
-                foreach (var s in table)
-                {
-                    Console.WriteLine(s.name_en + " " + s.name_fr);
-                }
+                textView.Text = "Addedd Succesfuly";
+                var intent = new Intent(this, typeof(LanguageActivity));
+                StartActivity(intent);
             };
 
         }
-        public static void AddStock(SQLiteConnection db, POI poi)
+        public static void AddPoi(SQLiteConnection db, POI poi)
         {
             db.Insert(poi);
         }
