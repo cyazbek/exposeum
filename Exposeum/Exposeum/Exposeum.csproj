@@ -81,7 +81,6 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable\metro_map.png" />
     <AndroidResource Include="Resources\drawable\floor_5.png" />
   </ItemGroup>
   <ItemGroup>
