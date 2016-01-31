@@ -28,7 +28,7 @@ namespace Exposeum
 
 		public MapView (Context context) : base(context, null, 0)
 		{
-			_map = context.Resources.GetDrawable (Resource.Drawable.metro_map);
+			_map = context.Resources.GetDrawable (Resource.Drawable.floor_5);
 			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
