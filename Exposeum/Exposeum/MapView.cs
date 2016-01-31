@@ -154,7 +154,7 @@ namespace Exposeum
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius*_scaleFactor) {
 					clicked = poi;
-					poi.setTouched();
+					poi.SetTouched();
 					continue;
 				}
 			}

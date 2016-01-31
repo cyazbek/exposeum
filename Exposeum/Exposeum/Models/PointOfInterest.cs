@@ -68,7 +68,7 @@ namespace Exposeum
 			canvas.DrawCircle (u * mapWidth, v * mapHeight, radius, paint);
 		}
 
-		public void touched(){
+		public void SetTouched(){
 			paint.Color = Color.ForestGreen;
 		}
 	}
