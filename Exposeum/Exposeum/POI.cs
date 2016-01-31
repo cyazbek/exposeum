@@ -1,3 +1,4 @@
+
 using SQLite;
 
 namespace Exposeum
@@ -6,7 +7,13 @@ namespace Exposeum
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-        public string description_en { get; set;}
-        public string description_fr{ get; set;} 
+
+        public string name_en { get; set; }
+
+        public string name_fr { get; set; }
+
+        public string dscription_en { get; set; }
+
+        public string dscription_fr { get; set; }
     }
 }

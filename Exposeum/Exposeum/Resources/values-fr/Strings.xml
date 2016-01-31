@@ -8,4 +8,12 @@
   <string name="b_activity">Activité des Beacons</string>
   <string name="l_activity">Activité de la langue</string>
   <string name="m_activity">Activité de la carte</string>
+  <string name ="DB_Created">Base de donnée créé</string>
+  <string name ="POI_name_en"> Nom du POI (Anglais) </string>
+  <string name ="POI_name_fr"> Nom du POI (Français) </string>
+  <string name ="POI_desc_en">Veuillez entrer la description en Anglais</string>
+  <string name ="POI_desc_fr">Veuillez entrer la description en Français</string>
+  <string name ="POI_submit">Soumettre</string>
+  <string name ="language_sub">Nouveau POI</string>
+  <string name ="language_disp">Afficher POI</string>
 </resources>

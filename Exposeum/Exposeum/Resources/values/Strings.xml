@@ -8,5 +8,12 @@
   <string name="b_activity">Beacon Activity</string>
   <string name="l_activity">Language Activity</string>
   <string name="m_activity">Map Activity</string>
-  
+  <string name ="DB_Created">Database Created</string>
+  <string name ="POI_name_en"> Name Of POI (English) </string>
+  <string name ="POI_name_fr"> Name Of POI (French) </string>
+  <string name ="POI_desc_en">Please enter the English Description</string>
+  <string name ="POI_desc_fr">Please enter the French Description</string>
+  <string name ="POI_submit">Submit</string>
+  <string name ="language_sub">New POI</string>
+  <string name ="language_disp">Display POI</string>
 </resources>
