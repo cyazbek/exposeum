@@ -7,12 +7,11 @@
         android:text="@+string/POI_name_en"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/POI_name_en" />
+        android:layout_height="wrap_content" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/POI_name_en" />
+        android:id="@+id/POI_name_en_text" />
     <TextView
         android:text="@+string/POI_name_fr"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -21,7 +20,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/POI_name_fr" />
+        android:id="@+id/POI_name_fr_text" />
     <TextView
         android:text="@+string/POI_desc_en"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -31,7 +30,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/POI_desc_en" />
+        android:id="@+id/POI_desc_en_text" />
     <TextView
         android:text="@+string/POI_desc_fr"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -41,16 +40,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/POI_desc_fr" />
+        android:id="@+id/POI_desc_fr_text" />
     <Button
         android:text="@+string/POI_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSubmit" />
     <TextView
-        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/displayNum" />
+        android:layout_height="22.0dp"
+        android:id="@+id/successMessage"
+        android:layout_marginBottom="13.5dp" />
 </LinearLayout>

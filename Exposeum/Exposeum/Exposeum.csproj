@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="POI_ListDisplay.cs" />
     <Compile Include="POI_insertion.cs" />
     <Compile Include="POI.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -84,7 +85,7 @@
     <AndroidResource Include="Resources\layout\POI_Insertion.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\POI_Display.axml">
+    <AndroidResource Include="Resources\layout\POI_InfoDisplay.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Language.axml">
@@ -96,6 +97,9 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\layout\POI_List.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

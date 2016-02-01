@@ -6,15 +6,27 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Large Text"
+        android:text="@+string/POI_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/POI_display_name" />
     <TextView
-        android:text="Large Text"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_POI_name" />
+    <TextView
+        android:text="@+string/POI_description"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/POI_display_desc" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_POI_description" />
 </LinearLayout>
