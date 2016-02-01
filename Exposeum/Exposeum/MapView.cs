@@ -23,9 +23,13 @@ namespace Exposeum
 		private float _posX;
 		private float _posY;
 		private float _scaleFactor = 1.0f;
+		private PointOfInterest _lastClickedPOI;
 
 		//test points to be drawn on map
 		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
+
+		//test edges to be draw on map
+		private List<Edge> sampleEdges = new List<Edge>();
 
 		public MapView (Context context) : base(context, null, 0)
 		{
@@ -55,6 +59,14 @@ namespace Exposeum
 			switch (action) {
 			case MotionEventActions.Down:
 				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
+				if (selected != null) {
+					if (_lastClickedPOI == null) {
+						_lastClickedPOI = selected;
+					} else if (_lastClickedPOI != selected) {
+						sampleEdges.Add (new Edge (_lastClickedPOI, selected));
+						_lastClickedPOI = selected;
+					}
+				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -111,6 +123,10 @@ namespace Exposeum
 			canvas.Scale (_scaleFactor, _scaleFactor);
 			_map.Draw (canvas);
 
+			//draw edges on top of map
+			foreach (Edge edge in sampleEdges)
+				edge.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);
+			
 			//draw pins on top of map
 			foreach (PointOfInterest poi in samplePoints)
 				poi.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);

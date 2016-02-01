@@ -66,6 +66,7 @@
     <Compile Include="MapActivity.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Models\Edge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
