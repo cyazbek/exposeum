@@ -56,7 +56,7 @@
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.20.0.0.2\lib\MonoAndroid10\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Estimote.Android">
-      <HintPath>..\packages\Xamarin.Estimote.Android.0.9.1.0\lib\MonoAndroid43\Xamarin.Estimote.Android.dll</HintPath>
+      <HintPath>..\Components\estimotesdkandroid-0.9.1.0\lib\android\Xamarin.Estimote.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +68,6 @@
     <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="MapView.cs" />
-    <Compile Include="BeaconView.cs" />
     <Compile Include="Model\BeaconFinder.cs" />
     <Compile Include="Model\IBeaconFinderObservable.cs" />
     <Compile Include="Model\IBeaconFinderObserver.cs" />
