@@ -145,6 +145,7 @@ namespace Exposeum
 
 			public override bool OnScale (ScaleGestureDetector detector)
 			{
+               
 				_view._scaleFactor *= detector.ScaleFactor;
 
 				// put a limit on how small or big the image can get.
@@ -171,7 +172,7 @@ namespace Exposeum
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius*_scaleFactor) {
 					clicked = poi;
 					poi.SetTouched();
-					continue;
+					break;
 				}
 			}
 				
