@@ -3,10 +3,13 @@ using EstimoteSdk;
 using Android.Util;
 using Android.OS;
 using Android.Content.PM;
+using JavaObject = Java.Lang.Object;
+using Android.Content;
+using System.Collections.Generic; 
 
 namespace Exposeum
 {
-	public class BeaconFinder: BeaconManager.IServiceReadyCallback
+	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
 
 		private BeaconManager beaconManager;
@@ -14,26 +17,42 @@ namespace Exposeum
 		private bool beaconInRegion;
 		private bool isRanging;
 		private const string TAG = "BeaconFinder";
+		int beaconCount;
+		private LinkedList<IBeaconFinderObserver> observers = new LinkedList<IBeaconFinderObserver>();
 
-		public BeaconFinder ()
+		public BeaconFinder (Context context)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-			beaconManager = new BeaconManager (this);
+			beaconManager = new BeaconManager (context);
 
 			//add event handlers
-			beaconManager.Ranging += BeaconManagerRanging;
+			beaconManager.Ranging += beaconManagerRanging;
 			beaconManager.EnteredRegion += (sender, args) => setBeaconInRegion(true);
 			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
 		}
 
-		private void BeaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
+		public BeaconFinder (Context context, Region customRegion){
+			region = customRegion;
+			beaconManager = new BeaconManager (context);
+
+			//add event handlers
+			beaconManager.Ranging += beaconManagerRanging;
+			beaconManager.EnteredRegion += (sender, args) => setBeaconInRegion(true);
+			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
+		}
+
+
+		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
 			if (e.Beacons == null)
 			{
 				return;
 			}
 
+			beaconCount = e.Beacons.Count;
+
 			Log.Debug("BeaconActivity", "Found {0} beacons.", e.Beacons.Count);
+			notifyObservers();
 
 			/*bool close = false;
 			foreach (var beacon in e.Beacons)
@@ -73,35 +92,46 @@ namespace Exposeum
 
 		}
 
-		public void FindBeacons(){
-
+		public void findBeacons(){
 			if(checkBluetooth())
+				//Connect ot the beacon service
 				beaconManager.Connect(this);
+		}
+
+		public void stop(){
+			if (isRanging)
+				//Disconnect ot the beacon service
+				beaconManager.Disconnect ();
 		}
 
 		private bool checkBluetooth()
 		{
 			//Validation checks
-			if (!beaconManager.HasBluetooth || !PackageManager.HasSystemFeature(PackageManager.FeatureBluetoothLe))
-			{
+			if (!beaconManager.HasBluetooth || !beaconManager.IsBluetoothEnabled 
+				|| !beaconManager.CheckPermissionsAndService())
 				return false;
-			}
-			else if (!beaconManager.IsBluetoothEnabled)
-			{
-				return false;
-			}
-			else if (!beaconManager.CheckPermissionsAndService())
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			
+
+			return true;
+
 		}
 
 		private void setBeaconInRegion(bool inRegion){
 			beaconInRegion = inRegion;
+		}
+
+		public void addObserver(IBeaconFinderObserver observer){
+			observers.AddLast (observer);
+		}
+
+		public void notifyObservers(){
+			foreach (IBeaconFinderObserver observer in observers) {
+				observer.beaconFinderObserverUpdate (this);
+			}
+		}
+
+		public int getBeaconCount(){
+			return beaconCount;
 		}
 
 	}

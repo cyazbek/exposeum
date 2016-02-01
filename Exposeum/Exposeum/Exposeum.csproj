@@ -70,6 +70,8 @@
     <Compile Include="MapView.cs" />
     <Compile Include="BeaconView.cs" />
     <Compile Include="Model\BeaconFinder.cs" />
+    <Compile Include="Model\IBeaconFinderObservable.cs" />
+    <Compile Include="Model\IBeaconFinderObserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

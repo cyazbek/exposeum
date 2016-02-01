@@ -20,7 +20,7 @@ namespace Exposeum
 {
 	[Activity(Label = "@string/beacon_activity")]	
 	//in the future beacon discovery should probably be handled by a service or the Application android class
-	public class BeaconActivity : Activity
+	public class BeaconActivity : Activity, IBeaconFinderObserver
 	{
 
 		private TextView beaconContextualText;
@@ -37,29 +37,30 @@ namespace Exposeum
 			//define UI bindings
 			beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
 
-			beaconFinder = new BeaconFinder();
-
-
-
+			beaconFinder = new BeaconFinder(this);
+			beaconFinder.addObserver (this);
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-
+			beaconFinder.findBeacons ();
 		}
 
 		protected override void OnPause()
 		{
-
-
+			beaconFinder.stop ();
 			base.OnPause();
 		}
 
 		protected override void OnDestroy()
 		{
-
+			beaconFinder.stop ();
 			base.OnDestroy();
+		}
+
+		public void beaconFinderObserverUpdate(IBeaconFinderObservable observable){
+			beaconContextualText.Text = "There are " + ((BeaconFinder)observable).getBeaconCount () + " beacon(s) close to you";
 		}
 
 	}
