@@ -1,23 +1,34 @@
 using System;
 using SQLite;
+using EstimoteSdk;
 
 namespace Exposeum.Models
 {
     class Database
     {
-        private String dbname;
         private SQLiteConnection dbconnection;
         private String folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
-        public Database(String dbname)
+        public Database()
         {
-            this.dbname = dbname;
-            this.dbconnection = new SQLiteConnection(System.IO.Path.Combine(folder, "POI.db"));
+            this.dbconnection = connect();
+        }
+
+        private SQLiteConnection connect()
+        {
+            return new SQLiteConnection(System.IO.Path.Combine(folder, "Exposeum.db"));
         }
 
         public SQLiteConnection getConnection()
         {
             return this.dbconnection;
+        }
+
+        public void createTables()
+        {
+            dbconnection.CreateTable<POI>();
+            dbconnection.CreateTable<Beacon>();
+            dbconnection.CreateTable<StoryLine>();
         }
 
     }
