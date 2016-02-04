@@ -26,7 +26,6 @@ namespace Exposeum
 		private TextView beaconContextualText;
 		private BeaconFinder beaconFinder;
 
-
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
@@ -60,7 +59,22 @@ namespace Exposeum
 		}
 
 		public void beaconFinderObserverUpdate(IBeaconFinderObservable observable){
-			beaconContextualText.Text = "There are " + ((BeaconFinder)observable).getBeaconCount () + " beacon(s) close to you";
+
+			BeaconFinder beaconFinder = (BeaconFinder)observable;
+
+			string text1 = "There is " + beaconFinder.getBeaconCount () + " beacon(s) close to you\n\n";
+
+			text1 = text1 + "There is " + beaconFinder.getImmediateBeacons().Count + " beacon(s) immediate to you\n\n";
+
+			Beacon beacon = beaconFinder.getClosestBeacon();
+
+			text1 = text1 + "The Closest beacon is: \n";
+			if (beacon != null)
+				text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
+
+			beaconContextualText.Text = text1 ;
+
+
 		}
 
 	}

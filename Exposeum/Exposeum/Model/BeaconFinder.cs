@@ -11,14 +11,14 @@ namespace Exposeum
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
-
 		private BeaconManager beaconManager;
 		private readonly EstimoteSdk.Region region;
 		private bool beaconInRegion;
 		private bool isRanging;
 		private const string TAG = "BeaconFinder";
-		int beaconCount;
+		private int beaconCount;
 		private LinkedList<IBeaconFinderObserver> observers = new LinkedList<IBeaconFinderObserver>();
+		private SortedList<double, Beacon> immediateBeacons;
 
 		public BeaconFinder (Context context)
 		{
@@ -50,25 +50,27 @@ namespace Exposeum
 			}
 
 			beaconCount = e.Beacons.Count;
+			immediateBeacons = new SortedList<double, Beacon>();
 
 			Log.Debug("BeaconActivity", "Found {0} beacons.", e.Beacons.Count);
-			notifyObservers();
 
-			/*bool close = false;
 			foreach (var beacon in e.Beacons)
 			{
+
 				var proximity = Utils.ComputeProximity(beacon);
-
-				if (proximity != Utils.Proximity.Unknown)
-					close = true;
-
-				if (proximity != Utils.Proximity.Immediate)
-					continue;
-
 				var accuracy = Utils.ComputeAccuracy(beacon);
-				if (accuracy > .06)
-					continue;
-			}*/
+
+				if (proximity == Utils.Proximity.Immediate) {
+					try {
+						immediateBeacons.Add (Utils.ComputeAccuracy (beacon), beacon);
+					} catch (System.ArgumentException ex) {
+
+					}
+				}
+
+			}
+
+			notifyObservers();
 		}
 
 		public void OnServiceReady()
@@ -132,6 +134,18 @@ namespace Exposeum
 
 		public int getBeaconCount(){
 			return beaconCount;
+		}
+
+		public SortedList<double, Beacon> getImmediateBeacons(){
+			return immediateBeacons;
+		}
+
+		public Beacon getClosestBeacon(){
+
+			if (immediateBeacons.Count == 0)
+				return null;
+			
+			return immediateBeacons.Values[ immediateBeacons.Count - 1 ];
 		}
 
 	}
