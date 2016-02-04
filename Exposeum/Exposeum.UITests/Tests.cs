@@ -22,6 +22,11 @@ namespace Exposeum.UITests
 		[Test]
 		public void ClickingButtonTwiceShouldChangeItsLabel ()
 		{
+
+			app.Repl ();
+			//app.Flash(c=>c.Marked("list"));
+		
+			/*
 			Func<AppQuery, AppQuery> MyButton = c => c.Button ("myButton");
 
 			app.Tap (MyButton);
@@ -30,6 +35,8 @@ namespace Exposeum.UITests
 			app.Screenshot ("Button clicked twice.");
 
 			Assert.AreEqual ("2 clicks!", results [0].Text);
+
+			*/
 		}
 	}
 }
