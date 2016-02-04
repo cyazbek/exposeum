@@ -1,11 +1,12 @@
 
 using SQLite;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
     public class POI
     {
         [PrimaryKey, AutoIncrement]
+
         public int ID { get; set; }
 
         public string name_en { get; set; }
