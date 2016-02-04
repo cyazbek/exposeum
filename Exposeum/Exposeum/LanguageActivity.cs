@@ -10,6 +10,7 @@ namespace Exposeum
     [Activity(Label = "@string/language_activity")]		
 	public class LanguageActivity : Activity
 	{
+        private Models.Database myDB = new Models.Database();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -17,14 +18,6 @@ namespace Exposeum
 
             SetContentView(Resource.Layout.Language);
 
-            //var docsFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
-            //var pathToDatabase = System.IO.Path.Combine(docsFolder, "db_sqlcompnet.db");
-
-            string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            var conn = new SQLiteConnection(System.IO.Path.Combine(folder, "POI.db"));
-            conn.CreateTable<POI>();
-
-            //var result = await createDatabase(pathToDatabase);
             var btnCreate = FindViewById<Button>(Resource.Id.POI_sub);
             var btnDisplay = FindViewById<Button>(Resource.Id.POI_disp);
 
