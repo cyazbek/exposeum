@@ -1,3 +1,5 @@
+using Exposeum.Models;
+
 namespace Exposeum
 {
 	using System.Collections.Generic;
@@ -29,7 +31,7 @@ namespace Exposeum
 		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
 
 		//test edges to be draw on map
-		private List<Edge> sampleEdges = new List<Edge>();
+		private List<Models.Edge> sampleEdges = new List<Models.Edge>();
 
 		public MapView (Context context) : base(context, null, 0)
 		{
@@ -63,7 +65,7 @@ namespace Exposeum
 					if (_lastClickedPOI == null) {
 						_lastClickedPOI = selected;
 					} else if (_lastClickedPOI != selected) {
-						sampleEdges.Add (new Edge (_lastClickedPOI, selected));
+						sampleEdges.Add (new Models.Edge (_lastClickedPOI, selected));
 						_lastClickedPOI = selected;
 					}
 				}
@@ -124,7 +126,7 @@ namespace Exposeum
 			_map.Draw (canvas);
 
 			//draw edges on top of map
-			foreach (Edge edge in sampleEdges)
+			foreach (Models.Edge edge in sampleEdges)
 				edge.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			
 			//draw pins on top of map
