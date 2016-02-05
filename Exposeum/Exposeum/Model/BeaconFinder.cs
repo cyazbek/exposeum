@@ -155,6 +155,10 @@ namespace Exposeum
 			beaconManager.StopMonitoring (region);
 		}
 
+		public BeaconManager getBeaconManager(){
+			return beaconManager;
+		}
+
 	}
 }
 
