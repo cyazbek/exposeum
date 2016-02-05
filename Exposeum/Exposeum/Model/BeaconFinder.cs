@@ -52,7 +52,7 @@ namespace Exposeum
 			beaconCount = e.Beacons.Count;
 			immediateBeacons = new SortedList<double, Beacon>();
 
-			Log.Debug("BeaconActivity", "Found {0} beacons.", e.Beacons.Count);
+			Log.Debug("BeaconFinder", "Found {0} beacons.", e.Beacons.Count);
 
 			foreach (var beacon in e.Beacons)
 			{
@@ -64,7 +64,7 @@ namespace Exposeum
 					try {
 						immediateBeacons.Add (Utils.ComputeAccuracy (beacon), beacon);
 					} catch (System.ArgumentException ex) {
-
+						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: ", ex.Message);
 					}
 				}
 
@@ -112,7 +112,6 @@ namespace Exposeum
 			if (!beaconManager.HasBluetooth || !beaconManager.IsBluetoothEnabled 
 				|| !beaconManager.CheckPermissionsAndService())
 				return false;
-			
 
 			return true;
 
@@ -141,7 +140,6 @@ namespace Exposeum
 		}
 
 		public Beacon getClosestBeacon(){
-
 			if (immediateBeacons.Count == 0)
 				return null;
 			
