@@ -6,12 +6,16 @@ using Android.Widget;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Content;
+using Exposeum.Models;
+using System.Globalization;
+using Java.Util;
 
 namespace Exposeum
 {
     [Activity(Label = "List of POIs")]
     public class POI_ListDisplay : Activity
-    {
+    { 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
 
@@ -20,6 +24,7 @@ namespace Exposeum
             // Set path, create connection
             string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var conn = new SQLiteConnection(System.IO.Path.Combine(folder, "POI.db"));
+            // load information based on system language missing
 
             SetContentView(Resource.Layout.POI_List);
             

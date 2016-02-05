@@ -6,6 +6,7 @@ using Android.Widget;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Content;
+using Exposeum.Models;
 
 namespace Exposeum
 {

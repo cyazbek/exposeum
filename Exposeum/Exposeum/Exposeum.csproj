@@ -71,9 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Database.cs" />
+    <Compile Include="Models\POI.cs" />
+    <Compile Include="Models\StoryLine.cs" />
     <Compile Include="POI_ListDisplay.cs" />
     <Compile Include="POI_insertion.cs" />
-    <Compile Include="POI.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeaconActivity.cs" />
