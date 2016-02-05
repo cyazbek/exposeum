@@ -19,7 +19,6 @@ using Android.Bluetooth;
 namespace Exposeum
 {
 	[Activity(Label = "@string/beacon_activity")]	
-	//in the future beacon discovery should probably be handled by a service or the Application android class
 	public class BeaconActivity : Activity, IBeaconFinderObserver
 	{
 
@@ -44,17 +43,20 @@ namespace Exposeum
 		{
 			base.OnResume();
 			beaconFinder.findBeacons ();
+			beaconFinder.stopMonitoring ();
 		}
 
 		protected override void OnPause()
 		{
 			beaconFinder.stop ();
+			beaconFinder.startMonitoring ();
 			base.OnPause();
 		}
 
 		protected override void OnDestroy()
 		{
 			beaconFinder.stop ();
+			beaconFinder.startMonitoring ();
 			base.OnDestroy();
 		}
 

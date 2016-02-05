@@ -146,6 +146,15 @@ namespace Exposeum
 			return immediateBeacons.Values[ immediateBeacons.Count - 1 ];
 		}
 
+		public void startMonitoring(BeaconManager.IMonitoringListener listener){
+			beaconManager.SetMonitoringListener (listener);
+			beaconManager.StartMonitoring (region);
+		}
+
+		public void stopMonitoring(){
+			beaconManager.StopMonitoring (region);
+		}
+
 	}
 }
 
