@@ -13,7 +13,7 @@ namespace Exposeum.Models
 
         public int ID { get; set; }
         /*A list containing all POI's relative to storyline*/
-        public List<POI> POIS;
+        public List<POI> POIS { get; set; }
         /*constructor for the StoryLine*/
         public StoryLine()
         {
@@ -22,24 +22,23 @@ namespace Exposeum.Models
         //Method to add a POI to a storyline. It makes sure that the POI is set to not veisited
         public void addPOI(POI poi)
         {
-            poi.visited = false;
             POIS.Add(poi); 
         }
 
         //returns a poi given an ID
         public POI getPOI(int id)
         {
-           return this.POIS.FirstOrDefault(x => x.ID == id);  
+           return this.POIS.Find(x => x.ID == id);  
         }
         //get a POI given a beaconID
         public POI getBeaconPOI(UUID id)
         {
-            return this.POIS.FirstOrDefault(x => x.beaconId == id);
+            return this.POIS.Find(x => x.beaconId == id);
         }
         //get a POI given a QRcode id
         public POI getQRPOI(int id)
         {
-            return this.POIS.FirstOrDefault(x => x.QrCodeId == id);
+            return this.POIS.Find(x => x.QrCodeId == id);
         }
 
         
