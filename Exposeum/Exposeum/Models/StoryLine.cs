@@ -2,6 +2,7 @@
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Exposeum.Models
 {
@@ -40,24 +41,56 @@ namespace Exposeum.Models
             return this.POIS.FirstOrDefault(x => x.QrCodeId == id);
         }
 
-        public string name_en { get; set; }
+        
         //Changed the status of a POI to visited. 
         public void visitPoi(POI poi)
         {
             poi.visited = true; 
         }
 
-
+        public string name_en { get; set; }
         public string name_fr { get; set; }
-
+        public string getName()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string storyName;
+            if (lang.Contains("fr"))
+            {
+                storyName = this.name_fr;
+            }
+            else storyName = this.name_en;
+            return storyName; 
+        }
         public string preview_en { get; set; }
 
         public string preview_fr { get; set; }
 
+        public string getPreview()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string storyPreview;
+            if (lang.Contains("fr"))
+            {
+                storyPreview = this.preview_fr;
+            }
+            else storyPreview = this.preview_fr;
+            return storyPreview;
+        }
         public string target_en { get; set; }
 
         public string target_fr { get; set; }
-
-        public string duration { get; set; }
+        public string getAudience()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string storyAudience;
+            if (lang.Contains("fr"))
+            {
+                storyAudience = this.target_fr;
+            }
+            else storyAudience = this.target_en;
+            return storyAudience;
+        }
+        public int duration { get; set; }
+        
     }
 }
