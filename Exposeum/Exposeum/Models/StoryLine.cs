@@ -10,10 +10,14 @@ namespace Exposeum.Models
         [PrimaryKey, AutoIncrement]
 
         public int ID { get; set; }
-
-        public List<POI> POIS = new List<POI>();
-
-        //this method is to fetch through the database and add all the correspondant poi's to its storyline. 
+        /*A list containing all POI's relative to storyline*/
+        public List<POI> POIS;
+        /*constructor for the StoryLine*/
+        public StoryLine()
+        {
+           POIS = new List<POI>();
+        }
+        //Method to add a POI to a storyline. It makes sure that the POI is set to not veisited
         public void addPOI(POI poi)
         {
             poi.visited = false;
@@ -24,6 +28,16 @@ namespace Exposeum.Models
         public POI getPOI(int id)
         {
            return this.POIS.FirstOrDefault(x => x.ID == id);  
+        }
+
+        public POI getBeaconPOI(int id)
+        {
+            return this.POIS.FirstOrDefault(x => x.beaconId == id);
+        }
+
+        public POI getQRPOI(int id)
+        {
+            return this.POIS.FirstOrDefault(x => x.QrCodeId == id);
         }
 
         public string name_en { get; set; }
