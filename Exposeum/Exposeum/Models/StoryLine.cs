@@ -29,12 +29,12 @@ namespace Exposeum.Models
         {
            return this.POIS.FirstOrDefault(x => x.ID == id);  
         }
-
+        //get a POI given a beaconID
         public POI getBeaconPOI(int id)
         {
             return this.POIS.FirstOrDefault(x => x.beaconId == id);
         }
-
+        //get a POI given a QRcode id
         public POI getQRPOI(int id)
         {
             return this.POIS.FirstOrDefault(x => x.QrCodeId == id);
