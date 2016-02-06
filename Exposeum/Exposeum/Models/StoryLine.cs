@@ -76,18 +76,18 @@ namespace Exposeum.Models
             else storyPreview = this.preview_fr;
             return storyPreview;
         }
-        public string target_en { get; set; }
+        public string audience_en { get; set; }
 
-        public string target_fr { get; set; }
+        public string audience_fr { get; set; }
         public string getAudience()
         {
             string lang = Thread.CurrentThread.CurrentCulture.Name;
             string storyAudience;
             if (lang.Contains("fr"))
             {
-                storyAudience = this.target_fr;
+                storyAudience = this.audience_fr;
             }
-            else storyAudience = this.target_en;
+            else storyAudience = this.audience_en;
             return storyAudience;
         }
         public int duration { get; set; }
