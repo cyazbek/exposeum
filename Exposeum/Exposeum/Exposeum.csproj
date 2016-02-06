@@ -74,9 +74,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Database.cs" />
-    <Compile Include="Models\POI.cs" />
-    <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Model\Database.cs" />
+    <Compile Include="Model\POI.cs" />
+    <Compile Include="Model\StoryLine.cs" />
     <Compile Include="POI_ListDisplay.cs" />
     <Compile Include="POI_insertion.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -121,9 +121,6 @@
     <AndroidResource Include="Resources\layout\Beacon.axml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\layout\" />
-    <Folder Include="Model\" />
     <AndroidResource Include="Resources\values-fr\Strings.xml" />
   </ItemGroup>
   <ItemGroup>

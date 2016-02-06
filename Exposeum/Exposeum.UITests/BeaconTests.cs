@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System;
 using System.IO;
 using System.Linq;
@@ -6,9 +6,9 @@ using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
-using EstimoteSdk;
 
-namespace Exposeum.UITests
+
+/*namespace Exposeum.UITests
 {
 	[TestFixture]
 	public class BeaconTests : IBeaconFinderObserver
@@ -41,4 +41,4 @@ namespace Exposeum.UITests
 		}
 	}
 }
-
+*/
