@@ -1,15 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System.IO;
 using SQLite;
 using Exposeum.Models;
 using Java.Util;
@@ -18,13 +8,12 @@ namespace Exposeum.Model
 {
     class POIDatabaseControl
     {
-        private SQLiteConnection dbconnection;
         private String folder; 
-        SQLiteConnection conn; 
+        private SQLiteConnection dbConnection; 
         public POIDatabaseControl()
         {
             this.folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            this.conn = this.connect(); 
+            this.dbConnection = this.connect(); 
         }
         private SQLiteConnection connect()
         {
@@ -32,19 +21,19 @@ namespace Exposeum.Model
         }
         public SQLiteConnection getConnection()
         {
-            return this.dbconnection;
+            return this.dbConnection;
         }
         public void CreateTable()
         {
-            dbconnection.CreateTable<POI>();
+            dbConnection.CreateTable<POI>();
         }
         public void AddPoi(POI poi)
         {
-            dbconnection.Insert(poi);
+            dbConnection.Insert(poi);
         }
         public IEnumerable<POI> getPOI(UUID id)
         {
-            return dbconnection.Query<POI>("select * from [POI] Where POI.beaconId= {0}", id);
+            return dbConnection.Query<POI>("select * from [POI] Where POI.beaconId= {0}", id);
         }
 
     }
