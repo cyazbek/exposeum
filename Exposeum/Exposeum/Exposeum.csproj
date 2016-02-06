@@ -74,10 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Database.cs" />
-    <Compile Include="Model\POI.cs" />
-    <Compile Include="Model\POIDatabaseControl.cs" />
-    <Compile Include="Model\StoryLine.cs" />
+    <Compile Include="Models\Database.cs" />
+    <Compile Include="Models\POI.cs" />
+    <Compile Include="Models\POIDatabaseControl.cs" />
+    <Compile Include="Models\StoryLine.cs" />
     <Compile Include="POI_ListDisplay.cs" />
     <Compile Include="POI_insertion.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -88,9 +88,9 @@
     <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="MapView.cs" />
-    <Compile Include="Model\BeaconFinder.cs" />
-    <Compile Include="Model\IBeaconFinderObservable.cs" />
-    <Compile Include="Model\IBeaconFinderObserver.cs" />
+    <Compile Include="Models\BeaconFinder.cs" />
+    <Compile Include="Models\IBeaconFinderObservable.cs" />
+    <Compile Include="Models\IBeaconFinderObserver.cs" />
     <AndroidResource Include="Resources\layout\POI_Insertion.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
