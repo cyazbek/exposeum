@@ -1,4 +1,5 @@
 
+using Java.Util;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Exposeum.Models
            return this.POIS.FirstOrDefault(x => x.ID == id);  
         }
         //get a POI given a beaconID
-        public POI getBeaconPOI(string id)
+        public POI getBeaconPOI(UUID id)
         {
             return this.POIS.FirstOrDefault(x => x.beaconId == id);
         }

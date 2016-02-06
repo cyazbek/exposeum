@@ -14,6 +14,8 @@ using Java.Util.Concurrent;
 using Android.Util;
 using Android.Content.PM;
 using Android.Bluetooth;
+using Exposeum.Models;
+using Java.Util;
 
 
 namespace Exposeum
@@ -24,16 +26,16 @@ namespace Exposeum
 
 		private TextView beaconContextualText;
 		private BeaconFinder beaconFinder;
-
-		protected override void OnCreate (Bundle savedInstanceState)
+        public POI myPoi;
+        protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
 			//View v = new BeaconView(Resource.Layout.Beacon);
 			SetContentView (Resource.Layout.Beacon);
-
-			//define UI bindings
-			beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
+            myPoi = new POI { name_en = "Point Of interest one", name_fr = "Point d'interet un", dscription_en = "This is the point of interest one", dscription_fr = "Celui là est le premier point d'interet", beaconId = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d") };
+            //define UI bindings
+            beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
 
 			beaconFinder = new BeaconFinder(this);
 			beaconFinder.addObserver (this);
@@ -69,9 +71,15 @@ namespace Exposeum
 			Beacon beacon = beaconFinder.getClosestBeacon();
 
 			text1 = text1 + "The Closest beacon is: \n";
-			if (beacon != null)
-				text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
-
+            if(beacon!=null)
+            {
+                if (beacon.ProximityUUID.Equals(myPoi.beaconId))
+                {
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + myPoi.getName() + "\nDescription: " + myPoi.getDescription() + "\nMinor: " + beacon.Minor + "\n\n";
+                }
+                else
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
+            }
 			beaconContextualText.Text = text1 ;
 
 

@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\POI.cs" />
+    <Compile Include="Model\POIDatabaseControl.cs" />
     <Compile Include="Model\StoryLine.cs" />
     <Compile Include="POI_ListDisplay.cs" />
     <Compile Include="POI_insertion.cs" />

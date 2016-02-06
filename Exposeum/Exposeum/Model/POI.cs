@@ -1,4 +1,5 @@
 
+using Java.Util;
 using SQLite;
 using System.Threading;
 
@@ -10,7 +11,7 @@ namespace Exposeum.Models
 
         public int ID { get; set; }
 
-        public string beaconId { get; set; }
+        public UUID beaconId { get; set; }
 
         public int QrCodeId { get; set; }
 
