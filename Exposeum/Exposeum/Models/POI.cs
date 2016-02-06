@@ -1,5 +1,6 @@
 
 using SQLite;
+using System.Threading;
 
 namespace Exposeum.Models
 {
@@ -26,5 +27,30 @@ namespace Exposeum.Models
         public string dscription_en { get; set; }
 
         public string dscription_fr { get; set; }
+
+        public string getDescription()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string description;
+            if (lang.Contains("fr"))
+            {
+                description = this.dscription_fr;
+            }
+            else description = this.dscription_en; 
+
+            return description; 
+        }
+        public string getName()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string PoiName;
+            if (lang.Contains("fr"))
+            {
+                PoiName = this.name_fr;
+            }
+            else PoiName = this.name_en;
+            return PoiName;
+        }
+
     }
 }

@@ -30,21 +30,10 @@ namespace Exposeum
 
             foreach (var poi in query)
             {
-                //recognizing the language of the system to see which language to display
-                string lang = Thread.CurrentThread.CurrentCulture.Name; 
-
-                textView.Text += "\n POI ID: " + poi.ID;
-                if (lang.Contains("fr"))
-                {
-                    textView.Text += "\n\t\t POI french name: " + poi.name_fr;
-                    textView.Text += "\n\t\t POI french description: " + poi.dscription_fr;
-                }
-
-                else
-                {
-                    textView.Text += "\n\t\t POI english name: " + poi.name_en;
-                    textView.Text += "\n\t\t POI english description: " + poi.dscription_en;
-                }
+                //Displaying the POI's information basd on the language of the phone.
+                
+                    textView.Text += "\n\t\t POI name: " + poi.getName();
+                    textView.Text += "\n\t\t POI description: " + poi.getDescription();  
             }
 
             /*
