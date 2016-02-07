@@ -175,7 +175,7 @@ namespace Exposeum.Controller
                 storyLine.poiList.Add(getPoi(i)); 
             }
 
-
+            return storyLine; 
         }
 
     }
