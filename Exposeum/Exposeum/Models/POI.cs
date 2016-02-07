@@ -6,10 +6,7 @@ using System.Threading;
 namespace Exposeum.Models
 {
     public class POI
-    {
-        [PrimaryKey, AutoIncrement]
-
-        public int ID { get; set; }
+        { 
 
         public Beacon beacon { get; set; }
         /*public UUID beaconId { get; set; }*/
