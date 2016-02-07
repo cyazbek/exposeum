@@ -1,36 +1,33 @@
 using System;
-using System.Collections.Generic;
 using SQLite;
-using Exposeum.Models;
-using Java.Util;
 
-namespace Exposeum.Model
+namespace Exposeum.Models
 {
-    class POIDatabaseControl
+    class StoryLineDbControl
     {
         private SQLiteConnection dbconnection;
         private String folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        public POIDatabaseControl()
+        public StoryLineDbControl()
         {
             this.dbconnection = connect();
         }
 
         private SQLiteConnection connect()
         {
-            return new SQLiteConnection(System.IO.Path.Combine(folder, "POI.db"));
+            return new SQLiteConnection(System.IO.Path.Combine(folder, "StoryLine.db"));
         }
         public void createTable()
         {
             dbconnection.CreateTable<StoryLine>();
         }
-        public void addPOI(POI poi)
+        public void addStory(StoryLine story)
         {
-            var myPoi = poi;
-            this.dbconnection.Insert(myPoi);
+            var storyLine = story;
+            this.dbconnection.Insert(storyLine);
         }
-        public POI getPoi(int id)
+        public StoryLine getStory(int id)
         {
-            return dbconnection.Get<POI>(id);
+            return dbconnection.Get<StoryLine>(id);
         }
 
     }

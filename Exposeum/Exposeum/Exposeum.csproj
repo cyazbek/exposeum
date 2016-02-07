@@ -76,6 +76,7 @@
     <Compile Include="Models\POI.cs" />
     <Compile Include="Models\POIDatabaseControl.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Models\StoryLineDbControl.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeaconActivity.cs" />
