@@ -10,40 +10,37 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
-        [PrimaryKey, AutoIncrement]
-        private int id
+        
+        
+        public string name_en
+         {
+            get; set;
+        }
+        public string name_fr
+         {
+            get; set;
+        }
+        public string audience_en
+         {
+            get; set;
+        }
+        public string audience_fr
+         {
+            get; set;
+        }
+        public string desc_en
+         {
+            get; set;
+        }
+        public string desc_fr 
+         {
+            get; set;
+        }
+        public string duration
         {
             get; set;
         }
-        private string name_en
-         {
-            get; set;
-        }
-        private string name_fr
-         {
-            get; set;
-        }
-        private string audience_en
-         {
-            get; set;
-        }
-        private string audience_fr
-         {
-            get; set;
-        }
-        private string desc_en
-         {
-            get; set;
-        }
-        private string desc_fr 
-         {
-            get; set;
-        }
-        private string duration
-        {
-            get; set;
-        }
-        private List<POI> poiList
+        public List<POI> poiList
         {
             get; set;
         }

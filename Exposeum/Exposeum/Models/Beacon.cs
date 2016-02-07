@@ -5,15 +5,15 @@ namespace Exposeum.Models
 {
     public class Beacon
     {
-        private UUID uuid
+        public UUID uuid
         {
             get; set;
         } 
-        private int major
+        public int major
         {
             get; set;
         } 
-        private int minor
+        public int minor
         {
             get; set;
         }
