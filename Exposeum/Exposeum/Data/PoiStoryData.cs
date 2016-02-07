@@ -14,7 +14,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Exposeum.Data
 {
-    class PoiStory
+    class PoiStoryData
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }

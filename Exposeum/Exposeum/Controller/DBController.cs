@@ -25,6 +25,7 @@ namespace Exposeum.Controller
                 db.CreateTable<POIData>();
                 db.CreateTable<StoryData>();
                 db.CreateTable<BeaconData>();
+                db.CreateTable<PoiStoryData>();
                 return "Tables created"; 
             }
             catch(Exception ex)
@@ -82,7 +83,7 @@ namespace Exposeum.Controller
             {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
-                PoiStory poiStory = new PoiStory { poiId = poiId, storyId = storId };
+                PoiStoryData poiStory = new PoiStoryData { poiId = poiId, storyId = storId };
                 db.Insert(poiStory);
                 return "Success";
             }

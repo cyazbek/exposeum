@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\BeaconData.cs" />
-    <Compile Include="Data\PoiStory.cs" />
+    <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Controller\DBController.cs" />
