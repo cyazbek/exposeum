@@ -10,6 +10,11 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
+        [PrimaryKey, AutoIncrement]
+        private int id
+        {
+            get; set;
+        }
         private string name_en
          {
             get; set;
@@ -69,7 +74,29 @@ namespace Exposeum.Models
         }
 
         
+        public string getName()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string storyName;
+            if (lang.Contains("fr"))
+            {
+                storyName = this.name_fr;
+            }
+            else storyName = this.name_en;
+            return storyName;
+        }
 
+        public string getDescription()
+        {
+            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string storyDesc;
+            if (lang.Contains("fr"))
+            {
+                storyDesc = this.desc_fr;
+            }
+            else storyDesc = this.desc_en;
+            return storyDesc;
+        }
 
 
         public string getAudience()
