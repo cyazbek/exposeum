@@ -71,4 +71,10 @@
   <ItemGroup>
     <Folder Include="US13\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Exposeum\Exposeum.csproj">
+      <Project>{95AD6949-CBE8-4014-8DD3-B18F4138C6D9}</Project>
+      <Name>Exposeum</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
