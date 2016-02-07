@@ -43,29 +43,27 @@ namespace Exposeum
                 String nameFrench = FindViewById<EditText>(Resource.Id.POI_name_fr_text).Text.ToString();
                 String descriptionEnglish = FindViewById<EditText>(Resource.Id.POI_desc_en_text).Text.ToString();
                 String descriptionFrench = FindViewById<EditText>(Resource.Id.POI_desc_fr_text).Text.ToString();
-
-                POI myPoi = new POI { name_en = nameEnglish, name_fr = nameFrench, dscription_en = descriptionEnglish, dscription_fr = descriptionFrench };
-                
                 var textView = FindViewById<TextView>(Resource.Id.successMessage);
-       
 
-                /*
-                var query = conn.Table<POI>();
 
-                foreach (var poi in query)
+                /*string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                var conn = new SQLiteConnection(System.IO.Path.Combine(folder, "Exposeum.db"));
+                var query = conn.Table<Data.POIData>();
+
+                foreach (var poiq in query)
                 {
-                    textView.Text += "POI ID: " + poi.ID;
-                    textView.Text += "POI english name: " + poi.name_en;
-                    textView.Text += "\nPOI french name: " + poi.name_fr;
-                    textView.Text += "\n POI english description: " + poi.dscription_en;
-                    textView.Text += "\n POI english description: " + poi.dscription_fr;
-                    textView.Text += "\n POI english description: " + poi.dscription_fr +"\n";
+                    textView.Text += "POI ID: " + poiq.ID;
+                    textView.Text += "POI english name: " + poiq.name_en;
+                    textView.Text += "\nPOI french name: " + poiq.name_fr;
+                    textView.Text += "\n POI english description: " + poiq.dscription_en;
+                    textView.Text += "\n POI english description: " + poiq.dscription_fr;
+                    textView.Text += "\n POI english description: " + poiq.dscription_fr +"\n";
                     textView.Text += conn.ExecuteScalar<int>("select count(*) from POI");
                 }
-                */
+                
 
-                // var intent = new Intent(this, typeof(LanguageActivity));
-                // StartActivity(intent);
+                var intent = new Intent(this, typeof(LanguageActivity));
+                 StartActivity(intent);*/
             };
             
 
