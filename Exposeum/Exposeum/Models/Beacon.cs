@@ -1,4 +1,5 @@
 using Java.Util;
+using EstimoteSdk;
 
 namespace Exposeum.Models
 {
@@ -22,9 +23,9 @@ namespace Exposeum.Models
             this.major = major;
             this.minor = minor; 
         }
-        public bool compareBeacon(Beacon beacon)
+        public bool compareBeacon(EstimoteSdk.Beacon beacon)
         {
-            if (this.uuid == beacon.uuid && this.minor == beacon.minor && this.major == beacon.major)
+            if (this.uuid.Equals(beacon.ProximityUUID) && this.minor == beacon.Minor && this.major == beacon.Major)
                 return true;
             else
                 return false; 
