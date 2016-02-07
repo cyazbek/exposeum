@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Exposeum.Data
 {
-    class StoryData
+    public class StoryData
     {
         [PrimaryKey, AutoIncrement]
         public int id

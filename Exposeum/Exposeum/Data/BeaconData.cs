@@ -14,7 +14,7 @@ using Java.Util;
 
 namespace Exposeum.Data
 {
-    class BeaconData
+    public class BeaconData
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
