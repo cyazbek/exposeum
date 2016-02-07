@@ -27,7 +27,7 @@ namespace Exposeum.Models
         public void createTables()
         {
             dbconnection.CreateTable<POI>();
-            dbconnection.CreateTable<Beacon>();
+            dbconnection.CreateTable<EstimoteSdk.Beacon>();
             dbconnection.CreateTable<StoryLine>();
         }
 

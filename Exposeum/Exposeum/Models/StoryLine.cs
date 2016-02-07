@@ -31,16 +31,16 @@ namespace Exposeum.Models
            return this.POIS.Find(x => x.ID == id);  
         }
         //get a POI given a beaconID
-        public POI getBeaconPOI(UUID id)
+        /*public POI getBeaconPOI(UUID id)
         {
             return this.POIS.Find(x => x.beaconId == id);
-        }
+        }*/
         //get a POI given a QRcode id
-        public POI getQRPOI(int id)
+        /*public POI getQRPOI(int id)
         {
             return this.POIS.Find(x => x.QrCodeId == id);
         }
-
+        */
         
         //Changed the status of a POI to visited. 
         public void visitPoi(POI poi)

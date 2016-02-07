@@ -11,9 +11,10 @@ namespace Exposeum.Models
 
         public int ID { get; set; }
 
-        public UUID beaconId { get; set; }
+        public Beacon beacon { get; set; }
+        /*public UUID beaconId { get; set; }*/
 
-        public int QrCodeId { get; set; }
+        //public int QrCode { get; set; }
 
         public bool visited { get; set; }
 
