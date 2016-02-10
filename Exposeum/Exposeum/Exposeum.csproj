@@ -110,6 +110,8 @@
     <Compile Include="PoiListActivity.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="Models\PointOfInterest.cs" />
+    <Compile Include="Models\Edge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -130,6 +132,7 @@
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable\ic_refresh.png" />
     <AndroidResource Include="Resources\layout\Beacon.axml" />
+    <AndroidResource Include="Resources\drawable\floor_5.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-fr\Strings.xml" />
@@ -143,6 +146,9 @@
       <Visible>False</Visible>
       <Version>1.0.11</Version>
     </XamarinComponentReference>
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\layout\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
