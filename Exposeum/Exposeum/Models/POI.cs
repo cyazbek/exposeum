@@ -7,10 +7,8 @@ namespace Exposeum.Models
 {
     public class POI
     {
-        [PrimaryKey, AutoIncrement]
 
-        public int ID { get; set; }
-
+        public int id { get; set;}
         public Beacon beacon { get; set; }
         /*public UUID beaconId { get; set; }*/
 
@@ -21,7 +19,7 @@ namespace Exposeum.Models
         public string name_en { get; set; }
 
         public string name_fr { get; set; }
-
+        public int storyId { get; set; }
         public int uCoord { get; set; }
 
         public int vCoord { get; set; } 
@@ -52,6 +50,21 @@ namespace Exposeum.Models
             }
             else PoiName = this.name_en;
             return PoiName;
+        }
+        public void convertFromData(Data.POIData poi)
+        {
+            this.visited = poi.visited;
+            this.name_en = poi.name_en;
+            this.name_fr = poi.name_fr;
+            this.dscription_en = poi.dscription_en;
+            this.dscription_fr = poi.dscription_fr;
+            this.uCoord = poi.uCoord;
+            this.vCoord = poi.vCoord;
+            this.id = poi.ID;
+        }
+        public string toString()
+        {
+            return this.id + " " + this.getName() + " " + this.getDescription();
         }
 
     }

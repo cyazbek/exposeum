@@ -12,28 +12,30 @@ namespace Exposeum
 	[Activity(Label = "@string/beacon_activity")]	
 	public class BeaconActivity : Activity, IBeaconFinderObserver
 	{
-
 		private TextView beaconContextualText;
 		private BeaconFinder beaconFinder;
-        public POI myPoi;
-        //public POI myPoi2;
-        //public POI myPoi3;
-        //public StoryLine story = new StoryLine();
+        private POI myPoi;
+        private POI myPoi1;
+		private StoryLine story;
+
         protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
-			//View v = new BeaconView(Resource.Layout.Beacon);
 			SetContentView (Resource.Layout.Beacon);
-            Models.Beacon beacon = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450); 
-            myPoi = new POI { name_en = "Point Of interest one", name_fr = "Point d'interet un", dscription_en = "This is the point of interest one", dscription_fr = "Celui là est le premier point d'interet"};
-            myPoi.beacon = beacon; 
-            //myPoi2 = new POI { name_en = "Point Of interest two", name_fr = "Point d'interet deux", dscription_en = "This is the point of interest two", dscription_fr = "Celui là est le deuxieme point d'interet", beaconId = UUID.FromString("b9407f30-f4f2-466e-aff9-25556b57fe6d") };
-            //myPoi3 = new POI { name_en = "Point Of interest three", name_fr = "Point d'interet trois", dscription_en = "This is the point of interest three", dscription_fr = "Celui là est le troisième point d'interet", beaconId = UUID.FromString("b9408z20-f4f2-466e-aff9-25556b57fe6d") };
-            //story.addPOI(myPoi1);
-            //story.addPOI(myPoi2);
-            //story.addPOI(myPoi3);
-            
+
+			story = new StoryLine ();
+            Models.Beacon beaconFiras = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450); 
+            myPoi = new POI { name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", dscription_en = "This is the point of interest Firas", dscription_fr = "Celui là est le premier point de Firas"};
+            myPoi.beacon = beaconFiras;
+            Models.Beacon beaconOli = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
+            myPoi1 = new POI { name_en = "Point Of interest Oli", name_fr = "Point d'interet Oli", dscription_en = "This is the point of interest Oli", dscription_fr = "Celui là est le premier point de Oli" };
+            myPoi1.beacon = beaconOli;
+            story.addPoi(myPoi);
+            story.addPoi(myPoi1);
+
+
+
             //define UI bindings
             beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
 
@@ -73,13 +75,13 @@ namespace Exposeum
 			text1 = text1 + "The Closest beacon is: \n";
             if(beacon!=null)
             {
-                Models.Beacon foundBeacon = new Models.Beacon(beacon.ProximityUUID, beacon.Major, beacon.Major);
-                if (foundBeacon.compareBeacon(myPoi.beacon))
+                if (story.hasBeacon(beacon))
                 {
-                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + myPoi.getName() + "\nDescription: " + myPoi.getDescription() + "\nMajor: " +beacon.Major +"\nMinor: " + beacon.Minor + "\n\n";
+                    POI poi = story.findPOI(beacon);
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + poi.getName() + "\nDescription: " + poi.getDescription() + "\nMajor: " +beacon.Major +"\nMinor: " + beacon.Minor + "\n\n";
                 }
-                if(!foundBeacon.compareBeacon(myPoi.beacon))
-                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
+                if(!story.hasBeacon(beacon))
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor +" " + story.getSize()+"\n\n" ;
             }
 			beaconContextualText.Text = text1 ;
 

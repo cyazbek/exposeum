@@ -44,7 +44,7 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Xamarin.Android.NUnitLite" />
     <Reference Include="Xamarin.Estimote.Android">
-      <HintPath>..\packages\Xamarin.Estimote.Android.0.9.1.0\lib\MonoAndroid43\Xamarin.Estimote.Android.dll</HintPath>
+      <HintPath>..\Components\estimotesdkandroid-0.9.1.0\lib\android\Xamarin.Estimote.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -70,5 +70,17 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
     <Folder Include="US13\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Exposeum\Exposeum.csproj">
+      <Project>{95AD6949-CBE8-4014-8DD3-B18F4138C6D9}</Project>
+      <Name>Exposeum</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="estimotesdkandroid">
+      <Version>0.9.1.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>

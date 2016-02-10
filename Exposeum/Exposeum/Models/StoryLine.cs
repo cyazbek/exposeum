@@ -4,52 +4,74 @@ using SQLite;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using EstimoteSdk;
+using Exposeum.Data;
 
 namespace Exposeum.Models
 {
     public class StoryLine
     {
-        [PrimaryKey, AutoIncrement]
-
-        public int ID { get; set; }
-        /*A list containing all POI's relative to storyline*/
-        public List<POI> POIS { get; set; }
-        /*constructor for the StoryLine*/
+        
+        
+        public string name_en
+         {
+            get; set;
+        }
+        public string name_fr
+         {
+            get; set;
+        }
+        public string audience_en
+         {
+            get; set;
+        }
+        public string audience_fr
+         {
+            get; set;
+        }
+        public string desc_en
+         {
+            get; set;
+        }
+        public string desc_fr 
+         {
+            get; set;
+        }
+        public string duration
+        {
+            get; set;
+        }
+        public List<POI> poiList
+        {
+            get; set;
+        }
         public StoryLine()
         {
-           POIS = new List<POI>();
+            this.poiList = new List<POI>();
         }
-        //Method to add a POI to a storyline. It makes sure that the POI is set to not veisited
-        public void addPOI(POI poi)
+        public void addPoi(POI poi)
         {
-            POIS.Add(poi); 
+            poiList.Add(poi);
+        }
+        public POI findPOI(EstimoteSdk.Beacon beacon)
+        {
+            return poiList.Find(x => x.beacon.compareBeacon(beacon));
+        }
+        public bool hasBeacon(EstimoteSdk.Beacon beacon)
+        {
+            foreach(var poi in poiList)
+            {
+                if (poi.beacon.compareBeacon(beacon))
+                    return true;
+            }
+            return false;
+        }
+        public int getSize()
+        {
+            return poiList.Count; 
         }
 
-        //returns a poi given an ID
-        public POI getPOI(int id)
-        {
-           return this.POIS.Find(x => x.ID == id);  
-        }
-        //get a POI given a beaconID
-        /*public POI getBeaconPOI(UUID id)
-        {
-            return this.POIS.Find(x => x.beaconId == id);
-        }*/
-        //get a POI given a QRcode id
-        /*public POI getQRPOI(int id)
-        {
-            return this.POIS.Find(x => x.QrCodeId == id);
-        }
-        */
         
-        //Changed the status of a POI to visited. 
-        public void visitPoi(POI poi)
-        {
-            poi.visited = true; 
-        }
-
-        public string name_en { get; set; }
-        public string name_fr { get; set; }
         public string getName()
         {
             string lang = Thread.CurrentThread.CurrentCulture.Name;
@@ -59,26 +81,22 @@ namespace Exposeum.Models
                 storyName = this.name_fr;
             }
             else storyName = this.name_en;
-            return storyName; 
+            return storyName;
         }
-        public string preview_en { get; set; }
 
-        public string preview_fr { get; set; }
-
-        public string getPreview()
+        public string getDescription()
         {
             string lang = Thread.CurrentThread.CurrentCulture.Name;
-            string storyPreview;
+            string storyDesc;
             if (lang.Contains("fr"))
             {
-                storyPreview = this.preview_fr;
+                storyDesc = this.desc_fr;
             }
-            else storyPreview = this.preview_fr;
-            return storyPreview;
+            else storyDesc = this.desc_en;
+            return storyDesc;
         }
-        public string audience_en { get; set; }
 
-        public string audience_fr { get; set; }
+
         public string getAudience()
         {
             string lang = Thread.CurrentThread.CurrentCulture.Name;
@@ -90,7 +108,16 @@ namespace Exposeum.Models
             else storyAudience = this.audience_en;
             return storyAudience;
         }
-        public int duration { get; set; }
+        public void convertFromData(StoryData story)
+        {
+            this.audience_en = story.audience_en;
+            this.audience_fr = story.audience_fr;
+            this.desc_en = story.desc_en;
+            this.desc_fr = story.desc_fr;
+            this.duration = story.duration;
+            this.name_en = story.name_en;
+            this.name_fr = story.name_fr;
+        }
         
     }
 }

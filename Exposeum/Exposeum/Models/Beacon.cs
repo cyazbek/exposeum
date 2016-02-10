@@ -1,18 +1,24 @@
 using Java.Util;
+using EstimoteSdk;
+using Exposeum.Data;
 
 namespace Exposeum.Models
 {
     public class Beacon
     {
-        private UUID uuid
+        public int id { get; set; }
+
+        public Beacon()
+        { }
+        public UUID uuid
         {
             get; set;
         } 
-        private int major
+        public int major
         {
             get; set;
         } 
-        private int minor
+        public int minor
         {
             get; set;
         }
@@ -22,12 +28,19 @@ namespace Exposeum.Models
             this.major = major;
             this.minor = minor; 
         }
-        public bool compareBeacon(Beacon beacon)
+        public bool compareBeacon(EstimoteSdk.Beacon beacon)
         {
-            if (this.uuid == beacon.uuid && this.minor == beacon.minor && this.major == beacon.major)
+            if (this.uuid.Equals(beacon.ProximityUUID) && this.minor == beacon.Minor && this.major == beacon.Major)
                 return true;
             else
                 return false; 
+        }
+        public void convertFromData(BeaconData data)
+        {
+            this.id = data.ID;
+            this.uuid = UUID.FromString(data.uuid);
+            this.major = data.major;
+            this.minor = data.minor;  
         }
     }
 }
