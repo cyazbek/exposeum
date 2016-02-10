@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using EstimoteSdk;
+using Exposeum.Data;
 
 namespace Exposeum.Models
 {
@@ -106,6 +107,16 @@ namespace Exposeum.Models
             }
             else storyAudience = this.audience_en;
             return storyAudience;
+        }
+        public void convertFromData(StoryData story)
+        {
+            this.audience_en = story.audience_en;
+            this.audience_fr = story.audience_fr;
+            this.desc_en = story.desc_en;
+            this.desc_fr = story.desc_fr;
+            this.duration = story.duration;
+            this.name_en = story.name_en;
+            this.name_fr = story.name_fr;
         }
         
     }

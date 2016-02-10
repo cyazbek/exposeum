@@ -1,10 +1,15 @@
 using Java.Util;
 using EstimoteSdk;
+using Exposeum.Data;
 
 namespace Exposeum.Models
 {
     public class Beacon
     {
+        public int id { get; set; }
+
+        public Beacon()
+        { }
         public UUID uuid
         {
             get; set;
@@ -29,6 +34,13 @@ namespace Exposeum.Models
                 return true;
             else
                 return false; 
+        }
+        public void convertFromData(BeaconData data)
+        {
+            this.id = data.ID;
+            this.uuid = UUID.FromString(data.uuid);
+            this.major = data.major;
+            this.minor = data.minor;  
         }
     }
 }

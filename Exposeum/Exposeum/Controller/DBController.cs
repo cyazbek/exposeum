@@ -3,8 +3,8 @@ using System.IO;
 using Exposeum.Data;
 using Exposeum.Models;
 using SQLite;
-
-
+using Java.Util;
+using System.Collections.Generic;
 
 namespace Exposeum.Controller
 {
@@ -126,6 +126,56 @@ namespace Exposeum.Controller
             {
                 return "Error " + ex.Message;
             }
+        }
+        public SQLiteConnection getConnection()
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            var db = new SQLiteConnection(dbPath);
+            return db; 
+        }
+
+        public POI getPoi(int id)
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            var db = new SQLiteConnection(dbPath);
+            var result = db.Get<POIData>(id);
+            POI poi = new POI();
+            poi.convertFromData(result);
+            var result2 = db.Get<BeaconData>(id);
+            Beacon beacon= new Beacon();
+            beacon.convertFromData(result2);
+            poi.beacon = beacon;
+            return poi; 
+        }
+
+        public Beacon getBeacon(int id)
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            var db = new SQLiteConnection(dbPath);
+            BeaconData beaconData = new BeaconData();
+            beaconData = db.Get<BeaconData>(id);
+            Beacon beacon = new Beacon();
+            beacon.convertFromData(beaconData);
+            return beacon;
+        }
+        public StoryLine getStory(int id)
+        {
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            var db = new SQLiteConnection(dbPath);
+            StoryData storyData = new StoryData();
+            storyData = db.Get<StoryData>(id);
+            int storyId = storyData.id;
+            var poiList = from poi in db.Table<PoiStoryData>()
+                          where poi.storyId.Equals(storyId)
+                          select poi.poiId;
+            StoryLine storyLine = new StoryLine();
+            storyLine.convertFromData(storyData);
+            foreach(int i in poiList)
+            {
+                storyLine.poiList.Add(getPoi(i)); 
+            }
+
+            return storyLine; 
         }
 
     }

@@ -9,6 +9,7 @@ using Android.Content;
 using Exposeum.Models;
 using Exposeum.Controller;
 using Java.Util;
+using Exposeum.Data;
 
 namespace Exposeum
 {
@@ -31,43 +32,35 @@ namespace Exposeum
             // Set path, create connection and create table
             //POIDatabaseControl db = new POIDatabaseControl();
             //db.createTable (); 
-            /*string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            /* folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var conn = new SQLiteConnection(System.IO.Path.Combine(folder, "POI.db"));*/
             SetContentView(Resource.Layout.POI_Insertion);
 
             var btnSubmit = FindViewById<Button>(Resource.Id.btnSubmit);
             btnSubmit.Click += (sender, e) =>
             {
-                
+
                 String nameEnglish = FindViewById<EditText>(Resource.Id.POI_name_en_text).Text.ToString();
                 String nameFrench = FindViewById<EditText>(Resource.Id.POI_name_fr_text).Text.ToString();
                 String descriptionEnglish = FindViewById<EditText>(Resource.Id.POI_desc_en_text).Text.ToString();
                 String descriptionFrench = FindViewById<EditText>(Resource.Id.POI_desc_fr_text).Text.ToString();
                 var textView = FindViewById<TextView>(Resource.Id.successMessage);
-
-
-                /*string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                var conn = new SQLiteConnection(System.IO.Path.Combine(folder, "Exposeum.db"));
-                var query = conn.Table<Data.POIData>();
-
-                foreach (var poiq in query)
-                {
-                    textView.Text += "POI ID: " + poiq.ID;
-                    textView.Text += "POI english name: " + poiq.name_en;
-                    textView.Text += "\nPOI french name: " + poiq.name_fr;
-                    textView.Text += "\n POI english description: " + poiq.dscription_en;
-                    textView.Text += "\n POI english description: " + poiq.dscription_fr;
-                    textView.Text += "\n POI english description: " + poiq.dscription_fr +"\n";
-                    textView.Text += conn.ExecuteScalar<int>("select count(*) from POI");
-                }
+                POI test = new POI { name_en = nameEnglish, name_fr = nameFrench, dscription_en = descriptionEnglish, dscription_fr = descriptionFrench };
+                Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+                test.beacon = beacon1;
+                string testresult = "Added test POI to db "+db.insertPoi(test);
+                Toast.MakeText(this, testresult, ToastLength.Short).Show();
+                POI poiq = new POI();
+                poiq = db.getPoi(4);
+                Toast.MakeText(this, poiq.toString(), ToastLength.Short).Show();
                 
-
+                /*
                 var intent = new Intent(this, typeof(LanguageActivity));
                  StartActivity(intent);*/
             };
-            
 
-        }
+
+      }
         /*public static void AddPoi(SQLiteConnection db, POI myPoi)
         {
             var poi = myPoi;

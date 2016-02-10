@@ -3,7 +3,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Exposeum.Data
 {
-    class POIData
+    public class POIData
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -27,6 +27,7 @@ namespace Exposeum.Data
 
         public int convertPOIToData(Models.POI poi, int beaconId)
         {
+            this.storyId = poi.storyId;
             this.beaconID = beaconId;
             this.visited = poi.visited;
             this.name_en = poi.name_en;
