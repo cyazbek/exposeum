@@ -121,6 +121,10 @@ namespace Exposeum
 			beaconInRegion = inRegion;
 		}
 
+		public bool getBeaconInRegion(){
+			return beaconInRegion;
+		}
+
 		public void addObserver(IBeaconFinderObserver observer){
 			observers.AddLast (observer);
 		}

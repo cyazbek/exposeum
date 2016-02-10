@@ -12,21 +12,19 @@ namespace Exposeum
 	[Activity(Label = "@string/beacon_activity")]	
 	public class BeaconActivity : Activity, IBeaconFinderObserver
 	{
-
 		private TextView beaconContextualText;
 		private BeaconFinder beaconFinder;
-        public POI myPoi;
-        public POI myPoi1;
-        StoryLine story = new StoryLine();
-        //public POI myPoi2;
-        //public POI myPoi3;
-        //public StoryLine story = new StoryLine();
+        private POI myPoi;
+        private POI myPoi1;
+		private StoryLine story;
+
         protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
-			//View v = new BeaconView(Resource.Layout.Beacon);
 			SetContentView (Resource.Layout.Beacon);
+
+			story = new StoryLine ();
             Models.Beacon beaconFiras = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450); 
             myPoi = new POI { name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", dscription_en = "This is the point of interest Firas", dscription_fr = "Celui là est le premier point de Firas"};
             myPoi.beacon = beaconFiras;
