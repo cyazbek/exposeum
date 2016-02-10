@@ -1,32 +1,29 @@
 ﻿namespace Exposeum
 {
-	using System.Collections.Generic;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Android.App;
+    using Android.Content;
+    using Android.Views;
+    using Android.Widget;
 
-	using Android.App;
-	using Android.Content;
-	using Android.Views;
-	using Android.Widget;
-
-	using Java.Lang;
-
-	/// <summary>
-	/// This adapter holds the names of activities in the application that can be 
-	/// launched from the main screen, the intent that can be used to launch them.
-	/// </summary>
-	public class MainMenuAdapter : BaseAdapter
+                                    /// <summary>
+                                  /// This adapter holds the names of activities in the application that can be 
+                                  /// launched from the main screen, the intent that can be used to launch them.
+                                  /// </summary>  
+    public class MainMenuAdapter : BaseAdapter
 	{
 		private  readonly Dictionary<string, Intent> _gestureActivities;
 		private readonly Activity _activity;
-
-		public MainMenuAdapter (Activity activity)
+        public MainMenuAdapter (Activity activity)
 		{
-			_activity = activity;
+            _activity = activity;
 			_gestureActivities = new Dictionary<string, Intent>
                                      {
-                                         { "Beacon Activity", new Intent(activity, typeof(BeaconActivity)) }, 
-                                         { "Map Activity", new Intent(activity, typeof(MapActivity)) },
-                                         { "Language Activity", new Intent(activity, typeof(LanguageActivity))}
+                                         { activity.BaseContext.Resources.GetText(Resource.String.b_activity), new Intent(activity, typeof(BeaconActivity)) }, 
+                                         { activity.BaseContext.Resources.GetText(Resource.String.m_activity), new Intent(activity, typeof(MapActivity)) },
+                                         { activity.BaseContext.Resources.GetText(Resource.String.l_activity), new Intent(activity, typeof(LanguageActivity))}
                                      };
 		}
 
@@ -37,7 +34,7 @@
 		/// </summary>
 		/// <param name="position"></param>
 		/// <returns></returns>
-		public override Object GetItem (int position)
+		public override Java.Lang.Object GetItem (int position)
 		{
 			return _gestureActivities.Values.ElementAt (position);
 		}
