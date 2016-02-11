@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.App;
 using Android.Graphics;
 
 namespace Exposeum.Models
@@ -52,6 +53,7 @@ namespace Exposeum.Models
 
 		public void SetTouched(){
 			_paint.Color = Color.ForestGreen;
+
 		}
 	}
 }
