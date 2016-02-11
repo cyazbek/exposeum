@@ -13,7 +13,6 @@
         android:textOn="FR"
         android:textOff="EN"
         android:checked="true"
-        android:background="#808080"
         android:layout_gravity="right" />
     <Button
         android:text="Explorer"
