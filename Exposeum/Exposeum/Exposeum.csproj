@@ -108,8 +108,12 @@
     <Compile Include="Models\PointOfInterest.cs" />
     <Compile Include="Models\Edge.cs" />
     <AndroidResource Include="Resources\layout\MapView.axml" />
-    <AndroidResource Include="Resources\drawable\planmetro2013.jpg" />
     <Compile Include="MapActivity.cs" />
+    <Compile Include="Models\Floor.cs" />
+    <AndroidResource Include="Resources\drawable\floor_1.png" />
+    <AndroidResource Include="Resources\drawable\floor_2.png" />
+    <AndroidResource Include="Resources\drawable\floor_3.png" />
+    <AndroidResource Include="Resources\drawable\floor_4.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
