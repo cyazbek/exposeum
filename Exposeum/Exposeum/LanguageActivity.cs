@@ -1,8 +1,15 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Renderscripts;
 using Android.Widget;
 using Exposeum.Controller;
+using Exposeum.Models;
+using System.ComponentModel;
+using System.Globalization;
+using System.Threading;
+
+
 namespace Exposeum
 {
     [Activity(Label = "@string/language_activity")]		
@@ -14,26 +21,30 @@ namespace Exposeum
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Language);
-            DBController db = new DBController();
-            var result = db.createDB();
-            Toast.MakeText(this, result, ToastLength.Short).Show(); 
-            var btnCreate = FindViewById<Button>(Resource.Id.POI_sub);
-            var btnDisplay = FindViewById<Button>(Resource.Id.POI_disp);
-
-            btnCreate.Click += (sender, e)=>
+            var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
+            var englishButton = FindViewById<Button>(Resource.Id.englishLang);
+            Language.getInstance(); 
+            frenchButton.Click += (sender, e)=>
             {
-                  var intent = new Intent(this, typeof(POI_insertion));
-                  StartActivity(intent);
+                Language.setLanguage("fr");
+                Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
+                var intent = new Intent(this, typeof(VisitActivity_fr));
+                StartActivity(intent);
+
             };
 
-            btnDisplay.Click += (sender, e) =>
+            englishButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(POI_ListDisplay));
+                Language.setLanguage("en");
+                Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
+                var intent = new Intent(this, typeof(VisitActivity_en));
                 StartActivity(intent);
             };
         }
     }
+    
 }
+
 
 
 
