@@ -32,7 +32,7 @@ namespace Exposeum.Models
         {
             lang = langSelected;
         }
-        public static void toogleLanguag()
+        public static void toogleLanguage()
         {
             if (lang == "fr")
                 lang = "en";

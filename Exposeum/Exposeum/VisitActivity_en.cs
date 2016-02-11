@@ -9,10 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Exposeum.Models;
 
 namespace Exposeum
 {
-    [Activity(Label = "VisitActivity_en")]
+    [Activity(Label = "Choice Of Visit")]
     public class VisitActivity_en : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,6 +22,13 @@ namespace Exposeum
             SetContentView(Resource.Layout.VisitActivity_en);
             var freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
+            var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
+            languageSelector.Click += (o, e) => {
+                    Language.toogleLanguage();
+                    var intent = new Intent(this, typeof(VisitActivity_fr));
+                    StartActivity(intent);
+            };
+
             freeVisitButton.Click += (sender, e) =>
             { 
                 var intent = new Intent(this, typeof(MapActivity));
