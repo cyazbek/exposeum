@@ -1,4 +1,5 @@
 using Exposeum.Models;
+using Android.Widget;
 
 namespace Exposeum
 {
@@ -17,7 +18,7 @@ namespace Exposeum
 	public class MapView : View
 	{
 		private static readonly int InvalidPointerId = -1;
-		private readonly Drawable _map;
+		private Drawable _map;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
 		private float _lastTouchX;
@@ -27,6 +28,8 @@ namespace Exposeum
 		private float _scaleFactor = 1.0f;
 		private PointOfInterest _lastClickedPOI;
 
+		private Context _context;
+
 		//test points to be drawn on map
 		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
 
@@ -35,6 +38,8 @@ namespace Exposeum
 
 		public MapView (Context context) : base(context, null, 0)
 		{
+			_context = context;
+
 			_map = context.Resources.GetDrawable (Resource.Drawable.floor_5);
 			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
@@ -50,6 +55,14 @@ namespace Exposeum
 			samplePoints.Add(new PointOfInterest(0.346f, 0.886f, "site 8"));
 			samplePoints.Add(new PointOfInterest(0.241f, 0.266f, "site 9"));
 		}
+			
+		public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
+		{
+			_map = _context.Resources.GetDrawable (Resource.Drawable.planmetro2013);
+			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
+			sampleEdges.Clear ();
+			samplePoints.Clear ();
+		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
 		{
@@ -60,7 +73,7 @@ namespace Exposeum
 
 			switch (action) {
 			case MotionEventActions.Down:
-				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
+				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
 				if (selected != null) {
 					if (_lastClickedPOI == null) {
 						_lastClickedPOI = selected;
@@ -163,7 +176,7 @@ namespace Exposeum
 			}
 		}
 
-		private PointOfInterest selectedPOI(float screenX, float screenY){
+		private PointOfInterest getSelectedPOI(float screenX, float screenY){
 
 			PointOfInterest clicked = null;
 
@@ -171,7 +184,7 @@ namespace Exposeum
 				float poiX = _posX + (_scaleFactor * _map.IntrinsicWidth * poi.U) - ((_scaleFactor * _map.IntrinsicWidth) / 2);
 				float poiY = _posY + (_scaleFactor * _map.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.IntrinsicHeight) / 2);
 
-				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius*_scaleFactor) {
+				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					clicked = poi;
 					poi.SetTouched();
 					break;
