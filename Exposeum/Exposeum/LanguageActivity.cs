@@ -23,7 +23,7 @@ namespace Exposeum
             SetContentView(Resource.Layout.Language);
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
             var englishButton = FindViewById<Button>(Resource.Id.englishLang);
-            Language.getInstance(); 
+//            Language.getInstance(); 
             frenchButton.Click += (sender, e)=>
             {
                 Language.setLanguage("fr");
