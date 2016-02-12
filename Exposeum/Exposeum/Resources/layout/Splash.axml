@@ -2,19 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:background="#000000"
+    android:background="#FFFFFF"
     android:layout_height="fill_parent">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="492.0dp"
+        android:layout_height="476.0dp"
         android:id="@+id/imageView"
         android:layout_marginBottom="10.5dp" />
     <Button
-        android:text=""
-        android:layout_width="276.0dp"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:textColor="#000000"
+        android:background="@drawable/SplashButton"
         android:id="@+id/switchButton"
-        android:layout_gravity="center" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        style="@style/button_text" />
 </LinearLayout>
