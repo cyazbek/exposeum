@@ -166,28 +166,28 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\first_fr.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\first_fr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\fourth.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\fourth.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\fourth_fr.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\fourth_fr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\second.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\second.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\second_fr.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\second_fr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\third.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\third.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\third_fr.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\third_fr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\first.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\first.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
