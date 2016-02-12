@@ -28,7 +28,7 @@ namespace Exposeum
             {
                 Language.setLanguage("fr");
                 Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
-                var intent = new Intent(this, typeof(VisitActivity_fr));
+                var intent = new Intent(this, typeof(SplashActivity));
                 StartActivity(intent);
 
             };
@@ -37,7 +37,7 @@ namespace Exposeum
             {
                 Language.setLanguage("en");
                 Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
-                var intent = new Intent(this, typeof(VisitActivity_en));
+                var intent = new Intent(this, typeof(SplashActivity));
                 StartActivity(intent);
             };
         }
