@@ -37,9 +37,13 @@ namespace Exposeum
             };
             storylineButton.Click += (sender, e) =>
             {
-                Toast.MakeText(this, "This Feature is not yet available", ToastLength.Long).Show();
+                Toast.MakeText(this, "This feature is not yet implemented", ToastLength.Long).Show();
             };
-
         }
-    }
+            public override void OnBackPressed()
+            {
+            var intent = new Intent(this, typeof(LanguageActivity));
+            StartActivity(intent);
+            }//end onBackPressed()
+        }
 }

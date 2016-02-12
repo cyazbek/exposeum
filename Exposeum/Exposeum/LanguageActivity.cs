@@ -41,6 +41,11 @@ namespace Exposeum
                 StartActivity(intent);
             };
         }
+        public override void OnBackPressed()
+        {
+            var intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+        }//end onBackPressed()
     }
     
 }
