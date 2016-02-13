@@ -22,7 +22,7 @@ namespace Exposeum
 		private float _lastTouchY;
 		private float _posX;
 		private float _posY;
-		private float _scaleFactor = 1.0f;
+		private float _scaleFactor = 0.5f;
 		private PointOfInterest _lastClickedPOI;
 		private Floor _currentFloor;
 		private Context _context;
