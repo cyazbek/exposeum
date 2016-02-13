@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Renderscripts;
 using Android.Widget;
@@ -12,7 +13,7 @@ using System.Threading;
 
 namespace Exposeum
 {
-    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]		
+    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar",ScreenOrientation = ScreenOrientation.Portrait)]		
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/

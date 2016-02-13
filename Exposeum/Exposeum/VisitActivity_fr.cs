@@ -9,10 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Content.PM;
 
 namespace Exposeum.Models
 {
-    [Activity(Label = "Choix De Visite")]
+    [Activity(Label = "Choix De Visite", Theme = "@android:style/Theme.Holo.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity_fr : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

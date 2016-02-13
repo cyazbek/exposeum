@@ -8,23 +8,28 @@
     android:minHeight="25px">
     <ToggleButton
         android:id="@+id/languageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textOn="FR"
         android:textOff="EN"
-        android:checked="false"
-        android:layout_gravity="right" />
+        android:checked="true"
+        android:layout_gravity="right"
+        style="@style/button_text" />
     <Button
         android:text="Visite Libre"
         android:id="@+id/freeTour"
-        android:layout_width="500px"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        style="@style/button_text"
         android:layout_gravity="center"
-        android:layout_marginTop="150px" />
+        android:layout_marginBottom="5.00dp"
+        android:layout_marginTop="200dp" />
     <Button
         android:id="@+id/storyLine"
         android:text="Tours Guidés"
-        android:layout_width="500px"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_width="250dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:layout_gravity="center"
+        style="@style/button_text" />
 </LinearLayout>

@@ -74,9 +74,9 @@ namespace Exposeum.Models
         
         public string getName()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyName;
-            if (lang.Contains("fr"))
+            if (lang.Equals("fr"))
             {
                 storyName = this.name_fr;
             }
@@ -86,9 +86,9 @@ namespace Exposeum.Models
 
         public string getDescription()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyDesc;
-            if (lang.Contains("fr"))
+            if (lang.Equals("fr"))
             {
                 storyDesc = this.desc_fr;
             }
@@ -99,9 +99,9 @@ namespace Exposeum.Models
 
         public string getAudience()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyAudience;
-            if (lang.Contains("fr"))
+            if (lang.Equals("fr"))
             {
                 storyAudience = this.audience_fr;
             }
