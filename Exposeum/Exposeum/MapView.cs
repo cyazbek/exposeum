@@ -1,4 +1,6 @@
+using Android.App;
 using Exposeum.Models;
+using SQLitePCL;
 
 namespace Exposeum
 {
@@ -32,9 +34,11 @@ namespace Exposeum
 
 		//test edges to be draw on map
 		private List<Models.Edge> sampleEdges = new List<Models.Edge>();
+	    private Context _context;
 
-		public MapView (Context context) : base(context, null, 0)
+	    public MapView (Context context) : base(context, null, 0)
 		{
+		    _context = context;
 			_map = context.Resources.GetDrawable (Resource.Drawable.floor_5);
 			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
@@ -61,6 +65,7 @@ namespace Exposeum
 			switch (action) {
 			case MotionEventActions.Down:
 				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
+
 				if (selected != null) {
 					if (_lastClickedPOI == null) {
 						_lastClickedPOI = selected;
@@ -68,7 +73,13 @@ namespace Exposeum
 						sampleEdges.Add (new Models.Edge (_lastClickedPOI, selected));
 						_lastClickedPOI = selected;
 					}
-				}
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this._context);
+                        builder.SetTitle("Error");
+                        builder.SetMessage(selected.Label);
+                        builder.SetCancelable(false);
+                        builder.SetPositiveButton("OK", delegate { });
+                        builder.Show();
+                    }
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -177,8 +188,8 @@ namespace Exposeum
 					break;
 				}
 			}
-				
-			return clicked;
+
+            return clicked;
 		}
 	}
 }

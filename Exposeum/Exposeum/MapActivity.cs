@@ -13,5 +13,9 @@ namespace Exposeum
 			View v = new MapView (this);
 			SetContentView (v);
 		}
+
+
+
+
 	}
 }
