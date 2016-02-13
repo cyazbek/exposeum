@@ -37,9 +37,5 @@ namespace Exposeum
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
 		}
-
-
-
-
 	}
 }

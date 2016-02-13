@@ -47,13 +47,20 @@ namespace Exposeum.Models
 			get { return this._radius; }
 		}
 
-		public void Draw(Canvas canvas, float mapWidth, float mapHeight){
+		public void Draw(Canvas canvas, float mapWidth, float mapHeight)
+		{
 			canvas.DrawCircle (_u * mapWidth, _v * mapHeight, _radius, _paint);
 		}
 
-		public void SetTouched(){
+		public void SetTouched()
+		{
 			_paint.Color = Color.ForestGreen;
+		}
 
+		public String getHTML()
+		{
+			String summary = String.Format ("<html><body>You selected POI {0}!<br><br></body></html>", _label);
+			return summary;
 		}
 	}
 }

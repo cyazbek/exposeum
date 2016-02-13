@@ -5,6 +5,7 @@ using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
+using Android.Webkit;
 
 namespace Exposeum
 {
@@ -98,15 +99,19 @@ namespace Exposeum
 				    var inflater = LayoutInflater.From(_context);
                     View popup_view  = inflater.Inflate(Resource.Layout.BeaconSummaryPopupView, null);
 
-                    popup_view.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent,ViewGroup.LayoutParams.WrapContent);
-
-                    PopupWindow pwindow = new PopupWindow(popup_view, WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
-                    Button dismissButton = popup_view.FindViewById<Button>(Resource.Id.beaconpopupdismiss);
+                    popup_view.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+					PopupWindow pwindow = new PopupWindow(popup_view, WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
+                    
+					Button dismissButton = popup_view.FindViewById<Button>(Resource.Id.beacon_popup_dismiss);
 
 				    dismissButton.Click += (sender, e) =>
 				    {
 				        pwindow.Dismiss();
 				    };
+
+					WebView popupWebView = popup_view.FindViewById<WebView>(Resource.Id.beacon_popup_webview);
+					popupWebView.LoadData(selected.getHTML(), "text/html", "utf-8");
+
                     pwindow.ShowAtLocation(popup_view, GravityFlags.Center,  0, 0);
 
 				}

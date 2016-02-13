@@ -6,10 +6,10 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/webView1" />
+        android:id="@+id/beacon_popup_webview" />
     <Button
         android:text="Dismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/beaconpopupdismiss" />
+        android:id="@+id/beacon_popup_dismiss" />
 </LinearLayout>
