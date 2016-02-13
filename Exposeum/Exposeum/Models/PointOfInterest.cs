@@ -9,7 +9,7 @@ namespace Exposeum.Models
 		private float _u;
 		private float _v;
 		private String _label = "no label";
-		private float _radius = 30;
+		private float _radius = 80;
 		private readonly Paint _paint = new Paint();
 
 		public PointOfInterest (float u, float v, string label)
