@@ -29,8 +29,6 @@ namespace Exposeum
 		private Floor _currentFloor;
 		private Context _context;
 
-		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
-
 		//test points to be drawn on map
 		private List<Floor> sampleFloors = new List<Floor>();
 
@@ -46,20 +44,20 @@ namespace Exposeum
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
-			floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1"));
-			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1"));
+			floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
+			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1b"));
 
-			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 1"));
-			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f, "site 1"));
+			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 2a"));
+			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f, "site 2b"));
 
-			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f, "site 1"));
-			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f, "site 1"));
+			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f, "site 3a"));
+			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f, "site 3b"));
 
-			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1"));
-			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 1"));
+			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 4a"));
+			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 4b"));
 
-			floor5.addPointOfInterest (new PointOfInterest (0.241f, 0.46f, "site 1"));
-			floor5.addPointOfInterest (new PointOfInterest (0.53f, 0.88f, "site 1"));
+			floor5.addPointOfInterest (new PointOfInterest (0.241f, 0.46f, "site 5a"));
+			floor5.addPointOfInterest (new PointOfInterest (0.53f, 0.88f, "site 5b"));
 
 			sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
@@ -75,7 +73,7 @@ namespace Exposeum
 			_currentFloor = sampleFloors [e.Progress];
 			_lastClickedPOI = null;
 
-			this.Invalidate ();
+			this.Invalidate (); //force redraw the activity instead of needing a touch
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
