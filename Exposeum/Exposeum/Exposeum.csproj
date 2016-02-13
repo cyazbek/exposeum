@@ -123,6 +123,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <None Include="Models\AboutResources.txt" />
+    <AndroidResource Include="Resources\layout\BeaconSummaryPopupView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -140,9 +143,6 @@
     <AndroidResource Include="Resources\values-fr\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\layout\" />
-    <Folder Include="Models\" />
     <XamarinComponentReference Include="estimotesdkandroid">
       <Version>0.9.1.0</Version>
       <Visible>False</Visible>

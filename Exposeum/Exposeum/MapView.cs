@@ -1,18 +1,13 @@
-using Android.App;
 using Exposeum.Models;
 using Android.Widget;
-using SQLitePCL;
+using System.Collections.Generic;
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.Views;
 
 namespace Exposeum
 {
-	using System.Collections.Generic;
-	using System;
-	using Android.Content;
-	using Android.Graphics;
-	using Android.Graphics.Drawables;
-	using Android.Util;
-	using Android.Views;
-
 	/// <summary>
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
@@ -99,13 +94,22 @@ namespace Exposeum
 						_currentFloor.addEdge(new Models.Edge (_lastClickedPOI, selected));
 						_lastClickedPOI = selected;
 					}
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this._context);
-                        builder.SetTitle("Error");
-                        builder.SetMessage(selected.Label);
-                        builder.SetCancelable(false);
-                        builder.SetPositiveButton("OK", delegate { });
-                        builder.Show();
-                    }
+
+				    var inflater = LayoutInflater.From(_context);
+                    View popup_view  = inflater.Inflate(Resource.Layout.BeaconSummaryPopupView, null);
+
+                    popup_view.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent,ViewGroup.LayoutParams.WrapContent);
+
+                    PopupWindow pwindow = new PopupWindow(popup_view, WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
+                    Button dismissButton = popup_view.FindViewById<Button>(Resource.Id.beaconpopupdismiss);
+
+				    dismissButton.Click += (sender, e) =>
+				    {
+				        pwindow.Dismiss();
+				    };
+                    pwindow.ShowAtLocation(popup_view, GravityFlags.Center,  0, 0);
+
+				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
