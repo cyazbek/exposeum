@@ -7,6 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/beacon_popup_webview" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText1"
+        android:text="Storyline 01 - Point 02: NARRATIVE HERE"
+        android:alpha="0" />
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="130.0dp"
+        android:id="@+id/imageView1" />
     <Button
         android:text="Dismiss"
         android:layout_width="match_parent"
