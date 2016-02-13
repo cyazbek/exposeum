@@ -1,15 +1,14 @@
 using Exposeum.Models;
+using Android.Widget;
+using System.Collections.Generic;
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.Views;
+using Android.Webkit;
 
 namespace Exposeum
 {
-	using System.Collections.Generic;
-	using System;
-	using Android.Content;
-	using Android.Graphics;
-	using Android.Graphics.Drawables;
-	using Android.Util;
-	using Android.Views;
-
 	/// <summary>
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
@@ -17,7 +16,6 @@ namespace Exposeum
 	public class MapView : View
 	{
 		private static readonly int InvalidPointerId = -1;
-		private readonly Drawable _map;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
 		private float _lastTouchX;
@@ -26,29 +24,55 @@ namespace Exposeum
 		private float _posY;
 		private float _scaleFactor = 1.0f;
 		private PointOfInterest _lastClickedPOI;
+		private Floor _currentFloor;
+		private Context _context;
 
 		//test points to be drawn on map
-		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
+		private List<Floor> sampleFloors = new List<Floor>();
 
-		//test edges to be draw on map
-		private List<Models.Edge> sampleEdges = new List<Models.Edge>();
+		private PopupWindow _popupWindow;
 
-		public MapView (Context context) : base(context, null, 0)
+	    public MapView (Context context) : base(context, null, 0)
 		{
-			_map = context.Resources.GetDrawable (Resource.Drawable.floor_5);
-			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
+			_context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
-			//push some sample points to draw on our map
-			samplePoints.Add(new PointOfInterest(0.53f, 0.46f, "site 1"));
-			samplePoints.Add(new PointOfInterest(0.62f, 0.64f, "site 2"));
-			samplePoints.Add(new PointOfInterest(0.60f, 0.82f, "site 3"));
-			samplePoints.Add(new PointOfInterest(0.85f, 0.88f, "site 4"));
-			samplePoints.Add(new PointOfInterest(0.925f, 0.55f, "site 5"));
-			samplePoints.Add(new PointOfInterest(0.77f, 0.265f, "site 6"));
-			samplePoints.Add(new PointOfInterest(0.56f, 0.19f, "site 7"));
-			samplePoints.Add(new PointOfInterest(0.346f, 0.886f, "site 8"));
-			samplePoints.Add(new PointOfInterest(0.241f, 0.266f, "site 9"));
+			Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
+			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
+			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
+			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
+			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
+
+			floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
+			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1b"));
+
+			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 2a"));
+			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f, "site 2b"));
+
+			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f, "site 3a"));
+			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f, "site 3b"));
+
+			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 4a"));
+			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 4b"));
+
+			floor5.addPointOfInterest (new PointOfInterest (0.241f, 0.46f, "site 5a"));
+			floor5.addPointOfInterest (new PointOfInterest (0.53f, 0.88f, "site 5b"));
+
+			sampleFloors.Add (floor1);
+			sampleFloors.Add (floor2);
+			sampleFloors.Add (floor3);
+			sampleFloors.Add (floor4);
+			sampleFloors.Add (floor5);
+
+			_currentFloor = sampleFloors [0];
+		}
+			
+		public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
+		{
+			_currentFloor = sampleFloors [e.Progress];
+			_lastClickedPOI = null;
+
+			this.Invalidate (); //force redraw the activity instead of needing a touch
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
@@ -60,15 +84,20 @@ namespace Exposeum
 
 			switch (action) {
 			case MotionEventActions.Down:
-				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
+				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
+
 				if (selected != null) {
 					if (_lastClickedPOI == null) {
 						_lastClickedPOI = selected;
 					} else if (_lastClickedPOI != selected) {
-						sampleEdges.Add (new Models.Edge (_lastClickedPOI, selected));
+						_currentFloor.addEdge(new Models.Edge (_lastClickedPOI, selected));
 						_lastClickedPOI = selected;
 					}
+
+					Views.BeaconPopup newBeaconPopup = new Views.BeaconPopup (_context, selected);
+					newBeaconPopup.Show ();
 				}
+
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -121,18 +150,9 @@ namespace Exposeum
 		{
 			base.OnDraw (canvas);
 			canvas.Save ();
-			canvas.Translate (_posX + _scaleFactor * -_map.IntrinsicWidth / 2, _posY + _scaleFactor * -_map.IntrinsicHeight / 2);
+			canvas.Translate (_posX + _scaleFactor * -_currentFloor.Image.IntrinsicWidth / 2, _posY + _scaleFactor * -_currentFloor.Image.IntrinsicHeight / 2);
 			canvas.Scale (_scaleFactor, _scaleFactor);
-			_map.Draw (canvas);
-
-			//draw edges on top of map
-			foreach (Models.Edge edge in sampleEdges)
-				edge.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);
-			
-			//draw pins on top of map
-			foreach (PointOfInterest poi in samplePoints)
-				poi.Draw (canvas, _map.IntrinsicWidth, _map.IntrinsicHeight);
-
+			_currentFloor.Draw (canvas);
 			canvas.Restore ();
 		}
 			
@@ -159,26 +179,27 @@ namespace Exposeum
 				}
 
 				_view.Invalidate ();
+
 				return true;
 			}
 		}
 
-		private PointOfInterest selectedPOI(float screenX, float screenY){
+		private PointOfInterest getSelectedPOI(float screenX, float screenY){
 
 			PointOfInterest clicked = null;
 
-			foreach (PointOfInterest poi in samplePoints) {
-				float poiX = _posX + (_scaleFactor * _map.IntrinsicWidth * poi.U) - ((_scaleFactor * _map.IntrinsicWidth) / 2);
-				float poiY = _posY + (_scaleFactor * _map.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.IntrinsicHeight) / 2);
+			foreach (PointOfInterest poi in _currentFloor.PointsOfInterest) {
+				float poiX = _posX + (_scaleFactor * _currentFloor.Image.IntrinsicWidth * poi.U) - ((_scaleFactor * _currentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _posY + (_scaleFactor * _currentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _currentFloor.Image.IntrinsicHeight) / 2);
 
-				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius*_scaleFactor) {
+				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					clicked = poi;
 					poi.SetTouched();
 					break;
 				}
 			}
-				
-			return clicked;
+
+            return clicked;
 		}
 	}
 }

@@ -48,7 +48,8 @@ namespace Exposeum
 			base.OnResume();
 			beaconFinder.findBeacons ();
 			beaconFinder.stopMonitoring ();
-		}
+ 
+        }
 
 		protected override void OnPause()
 		{
