@@ -1,5 +1,10 @@
+using Android.App;
 using Exposeum.Models;
+<<<<<<< HEAD
 using Android.Widget;
+=======
+using SQLitePCL;
+>>>>>>> 7bcfa9df021c7259bcd79e45772eee62cccb726c
 
 namespace Exposeum
 {
@@ -30,12 +35,26 @@ namespace Exposeum
 		private Context _context;
 
 		//test points to be drawn on map
+<<<<<<< HEAD
 		private List<Floor> sampleFloors = new List<Floor>();
+=======
+		private List<PointOfInterest> samplePoints = new List<PointOfInterest>();
 
-		public MapView (Context context) : base(context, null, 0)
+		//test edges to be draw on map
+		private List<Models.Edge> sampleEdges = new List<Models.Edge>();
+	    private Context _context;
+>>>>>>> 7bcfa9df021c7259bcd79e45772eee62cccb726c
+
+	    public MapView (Context context) : base(context, null, 0)
 		{
+<<<<<<< HEAD
 			_context = context;
 
+=======
+		    _context = context;
+			_map = context.Resources.GetDrawable (Resource.Drawable.floor_5);
+			_map.SetBounds (0, 0, _map.IntrinsicWidth, _map.IntrinsicHeight);
+>>>>>>> 7bcfa9df021c7259bcd79e45772eee62cccb726c
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
 			Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
@@ -85,7 +104,12 @@ namespace Exposeum
 
 			switch (action) {
 			case MotionEventActions.Down:
+<<<<<<< HEAD
 				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
+=======
+				PointOfInterest selected = selectedPOI (ev.GetX (), ev.GetY ());
+
+>>>>>>> 7bcfa9df021c7259bcd79e45772eee62cccb726c
 				if (selected != null) {
 					if (_lastClickedPOI == null) {
 						_lastClickedPOI = selected;
@@ -93,7 +117,13 @@ namespace Exposeum
 						_currentFloor.addEdge(new Models.Edge (_lastClickedPOI, selected));
 						_lastClickedPOI = selected;
 					}
-				}
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this._context);
+                        builder.SetTitle("Error");
+                        builder.SetMessage(selected.Label);
+                        builder.SetCancelable(false);
+                        builder.SetPositiveButton("OK", delegate { });
+                        builder.Show();
+                    }
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
 				_activePointerId = ev.GetPointerId (0);
@@ -193,8 +223,8 @@ namespace Exposeum
 					break;
 				}
 			}
-				
-			return clicked;
+
+            return clicked;
 		}
 	}
 }
