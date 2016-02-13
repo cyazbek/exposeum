@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace Exposeum
 {
-    [Activity(Label = "@string/language_activity")]		
+    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]		
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/

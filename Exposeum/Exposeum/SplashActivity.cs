@@ -34,19 +34,19 @@ namespace Exposeum
             if(Models.Language.getLanguage()=="en")
             {
                 int counter = 0;
-                imageView.SetBackgroundResource(imageList_en[0]);
+                imageView.SetImageResource(imageList_en[0]);
                 buttonNext.Text = "Next";
                 buttonNext.Click += (o, e) =>
                 {
                     counter += 1;
                     if (counter < imageList_en.Count -1)
                     {
-                        imageView.SetBackgroundResource(imageList_en[counter]);
+                        imageView.SetImageResource(imageList_en[counter]);
                         buttonNext.Text = "Next";
                     }
                     else if (counter == imageList_en.Count - 1)
                     {
-                        imageView.SetBackgroundResource(imageList_en[counter]);
+                        imageView.SetImageResource(imageList_en[counter]);
                         buttonNext.Text = "Start Journey";
                     }
                     else
@@ -60,19 +60,19 @@ namespace Exposeum
             if (Models.Language.getLanguage() == "fr")
             {
                 int counter = 0;
-                imageView.SetBackgroundResource(imageList_fr[0]);
+                imageView.SetImageResource(imageList_fr[0]);
                 buttonNext.Text = "Suivant";
                 buttonNext.Click += (o, e) =>
                 {
                     counter += 1;
                     if (counter < imageList_fr.Count - 1)
                     {
-                        imageView.SetBackgroundResource(imageList_fr[counter]);
+                        imageView.SetImageResource(imageList_fr[counter]);
                         buttonNext.Text = "Suivant";
                     }
                     else if (counter == imageList_fr.Count - 1)
                     {
-                        imageView.SetBackgroundResource(imageList_fr[counter]);
+                        imageView.SetImageResource(imageList_fr[counter]);
                         buttonNext.Text = "Commencer la visite";
                     }
                     else
