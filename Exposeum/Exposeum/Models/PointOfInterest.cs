@@ -44,17 +44,6 @@ namespace Exposeum.Models
 			_paint.Color = Color.OrangeRed;
 		}
 
-		public string Label_en
-		{
-			set { this._label = value; }
-			get { return this._label; }
-		}
-        public string Label_fr
-        {
-            set { this._label = value; }
-            get { return this._label; }
-        }
-
 
         public float U
 		{
