@@ -11,8 +11,29 @@ namespace Exposeum.Models
 		private String _label = "no label";
 		private float _radius = 80;
 		private readonly Paint _paint = new Paint();
+        private Beacon beacon { get; set; }
+        private string name_en
+        {
+            get; set;
+        }
+        private string name_fr
+        {
+            get; set;
+        }
+        private string description_en
+        {
+            get; set;
+        }
+        private string description_fr
+        {
+            get; set;
+        }
+        private int id
+        {
+            get; set;
+        }
 
-		public PointOfInterest (float u, float v, string label)
+        public PointOfInterest (float u, float v, string label)
 		{
 			this._u = u;
 			this._v = v;
@@ -23,13 +44,19 @@ namespace Exposeum.Models
 			_paint.Color = Color.OrangeRed;
 		}
 
-		public string Label
+		public string Label_en
 		{
 			set { this._label = value; }
 			get { return this._label; }
 		}
+        public string Label_fr
+        {
+            set { this._label = value; }
+            get { return this._label; }
+        }
 
-		public float U
+
+        public float U
 		{
 			set { this._u = value; }
 			get { return this._u; }
@@ -59,8 +86,42 @@ namespace Exposeum.Models
 
 		public String getHTML()
 		{
-			String summary = String.Format ("<html><body>You selected POI {0}!<br><br></body></html>", _label);
-			return summary;
+            string summary; 
+            if (Language.getLanguage()=="fr")
+            {
+                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", _label);
+            }
+            else
+                summary = String.Format("<html><body>You Selected {0}!<br><br></body></html>", _label);
+
+            return summary;
 		}
-	}
+        public string getDescription()
+        {
+            if (Language.getLanguage() == "fr")
+            {
+                return this.description_fr;
+            }
+            else
+                return this.description_en;
+        }
+        public string getName()
+        {
+            if (Language.getLanguage() == "fr")
+            {
+                return this.name_fr;
+            }
+            else
+                return this.name_en;
+        }
+        public bool checkBeacon(Beacon b)
+        {
+            if (this.beacon == null)
+                return false;
+            else if (this.beacon.uuid.Equals(b.uuid) & this.beacon.minor == b.minor & this.beacon.major == b.major)
+                return true;
+            else
+                return false; 
+        }
+    }
 }
