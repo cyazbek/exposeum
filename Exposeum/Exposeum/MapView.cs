@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Android.Webkit;
+using Android.App;
 
 namespace Exposeum
 {
@@ -13,8 +14,9 @@ namespace Exposeum
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
 	/// </summary>
-	public class MapView : View
-	{
+	public class MapView : View, IBeaconFinderObserver
+
+    {
 		private static readonly int InvalidPointerId = -1;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
@@ -26,18 +28,23 @@ namespace Exposeum
 		private PointOfInterest _lastClickedPOI;
 		private Floor _currentFloor;
 		private Context _context;
+        private BeaconFinder beaconFinder;
 
-		//test points to be drawn on map
-		private List<Floor> sampleFloors = new List<Floor>();
+        //test points to be drawn on map
+        private List<Floor> sampleFloors = new List<Floor>();
 
 		private PopupWindow _popupWindow;
 
 	    public MapView (Context context) : base(context, null, 0)
-		{
-			_context = context;
+		{            
+        
+            _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
-			Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
+            beaconFinder = new BeaconFinder(_context);
+            beaconFinder.addObserver(this);
+
+            Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
 			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
@@ -66,8 +73,13 @@ namespace Exposeum
 
 			_currentFloor = sampleFloors [0];
 		}
-			
-		public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
+
+        public static explicit operator Activity(MapView v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
 			_currentFloor = sampleFloors [e.Progress];
 			_lastClickedPOI = null;
@@ -201,5 +213,11 @@ namespace Exposeum
 
             return clicked;
 		}
-	}
+
+        //TODO: add method body
+        public void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
+        {
+            
+        }
+    }
 }
