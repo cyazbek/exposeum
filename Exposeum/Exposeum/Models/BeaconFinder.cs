@@ -48,8 +48,8 @@ namespace Exposeum
 
 			//add event handlers
 			beaconManager.Ranging += beaconManagerRanging;
-			beaconManager.EnteredRegion += (sender, args) => beaconEnteredRegion();
-			beaconManager.ExitedRegion += (sender, args) => beaconExitedRegion();
+			beaconManager.EnteredRegion += (sender, args) => beaconEnteredRegion(sender, args);
+			beaconManager.ExitedRegion += (sender, args) => beaconExitedRegion(sender, args);
 		}
 
 		private void constructNotificationManager(Context context){
@@ -198,9 +198,13 @@ namespace Exposeum
 			this.storyLine = storyLine;
 		}
 
-		private void beaconEnteredRegion(){}
+		private void beaconEnteredRegion(object sender, BeaconManager.EnteredRegionEventArgs e){
+			
+		}
 
-		private void beaconExitedRegion(){}
+		private void beaconExitedRegion(object sender, BeaconManager.ExitedRegionEventArgs e){
+			
+		}
 
 	}
 }
