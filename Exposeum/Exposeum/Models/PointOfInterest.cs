@@ -11,8 +11,9 @@ namespace Exposeum.Models
 		private String _label = "no label";
 		private float _radius = 80;
 		private readonly Paint _paint = new Paint();
+        public bool visited { get; set; }
 
-		public PointOfInterest (float u, float v, string label)
+        public PointOfInterest (float u, float v, string label)
 		{
 			this._u = u;
 			this._v = v;
