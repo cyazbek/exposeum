@@ -39,7 +39,7 @@ namespace Exposeum
             //define UI bindings
             beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
 
-			beaconFinder = new BeaconFinder(this);
+			beaconFinder = new BeaconFinder(this, story);
 			beaconFinder.addObserver (this);
 		}
 
@@ -53,6 +53,7 @@ namespace Exposeum
 		protected override void OnPause()
 		{
 			beaconFinder.stop ();
+			beaconFinder.startMonitoring ();
 			base.OnPause();
 		}
 
