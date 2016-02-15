@@ -8,6 +8,7 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.App;
 using Android.Support.V4.App;
+using Exposeum.Models;
 
 namespace Exposeum
 {
@@ -22,19 +23,25 @@ namespace Exposeum
 		private const string TAG = "BeaconFinder";
 		private int beaconCount;
 		private LinkedList<IBeaconFinderObserver> observers = new LinkedList<IBeaconFinderObserver>();
-		private SortedList<double, Beacon> immediateBeacons;
+		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
+		private NotificationCompat.Builder buildingNotification;
+		private StoryLine storyLine;
 
-		public BeaconFinder (Context context)
+		public BeaconFinder (Context context, StoryLine storyLine)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
+			preBuildAndroidNotification (context);
 		}
 
 		public BeaconFinder (Context context, Region customRegion){
 			region = customRegion;
+			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
+			preBuildAndroidNotification (context);
 		}
 
 		private void constructBeaconManager(Context context){
@@ -49,6 +56,20 @@ namespace Exposeum
 		private void constructNotificationManager(Context context){
 			notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 		}
+
+		private void preBuildAndroidNotification(Context context){
+
+			Intent notifyIntent = new Intent(context, context.GetType());
+			notifyIntent.SetFlags(ActivityFlags.SingleTop);
+
+			PendingIntent pendingIntent = PendingIntent.GetActivities(context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
+
+			buildingNotification = new NotificationCompat.Builder (context)
+				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
+				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
+				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
+				.SetContentTitle(storyLine.getName);
+		}
 			
 		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
@@ -58,7 +79,7 @@ namespace Exposeum
 			}
 
 			beaconCount = e.Beacons.Count;
-			immediateBeacons = new SortedList<double, Beacon>();
+			immediateBeacons = new SortedList<double, EstimoteSdk.Beacon>();
 
 			Log.Debug("BeaconFinder", "Found {0} beacons.", e.Beacons.Count);
 
@@ -143,15 +164,18 @@ namespace Exposeum
 			}
 		}
 
+		public void sendAndroidNotification(){
+		}
+
 		public int getBeaconCount(){
 			return beaconCount;
 		}
 
-		public SortedList<double, Beacon> getImmediateBeacons(){
+		public SortedList<double, EstimoteSdk.Beacon> getImmediateBeacons(){
 			return immediateBeacons;
 		}
 
-		public Beacon getClosestBeacon(){
+		public EstimoteSdk.Beacon getClosestBeacon(){
 			if (immediateBeacons.Count == 0)
 				return null;
 			
@@ -169,6 +193,14 @@ namespace Exposeum
 
 		public BeaconManager getBeaconManager(){
 			return beaconManager;
+		}
+
+		public StoryLine getStoryLine(){
+			return storyLine;
+		}
+
+		public void setStoryLine(StoryLine storyLine){
+			this.storyLine = storyLine;
 		}
 
 	}
