@@ -81,12 +81,18 @@ namespace Exposeum
 				return;
 			}
 
-			beaconCount = e.Beacons.Count;
+			filterImmediateBeacons (e.Beacons);
+
+			notifyObservers();
+		}
+
+		private void filterImmediateBeacons(List<EstimoteSdk.Beacon> beacons){
+			beaconCount = beacons.Count;
 			immediateBeacons = new SortedList<double, EstimoteSdk.Beacon>();
 
-			Log.Debug("BeaconFinder", "Found {0} beacons.", e.Beacons.Count);
+			Log.Debug("BeaconFinder", "Found {0} beacons.", beacons.Count);
 
-			foreach (var beacon in e.Beacons)
+			foreach (var beacon in beacons)
 			{
 
 				var proximity = Utils.ComputeProximity(beacon);
@@ -101,8 +107,6 @@ namespace Exposeum
 				}
 
 			}
-
-			notifyObservers();
 		}
 
 		public void OnServiceReady()
