@@ -82,7 +82,7 @@ namespace Exposeum
 				return;
 			}
 
-			filterImmediateBeacons (e.Beacons);
+			filterImmediateBeacons ((List<EstimoteSdk.Beacon>) e.Beacons);
 
 			notifyObservers();
 		}
@@ -213,7 +213,7 @@ namespace Exposeum
 				return;
 			}
 
-			filterImmediateBeacons (e.Beacons);
+			filterImmediateBeacons ((List<EstimoteSdk.Beacon>) e.Beacons);
 
 			POI poi = storyLine.findPOI (getClosestBeacon ());
 			sendBeaconFoundNotification ( buildBeaconFoundNotification (poi.getDescription() ) );
