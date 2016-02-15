@@ -5,12 +5,15 @@ using Android.OS;
 using Android.Content.PM;
 using JavaObject = Java.Lang.Object;
 using Android.Content;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using Android.App; 
 
 namespace Exposeum
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
+		private static readonly int BeaconFoundNotificationId = 1001;
+		private NotificationManager notificationManager;
 		private BeaconManager beaconManager;
 		private readonly EstimoteSdk.Region region;
 		private bool beaconInRegion;
@@ -23,16 +26,15 @@ namespace Exposeum
 		public BeaconFinder (Context context)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-			beaconManager = new BeaconManager (context);
-
-			//add event handlers
-			beaconManager.Ranging += beaconManagerRanging;
-			beaconManager.EnteredRegion += (sender, args) => setBeaconInRegion(true);
-			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
+			constructBeaconManager (context);
 		}
 
 		public BeaconFinder (Context context, Region customRegion){
 			region = customRegion;
+			constructBeaconManager (context);
+		}
+
+		private void constructBeaconManager(Context context){
 			beaconManager = new BeaconManager (context);
 
 			//add event handlers
@@ -40,6 +42,7 @@ namespace Exposeum
 			beaconManager.EnteredRegion += (sender, args) => setBeaconInRegion(true);
 			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
 		}
+
 
 
 		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
