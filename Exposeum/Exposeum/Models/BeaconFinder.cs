@@ -18,7 +18,6 @@ namespace Exposeum
 		private NotificationManager notificationManager;
 		private BeaconManager beaconManager;
 		private readonly EstimoteSdk.Region region;
-		private bool beaconInRegion;
 		private bool isRanging;
 		private const string TAG = "BeaconFinder";
 		private int beaconCount;
@@ -49,8 +48,8 @@ namespace Exposeum
 
 			//add event handlers
 			beaconManager.Ranging += beaconManagerRanging;
-			beaconManager.EnteredRegion += (sender, args) => setBeaconInRegion(true);
-			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
+			beaconManager.EnteredRegion += (sender, args) => beaconEnteredRegion();
+			beaconManager.ExitedRegion += (sender, args) => beaconExitedRegion();
 		}
 
 		private void constructNotificationManager(Context context){
@@ -150,14 +149,6 @@ namespace Exposeum
 
 		}
 
-		private void setBeaconInRegion(bool inRegion){
-			beaconInRegion = inRegion;
-		}
-
-		public bool getBeaconInRegion(){
-			return beaconInRegion;
-		}
-
 		public void addObserver(IBeaconFinderObserver observer){
 			observers.AddLast (observer);
 		}
@@ -206,6 +197,10 @@ namespace Exposeum
 		public void setStoryLine(StoryLine storyLine){
 			this.storyLine = storyLine;
 		}
+
+		private void beaconEnteredRegion(){}
+
+		private void beaconExitedRegion(){}
 
 	}
 }
