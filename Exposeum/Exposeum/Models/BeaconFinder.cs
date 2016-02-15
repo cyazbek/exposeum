@@ -6,7 +6,8 @@ using Android.Content.PM;
 using JavaObject = Java.Lang.Object;
 using Android.Content;
 using System.Collections.Generic;
-using Android.App; 
+using Android.App;
+using Android.Support.V4.App;
 
 namespace Exposeum
 {
@@ -27,11 +28,13 @@ namespace Exposeum
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
 			constructBeaconManager (context);
+			constructNotificationManager (context);
 		}
 
 		public BeaconFinder (Context context, Region customRegion){
 			region = customRegion;
 			constructBeaconManager (context);
+			constructNotificationManager (context);
 		}
 
 		private void constructBeaconManager(Context context){
@@ -43,8 +46,10 @@ namespace Exposeum
 			beaconManager.ExitedRegion += (sender, args) => setBeaconInRegion(false);
 		}
 
-
-
+		private void constructNotificationManager(Context context){
+			notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+		}
+			
 		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
 			if (e.Beacons == null)
