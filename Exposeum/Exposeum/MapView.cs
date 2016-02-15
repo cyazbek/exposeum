@@ -31,6 +31,7 @@ namespace Exposeum
 		private Context _context;
 
         private BeaconFinder beaconFinder;
+        private StoryLine storyLine;
 
         //test points to be drawn on map
         private List<Floor> sampleFloors = new List<Floor>();
@@ -75,6 +76,10 @@ namespace Exposeum
 
 			floor5.addPointOfInterest (poi1);
 			floor5.addPointOfInterest (poi2);
+
+            storyLine = new StoryLine();
+            // storyline.addPoi(poi1);
+            // storyline.addPoi(poi2);
             
 			sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
@@ -223,7 +228,21 @@ namespace Exposeum
         //TODO: add method body
         public void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
         {
-            
+            BeaconFinder beaconFinder = (BeaconFinder)observable;
+            EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
+
+            text1 = text1 + "The Closest beacon is: \n";
+            if (beacon != null)
+            {
+                if (story.hasBeacon(beacon))
+                {
+                    POI poi = story.findPOI(beacon);
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + poi.getName() + "\nDescription: " + poi.getDescription() + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
+                }
+                if (!story.hasBeacon(beacon))
+                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + " " + story.getSize() + "\n\n";
+            }
+            beaconContextualText.Text = text1;
         }
     }
 }
