@@ -70,6 +70,10 @@ namespace Exposeum
 				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
 				.SetContentTitle(storyLine.getName);
 		}
+
+		private Notification buildAndroidNotification(string message){
+			return buildingNotification.SetContentText (message).Build ();
+		}
 			
 		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
