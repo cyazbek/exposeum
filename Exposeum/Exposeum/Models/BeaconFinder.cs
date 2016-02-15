@@ -32,7 +32,7 @@ namespace Exposeum
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
-			preBuildAndroidNotification (context);
+			preBuildBeaconFoundNotification (context);
 		}
 
 		public BeaconFinder (Context context, Region customRegion){
@@ -40,14 +40,15 @@ namespace Exposeum
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
-			preBuildAndroidNotification (context);
+			preBuildBeaconFoundNotification (context);
 		}
 
 		private void constructBeaconManager(Context context){
 			beaconManager = new BeaconManager (context);
 
-			//add event handlers
+			//add event handlers for ranging
 			beaconManager.Ranging += beaconManagerRanging;
+			//add event handlers for monitoring
 			beaconManager.EnteredRegion += (sender, args) => beaconEnteredRegion(sender, args);
 			beaconManager.ExitedRegion += (sender, args) => beaconExitedRegion(sender, args);
 		}
@@ -56,7 +57,7 @@ namespace Exposeum
 			notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 		}
 
-		private void preBuildAndroidNotification(Context context){
+		private void preBuildBeaconFoundNotification(Context context){
 
 			Intent notifyIntent = new Intent(context, context.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
@@ -70,7 +71,7 @@ namespace Exposeum
 				.SetContentTitle(storyLine.getName);
 		}
 
-		private Notification buildAndroidNotification(string message){
+		private Notification buildBeaconFoundNotification(string message){
 			return buildingNotification.SetContentText (message).Build ();
 		}
 			
