@@ -35,7 +35,7 @@ namespace Exposeum
 			preBuildBeaconFoundNotification (context);
 		}
 
-		public BeaconFinder (Context context, Region customRegion){
+		public BeaconFinder (Context context, StoryLine storyLine, Region customRegion){
 			region = customRegion;
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
