@@ -7,6 +7,7 @@ using Android.Graphics;
 using Android.Views;
 using Android.Webkit;
 using Android.App;
+using Java.Util;
 
 namespace Exposeum
 {
@@ -28,6 +29,7 @@ namespace Exposeum
 		private PointOfInterest _lastClickedPOI;
 		private Floor _currentFloor;
 		private Context _context;
+
         private BeaconFinder beaconFinder;
 
         //test points to be drawn on map
@@ -50,7 +52,16 @@ namespace Exposeum
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
-			floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
+
+            Models.Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+            PointOfInterest poi1 = new PointOfInterest(0.53f, 0.46f, "Point of interest 5a");
+            poi1.beacon = beacon1;
+
+            Models.Beacon beacon2 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
+            PointOfInterest poi2 = new PointOfInterest(0.53f, 0.46f, "Point of interest 5b");
+            poi2.beacon = beacon2;
+
+            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
 			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1b"));
 
 			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 2a"));
@@ -62,9 +73,9 @@ namespace Exposeum
 			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 4a"));
 			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 4b"));
 
-			floor5.addPointOfInterest (new PointOfInterest (0.241f, 0.46f, "site 5a"));
-			floor5.addPointOfInterest (new PointOfInterest (0.53f, 0.88f, "site 5b"));
-
+			floor5.addPointOfInterest (poi1);
+			floor5.addPointOfInterest (poi2);
+            
 			sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
 			sampleFloors.Add (floor3);
@@ -73,11 +84,6 @@ namespace Exposeum
 
 			_currentFloor = sampleFloors [0];
 		}
-
-        public static explicit operator Activity(MapView v)
-        {
-            throw new NotImplementedException();
-        }
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
