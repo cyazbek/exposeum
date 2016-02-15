@@ -164,7 +164,11 @@ namespace Exposeum
 			}
 		}
 
-		public void sendAndroidNotification(){
+		public void sendBeaconFoundNotification(Notification notification){
+			notification.Defaults |= NotificationDefaults.Lights;
+			notification.Defaults |= NotificationDefaults.Sound;
+			notificationManager.Notify(BeaconFoundNotificationId, notification);
+
 		}
 
 		public int getBeaconCount(){
@@ -204,11 +208,20 @@ namespace Exposeum
 		}
 
 		private void beaconEnteredRegion(object sender, BeaconManager.EnteredRegionEventArgs e){
+			if (e.Beacons == null)
+			{
+				return;
+			}
+
+			filterImmediateBeacons (e.Beacons);
+
+			POI poi = storyLine.findPOI (getClosestBeacon ());
+			sendBeaconFoundNotification ( buildBeaconFoundNotification (poi.getDescription() ) );
 			
 		}
 
 		private void beaconExitedRegion(object sender, BeaconManager.ExitedRegionEventArgs e){
-			
+			//
 		}
 
 	}
