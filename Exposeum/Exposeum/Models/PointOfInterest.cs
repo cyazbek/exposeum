@@ -12,6 +12,7 @@ namespace Exposeum.Models
 		private float _radius = 80;
 		private readonly Paint _paint = new Paint();
         public bool visited { get; set; }
+        public Beacon beacon { get; set; }
 
         public PointOfInterest (float u, float v, string label)
 		{
