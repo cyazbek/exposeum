@@ -82,12 +82,12 @@ namespace Exposeum
 				return;
 			}
 
-			filterImmediateBeacons ((List<EstimoteSdk.Beacon>) e.Beacons);
+			filterImmediateBeacons (e.Beacons);
 
 			notifyObservers();
 		}
 
-		private void filterImmediateBeacons(List<EstimoteSdk.Beacon> beacons){
+		private void filterImmediateBeacons(IList<EstimoteSdk.Beacon> beacons){
 			beaconCount = beacons.Count;
 			immediateBeacons = new SortedList<double, EstimoteSdk.Beacon>();
 
@@ -101,7 +101,7 @@ namespace Exposeum
 
 				if (proximity == Utils.Proximity.Immediate) {
 					try {
-						immediateBeacons.Add (Utils.ComputeAccuracy (beacon), beacon);
+						immediateBeacons.Add (accuracy, beacon);
 					} catch (System.ArgumentException ex) {
 						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: ", ex.Message);
 					}
