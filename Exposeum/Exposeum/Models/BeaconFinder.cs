@@ -68,7 +68,7 @@ namespace Exposeum
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
-				.SetContentTitle(storyLine.getName);
+				.SetContentTitle(storyLine.getName());
 		}
 
 		private Notification buildBeaconFoundNotification(string message){
