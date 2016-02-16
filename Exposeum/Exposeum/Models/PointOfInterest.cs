@@ -34,6 +34,12 @@ namespace Exposeum.Models
             _paint.Color = Color.OrangeRed;
         }
         
+        public float Radius
+        {
+            set { this._radius = value; }
+            get { return this._radius; }
+        }
+
         public void Draw(Canvas canvas, float mapWidth, float mapHeight)
         {
             canvas.DrawCircle(_u * mapWidth, _v * mapHeight, _radius, _paint);
