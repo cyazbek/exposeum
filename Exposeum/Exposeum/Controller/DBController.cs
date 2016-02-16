@@ -58,7 +58,7 @@ namespace Exposeum.Controller
 
 
 
-        public string insertPoi(POI poi)
+        public string insertPoi(PointOfInterest poi)
         {
             try
             {
@@ -134,12 +134,12 @@ namespace Exposeum.Controller
             return db; 
         }
 
-        public POI getPoi(int id)
+        public PointOfInterest getPoi(int id)
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             var result = db.Get<POIData>(id);
-            POI poi = new POI();
+            PointOfInterest poi = new PointOfInterest();
             poi.convertFromData(result);
             var result2 = db.Get<BeaconData>(id);
             Beacon beacon= new Beacon();

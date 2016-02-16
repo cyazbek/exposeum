@@ -14,8 +14,8 @@ namespace Exposeum
 	{
 		private TextView beaconContextualText;
 		private BeaconFinder beaconFinder;
-        private POI myPoi;
-        private POI myPoi1;
+        private PointOfInterest myPoi;
+        private PointOfInterest myPoi1;
 		private StoryLine story;
 
         protected override void OnCreate (Bundle savedInstanceState)
@@ -25,11 +25,11 @@ namespace Exposeum
 			SetContentView (Resource.Layout.Beacon);
 
 			story = new StoryLine ();
-            Models.Beacon beaconFiras = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450); 
-            myPoi = new POI { name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", dscription_en = "This is the point of interest Firas", dscription_fr = "Celui là est le premier point de Firas"};
+            Models.Beacon beaconFiras = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
+            myPoi = new PointOfInterest(){ name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", description_en = "This is the point of interest Firas", description_fr = "Celui là est le premier point de Firas"};
             myPoi.beacon = beaconFiras;
             Models.Beacon beaconOli = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
-            myPoi1 = new POI { name_en = "Point Of interest Oli", name_fr = "Point d'interet Oli", dscription_en = "This is the point of interest Oli", dscription_fr = "Celui là est le premier point de Oli" };
+            myPoi1 = new PointOfInterest { name_en = "Point Of interest Oli", name_fr = "Point d'interet Oli", description_en = "This is the point of interest Oli", description_fr = "Celui là est le premier point de Oli" };
             myPoi1.beacon = beaconOli;
             story.addPoi(myPoi);
             story.addPoi(myPoi1);
@@ -78,7 +78,7 @@ namespace Exposeum
             {
                 if (story.hasBeacon(beacon))
                 {
-                    POI poi = story.findPOI(beacon);
+                    PointOfInterest poi = story.findPOI(beacon);
                     text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + poi.getName() + "\nDescription: " + poi.getDescription() + "\nMajor: " +beacon.Major +"\nMinor: " + beacon.Minor + "\n\n";
                 }
                 if(!story.hasBeacon(beacon))

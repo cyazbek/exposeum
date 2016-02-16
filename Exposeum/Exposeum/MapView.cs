@@ -6,6 +6,8 @@ using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Android.Webkit;
+using Android.App;
+using Java.Util;
 
 namespace Exposeum
 {
@@ -14,7 +16,8 @@ namespace Exposeum
 	///   of View.
 	/// </summary>
 	public class MapView : View
-	{
+
+    {
 		private static readonly int InvalidPointerId = -1;
 		private readonly ScaleGestureDetector _scaleDetector;
 		private int _activePointerId = InvalidPointerId;
@@ -27,38 +30,41 @@ namespace Exposeum
 		private Floor _currentFloor;
 		private Context _context;
 
-		//test points to be drawn on map
-		private List<Floor> sampleFloors = new List<Floor>();
+        
+        //test points to be drawn on map
+        private List<Floor> sampleFloors = new List<Floor>();
 
 		private PopupWindow _popupWindow;
 
 	    public MapView (Context context) : base(context, null, 0)
-		{
-			_context = context;
+		{            
+        
+            _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-
-			Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
+        
+            Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
 			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
-			floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
-			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1b"));
+            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
+			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f));
 
-			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 2a"));
-			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f, "site 2b"));
+			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f));
+			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f));
 
-			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f, "site 3a"));
-			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f, "site 3b"));
+			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f));
+			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f));
 
-			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 4a"));
-			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 4b"));
+			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
+			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f));
 
-			floor5.addPointOfInterest (new PointOfInterest (0.241f, 0.46f, "site 5a"));
-			floor5.addPointOfInterest (new PointOfInterest (0.53f, 0.88f, "site 5b"));
+			floor5.addPointOfInterest(new PointOfInterest(0.53f, 0.46f));
+            floor5.addPointOfInterest(new PointOfInterest(0.73f, 0.16f));
 
-			sampleFloors.Add (floor1);
+
+            sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
 			sampleFloors.Add (floor3);
 			sampleFloors.Add (floor4);
@@ -66,8 +72,8 @@ namespace Exposeum
 
 			_currentFloor = sampleFloors [0];
 		}
-			
-		public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
+
+        public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
 			_currentFloor = sampleFloors [e.Progress];
 			_lastClickedPOI = null;
@@ -189,8 +195,8 @@ namespace Exposeum
 			PointOfInterest clicked = null;
 
 			foreach (PointOfInterest poi in _currentFloor.PointsOfInterest) {
-				float poiX = _posX + (_scaleFactor * _currentFloor.Image.IntrinsicWidth * poi.U) - ((_scaleFactor * _currentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _posY + (_scaleFactor * _currentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _currentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _posX + (_scaleFactor * _currentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _currentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _posY + (_scaleFactor * _currentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _currentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					clicked = poi;
@@ -201,5 +207,7 @@ namespace Exposeum
 
             return clicked;
 		}
-	}
+
+        
+    }
 }
