@@ -15,7 +15,7 @@ namespace Exposeum
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
 	/// </summary>
-	public class MapView : View, IBeaconFinderObserver
+	public class MapView : View
 
     {
 		private static readonly int InvalidPointerId = -1;
@@ -30,9 +30,7 @@ namespace Exposeum
 		private Floor _currentFloor;
 		private Context _context;
 
-        private BeaconFinder beaconFinder;
-        private StoryLine storyLine;
-
+        
         //test points to be drawn on map
         private List<Floor> sampleFloors = new List<Floor>();
 
@@ -43,45 +41,30 @@ namespace Exposeum
         
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-
-            beaconFinder = new BeaconFinder(_context);
-            beaconFinder.addObserver(this);
-
+        
             Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
 			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
+            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
+			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f));
 
-            Models.Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-            PointOfInterest poi1 = new PointOfInterest(0.53f, 0.46f, "Point of interest 5a");
-            poi1.beacon = beacon1;
+			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f));
+			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f));
 
-            Models.Beacon beacon2 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
-            PointOfInterest poi2 = new PointOfInterest(0.53f, 0.46f, "Point of interest 5b");
-            poi2.beacon = beacon2;
+			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f));
+			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f));
 
-            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 1a"));
-			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f, "site 1b"));
+			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
+			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f));
 
-			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f, "site 2a"));
-			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f, "site 2b"));
+			floor5.addPointOfInterest(new PointOfInterest(0.53f, 0.46f));
+            floor5.addPointOfInterest(new PointOfInterest(0.73f, 0.16f));
 
-			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f, "site 3a"));
-			floor3.addPointOfInterest (new PointOfInterest (0.77f, 0.46f, "site 3b"));
 
-			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f, "site 4a"));
-			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f, "site 4b"));
-
-			floor5.addPointOfInterest (poi1);
-			floor5.addPointOfInterest (poi2);
-
-            storyLine = new StoryLine();
-            // storyline.addPoi(poi1);
-            // storyline.addPoi(poi2);
-            
-			sampleFloors.Add (floor1);
+            sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
 			sampleFloors.Add (floor3);
 			sampleFloors.Add (floor4);
@@ -212,8 +195,8 @@ namespace Exposeum
 			PointOfInterest clicked = null;
 
 			foreach (PointOfInterest poi in _currentFloor.PointsOfInterest) {
-				float poiX = _posX + (_scaleFactor * _currentFloor.Image.IntrinsicWidth * poi.U) - ((_scaleFactor * _currentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _posY + (_scaleFactor * _currentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _currentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _posX + (_scaleFactor * _currentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _currentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _posY + (_scaleFactor * _currentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _currentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					clicked = poi;
@@ -225,24 +208,6 @@ namespace Exposeum
             return clicked;
 		}
 
-        //TODO: add method body
-        public void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
-        {
-            BeaconFinder beaconFinder = (BeaconFinder)observable;
-            EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
-
-            text1 = text1 + "The Closest beacon is: \n";
-            if (beacon != null)
-            {
-                if (story.hasBeacon(beacon))
-                {
-                    POI poi = story.findPOI(beacon);
-                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nName: " + poi.getName() + "\nDescription: " + poi.getDescription() + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + "\n\n";
-                }
-                if (!story.hasBeacon(beacon))
-                    text1 = text1 + "Beacon UUID: " + beacon.ProximityUUID + "\nMajor: " + beacon.Major + "\nMinor: " + beacon.Minor + " " + story.getSize() + "\n\n";
-            }
-            beaconContextualText.Text = text1;
-        }
+        
     }
 }
