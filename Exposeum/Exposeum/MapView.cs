@@ -15,7 +15,7 @@ namespace Exposeum
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
 	/// </summary>
-	public class MapView : View
+	public class MapView : View, IBeaconFinderObserver
 
     {
 		private static readonly int InvalidPointerId = -1;
@@ -30,7 +30,9 @@ namespace Exposeum
 		private Floor _currentFloor;
 		private Context _context;
 
-        
+        private BeaconFinder beaconFinder;
+        private StoryLine storyLine;
+
         //test points to be drawn on map
         private List<Floor> sampleFloors = new List<Floor>();
 
@@ -41,12 +43,24 @@ namespace Exposeum
         
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-        
+
+            beaconFinder = new BeaconFinder(_context);
+            beaconFinder.findBeacons();
+            beaconFinder.addObserver(this);
+
             Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
 			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
+
+            Models.Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+            PointOfInterest poi1 = new PointOfInterest(0.53f, 0.46f);
+            poi1.beacon = beacon1;
+
+            Models.Beacon beacon2 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
+            PointOfInterest poi2 = new PointOfInterest(0.73f, 0.66f);
+            poi2.beacon = beacon2;
 
             floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
 			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f));
@@ -60,9 +74,12 @@ namespace Exposeum
 			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
 			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f));
 
-			floor5.addPointOfInterest(new PointOfInterest(0.53f, 0.46f));
-            floor5.addPointOfInterest(new PointOfInterest(0.73f, 0.16f));
+            floor5.addPointOfInterest(poi1);
+            floor5.addPointOfInterest(poi2);
 
+            storyLine = new StoryLine();
+            storyLine.addPoi(poi1);
+            storyLine.addPoi(poi2);
 
             sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
@@ -208,6 +225,25 @@ namespace Exposeum
             return clicked;
 		}
 
-        
+        public void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
+        {
+
+            BeaconFinder beaconFinder = (BeaconFinder)observable;
+            EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
+            this.Invalidate();
+
+            if (beacon != null)
+            {
+                if (storyLine.hasBeacon(beacon))
+                {
+                    PointOfInterest poi = storyLine.findPOI(beacon);
+                    poi.visited = true;
+                    poi.SetTouched();
+                    Toast.MakeText(_context, "Foud Me", ToastLength.Short).Show();
+                }
+            }
+        }
+
+
     }
 }
