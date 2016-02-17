@@ -21,7 +21,9 @@ namespace Exposeum
         private List<int> ImagesArray = new List<int>();
         private List<int> ImagesFrench = new List<int>();
         private List<int> ImagesEnglish = new List<int>();
-        private List<int> ImagesToDisplay; 
+        private List<int> ImagesToDisplay;
+        Intent intent; 
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,11 +44,13 @@ namespace Exposeum
             if (Language.getLanguage()=="fr")
             {
                 buttonText = "Avancez";
+                intent = new Intent(this, typeof(VisitActivity_fr));
                 ImagesToDisplay = ImagesFrench; 
             }
             else
             {
                 buttonText = "Skip";
+                intent = new Intent(this, typeof(VisitActivity_en));
                 ImagesToDisplay = ImagesEnglish;
             }
             WalkthroughButton.Text = buttonText;
@@ -54,16 +58,7 @@ namespace Exposeum
             init();
             WalkthroughButton.Click += (sender, e) =>
             {
-                if (Language.getLanguage() == "fr")
-                {
-                    var intent = new Intent(this, typeof(VisitActivity_fr));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    var intent = new Intent(this, typeof(VisitActivity_en));
-                    StartActivity(intent);
-                }
+                StartActivity(intent);
             };
             
         }
