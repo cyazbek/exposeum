@@ -52,7 +52,20 @@ namespace Exposeum
             WalkthroughButton.Text = buttonText;
 
             init();
-            // Create your application here
+            WalkthroughButton.Click += (sender, e) =>
+            {
+                if (Language.getLanguage() == "fr")
+                {
+                    var intent = new Intent(this, typeof(VisitActivity_fr));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    var intent = new Intent(this, typeof(VisitActivity_en));
+                    StartActivity(intent);
+                }
+            };
+            
         }
         private void init()
         {
