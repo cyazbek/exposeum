@@ -41,19 +41,18 @@ namespace Exposeum
 
 			beaconFinder = new BeaconFinder(this, story);
 			beaconFinder.addObserver (this);
+			beaconFinder.findBeacons ();
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			beaconFinder.findBeacons ();
-			beaconFinder.stopMonitoring ();
+			beaconFinder.setInFocus (true);
 		}
 
 		protected override void OnPause()
 		{
-			beaconFinder.stopRanging ();
-			beaconFinder.startMonitoring ();
+			beaconFinder.setInFocus (false);
 			base.OnPause();
 		}
 

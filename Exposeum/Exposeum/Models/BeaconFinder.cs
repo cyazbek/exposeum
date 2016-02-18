@@ -27,6 +27,7 @@ namespace Exposeum
 		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
 		private StoryLine storyLine;
 		private Context context;
+		private bool inFocus;
 
 		public BeaconFinder (Context context, StoryLine storyLine)
 		{
@@ -49,9 +50,6 @@ namespace Exposeum
 
 			//add event handlers for ranging
 			beaconManager.Ranging += beaconManagerRanging;
-			//add event handlers for monitoring
-			beaconManager.EnteredRegion += (sender, args) => beaconEnteredRegion(sender, args);
-			beaconManager.ExitedRegion += (sender, args) => beaconExitedRegion(sender, args);
 
 			// Default values are 5s of scanning and 25s of waiting time to save CPU cycles.
 			// In order for this demo to be more responsive and immediate we lower down those values.
@@ -96,12 +94,30 @@ namespace Exposeum
 		{
 			if (e.Beacons == null)
 			{
+				//If the app is not in focus, clear all potential notification associated with a beacon
+				if(!inFocus)
+					notificationManager.Cancel (BeaconFoundNotificationId);
+
 				return;
 			}
 
+			EstimoteSdk.Beacon previousClosestBeacon = getClosestBeacon ();
+
 			filterImmediateBeacons (e.Beacons);
 
-			notifyObservers();
+			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
+
+			if (inFocus)
+				notifyObservers();
+
+			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
+				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
+				return;
+
+
+			if(!inFocus)
+				notifyUser ();
+				
 		}
 
 		/// <summary>
@@ -177,7 +193,6 @@ namespace Exposeum
 				//Disconnect ot the beacon service
 				beaconManager.StopRanging (region);
 			}
-				
 		}
 
 		/// <summary>
@@ -187,7 +202,6 @@ namespace Exposeum
 		public void stopBeaconFinder(){
 			Log.Debug("BeaconFinder", "stopping everything");
 			stopRanging ();
-			stopMonitoring ();
 			beaconManager.Disconnect ();
 		}
 
@@ -202,7 +216,6 @@ namespace Exposeum
 				return false;
 
 			return true;
-
 		}
 
 		/// <summary>
@@ -250,27 +263,10 @@ namespace Exposeum
 		/// This method returns the beacon closest to the phone.
 		/// </summary>
 		public EstimoteSdk.Beacon getClosestBeacon(){
-			if (immediateBeacons.Count == 0)
+			if (immediateBeacons == null || immediateBeacons.Count == 0)
 				return null;
 			
 			return immediateBeacons.Values[ immediateBeacons.Count - 1 ];
-		}
-
-		/// <summary>
-		/// This method starts the monitoring process of beacons.
-		/// </summary>
-		public void startMonitoring(){
-			Log.Debug("BeaconFinder", "starting to monitor");
-			beaconManager.StartMonitoring (region);
-		}
-
-		/// <summary>
-		/// This method stops the monitoring process of beacons.
-		/// </summary>
-		public void stopMonitoring(){
-			Log.Debug("BeaconFinder", "stopping monitoring");
-			beaconManager.StopMonitoring (region);
-			notificationManager.Cancel(BeaconFoundNotificationId);
 		}
 
 		/// <summary>
@@ -295,34 +291,28 @@ namespace Exposeum
 		}
 
 		/// <summary>
-		/// This method handles events where beacons entered the monitored region. When a beacon is found using monitoring this method is called and
-		/// the event along with the sender is passed. This method will filter the beacons and send a 
-		/// notification to the phone.
 		/// </summary>
-		private void beaconEnteredRegion(object sender, BeaconManager.EnteredRegionEventArgs e){
-			if (e.Beacons == null)
-			{
-				return;
-			}
-
-			filterImmediateBeacons (e.Beacons);
+		private void notifyUser(){
 
 			Log.Debug("BeaconFinder", "Beacon Entering region event");
 
-			if(getClosestBeacon () != null){
+			//clear all previous notifications
+			notificationManager.Cancel (BeaconFoundNotificationId);
+
+			if (getClosestBeacon () != null) {
 				POI poi = storyLine.findPOI (getClosestBeacon ());
-				sendBeaconFoundNotification ( buildBeaconFoundNotification (poi.getDescription() ) );
-				Log.Debug("BeaconFinder", "closest beacon not null");
+				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getDescription ()));
+			} else {
+				notificationManager.Cancel (BeaconFoundNotificationId);
 			}
 		}
 
-		/// <summary>
-		/// This method handles events where beacons exited the monitored region. When a beacon is lost using monitoring this method is called and
-		/// the event along with the sender is passed.
-		/// </summary>
-		private void beaconExitedRegion(object sender, BeaconManager.ExitedRegionEventArgs e){
-			Log.Debug("BeaconFinder", "Beacon exited region event");
-			notificationManager.Cancel (BeaconFoundNotificationId);
+		public void setInFocus(bool focus){
+			inFocus = focus;
+		}
+
+		public bool getInFocus(){
+			return inFocus;
 		}
 
 	}
