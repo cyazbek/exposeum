@@ -15,7 +15,8 @@ namespace Exposeum.Models
         public string desc_fr { get; set; }
         public string duration { get; set; }
         public List<PointOfInterest> poiList { get; set; }
-        public List<PointOfInterest> poiVisitedList { get; set; }
+        public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
+        
 
         public StoryLine() 
         {
@@ -25,6 +26,11 @@ namespace Exposeum.Models
         public void addPoi(PointOfInterest poi)
         {
             poiList.Add(poi);
+        }
+
+        public void addVisitedPoiToList(PointOfInterest poi)
+        {
+            poiVisitedList.Add(poi);
         }
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
