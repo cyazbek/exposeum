@@ -59,7 +59,6 @@ namespace Exposeum
 
 		protected override void OnDestroy()
 		{
-			beaconFinder.stopBeaconFinder ();
 			base.OnDestroy();
 		}
 
