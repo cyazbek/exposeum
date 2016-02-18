@@ -100,7 +100,6 @@
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Controller\DBController.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\POI.cs" />
     <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\StoryLine.cs" />
     <Compile Include="SplashActivity.cs" />

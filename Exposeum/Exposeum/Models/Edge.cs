@@ -19,7 +19,7 @@ namespace Exposeum.Models
 		}
 
 		public void Draw(Canvas canvas, float mapWidth, float mapHeight){
-			canvas.DrawLine (start.U * mapWidth, start.V* mapHeight, end.U * mapWidth, end.V * mapHeight, paint);
+			canvas.DrawLine (start._u * mapWidth, start._v* mapHeight, end._u * mapWidth, end._v * mapHeight, paint);
 		}
 	}
 }

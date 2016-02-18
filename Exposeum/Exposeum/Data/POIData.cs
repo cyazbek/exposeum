@@ -17,25 +17,25 @@ namespace Exposeum.Data
 
         public string name_fr { get; set; }
 
-        public int uCoord { get; set; }
+        public float uCoord { get; set; }
 
-        public int vCoord { get; set; }
+        public float vCoord { get; set; }
 
         public string dscription_en { get; set; }
 
         public string dscription_fr { get; set; }
 
-        public int convertPOIToData(Models.POI poi, int beaconId)
+        public int convertPOIToData(Models.PointOfInterest poi, int beaconId)
         {
-            this.storyId = poi.storyId;
+            this.storyId = poi.storyID;
             this.beaconID = beaconId;
             this.visited = poi.visited;
             this.name_en = poi.name_en;
             this.name_fr = poi.name_fr;
-            this.dscription_en = poi.dscription_en;
-            this.dscription_fr = poi.dscription_fr;
-            this.uCoord = poi.uCoord;
-            this.vCoord = poi.vCoord; 
+            this.dscription_en = poi.description_en;
+            this.dscription_fr = poi.description_fr;
+            this.uCoord = poi._u;
+            this.vCoord = poi._v; 
             return this.ID; 
         }
     }
