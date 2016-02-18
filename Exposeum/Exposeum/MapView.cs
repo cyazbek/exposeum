@@ -48,8 +48,15 @@ namespace Exposeum
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
-            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
-			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f));
+	        PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f);
+	        p1.name_en = "POINT 1";
+	        p1.name_fr = "Le POINT 2";
+            floor1.addPointOfInterest (p1);
+
+            PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f);
+            p2.name_en = "POINT 2";
+	        p2.name_fr = "Le POINT 2";
+            floor1.addPointOfInterest (p2);
 
 			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f));
 			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f));
