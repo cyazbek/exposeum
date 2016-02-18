@@ -25,8 +25,8 @@ namespace Exposeum
 		private int beaconCount;
 		private LinkedList<IBeaconFinderObserver> observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
-		private NotificationCompat.Builder buildingNotification;
 		private StoryLine storyLine;
+		private Context context;
 
 		public BeaconFinder (Context context, StoryLine storyLine)
 		{
@@ -34,7 +34,7 @@ namespace Exposeum
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
-			preBuildBeaconFoundNotification (context);
+			this.context = context;
 		}
 
 		public BeaconFinder (Context context, StoryLine storyLine, Region customRegion){
@@ -42,7 +42,6 @@ namespace Exposeum
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
-			preBuildBeaconFoundNotification (context);
 		}
 
 		private void constructBeaconManager(Context context){
@@ -64,32 +63,28 @@ namespace Exposeum
 		}
 
 		/// <summary>
-		/// This method initiate the building process of an android notification but does not complete it. You must
-		/// call buildBeaconFoundNotification() to complete the building process.
+		/// This method completes the building process of an android system notification for when a beacon is found.
+		/// The notification building must have already been started by preBuildBeaconFoundNotification()
 		/// </summary>
-		private void preBuildBeaconFoundNotification(Context context){
+		private Notification buildBeaconFoundNotification(string message){
+			if (context == null) {
+				throw new Exception ("No notification currently in the building process. " +
+					"Call preBuildBeaconFoundNotification before calling this method");
+			}
 
 			Intent notifyIntent = new Intent(context, context.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
 
 			PendingIntent pendingIntent = PendingIntent.GetActivities(context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
 
-			buildingNotification = new NotificationCompat.Builder (context)
+			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
-				.SetContentTitle(storyLine.getName());
-		}
+				.SetContentTitle(storyLine.getName())
+				.SetContentText (message);
 
-		/// <summary>
-		/// This method completes the building process of an android system notification for when a beacon is found.
-		/// The notification building must have already been started by preBuildBeaconFoundNotification()
-		/// </summary>
-		private Notification buildBeaconFoundNotification(string message){
-			if (buildingNotification == null)
-				throw new Exception ("No notification currently in the building process. " +
-					"Call preBuildBeaconFoundNotification before calling this method");
-			return buildingNotification.SetContentText (message).Build ();
+			return notifBuilder.Build ();
 		}
 
 		/// <summary>
