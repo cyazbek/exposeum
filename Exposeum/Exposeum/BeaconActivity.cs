@@ -52,15 +52,14 @@ namespace Exposeum
 
 		protected override void OnPause()
 		{
-			beaconFinder.stop ();
+			beaconFinder.stopRanging ();
 			beaconFinder.startMonitoring ();
 			base.OnPause();
 		}
 
 		protected override void OnDestroy()
 		{
-			beaconFinder.stop ();
-			beaconFinder.stopMonitoring ();
+			beaconFinder.stopBeaconFinder ();
 			base.OnDestroy();
 		}
 
