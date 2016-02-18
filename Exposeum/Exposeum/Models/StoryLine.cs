@@ -15,6 +15,7 @@ namespace Exposeum.Models
         public string desc_fr { get; set; }
         public string duration { get; set; }
         public List<PointOfInterest> poiList { get; set; }
+        public List<PointOfInterest> poiVisitedList { get; set; }
 
         public StoryLine() 
         {

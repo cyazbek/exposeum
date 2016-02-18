@@ -237,6 +237,7 @@ namespace Exposeum
                 if (storyLine.hasBeacon(beacon))
                 {
                     PointOfInterest poi = storyLine.findPOI(beacon);
+                    storyLine.poiVisitedList.Add(poi);
                     poi.visited = true;
                     poi.SetTouched();
                     Toast.MakeText(_context, "Foud Me", ToastLength.Short).Show();
