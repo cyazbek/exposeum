@@ -170,7 +170,8 @@ namespace Exposeum
 				//Connect ot the beacon service
 				beaconManager.Connect(this);
 
-			}
+			}else if(isServiceReady)
+				beaconManager.StartRanging(region);
 		}
 
 		/// <summary>
@@ -189,6 +190,7 @@ namespace Exposeum
 		/// Estimote Ibeacon finding service
 		/// </summary>
 		public void stopBeaconFinder(){
+			Log.Debug("BeaconFinder", "stopping everything");
 			stopRanging ();
 			stopMonitoring ();
 			beaconManager.Disconnect ();
@@ -310,7 +312,7 @@ namespace Exposeum
 
 			filterImmediateBeacons (e.Beacons);
 
-			Log.Debug("BeaconFinder", "Monitoring...");
+			Log.Debug("BeaconFinder", "Beacon Entering region event");
 
 			if(getClosestBeacon () != null){
 				POI poi = storyLine.findPOI (getClosestBeacon ());
@@ -324,7 +326,8 @@ namespace Exposeum
 		/// the event along with the sender is passed.
 		/// </summary>
 		private void beaconExitedRegion(object sender, BeaconManager.ExitedRegionEventArgs e){
-			//
+			Log.Debug("BeaconFinder", "Beacon exited region event");
+			notificationManager.Cancel (BeaconFoundNotificationId);
 		}
 
 	}
