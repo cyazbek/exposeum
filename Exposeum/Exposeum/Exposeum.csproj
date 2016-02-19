@@ -109,6 +109,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
+    <Compile Include="Exceptions\CantSetRegionException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

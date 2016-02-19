@@ -20,7 +20,7 @@ namespace Exposeum
 		private static readonly int BeaconFoundNotificationId = 1001;
 		private NotificationManager notificationManager;
 		private BeaconManager beaconManager;
-		private readonly EstimoteSdk.Region region;
+		private EstimoteSdk.Region region;
 		private bool isRanging;
 		private bool isServiceReady;
 		private const string TAG = "BeaconFinder";
@@ -41,7 +41,7 @@ namespace Exposeum
 
 		public static void initInstance(Context context){
 			if (singletonInstance == null)
-				BeaconFinder (context);
+				singletonInstance = new BeaconFinder (context);
 		}
 
 		public static BeaconFinder getInstance(){
@@ -321,6 +321,9 @@ namespace Exposeum
 		}
 
 		public void setRegion(Region region){
+			if (isRanging)
+				throw new CantSetRegionException ("Cannot set set region since BeaconFinder is ranging. Stop ranging first, then set the region.");
+
 			this.region = region;
 		}
 
