@@ -14,8 +14,8 @@
   <string name ="POI_desc_en">Please enter the English Description</string>
   <string name ="POI_desc_fr">Please enter the French Description</string>
   <string name ="POI_submit">Submit</string>
-  <string name ="language_sub">New POI</string>
-  <string name ="language_disp">Display list of POIs</string>
+  <string name ="english">English</string>
+  <string name ="french">Français</string>
   <string name ="POI_name"> Name Of POI </string>
   <string name ="POI_description"> Description Of POI </string>
 </resources>

@@ -21,8 +21,7 @@
             _activity = activity;
 			_gestureActivities = new Dictionary<string, Intent>
                                      {
-                                         { activity.BaseContext.Resources.GetText(Resource.String.b_activity), new Intent(activity, typeof(BeaconActivity)) }, 
-                                         { activity.BaseContext.Resources.GetText(Resource.String.m_activity), new Intent(activity, typeof(MapActivity)) },
+                                         { activity.BaseContext.Resources.GetText(Resource.String.b_activity), new Intent(activity, typeof(BeaconActivity)) },
                                          { activity.BaseContext.Resources.GetText(Resource.String.l_activity), new Intent(activity, typeof(LanguageActivity))}
                                      };
 		}

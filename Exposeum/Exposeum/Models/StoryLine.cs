@@ -1,113 +1,97 @@
 
-using Java.Util;
-using SQLite;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using EstimoteSdk;
 using Exposeum.Data;
 
 namespace Exposeum.Models
 {
     public class StoryLine
     {
+
+        public string name_en {get; set;}
+        public string name_fr { get; set; }
+        public string audience_en { get; set; }
+        public string audience_fr { get; set; }
+        public string desc_en { get; set; }
+        public string desc_fr { get; set; }
+        public string duration { get; set; }
+        public List<PointOfInterest> poiList { get; set; }
+        public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
         
-        
-        public string name_en
-         {
-            get; set;
-        }
-        public string name_fr
-         {
-            get; set;
-        }
-        public string audience_en
-         {
-            get; set;
-        }
-        public string audience_fr
-         {
-            get; set;
-        }
-        public string desc_en
-         {
-            get; set;
-        }
-        public string desc_fr 
-         {
-            get; set;
-        }
-        public string duration
+
+        public StoryLine() 
         {
-            get; set;
+            this.poiList = new List<PointOfInterest>();
         }
-        public List<POI> poiList
-        {
-            get; set;
-        }
-        public StoryLine()
-        {
-            this.poiList = new List<POI>();
-        }
-        public void addPoi(POI poi)
+
+        public void addPoi(PointOfInterest poi)
         {
             poiList.Add(poi);
         }
-        public POI findPOI(EstimoteSdk.Beacon beacon)
+
+        public void addVisitedPoiToList(PointOfInterest poi)
+        {
+            poiVisitedList.Add(poi);
+        }
+
+        public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
         {
             return poiList.Find(x => x.beacon.compareBeacon(beacon));
         }
+
         public bool hasBeacon(EstimoteSdk.Beacon beacon)
         {
-            foreach(var poi in poiList)
+            foreach (var poi in poiList)
             {
                 if (poi.beacon.compareBeacon(beacon))
                     return true;
             }
             return false;
         }
+
         public int getSize()
         {
-            return poiList.Count; 
+            return poiList.Count;
         }
 
-        
         public string getName()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyName;
-            if (lang.Contains("fr"))
-            {
+
+            if (lang.Equals("fr"))
                 storyName = this.name_fr;
-            }
-            else storyName = this.name_en;
+            else
+                storyName = this.name_en;
+
             return storyName;
         }
 
         public string getDescription()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyDesc;
-            if (lang.Contains("fr"))
-            {
+
+            if (lang.Equals("fr"))
                 storyDesc = this.desc_fr;
-            }
-            else storyDesc = this.desc_en;
+            else
+                storyDesc = this.desc_en;
+
             return storyDesc;
         }
 
-
         public string getAudience()
         {
-            string lang = Thread.CurrentThread.CurrentCulture.Name;
+            string lang = Language.getLanguage();
             string storyAudience;
-            if (lang.Contains("fr"))
-            {
+
+            if (lang.Equals("fr"))
                 storyAudience = this.audience_fr;
-            }
-            else storyAudience = this.audience_en;
+            else
+                storyAudience = this.audience_en;
+
             return storyAudience;
         }
+
         public void convertFromData(StoryData story)
         {
             this.audience_en = story.audience_en;
@@ -118,6 +102,6 @@ namespace Exposeum.Models
             this.name_en = story.name_en;
             this.name_fr = story.name_fr;
         }
-        
+
     }
 }

@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroudlanguagefix">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroudlanguagefix"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ToggleButton
+        android:id="@+id/languageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textOn="EN"
+        android:textOff="FR"
+        android:checked="true"
+        android:layout_gravity="right"
+        style="@style/button_text" />
     <Button
-        android:text="@+string/english"
-        android:id="@+id/englishLang"
+        android:text="Explorer"
+        android:id="@+id/freeTour"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         style="@style/button_text"
         android:layout_gravity="center"
         android:layout_marginBottom="5.00dp"
-        android:layout_marginTop="250dp" />
+        android:layout_marginTop="200dp" />
     <Button
-        android:id="@+id/frenchLang"
-        android:text="@+string/french"
+        android:id="@+id/storyLine"
+        android:text="Guided Tour"
         android:layout_height="wrap_content"
         android:layout_width="250dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"

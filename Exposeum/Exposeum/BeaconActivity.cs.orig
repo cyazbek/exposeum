@@ -1,4 +1,4 @@
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Widget;
 using EstimoteSdk;
@@ -48,9 +48,15 @@ namespace Exposeum
 		protected override void OnResume()
 		{
 			base.OnResume();
+<<<<<<< HEAD
 			beaconFinder.setInFocus (true);
+		}
+=======
+			beaconFinder.findBeacons ();
+			beaconFinder.stopMonitoring ();
  
         }
+>>>>>>> 1f364de47009d0bb5834c8856d76c2997a18da0d
 
 		protected override void OnPause()
 		{

@@ -34,7 +34,7 @@ namespace UnitTests
 			Console.WriteLine ("test1");
 			Assert.True (true);
 
-			KeyValuePair<double, Beacon> previousPair;
+			KeyValuePair<double, Beacon> previousPair = new KeyValuePair<double, Beacon>();
 			int j = 0;
 			foreach (KeyValuePair<double, Beacon> pair in beaconFinder.getImmediateBeacons ()) {
 

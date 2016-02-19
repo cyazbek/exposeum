@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.sinistersix.exposeum">
+	<uses-sdk android:minSdkVersion="10" />
+<<<<<<< HEAD
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+=======
+>>>>>>> a4c132c98919df5900777216ea8c01d84720ff17
+	<application android:allowBackup="true" android:icon="@mipmap/icon" android:label="@string/app_name" android:theme="@style/Theme.AppCompat.Light"></application>
+</manifest>

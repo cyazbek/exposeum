@@ -22,6 +22,20 @@ namespace Exposeum.UITests
 		[Test]
 		public void ClickingButtonTwiceShouldChangeItsLabel ()
 		{
+
+			//app.Repl ();
+			app.Flash(marked:"list");
+			app.Flash(marked:"Map Activity");
+			app.Tap(marked:"Map Activity");
+			app.PinchToZoomIn("content");
+			app.SwipeRight ();
+			app.SwipeLeft ();
+
+			//-------------------------------------------------------------------------------------
+			//Next Plan of action is to tap on the right coordinate to change the color of the POI.
+			//-------------------------------------------------------------------------------------
+
+			/*
 			Func<AppQuery, AppQuery> MyButton = c => c.Button ("myButton");
 
 			app.Tap (MyButton);
@@ -30,6 +44,8 @@ namespace Exposeum.UITests
 			app.Screenshot ("Button clicked twice.");
 
 			Assert.AreEqual ("2 clicks!", results [0].Text);
+
+			*/
 		}
 	}
 }
