@@ -52,8 +52,8 @@ namespace Exposeum
 
 		protected override void OnPause()
 		{
-			beaconFinder.setInFocus (false);
 			base.OnPause();
+			beaconFinder.setInFocus (false);
 		}
 
 		protected override void OnDestroy()
