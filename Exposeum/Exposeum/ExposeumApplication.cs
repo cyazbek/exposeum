@@ -10,7 +10,7 @@ namespace Exposeum
 		public ExposeumApplication (IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
 		}
-
+			
 		public override void OnCreate(){
 			base.OnCreate ();
 			initSingletons ();
