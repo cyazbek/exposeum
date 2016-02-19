@@ -31,20 +31,13 @@ namespace Exposeum
 		private Context context;
 		private bool inFocus;
 
-		public BeaconFinder (Context context, StoryLine storyLine)
+		private BeaconFinder (Context context, StoryLine storyLine)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
 			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
 			this.context = context;
-		}
-
-		public BeaconFinder (Context context, StoryLine storyLine, Region customRegion){
-			region = customRegion;
-			this.storyLine = storyLine;
-			constructBeaconManager (context);
-			constructNotificationManager (context);
 		}
 
 		private void constructBeaconManager(Context context){
@@ -312,6 +305,14 @@ namespace Exposeum
 
 		public bool getInFocus(){
 			return inFocus;
+		}
+
+		public void setRegion(Region region){
+			this.region = region;
+		}
+
+		public Region getRegion(){
+			return region;
 		}
 
 	}
