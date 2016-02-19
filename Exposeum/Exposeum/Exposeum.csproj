@@ -107,6 +107,7 @@
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
+    <Compile Include="ExposeumApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
