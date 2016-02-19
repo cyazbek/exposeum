@@ -39,15 +39,24 @@ namespace Exposeum
 			this.context = context;
 		}
 
+		/// <summary>
+		/// This method instantiate the instance of the BeaconFinder singleton
+		/// </summary>
 		public static void initInstance(Context context){
 			if (singletonInstance == null)
 				singletonInstance = new BeaconFinder (context);
 		}
 
+		/// <summary>
+		/// This method returns the instance of the BeaconFinder singleton
+		/// </summary>
 		public static BeaconFinder getInstance(){
 			return singletonInstance;
 		}
 
+		/// <summary>
+		/// This method builds the beaconManager
+		/// </summary>
 		private void constructBeaconManager(Context context){
 			beaconManager = new BeaconManager (context);
 
@@ -55,6 +64,9 @@ namespace Exposeum
 			beaconManager.Ranging += beaconManagerRanging;
 		}
 
+		/// <summary>
+		/// This method builds the notification manager
+		/// </summary>
 		private void constructNotificationManager(Context context){
 			notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 		}
@@ -108,14 +120,14 @@ namespace Exposeum
 
 			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
 
-			if (inFocus)
+			if (inFocus && getClosestBeacon () != null)
 				notifyObservers();
 
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
-			if(!inFocus)
+			if(!inFocus && getClosestBeacon () != null)
 				notifyUser ();
 				
 		}
@@ -315,14 +327,23 @@ namespace Exposeum
 			}
 		}
 
+		/// <summary>
+		/// This method allows you to set the focus status of the app/activity
+		/// </summary>
 		public void setInFocus(bool focus){
 			inFocus = focus;
 		}
 
+		/// <summary>
+		/// This method allows you to get the focus status of the app/activity
+		/// </summary>
 		public bool getInFocus(){
 			return inFocus;
 		}
 
+		/// <summary>
+		/// This method allows you to set the region that the BeaconFinder will range
+		/// </summary>
 		public void setRegion(Region region){
 			if (isRanging)
 				throw new CantSetRegionException ("Cannot set set region since BeaconFinder is ranging. Stop ranging first, then set the region.");
@@ -330,6 +351,9 @@ namespace Exposeum
 			this.region = region;
 		}
 
+		/// <summary>
+		/// This method allows you to get the region that the BeaconFinder ranges
+		/// </summary>
 		public Region getRegion(){
 			return region;
 		}
