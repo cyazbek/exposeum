@@ -34,10 +34,18 @@ namespace Exposeum
 		private BeaconFinder (Context context)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-			this.storyLine = storyLine;
 			constructBeaconManager (context);
 			constructNotificationManager (context);
 			this.context = context;
+		}
+
+		public static void initInstance(Context context){
+			if (singletonInstance == null)
+				BeaconFinder (context);
+		}
+
+		public static BeaconFinder getInstance(){
+			return singletonInstance;
 		}
 
 		private void constructBeaconManager(Context context){

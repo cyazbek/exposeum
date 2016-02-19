@@ -14,7 +14,7 @@ namespace Exposeum
 		}
 
 		protected void initSigletons(){
-			
+			BeaconFinder.initInstance (this);
 		}
 	}
 }
