@@ -31,7 +31,7 @@ namespace Exposeum
 		private Context context;
 		private bool inFocus;
 
-		private BeaconFinder (Context context, StoryLine storyLine)
+		private BeaconFinder (Context context)
 		{
 			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
 			this.storyLine = storyLine;
@@ -169,6 +169,11 @@ namespace Exposeum
 		/// This method lauch the Estimote Ibeacon finding service and connects our current instance to it.
 		/// </summary>
 		public void findBeacons(){
+
+			if (storyLine == null) {
+				throw new StoryLineNotFoundException ("You must set the storyline first. Call setStorylLine");
+			}
+
 			if(checkBluetooth() && !isServiceReady){
 				//Connect ot the beacon service
 				beaconManager.Connect(this);
