@@ -17,6 +17,7 @@ namespace Exposeum.Models
         public int id { get; set; }
         public int storyID { get; set; }
         public Boolean visited { get; set; }
+		private float _icon_scale_factor = 0.2f;
 
 		private Drawable _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
 		private Drawable _unvisited_icon =Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
@@ -42,12 +43,13 @@ namespace Exposeum.Models
         
         public float Radius
         {
-			get { return this._visited_icon.IntrinsicWidth / 2.0f;}
+			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
         }
 
         public void Draw(Canvas canvas, float mapWidth, float mapHeight)
 		{
 			canvas.Translate (_u * mapWidth, _v * mapHeight);
+			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
 			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
 
 			if (visited)
@@ -56,6 +58,7 @@ namespace Exposeum.Models
 				_unvisited_icon.Draw (canvas);
 
 			canvas.Translate (_unvisited_icon.IntrinsicWidth / 2.0f, _unvisited_icon.IntrinsicHeight / 2.0f);
+			canvas.Scale (1.0f/_icon_scale_factor, 1.0f/_icon_scale_factor);
 			canvas.Translate (-_u * mapWidth, -_v * mapHeight);
 		}
 
