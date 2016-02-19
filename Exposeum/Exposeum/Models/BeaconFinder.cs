@@ -50,10 +50,6 @@ namespace Exposeum
 
 			//add event handlers for ranging
 			beaconManager.Ranging += beaconManagerRanging;
-
-			// Default values are 5s of scanning and 25s of waiting time to save CPU cycles.
-			// In order for this demo to be more responsive and immediate we lower down those values.
-			beaconManager.SetBackgroundScanPeriod(TimeUnit.Seconds.ToMillis(1), 0);
 		}
 
 		private void constructNotificationManager(Context context){
@@ -97,9 +93,11 @@ namespace Exposeum
 				//If the app is not in focus, clear all potential notification associated with a beacon
 				if(!inFocus)
 					notificationManager.Cancel (BeaconFoundNotificationId);
-
+				Log.Debug("BeaconFinder", "e.Beacons is null");
 				return;
 			}
+
+			Log.Debug("BeaconFinder", e.Beacons.ToString());
 
 			EstimoteSdk.Beacon previousClosestBeacon = getClosestBeacon ();
 
@@ -113,7 +111,6 @@ namespace Exposeum
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
-
 
 			if(!inFocus)
 				notifyUser ();
@@ -140,7 +137,7 @@ namespace Exposeum
 					try {
 						immediateBeacons.Add (accuracy, beacon);
 					} catch (System.ArgumentException ex) {
-						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: ", ex.Message);
+						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: " + ex.Message);
 					}
 				}
 
@@ -284,7 +281,7 @@ namespace Exposeum
 		}
 
 		/// <summary>
-		/// This method sets the current instance of the sotryline.
+		/// This method sets the current instance of the storyline.
 		/// </summary>
 		public void setStoryLine(StoryLine storyLine){
 			this.storyLine = storyLine;
@@ -294,7 +291,7 @@ namespace Exposeum
 		/// </summary>
 		private void notifyUser(){
 
-			Log.Debug("BeaconFinder", "Beacon Entering region event");
+			Log.Debug("BeaconFinder", "Notifying user");
 
 			//clear all previous notifications
 			notificationManager.Cancel (BeaconFoundNotificationId);
