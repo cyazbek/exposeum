@@ -132,6 +132,9 @@ namespace Exposeum
 
 			foreach (var beacon in beacons)
 			{
+				//if the beacon is not in the storyline, skip it and move to the next one
+				if (!storyLine.hasBeacon (beacon))
+					continue;
 
 				var proximity = Utils.ComputeProximity(beacon);
 				var accuracy = Utils.ComputeAccuracy(beacon);
