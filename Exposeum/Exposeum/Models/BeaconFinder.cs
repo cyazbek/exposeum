@@ -15,6 +15,8 @@ namespace Exposeum
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
+		private static BeaconFinder singletonInstance;
+
 		private static readonly int BeaconFoundNotificationId = 1001;
 		private NotificationManager notificationManager;
 		private BeaconManager beaconManager;
@@ -314,4 +316,3 @@ namespace Exposeum
 
 	}
 }
-
