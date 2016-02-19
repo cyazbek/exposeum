@@ -45,7 +45,6 @@ namespace Exposeum
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
 			beaconFinder = BeaconFinder.getInstance();
-            beaconFinder.findBeacons();
             beaconFinder.addObserver(this);
 
             Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
@@ -90,6 +89,8 @@ namespace Exposeum
 			sampleFloors.Add (floor5);
 
 			_currentFloor = sampleFloors [0];
+
+			beaconFinder.findBeacons();
 		}
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
