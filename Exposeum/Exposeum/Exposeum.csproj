@@ -108,6 +108,7 @@
     <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
+    <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -155,5 +156,6 @@
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>
