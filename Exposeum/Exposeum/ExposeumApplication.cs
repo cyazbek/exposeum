@@ -1,19 +1,22 @@
 ﻿using System;
 using Android.App;
+using Android.Runtime;
 
 namespace Exposeum
 {
+	[Application]
 	public class ExposeumApplication: Application
 	{
-		public ExposeumApplication ()
+		public ExposeumApplication (IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
 		}
 
 		public override void OnCreate(){
-			initSigletons ();
+			base.OnCreate ();
+			initSingletons ();
 		}
 
-		protected void initSigletons(){
+		protected void initSingletons(){
 			BeaconFinder.initInstance (this);
 		}
 	}
