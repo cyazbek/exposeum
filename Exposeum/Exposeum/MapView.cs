@@ -44,7 +44,7 @@ namespace Exposeum
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 
-            beaconFinder = new BeaconFinder(_context);
+			beaconFinder = BeaconFinder.getInstance();
             beaconFinder.findBeacons();
             beaconFinder.addObserver(this);
 
@@ -80,6 +80,8 @@ namespace Exposeum
             storyLine = new StoryLine();
             storyLine.addPoi(poi1);
             storyLine.addPoi(poi2);
+
+			beaconFinder.setStoryLine (storyLine);
 
             sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);

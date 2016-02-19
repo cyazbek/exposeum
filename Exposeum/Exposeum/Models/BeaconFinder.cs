@@ -305,7 +305,7 @@ namespace Exposeum
 			notificationManager.Cancel (BeaconFoundNotificationId);
 
 			if (getClosestBeacon () != null) {
-				POI poi = storyLine.findPOI (getClosestBeacon ());
+				PointOfInterest poi = storyLine.findPOI (getClosestBeacon ());
 				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getDescription ()));
 			} else {
 				notificationManager.Cancel (BeaconFoundNotificationId);
