@@ -89,9 +89,11 @@ namespace Exposeum
 			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
-				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
+				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
 				.SetContentTitle(storyLine.getName())
-				.SetContentText (message);
+				.SetContentText (message)
+				.SetPriority(2)
+				.SetVibrate(new long[] { 1000, 1000, 1000 });
 
 			return notifBuilder.Build ();
 		}
@@ -120,14 +122,14 @@ namespace Exposeum
 
 			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
 
-			if (inFocus && getClosestBeacon () != null)
+			if (inFocus)
 				notifyObservers();
 
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
-			if(!inFocus && getClosestBeacon () != null)
+			if(!inFocus)
 				notifyUser ();
 				
 		}
