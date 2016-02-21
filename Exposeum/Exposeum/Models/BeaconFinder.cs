@@ -29,6 +29,7 @@ namespace Exposeum
 		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
 		private StoryLine storyLine;
 		private Context context;
+		private Context notificationDestination;
 		private bool inFocus;
 
 		private BeaconFinder (Context context)
@@ -81,7 +82,9 @@ namespace Exposeum
 					"Call preBuildBeaconFoundNotification before calling this method");
 			}
 
-			Intent notifyIntent = new Intent(context, context.GetType());
+			Context destination = notificationDestination == null ? context : notificationDestination;
+
+			Intent notifyIntent = new Intent(destination, destination.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
 
 			PendingIntent pendingIntent = PendingIntent.GetActivities(context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
@@ -358,6 +361,22 @@ namespace Exposeum
 		/// </summary>
 		public Region getRegion(){
 			return region;
+		}
+
+		/// <summary>
+		/// This method allows you to get the the context to which a a user 
+		/// will be directed after tapping the notification
+		/// </summary>
+		public Context getNotificationDestination(){
+			return notificationDestination;
+		}
+
+		/// <summary>
+		/// This method allows you to set the the context to which a a user 
+		/// will be directed after tapping the notification
+		/// </summary>
+		public void setNotificationDestination(Context cont){
+			notificationDestination = cont;
 		}
 
 	}
