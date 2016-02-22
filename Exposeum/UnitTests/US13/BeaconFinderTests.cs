@@ -17,6 +17,7 @@ namespace UnitTests
 		private PointOfInterest myPoi;
 		private PointOfInterest myPoi1;
 		private StoryLine story;
+		private bool isBeaconDetected;
 
 
 		[SetUp]
@@ -33,7 +34,12 @@ namespace UnitTests
 			story.addPoi(myPoi1);
 
 			beaconFinder.setStoryLine (story);
+			beaconFinder.setInFocus (true);
 			beaconFinder.addObserver (this);
+
+			isBeaconDetected = false;
+
+			beaconFinder.findBeacons ();
 		}
 
 
@@ -42,15 +48,14 @@ namespace UnitTests
 		{
 		}
 
-		[Test]
-		public void assertOliIsRight(){
-			Assert.AreEqual ("Point Of interest Firas", myPoi.name_en);
-		}
 
-		/*[Test]
+		[Test]
 		public void testImmediateBeaconOrderedByAccuracy ()
 		{
-			beaconFinder.findBeacons ();
+
+		
+			while (!isBeaconDetected) {
+			}
 
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
 			SortedList<double, EstimoteSdk.Beacon> immediateBeacons = beaconFinder.getImmediateBeacons ();
@@ -61,16 +66,16 @@ namespace UnitTests
 					previousPair = pair;
 					continue;
 				}
-                /*
-				Assert.True (pair.Key <  previousPair.Key);
-				Assert.True (Utils.ComputeAccuracy (pair.Value) <  Utils.ComputeAccuracy (previousPair.Value));
+
+				Assert.True (pair.Key >  previousPair.Key);
+				Assert.True (Utils.ComputeAccuracy (pair.Value) >  Utils.ComputeAccuracy (previousPair.Value));
 				j++;
 
 				previousPair = pair;
 
 
 			}
-		}*/
+		}
 
 		[Test]
 		public void Pass ()
@@ -80,7 +85,7 @@ namespace UnitTests
 
 
 		public void beaconFinderObserverUpdate(IBeaconFinderObservable observable){
-		//	testImmediateBeaconOrderedByAccuracy ();	
+			isBeaconDetected = true;	
 		}
         
 	}
