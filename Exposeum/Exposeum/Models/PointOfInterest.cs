@@ -19,11 +19,13 @@ namespace Exposeum.Models
         public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
-		private Drawable _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
-		private Drawable _unvisited_icon =Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
+		private Drawable _visited_icon;
+		private Drawable _unvisited_icon;
 
         public PointOfInterest()
         {
+			setVisitedUnvisitedIcons ();
+
 			visited = false;
 
 			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
@@ -32,6 +34,7 @@ namespace Exposeum.Models
 
         public PointOfInterest(float u, float v)
         {
+			setVisitedUnvisitedIcons ();
             this._u = u;
             this._v = v;
 
@@ -40,6 +43,22 @@ namespace Exposeum.Models
 			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
 			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
+
+		private void setVisitedUnvisitedIcons(){
+
+			try{
+				_visited_icon = Android.App.Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
+			}catch(Exception e){
+				_visited_icon = new ColorDrawable ();
+			}
+
+			try{
+				_unvisited_icon =Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
+			}catch(Exception e){
+				_unvisited_icon = new ColorDrawable ();
+			}
+
+		}
         
         public float Radius
         {
