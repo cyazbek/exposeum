@@ -25,7 +25,8 @@ namespace Exposeum.Views
 				_pwindow.Dismiss();
 			};
 
-			WebView popupWebView = popup_view.FindViewById<WebView>(Resource.Id.beacon_popup_webview);
+		    
+            WebView popupWebView = popup_view.FindViewById<WebView>(Resource.Id.beacon_popup_webview);
 			popupWebView.LoadData(POI.getHTML(), "text/html", "utf-8");
 		}
 

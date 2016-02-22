@@ -10,7 +10,7 @@
     ///   The main activity is implemented as a ListActivity. When the user
     ///   clicks on a item in the ListView, we will display the appropriate activity.
     /// </summary>
-    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/ic_launcher", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Locale)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/Logo", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Locale)]
     	public class MainActivity : ListActivity
 	{
         
