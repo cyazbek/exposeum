@@ -69,7 +69,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Exposeum\Exposeum.csproj">
       <Project>{95AD6949-CBE8-4014-8DD3-B18F4138C6D9}</Project>
@@ -81,5 +80,21 @@
       <Version>0.9.1.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Exposeum\Resources\drawable\Logo.png">
+      <Link>Resources\Drawable\Logo.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="..\Exposeum\Resources\values\Strings.xml">
+      <Link>Resources\values\Strings.xml</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Exposeum\Resources\values-fr\Strings.xml">
+      <Link>Resources\values-fr\Strings.xml</Link>
+    </AndroidResource>
   </ItemGroup>
 </Project>

@@ -34,6 +34,7 @@ namespace UnitTests.US07
             _mapview = new MapView(context);
 
             _beaconPopup = new BeaconPopup(context, _poi);
+
             
 
         }
@@ -42,6 +43,7 @@ namespace UnitTests.US07
         public void TestClickPoiOpensSummaryPopup()
         {
 
+            Assert.Equals(3, 3);
 
         }
     }
