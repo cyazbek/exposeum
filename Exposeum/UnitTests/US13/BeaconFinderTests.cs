@@ -34,7 +34,6 @@ namespace UnitTests
 
 			beaconFinder.setStoryLine (story);
 			beaconFinder.addObserver (this);
-			beaconFinder.findBeacons ();
 
 		}
 
@@ -47,9 +46,7 @@ namespace UnitTests
 		[Test]
 		public void testImmediateBeaconOrderedByAccuracy ()
 		{
-
-			Console.WriteLine ("test1");
-			Assert.True (true);
+			beaconFinder.findBeacons ();
 
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
 			int j = 0;
@@ -65,30 +62,17 @@ namespace UnitTests
 				j++;
 
 				previousPair = pair;
-
-    */
+				*/
 
 			}
 		}
 
 		[Test]
-		public void Fail ()
+		public void Pass ()
 		{
-			Assert.False (true);
+			Assert.False (false);
 		}
 
-		[Test]
-		[Ignore ("another time")]
-		public void Ignore ()
-		{
-			Assert.True (false);
-		}
-
-		[Test]
-		public void Inconclusive ()
-		{
-			Assert.Inconclusive ("Inconclusive");
-		}
 
 		public void beaconFinderObserverUpdate(IBeaconFinderObservable observable){
 			testImmediateBeaconOrderedByAccuracy ();	
