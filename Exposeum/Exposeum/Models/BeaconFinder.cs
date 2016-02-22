@@ -74,13 +74,8 @@ namespace Exposeum
 
 		/// <summary>
 		/// This method completes the building process of an android system notification for when a beacon is found.
-		/// The notification building must have already been started by preBuildBeaconFoundNotification()
 		/// </summary>
-		private Notification buildBeaconFoundNotification(string message){
-			if (context == null) {
-				throw new Exception ("No notification currently in the building process. " +
-					"Call preBuildBeaconFoundNotification before calling this method");
-			}
+		private Notification buildBeaconFoundNotification(string poiName, string poiDesc){
 
 			Context destination = notificationDestination == null ? context : notificationDestination;
 
@@ -93,8 +88,8 @@ namespace Exposeum
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
-				.SetContentTitle(storyLine.getName())
-				.SetContentText (message)
+				.SetContentTitle(poiName)
+				.SetContentText (poiDesc)
 				.SetPriority(2)
 				.SetVibrate(new long[] { 1000, 1000, 1000 });
 
@@ -262,7 +257,7 @@ namespace Exposeum
 		/// <summary>
 		/// This method sends a previously built Android Notification to the android system.
 		/// </summary>
-		public void sendBeaconFoundNotification(Notification notification){
+		private void sendBeaconFoundNotification(Notification notification){
 			notification.Defaults |= NotificationDefaults.Lights;
 			notification.Defaults |= NotificationDefaults.Sound;
 			notificationManager.Notify(BeaconFoundNotificationId, notification);
@@ -328,7 +323,7 @@ namespace Exposeum
 
 			if (getClosestBeacon () != null) {
 				PointOfInterest poi = storyLine.findPOI (getClosestBeacon ());
-				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getDescription ()));
+				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getName (), poi.getDescription ()));
 			} else {
 				notificationManager.Cancel (BeaconFoundNotificationId);
 			}
