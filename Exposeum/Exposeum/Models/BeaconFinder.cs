@@ -266,6 +266,7 @@ namespace Exposeum
 			notification.Defaults |= NotificationDefaults.Lights;
 			notification.Defaults |= NotificationDefaults.Sound;
 			notificationManager.Notify(BeaconFoundNotificationId, notification);
+
 			Log.Debug("BeaconFinder", "Sending notification");
 
 		}
@@ -288,10 +289,11 @@ namespace Exposeum
 		/// This method returns the beacon closest to the phone.
 		/// </summary>
 		public EstimoteSdk.Beacon getClosestBeacon(){
+
 			if (immediateBeacons == null || immediateBeacons.Count == 0)
 				return null;
 			
-			return immediateBeacons.Values[ immediateBeacons.Count - 1 ];
+			return immediateBeacons.Values[ 0 ];
 		}
 
 		/// <summary>

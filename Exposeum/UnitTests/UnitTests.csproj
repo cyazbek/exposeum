@@ -53,7 +53,8 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="US07\BeaconSummaryPopupTests.cs" />
-    <Compile Include="US13\BeaconFinderTests.cs" />
+    <Compile Include="US09\BeaconFinderTestsUS9.cs" />
+    <Compile Include="US13\BeaconFinderTestsUS13.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -96,5 +97,9 @@
     <AndroidResource Include="..\Exposeum\Resources\values-fr\Strings.xml">
       <Link>Resources\values-fr\Strings.xml</Link>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="New Folder\" />
+    <Folder Include="US09\" />
   </ItemGroup>
 </Project>
