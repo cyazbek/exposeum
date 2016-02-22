@@ -13,7 +13,7 @@ namespace UnitTests
 		{
 			// tests can be inside the main assembly
 			AddTest (Assembly.GetExecutingAssembly ());
-			AddTest (typeof (BeaconFinderTests).Assembly);
+			//AddTest (typeof (BeaconFinderTests).Assembly);
 			// or in any reference assemblies
 			// AddTest (typeof (Your.Library.TestClass).Assembly);
 
