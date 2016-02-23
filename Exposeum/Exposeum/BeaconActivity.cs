@@ -40,6 +40,7 @@ namespace Exposeum
             beaconContextualText = FindViewById<TextView>(Resource.Id.textView1);
 
 			beaconFinder = BeaconFinder.getInstance ();
+			beaconFinder.setNotificationDestination (this);
 			beaconFinder.setStoryLine (story);
 			beaconFinder.addObserver (this);
 			beaconFinder.findBeacons ();

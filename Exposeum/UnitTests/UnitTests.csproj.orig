@@ -52,10 +52,14 @@
     <Compile Include="TestsSample.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="US07\BeaconSummaryPopupTests.cs" />
     <Compile Include="US09\BeaconFinderTestsUS9.cs" />
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
+=======
+    <Compile Include="US13\BeaconFinderTests.cs" />
     <Compile Include="LanguageTest.cs" />
+>>>>>>> c14d5ad556f69507b44d760c0ac4c03cfc784d83
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

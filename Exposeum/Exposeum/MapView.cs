@@ -15,7 +15,7 @@ namespace Exposeum
 	///   This class will show how to respond to touch events using a custom subclass
 	///   of View.
 	/// </summary>
-	public class MapView : View, IBeaconFinderObserver
+	public class MapView : View
 
     {
 		private static readonly int InvalidPointerId = -1;
@@ -30,9 +30,7 @@ namespace Exposeum
 		private Floor _currentFloor;
 		private Context _context;
 
-        private BeaconFinder beaconFinder;
-        private StoryLine storyLine;
-
+        
         //test points to be drawn on map
         private List<Floor> sampleFloors = new List<Floor>();
 
@@ -43,26 +41,22 @@ namespace Exposeum
         
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-
-			beaconFinder = BeaconFinder.getInstance();
-            beaconFinder.addObserver(this);
-
+        
             Floor floor1 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_2));
 			Floor floor3 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_3));
 			Floor floor4 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_4));
 			Floor floor5 = new Floor (Resources.GetDrawable (Resource.Drawable.floor_5));
 
-            Models.Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-            PointOfInterest poi1 = new PointOfInterest(0.53f, 0.46f);
-            poi1.beacon = beacon1;
+	        PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f);
+	        p1.name_en = "POINT 1";
+	        p1.name_fr = "Le POINT 2";
+            floor1.addPointOfInterest (p1);
 
-            Models.Beacon beacon2 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
-            PointOfInterest poi2 = new PointOfInterest(0.73f, 0.66f);
-            poi2.beacon = beacon2;
-
-            floor1.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
-			floor1.addPointOfInterest (new PointOfInterest (0.60f, 0.82f));
+            PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f);
+            p2.name_en = "POINT 2";
+	        p2.name_fr = "Le POINT 2";
+            floor1.addPointOfInterest (p2);
 
 			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f));
 			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f));
@@ -73,14 +67,9 @@ namespace Exposeum
 			floor4.addPointOfInterest (new PointOfInterest (0.53f, 0.46f));
 			floor4.addPointOfInterest (new PointOfInterest (0.73f, 0.16f));
 
-            floor5.addPointOfInterest(poi1);
-            floor5.addPointOfInterest(poi2);
+			floor5.addPointOfInterest(new PointOfInterest(0.53f, 0.46f));
+            floor5.addPointOfInterest(new PointOfInterest(0.73f, 0.16f));
 
-            storyLine = new StoryLine();
-            storyLine.addPoi(poi1);
-            storyLine.addPoi(poi2);
-
-			beaconFinder.setStoryLine (storyLine);
 
             sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
@@ -89,8 +78,6 @@ namespace Exposeum
 			sampleFloors.Add (floor5);
 
 			_currentFloor = sampleFloors [0];
-
-			beaconFinder.findBeacons();
 		}
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
@@ -228,26 +215,6 @@ namespace Exposeum
             return clicked;
 		}
 
-        public void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
-        {
-
-            BeaconFinder beaconFinder = (BeaconFinder)observable;
-            EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
-            this.Invalidate();
-
-            if (beacon != null)
-            {
-                if (storyLine.hasBeacon(beacon))
-                {
-                    PointOfInterest poi = storyLine.findPOI(beacon);
-                    poi.visited = true;
-                    poi.SetTouched();
-                    storyLine.addVisitedPoiToList(poi);
-                    Toast.MakeText(_context, "Foud Me", ToastLength.Short).Show();
-                }
-            }
-        }
-
-
+        
     }
 }

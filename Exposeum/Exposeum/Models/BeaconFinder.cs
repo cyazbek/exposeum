@@ -29,6 +29,7 @@ namespace Exposeum
 		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
 		private StoryLine storyLine;
 		private Context context;
+		private Context notificationDestination;
 		private bool inFocus;
 
 		private BeaconFinder (Context context)
@@ -73,15 +74,12 @@ namespace Exposeum
 
 		/// <summary>
 		/// This method completes the building process of an android system notification for when a beacon is found.
-		/// The notification building must have already been started by preBuildBeaconFoundNotification()
 		/// </summary>
-		private Notification buildBeaconFoundNotification(string message){
-			if (context == null) {
-				throw new Exception ("No notification currently in the building process. " +
-					"Call preBuildBeaconFoundNotification before calling this method");
-			}
+		private Notification buildBeaconFoundNotification(string poiName, string poiDesc){
 
-			Intent notifyIntent = new Intent(context, context.GetType());
+			Context destination = notificationDestination == null ? context : notificationDestination;
+
+			Intent notifyIntent = new Intent(destination, destination.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
 
 			PendingIntent pendingIntent = PendingIntent.GetActivities(context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
@@ -89,9 +87,11 @@ namespace Exposeum
 			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
-				.SetSmallIcon(Resource.Drawable.beacon_gray)// Display this icon
-				.SetContentTitle(storyLine.getName())
-				.SetContentText (message);
+				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
+				.SetContentTitle(poiName)
+				.SetContentText (poiDesc)
+				.SetPriority(2)
+				.SetVibrate(new long[] { 1000, 1000, 1000 });
 
 			return notifBuilder.Build ();
 		}
@@ -120,14 +120,14 @@ namespace Exposeum
 
 			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
 
-			if (inFocus && getClosestBeacon () != null)
+			if (inFocus)
 				notifyObservers();
 
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
-			if(!inFocus && getClosestBeacon () != null)
+			if(!inFocus)
 				notifyUser ();
 				
 		}
@@ -257,10 +257,11 @@ namespace Exposeum
 		/// <summary>
 		/// This method sends a previously built Android Notification to the android system.
 		/// </summary>
-		public void sendBeaconFoundNotification(Notification notification){
+		private void sendBeaconFoundNotification(Notification notification){
 			notification.Defaults |= NotificationDefaults.Lights;
 			notification.Defaults |= NotificationDefaults.Sound;
 			notificationManager.Notify(BeaconFoundNotificationId, notification);
+
 			Log.Debug("BeaconFinder", "Sending notification");
 
 		}
@@ -283,10 +284,11 @@ namespace Exposeum
 		/// This method returns the beacon closest to the phone.
 		/// </summary>
 		public EstimoteSdk.Beacon getClosestBeacon(){
+
 			if (immediateBeacons == null || immediateBeacons.Count == 0)
 				return null;
 			
-			return immediateBeacons.Values[ immediateBeacons.Count - 1 ];
+			return immediateBeacons.Values[ 0 ];
 		}
 
 		/// <summary>
@@ -321,7 +323,7 @@ namespace Exposeum
 
 			if (getClosestBeacon () != null) {
 				PointOfInterest poi = storyLine.findPOI (getClosestBeacon ());
-				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getDescription ()));
+				sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getName (), poi.getDescription ()));
 			} else {
 				notificationManager.Cancel (BeaconFoundNotificationId);
 			}
@@ -356,6 +358,22 @@ namespace Exposeum
 		/// </summary>
 		public Region getRegion(){
 			return region;
+		}
+
+		/// <summary>
+		/// This method allows you to get the the context to which a a user 
+		/// will be directed after tapping the notification
+		/// </summary>
+		public Context getNotificationDestination(){
+			return notificationDestination;
+		}
+
+		/// <summary>
+		/// This method allows you to set the the context to which a a user 
+		/// will be directed after tapping the notification
+		/// </summary>
+		public void setNotificationDestination(Context cont){
+			notificationDestination = cont;
 		}
 
 	}

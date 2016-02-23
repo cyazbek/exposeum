@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
@@ -8,8 +9,6 @@ namespace Exposeum.Models
     {
         public float _u { get; set; }
         public float _v { get; set; }
-        public float _radius = 80;
-        public readonly Paint _paint = new Paint();
         public Beacon beacon { get; set; }
         public string name_en { get; set; }
         public string name_fr { get; set; }
@@ -18,36 +17,73 @@ namespace Exposeum.Models
         public int id { get; set; }
         public int storyID { get; set; }
         public Boolean visited { get; set; }
+		private float _icon_scale_factor = 0.2f;
+
+		private Drawable _visited_icon;
+		private Drawable _unvisited_icon;
 
         public PointOfInterest()
         {
-            _paint.SetStyle(Paint.Style.Fill);
-            _paint.Color = Color.OrangeRed;
+			setVisitedUnvisitedIcons ();
+
+			visited = false;
+
+			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
+			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
 
         public PointOfInterest(float u, float v)
         {
+			setVisitedUnvisitedIcons ();
             this._u = u;
             this._v = v;
 
-            _paint.SetStyle(Paint.Style.Fill);
-            _paint.Color = Color.OrangeRed;
+			visited = false;
+
+			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
+			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
+
+		private void setVisitedUnvisitedIcons(){
+
+			try{
+				_visited_icon = Android.App.Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
+			}catch(Exception e){
+				_visited_icon = new ColorDrawable ();
+			}
+
+			try{
+				_unvisited_icon =Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
+			}catch(Exception e){
+				_unvisited_icon = new ColorDrawable ();
+			}
+
+		}
         
         public float Radius
         {
-            set { this._radius = value; }
-            get { return this._radius; }
+			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
         }
 
         public void Draw(Canvas canvas, float mapWidth, float mapHeight)
-        {
-            canvas.DrawCircle(_u * mapWidth, _v * mapHeight, _radius, _paint);
-        }
+		{
+			canvas.Translate (_u * mapWidth, _v * mapHeight);
+			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
+			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
+
+			if (visited)
+				_visited_icon.Draw (canvas);
+			else
+				_unvisited_icon.Draw (canvas);
+
+			canvas.Translate (_unvisited_icon.IntrinsicWidth / 2.0f, _unvisited_icon.IntrinsicHeight / 2.0f);
+			canvas.Scale (1.0f/_icon_scale_factor, 1.0f/_icon_scale_factor);
+			canvas.Translate (-_u * mapWidth, -_v * mapHeight);
+		}
 
         public void SetTouched()
         {
-            _paint.Color = Color.ForestGreen;
+			visited = true;
         }
 
         public String getHTML()
