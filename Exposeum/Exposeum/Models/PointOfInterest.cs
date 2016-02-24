@@ -5,10 +5,8 @@ using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
-    public class PointOfInterest
+	public class PointOfInterest : MapElement
     {
-        public float _u { get; set; }
-        public float _v { get; set; }
         public Beacon beacon { get; set; }
         public string name_en { get; set; }
         public string name_fr { get; set; }

@@ -128,6 +128,8 @@
     <Compile Include="WalkthroughActivity.cs" />
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
+    <Compile Include="Controller\MapController.cs" />
+    <Compile Include="Models\Map.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -143,7 +145,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml" />
-    <None Include="Models\AboutResources.txt" />
     <AndroidResource Include="Resources\layout\BeaconSummaryPopupView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>

@@ -21,7 +21,6 @@ namespace Exposeum.Models
         public List<PointOfInterest> poiList { get; set; }
         public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
         
-
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
