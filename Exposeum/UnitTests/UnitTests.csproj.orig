@@ -71,10 +71,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
+<<<<<<< HEAD
+=======
     <Folder Include="US13\" />
     <Folder Include="US1\" />
   </ItemGroup>
   <ItemGroup>
+>>>>>>> f3acf15c3bac34389aaccd6d16b2c6d45bc29050
     <ProjectReference Include="..\Exposeum\Exposeum.csproj">
       <Project>{95AD6949-CBE8-4014-8DD3-B18F4138C6D9}</Project>
       <Name>Exposeum</Name>
