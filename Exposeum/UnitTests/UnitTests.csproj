@@ -53,6 +53,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="US07\BeaconSummaryPopupTests.cs" />
+    <Compile Include="US11\PointOfInterestVisitedTest.cs" />
     <Compile Include="US13\BeaconFinderTests.cs" />
   </ItemGroup>
   <ItemGroup>
