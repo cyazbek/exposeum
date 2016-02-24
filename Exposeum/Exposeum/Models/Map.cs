@@ -54,15 +54,22 @@ namespace Exposeum.Models
 			p5.name_fr = "Le POINT 5";
 			floor1.addMapElement (p5);
 
-			PointOfInterest p6 = new PointOfInterest(0.48f, 0.62f);
+			PointOfInterest p6 = new PointOfInterest(0.48f, 0.12f);
 			p6.name_en = "POINT 6";
 			p6.name_fr = "Le POINT 6";
 			floor1.addMapElement (p6);
 
-			floor2.addMapElement (new PointOfInterest(0.90f, 0.46f));
-			floor2.addMapElement (new PointOfInterest(0.53f, 0.66f));
-			floor2.addMapElement (new PointOfInterest(0.9f, 0.16f));
-			floor2.addMapElement (new PointOfInterest(0.63f, 0.8f));
+			PointOfInterest p7 = new PointOfInterest(0.38f, 0.62f);
+			p7.name_en = "POINT 7";
+			p7.name_fr = "Le POINT 7";
+
+			PointOfInterest p8 = new PointOfInterest(0.98f, 0.82f);
+			p8.name_en = "POINT 8";
+			p8.name_fr = "Le POINT 8";
+
+
+			floor2.addMapElement (p7);
+			floor2.addMapElement (p8);
 
 			floor3.addMapElement (new PointOfInterest(0.53f, 0.43f));
 			floor3.addMapElement (new PointOfInterest(0.77f, 0.46f));
@@ -90,6 +97,8 @@ namespace Exposeum.Models
 			storyline.addPoi (p4);
 			storyline.addPoi (p5);
 			storyline.addPoi (p6);
+			storyline.addPoi (p7);
+			storyline.addPoi (p8);
 
 			_currentStoryline = storyline;
 
