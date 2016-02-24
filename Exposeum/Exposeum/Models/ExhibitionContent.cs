@@ -2,13 +2,13 @@
 {
     public abstract class ExhibitionContent
     {
-        public int ID { get; set; }
-        public string title { get; set; }
-        public Language language { get; set; }
-        public int storylineID { get; set; }
+        private int ID { get; set; }
+        private string title { get; set; }
+        private Language language { get; set; }
+        private int storylineID { get; set; }
 
-        // Method to format the content in HTML format.
-        public abstract string HtmlFormat();
+        //Method that format's the content in html syntax.
+        public abstract string htmlFormat();
+
     }
-
 }
