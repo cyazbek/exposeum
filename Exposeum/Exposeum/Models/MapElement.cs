@@ -1,7 +1,6 @@
 ﻿using System;
-using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
     public abstract class MapElement
 	{
