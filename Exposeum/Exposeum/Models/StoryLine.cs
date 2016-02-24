@@ -14,6 +14,10 @@ namespace Exposeum.Models
         public string desc_en { get; set; }
         public string desc_fr { get; set; }
         public string duration { get; set; }
+        public int ID { get; set; }
+        public string imgPath { get; set; }
+        public int FloorsCovered { get; set; }
+        public List<MapElement> ListMapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
         
@@ -21,6 +25,11 @@ namespace Exposeum.Models
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
+        }
+
+        public StoryLine(int ID)
+        {
+            this.ID = ID;
         }
 
         public void addPoi(PointOfInterest poi)
