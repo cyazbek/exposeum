@@ -251,12 +251,13 @@ namespace Exposeum
                 {
                     PointOfInterest poi = storyLine.findPOI(beacon);
                     poi.visited = true;
-                    poi.setVisitedUnvisitedIcons();
+                    // poi.setVisitedUnvisitedIcons();
                     storyLine.addVisitedPoiToList(poi);
-                    this.Invalidate();
                     Toast.MakeText(_context, "Foud Me", ToastLength.Short).Show();
                 }
             }
+
+            this.Invalidate();
         }
     }
 }
