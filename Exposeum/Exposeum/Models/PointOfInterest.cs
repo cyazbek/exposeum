@@ -19,8 +19,8 @@ namespace Exposeum.Models
         public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
-        private Drawable _visited_icon = new ColorDrawable();
-		private Drawable _unvisited_icon = new ColorDrawable();
+        private Drawable _visited_icon;
+        private Drawable _unvisited_icon;
 
         public PointOfInterest()
         {
@@ -48,14 +48,12 @@ namespace Exposeum.Models
 		public void setVisitedUnvisitedIcons(){
 
 			try{
-                if(this.visited)
 				    _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
 			}catch(Exception e){
 				_visited_icon = new ColorDrawable ();
 			}
 
 			try{
-                if (!this.visited)
                     _unvisited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
 			}catch(Exception e){
 				_unvisited_icon = new ColorDrawable ();
@@ -87,7 +85,6 @@ namespace Exposeum.Models
         public void SetTouched()
         {
 			visited = true;
-            setVisitedUnvisitedIcons();
         }
 
         public String getHTML()

@@ -84,14 +84,6 @@ namespace Exposeum
 			floor5.addPointOfInterest(poi1);
             floor5.addPointOfInterest(poi2);
 
-            storyLine = new StoryLine();
-            storyLine.addPoi(poi1);
-            storyLine.addPoi(poi2);
-
-            beaconFinder.setStoryLine(storyLine);
-            beaconFinder.setInFocus(true);
-            beaconFinder.findBeacons();
-
             sampleFloors.Add (floor1);
 			sampleFloors.Add (floor2);
 			sampleFloors.Add (floor3);
@@ -100,7 +92,14 @@ namespace Exposeum
 
 			_currentFloor = sampleFloors [0];
 
-            
+
+            storyLine = new StoryLine();
+            storyLine.addPoi(poi1);
+            storyLine.addPoi(poi2);
+
+            beaconFinder.setStoryLine(storyLine);
+            beaconFinder.setInFocus(true);
+            beaconFinder.findBeacons();
         }
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
@@ -230,7 +229,7 @@ namespace Exposeum
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					clicked = poi;
-					poi.setVisitedUnvisitedIcons();
+					poi.SetTouched();
 					break;
 				}
 			}
@@ -251,9 +250,7 @@ namespace Exposeum
                 {
                     PointOfInterest poi = storyLine.findPOI(beacon);
                     poi.visited = true;
-                    // poi.setVisitedUnvisitedIcons();
                     storyLine.addVisitedPoiToList(poi);
-                    Toast.MakeText(_context, "Foud Me", ToastLength.Short).Show();
                 }
             }
 
