@@ -4,7 +4,7 @@ using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
-using Exposeum.Controller;
+using Exposeum.Controllers;
 using System;
 
 namespace Exposeum
@@ -145,7 +145,7 @@ namespace Exposeum
 
 				}
 			}
-				
+
 			canvas.Restore ();
 		}
 			

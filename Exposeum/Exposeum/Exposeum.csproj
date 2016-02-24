@@ -78,7 +78,6 @@
     <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
     <Compile Include="Models\Beacon.cs" />
-    <Compile Include="Controller\DBController.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\StoryLine.cs" />
@@ -128,8 +127,9 @@
     <Compile Include="WalkthroughActivity.cs" />
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
-    <Compile Include="Controller\MapController.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Controllers\DBController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

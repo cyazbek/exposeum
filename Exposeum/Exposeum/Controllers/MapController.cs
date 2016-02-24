@@ -2,7 +2,7 @@
 using Exposeum.Views;
 using Exposeum.Models;
 
-namespace Exposeum.Controller
+namespace Exposeum.Controllers
 {
 	public class MapController
 	{

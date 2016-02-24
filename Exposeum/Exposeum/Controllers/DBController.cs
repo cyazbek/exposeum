@@ -6,7 +6,7 @@ using SQLite;
 using Java.Util;
 using System.Collections.Generic;
 
-namespace Exposeum.Controller
+namespace Exposeum.Controllers
 {
     class DBController
     {
