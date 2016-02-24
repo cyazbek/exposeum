@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using EstimoteSdk;
 using Android.App;
 using Exposeum;
 using System.Collections.Generic;

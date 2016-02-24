@@ -127,6 +127,7 @@
     <AndroidResource Include="Resources\drawable\Beacon_Inactivated.png" />
     <Compile Include="WalkthroughActivity.cs" />
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
+    <Compile Include="Models\MapElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
