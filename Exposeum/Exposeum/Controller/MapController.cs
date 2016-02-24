@@ -25,8 +25,21 @@ namespace Exposeum.Controller
 			_view.update ();
 		}
 
-		public void PointOfInterestTapped(PointOfInterest poi){
-			poi.SetTouched ();
+		public void PointOfInterestTapped(PointOfInterest selectedPOI){
+
+			PointOfInterest latestUnvisited = null;
+
+			//only allow the next unvisited node to be clicked
+			for (int i = 0; i < _model._currentStoryline.poiList.Count; i++) {
+				if (!_model._currentStoryline.poiList [i].visited) {
+					latestUnvisited = _model._currentStoryline.poiList [i];
+					break;
+				}
+			}
+
+			if (selectedPOI.Equals(latestUnvisited))
+				selectedPOI.SetTouched ();
+			
 			_view.update (); //technically unncecessary but included for completeness
 		}
 	}
