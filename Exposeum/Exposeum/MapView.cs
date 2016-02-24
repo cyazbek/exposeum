@@ -249,7 +249,7 @@ namespace Exposeum
                 if (storyLine.hasBeacon(beacon))
                 {
                     PointOfInterest poi = storyLine.findPOI(beacon);
-                    poi.visited = true;
+                    poi.SetTouched();
                     storyLine.addVisitedPoiToList(poi);
                 }
             }
