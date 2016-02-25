@@ -65,6 +65,14 @@ namespace Exposeum
             PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f);
 	        p1.name_en = "POINT 1";
 	        p1.name_fr = "Le POINT 2";
+            
+            //Creating and setting a description object to the poi.
+            //No need for englis or french if statements always.
+	        PointOfInterestDescription p1desc = new PointOfInterestDescription("The First Example",
+	            "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
+
+            p1.description = p1desc;
+
             floor1.addPointOfInterest (p1);
 
             PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f);

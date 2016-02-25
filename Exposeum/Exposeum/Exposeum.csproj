@@ -81,6 +81,7 @@
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Controller\DBController.cs" />
     <Compile Include="Models\ImageContent.cs" />
+    <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\TextContent.cs" />
     <Compile Include="Models\ExhibitionContent.cs" />
     <Compile Include="Models\Language.cs" />

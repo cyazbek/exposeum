@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Views;
 
 namespace Exposeum.Models
 {
@@ -18,6 +19,8 @@ namespace Exposeum.Models
         public int storyID { get; set; }
         public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
+
+        public PointOfInterestDescription description { get; set; }
 
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
@@ -92,9 +95,10 @@ namespace Exposeum.Models
             string summary;
 
             if (Language.getLanguage() == "fr")
-                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", name_fr);
+                summary = String.Format("<html><body><h1>Vous avez selectionnez {0}!{1}</h1><br><br></body></html>", name_fr ,"@string/app_name");
             else
-                summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", name_en );
+                summary = description.htmlFormat();
+            //summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", name_en );
 
             return summary;
         }
@@ -124,6 +128,8 @@ namespace Exposeum.Models
             else
                 return false;
         }
+
+
 
         public void convertFromData(Data.POIData poi)
         {
