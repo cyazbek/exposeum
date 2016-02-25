@@ -8,11 +8,11 @@ namespace Exposeum.Models
 	public class Map
 	{
 		private List<Floor> _floors;
-		public Floor _currentFloor { get; set; }
+		private Floor _currentFloor;
+		private List<StoryLine> _storylines;
+		private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
-		private List<StoryLine> _storylines;
-		public StoryLine _currentStoryline { get; set; }
 
 		public Map ()
 		{
@@ -117,6 +117,18 @@ namespace Exposeum.Models
 		public void SetCurrentFloor(int i)
 		{
 			_currentFloor = _floors [i];
+		}
+
+		public Floor CurrentFloor
+		{
+			get { return this._currentFloor; }
+			set { this._currentFloor = value; }
+		}
+
+		public StoryLine CurrentStoryline
+		{
+			get { return this._currentStoryline; }
+			set { this._currentStoryline = value; }
 		}
 	}
 }

@@ -8,27 +8,23 @@ namespace Exposeum.Controllers
 	{
 		private MapView _view;
 		private Map _model;
-		private BeaconFinder beaconFinder = BeaconFinder.getInstance();
+		private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
 
 		public MapController(MapView view){
 			_view = view;
 
 			_model = new Map ();
 
-			beaconFinder.addObserver (this);
+			_beaconFinder.addObserver (this);
 
-			beaconFinder.setStoryLine(_model._currentStoryline);
-			beaconFinder.setInFocus(true);
-			beaconFinder.findBeacons();
+			_beaconFinder.setStoryLine(_model.CurrentStoryline);
+			_beaconFinder.setInFocus(true);
+			_beaconFinder.findBeacons();
 		}
 
-		public Map GetMap(){
-			return _model;
-		}
-
-		public void FoorChanged(int newFloorIndex){
+		public void FloorChanged(int newFloorIndex){
 			_model.SetCurrentFloor(newFloorIndex);
-			_view.update ();
+			_view.Update ();
 		}
 
 		public void beaconFinderObserverUpdate (IBeaconFinderObservable observable)
@@ -38,27 +34,27 @@ namespace Exposeum.Controllers
 
 			if (beacon != null)
 			{
-				if (_model._currentStoryline.hasBeacon(beacon))
+				if (_model.CurrentStoryline.hasBeacon(beacon))
 				{
-					PointOfInterest poi = _model._currentStoryline.findPOI(beacon);
+					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 					poi.SetTouched();
-					_model._currentStoryline.addVisitedPoiToList(poi);
+					_model.CurrentStoryline.addVisitedPoiToList(poi);
 				}
 			}
 
-			_view.update ();
+			_view.Update ();
 		}
 
 		public void PointOfInterestTapped(PointOfInterest selectedPOI){
 
-			_view.initiatePointOfInterestPopup (selectedPOI);
+			_view.InitiatePointOfInterestPopup (selectedPOI);
 
 			PointOfInterest latestUnvisited = null;
 
 			//only allow the next unvisited node to be clicked
-			for (int i = 0; i < _model._currentStoryline.poiList.Count; i++) {
-				if (!_model._currentStoryline.poiList [i].visited) {
-					latestUnvisited = _model._currentStoryline.poiList [i];
+			for (int i = 0; i < _model.CurrentStoryline.poiList.Count; i++) {
+				if (!_model.CurrentStoryline.poiList [i].visited) {
+					latestUnvisited = _model.CurrentStoryline.poiList [i];
 					break;
 				}
 			}
@@ -66,7 +62,12 @@ namespace Exposeum.Controllers
 			if (selectedPOI.Equals(latestUnvisited))
 				selectedPOI.SetTouched ();
 			
-			_view.update (); //technically unncecessary but included for completeness
+			_view.Update (); //technically unncecessary but included for completeness
+		}
+
+		public Map Model
+		{
+			get { return this._model; }
 		}
 	}
 }

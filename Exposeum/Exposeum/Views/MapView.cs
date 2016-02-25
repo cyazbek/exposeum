@@ -32,7 +32,7 @@ namespace Exposeum.Views
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 			_controller = new MapController (this);
-			_map = _controller.GetMap ();
+			_map = _controller.Model;
 
 			_visitedEdge.SetStyle (Paint.Style.Fill);
 			_visitedEdge.Color = Color.Purple;
@@ -45,15 +45,14 @@ namespace Exposeum.Views
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
-			_controller.FoorChanged(e.Progress);
+			_controller.FloorChanged(e.Progress);
 		}
 
-		public void update(){
-			//draw
-			this.Invalidate(); //force redraw (necessary?)
+		public void Update(){
+			this.Invalidate();
 		}
 
-		public void initiatePointOfInterestPopup(PointOfInterest poi){
+		public void InitiatePointOfInterestPopup(PointOfInterest poi){
 			Views.BeaconPopup newBeaconPopup = new Views.BeaconPopup (_context, poi);
 			newBeaconPopup.Show ();
 		}
@@ -122,34 +121,34 @@ namespace Exposeum.Views
 		{
 			base.OnDraw (canvas);
 			canvas.Save ();
-			canvas.Translate (_translateX + _scaleFactor * -_map._currentFloor.Image.IntrinsicWidth / 2, _translateY + _scaleFactor * -_map._currentFloor.Image.IntrinsicHeight / 2);
+			canvas.Translate (_translateX + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2, _translateY + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2);
 			canvas.Scale (_scaleFactor, _scaleFactor);
 
-			_map._currentFloor.Image.Draw (canvas);
+			_map.CurrentFloor.Image.Draw (canvas);
 
 			Paint appropriateEdgePaintBrush = _visitedEdge;
 
 			//draw edges on top of map
-			for (int i = 0; i < _map._currentStoryline.poiList.Count; i++) {
+			for (int i = 0; i < _map.CurrentStoryline.poiList.Count; i++) {
 
-				PointOfInterest current = _map._currentStoryline.poiList [i];
+				PointOfInterest current = _map.CurrentStoryline.poiList [i];
 
-				if (_map._currentFloor.PointsOfInterest ().Contains (current)) {
+				if (_map.CurrentFloor.PointsOfInterest ().Contains (current)) {
 					
-					if (i < _map._currentStoryline.poiList.Count - 1) {
+					if (i < _map.CurrentStoryline.poiList.Count - 1) {
 
-						PointOfInterest next = _map._currentStoryline.poiList [i + 1];
+						PointOfInterest next = _map.CurrentStoryline.poiList [i + 1];
 
-						if (_map._currentFloor.PointsOfInterest ().Contains (next)) {
+						if (_map.CurrentFloor.PointsOfInterest ().Contains (next)) {
 
 							if (next.visited == false)
 								appropriateEdgePaintBrush = _unvisitedEdge;
-							canvas.DrawLine (current._u * _map._currentFloor.Image.IntrinsicWidth, current._v * _map._currentFloor.Image.IntrinsicHeight, next._u * _map._currentFloor.Image.IntrinsicWidth, next._v * _map._currentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
+							canvas.DrawLine (current._u * _map.CurrentFloor.Image.IntrinsicWidth, current._v * _map.CurrentFloor.Image.IntrinsicHeight, next._u * _map.CurrentFloor.Image.IntrinsicWidth, next._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 
 						}
 					}
 
-					current.Draw (canvas, _map._currentFloor.Image.IntrinsicWidth, _map._currentFloor.Image.IntrinsicHeight); //draw the current guy
+					current.Draw (canvas, _map.CurrentFloor.Image.IntrinsicWidth, _map.CurrentFloor.Image.IntrinsicHeight); //draw the current guy
 
 				}
 			}
@@ -187,10 +186,10 @@ namespace Exposeum.Views
 
 		private PointOfInterest getSelectedPOI(float screenX, float screenY){
 
-			foreach (PointOfInterest poi in _map._currentFloor.PointsOfInterest()) {
+			foreach (PointOfInterest poi in _map.CurrentFloor.PointsOfInterest()) {
 
-				float poiX = _translateX + (_scaleFactor * _map._currentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _map._currentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map._currentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _map._currentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					return poi;
