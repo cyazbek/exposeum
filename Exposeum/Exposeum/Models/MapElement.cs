@@ -1,11 +1,10 @@
 ﻿using System;
-using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
     public abstract class MapElement
 	{
-		public int x_coordinate, y_coordinate;
+		public float _u, _v;
 		public Floor floor;
 
 		public MapElement ()
@@ -13,4 +12,3 @@ namespace Exposeum
 		}
 	}
 }
-
