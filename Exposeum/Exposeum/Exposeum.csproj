@@ -244,5 +244,4 @@
     <Error Condition="!Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets'))" />
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
-  <ItemGroup />
 </Project>

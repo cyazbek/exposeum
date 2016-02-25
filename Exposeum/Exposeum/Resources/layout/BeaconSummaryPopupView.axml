@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
     <WebView
         android:layout_width="match_parent"
-        android:layout_height="383.0dp"
+        android:layout_height="252.5dp"
         android:id="@+id/beacon_popup_webview"
         android:layout_marginLeft="20.0dp"
         android:layout_marginRight="20.0dp"
