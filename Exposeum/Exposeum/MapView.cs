@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 
@@ -50,6 +51,11 @@ namespace Exposeum
 		public void update(){
 			//draw
 			this.Invalidate(); //force redraw (necessary?)
+		}
+
+		public void initiatePointOfInterestPopup(PointOfInterest poi){
+			Views.BeaconPopup newBeaconPopup = new Views.BeaconPopup (_context, poi);
+			newBeaconPopup.Show ();
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)

@@ -52,6 +52,8 @@ namespace Exposeum.Controllers
 
 		public void PointOfInterestTapped(PointOfInterest selectedPOI){
 
+			_view.initiatePointOfInterestPopup (selectedPOI);
+
 			PointOfInterest latestUnvisited = null;
 
 			//only allow the next unvisited node to be clicked
