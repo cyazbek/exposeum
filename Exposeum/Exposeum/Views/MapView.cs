@@ -8,7 +8,7 @@ using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 
-namespace Exposeum
+namespace Exposeum.Views
 {
 
 	public class MapView : View

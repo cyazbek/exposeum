@@ -6,7 +6,6 @@ namespace Exposeum.Controllers
 {
 	public class MapController : IBeaconFinderObserver
 	{
-		private static MapController _instance;
 		private MapView _view;
 		private Map _model;
 		private BeaconFinder beaconFinder = BeaconFinder.getInstance();
