@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content.Res;
+using Java.Util;
 
 namespace Exposeum.Models
 {
@@ -67,6 +68,13 @@ namespace Exposeum.Models
 			p8.name_en = "POINT 8";
 			p8.name_fr = "Le POINT 8";
 
+			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f);
+			p9.beacon = beacon1;
+
+			Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
+			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f);
+			p10.beacon = beacon2;
 
 			floor2.addMapElement (p7);
 			floor2.addMapElement (p8);
@@ -77,8 +85,8 @@ namespace Exposeum.Models
 			floor4.addMapElement (new PointOfInterest(0.53f, 0.46f));
 			floor4.addMapElement (new PointOfInterest(0.73f, 0.16f));
 
-			floor5.addMapElement(new PointOfInterest(0.53f, 0.46f));
-			floor5.addMapElement(new PointOfInterest(0.73f, 0.16f));
+			floor5.addMapElement(p9);
+			floor5.addMapElement(p10);
 
 			_floors = new List<Floor> ();
 			_floors.Add (floor1);
@@ -99,6 +107,8 @@ namespace Exposeum.Models
 			storyline.addPoi (p6);
 			storyline.addPoi (p7);
 			storyline.addPoi (p8);
+			storyline.addPoi (p9);
+			storyline.addPoi (p10);
 
 			_currentStoryline = storyline;
 

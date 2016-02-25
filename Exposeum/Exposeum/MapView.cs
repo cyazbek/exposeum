@@ -22,6 +22,7 @@ namespace Exposeum
 		private float _scaleFactor = 0.5f;
 		private Context _context;
 		private Map _map;
+		private MapController _controller;
 		private Paint _visitedEdge = new Paint ();
 		private Paint _unvisitedEdge = new Paint ();
 
@@ -29,7 +30,8 @@ namespace Exposeum
 		{            
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-			_map = MapController.getInstance ().RegisterMapView (this);
+			_controller = new MapController (this);
+			_map = _controller.GetMap ();
 
 			_visitedEdge.SetStyle (Paint.Style.Fill);
 			_visitedEdge.Color = Color.Purple;
@@ -42,7 +44,7 @@ namespace Exposeum
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
-			MapController.getInstance().FoorChanged(e.Progress);
+			_controller.FoorChanged(e.Progress);
 		}
 
 		public void update(){
@@ -61,7 +63,7 @@ namespace Exposeum
 			case MotionEventActions.Down:
 				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
 				if (selected != null) {
-					MapController.getInstance ().PointOfInterestTapped (selected);
+					_controller.PointOfInterestTapped (selected);
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();

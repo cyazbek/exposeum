@@ -4,24 +4,49 @@ using Exposeum.Models;
 
 namespace Exposeum.Controllers
 {
-	public class MapController
+	public class MapController : IBeaconFinderObserver
 	{
-		private static MapController _instance = new MapController();
+		private static MapController _instance;
 		private MapView _view;
 		private Map _model;
+		private BeaconFinder beaconFinder = BeaconFinder.getInstance();
 
-		public static MapController getInstance(){
-			return _instance; //eager loading
+		public MapController(MapView view){
+			_view = view;
+
+			_model = new Map ();
+
+			beaconFinder.addObserver (this);
+
+			beaconFinder.setStoryLine(_model._currentStoryline);
+			beaconFinder.setInFocus(true);
+			beaconFinder.findBeacons();
 		}
 
-		public Map RegisterMapView(MapView mapView){
-			_view = mapView;
-			_model = new Map ();
+		public Map GetMap(){
 			return _model;
 		}
 
 		public void FoorChanged(int newFloorIndex){
 			_model.SetCurrentFloor(newFloorIndex);
+			_view.update ();
+		}
+
+		public void beaconFinderObserverUpdate (IBeaconFinderObservable observable)
+		{
+			BeaconFinder beaconFinder = (BeaconFinder)observable;
+			EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
+
+			if (beacon != null)
+			{
+				if (_model._currentStoryline.hasBeacon(beacon))
+				{
+					PointOfInterest poi = _model._currentStoryline.findPOI(beacon);
+					poi.SetTouched();
+					_model._currentStoryline.addVisitedPoiToList(poi);
+				}
+			}
+
 			_view.update ();
 		}
 
