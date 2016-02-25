@@ -55,10 +55,14 @@ namespace Exposeum
 
             Models.Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
             PointOfInterest poi1 = new PointOfInterest(0.53f, 0.46f);
+            poi1.description = new PointOfInterestDescription("5.1 - The First Example",
+                "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
             poi1.beacon = beacon1;
 
             Models.Beacon beacon2 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
             PointOfInterest poi2 = new PointOfInterest(0.53f, 0.76f);
+            poi2.description = new PointOfInterestDescription("5.2 - The Second Example",
+                "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
             poi2.beacon = beacon2;
 
 
@@ -68,19 +72,24 @@ namespace Exposeum
             
             //Creating and setting a description object to the poi.
             //No need for englis or french if statements always.
-	        PointOfInterestDescription p1desc = new PointOfInterestDescription("The First Example",
-	            "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
 
-            p1.description = p1desc;
+            p1.description =new PointOfInterestDescription("1.1 - The First Example",
+                "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
 
             floor1.addPointOfInterest (p1);
 
             PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f);
             p2.name_en = "POINT 2";
 	        p2.name_fr = "Le POINT 2";
+
+            p2.description = new PointOfInterestDescription("1.2 - The Second Example",
+                "Once upon a time, there was 6 students...", "Little did they know that SOEN 390. (dramatical ending)");
+
             floor1.addPointOfInterest (p2);
 
 			floor2.addPointOfInterest (new PointOfInterest (0.90f, 0.46f));
+
+
 			floor2.addPointOfInterest (new PointOfInterest (0.53f, 0.66f));
 
 			floor3.addPointOfInterest (new PointOfInterest (0.53f, 0.43f));

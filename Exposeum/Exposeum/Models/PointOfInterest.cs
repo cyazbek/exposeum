@@ -22,6 +22,9 @@ namespace Exposeum.Models
 
         public PointOfInterestDescription description { get; set; }
 
+        public ExhibitionContent expoContent {get; set; }
+
+
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
 
@@ -98,7 +101,6 @@ namespace Exposeum.Models
                 summary = String.Format("<html><body><h1>Vous avez selectionnez {0}!{1}</h1><br><br></body></html>", name_fr ,"@string/app_name");
             else
                 summary = description.htmlFormat();
-            //summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", name_en );
 
             return summary;
         }
