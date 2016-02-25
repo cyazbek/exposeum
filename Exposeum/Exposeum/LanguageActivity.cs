@@ -4,7 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Renderscripts;
 using Android.Widget;
-using Exposeum.Controller;
+using Exposeum.Controllers;
 using Exposeum.Models;
 using System.ComponentModel;
 using System.Globalization;

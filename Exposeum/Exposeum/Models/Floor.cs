@@ -3,42 +3,29 @@ using System.Collections.Generic;
 
 using Android.Graphics.Drawables;
 using Android.Graphics;
+using System.Linq;
 
 namespace Exposeum.Models
 {
 	public class Floor
 	{
 		private Drawable _floorPlan;
-		private List<Edge> _floorEdges = new List<Edge>();
-		private List<PointOfInterest> _floorPointsOfInterest = new List<PointOfInterest>();
+		private List<MapElement> _floorMapElements = new List<MapElement>();
+		private Paint paint = new Paint();
 
 		public Floor (Drawable floorPlan)
 		{
 			_floorPlan = floorPlan;
 			_floorPlan.SetBounds (0, 0, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
+
+			paint.SetStyle (Paint.Style.Fill);
+			paint.Color = Color.Purple;
+			paint.StrokeWidth = 20; //magic number, should extract static constant
 		}
 
-		public void Draw(Canvas canvas)
+		public void addMapElement(MapElement e)
 		{
-			_floorPlan.Draw (canvas);
-
-			//draw edges on top of map
-			foreach (Models.Edge edge in _floorEdges)
-				edge.Draw (canvas, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
-
-			//draw pins on top of edges
-			foreach (PointOfInterest poi in _floorPointsOfInterest)
-				poi.Draw (canvas, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
-		}
-
-		public void addEdge(Edge e)
-		{
-			_floorEdges.Add (e);
-		}
-
-		public void addPointOfInterest(PointOfInterest e)
-		{
-			_floorPointsOfInterest.Add (e);
+			_floorMapElements.Add (e);
 		}
 
 		public Drawable Image
@@ -46,10 +33,14 @@ namespace Exposeum.Models
 			get { return this._floorPlan; }
 		}
 
-		public List<PointOfInterest> PointsOfInterest
+		public List<MapElement> MapElements
 		{
-			get { return this._floorPointsOfInterest; }
+			get { return this._floorMapElements; }
 		}
 
+		public List<MapElement> PointsOfInterest()
+		{
+			return _floorMapElements.OfType<MapElement>().ToList();
+		}
 	}
 }

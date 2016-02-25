@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -77,17 +77,10 @@
     <Compile Include="Data\BeaconData.cs" />
     <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
-    <Compile Include="Models\AudioContent.cs" />
     <Compile Include="Models\Beacon.cs" />
-    <Compile Include="Controller\DBController.cs" />
-    <Compile Include="Models\ImageContent.cs" />
-    <Compile Include="Models\PointOfInterestDescription.cs" />
-    <Compile Include="Models\TextContent.cs" />
-    <Compile Include="Models\ExhibitionContent.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\StoryLine.cs" />
-    <Compile Include="Models\VideoContent.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="VisitActivity_en.cs" />
     <Compile Include="VisitActivity_fr.cs" />
@@ -97,7 +90,6 @@
     <Compile Include="LanguageActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainMenuAdapter.cs" />
-    <Compile Include="MapView.cs" />
     <Compile Include="Models\BeaconFinder.cs" />
     <Compile Include="Models\IBeaconFinderObservable.cs" />
     <Compile Include="Models\IBeaconFinderObserver.cs" />
@@ -134,6 +126,10 @@
     <Compile Include="WalkthroughActivity.cs" />
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Controllers\DBController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Views\MapView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -149,7 +145,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml" />
-    <None Include="Models\AboutResources.txt" />
     <AndroidResource Include="Resources\layout\BeaconSummaryPopupView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
@@ -244,4 +239,8 @@
     <Error Condition="!Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets'))" />
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
+  <ItemGroup>
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
 </Project>
