@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Java.Util;
 
 namespace Exposeum.Models
 {
@@ -25,8 +26,8 @@ namespace Exposeum.Models
 			setVisitedUnvisitedIcons ();
 
 			visited = false;
-
-			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
+            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+            _visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
 			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
 
@@ -36,7 +37,8 @@ namespace Exposeum.Models
             this._u = u;
             this._v = v;
 
-			visited = false;
+            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+            visited = false;
 
 			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
 			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
