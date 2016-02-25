@@ -4,22 +4,14 @@ namespace Exposeum.Models
 {
 	public class Edge
 	{
-		private PointOfInterest start, end;
-		private Paint paint = new Paint();
-		private int strokeWidth = 20;
+		private MapElement start {get; set;}
+		private MapElement end {get; set;}
+		private double distance {get; set;}
 
-		public Edge (PointOfInterest start, PointOfInterest end)
+		public Edge (MapElement start, MapElement end)
 		{
 			this.start = start;
 			this.end = end;
-
-			paint.SetStyle (Paint.Style.Fill);
-			paint.Color = Color.Purple;
-			paint.StrokeWidth = strokeWidth;
-		}
-
-		public void Draw(Canvas canvas, float mapWidth, float mapHeight){
-			canvas.DrawLine (start._u * mapWidth, start._v* mapHeight, end._u * mapWidth, end._v * mapHeight, paint);
 		}
 	}
 }
