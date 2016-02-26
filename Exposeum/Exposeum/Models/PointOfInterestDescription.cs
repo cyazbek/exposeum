@@ -1,25 +1,23 @@
-﻿using Android.Graphics;
-
-namespace Exposeum.Models
+﻿namespace Exposeum.Models
 {
     public class PointOfInterestDescription
     {
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Description { get; set; }
 
-        public string title { get; set; }
-        public string  summary { get; set; }
-        public string description { get; set; }
 
-        public PointOfInterestDescription(string title, string summary, string description)
+        public PointOfInterestDescription(string Title, string Summary, string Description)
         {
-            this.title = title;
-            this.summary = summary;
-            this.description = description;
+            this.Title = Title;
+            this.Summary = Summary;
+            this.Description = Description;
         }
 
-        public string htmlFormat()
+        public string getHTML()
         {
-            return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2></body></html>", title,summary);
+            return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2><p>{2}</p></body></html>"
+                ,Title,Summary,Description);
         }
-
     }
 }

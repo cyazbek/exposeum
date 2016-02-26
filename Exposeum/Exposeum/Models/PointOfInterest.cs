@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Text.Style;
 using Java.Util;
 
 namespace Exposeum.Models
@@ -17,6 +18,8 @@ namespace Exposeum.Models
         public int storyID { get; set; }
         public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
+
+        public PointOfInterestDescription description { get; set; }
 
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
@@ -44,6 +47,12 @@ namespace Exposeum.Models
 			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
 			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
+
+	    public PointOfInterest(float u, float v, Floor floor)
+	    {
+	        new PointOfInterest(u, v);
+	        this.floor = floor;
+	    }
 
 		public void setVisitedUnvisitedIcons(){
 
