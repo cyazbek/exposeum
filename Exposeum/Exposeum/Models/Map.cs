@@ -39,14 +39,10 @@ namespace Exposeum.Models
 			p2.visited = true;
 			floor1.addMapElement (p2);
 
-			Models.Beacon beacon3 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f);
-			p3.name_en = "Nipper The Dog";
-			p3.name_fr = "Nipper Le Chien";
-			p3.description_en = "Nipper would eat cookies.";
-			p3.description_fr = "Nipper mangeait des biscuits.";
-			p3.beacon = beacon3;
-			p3.visited = false;
+			p3.name_en = "POINT 3";
+			p3.name_fr = "Le POINT 3";
+			p3.visited = true;
 			floor1.addMapElement (p3);
 
 			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f);
@@ -72,9 +68,14 @@ namespace Exposeum.Models
 			p8.name_en = "POINT 8";
 			p8.name_fr = "Le POINT 8";
 
-			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+			Beacon beacon1 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f);
+			p9.name_en = "Nipper The Dog";
+			p9.name_fr = "Nipper Le Chien";
+			p9.description_en = "Nipper would eat cookies.";
+			p9.description_fr = "Nipper mangeait des biscuits.";
 			p9.beacon = beacon1;
+			p9.visited = false;
 
 			Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
 			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f);
