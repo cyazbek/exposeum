@@ -20,10 +20,12 @@ namespace Exposeum.Models
         public List<MapElement> ListMapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
+		private bool isComplete { get; set{ isComplete = false; } }
         
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
+	
         }
 
         public StoryLine(int ID)
