@@ -39,10 +39,14 @@ namespace Exposeum.Models
 			p2.visited = true;
 			floor1.addMapElement (p2);
 
+			Models.Beacon beacon3 = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f);
-			p3.name_en = "POINT 3";
-			p3.name_fr = "Le POINT 3";
-			p3.visited = true;
+			p3.name_en = "Nipper The Dog";
+			p3.name_fr = "Nipper Le Chien";
+			p3.description_en = "Nipper would eat cookies.";
+			p3.description_fr = "Nipper mangeait des biscuits.";
+			p3.beacon = beacon3;
+			p3.visited = false;
 			floor1.addMapElement (p3);
 
 			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f);
