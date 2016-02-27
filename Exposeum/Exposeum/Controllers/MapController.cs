@@ -18,7 +18,6 @@ namespace Exposeum.Controllers
 			_beaconFinder.addObserver (this);
 
 			_beaconFinder.setStoryLine(_model.CurrentStoryline);
-			_beaconFinder.setInFocus(true);
 			_beaconFinder.findBeacons();
 		}
 
@@ -39,6 +38,7 @@ namespace Exposeum.Controllers
 					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 					poi.SetTouched();
 					_model.CurrentStoryline.addVisitedPoiToList(poi);
+					PointOfInterestTapped (poi);
 				}
 			}
 
