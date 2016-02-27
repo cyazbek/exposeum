@@ -36,9 +36,10 @@ namespace Exposeum.Controllers
 				if (_model.CurrentStoryline.hasBeacon(beacon))
 				{
 					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+					PointOfInterestTapped (poi);
 					poi.SetTouched();
 					_model.CurrentStoryline.addVisitedPoiToList(poi);
-					PointOfInterestTapped (poi);
+
 				}
 			}
 
