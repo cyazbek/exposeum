@@ -47,7 +47,8 @@ namespace Exposeum.Controllers
 
 		public void PointOfInterestTapped(PointOfInterest selectedPOI){
 
-			_view.InitiatePointOfInterestPopup (selectedPOI);
+			if(!selectedPOI.visited)
+				_view.InitiatePointOfInterestPopup (selectedPOI);
 
 			PointOfInterest latestUnvisited = null;
 
@@ -58,9 +59,6 @@ namespace Exposeum.Controllers
 					break;
 				}
 			}
-
-			if (selectedPOI.Equals(latestUnvisited))
-				selectedPOI.SetTouched ();
 			
 			_view.Update (); //technically unncecessary but included for completeness
 		}
