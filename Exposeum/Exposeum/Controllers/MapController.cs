@@ -1,6 +1,7 @@
 ﻿using System;
 using Exposeum.Views;
 using Exposeum.Models;
+using Android.App;
 
 namespace Exposeum.Controllers
 {
@@ -20,6 +21,20 @@ namespace Exposeum.Controllers
 			_beaconFinder.setStoryLine(_model.CurrentStoryline);
 			_beaconFinder.setInFocus(true);
 			_beaconFinder.findBeacons();
+
+			if (_model.CurrentStoryline != null) {
+
+				// Create a new fragment and a transaction.
+				FragmentTransaction fragmentTx = ((Activity)_view.Context).FragmentManager.BeginTransaction();
+				MapProgressionFragment newMapProgressionFrag = new MapProgressionFragment();
+
+				// The fragment will have the ID of Resource.Id.fragment_container.
+				fragmentTx.Add(Resource.Id.map_frag_frame_lay, newMapProgressionFrag);
+
+				// Commit the transaction.
+				fragmentTx.Commit();
+
+			}
 		}
 
 		public void FloorChanged(int newFloorIndex){

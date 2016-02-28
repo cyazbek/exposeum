@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +16,8 @@ namespace Exposeum
 {
 	public class MapProgressionFragment : Fragment
 	{
+		private StoryLineNotFoundException _storyline;
+
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);

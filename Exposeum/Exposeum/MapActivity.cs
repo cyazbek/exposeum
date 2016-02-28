@@ -29,21 +29,6 @@ namespace Exposeum
 
 			map_view_frame_layout.AddView (map_view);
 
-			bool guidedTour = true; //will depend on whether or not currentStoryLine == null I presume (storyline 0 shenanigans)
-
-			if (guidedTour) {
-				// Create a new fragment and a transaction.
-				FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
-				MapProgressionFragment newMapProgressionFrag = new MapProgressionFragment(); //pass storyline into here eventually?
-
-				// The fragment will have the ID of Resource.Id.fragment_container.
-				fragmentTx.Add(Resource.Id.map_frag_frame_lay, newMapProgressionFrag);
-
-				// Commit the transaction.
-				fragmentTx.Commit();
-			}
-
-
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
 
