@@ -56,9 +56,14 @@ namespace Exposeum.Models
 
 			_currentFloor = floor1;
 
-			//set up POIs
+            // set up Beacons
+            Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+            Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
+            Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 
-			PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
+
+            //set up POIs
+            PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
             PointOfInterestDescription description1 = new PointOfInterestDescription("The First :: Title"
                     , "A Summary about the first :: summary", "A Full Description about the first :: Description");
 		    p1.description = description1;
@@ -117,15 +122,13 @@ namespace Exposeum.Models
             p8.name_en = "POINT 8";
 			p8.name_fr = "Le POINT 8";
 
-			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
 			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
             PointOfInterestDescription description9 = new PointOfInterestDescription("The Ninth :: Title"
                     , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description");
             p9.description = description9;
             p9.beacon = beacon1;
 
-			Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
-			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f, floor5);
+			PointOfInterest p10 = new PointOfInterest(0.93f, 0.26f, floor5);
             PointOfInterestDescription description10 = new PointOfInterestDescription("The Tenth :: Title"
                     , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description");
             p10.description = description10;
@@ -145,7 +148,13 @@ namespace Exposeum.Models
 			p12.name_en = "POINT 12";
 			p12.name_fr = "Le POINT 12";
 
-			StoryLine storyline = new StoryLine ();
+            PointOfInterest p13 = new PointOfInterest(0.23f, 0.96f, floor5);
+            PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth :: Title"
+                    , "A Summary about the thirteenth :: summary", "A Full Description about the thirteenth :: Description");
+            p10.description = description10;
+            p10.beacon = beacon3;
+
+            StoryLine storyline = new StoryLine ();
 
 			storyline.addPoi (p1);
 			storyline.addPoi (p2);
