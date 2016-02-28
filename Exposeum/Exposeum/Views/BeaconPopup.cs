@@ -27,7 +27,7 @@ namespace Exposeum.Views
 
 		    
             WebView popupWebView = popup_view.FindViewById<WebView>(Resource.Id.beacon_popup_webview);
-			popupWebView.LoadData(POI.getHTML(), "text/html", "utf-8");
+			popupWebView.LoadData(POI.description.getHTML(), "text/html", "utf-8");
 		}
 
 		public void Show()

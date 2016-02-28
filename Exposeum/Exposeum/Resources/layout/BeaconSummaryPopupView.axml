@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <WebView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/beacon_popup_webview" />
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="130.0dp"
-        android:id="@+id/imageView1" />
+        android:layout_height="252.5dp"
+        android:id="@+id/beacon_popup_webview"
+        android:layout_marginLeft="20.0dp"
+        android:layout_marginRight="20.0dp"
+        android:layout_marginTop="73.0dp"
+        android:layout_marginBottom="16.0dp" />
     <Button
         android:text="Dismiss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/beacon_popup_dismiss" />
+        android:layout_width="325.0dp"
+        android:layout_height="70.0dp"
+        android:id="@+id/beacon_popup_dismiss"
+        android:layout_marginTop="50.0dp"
+        android:layout_marginBottom="40.0dp"
+        android:layout_marginLeft="25.0dp"
+        android:layout_marginRight="25.0dp" />
 </LinearLayout>
