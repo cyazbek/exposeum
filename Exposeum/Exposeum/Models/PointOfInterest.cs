@@ -50,6 +50,8 @@ namespace Exposeum.Models
 
 	        this.floor = floor;
 
+			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+			visited = false;
 			setVisitedUnvisitedIcons ();
 	    }
 
