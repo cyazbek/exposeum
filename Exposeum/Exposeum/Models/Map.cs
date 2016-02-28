@@ -118,7 +118,7 @@ namespace Exposeum.Models
 			p11.description = description11;
 			p11.name_en = "POINT 11";
 			p11.name_fr = "Le POINT 11";
-			p10.beacon = beacon3;
+			p11.beacon = beacon3;
 
 			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, floor4);
 			PointOfInterestDescription description12 = new PointOfInterestDescription("The Twelfth :: Title"
