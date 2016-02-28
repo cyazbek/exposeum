@@ -49,10 +49,15 @@ namespace Exposeum.Models
 			this._v = v;
 
 	        this.floor = floor;
+<<<<<<< HEAD
 
 			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			visited = false;
 			setVisitedUnvisitedIcons ();
+=======
+            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+            setVisitedUnvisitedIcons ();
+>>>>>>> 216e694dee466223121bfa572350b7fd90a97d1c
 	    }
 
 		public void setVisitedUnvisitedIcons()
