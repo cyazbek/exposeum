@@ -7,8 +7,9 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/WviewPager"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
-        android:layout_marginBottom="15dp" />
+        android:layout_height="514.0dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp" />
     <Button
         android:text=""
         android:id="@+id/WalkThroughButton"
@@ -21,5 +22,6 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp" />
 </LinearLayout>
