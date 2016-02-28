@@ -25,7 +25,6 @@ namespace Exposeum
 			SetContentView(view);
 
 			LinearLayout lay = (LinearLayout)view.FindViewById (Resource.Id.linlay1);
-
 			MapView map_view = new MapView (this);
 
 			map_view.LayoutParameters = new ViewGroup.LayoutParams (

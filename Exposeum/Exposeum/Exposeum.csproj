@@ -223,12 +223,12 @@
     <AndroidResource Include="Resources\drawable-nodpi\first.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-nodpi\third.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\fourth.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-nodpi\second.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-nodpi\fourth.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\third.png" />
   </ItemGroup>
 </Project>
