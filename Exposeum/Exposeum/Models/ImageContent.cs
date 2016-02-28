@@ -8,7 +8,7 @@
 
         public override string htmlFormat()
         {
-            throw new System.NotImplementedException();
+            return "<img>sldks</img>";
         }
     }
 }

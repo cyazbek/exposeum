@@ -10,7 +10,6 @@ namespace Exposeum.Models
 	public class Floor
 	{
 		private Drawable _floorPlan;
-		private List<MapElement> _floorMapElements = new List<MapElement>();
 		private Paint paint = new Paint();
 
 		public Floor (Drawable floorPlan)
@@ -23,24 +22,9 @@ namespace Exposeum.Models
 			paint.StrokeWidth = 20; //magic number, should extract static constant
 		}
 
-		public void addMapElement(MapElement e)
-		{
-			_floorMapElements.Add (e);
-		}
-
 		public Drawable Image
 		{
 			get { return this._floorPlan; }
-		}
-
-		public List<MapElement> MapElements
-		{
-			get { return this._floorMapElements; }
-		}
-
-		public List<MapElement> PointsOfInterest()
-		{
-			return _floorMapElements.OfType<MapElement>().ToList();
 		}
 	}
 }

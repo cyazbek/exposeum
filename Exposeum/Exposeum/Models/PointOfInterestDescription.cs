@@ -2,14 +2,22 @@
 {
     public class PointOfInterestDescription
     {
-        public string title { get; set; }
-        public string summary { get; set; }
-        public string language { get; set; }
-        public PointOfInterestDescription()
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Description { get; set; }
+
+
+        public PointOfInterestDescription(string Title, string Summary, string Description)
         {
-            this.title = "Title not provided";
-            this.summary = "Summary not provided";
-            this.language = "English";
+            this.Title = Title;
+            this.Summary = Summary;
+            this.Description = Description;
+        }
+
+        public string getHTML()
+        {
+            return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2><p>{2}</p></body></html>"
+                ,Title,Summary,Description);
         }
     }
 }

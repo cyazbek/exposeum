@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Text.Style;
 using Java.Util;
 
 namespace Exposeum.Models
@@ -18,6 +19,8 @@ namespace Exposeum.Models
         public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
+        public PointOfInterestDescription description { get; set; }
+
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
 
@@ -27,37 +30,45 @@ namespace Exposeum.Models
 
 			visited = false;
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
-            _visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
-			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
         }
 
         public PointOfInterest(float u, float v)
         {
-			setVisitedUnvisitedIcons ();
-
             this._u = u;
             this._v = v;
 
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             visited = false;
 
-			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
-			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
+			setVisitedUnvisitedIcons ();
         }
 
-		public void setVisitedUnvisitedIcons(){
+	    public PointOfInterest(float u, float v, Floor floor)
+	    {
+			this._u = u;
+			this._v = v;
 
+	        this.floor = floor;
+
+			setVisitedUnvisitedIcons ();
+	    }
+
+		public void setVisitedUnvisitedIcons()
+		{
 			try{
-				    _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
+			    _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
 			}catch(Exception e){
 				_visited_icon = new ColorDrawable ();
 			}
 
 			try{
-                    _unvisited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
+				_unvisited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
 			}catch(Exception e){
 				_unvisited_icon = new ColorDrawable ();
 			}
+
+			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
+			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
 
 		}
         
@@ -66,9 +77,9 @@ namespace Exposeum.Models
 			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
         }
 
-        public void Draw(Canvas canvas, float mapWidth, float mapHeight)
+        public void Draw(Canvas canvas)
 		{
-			canvas.Translate (_u * mapWidth, _v * mapHeight);
+			canvas.Translate (_u * floor.Image.IntrinsicWidth, _v * floor.Image.IntrinsicHeight);
 			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
 			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
 
@@ -79,7 +90,7 @@ namespace Exposeum.Models
 
 			canvas.Translate (_unvisited_icon.IntrinsicWidth / 2.0f, _unvisited_icon.IntrinsicHeight / 2.0f);
 			canvas.Scale (1.0f/_icon_scale_factor, 1.0f/_icon_scale_factor);
-			canvas.Translate (-_u * mapWidth, -_v * mapHeight);
+			canvas.Translate (-_u * floor.Image.IntrinsicWidth, -_v * floor.Image.IntrinsicHeight);
 		}
 
         public void SetTouched()
@@ -141,7 +152,5 @@ namespace Exposeum.Models
         {
             return this.id + " " + this.getName() + " " + this.getDescription();
         }
-
     }
-
 }

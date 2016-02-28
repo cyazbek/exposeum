@@ -7,6 +7,7 @@ using Exposeum.Models;
 using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
+using System.Linq;
 
 namespace Exposeum.Views
 {
@@ -120,6 +121,7 @@ namespace Exposeum.Views
 		protected override void OnDraw (Canvas canvas)
 		{
 			base.OnDraw (canvas);
+
 			canvas.Save ();
 			canvas.Translate (_translateX + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2, _translateY + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2);
 			canvas.Scale (_scaleFactor, _scaleFactor);
@@ -128,29 +130,27 @@ namespace Exposeum.Views
 
 			Paint appropriateEdgePaintBrush = _visitedEdge;
 
-			//draw edges on top of map
-			for (int i = 0; i < _map.CurrentStoryline.poiList.Count; i++) {
+			//draw edges and POIs on top of map
 
-				PointOfInterest current = _map.CurrentStoryline.poiList [i];
+			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.poiList.Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
 
-				if (_map.CurrentFloor.PointsOfInterest ().Contains (current)) {
+			for (int i = 0; i < currentFloorPOIs.Count; i++) {
+
+				PointOfInterest currentPOI = currentFloorPOIs[i];
 					
-					if (i < _map.CurrentStoryline.poiList.Count - 1) {
+				if (i < currentFloorPOIs.Count - 1) {
 
-						PointOfInterest next = _map.CurrentStoryline.poiList [i + 1];
+					PointOfInterest nextPOI = currentFloorPOIs[i + 1];
 
-						if (_map.CurrentFloor.PointsOfInterest ().Contains (next)) {
-
-							if (next.visited == false)
-								appropriateEdgePaintBrush = _unvisitedEdge;
-							canvas.DrawLine (current._u * _map.CurrentFloor.Image.IntrinsicWidth, current._v * _map.CurrentFloor.Image.IntrinsicHeight, next._u * _map.CurrentFloor.Image.IntrinsicWidth, next._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
-
-						}
-					}
-
-					current.Draw (canvas, _map.CurrentFloor.Image.IntrinsicWidth, _map.CurrentFloor.Image.IntrinsicHeight); //draw the current guy
+					if (!nextPOI.visited)
+						appropriateEdgePaintBrush = _unvisitedEdge;
+					
+					canvas.DrawLine (currentPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, currentPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, nextPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, nextPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 
 				}
+
+				currentPOI.Draw (canvas); //draw the current guy
+
 			}
 
 			canvas.Restore ();
@@ -167,7 +167,6 @@ namespace Exposeum.Views
 
 			public override bool OnScale (ScaleGestureDetector detector)
 			{
-               
 				_view._scaleFactor *= detector.ScaleFactor;
 
 				// put a limit on how small or big the image can get.
@@ -186,7 +185,9 @@ namespace Exposeum.Views
 
 		private PointOfInterest getSelectedPOI(float screenX, float screenY){
 
-			foreach (PointOfInterest poi in _map.CurrentFloor.PointsOfInterest()) {
+			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.poiList.Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
+
+			foreach (PointOfInterest poi in currentFloorPOIs) {
 
 				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
 				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
