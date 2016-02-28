@@ -2,6 +2,9 @@
 using Exposeum.Views;
 using Exposeum.Models;
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Exposeum.Controllers
 {
 	public class MapController : IBeaconFinderObserver
@@ -32,14 +35,11 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
 
-			if (beacon != null)
+            if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
-				if (_model.CurrentStoryline.hasBeacon(beacon))
-				{
-					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
-					poi.SetTouched();
-					_model.CurrentStoryline.addVisitedPoiToList(poi);
-				}
+                    PointOfInterest pointOfInterest = _model.CurrentStoryline.findPOI(beacon);
+                    pointOfInterest.SetTouched();
+                    _model.CurrentStoryline.addVisitedPoiToList(pointOfInterest);
 			}
 
 			_view.Update ();

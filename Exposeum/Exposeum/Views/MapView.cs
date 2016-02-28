@@ -44,6 +44,11 @@ namespace Exposeum.Views
 			_unvisitedEdge.StrokeWidth = 25;
 		}
 
+        public MapController getController()
+        {
+            return _controller;
+        }
+
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
 		{
 			_controller.FloorChanged(e.Progress);
