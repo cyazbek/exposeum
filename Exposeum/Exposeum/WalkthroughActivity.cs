@@ -31,10 +31,10 @@ namespace Exposeum
             SetContentView(Resource.Layout.WalkThrough);
             var WalkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
             string buttonText;
-            ImagesFrench.Add(Resource.Drawable.first);
-            ImagesFrench.Add(Resource.Drawable.second);
-            ImagesFrench.Add(Resource.Drawable.third);
-            ImagesFrench.Add(Resource.Drawable.fourth);
+            ImagesFrench.Add(Resource.Drawable.first_fr);
+            ImagesFrench.Add(Resource.Drawable.second_fr);
+            ImagesFrench.Add(Resource.Drawable.third_fr);
+            ImagesFrench.Add(Resource.Drawable.fourth_fr);
 
             ImagesEnglish.Add(Resource.Drawable.first);
             ImagesEnglish.Add(Resource.Drawable.second);
@@ -42,7 +42,7 @@ namespace Exposeum
             ImagesEnglish.Add(Resource.Drawable.fourth);
             if (Language.getLanguage()=="fr")
             {
-                buttonText = "Avancez";
+                buttonText = "Sauter";
                 intent = new Intent(this, typeof(VisitActivity_fr));
                 ImagesToDisplay = ImagesFrench; 
             }
