@@ -29,9 +29,7 @@ namespace UnitTests.US_11
             [SetUp]
             public void Setup()
             {
-                Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-                pointOfInterestTest = new PointOfInterest(0.53f, 0.46f);
-                pointOfInterestTest.beacon  = beacon1;
+                pointOfInterestTest = new PointOfInterest();
             }
 
             [TearDown]
@@ -48,18 +46,17 @@ namespace UnitTests.US_11
             [Test]
             public void testPoiVisitedIsTrueOnceCorrespondingBeaconIsFound()
             {
-
-                Setup();
-
                 Context c = Android.App.Application.Context;
                 MapView mapView = new MapView(c);
                 MapController mapController = mapView.getController();
                 BeaconFinder beaconFinder = BeaconFinder.getInstance();
-                mapController.Model.CurrentStoryline.addPoi(pointOfInterestTest);
+
+                Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+                pointOfInterestTest = mapController.Model.CurrentStoryline.poiList.Where(poi => poi.beacon.Equals(beacon1)).FirstOrDefault();
 
                 mapController.beaconFinderObserverUpdate(beaconFinder);
 
-                Assert.AreEqual(true, pointOfInterestTest.visited);
+                Assert.True(pointOfInterestTest.visited);
             }
 
             [Test]
