@@ -19,6 +19,8 @@ namespace Exposeum.Models
 		}
 
 		private void seedData(){
+
+			StoryLine storyline = new StoryLine ();
 			
 			Floor floor1 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1));
 			Floor floor2 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2));
@@ -45,6 +47,7 @@ namespace Exposeum.Models
             p1.name_en = "POINT 1";
 			p1.name_fr = "Le POINT 1";
             p1.visited = true;
+			storyline.addVisitedPoiToList (p1);
 
 			PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
@@ -53,6 +56,7 @@ namespace Exposeum.Models
             p2.name_en = "POINT 2";
 			p2.name_fr = "Le POINT 2";
 			p2.visited = true;
+			storyline.addVisitedPoiToList (p2);
 
 			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f, floor1);
             PointOfInterestDescription description3 = new PointOfInterestDescription("The third :: Title"
@@ -61,6 +65,7 @@ namespace Exposeum.Models
             p3.name_en = "POINT 3";
 			p3.name_fr = "Le POINT 3";
 			p3.visited = true;
+			storyline.addVisitedPoiToList (p3);
 
 			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
             PointOfInterestDescription description4 = new PointOfInterestDescription("The Fourth :: Title"
@@ -125,7 +130,7 @@ namespace Exposeum.Models
 			p12.name_en = "POINT 12";
 			p12.name_fr = "Le POINT 12";
 
-			StoryLine storyline = new StoryLine ();
+
 
 			storyline.addPoi (p1);
 			storyline.addPoi (p2);

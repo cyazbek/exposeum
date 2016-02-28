@@ -12,11 +12,20 @@ using Android.Views;
 using Android.Widget;
 using Android.Graphics;
 
+using Exposeum.Models;
+
 namespace Exposeum
 {
 	public class MapProgressionFragment : Fragment
 	{
-		private StoryLineNotFoundException _storyline;
+		private StoryLine _storyline;
+		private ProgressBar _progressBar;
+
+		public MapProgressionFragment() { } //necessary due to default constructor called on rotate event
+
+		public MapProgressionFragment(StoryLine storyline){
+			_storyline = storyline;
+		}
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
@@ -27,8 +36,14 @@ namespace Exposeum
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			return inflater.Inflate(Resource.Layout.map_progression, container, false);
+			View mapProgressionFragmentView = inflater.Inflate(Resource.Layout.MapProgressionFragment, container, false);
+			_progressBar = mapProgressionFragmentView.FindViewById<ProgressBar> (Resource.Id.map_progression_frag_progressbar);
+			Update ();
+			return mapProgressionFragmentView;
 		}
 
+		public void Update(){
+			_progressBar.Progress = (int)(100 * ((float)_storyline.poiVisitedList.Count / (float) _storyline.poiList.Count));
+		}
 	}
 }

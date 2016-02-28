@@ -132,8 +132,8 @@
     <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
-    <AndroidResource Include="Resources\layout\map_progression.axml" />
     <Compile Include="Views\MapProgressionFragment.cs" />
+    <AndroidResource Include="Resources\layout\MapProgressionFragment.axml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
