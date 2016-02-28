@@ -32,14 +32,14 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
 
-			if (beacon != null)
+			if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
-				if (_model.CurrentStoryline.hasBeacon(beacon))
-				{
-					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
-					poi.SetTouched();
-					_model.CurrentStoryline.addVisitedPoiToList(poi);
-				}
+                foreach(var poi in _model.CurrentStoryline.poiList)
+                {
+                    PointOfInterest pointOfInterest = _model.CurrentStoryline.findPOI(beacon);
+                    poi.SetTouched();
+                    _model.CurrentStoryline.addVisitedPoiToList(poi);
+                }
 			}
 
 			_view.Update ();
