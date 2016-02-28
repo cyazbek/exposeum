@@ -30,17 +30,15 @@ namespace Exposeum
             SetContentView(Resource.Layout.WalkThrough);
             var WalkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
             string buttonText;
-            ImagesFrench.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesFrench.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesFrench.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesFrench.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesFrench.Add(Resource.Drawable.BackgroudLanguageFix);
+            ImagesFrench.Add(Resource.Drawable.first);
+            ImagesFrench.Add(Resource.Drawable.second);
+            ImagesFrench.Add(Resource.Drawable.third);
+            ImagesFrench.Add(Resource.Drawable.fourth);
 
-            ImagesEnglish.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesEnglish.Add(Resource.Drawable.Logo);
-            ImagesEnglish.Add(Resource.Drawable.BackgroudLanguageFix);
-            ImagesEnglish.Add(Resource.Drawable.Logo);
-            ImagesEnglish.Add(Resource.Drawable.BackgroudLanguageFix);
+            ImagesEnglish.Add(Resource.Drawable.first);
+            ImagesEnglish.Add(Resource.Drawable.second);
+            ImagesEnglish.Add(Resource.Drawable.third);
+            ImagesEnglish.Add(Resource.Drawable.fourth);
             if (Language.getLanguage()=="fr")
             {
                 buttonText = "Avancez";
