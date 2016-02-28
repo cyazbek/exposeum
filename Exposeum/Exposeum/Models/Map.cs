@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Android.Content.Res;
 using Java.Util;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
@@ -9,7 +10,7 @@ namespace Exposeum.Models
 	{
 		private List<Floor> _floors;
 		private Floor _currentFloor;
-		private StoryLine _currentStoryline;
+        private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
 
@@ -17,14 +18,33 @@ namespace Exposeum.Models
 		{
 			seedData ();
 		}
-
+        
 		private void seedData(){
-			
-			Floor floor1 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1));
-			Floor floor2 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2));
-			Floor floor3 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3));
-			Floor floor4 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4));
-			Floor floor5 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5));
+
+            Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
+
+            try
+            {
+                floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
+                floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
+                floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
+                floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
+                floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
+            }
+            catch(Exception e)
+            {
+                floorplan1 = new ColorDrawable();
+                floorplan2 = new ColorDrawable();
+                floorplan3 = new ColorDrawable();
+                floorplan4 = new ColorDrawable();
+                floorplan5 = new ColorDrawable();
+            }
+
+            Floor floor1 = new Floor(floorplan1);
+            Floor floor2 = new Floor(floorplan2);
+            Floor floor3 = new Floor(floorplan3);
+            Floor floor4 = new Floor(floorplan4);
+            Floor floor5 = new Floor(floorplan5);
 
 			_floors = new List<Floor> ();
 
