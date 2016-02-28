@@ -8,6 +8,7 @@ using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 using System.Linq;
+using Android.Util;
 
 namespace Exposeum.Views
 {
@@ -27,6 +28,7 @@ namespace Exposeum.Views
 		private MapController _controller;
 		private Paint _visitedEdge = new Paint ();
 		private Paint _unvisitedEdge = new Paint ();
+		private float _canvas_width, _canvas_height; 
 
 	    public MapView (Context context) : base(context, null, 0)
 		{            
@@ -91,6 +93,17 @@ namespace Exposeum.Views
 					float deltaY = y - _lastTouchY;
 					_translateX += deltaX;
 					_translateY += deltaY;
+
+					//clamp the translation to keep the map on-screen
+
+					float maxX = (_scaleFactor * +_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f); //good
+					float maxY = (_scaleFactor * +_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f); //good
+					float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f); //good
+					float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
+
+					_translateX = Clamp (minX, maxX, _translateX);
+					_translateY = Clamp (minY, maxY, _translateY);
+
 					Invalidate ();
 				}
 
@@ -161,6 +174,12 @@ namespace Exposeum.Views
 			canvas.Restore ();
 		}
 			
+		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
+			_canvas_width = w;
+			_canvas_height = h;
+			//onSizeChanged(w, h, oldw, oldh);
+		}
+			
 		private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
 		{
 			private readonly MapView _view;
@@ -175,11 +194,11 @@ namespace Exposeum.Views
 				_view._scaleFactor *= detector.ScaleFactor;
 
 				// put a limit on how small or big the image can get.
-				if (_view._scaleFactor > 5.0f) {
-					_view._scaleFactor = 5.0f;
+				if (_view._scaleFactor > 3.0f) {
+					_view._scaleFactor = 3.0f;
 				}
-				if (_view._scaleFactor < 0.1f) {
-					_view._scaleFactor = 0.1f;
+				if (_view._scaleFactor < 0.5f) {
+					_view._scaleFactor = 0.5f;
 				}
 
 				_view.Invalidate ();
@@ -203,6 +222,10 @@ namespace Exposeum.Views
 			}
 
 			return null;
+		}
+
+		private float Clamp(float min, float max, float value){
+			return Math.Min(Math.Max(value, min), max);
 		}
     }
 }
