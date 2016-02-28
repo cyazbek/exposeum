@@ -22,21 +22,32 @@ namespace Exposeum
 			base.OnCreate (savedInstanceState);
 
 			View view = LayoutInflater.Inflate (Resource.Layout.MapView, null);
-			SetContentView(view);
 
-			LinearLayout lay = (LinearLayout)view.FindViewById (Resource.Id.linlay1);
+			FrameLayout map_view_frame_layout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
 
 			MapView map_view = new MapView (this);
 
-			map_view.LayoutParameters = new ViewGroup.LayoutParams (
-				ViewGroup.LayoutParams.WrapContent,
-				ViewGroup.LayoutParams.WrapContent
-			);
+			map_view_frame_layout.AddView (map_view);
 
-			lay.AddView (map_view, 1);
+			bool guidedTour = true; //will depend on whether or not currentStoryLine == null I presume (storyline 0 shenanigans)
+
+			if (guidedTour) {
+				// Create a new fragment and a transaction.
+				FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
+				MapProgressionFragment newMapProgressionFrag = new MapProgressionFragment(); //pass storyline into here eventually?
+
+				// The fragment will have the ID of Resource.Id.fragment_container.
+				fragmentTx.Add(Resource.Id.map_frag_frame_lay, newMapProgressionFrag);
+
+				// Commit the transaction.
+				fragmentTx.Commit();
+			}
+
 
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
+
+			SetContentView (view);
 		}
 	}
 }

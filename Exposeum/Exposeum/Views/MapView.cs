@@ -42,6 +42,12 @@ namespace Exposeum.Views
 			_unvisitedEdge.SetStyle (Paint.Style.Stroke);
 			_unvisitedEdge.Color = Color.Red;
 			_unvisitedEdge.StrokeWidth = 25;
+
+			this.LayoutParameters = new ViewGroup.LayoutParams (
+				ViewGroup.LayoutParams.MatchParent,
+				ViewGroup.LayoutParams.MatchParent
+			);
+
 		}
 
         public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
