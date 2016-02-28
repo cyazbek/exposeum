@@ -121,7 +121,7 @@
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_4.png" />
-    <Compile Include="Views\BeaconPopup.cs" />
+    <Compile Include="Views\PointOfInterestPopup.cs" />
     <AndroidResource Include="Resources\drawable\logo_notif.png" />
     <AndroidResource Include="Resources\drawable\Beacon_Activated.png" />
     <AndroidResource Include="Resources\drawable\Beacon_Inactivated.png" />

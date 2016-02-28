@@ -37,29 +37,17 @@ namespace Exposeum.Controllers
             if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
 					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
-					PointOfInterestTapped (poi);
 					poi.SetTouched();
-					_model.CurrentStoryline.addVisitedPoiToList(poi);
+                    displayPopUp(poi);
+                    _model.CurrentStoryline.addVisitedPoiToList(poi);
 			}
 
 			_view.Update ();
 		}
 
-		public void PointOfInterestTapped(PointOfInterest selectedPOI){
-
-			if(!selectedPOI.visited)
-				_view.InitiatePointOfInterestPopup (selectedPOI);
-
-			PointOfInterest latestUnvisited = null;
-
-			//only allow the next unvisited node to be clicked
-			for (int i = 0; i < _model.CurrentStoryline.poiList.Count; i++) {
-				if (!_model.CurrentStoryline.poiList [i].visited) {
-					latestUnvisited = _model.CurrentStoryline.poiList [i];
-					break;
-				}
-			}
-			
+		public void displayPopUp(PointOfInterest selectedPOI)
+        {	
+			_view.InitiatePointOfInterestPopup (selectedPOI);
 			_view.Update (); //technically unncecessary but included for completeness
 		}
 
