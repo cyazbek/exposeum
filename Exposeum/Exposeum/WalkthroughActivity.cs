@@ -11,10 +11,11 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
 using Exposeum.Models;
+using Android.Content.PM;
 
 namespace Exposeum
 {
-    [Activity(Label = "WalkthroughActivity", Theme = "@android:style/Theme.Holo.NoActionBar")]
+    [Activity(Label = "WalkthroughActivity", Theme = "@android:style/Theme.Holo.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
     public class WalkthroughActivity : Activity
     {
         private static ViewPager mPager;
