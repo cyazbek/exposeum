@@ -49,6 +49,7 @@ namespace Exposeum.Controllers
 
 			_view.InitiatePointOfInterestPopup (selectedPOI);
 
+            /*
 			PointOfInterest latestUnvisited = null;
 
 			//only allow the next unvisited node to be clicked
@@ -61,7 +62,8 @@ namespace Exposeum.Controllers
 
 			if (selectedPOI.Equals(latestUnvisited))
 				selectedPOI.SetTouched ();
-			
+			*/
+
 			_view.Update (); //technically unncecessary but included for completeness
 		}
 
