@@ -124,13 +124,13 @@ namespace Exposeum.Models
 
 			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
             PointOfInterestDescription description9 = new PointOfInterestDescription("The Ninth :: Title"
-                    , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description");
+                    , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description: green beacon");
             p9.description = description9;
             p9.beacon = beacon1;
 
 			PointOfInterest p10 = new PointOfInterest(0.38f, 0.62f, floor5);
             PointOfInterestDescription description10 = new PointOfInterestDescription("The Tenth :: Title"
-                    , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description");
+                    , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description: blue beacon");
             p10.description = description10;
             p10.beacon = beacon2;
 
@@ -150,7 +150,7 @@ namespace Exposeum.Models
 
             PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
             PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth :: Title"
-                    , "A Summary about the thirteenth :: summary", "A Full Description about the thirteenth :: Description");
+                    , "A Summary about the thirteenth :: summary", "A Full Description about the thirteenth :: Description: purple beacon");
             p13.description = description13;
             p13.beacon = beacon3;
 
