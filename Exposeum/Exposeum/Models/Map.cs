@@ -115,7 +115,7 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
-			PointOfInterest p8 = new PointOfInterest(0.98f, 0.82f, floor2);
+			PointOfInterest p8 = new PointOfInterest(0.38f, 0.62f, floor2);
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
@@ -128,7 +128,7 @@ namespace Exposeum.Models
             p9.description = description9;
             p9.beacon = beacon1;
 
-			PointOfInterest p10 = new PointOfInterest(0.93f, 0.26f, floor5);
+			PointOfInterest p10 = new PointOfInterest(0.38f, 0.62f, floor5);
             PointOfInterestDescription description10 = new PointOfInterestDescription("The Tenth :: Title"
                     , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description");
             p10.description = description10;
@@ -148,11 +148,11 @@ namespace Exposeum.Models
 			p12.name_en = "POINT 12";
 			p12.name_fr = "Le POINT 12";
 
-            PointOfInterest p13 = new PointOfInterest(0.23f, 0.96f, floor5);
+            PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
             PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth :: Title"
                     , "A Summary about the thirteenth :: summary", "A Full Description about the thirteenth :: Description");
-            p10.description = description10;
-            p10.beacon = beacon3;
+            p13.description = description13;
+            p13.beacon = beacon3;
 
             StoryLine storyline = new StoryLine ();
 
@@ -168,8 +168,9 @@ namespace Exposeum.Models
 			storyline.addPoi (p10);
 			storyline.addPoi (p11);
 			storyline.addPoi (p12);
+            storyline.addPoi(p13);
 
-			_currentStoryline = storyline;
+            _currentStoryline = storyline;
 
 		}
 
