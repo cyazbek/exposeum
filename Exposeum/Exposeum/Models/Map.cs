@@ -63,7 +63,7 @@ namespace Exposeum.Models
 
 
             //set up POIs
-            PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
+            PointOfInterest p1 = new PointOfInterest(0.457f, 0.542f, floor1);
             PointOfInterestDescription description1 = new PointOfInterestDescription("The First :: Title"
                     , "A Summary about the first :: summary", "A Full Description about the first :: Description");
 		    p1.description = description1;
@@ -71,7 +71,7 @@ namespace Exposeum.Models
 			p1.name_fr = "Le POINT 1";
             p1.visited = true;
 
-			PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
+			PointOfInterest p2 = new PointOfInterest(0.198f, 0.905f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
                     , "A Summary about the second :: summary", "A Full Description about the second :: Description");
             p2.description = description2;
@@ -79,7 +79,7 @@ namespace Exposeum.Models
 			p2.name_fr = "Le POINT 2";
 			p2.visited = true;
 
-			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f, floor1);
+			PointOfInterest p3 = new PointOfInterest(0.328f, 0.794f, floor1);
             PointOfInterestDescription description3 = new PointOfInterestDescription("The third :: Title"
                     , "A Summary about the third :: summary", "A Full Description about the third :: Description");
             p3.description = description3;
@@ -87,21 +87,21 @@ namespace Exposeum.Models
 			p3.name_fr = "Le POINT 3";
 			p3.visited = true;
 
-			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
+			PointOfInterest p4 = new PointOfInterest(0.732f, 0.568f, floor1);
             PointOfInterestDescription description4 = new PointOfInterestDescription("The Fourth :: Title"
                     , "A Summary about the fourth :: summary", "A Full Description about the fourth :: Description");
             p4.description = description4;
             p4.name_en = "POINT 4";
 			p4.name_fr = "Le POINT 4";
 
-			PointOfInterest p5 = new PointOfInterest(0.30f, 0.12f, floor1);
+			PointOfInterest p5 = new PointOfInterest(0.807f, 0.448f, floor1);
             PointOfInterestDescription description5 = new PointOfInterestDescription("The Fifth :: Title"
                     , "A Summary about the fifth :: summary", "A Full Description about the fifth :: Description");
             p5.description = description5;
             p5.name_en = "POINT 5";
 			p5.name_fr = "Le POINT 5";
 
-			PointOfInterest p6 = new PointOfInterest(0.48f, 0.12f, floor1);
+			PointOfInterest p6 = new PointOfInterest(0.567f, 0.099f, floor1);
             PointOfInterestDescription description6 = new PointOfInterestDescription("The Sixth :: Title"
                     , "A Summary about the sixth :: summary", "A Full Description about the sixth :: Description");
             p6.description = description6;
