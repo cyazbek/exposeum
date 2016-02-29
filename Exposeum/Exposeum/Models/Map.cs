@@ -134,7 +134,6 @@ namespace Exposeum.Models
             p10.description = description10;
             p10.beacon = beacon2;
 
-			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, floor4);
 			PointOfInterestDescription description11 = new PointOfInterestDescription("The Eleventh :: Title"
 				, "A Summary about the eighth :: summary", "A Full Description about the eleventh :: Description");
