@@ -39,9 +39,6 @@ namespace Exposeum.Views
 			_controller = new MapController (this);
 			_map = _controller.Model;
 
-			_translateX = _scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2; //center the image on view creation
-			_translateY = _scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2;
-
 			_visitedEdge.SetStyle (Paint.Style.Fill);
 			_visitedEdge.Color = Color.Purple;
 			_visitedEdge.StrokeWidth = 20;
@@ -185,7 +182,16 @@ namespace Exposeum.Views
 		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
 			_canvas_width = w;
 			_canvas_height = h;
-			//onSizeChanged(w, h, oldw, oldh);
+
+			//center the image on canvas size change (rotation)
+			//is also called when canvas is first instantiated
+			float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
+			float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
+			float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
+			float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
+
+			_translateX = minX + ((maxX - minX) / 2.0f); //translate half-way on both axes
+			_translateY = minY + ((maxY - minY) / 2.0f);
 		}
 			
 		private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
