@@ -38,6 +38,5 @@ namespace Exposeum.Models
                 lang = "en";
             else lang = "fr";
         }
-
     }
 }

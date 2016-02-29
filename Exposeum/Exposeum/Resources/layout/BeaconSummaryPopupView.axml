@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
+    android:theme="@android:style/Theme.Holo.Light.Dialog"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
     <WebView
         android:layout_width="match_parent"
-        android:layout_height="252.5dp"
+        android:layout_height="339.0dp"
         android:id="@+id/pointofinterest_popup_webview"
         android:layout_marginLeft="20.0dp"
         android:layout_marginRight="20.0dp"
         android:layout_marginTop="73.0dp"
-        android:layout_marginBottom="16.0dp" />
+        android:layout_marginBottom="5.0dp" />
     <Button
         android:text="Dismiss"
         android:layout_width="325.0dp"
         android:layout_height="70.0dp"
         android:id="@+id/pointofinterest_popup_dismiss"
-        android:layout_marginTop="50.0dp"
+        android:layout_marginTop="15.0dp"
         android:layout_marginBottom="40.0dp"
         android:layout_marginLeft="25.0dp"
         android:layout_marginRight="25.0dp" />
