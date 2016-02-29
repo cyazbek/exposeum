@@ -36,9 +36,9 @@ namespace Exposeum.Controllers
 
             if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
-					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
-				if(!poi.visited){ //don't display a popup if the beacon has already been visited
+				if(!poi.visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
 					poi.SetTouched();
 					displayPopUp(poi);
 					_model.CurrentStoryline.addVisitedPoiToList(poi);
