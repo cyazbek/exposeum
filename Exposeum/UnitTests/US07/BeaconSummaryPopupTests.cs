@@ -23,7 +23,7 @@ namespace UnitTests.US07
     {
         private PointOfInterest _poi;
         private MapView _mapview;
-        private BeaconPopup _beaconPopup;
+        private PointOfInterestPopup _beaconPopup;
 
         [SetUp]
         public void Setup()
@@ -33,7 +33,7 @@ namespace UnitTests.US07
             MockContext context = new MockContext();
             _mapview = new MapView(context);
 
-            _beaconPopup = new BeaconPopup(context, _poi);
+            _beaconPopup = new PointOfInterestPopup(context, _poi);
 
             
 

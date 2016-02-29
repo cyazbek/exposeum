@@ -30,6 +30,8 @@ namespace Exposeum.Views
 		private Paint _unvisitedEdge = new Paint ();
 		private float _canvas_width, _canvas_height; 
 
+        private PointOfInterestPopup newPointOfInterestPopup;
+
 	    public MapView (Context context) : base(context, null, 0)
 		{            
             _context = context;
@@ -61,8 +63,12 @@ namespace Exposeum.Views
 		}
 
 		public void InitiatePointOfInterestPopup(PointOfInterest poi){
-			Views.BeaconPopup newBeaconPopup = new Views.BeaconPopup (_context, poi);
-			newBeaconPopup.Show ();
+
+            if (newPointOfInterestPopup == null || ! newPointOfInterestPopup.isShowing())
+            {
+                newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
+                newPointOfInterestPopup.Show();
+            }
 		}
 
 		public override bool OnTouchEvent (MotionEvent ev)
@@ -76,7 +82,7 @@ namespace Exposeum.Views
 			case MotionEventActions.Down:
 				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
 				if (selected != null) {
-					_controller.PointOfInterestTapped (selected);
+					_controller.displayPopUp (selected);
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();

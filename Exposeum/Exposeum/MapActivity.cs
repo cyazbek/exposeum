@@ -17,6 +17,9 @@ namespace Exposeum
 	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]	
 	public class MapActivity : Activity
 	{
+
+		private BeaconFinder _beaconFinder;
+
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
@@ -36,6 +39,22 @@ namespace Exposeum
 
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
+
+			_beaconFinder = BeaconFinder.getInstance ();
+			_beaconFinder.setInFocus(true);
+		}
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+			_beaconFinder.setInFocus (true);
+
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause();
+			_beaconFinder.setInFocus (false);
 		}
 	}
 }
