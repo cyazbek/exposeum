@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Android.Content.Res;
 using Java.Util;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
@@ -9,7 +10,7 @@ namespace Exposeum.Models
 	{
 		private List<Floor> _floors;
 		private Floor _currentFloor;
-		private StoryLine _currentStoryline;
+        private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
 
@@ -17,14 +18,33 @@ namespace Exposeum.Models
 		{
 			seedData ();
 		}
-
+        
 		private void seedData(){
-			
-			Floor floor1 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1));
-			Floor floor2 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2));
-			Floor floor3 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3));
-			Floor floor4 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4));
-			Floor floor5 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5));
+
+            Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
+
+            try
+            {
+                floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
+                floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
+                floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
+                floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
+                floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
+            }
+            catch(Exception e)
+            {
+                floorplan1 = new ColorDrawable();
+                floorplan2 = new ColorDrawable();
+                floorplan3 = new ColorDrawable();
+                floorplan4 = new ColorDrawable();
+                floorplan5 = new ColorDrawable();
+            }
+
+            Floor floor1 = new Floor(floorplan1);
+            Floor floor2 = new Floor(floorplan2);
+            Floor floor3 = new Floor(floorplan3);
+            Floor floor4 = new Floor(floorplan4);
+            Floor floor5 = new Floor(floorplan5);
 
 			_floors = new List<Floor> ();
 
@@ -36,9 +56,14 @@ namespace Exposeum.Models
 
 			_currentFloor = floor1;
 
-			//set up POIs
+            // set up Beacons
+            Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
+            Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
+            Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 
-			PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
+
+            //set up POIs
+            PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
             PointOfInterestDescription description1 = new PointOfInterestDescription("The First :: Title"
                     , "A Summary about the first :: summary", "A Full Description about the first :: Description");
 		    p1.description = description1;
@@ -90,28 +115,25 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
-			PointOfInterest p8 = new PointOfInterest(0.98f, 0.82f, floor2);
+			PointOfInterest p8 = new PointOfInterest(0.38f, 0.62f, floor2);
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
             p8.name_en = "POINT 8";
 			p8.name_fr = "Le POINT 8";
 
-			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
 			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
             PointOfInterestDescription description9 = new PointOfInterestDescription("The Ninth :: Title"
-                    , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description");
+                    , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description: green beacon");
             p9.description = description9;
             p9.beacon = beacon1;
 
-			Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
-			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f, floor5);
+			PointOfInterest p10 = new PointOfInterest(0.38f, 0.62f, floor5);
             PointOfInterestDescription description10 = new PointOfInterestDescription("The Tenth :: Title"
-                    , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description");
+                    , "A Summary about the tenth :: summary", "A Full Description about the tenth :: Description: blue beacon");
             p10.description = description10;
             p10.beacon = beacon2;
 
-			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, floor4);
 			PointOfInterestDescription description11 = new PointOfInterestDescription("The Eleventh :: Title"
 				, "A Summary about the eighth :: summary", "A Full Description about the eleventh :: Description");
@@ -127,7 +149,13 @@ namespace Exposeum.Models
 			p12.name_en = "POINT 12";
 			p12.name_fr = "Le POINT 12";
 
-			StoryLine storyline = new StoryLine ();
+            PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
+            PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth :: Title"
+                    , "A Summary about the thirteenth :: summary", "A Full Description about the thirteenth :: Description: purple beacon");
+            p13.description = description13;
+            p13.beacon = beacon3;
+
+            StoryLine storyline = new StoryLine ();
 
 			storyline.addPoi (p1);
 			storyline.addPoi (p2);
@@ -141,8 +169,9 @@ namespace Exposeum.Models
 			storyline.addPoi (p10);
 			storyline.addPoi (p11);
 			storyline.addPoi (p12);
+            storyline.addPoi(p13);
 
-			_currentStoryline = storyline;
+            _currentStoryline = storyline;
 
 		}
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -50,9 +50,15 @@ namespace Exposeum.Models
             visited = false;
 
             this.floor = floor;
+            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 
+<<<<<<< HEAD
 			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+			visited = false;
 			setVisitedUnvisitedIcons ();
+=======
+            setVisitedUnvisitedIcons ();
+>>>>>>> 3b318a61b597967861f51a04efaa321c1a90a62e
 	    }
 
 		public void setVisitedUnvisitedIcons()

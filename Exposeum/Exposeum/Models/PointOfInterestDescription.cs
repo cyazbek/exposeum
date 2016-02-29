@@ -14,10 +14,16 @@
             this.Description = Description;
         }
 
-        public string getHTML()
+        public string getFullDescriptionHTML()
         {
             return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2><p>{2}</p></body></html>"
                 ,Title,Summary,Description);
+        }
+
+        public string getOnlySummaryHTML()
+        {
+            return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2></body></html>"
+                , Title, Summary);
         }
     }
 }

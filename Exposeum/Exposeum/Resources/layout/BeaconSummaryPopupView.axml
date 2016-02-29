@@ -7,7 +7,7 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="252.5dp"
-        android:id="@+id/beacon_popup_webview"
+        android:id="@+id/pointofinterest_popup_webview"
         android:layout_marginLeft="20.0dp"
         android:layout_marginRight="20.0dp"
         android:layout_marginTop="73.0dp"
@@ -16,7 +16,7 @@
         android:text="Dismiss"
         android:layout_width="325.0dp"
         android:layout_height="70.0dp"
-        android:id="@+id/beacon_popup_dismiss"
+        android:id="@+id/pointofinterest_popup_dismiss"
         android:layout_marginTop="50.0dp"
         android:layout_marginBottom="40.0dp"
         android:layout_marginLeft="25.0dp"

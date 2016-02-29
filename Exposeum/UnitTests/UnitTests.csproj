@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -56,6 +56,7 @@
     <Compile Include="US09\BeaconFinderTestsUS9.cs" />
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US1\LanguageTest.cs" />
+    <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -72,8 +73,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="US13\" />
-    <Folder Include="US1\" />
+    <Folder Include="New Folder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exposeum\Exposeum.csproj">
@@ -103,8 +103,5 @@
       <Link>Resources\values-fr\Strings.xml</Link>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="New Folder\" />
-    <Folder Include="US09\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
