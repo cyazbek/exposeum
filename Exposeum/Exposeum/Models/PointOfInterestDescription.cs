@@ -16,9 +16,9 @@
 
         public string getFullDescriptionHTML()
         {
-            return string.Format("<html><body><h1>{0}</h1><h2>{1}</h2><p>{2}</p>" +
+            return string.Format("<html><body><h1 style=\"color:#c91215;\" >{0}</h1><h2>{1}</h2>" +
                                  "<img src=\"EmileBerliner.png\"/></body></html>"
-                , Title,Summary,Description);
+                , Title,Description);
         }
 
         public string getOnlySummaryHTML()
