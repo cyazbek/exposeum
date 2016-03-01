@@ -7,6 +7,11 @@ namespace Exposeum.Controllers
     {
         private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
 
+        public TopMenuController()
+        {
+
+        }
+
 
     }
 }
