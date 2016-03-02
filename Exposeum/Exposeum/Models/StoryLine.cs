@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using Exposeum.Data;
+using System;
 
 namespace Exposeum.Models
 {
@@ -17,14 +18,15 @@ namespace Exposeum.Models
         public int ID { get; set; }
         public string imgPath { get; set; }
         public int FloorsCovered { get; set; }
-        public List<MapElement> ListMapElements { get; set; } 
-        public List<PointOfInterest> poiList { get; set; }
-        public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
+        public LinkedList<Node> nodeList { get;} 
+        public List<PointOfInterest> poiList { get;}
+		public List<PointOfInterest> poiVisitedList { get;}
 		private bool isComplete { get; set; }
         
         public StoryLine() 
         {
-            this.poiList = new List<PointOfInterest>();
+            poiList = new List<PointOfInterest>();
+			poiVisitedList = new List<PointOfInterest>();
 			isComplete = false;
 	
         }
@@ -32,16 +34,35 @@ namespace Exposeum.Models
         public StoryLine(int ID)
         {
             this.ID = ID;
+
+			poiList = new List<PointOfInterest>();
+			poiVisitedList = new List<PointOfInterest>();
+			isComplete = false;
         }
 
+
+		/// <summary>
+		/// DEPRECATED: use addNode() instead
+		/// </summary>
         public void addPoi(PointOfInterest poi)
         {
-            poiList.Add(poi);
+			nodeList.AddLast (poi);
+            poiList.Add (poi);
         }
 
+		public void addNode(Node node)
+		{
+			nodeList.AddLast (node);
+
+			if(node.GetType() == typeof(PointOfInterest))
+				poiList.Add (node);
+		}
+			
+		//TODO: this method shoudl be removed
         public void addVisitedPoiToList(PointOfInterest poi)
         {
-            poiVisitedList.Add(poi);
+			if(poiList.Exists(poi))
+            	poiVisitedList.Add(poi);
         }
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
