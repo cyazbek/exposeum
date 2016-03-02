@@ -10,5 +10,15 @@ namespace Exposeum.Controllers
 		{
 			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
         }
+
+        public void ResetStorylineProgress(StoryLine storyLine)
+        {
+            foreach (var poi in storyLine.poiList)
+            {
+                poi.visited = false;
+            }
+
+            storyLine = null;
+        }
     }
 }
