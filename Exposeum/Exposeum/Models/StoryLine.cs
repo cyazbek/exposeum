@@ -65,6 +65,42 @@ namespace Exposeum.Models
             	poiVisitedList.Add(poi);
         }
 
+		/// <summary>
+		/// This method will update the progress of the storyline using the passed node.
+		/// </summary>
+		public void updateProgress(Node node){
+
+			LinkedListNode<Node> rightBoundLinkedNode = nodeList.Find (node);
+			LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
+			LinkedListNode<Node> leftBoundLinkedNode;
+			Stack<Node> nodeStack = new Stack<Node>();
+
+			nodeStack.Push (rightBoundLinkedNode.Value);
+
+
+			//first pass, find the leftBound
+			while(!currentLinkedNode.Value.visited) {
+
+				//if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
+				if (currentLinkedNode.Value.GetType () != typeof(PointOfInterest)) {
+					nodeStack.Push (currentLinkedNode.Value);
+					currentLinkedNode = currentLinkedNode.Previous;
+				}
+					
+				else
+					throw new PointOfInterestNotVisitedException ("There is an unvisited POI between the current POI and the previously visited POI.");
+			}
+
+			//Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+			while (nodeStack.Count > 0) {
+				nodeStack.Pop ().SetTouched ();
+			}
+
+
+
+
+		}
+
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
         {
             return poiList.Find(x => x.beacon.compareBeacon(beacon));
