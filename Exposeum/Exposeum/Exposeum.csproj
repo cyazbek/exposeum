@@ -132,6 +132,8 @@
     <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
+    <Compile Include="Models\PointOfTravel.cs" />
+    <Compile Include="Models\Node.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
