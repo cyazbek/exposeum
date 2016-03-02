@@ -19,7 +19,7 @@ namespace Exposeum.Models
         public int FloorsCovered { get; set; }
         public List<MapElement> ListMapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
-        public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
+        private PointOfInterest _lastPointOfInterestVisited ;
 		private bool isComplete { get; set; }
         
         public StoryLine() 
@@ -39,9 +39,9 @@ namespace Exposeum.Models
             poiList.Add(poi);
         }
 
-        public void addVisitedPoiToList(PointOfInterest poi)
+        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
         {
-            poiVisitedList.Add(poi);
+            this._lastPointOfInterestVisited = lastPoiVisited;
         }
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
