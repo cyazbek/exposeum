@@ -67,8 +67,8 @@ namespace Exposeum.Controllers
 
 		public void displayPopUp(PointOfInterest selectedPOI)
         {	
-			_view.InitiatePointOfInterestPopup (selectedPOI);
-			_view.Update (); //technically unncecessary but included for completeness
+			_map_view.InitiatePointOfInterestPopup (selectedPOI);
+			_map_view.Update (); //technically unncecessary but included for completeness
 		}
 
 		public Map Model

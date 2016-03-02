@@ -37,6 +37,8 @@ namespace Exposeum
 
 			_beaconFinder = BeaconFinder.getInstance ();
 			_beaconFinder.setInFocus(true);
+
+			SetContentView (view);
 		}
 
 		protected override void OnResume()

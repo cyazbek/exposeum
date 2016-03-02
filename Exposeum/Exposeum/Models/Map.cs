@@ -40,6 +40,8 @@ namespace Exposeum.Models
                 floorplan5 = new ColorDrawable();
             }
 
+			StoryLine storyline = new StoryLine ();
+
             Floor floor1 = new Floor(floorplan1);
             Floor floor2 = new Floor(floorplan2);
             Floor floor3 = new Floor(floorplan3);
