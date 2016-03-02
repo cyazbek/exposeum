@@ -92,8 +92,15 @@ namespace Exposeum.Models
 			}
 
 			//Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+			Node currentNode;
 			while (nodeStack.Count > 0) {
-				nodeStack.Pop ().SetTouched ();
+
+
+				currentNode = nodeStack.Pop();
+				currentNode.SetTouched();
+
+				if (currentNode.GetType () != typeof(PointOfInterest))
+					addVisitedPoiToList (currentNode);
 			}
 
 
