@@ -12,5 +12,10 @@ namespace Exposeum.Controllers
             _beaconFinder.stopBeaconFinder();
         }
 
+        public void ResumeStoryline()
+        {
+            _beaconFinder.findBeacons();
+        }
+
     }
 }
