@@ -5,13 +5,12 @@ namespace Exposeum.Controllers
 {
     public class TopMenuController
     {
-        private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
+        private readonly BeaconFinder _beaconFinder = BeaconFinder.getInstance();
 
-        public TopMenuController()
+        public void PauseStoryline()
         {
-
+            _beaconFinder.stopBeaconFinder();
         }
-
 
     }
 }
