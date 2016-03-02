@@ -42,5 +42,15 @@ namespace Exposeum.Models
             this.major = data.major;
             this.minor = data.minor;  
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj != null)
+            {
+                Beacon other = (Beacon)obj;
+                return other.major == major && other.minor == minor;
+            }
+            return false;
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿using System;
+using System;
 using Exposeum.Views;
 using Exposeum.Models;
 using Android.App;
+
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Exposeum.Controllers
 {
@@ -20,7 +23,6 @@ namespace Exposeum.Controllers
 			_beaconFinder.addObserver (this);
 
 			_beaconFinder.setStoryLine(_model.CurrentStoryline);
-			_beaconFinder.setInFocus(true);
 			_beaconFinder.findBeacons();
 
 			//If we are not in free explorer mode (ie there exists a current storyline) then add the
@@ -47,41 +49,26 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
 
-			if (beacon != null)
+            if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
-				if (_model.CurrentStoryline.hasBeacon(beacon))
-				{
-					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+
+				if(!poi.visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
 					poi.SetTouched();
+					displayPopUp(poi);
 					_model.CurrentStoryline.addVisitedPoiToList(poi);
 				}
+
 			}
 
 			_map_progression_view.Update ();
 			_map_view.Update ();
 		}
 
-		public void PointOfInterestTapped(PointOfInterest selectedPOI){
-
-			_map_view.InitiatePointOfInterestPopup (selectedPOI);
-
-			PointOfInterest latestUnvisited = null;
-
-			//only allow the next unvisited node to be clicked
-			for (int i = 0; i < _model.CurrentStoryline.poiList.Count; i++) {
-				if (!_model.CurrentStoryline.poiList [i].visited) {
-					latestUnvisited = _model.CurrentStoryline.poiList [i];
-					break;
-				}
-			}
-
-			if (selectedPOI.Equals (latestUnvisited)) {
-				selectedPOI.SetTouched ();
-				_model.CurrentStoryline.poiVisitedList.Add (latestUnvisited);
-			}
-
-			_map_progression_view.Update ();
-			_map_view.Update (); //technically unncecessary but included for completeness
+		public void displayPopUp(PointOfInterest selectedPOI)
+        {	
+			_view.InitiatePointOfInterestPopup (selectedPOI);
+			_view.Update (); //technically unncecessary but included for completeness
 		}
 
 		public Map Model

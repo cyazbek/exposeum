@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Content.Res;
 using Java.Util;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
@@ -9,7 +10,7 @@ namespace Exposeum.Models
 	{
 		private List<Floor> _floors;
 		private Floor _currentFloor;
-		private StoryLine _currentStoryline;
+        private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
 
@@ -17,16 +18,33 @@ namespace Exposeum.Models
 		{
 			seedData ();
 		}
-
+        
 		private void seedData(){
 
-			StoryLine storyline = new StoryLine ();
-			
-			Floor floor1 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1));
-			Floor floor2 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2));
-			Floor floor3 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3));
-			Floor floor4 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4));
-			Floor floor5 = new Floor (Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5));
+            Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
+
+            try
+            {
+                floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
+                floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
+                floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
+                floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
+                floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
+            }
+            catch(Exception e)
+            {
+                floorplan1 = new ColorDrawable();
+                floorplan2 = new ColorDrawable();
+                floorplan3 = new ColorDrawable();
+                floorplan4 = new ColorDrawable();
+                floorplan5 = new ColorDrawable();
+            }
+
+            Floor floor1 = new Floor(floorplan1);
+            Floor floor2 = new Floor(floorplan2);
+            Floor floor3 = new Floor(floorplan3);
+            Floor floor4 = new Floor(floorplan4);
+            Floor floor5 = new Floor(floorplan5);
 
 			_floors = new List<Floor> ();
 
@@ -116,12 +134,14 @@ namespace Exposeum.Models
             p10.description = description10;
             p10.beacon = beacon2;
 
+			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, floor4);
 			PointOfInterestDescription description11 = new PointOfInterestDescription("The Eleventh :: Title"
 				, "A Summary about the eighth :: summary", "A Full Description about the eleventh :: Description");
 			p11.description = description11;
 			p11.name_en = "POINT 11";
 			p11.name_fr = "Le POINT 11";
+			p11.beacon = beacon3;
 
 			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, floor4);
 			PointOfInterestDescription description12 = new PointOfInterestDescription("The Twelfth :: Title"
