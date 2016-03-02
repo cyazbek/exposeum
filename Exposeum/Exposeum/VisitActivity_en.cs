@@ -14,7 +14,7 @@ using Android.Content.PM;
 
 namespace Exposeum
 {
-    [Activity(Label = "Choice Of Visit", Theme = "@android:style/Theme.Holo.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity_en : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
