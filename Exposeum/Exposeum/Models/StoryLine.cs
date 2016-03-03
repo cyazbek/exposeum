@@ -61,7 +61,7 @@ namespace Exposeum.Models
 		//TODO: this method shoudl be removed
         public void addVisitedPoiToList(PointOfInterest poi)
         {
-			if(poiList.Exists(poi))
+			if(poiList.Contains(poi))
             	poiVisitedList.Add(poi);
         }
 
