@@ -72,7 +72,6 @@ namespace Exposeum.Models
 
 			LinkedListNode<Node> rightBoundLinkedNode = nodeList.Find (node);
 			LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
-			LinkedListNode<Node> leftBoundLinkedNode;
 			Stack<Node> nodeStack = new Stack<Node>();
 
 			nodeStack.Push (rightBoundLinkedNode.Value);
@@ -100,7 +99,7 @@ namespace Exposeum.Models
 				currentNode.SetTouched();
 
 				if (currentNode.GetType () != typeof(PointOfInterest))
-					addVisitedPoiToList (currentNode);
+					addVisitedPoiToList ((PointOfInterest) currentNode);
 			}
 
 
