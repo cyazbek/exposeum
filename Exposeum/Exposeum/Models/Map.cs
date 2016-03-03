@@ -13,11 +13,13 @@ namespace Exposeum.Models
         private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
+        private List<StoryLine> _storyLines;
 
-		public Map ()
+        public Map ()
 		{
 			seedData ();
-		}
+            _storyLines = new List<StoryLine>();
+        }
         
 		private void seedData(){
 
@@ -191,5 +193,14 @@ namespace Exposeum.Models
 			get { return this._currentStoryline; }
 			set { this._currentStoryline = value; }
 		}
-	}
+        public void addStoryLine(StoryLine storyline)
+        {
+            this._storyLines.Add(storyline);
+        }
+        public List<StoryLine> getStoryLineList
+        {
+            get { return this._storyLines; }
+            set { this._storyLines = value; }
+        }
+    }
 }
