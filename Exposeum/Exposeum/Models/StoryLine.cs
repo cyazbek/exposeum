@@ -55,7 +55,7 @@ namespace Exposeum.Models
 			nodeList.AddLast (node);
 
 			if(node.GetType() == typeof(PointOfInterest))
-				poiList.Add (node);
+				poiList.Add (node as PointOfInterest);
 		}
 			
 		//TODO: this method shoudl be removed
@@ -91,15 +91,14 @@ namespace Exposeum.Models
 			}
 
 			//Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
-			Node currentNode;
-			while (nodeStack.Count > 0) {
+		    while (nodeStack.Count > 0) {
 
 
-				currentNode = nodeStack.Pop();
+				Node currentNode = nodeStack.Pop();
 				currentNode.SetTouched();
 
 				if (currentNode.GetType () != typeof(PointOfInterest))
-					addVisitedPoiToList ((PointOfInterest) currentNode);
+					addVisitedPoiToList (currentNode as PointOfInterest);
 			}
 
 
