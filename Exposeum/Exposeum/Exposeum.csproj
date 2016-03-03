@@ -88,6 +88,7 @@
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
     <Compile Include="VisitActivity_en.cs" />
     <Compile Include="VisitActivity_fr.cs" />

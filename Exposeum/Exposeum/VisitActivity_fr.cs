@@ -36,7 +36,8 @@ namespace Exposeum.Models
             };
             storylineButton.Click += (sender, e) =>
             {
-                Toast.MakeText(this, "Cet Option n'est pas encore Disponible", ToastLength.Long).Show();
+                var intent = new Intent(this, typeof(StoryLineListActivity));
+                StartActivity(intent);
             };
             
     }
