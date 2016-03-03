@@ -13,18 +13,17 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/linearLayout1"
-        android:gravity="center_horizontal">
+        android:gravity="center_vertical"
+        android:clickable="false">
         <ImageView
             android:src="@drawable/back_arrow"
-            android:layout_width="81.0dp"
-            android:layout_height="49.5dp"
-            android:id="@+id/imageView2" />
-        <TextView
-            android:text="Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:gravity="center" />
+            android:layout_width="40.0dp"
+            android:layout_height="40dp"
+            android:id="@+id/BackImage"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="11.0dp"
+            android:adjustViewBounds="false"
+            android:clickable="true" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -39,7 +38,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="60.5dp"
-            android:id="@+id/textView3"
+            android:id="@+id/TitleActionBar"
             android:gravity="center"
             android:textColor="#ffffff"
             android:textAllCaps="true"
@@ -57,9 +56,11 @@
         android:gravity="center_horizontal">
         <ImageView
             android:src="@drawable/menu"
-            android:layout_width="95.5dp"
-            android:layout_height="49.0dp"
-            android:id="@+id/imageView1" />
+            android:layout_width="40.0dp"
+            android:layout_height="40.0dp"
+            android:id="@+id/OptionImage"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="false" />
         <TextView
             android:text="Text"
             android:layout_width="match_parent"

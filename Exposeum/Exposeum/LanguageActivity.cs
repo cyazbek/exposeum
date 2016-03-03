@@ -24,11 +24,20 @@ namespace Exposeum
             SetContentView(Resource.Layout.Language);
 
             //=========================================================================================
-
+            
+            //remove default bar
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
             ActionBar.SetCustomView(Resource.Layout.ActionBar);
             ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                base.OnBackPressed();
+            };
 
             //=========================================================================================
 
