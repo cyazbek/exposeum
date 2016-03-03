@@ -39,7 +39,17 @@ namespace Exposeum.Controllers
 			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
 				if(!poi.visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
-					_model.CurrentStoryline.updateProgress(poi);
+				    if (!ExposeumApplication.IsExplorerMode)
+				    {
+				        try
+				        {
+				            _model.CurrentStoryline.updateProgress(poi);
+				        }
+				        catch (PointOfInterestNotVisitedException e)
+				        {
+				            DisplayOutOfOrderPointOfInterestPopup(poi);
+				        }
+				    } 
 					displayPopUp(poi);
 				}
 			}
@@ -47,7 +57,16 @@ namespace Exposeum.Controllers
 			_view.Update ();
 		}
 
-		public void displayPopUp(PointOfInterest selectedPOI)
+        /// <summary>
+        /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
+        /// </summary>
+	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
+	    {
+            //tell mapview to show a small toast
+            _view.InitiateOutOfOrderPointOfInterestPopup(poi);
+	    }
+
+	    public void displayPopUp(PointOfInterest selectedPOI)
         {	
 			_view.InitiatePointOfInterestPopup (selectedPOI);
 			_view.Update (); //technically unncecessary but included for completeness

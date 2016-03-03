@@ -210,5 +210,10 @@ namespace Exposeum.Views
 
 			return null;
 		}
+
+	    public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest poi)
+	    {
+	        throw new NotImplementedException();
+	    }
     }
 }

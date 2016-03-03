@@ -71,39 +71,41 @@ namespace Exposeum.Models
 		public void updateProgress(Node node){
 
 			LinkedListNode<Node> rightBoundLinkedNode = nodeList.Find (node);
-			LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
-			Stack<Node> nodeStack = new Stack<Node>();
+		    if (rightBoundLinkedNode != null)
+		    {
+		        LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
+		        Stack<Node> nodeStack = new Stack<Node>();
 
-			nodeStack.Push (rightBoundLinkedNode.Value);
-
-
-			//first pass, find the leftBound
-			while(!currentLinkedNode.Value.visited) {
-
-				//if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
-				if (currentLinkedNode.Value.GetType () != typeof(PointOfInterest)) {
-					nodeStack.Push (currentLinkedNode.Value);
-					currentLinkedNode = currentLinkedNode.Previous;
-				}
-					
-				else
-					throw new PointOfInterestNotVisitedException ("There is an unvisited POI between the current POI and the previously visited POI.");
-			}
-
-			//Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
-		    while (nodeStack.Count > 0) {
+		        nodeStack.Push (rightBoundLinkedNode.Value);
 
 
-				Node currentNode = nodeStack.Pop();
-				currentNode.SetTouched();
+		        //first pass, find the leftBound
+		        while(currentLinkedNode != null && !currentLinkedNode.Value.visited) {
 
-				if (currentNode.GetType () != typeof(PointOfInterest))
-					addVisitedPoiToList (currentNode as PointOfInterest);
-			}
+		            //if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
+		            if (currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
+		            {
+		                nodeStack.Push(currentLinkedNode.Value);
+		                currentLinkedNode = currentLinkedNode.Previous;
+		            }
+		            else
+		            {
+		                throw new PointOfInterestNotVisitedException(
+		                    "There is an unvisited POI between the current POI and the previously visited POI.");
+		            }
+		        }
+
+		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+		        while (nodeStack.Count > 0) {
 
 
+		            Node currentNode = nodeStack.Pop();
+		            currentNode.SetTouched();
 
-
+		            if (currentNode.GetType () != typeof(PointOfInterest))
+		                addVisitedPoiToList (currentNode as PointOfInterest);
+		        }
+		    }
 		}
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
