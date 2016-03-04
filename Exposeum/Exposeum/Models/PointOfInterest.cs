@@ -7,13 +7,16 @@ using Java.Util;
 
 namespace Exposeum.Models
 {
-	public class PointOfInterest : Node
+	public class PointOfInterest : MapElement
     {
         public Beacon beacon { get; set; }
         public string name_en { get; set; }
         public string name_fr { get; set; }
         public string description_en { get; set; }
         public string description_fr { get; set; }
+        public int id { get; set; }
+        public int storyID { get; set; }
+        public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
         public PointOfInterestDescription description { get; set; }
@@ -21,26 +24,29 @@ namespace Exposeum.Models
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
 
-		public PointOfInterest() : base()
+		//TODO: Remove this constructor
+        public PointOfInterest()
         {
 			setVisitedUnvisitedIcons ();
+
+			visited = false;
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
         }
 
-		public PointOfInterest(float u, float v) : base(u, v)
+		//TODO: Remove this constructor
+        public PointOfInterest(float u, float v)
         {
-            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
-			setVisitedUnvisitedIcons ();
-        }
+            this._u = u;
+            this._v = v;
 
-		public PointOfInterest(float u, float v, Floor floor) : base (u, v, floor)
-	    {
-			this._u = u;
-			this._v = v;
+            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             visited = false;
 
-            this.floor = floor;
+			setVisitedUnvisitedIcons ();
+        }
 
+		public PointOfInterest(float u, float v, Floor floor) : base(u, v, floor)
+	    {
 			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			setVisitedUnvisitedIcons ();
 	    }
@@ -84,6 +90,11 @@ namespace Exposeum.Models
 
 			canvas.Restore();
 		}
+
+        public void SetTouched()
+        {
+			visited = true;
+        }
 
         public String getHTML()
         {
