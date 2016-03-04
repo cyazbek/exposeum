@@ -73,13 +73,13 @@ namespace Exposeum.Models
 		public void updateProgress(Node node){
 
 			LinkedListNode<Node> rightBoundLinkedNode = nodeList.Find (node);
+
 		    if (rightBoundLinkedNode != null)
 		    {
 		        LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
 		        Stack<Node> nodeStack = new Stack<Node>();
 
 		        nodeStack.Push (rightBoundLinkedNode.Value);
-
 
 		        //first pass, find the leftBound
 		        while(currentLinkedNode != null && !currentLinkedNode.Value.visited) {
@@ -100,13 +100,16 @@ namespace Exposeum.Models
 		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
 		        while (nodeStack.Count > 0) {
 
-
 		            Node currentNode = nodeStack.Pop();
 		            currentNode.SetTouched();
 
 		            if (currentNode.GetType () != typeof(PointOfInterest))
 		                addVisitedPoiToList (currentNode as PointOfInterest);
 		        }
+
+				//finally, of this node is the last node of the tour, set the tour as completed
+				if(rightBoundLinkedNode.Next == null)
+					isComplete = true;
 		    }
 		}
 
