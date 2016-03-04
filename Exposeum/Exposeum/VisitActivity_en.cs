@@ -40,7 +40,8 @@ namespace Exposeum
             storylineButton.Click += (sender, e) =>
             {
                 ExposeumApplication.IsExplorerMode = false;
-                Toast.MakeText(this, "This feature is not yet implemented", ToastLength.Long).Show();
+                var intent = new Intent(this, typeof(MapActivity));
+                StartActivity(intent);
             };
         }
             public override void OnBackPressed()
