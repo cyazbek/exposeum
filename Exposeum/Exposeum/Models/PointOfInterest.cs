@@ -16,7 +16,6 @@ namespace Exposeum.Models
         public string description_fr { get; set; }
         public int id { get; set; }
         public int storyID { get; set; }
-        public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
         public PointOfInterestDescription description { get; set; }
@@ -29,7 +28,7 @@ namespace Exposeum.Models
         {
 			setVisitedUnvisitedIcons ();
 
-			visited = false;
+			Visited = false;
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
         }
 
@@ -40,7 +39,7 @@ namespace Exposeum.Models
             this._v = v;
 
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
-            visited = false;
+            Visited = false;
 
 			setVisitedUnvisitedIcons ();
         }
@@ -83,18 +82,13 @@ namespace Exposeum.Models
 			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
 			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
 
-			if (visited)
+			if (Visited)
 				_visited_icon.Draw (canvas);
 			else
 				_unvisited_icon.Draw (canvas);
 
 			canvas.Restore();
 		}
-
-        public void SetTouched()
-        {
-			visited = true;
-        }
 
         public String getHTML()
         {
