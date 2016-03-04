@@ -38,20 +38,30 @@ namespace Exposeum.Controllers
 			{
 			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
-				if(!poi.visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
-				    if (!ExposeumApplication.IsExplorerMode)
-				    {
-				        try
-				        {
-				            _model.CurrentStoryline.updateProgress(poi);
-				        }
-				        catch (PointOfInterestNotVisitedException e)
-				        {
-				            DisplayOutOfOrderPointOfInterestPopup(poi);
-				        }
-				    } 
-					displayPopUp(poi);
-				}
+			    if (!poi.visited && poi.floor.Equals(_model.CurrentFloor))
+			    {
+                    // for TESTS:
+			        ExposeumApplication.IsExplorerMode = false;
+			        //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
+			        if (!ExposeumApplication.IsExplorerMode)
+			        {
+			            try
+			            {
+			                _model.CurrentStoryline.updateProgress(poi);
+                            displayPopUp(poi);
+                        }
+                        catch (PointOfInterestNotVisitedException e)
+			            {
+			                DisplayOutOfOrderPointOfInterestPopup(poi);
+			            }
+                    }
+                    else
+                    {
+                        poi.SetTouched();
+                        displayPopUp(poi);
+                    }
+			    }
+
 			}
 
 			_view.Update ();
