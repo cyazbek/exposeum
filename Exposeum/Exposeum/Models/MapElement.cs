@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.Graphics;
 
 namespace Exposeum.Models
 {
@@ -17,5 +18,7 @@ namespace Exposeum.Models
         {
             Visited = true;
         }
+
+        public abstract void Draw(Canvas canvas);
 	}
 }
