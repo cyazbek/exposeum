@@ -8,6 +8,8 @@ using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 using System.Linq;
+using Android.App;
+using Exposeum.Fragments;
 
 namespace Exposeum.Views
 {
@@ -213,7 +215,8 @@ namespace Exposeum.Views
 
 	    public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
-	        throw new NotImplementedException();
-	    }
+            OutOfOrderPointFragment dialog = new OutOfOrderPointFragment(poi);
+            dialog.Show("Wrong Point title");
+        }
     }
 }
