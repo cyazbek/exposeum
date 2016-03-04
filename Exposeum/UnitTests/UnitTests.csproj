@@ -57,6 +57,8 @@
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US1\LanguageTest.cs" />
     <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
+    <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />
+    <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -73,7 +75,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="New Folder\" />
+    <Folder Include="US12\" />
+    <Folder Include="US12\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exposeum\Exposeum.csproj">
