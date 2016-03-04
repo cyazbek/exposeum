@@ -27,6 +27,7 @@ namespace Exposeum.Models
         {
             poiList = new List<PointOfInterest>();
 			poiVisitedList = new List<PointOfInterest>();
+			nodeList = new LinkedList<Node> ();
 			isComplete = false;
 	
         }
@@ -37,6 +38,7 @@ namespace Exposeum.Models
 
 			poiList = new List<PointOfInterest>();
 			poiVisitedList = new List<PointOfInterest>();
+			nodeList = new LinkedList<Node> ();
 			isComplete = false;
         }
 
