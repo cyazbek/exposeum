@@ -33,6 +33,7 @@ namespace Exposeum.Views
 		private float _canvas_width, _canvas_height; 
 
         private PointOfInterestPopup newPointOfInterestPopup;
+		private OutOfOrderPointFragment outOfOrderDialog;
 
 	    public MapView (Context context) : base(context, null, 0)
 		{            
@@ -244,8 +245,11 @@ namespace Exposeum.Views
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
 	        {
-                OutOfOrderPointFragment dialog = new OutOfOrderPointFragment(poi);
-                dialog.Show(tr, "Wrong POI");
+				if (outOfOrderDialog == null || !outOfOrderDialog.IsVisible) {
+					outOfOrderDialog = new OutOfOrderPointFragment(poi);
+					outOfOrderDialog.Show(tr, "Wrong POI");
+				}
+                
             }
 	    }
 
