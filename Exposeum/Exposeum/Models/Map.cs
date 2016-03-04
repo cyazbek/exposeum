@@ -69,7 +69,7 @@ namespace Exposeum.Models
 		    p1.description = description1;
             p1.name_en = "POINT 1";
 			p1.name_fr = "Le POINT 1";
-            p1.visited = true;
+            p1.Visited = true;
 
 			PointOfInterest p2 = new PointOfInterest(0.198f, 0.905f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second: Title"
@@ -77,7 +77,7 @@ namespace Exposeum.Models
             p2.description = description2;
             p2.name_en = "POINT 2";
 			p2.name_fr = "Le POINT 2";
-			p2.visited = true;
+			p2.Visited = true;
 
 			PointOfInterest p3 = new PointOfInterest(0.328f, 0.794f, floor1);
             PointOfInterestDescription description3 = new PointOfInterestDescription("The third: Title"
@@ -85,7 +85,7 @@ namespace Exposeum.Models
             p3.description = description3;
             p3.name_en = "POINT 3";
 			p3.name_fr = "Le POINT 3";
-			p3.visited = true;
+			p3.Visited = true;
 
 			PointOfInterest p4 = new PointOfInterest(0.732f, 0.568f, floor1);
             PointOfInterestDescription description4 = new PointOfInterestDescription("The Fourth: Title"
