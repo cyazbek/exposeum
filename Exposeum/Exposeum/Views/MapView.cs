@@ -157,24 +157,24 @@ namespace Exposeum.Views
 
 			//draw edges and POIs on top of map
 
-			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.poiList.Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> currentFloorElements = _map.CurrentStoryline.ListMapElements.Where(element => element.floor.Equals(_map.CurrentFloor)).ToList();
 
-			for (int i = 0; i < currentFloorPOIs.Count; i++) {
+			for (int i = 0; i < currentFloorElements.Count; i++) {
 
-				PointOfInterest currentPOI = currentFloorPOIs[i];
+				MapElement current = currentFloorElements[i];
 					
-				if (i < currentFloorPOIs.Count - 1) {
+				if (i < currentFloorElements.Count - 1) {
 
-					PointOfInterest nextPOI = currentFloorPOIs[i + 1];
+					MapElement next = currentFloorElements[i + 1];
 
-					if (!nextPOI.Visited)
+					if (!next.Visited)
 						appropriateEdgePaintBrush = _unvisitedEdge;
 					
 					// canvas.DrawLine (currentPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, currentPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, nextPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, nextPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 
 				}
 
-				currentPOI.Draw (canvas); //draw the current guy
+				current.Draw (canvas); //draw the current guy
 
 			}
 
