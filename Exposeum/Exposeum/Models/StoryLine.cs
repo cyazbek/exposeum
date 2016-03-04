@@ -18,7 +18,7 @@ namespace Exposeum.Models
         public int ID { get; set; }
         public string imgPath { get; set; }
         public int FloorsCovered { get; set; }
-        public LinkedList<Node> nodeList { get;} 
+		public List<MapElement> ListMapElements { get;} 
         public List<PointOfInterest> poiList { get;}
 		public List<PointOfInterest> poiVisitedList { get;}
 		private bool isComplete { get; set; }
@@ -27,9 +27,8 @@ namespace Exposeum.Models
         {
             poiList = new List<PointOfInterest>();
 			poiVisitedList = new List<PointOfInterest>();
-			nodeList = new LinkedList<Node> ();
+			ListMapElements = new List<MapElement> ();
 			isComplete = false;
-	
         }
 
         public StoryLine(int ID)
@@ -38,7 +37,7 @@ namespace Exposeum.Models
 
 			poiList = new List<PointOfInterest>();
 			poiVisitedList = new List<PointOfInterest>();
-			nodeList = new LinkedList<Node> ();
+			ListMapElements = new List<MapElement> ();
 			isComplete = false;
         }
 
@@ -48,14 +47,15 @@ namespace Exposeum.Models
 		/// </summary>
         public void addPoi(PointOfInterest poi)
         {
-			nodeList.AddLast (poi);
+			ListMapElements.Add (poi);
             poiList.Add (poi);
         }
 
-		public void addNode(Node node)
+		public void addMapElement(MapElement node)
 		{
-			nodeList.AddLast (node);
+			ListMapElements.Add (node);
 
+			//to be removed when poiList is removed
 			if(node.GetType() == typeof(PointOfInterest))
 				poiList.Add (node as PointOfInterest);
 		}
@@ -70,19 +70,23 @@ namespace Exposeum.Models
 		/// <summary>
 		/// This method will update the progress of the storyline using the passed node.
 		/// </summary>
-		public void updateProgress(Node node){
+		public void updateProgress(MapElement mapElement){
 
-			LinkedListNode<Node> rightBoundLinkedNode = nodeList.Find (node);
+			//convert ListMapElements to a LinkedList
+			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (ListMapElements);
+
+			//Find the supplied mapElement in the LinkedList
+			LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find (mapElement);
 
 		    if (rightBoundLinkedNode != null)
 		    {
-		        LinkedListNode<Node> currentLinkedNode = rightBoundLinkedNode.Previous;
-		        Stack<Node> nodeStack = new Stack<Node>();
+				LinkedListNode<MapElement> currentLinkedNode = rightBoundLinkedNode.Previous;
+				Stack<MapElement> nodeStack = new Stack<MapElement>();
 
 		        nodeStack.Push (rightBoundLinkedNode.Value);
 
 		        //first pass, find the leftBound
-		        while(currentLinkedNode != null && !currentLinkedNode.Value.visited) {
+		        while(currentLinkedNode != null && !currentLinkedNode.Value.Visited) {
 
 		            //if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
 		            if (currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
@@ -100,8 +104,8 @@ namespace Exposeum.Models
 		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
 		        while (nodeStack.Count > 0) {
 
-		            Node currentNode = nodeStack.Pop();
-		            currentNode.SetTouched();
+					MapElement currentNode = nodeStack.Pop();
+		            currentNode.SetVisited();
 
 		            if (currentNode.GetType () != typeof(PointOfInterest))
 		                addVisitedPoiToList (currentNode as PointOfInterest);

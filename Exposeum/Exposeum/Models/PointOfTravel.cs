@@ -3,7 +3,7 @@ using Android.Graphics;
 
 namespace Exposeum.Models
 {
-	public class PointOfTravel : Node
+	public class PointOfTravel : MapElement
 	{
 		public PointOfTravel() : base()
 		{

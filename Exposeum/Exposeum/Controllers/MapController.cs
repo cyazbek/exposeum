@@ -38,7 +38,7 @@ namespace Exposeum.Controllers
 			{
 			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
-			    if (!poi.visited && poi.floor.Equals(_model.CurrentFloor))
+			    if (!poi.Visited && poi.floor.Equals(_model.CurrentFloor))
 			    {
                     // for TESTS:
 			        ExposeumApplication.IsExplorerMode = false;
@@ -57,7 +57,7 @@ namespace Exposeum.Controllers
                     }
                     else
                     {
-                        poi.SetTouched();
+                        poi.SetVisited();
                         displayPopUp(poi);
                     }
 			    }
