@@ -37,8 +37,9 @@ namespace Exposeum.Models
             };
             storylineButton.Click += (sender, e) =>
             {
-                ExposeumApplication.IsExplorerMode = false;
-                Toast.MakeText(this, "Cet Option n'est pas encore Disponible", ToastLength.Long).Show();
+				ExposeumApplication.IsExplorerMode = false;
+				var intent = new Intent(this, typeof(MapActivity));
+				StartActivity(intent);
             };
             
     }
