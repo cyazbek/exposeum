@@ -30,12 +30,14 @@ namespace Exposeum.Models
             };
             freeVisitButton.Click += (sender, e) =>
             {
+                ExposeumApplication.IsExplorerMode = true;
                 var intent = new Intent(this, typeof(MapActivity));
                 StartActivity(intent);
 
             };
             storylineButton.Click += (sender, e) =>
             {
+                ExposeumApplication.IsExplorerMode = false;
                 Toast.MakeText(this, "Cet Option n'est pas encore Disponible", ToastLength.Long).Show();
             };
             
