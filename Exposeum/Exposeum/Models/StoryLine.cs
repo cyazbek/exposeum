@@ -43,7 +43,7 @@ namespace Exposeum.Models
 
 
 		/// <summary>
-		/// DEPRECATED: use addNode() instead
+		/// DEPRECATED: use addMapElement() instead
 		/// </summary>
         public void addPoi(PointOfInterest poi)
         {

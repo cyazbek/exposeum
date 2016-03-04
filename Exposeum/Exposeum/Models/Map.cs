@@ -65,7 +65,7 @@ namespace Exposeum.Models
 		    p1.description = description1;
             p1.name_en = "POINT 1";
 			p1.name_fr = "Le POINT 1";
-            p1.visited = false;
+            p1.Visited = false;
 			p1.beacon = beacon1;
 
 			PointOfTravel pot1 = new PointOfTravel(0.60f, 0.82f, floor1);
@@ -76,7 +76,7 @@ namespace Exposeum.Models
             p2.description = description2;
             p2.name_en = "POINT 2";
 			p2.name_fr = "Le POINT 2";
-			p2.visited = false;
+			p2.Visited = false;
 			p2.beacon = beacon3;*/
 
 			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
@@ -86,7 +86,7 @@ namespace Exposeum.Models
             p3.description = description3;
             p3.name_en = "POINT 3";
 			p3.name_fr = "Le POINT 3";
-			p3.visited = false;
+			p3.Visited = false;
 			p3.beacon = beacon3;
 
 			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
@@ -152,18 +152,18 @@ namespace Exposeum.Models
 
 			StoryLine storyline = new StoryLine ();
 
-		    storyline.addNode(p1);
-			storyline.addNode (pot1);
-			storyline.addNode (p3);
-			storyline.addNode (p4);
-			storyline.addNode (p5);
-			storyline.addNode (p6);
-			storyline.addNode (p7);
-			storyline.addNode (p8);
-			storyline.addNode (p9);
-			storyline.addNode (p10);
-			storyline.addNode (p11);
-			storyline.addNode (p12);
+		    storyline.addMapElement(p1);
+			storyline.addMapElement (pot1);
+			storyline.addMapElement (p3);
+			storyline.addMapElement (p4);
+			storyline.addMapElement (p5);
+			storyline.addMapElement (p6);
+			storyline.addMapElement (p7);
+			storyline.addMapElement (p8);
+			storyline.addMapElement (p9);
+			storyline.addMapElement (p10);
+			storyline.addMapElement (p11);
+			storyline.addMapElement (p12);
 
 			_currentStoryline = storyline;
 
