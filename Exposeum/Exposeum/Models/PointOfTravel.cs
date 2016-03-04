@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.Graphics;
 
 namespace Exposeum.Models
 {
@@ -16,6 +17,9 @@ namespace Exposeum.Models
 		{
 		}
 
+		public override void Draw(Canvas canvas){
+			
+		}
 	
 	}
 }

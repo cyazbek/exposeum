@@ -36,8 +36,6 @@ namespace Exposeum.Models
 		{
 			visited = true;
 		}
-
-		public abstract void Draw(Canvas canvas);
 	}
 }
 
