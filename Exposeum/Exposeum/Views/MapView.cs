@@ -40,7 +40,7 @@ namespace Exposeum.Views
 			_map = _controller.Model;
 
 			_visitedEdge.SetStyle (Paint.Style.Fill);
-			_visitedEdge.Color = Color.Purple;
+			_visitedEdge.Color = Color.Green;
 			_visitedEdge.StrokeWidth = 20;
 
 			_unvisitedEdge.SetStyle (Paint.Style.Stroke);
@@ -174,7 +174,7 @@ namespace Exposeum.Views
 					if (!nextPOI.visited)
 						appropriateEdgePaintBrush = _unvisitedEdge;
 					
-					// canvas.DrawLine (currentPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, currentPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, nextPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, nextPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
+					canvas.DrawLine (currentPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, currentPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, nextPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, nextPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 
 				}
 
