@@ -24,6 +24,7 @@ namespace Exposeum.Models
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
 
+		//TODO: Remove this constructor
         public PointOfInterest()
         {
 			setVisitedUnvisitedIcons ();
@@ -32,6 +33,7 @@ namespace Exposeum.Models
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
         }
 
+		//TODO: Remove this constructor
         public PointOfInterest(float u, float v)
         {
             this._u = u;
@@ -43,14 +45,8 @@ namespace Exposeum.Models
 			setVisitedUnvisitedIcons ();
         }
 
-	    public PointOfInterest(float u, float v, Floor floor)
+		public PointOfInterest(float u, float v, Floor floor) : base(u, v, floor)
 	    {
-			this._u = u;
-			this._v = v;
-            visited = false;
-
-            this.floor = floor;
-
 			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			setVisitedUnvisitedIcons ();
 	    }

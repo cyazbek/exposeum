@@ -14,6 +14,15 @@ namespace Exposeum.Models
 		{
 		}
 
+		protected MapElement(float u, float v, Floor floor)
+		{
+			this._u = u;
+			this._v = v;
+			Visited = false;
+
+			this.floor = floor;
+		}
+
         public void SetVisited()
         {
             Visited = true;
