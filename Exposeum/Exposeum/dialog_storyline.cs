@@ -16,6 +16,7 @@ namespace Exposeum
     class dialog_storyline : DialogFragment
     {
         StoryLine storyLine;
+        
         public dialog_storyline(StoryLine storyLine)
         {
             this.storyLine = storyLine;
@@ -38,13 +39,20 @@ namespace Exposeum
                 button.Text = "Commencez l'éxperience";
             else
                 button.Text = "Begin Journey";
+            button.Click += delegate {
+               
+            };
+            this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
+
+        
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             Dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnActivityCreated(savedInstanceState);
         }
-
+        
     }
 }
