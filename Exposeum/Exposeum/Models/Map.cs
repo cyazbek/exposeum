@@ -58,29 +58,36 @@ namespace Exposeum.Models
 
 			//set up POIs
 
+			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
 			PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
             PointOfInterestDescription description1 = new PointOfInterestDescription("The First :: Title"
                     , "A Summary about the first :: summary", "A Full Description about the first :: Description");
 		    p1.description = description1;
             p1.name_en = "POINT 1";
 			p1.name_fr = "Le POINT 1";
-            p1.visited = true;
+            p1.visited = false;
+			p1.beacon = beacon1;
 
-			PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
+			PointOfTravel pot1 = new PointOfTravel(0.60f, 0.82f, floor1);
+
+			/*PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
                     , "A Summary about the second :: summary", "A Full Description about the second :: Description");
             p2.description = description2;
             p2.name_en = "POINT 2";
 			p2.name_fr = "Le POINT 2";
-			p2.visited = true;
+			p2.visited = false;
+			p2.beacon = beacon3;*/
 
+			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f, floor1);
             PointOfInterestDescription description3 = new PointOfInterestDescription("The third :: Title"
                     , "A Summary about the third :: summary", "A Full Description about the third :: Description");
             p3.description = description3;
             p3.name_en = "POINT 3";
 			p3.name_fr = "Le POINT 3";
-			p3.visited = true;
+			p3.visited = false;
+			p3.beacon = beacon3;
 
 			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
             PointOfInterestDescription description4 = new PointOfInterestDescription("The Fourth :: Title"
@@ -117,12 +124,10 @@ namespace Exposeum.Models
             p8.name_en = "POINT 8";
 			p8.name_fr = "Le POINT 8";
 
-			Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
 			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
             PointOfInterestDescription description9 = new PointOfInterestDescription("The Ninth :: Title"
                     , "A Summary about the nineth :: summary", "A Full Description about the ninth :: Description");
             p9.description = description9;
-            p9.beacon = beacon1;
 
 			Beacon beacon2 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
 			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f, floor5);
@@ -131,14 +136,12 @@ namespace Exposeum.Models
             p10.description = description10;
             p10.beacon = beacon2;
 
-			Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, floor4);
 			PointOfInterestDescription description11 = new PointOfInterestDescription("The Eleventh :: Title"
 				, "A Summary about the eighth :: summary", "A Full Description about the eleventh :: Description");
 			p11.description = description11;
 			p11.name_en = "POINT 11";
 			p11.name_fr = "Le POINT 11";
-			p11.beacon = beacon3;
 
 			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, floor4);
 			PointOfInterestDescription description12 = new PointOfInterestDescription("The Twelfth :: Title"
