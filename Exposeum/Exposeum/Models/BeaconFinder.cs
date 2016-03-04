@@ -323,7 +323,7 @@ namespace Exposeum
 
 			if (getClosestBeacon () != null) {
 				PointOfInterest poi = storyLine.findPOI (getClosestBeacon ());
-				if(!poi.visited) //don't send a notification if the beacon has already been visited
+				if(!poi.Visited) //don't send a notification if the beacon has already been visited
 					sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getName (), poi.getDescription ()));
 			} else {
 				notificationManager.Cancel (BeaconFoundNotificationId);

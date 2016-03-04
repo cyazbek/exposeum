@@ -76,7 +76,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
     <Folder Include="US12\" />
-    <Folder Include="US12\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exposeum\Exposeum.csproj">
