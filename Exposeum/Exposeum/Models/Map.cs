@@ -152,18 +152,18 @@ namespace Exposeum.Models
 
 			StoryLine storyline = new StoryLine ();
 
-			storyline.addPoi (p1);
-			storyline.addPoi (p2);
-			storyline.addPoi (p3);
-			storyline.addPoi (p4);
-			storyline.addPoi (p5);
-			storyline.addPoi (p6);
-			storyline.addPoi (p7);
-			storyline.addPoi (p8);
-			storyline.addPoi (p9);
-			storyline.addPoi (p10);
-			storyline.addPoi (p11);
-			storyline.addPoi (p12);
+		    storyline.addNode(p1);
+			storyline.addNode (pot1);
+			storyline.addNode (p3);
+			storyline.addNode (p4);
+			storyline.addNode (p5);
+			storyline.addNode (p6);
+			storyline.addNode (p7);
+			storyline.addNode (p8);
+			storyline.addNode (p9);
+			storyline.addNode (p10);
+			storyline.addNode (p11);
+			storyline.addNode (p12);
 
 			_currentStoryline = storyline;
 

@@ -7,8 +7,8 @@
     <ImageView
         android:src="@drawable/beacon_xmark"
         android:id="@+id/wrongPointIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
     <LinearLayout
         android:id="@+id/Text"
         android:orientation="vertical"
@@ -33,7 +33,7 @@
             android:scrollbars="vertical"
             android:textColor="#000000"
             android:paddingTop="20dip"
-            android:paddingLeft="5dip"
+            android:paddingLeft="85dip"
             android:paddingRight="5dip"
             android:text="Please retrace back to: " />
     </LinearLayout>
