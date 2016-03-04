@@ -243,22 +243,22 @@
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\completed.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\completed.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\EmileBerliner.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\EmileBerliner.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\inProgress.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\inProgress.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\NipperTheDog.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\NipperTheDog.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Pink_Panther.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\Pink_Panther.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\start.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />

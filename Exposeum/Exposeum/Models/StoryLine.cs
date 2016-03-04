@@ -6,19 +6,20 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
-        public StoryLine(string title, string description, string audience, string duration, int imageId)
+        public StoryLine(string name_en, string name_fr, string audience_en, string audience_fr, string description_en, string description_fr, string duration, int imageId)
         {
-            this.title = title;
-            this.description = description;
-            this.audience = audience;
+            this.name_en = name_en;
+            this.name_fr = name_fr;
+            this.audience_en = audience_en;
+            this.audience_fr = audience_fr;
+            this.desc_en = description_en;
+            this.desc_fr = description_fr;
             this.duration = duration;
             this.ImageId = imageId;
             this.currentStatus = Status.isNew;
         }
+       
 
-        public string title { get; set; }
-        public string description { get; set; }
-        public string audience { get; set; }
         public int ImageId { get; set; }
         public Status currentStatus { get; set; }
         public string name_en {get; set;}
