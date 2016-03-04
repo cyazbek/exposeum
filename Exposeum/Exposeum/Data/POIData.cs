@@ -29,7 +29,7 @@ namespace Exposeum.Data
         {
             this.storyId = poi.storyID;
             this.beaconID = beaconId;
-            this.visited = poi.visited;
+            this.visited = poi.Visited;
             this.name_en = poi.name_en;
             this.name_fr = poi.name_fr;
             this.dscription_en = poi.description_en;

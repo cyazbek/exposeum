@@ -8,9 +8,12 @@ using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 using System.Linq;
+<<<<<<< HEAD
 using Android.App;
 using Exposeum.Fragments;
+=======
 using Android.Util;
+>>>>>>> 82c84b0bda410ee783933593e78903c2b79e8d4a
 
 namespace Exposeum.Views
 {
@@ -240,6 +243,7 @@ namespace Exposeum.Views
 			return null;
 		}
 
+<<<<<<< HEAD
 	    public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
@@ -248,9 +252,10 @@ namespace Exposeum.Views
                 dialog.Show(tr, "Wrong POI");
             }
 	    }
-
+=======
 		private float Clamp(float min, float max, float value){
 			return Math.Min(Math.Max(value, min), max);
 		}
+>>>>>>> 82c84b0bda410ee783933593e78903c2b79e8d4a
     }
 }

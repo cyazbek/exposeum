@@ -69,8 +69,10 @@ namespace Exposeum.Models
 			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
         }
 
-        public void Draw(Canvas canvas)
-		{
+        public override void Draw(Canvas canvas)
+        {
+            canvas.Save();
+
 			canvas.Translate (_u * floor.Image.IntrinsicWidth, _v * floor.Image.IntrinsicHeight);
 			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
 			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
@@ -80,9 +82,7 @@ namespace Exposeum.Models
 			else
 				_unvisited_icon.Draw (canvas);
 
-			canvas.Translate (_unvisited_icon.IntrinsicWidth / 2.0f, _unvisited_icon.IntrinsicHeight / 2.0f);
-			canvas.Scale (1.0f/_icon_scale_factor, 1.0f/_icon_scale_factor);
-			canvas.Translate (-_u * floor.Image.IntrinsicWidth, -_v * floor.Image.IntrinsicHeight);
+			canvas.Restore();
 		}
 
         public String getHTML()

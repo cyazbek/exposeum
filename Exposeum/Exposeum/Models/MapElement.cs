@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.Graphics;
 
 namespace Exposeum.Models
 {
@@ -7,8 +8,17 @@ namespace Exposeum.Models
 		public float _u, _v;
         public Floor floor;
 
-		public MapElement ()
+        public Boolean Visited { get; set; }
+
+        protected MapElement ()
 		{
 		}
+
+        public void SetVisited()
+        {
+            Visited = true;
+        }
+
+        public abstract void Draw(Canvas canvas);
 	}
 }

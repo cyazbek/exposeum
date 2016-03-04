@@ -36,30 +36,56 @@ namespace Exposeum.Controllers
 
             if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
 			{
-					PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
-					PointOfInterestTapped (poi);
-					poi.SetTouched();
+			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+
+<<<<<<< HEAD
+			    if (!poi.visited && poi.floor.Equals(_model.CurrentFloor))
+			    {
+                    // for TESTS:
+			        ExposeumApplication.IsExplorerMode = false;
+			        //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
+			        if (!ExposeumApplication.IsExplorerMode)
+			        {
+			            try
+			            {
+			                _model.CurrentStoryline.updateProgress(poi);
+                            displayPopUp(poi);
+                        }
+                        catch (PointOfInterestNotVisitedException e)
+			            {
+			                DisplayOutOfOrderPointOfInterestPopup(poi);
+			            }
+                    }
+                    else
+                    {
+                        poi.SetTouched();
+                        displayPopUp(poi);
+                    }
+			    }
+=======
+				if(!poi.Visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
+					poi.SetVisited();
+					displayPopUp(poi);
 					_model.CurrentStoryline.addVisitedPoiToList(poi);
+				}
+>>>>>>> 82c84b0bda410ee783933593e78903c2b79e8d4a
+
 			}
 
 			_view.Update ();
 		}
 
-		public void PointOfInterestTapped(PointOfInterest selectedPOI){
+        /// <summary>
+        /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
+        /// </summary>
+	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
+	    {
+            _view.InitiateOutOfOrderPointOfInterestPopup(poi);
+	    }
 
-			if(!selectedPOI.visited)
-				_view.InitiatePointOfInterestPopup (selectedPOI);
-
-			PointOfInterest latestUnvisited = null;
-
-			//only allow the next unvisited node to be clicked
-			for (int i = 0; i < _model.CurrentStoryline.poiList.Count; i++) {
-				if (!_model.CurrentStoryline.poiList [i].visited) {
-					latestUnvisited = _model.CurrentStoryline.poiList [i];
-					break;
-				}
-			}
-			
+	    public void displayPopUp(PointOfInterest selectedPOI)
+        {	
+			_view.InitiatePointOfInterestPopup (selectedPOI);
 			_view.Update (); //technically unncecessary but included for completeness
 		}
 

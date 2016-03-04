@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -41,22 +41,16 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Macaw.UIComponents">
+      <HintPath>..\Components\MultiImageView-1.2\lib\android\Macaw.UIComponents.dll</HintPath>
+    </Reference>
     <Reference Include="SQLite-net">
       <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
-<<<<<<< HEAD
-=======
-
-      <Private>True</Private>
->>>>>>> 33542f5f71d207df3a2a873ca8b686bceb0204da
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.23.0.1.3\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.10.6\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
@@ -78,17 +72,21 @@
     <Reference Include="SQLiteNetExtensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\SQLiteNetExtensions.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.0.1.3\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="Data\BeaconData.cs" />
     <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
+    <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\Beacon.cs" />
-    <Compile Include="Controller\DBController.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
+    <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\StoryLine.cs" />
-    <Compile Include="SplashActivity.cs" />
     <Compile Include="VisitActivity_en.cs" />
     <Compile Include="VisitActivity_fr.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -97,7 +95,6 @@
     <Compile Include="LanguageActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainMenuAdapter.cs" />
-    <Compile Include="MapView.cs" />
     <Compile Include="Models\BeaconFinder.cs" />
     <Compile Include="Models\IBeaconFinderObservable.cs" />
     <Compile Include="Models\IBeaconFinderObserver.cs" />
@@ -123,20 +120,28 @@
     <AndroidResource Include="Resources\layout\MapView.axml" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Models\Floor.cs" />
-    <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <AndroidResource Include="Resources\drawable\floor_2.png" />
-    <AndroidResource Include="Resources\drawable\floor_3.png" />
-    <AndroidResource Include="Resources\drawable\floor_4.png" />
-    <Compile Include="Views\BeaconPopup.cs" />
-<<<<<<< HEAD
+    <Compile Include="Views\PointOfInterestPopup.cs" />
     <AndroidResource Include="Resources\drawable\logo_notif.png" />
-=======
     <AndroidResource Include="Resources\drawable\Beacon_Activated.png" />
     <AndroidResource Include="Resources\drawable\Beacon_Inactivated.png" />
-
     <Compile Include="WalkthroughActivity.cs" />
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
->>>>>>> 33542f5f71d207df3a2a873ca8b686bceb0204da
+    <Compile Include="Models\MapElement.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Controllers\DBController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Views\MapView.cs" />
+<<<<<<< HEAD
+    <Compile Include="Models\PointOfTravel.cs" />
+    <Compile Include="Models\Node.cs" />
+    <Compile Include="Exceptions\PointOfInterestNotVisitedException.cs" />
+=======
+    <AndroidResource Include="Resources\drawable\floor_5.png" />
+    <AndroidResource Include="Resources\drawable\floor_4.png" />
+    <AndroidResource Include="Resources\drawable\floor_3.png" />
+    <AndroidResource Include="Resources\drawable\floor_2.png" />
+    <AndroidResource Include="Resources\drawable\floor_1.png" />
+>>>>>>> 82c84b0bda410ee783933593e78903c2b79e8d4a
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -152,7 +157,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml" />
-    <None Include="Models\AboutResources.txt" />
     <AndroidResource Include="Resources\layout\BeaconSummaryPopupView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
@@ -160,6 +164,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\WalkThroughFragment.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -172,7 +179,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable\ic_refresh.png" />
     <AndroidResource Include="Resources\layout\Beacon.axml" />
-    <AndroidResource Include="Resources\drawable\floor_5.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-fr\Strings.xml" />
@@ -191,9 +197,29 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
-      <Visible>False</Visible>
       <Version>23.0.1.3</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SplashButton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-nodpi\BackgroudLanguageFix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\buttonshape.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-nodpi\first.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-nodpi\first_fr.png" />
@@ -217,24 +243,7 @@
     <AndroidResource Include="Resources\drawable-nodpi\third_fr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-nodpi\first.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SplashButton.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-nodpi\BackgroudLanguageFix.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\buttonshape.xml" />
+    <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
@@ -247,8 +256,10 @@
     <Error Condition="!Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets'))" />
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
+<<<<<<< HEAD
   <ItemGroup>
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Exceptions\" />
+    <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
+=======
+>>>>>>> 82c84b0bda410ee783933593e78903c2b79e8d4a
 </Project>
