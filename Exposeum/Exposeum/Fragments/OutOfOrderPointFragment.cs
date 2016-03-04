@@ -54,11 +54,5 @@ namespace Exposeum.Fragments
             base.OnActivityCreated(savedInstanceState);
         }
 
-        public void Show(string str)
-        {
-            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            this.Show(transaction, str);
-
-        }
     }
 }

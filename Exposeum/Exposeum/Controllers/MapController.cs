@@ -62,7 +62,6 @@ namespace Exposeum.Controllers
         /// </summary>
 	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
-            //tell mapview to show a small toast
             _view.InitiateOutOfOrderPointOfInterestPopup(poi);
 	    }
 

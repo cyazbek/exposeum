@@ -215,8 +215,11 @@ namespace Exposeum.Views
 
 	    public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
-            OutOfOrderPointFragment dialog = new OutOfOrderPointFragment(poi);
-            dialog.Show("Wrong Point title");
-        }
+	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
+	        {
+                OutOfOrderPointFragment dialog = new OutOfOrderPointFragment(poi);
+                dialog.Show(tr, "Wrong POI");
+            }
+	    }
     }
 }
