@@ -31,14 +31,17 @@ namespace Exposeum
             };
 
             freeVisitButton.Click += (sender, e) =>
-            { 
+            {
+                ExposeumApplication.IsExplorerMode = true;
                 var intent = new Intent(this, typeof(MapActivity));
                 StartActivity(intent);
 
             };
             storylineButton.Click += (sender, e) =>
             {
-                Toast.MakeText(this, "This feature is not yet implemented", ToastLength.Long).Show();
+				ExposeumApplication.IsExplorerMode = false;
+				var intent = new Intent(this, typeof(MapActivity));
+				StartActivity(intent);
             };
         }
             public override void OnBackPressed()
