@@ -131,7 +131,6 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
-    <AndroidResource Include="Resources\layout\MapProgressionFragment.axml" />
     <AndroidResource Include="Resources\drawable\floor_5.png" />
     <AndroidResource Include="Resources\drawable\floor_4.png" />
     <AndroidResource Include="Resources\drawable\floor_3.png" />
