@@ -71,6 +71,8 @@ namespace Exposeum.Controllers
         {	
 			_map_view.InitiatePointOfInterestPopup (selectedPOI);
 			_map_view.Update (); //technically unncecessary but included for completeness
+			if (!ExposeumApplication.IsExplorerMode)
+				_map_progression_view.Update ();
 		}
 
 		public Map Model
