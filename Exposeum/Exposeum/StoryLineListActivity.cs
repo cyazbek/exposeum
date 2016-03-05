@@ -53,8 +53,16 @@ namespace Exposeum
         {
             var storyLine = map.getStoryLineList[e.Position];
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            dialog_storyline dialog = new dialog_storyline(storyLine);
-            dialog.Show(transaction, "Story Line title");
+            if(storyLine.currentStatus==Status.inProgress)
+            {
+                DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
+            else
+            {
+                DialogStoryline dialog = new DialogStoryline(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
         }
         
     }

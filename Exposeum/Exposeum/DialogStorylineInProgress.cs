@@ -13,18 +13,18 @@ using Exposeum.Models;
 
 namespace Exposeum
 {
-    class dialog_storyline : DialogFragment
+    class DialogStorylineInProgress : DialogFragment
     {
         StoryLine storyLine;
         
-        public dialog_storyline(StoryLine storyLine)
+        public DialogStorylineInProgress(StoryLine storyLine)
         {
             this.storyLine = storyLine;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            var view = inflater.Inflate(Resource.Layout.StoryLine_Dialog, container, false);
+            var view = inflater.Inflate(Resource.Layout.StoryLine_dialog_inProgress, container, false);
             view.FindViewById<ImageView>(Resource.Id.sotryLineDialogPic).SetImageResource(storyLine.ImageId);
             view.FindViewById<TextView>(Resource.Id.storyLineDialogTitle).Text = storyLine.getName();
             view.FindViewById<TextView>(Resource.Id.storyLineDialogAudience).Text = storyLine.getAudience();
@@ -34,13 +34,24 @@ namespace Exposeum
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
-            var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
+            var buttonToResume = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToResume);
+            var buttonToReset = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToReset);
             if (Language.getLanguage() == "fr")
-                button.Text = "Commencez l'éxperience";
+            {
+                buttonToResume.Text = "Continuer";
+                buttonToReset.Text = "Recommencer";
+            }
+                
             else
-                button.Text = "Begin Journey";
-            button.Click += delegate {
+            {
+                buttonToResume.Text = "Resume Journey";
+                buttonToReset.Text = "Restart Jouney";
+            }
+            buttonToResume.Click += delegate {
                
+            };
+            buttonToReset.Click += delegate {
+
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;

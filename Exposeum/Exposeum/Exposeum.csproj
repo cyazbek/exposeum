@@ -81,7 +81,8 @@
     <Compile Include="Data\BeaconData.cs" />
     <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
-    <Compile Include="dialog_storyline.cs" />
+    <Compile Include="DialogStorylineInProgress.cs" />
+    <Compile Include="DialogStoryline.cs" />
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
@@ -166,6 +167,9 @@
     <AndroidResource Include="Resources\layout\StoryLine_Dialog.axml" />
     <AndroidResource Include="Resources\layout\StoryLineListView.axml" />
     <AndroidResource Include="Resources\layout\StoryLineRow.axml" />
+    <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
