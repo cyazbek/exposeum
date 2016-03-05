@@ -169,15 +169,21 @@ namespace Exposeum.Models
 
 		}
 
-		public void SetCurrentFloor(int i)
+		public void SetCurrentFloor(Floor floor)
 		{
-			_currentFloor = _floors [i];
+			_currentFloor = floor;
 		}
 
 		public Floor CurrentFloor
 		{
 			get { return this._currentFloor; }
 			set { this._currentFloor = value; }
+		}
+
+		public List<Floor> Floors
+		{
+			get { return this._floors; }
+			set { this._floors = value; }
 		}
 
 		public StoryLine CurrentStoryline
