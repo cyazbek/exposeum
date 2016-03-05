@@ -16,7 +16,7 @@ namespace Exposeum.Controllers
 		public MapController(MapView view){
 			_view = view;
 
-			_model = new Map ();
+			_model = MapService.GetMapInstance ();
 
 			_beaconFinder.addObserver (this);
 
