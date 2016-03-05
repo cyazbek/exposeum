@@ -1,14 +1,17 @@
 ﻿using Exposeum.Models;
+using Android.App;
 
 namespace Exposeum.Controllers
 {
-    public class StorylineController
+    public static class StoryLineController
     {
-        public StoryLine CurrentStoryLine { get; set; }
 
-        public void CreateTempStoryline ()
-		{
-			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
-        }
+		private static Map map = MapService.GetMapInstance();
+
+		public StoryLineListAdapter GetStoryLines(Activity activity){
+			return new StoryLineListAdapter(activity, map.getStoryLineList);
+		}
+
+
     }
 }
