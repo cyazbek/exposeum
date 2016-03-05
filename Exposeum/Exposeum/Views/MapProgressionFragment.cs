@@ -111,6 +111,11 @@ namespace Exposeum
 				ResetPaint ();
 			}
 
+			public override bool OnTouchEvent (MotionEvent ev){
+				ev.Dispose (); //dispose of the touch event, do not pass it to the map view underneath
+				return true;
+			}
+
 			public void SetHostFragment(MapProgressionFragment f){
 				this.hostFragment = f;
 			}
