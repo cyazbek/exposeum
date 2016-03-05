@@ -56,7 +56,7 @@ namespace Exposeum
 				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
 				this.Orientation = Orientation.Vertical;
 				this.SetWillNotDraw(false); //causes the OnDraw override below to be called
-				this.SetMinimumHeight(240);
+				this.SetMinimumHeight(220);
 				this.SetBackgroundColor(Color.Red);
 
 				ResetPaint();
@@ -82,7 +82,7 @@ namespace Exposeum
 
 					MapElement current = currentStoryline.MapElements [i];
 
-					canvas.DrawLine (currentCentreX, 750, currentCentreX + 800, 750, bgLine);
+					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, bgLine);
 
 					if (!current.Visited)
 						unvisitedTripped = true;
@@ -94,14 +94,14 @@ namespace Exposeum
 						circle.SetStyle (Paint.Style.Fill);
 						circle.Color = Color.Red;
 
-						canvas.DrawCircle (currentCentreX, 750, 250, circle);
+						canvas.DrawCircle (currentCentreX, 650, 250, circle);
 
 						circle.Color = Color.White;
 						circle.SetStyle (Paint.Style.Stroke);
 					}
 
-					canvas.DrawCircle (currentCentreX, 750, 250, circle);
-					canvas.DrawText ("" + (i + 1), currentCentreX - 100, 750 + 100, text);
+					canvas.DrawCircle (currentCentreX, 650, 250, circle);
+					canvas.DrawText ("" + (i + 1), currentCentreX - 100, 650 + 100, text);
 
 					currentCentreX += 800;
 				}
