@@ -25,7 +25,9 @@ namespace Exposeum.Controllers
 		}
 
 		public void FloorChanged(int newFloorIndex){
-			_model.SetCurrentFloor(newFloorIndex);
+			Floor newFloor = _model.Floors [newFloorIndex];
+			if (newFloor != null)
+				_model.SetCurrentFloor(newFloor);
 			_view.Update ();
 		}
 
@@ -38,7 +40,7 @@ namespace Exposeum.Controllers
 			{
 			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
-			    if (!poi.Visited && poi.floor.Equals(_model.CurrentFloor))
+			    if (!poi.Visited)
 			    {
                     // for TESTS:
 			        ExposeumApplication.IsExplorerMode = false;
@@ -48,7 +50,10 @@ namespace Exposeum.Controllers
 			            try
 			            {
 			                _model.CurrentStoryline.updateProgress(poi);
-                            displayPopUp(poi);
+
+							if(poi.floor != _model.CurrentFloor)
+								_model.SetCurrentFloor(poi.floor);
+							displayPopUp(poi);
                         }
                         catch (PointOfInterestNotVisitedException e)
 			            {
@@ -58,6 +63,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         poi.SetVisited();
+						if(poi.floor != _model.CurrentFloor)
                         displayPopUp(poi);
                     }
 			    }
