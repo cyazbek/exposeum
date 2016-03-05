@@ -36,8 +36,11 @@ namespace Exposeum.Fragments
             var button = view.FindViewById<Button>(Resource.Id.wrongPointButton);
             if (Language.getLanguage() == "fr")
                 button.Text = "Fermer";
-
             
+            button.Click += (sender, e) =>
+            {
+                this.Dismiss();
+            };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
