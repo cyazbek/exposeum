@@ -30,14 +30,21 @@ namespace Exposeum.Models
             };
             freeVisitButton.Click += (sender, e) =>
             {
+                ExposeumApplication.IsExplorerMode = true;
                 var intent = new Intent(this, typeof(MapActivity));
                 StartActivity(intent);
 
             };
             storylineButton.Click += (sender, e) =>
             {
+<<<<<<< HEAD
                 var intent = new Intent(this, typeof(StoryLineListActivity));
                 StartActivity(intent);
+=======
+				ExposeumApplication.IsExplorerMode = false;
+				var intent = new Intent(this, typeof(MapActivity));
+				StartActivity(intent);
+>>>>>>> fe29a307ebaa970c78dcadac06b1c7b84254de5c
             };
             
     }
