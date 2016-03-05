@@ -36,8 +36,8 @@ namespace Exposeum
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			View mapProgressionFragmentView = inflater.Inflate(Resource.Layout.MapProgressionFragment, container, false);
-			_progressBar = mapProgressionFragmentView.FindViewById<ProgressBar> (Resource.Id.map_progression_frag_progressbar);
+			MapProgressionFragmentView mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
+			_progressBar = mapProgressionFragmentView.progressBar;
 			Update ();
 			return mapProgressionFragmentView;
 		}
@@ -50,8 +50,25 @@ namespace Exposeum
 				visitedMapElements++;
 			}
 
-
 			_progressBar.Progress = (int)(100 * ((float)visitedMapElements / (float) _storyline.MapElements.Count));
+		}
+
+		class MapProgressionFragmentView : LinearLayout
+		{
+			public ProgressBar progressBar { get; set; }
+
+			public MapProgressionFragmentView(Context context) : base(context)
+			{
+				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+				this.Orientation = Orientation.Vertical;
+
+				progressBar = new ProgressBar(context, null, Android.Resource.Attribute.ProgressBarStyleHorizontal);
+	
+				progressBar.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+				progressBar.Max = 100;
+
+				AddView(progressBar);
+			}
 		}
 	}
 }
