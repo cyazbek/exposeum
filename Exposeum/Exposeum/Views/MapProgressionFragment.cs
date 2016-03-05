@@ -19,7 +19,6 @@ namespace Exposeum
 	public class MapProgressionFragment : Fragment
 	{
 		private StoryLine _storyline;
-		private ProgressBar _progressBar;
 
 		public MapProgressionFragment() { } //necessary due to default constructor called on rotate event
 
@@ -37,7 +36,6 @@ namespace Exposeum
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			MapProgressionFragmentView mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
-			_progressBar = mapProgressionFragmentView.progressBar;
 			Update ();
 			return mapProgressionFragmentView;
 		}
@@ -50,24 +48,15 @@ namespace Exposeum
 				visitedMapElements++;
 			}
 
-			_progressBar.Progress = (int)(100 * ((float)visitedMapElements / (float) _storyline.MapElements.Count));
+			//TODO: draw updated view
 		}
 
 		class MapProgressionFragmentView : LinearLayout
 		{
-			public ProgressBar progressBar { get; set; }
-
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
 				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
 				this.Orientation = Orientation.Vertical;
-
-				progressBar = new ProgressBar(context, null, Android.Resource.Attribute.ProgressBarStyleHorizontal);
-	
-				progressBar.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-				progressBar.Max = 100;
-
-				AddView(progressBar);
 			}
 		}
 	}
