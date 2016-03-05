@@ -37,14 +37,9 @@ namespace Exposeum.Models
             };
             storylineButton.Click += (sender, e) =>
             {
-<<<<<<< HEAD
-                var intent = new Intent(this, typeof(StoryLineListActivity));
-                StartActivity(intent);
-=======
 				ExposeumApplication.IsExplorerMode = false;
-				var intent = new Intent(this, typeof(MapActivity));
+				var intent = new Intent(this, typeof(StoryLineListActivity));
 				StartActivity(intent);
->>>>>>> fe29a307ebaa970c78dcadac06b1c7b84254de5c
             };
             
     }
