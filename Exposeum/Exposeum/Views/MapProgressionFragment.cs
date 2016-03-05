@@ -43,7 +43,15 @@ namespace Exposeum
 		}
 
 		public void Update(){
-			_progressBar.Progress = (int)(100 * ((float)_storyline.poiVisitedList.Count / (float) _storyline.poiList.Count));
+			
+			int visitedMapElements = 0;
+
+			while (_storyline.MapElements [visitedMapElements].Visited) {
+				visitedMapElements++;
+			}
+
+
+			_progressBar.Progress = (int)(100 * ((float)visitedMapElements / (float) _storyline.MapElements.Count));
 		}
 	}
 }

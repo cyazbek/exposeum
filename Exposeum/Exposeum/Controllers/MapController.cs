@@ -27,7 +27,7 @@ namespace Exposeum.Controllers
 
 			//If we are not in free explorer mode (ie there exists a current storyline) then add the
 			//current storyline progression fragment to the map activity
-			if (_model.CurrentStoryline != null) {
+			if (!ExposeumApplication.IsExplorerMode) {
 
 				// Create a new fragment and a transaction.
 				FragmentTransaction fragmentTx = ((Activity)_map_view.Context).FragmentManager.BeginTransaction();
@@ -61,7 +61,9 @@ namespace Exposeum.Controllers
 
 			}
 
-			_map_progression_view.Update ();
+			if (!ExposeumApplication.IsExplorerMode)
+				_map_progression_view.Update ();
+
 			_map_view.Update ();
 		}
 

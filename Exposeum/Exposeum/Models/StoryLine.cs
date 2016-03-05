@@ -16,7 +16,7 @@ namespace Exposeum.Models
         public int ID { get; set; }
         public string imgPath { get; set; }
         public int FloorsCovered { get; set; }
-        public List<MapElement> ListMapElements { get; set; } 
+        public List<MapElement> MapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
 		private bool isComplete { get; set; }
@@ -24,6 +24,7 @@ namespace Exposeum.Models
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
+			this.MapElements = new List<MapElement> ();
 			isComplete = false;
 	
         }
@@ -37,6 +38,11 @@ namespace Exposeum.Models
         {
             poiList.Add(poi);
         }
+
+		public void AddMapElement(MapElement e)
+		{
+			MapElements.Add(e);
+		}
 
         public void addVisitedPoiToList(PointOfInterest poi)
         {

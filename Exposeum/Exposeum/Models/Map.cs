@@ -157,19 +157,19 @@ namespace Exposeum.Models
             p13.description = description13;
             p13.beacon = beacon3;
 
-			storyline.addPoi (p1);
-			storyline.addPoi (p2);
-			storyline.addPoi (p3);
-			storyline.addPoi (p4);
-			storyline.addPoi (p5);
-			storyline.addPoi (p6);
-			storyline.addPoi (p7);
-			storyline.addPoi (p8);
-			storyline.addPoi (p9);
-			storyline.addPoi (p10);
-			storyline.addPoi (p11);
-			storyline.addPoi (p12);
-            storyline.addPoi(p13);
+			storyline.AddMapElement (p1);
+			storyline.AddMapElement (p2);
+			storyline.AddMapElement (p3);
+			storyline.AddMapElement (p4);
+			storyline.AddMapElement (p5);
+			storyline.AddMapElement (p6);
+			storyline.AddMapElement (p7);
+			storyline.AddMapElement (p8);
+			storyline.AddMapElement (p9);
+			storyline.AddMapElement (p10);
+			storyline.AddMapElement (p11);
+			storyline.AddMapElement (p12);
+			storyline.AddMapElement (p13);
 
             _currentStoryline = storyline;
 
