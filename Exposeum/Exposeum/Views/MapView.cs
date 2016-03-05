@@ -231,7 +231,7 @@ namespace Exposeum.Views
 
 		private PointOfInterest getSelectedPOI(float screenX, float screenY){
 
-			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.poiList.Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
+			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
 
 			foreach (PointOfInterest poi in currentFloorPOIs) {
 
