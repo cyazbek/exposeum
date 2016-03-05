@@ -43,21 +43,23 @@ namespace Exposeum
 		}
 
 		public void Update(){
-
 			mapProgressionFragmentView.Invalidate ();
 		}
 
 		class MapProgressionFragmentView : LinearLayout
 		{
 			private MapProgressionFragment hostFragment;
+			private Paint bgLine, circle;
 
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
 				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
 				this.Orientation = Orientation.Vertical;
 				this.SetWillNotDraw(false); //causes the OnDraw override below to be called
-				this.SetMinimumHeight(300);
-				this.SetBackgroundColor(Color.MediumVioletRed);
+				this.SetMinimumHeight(240);
+				this.SetBackgroundColor(Color.Red);
+
+				ResetPaint();
 			}
 
 			protected override void OnDraw(Canvas canvas)
@@ -65,36 +67,64 @@ namespace Exposeum
 				base.OnDraw(canvas);
 
 				canvas.Save ();
-
 				canvas.Scale (0.20f, 0.20f);
+
+				Paint text = new Paint ();
+				text.TextSize = 300;
+				text.Color = Color.Red;
 
 				StoryLine currentStoryline = hostFragment._storyline;
 
-				Paint bgLinePaint = new Paint ();
-				bgLinePaint.SetStyle (Paint.Style.Stroke);
-				bgLinePaint.Color = Color.White;
-				bgLinePaint.StrokeWidth = 85;
-
-				Paint circlePaint = new Paint ();
-				circlePaint.SetStyle (Paint.Style.Stroke);
-				circlePaint.Color = Color.Gray;
-				circlePaint.StrokeWidth = 55;
-
-				canvas.DrawLine (0.0f, 1000, 800 * currentStoryline.MapElements.Count, 1000, bgLinePaint);
-		
-				float currentCentreX;
+				int currentCentreX = 400;
+				bool unvisitedTripped = false;
 
 				for (int i = 0; i < currentStoryline.MapElements.Count; i++) {
-					currentCentreX = 800.0f * i;
-					canvas.DrawCircle (currentCentreX, 1000, 250, circlePaint);
+
+					MapElement current = currentStoryline.MapElements [i];
+
+					canvas.DrawLine (currentCentreX, 750, currentCentreX + 800, 750, bgLine);
+
+					if (!current.Visited)
+						unvisitedTripped = true;
+					
+					if (unvisitedTripped) {
+
+						text.Color = Color.White;
+
+						circle.SetStyle (Paint.Style.Fill);
+						circle.Color = Color.Red;
+
+						canvas.DrawCircle (currentCentreX, 750, 250, circle);
+
+						circle.Color = Color.White;
+						circle.SetStyle (Paint.Style.Stroke);
+					}
+
+					canvas.DrawCircle (currentCentreX, 750, 250, circle);
+					canvas.DrawText ("" + (i + 1), currentCentreX - 100, 750 + 100, text);
+
+					currentCentreX += 800;
 				}
 
 				canvas.Restore ();
 
+				ResetPaint ();
 			}
 
 			public void SetHostFragment(MapProgressionFragment f){
 				this.hostFragment = f;
+			}
+
+			private void ResetPaint(){
+				bgLine = new Paint ();
+				bgLine.SetStyle (Paint.Style.Stroke);
+				bgLine.Color = Color.White;
+				bgLine.StrokeWidth = 85;
+
+				circle = new Paint ();
+				circle.SetStyle (Paint.Style.FillAndStroke);
+				circle.Color = Color.White;
+				circle.StrokeWidth = 55;
 			}
 		}
 	}

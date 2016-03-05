@@ -117,7 +117,7 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
-			PointOfInterest p8 = new PointOfInterest(0.38f, 0.62f, floor2);
+			PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
