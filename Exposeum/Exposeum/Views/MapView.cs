@@ -172,7 +172,7 @@ namespace Exposeum.Views
 						appropriateEdgePaintBrush = _unvisitedEdge;
 					
 					if (!ExposeumApplication.IsExplorerMode) {
-						canvas.DrawLine (currentPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, currentPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, nextPOI._u * _map.CurrentFloor.Image.IntrinsicWidth, nextPOI._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
+						canvas.DrawLine (current._u * _map.CurrentFloor.Image.IntrinsicWidth, current._v * _map.CurrentFloor.Image.IntrinsicHeight, next._u * _map.CurrentFloor.Image.IntrinsicWidth, next._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 					}
 
 				}
