@@ -57,7 +57,7 @@ namespace Exposeum.Controllers
                         }
                         catch (PointOfInterestNotVisitedException e)
 			            {
-			                DisplayOutOfOrderPointOfInterestPopup(poi);
+							DisplayOutOfOrderPointOfInterestPopup(e.mapElement);
 			            }
                     }
                     else

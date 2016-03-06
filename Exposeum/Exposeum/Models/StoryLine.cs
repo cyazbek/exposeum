@@ -96,7 +96,7 @@ namespace Exposeum.Models
 		            else
 		            {
 		                throw new PointOfInterestNotVisitedException(
-		                    "There is an unvisited POI between the current POI and the previously visited POI.");
+							"There is an unvisited POI between the current POI and the previously visited POI.", currentLinkedNode.Value);
 		            }
 		        }
 
