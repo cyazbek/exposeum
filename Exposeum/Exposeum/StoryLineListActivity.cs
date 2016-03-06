@@ -26,23 +26,15 @@ namespace Exposeum
             SetContentView(Resource.Layout.StoryLineListView);
             listView = FindViewById<ListView>(Resource.Id.List);
 			listView.Adapter = StoryLineController.GetStoryLines(this);
-            listView.ItemClick += ListView_ItemClick;
+            listView.ItemClick += ListViewItemClick;
         }
 
-        private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var storyLine = map.getStoryLineList[e.Position];
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            if(storyLine.currentStatus==Status.inProgress)
-            {
-                DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
-                dialog.Show(transaction, "Story Line title");
-            }
-            else
-            {
-                DialogStoryline dialog = new DialogStoryline(storyLine);
-                dialog.Show(transaction, "Story Line title");
-            }
+			StoryLineController.SelectStoryLine (e.Position);
+			StoryLineController.ShowSelectedStoryLineDialog (transaction);
+
         }
         
     }
