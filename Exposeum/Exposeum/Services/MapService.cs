@@ -7,7 +7,7 @@ namespace Exposeum
 	{
 		private static Map instance;
 
-		public Map GetMapInstance(){
+		public static Map GetMapInstance(){
 			if (instance == null)
 				instance = new Map ();
 
