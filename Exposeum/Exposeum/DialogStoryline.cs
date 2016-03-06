@@ -18,6 +18,7 @@ namespace Exposeum
     {
         StoryLine storyLine;
         Context context; 
+		StorylineController _storylineController = StorylineController.GetInstance();
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
@@ -43,7 +44,7 @@ namespace Exposeum
             else
                 button.Text = "Begin Journey";
             button.Click += delegate {
-				StoryLineController.SetActiveStoryLine();
+				_storylineController.SetActiveStoryLine();
                 var intent = new Intent(context, typeof(MapActivity));
                 StartActivity(intent);
             };

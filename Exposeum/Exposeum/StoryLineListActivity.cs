@@ -18,6 +18,8 @@ namespace Exposeum
     public class StoryLineListActivity : Activity
     {
         public Map map;
+		StorylineController _storylineController = StorylineController.GetInstance();
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -26,15 +28,15 @@ namespace Exposeum
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
             listView = FindViewById<ListView>(Resource.Id.List);
-			listView.Adapter = StoryLineController.GetStoryLines(this);
+			listView.Adapter = _storylineController.GetStoryLines(this);
             listView.ItemClick += ListViewItemClick;
         }
 
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-			StoryLineController.SelectStoryLine (e.Position);
-			StoryLineController.ShowSelectedStoryLineDialog (transaction, this);
+			_storylineController.SelectStoryLine (e.Position);
+			_storylineController.ShowSelectedStoryLineDialog (transaction, this);
 
         }
         

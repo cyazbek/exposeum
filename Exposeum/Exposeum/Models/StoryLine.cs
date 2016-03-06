@@ -48,7 +48,8 @@ namespace Exposeum.Models
 			this.desc_fr = description_fr;
 			this.duration = duration;
 			this.ImageId = imageId;
-			this.currentStatus = Status.isNew;
+
+			this.MapElements = new List<MapElement> ();
 			this.poiList = new List<PointOfInterest>();
 			this.currentStatus = Status.isNew;
 		}
@@ -121,6 +122,9 @@ namespace Exposeum.Models
 					MapElement currentNode = nodeStack.Pop();
 		            currentNode.SetVisited();
 		        }
+
+				if (rightBoundLinkedNode.Value.GetType() != typeof (PointOfInterest))
+					_lastPointOfInterestVisited = rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if(rightBoundLinkedNode.Next == null)

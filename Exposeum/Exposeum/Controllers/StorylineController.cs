@@ -17,15 +17,15 @@ namespace Exposeum.Controllers
             return _storylineController;
         }
 
-		public static StoryLineListAdapter GetStoryLines(Activity activity){
+		public StoryLineListAdapter GetStoryLines(Activity activity){
 			return new StoryLineListAdapter(activity, map.getStoryLineList);
 		}
 
-		public static void SelectStoryLine(int storylinePosition){
+		public void SelectStoryLine(int storylinePosition){
 			selectedStoryLine = map.getStoryLineList[storylinePosition];
 		}
 
-		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
+		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
 			
 				
 				DialogFragment dialog;
@@ -40,7 +40,7 @@ namespace Exposeum.Controllers
 
 				dialog.Show(transaction, "Story Line title");
 		}
-
+			
         public void ResetStorylineProgress(StoryLine storyLine)
         {
             foreach (var poi in storyLine.poiList)
@@ -63,7 +63,7 @@ namespace Exposeum.Controllers
             BeaconFinder.getInstance().findBeacons();
         }
 
-		public static void SetActiveStoryLine(){
+		public void SetActiveStoryLine(){
 			map.CurrentStoryline = selectedStoryLine;
 		}
     }

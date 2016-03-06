@@ -167,9 +167,6 @@ namespace Exposeum.Models
 			storyline.AddMapElement (p10);
 			storyline.AddMapElement (p11);
 			storyline.AddMapElement (p12);
-			
-
-			_currentStoryline = storyline;
 
 			StoryLine story2 = new StoryLine("Story of Berliner","L'histoire de Berliner", "Kids","Enfants", "Description in english","Description en français", 60, Resource.Drawable.EmileBerliner);
 			StoryLine story3 = new StoryLine("Pink Panther", "Panthère Rose","All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.Pink_Panther);

@@ -65,7 +65,7 @@ namespace Exposeum
             buttonToResume.Click += delegate
             {
 				//the code below is problematic
-                _storylineController.CurrentStoryLine = storyLine;
+				_storylineController.SetActiveStoryLine();
                 _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(context, typeof(MapActivity));
                 StartActivity(intent);
