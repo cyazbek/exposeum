@@ -35,7 +35,7 @@ namespace Exposeum.Models
         public List<MapElement> ListMapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         private PointOfInterest _lastPointOfInterestVisited ;
-		private bool isComplete { get; set; }
+        public bool isComplete { get; set; }
         
         public StoryLine() 
         {

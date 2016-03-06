@@ -83,6 +83,7 @@
     <Compile Include="Data\StoryData.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
@@ -164,11 +165,14 @@
     <AndroidResource Include="Resources\layout\WalkThroughFragment.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ActionBar.axml"  />
+    <AndroidResource Include="Resources\layout\ActionBar.axml" />
     <AndroidResource Include="Resources\layout\StoryLine_Dialog.axml" />
     <AndroidResource Include="Resources\layout\StoryLineListView.axml" />
     <AndroidResource Include="Resources\layout\StoryLineRow.axml" />
     <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Pause_confirmation.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -247,9 +251,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Menu Bar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
   </ItemGroup>

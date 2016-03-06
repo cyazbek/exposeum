@@ -57,6 +57,7 @@
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US1\LanguageTest.cs" />
     <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
+    <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
