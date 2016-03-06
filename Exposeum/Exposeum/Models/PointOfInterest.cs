@@ -16,7 +16,6 @@ namespace Exposeum.Models
         public string description_fr { get; set; }
         public int id { get; set; }
         public int storyID { get; set; }
-        public Boolean visited { get; set; }
 		private float _icon_scale_factor = 0.2f;
 
         public PointOfInterestDescription description { get; set; }
@@ -24,33 +23,29 @@ namespace Exposeum.Models
         private Drawable _visited_icon;
         private Drawable _unvisited_icon;
 
+		//TODO: Remove this constructor
         public PointOfInterest()
         {
 			setVisitedUnvisitedIcons ();
 
-			visited = false;
+			Visited = false;
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
         }
 
+		//TODO: Remove this constructor
         public PointOfInterest(float u, float v)
         {
             this._u = u;
             this._v = v;
 
             beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
-            visited = false;
+            Visited = false;
 
 			setVisitedUnvisitedIcons ();
         }
 
-	    public PointOfInterest(float u, float v, Floor floor)
+		public PointOfInterest(float u, float v, Floor floor) : base(u, v, floor)
 	    {
-			this._u = u;
-			this._v = v;
-            visited = false;
-
-            this.floor = floor;
-
 			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			setVisitedUnvisitedIcons ();
 	    }
@@ -79,26 +74,21 @@ namespace Exposeum.Models
 			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
         }
 
-        public void Draw(Canvas canvas)
-		{
+        public override void Draw(Canvas canvas)
+        {
+            canvas.Save();
+
 			canvas.Translate (_u * floor.Image.IntrinsicWidth, _v * floor.Image.IntrinsicHeight);
 			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
 			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
 
-			if (visited)
+			if (Visited)
 				_visited_icon.Draw (canvas);
 			else
 				_unvisited_icon.Draw (canvas);
 
-			canvas.Translate (_unvisited_icon.IntrinsicWidth / 2.0f, _unvisited_icon.IntrinsicHeight / 2.0f);
-			canvas.Scale (1.0f/_icon_scale_factor, 1.0f/_icon_scale_factor);
-			canvas.Translate (-_u * floor.Image.IntrinsicWidth, -_v * floor.Image.IntrinsicHeight);
+			canvas.Restore();
 		}
-
-        public void SetTouched()
-        {
-			visited = true;
-        }
 
         public String getHTML()
         {
