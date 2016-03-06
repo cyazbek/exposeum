@@ -124,7 +124,7 @@ namespace Exposeum.Models
 		        }
 
 				if (rightBoundLinkedNode.Value.GetType() != typeof (PointOfInterest))
-					_lastPointOfInterestVisited = rightBoundLinkedNode.Value;
+					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if(rightBoundLinkedNode.Next == null)
