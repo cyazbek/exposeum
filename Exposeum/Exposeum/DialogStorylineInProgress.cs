@@ -46,7 +46,7 @@ namespace Exposeum
             if (Language.getLanguage() == "fr")
             {
                 view.FindViewById<TextView>(Resource.Id.storyInProgress).Text = "Actuallement en cours.";
-                buttonToResume.Text = "Continuer";
+                buttonToResume.Text = "Reprendre";
                 buttonToReset.Text = "Recommencer";
             }  
             else
@@ -59,12 +59,13 @@ namespace Exposeum
             buttonToResume.Click += delegate
             {
                 _storylineController.CurrentStoryLine = storyLine;
+                _storylineController.ResumeStorylineBeacons();
                 //TODO: redirect to map with selected storyline
             };
 
             buttonToReset.Click += delegate {
                 _storylineController.ResetStorylineProgress(storyLine);
-                _storylineController.CurrentStoryLine = storyLine;
+                _storylineController.ResumeStorylineBeacons();
                 //TODO: redirect to map with selected storyline
             };
 
