@@ -176,7 +176,7 @@
     <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Pause_confirmation.axml">
+    <AndroidResource Include="Resources\layout\Pause_confirmation.axml"/>
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>

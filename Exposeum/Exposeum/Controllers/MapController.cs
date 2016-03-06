@@ -96,7 +96,7 @@ namespace Exposeum.Controllers
         /// </summary>
 	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
-            _view.InitiateOutOfOrderPointOfInterestPopup(poi);
+			_map_view.InitiateOutOfOrderPointOfInterestPopup(poi);
 	    }
 
 	    public void displayPopUp(PointOfInterest selectedPOI)

@@ -33,7 +33,6 @@ namespace Exposeum.Controllers
 
             storyLine.SetLastPointOfInterestVisited(null);
             storyLine.currentStatus = Status.isNew;
-            storyLine.isComplete = false;
 
         }
 

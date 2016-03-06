@@ -48,9 +48,8 @@ namespace Exposeum.Models
             this.ID = ID;
 
 			poiList = new List<PointOfInterest>();
-			poiVisitedList = new List<PointOfInterest>();
-			ListMapElements = new List<MapElement> ();
-			isComplete = false;
+			MapElements = new List<MapElement> ();
+			this.currentStatus = Status.isNew;
         }
 
 
@@ -59,7 +58,7 @@ namespace Exposeum.Models
 		/// </summary>
         public void addPoi(PointOfInterest poi)
         {
-			ListMapElements.Add (poi);
+			MapElements.Add (poi);
             poiList.Add (poi);
         }
 
@@ -71,8 +70,8 @@ namespace Exposeum.Models
 		{
 			MapElements.Add(e);
 			//to be removed when poiList is removed
-			if(node.GetType() == typeof(PointOfInterest))
-				poiList.Add (node as PointOfInterest);
+			if(e.GetType() == typeof(PointOfInterest))
+				poiList.Add (e as PointOfInterest);
 		}
 
         public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
@@ -87,7 +86,7 @@ namespace Exposeum.Models
 		public void updateProgress(MapElement mapElement){
 
 			//convert ListMapElements to a LinkedList
-			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (ListMapElements);
+			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (MapElements);
 
 			//Find the supplied mapElement in the LinkedList
 			LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find (mapElement);
@@ -120,14 +119,11 @@ namespace Exposeum.Models
 
 					MapElement currentNode = nodeStack.Pop();
 		            currentNode.SetVisited();
-
-		            if (currentNode.GetType () != typeof(PointOfInterest))
-		                addVisitedPoiToList (currentNode as PointOfInterest);
 		        }
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if(rightBoundLinkedNode.Next == null)
-					isComplete = true;
+					this.currentStatus = Status.isVisited;
 		    }
 		}
 

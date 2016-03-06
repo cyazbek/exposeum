@@ -155,18 +155,18 @@ namespace Exposeum.Models
 			p12.name_fr = "Le POINT 12";
 
 
-		    storyline.addMapElement(p1);
-			storyline.addMapElement (pot1);
-			storyline.addMapElement (p3);
-			storyline.addMapElement (p4);
-			storyline.addMapElement (p5);
-			storyline.addMapElement (p6);
-			storyline.addMapElement (p7);
-			storyline.addMapElement (p8);
-			storyline.addMapElement (p9);
-			storyline.addMapElement (p10);
-			storyline.addMapElement (p11);
-			storyline.addMapElement (p12);
+			storyline.AddMapElement(p1);
+			storyline.AddMapElement (pot1);
+			storyline.AddMapElement (p3);
+			storyline.AddMapElement (p4);
+			storyline.AddMapElement (p5);
+			storyline.AddMapElement (p6);
+			storyline.AddMapElement (p7);
+			storyline.AddMapElement (p8);
+			storyline.AddMapElement (p9);
+			storyline.AddMapElement (p10);
+			storyline.AddMapElement (p11);
+			storyline.AddMapElement (p12);
 
 			_currentStoryline = storyline;
 
