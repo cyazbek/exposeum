@@ -27,6 +27,21 @@ namespace Exposeum.Controllers
             {
                 poi.Visited = false;
             }
+
+            storyLine.SetLastPointOfInterestVisited(null);
+            storyLine.currentStatus = Status.isNew;
+            storyLine.isComplete = false;
+
+        }
+
+        public void PauseStorylineBeacons()
+        {
+            BeaconFinder.getInstance().stopRanging();
+        }
+
+        public void ResumeStorylineBeacons()
+        {
+            BeaconFinder.getInstance().findBeacons();
         }
     }
 }
