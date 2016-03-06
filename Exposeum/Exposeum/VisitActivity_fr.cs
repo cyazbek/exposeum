@@ -38,7 +38,7 @@ namespace Exposeum.Models
             storylineButton.Click += (sender, e) =>
             {
 				ExposeumApplication.IsExplorerMode = false;
-				var intent = new Intent(this, typeof(MapActivity));
+				var intent = new Intent(this, typeof(StoryLineListActivity));
 				StartActivity(intent);
             };
             
