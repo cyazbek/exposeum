@@ -207,7 +207,7 @@ namespace UnitTests.US_11
                     {
                         PointOfInterest poi = _model.getCurrentStoryline.findPOI(beacon);
                         poi.SetTouched();
-                        _model.getCurrentStoryline.addVisitedPoiToList(poi);
+                        _model.getCurrentStoryline.SetLastPointOfInterestVisited(poi);
                     }
                 }
 
