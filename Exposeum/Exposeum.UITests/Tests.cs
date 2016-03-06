@@ -26,7 +26,7 @@ namespace Exposeum.UITests
 			//app.Repl ();
 			app.Flash(marked:"list");
 			app.Flash(marked:"Map Activity");
-			app.Tap(marked:"Map Activity");
+			app.Tap(marked:"Language Activity");
 			app.PinchToZoomIn("content");
 			app.SwipeRight ();
 			app.SwipeLeft ();

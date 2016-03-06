@@ -15,7 +15,7 @@ namespace Exposeum.Controllers
         {
             foreach (var poi in storyLine.poiList)
             {
-                poi.visited = false;
+                poi.Visited = false;
             }
 
             storyLine = null;

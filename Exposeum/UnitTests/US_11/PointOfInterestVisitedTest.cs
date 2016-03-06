@@ -71,7 +71,7 @@ namespace UnitTests.US_11
             [Test]
             public void testPoiVisitedIsFalseUponInstantiation()
             {
-                Assert.AreEqual(false, pointOfInterestTest.Visited);
+                Assert.AreEqual(false, pointOfInterestTest.visited);
             }
 
             [Test]
@@ -90,7 +90,7 @@ namespace UnitTests.US_11
                 Beacon beaconModel = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
                 pointOfInterestTest = mapController.Model.getCurrentStoryline.poiList.Where(poi => poi.beacon.Equals(beaconModel)).FirstOrDefault();
 
-                Assert.True(pointOfInterestTest.Visited);
+                Assert.True(pointOfInterestTest.visited);
             }
 
             [Test]
@@ -109,7 +109,7 @@ namespace UnitTests.US_11
                 Beacon beaconModel = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
                 pointOfInterestTest = mapController.Model.getCurrentStoryline.poiList.Where(poi => poi.beacon.Equals(beaconModel)).FirstOrDefault();
 
-                Assert.False(pointOfInterestTest.Visited);
+                Assert.False(pointOfInterestTest.visited);
             }
 
             [Test]
@@ -206,8 +206,8 @@ namespace UnitTests.US_11
                     if (beacon != null && (_model.getCurrentStoryline.hasBeacon(beacon)))
                     {
                         PointOfInterest poi = _model.getCurrentStoryline.findPOI(beacon);
-                        poi.SetVisited();
-                        _model.getCurrentStoryline.addVisitedPoiToList(poi);
+                        poi.SetTouched();
+                        _model.getCurrentStoryline.SetLastPointOfInterestVisited(poi);
                     }
                 }
 
