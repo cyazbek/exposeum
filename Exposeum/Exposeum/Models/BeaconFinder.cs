@@ -120,12 +120,12 @@ namespace Exposeum
 
 			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
 
-			if (inFocus)
-				notifyObservers();
-
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
+
+			if (inFocus)
+				notifyObservers();
 
 			if(!inFocus)
 				notifyUser ();

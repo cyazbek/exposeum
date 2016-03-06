@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Exposeum.Data;
+using System;
 
 namespace Exposeum.Models
 {
@@ -34,40 +35,101 @@ namespace Exposeum.Models
         public List<MapElement> MapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         private PointOfInterest _lastPointOfInterestVisited ;
-        public bool isComplete { get; set; }
         
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
 			this.MapElements = new List<MapElement> ();
-			isComplete = false;
-	
+
         }
 
         public StoryLine(int ID)
         {
             this.ID = ID;
+
+			poiList = new List<PointOfInterest>();
+			poiVisitedList = new List<PointOfInterest>();
+			ListMapElements = new List<MapElement> ();
+			isComplete = false;
         }
 
+
+		/// <summary>
+		/// DEPRECATED: use addMapElement() instead
+		/// </summary>
         public void addPoi(PointOfInterest poi)
         {
-            poiList.Add(poi);
+			ListMapElements.Add (poi);
+            poiList.Add (poi);
         }
 
-        public PointOfInterest GetLastVisitedPointOfInterest()
-        {
+        public PointOfInterest GetLastVisitedPointOfInterest(){
             return this._lastPointOfInterestVisited;
         }
 
 		public void AddMapElement(MapElement e)
 		{
 			MapElements.Add(e);
+			//to be removed when poiList is removed
+			if(node.GetType() == typeof(PointOfInterest))
+				poiList.Add (node as PointOfInterest);
 		}
 
         public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
         {
             this._lastPointOfInterestVisited = lastPoiVisited;
+
         }
+
+		/// <summary>
+		/// This method will update the progress of the storyline using the passed node.
+		/// </summary>
+		public void updateProgress(MapElement mapElement){
+
+			//convert ListMapElements to a LinkedList
+			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (ListMapElements);
+
+			//Find the supplied mapElement in the LinkedList
+			LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find (mapElement);
+
+		    if (rightBoundLinkedNode != null)
+		    {
+				LinkedListNode<MapElement> currentLinkedNode = rightBoundLinkedNode.Previous;
+				Stack<MapElement> nodeStack = new Stack<MapElement>();
+
+		        nodeStack.Push (rightBoundLinkedNode.Value);
+
+		        //first pass, find the leftBound
+		        while(currentLinkedNode != null && !currentLinkedNode.Value.Visited) {
+
+		            //if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
+		            if (currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
+		            {
+		                nodeStack.Push(currentLinkedNode.Value);
+		                currentLinkedNode = currentLinkedNode.Previous;
+		            }
+		            else
+		            {
+		                throw new PointOfInterestNotVisitedException(
+							"There is an unvisited POI between the current POI and the previously visited POI.", (PointOfInterest)currentLinkedNode.Value);
+		            }
+		        }
+
+		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+		        while (nodeStack.Count > 0) {
+
+					MapElement currentNode = nodeStack.Pop();
+		            currentNode.SetVisited();
+
+		            if (currentNode.GetType () != typeof(PointOfInterest))
+		                addVisitedPoiToList (currentNode as PointOfInterest);
+		        }
+
+				//finally, of this node is the last node of the tour, set the tour as completed
+				if(rightBoundLinkedNode.Next == null)
+					isComplete = true;
+		    }
+		}
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
         {

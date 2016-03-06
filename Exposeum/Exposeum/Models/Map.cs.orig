@@ -121,7 +121,11 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
+<<<<<<< HEAD
 			PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
+=======
+			PointOfInterest p8 = new PointOfInterest(0.98f, 0.82f, floor2);
+>>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
@@ -154,6 +158,30 @@ namespace Exposeum.Models
 			p12.name_en = "POINT 12";
 			p12.name_fr = "Le POINT 12";
 
+<<<<<<< HEAD
+            PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
+            PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth: Title"
+                    , "A Summary about the thirteenth: summary", "A Full Description about the thirteenth: Description: purple beacon");
+            p13.description = description13;
+            p13.beacon = beacon3;
+
+			storyline.AddMapElement (p1);
+			storyline.AddMapElement (p2);
+			storyline.AddMapElement (p3);
+			storyline.AddMapElement (p4);
+			storyline.AddMapElement (p5);
+			storyline.AddMapElement (p6);
+			storyline.AddMapElement (p7);
+			storyline.AddMapElement (p8);
+			storyline.AddMapElement (p9);
+			storyline.AddMapElement (p10);
+			storyline.AddMapElement (p11);
+			storyline.AddMapElement (p12);
+			storyline.AddMapElement (p13);
+
+            _currentStoryline = storyline;
+=======
+			StoryLine storyline = new StoryLine ();
 
 		    storyline.addMapElement(p1);
 			storyline.addMapElement (pot1);
@@ -169,6 +197,7 @@ namespace Exposeum.Models
 			storyline.addMapElement (p12);
 
 			_currentStoryline = storyline;
+>>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
 
 		}
 

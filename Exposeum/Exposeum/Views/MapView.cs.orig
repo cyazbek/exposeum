@@ -164,6 +164,7 @@ namespace Exposeum.Views
 
 			//draw edges and POIs on top of map
 
+<<<<<<< HEAD
 			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.floor.Equals(_map.CurrentFloor)).ToList();
 
 			for (int i = 0; i < currentFloorMapElements.Count; i++) {
@@ -173,6 +174,17 @@ namespace Exposeum.Views
 				if (i < currentFloorMapElements.Count - 1) {
 
 					MapElement next = currentFloorMapElements[i + 1];
+=======
+			List<MapElement> currentFloorElements = _map.CurrentStoryline.ListMapElements.Where(element => element.floor.Equals(_map.CurrentFloor)).ToList();
+
+			for (int i = 0; i < currentFloorElements.Count; i++) {
+
+				MapElement current = currentFloorElements[i];
+					
+				if (i < currentFloorElements.Count - 1) {
+
+					MapElement next = currentFloorElements[i + 1];
+>>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
 
 					if (!next.Visited)
 						appropriateEdgePaintBrush = _unvisitedEdge;

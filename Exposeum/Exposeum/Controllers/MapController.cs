@@ -40,7 +40,9 @@ namespace Exposeum.Controllers
 		}
 
 		public void FloorChanged(int newFloorIndex){
-			_model.SetCurrentFloor(newFloorIndex);
+			Floor newFloor = _model.Floors [newFloorIndex];
+			if (newFloor != null)
+				_model.SetCurrentFloor(newFloor);
 			_map_view.Update ();
 		}
 
@@ -53,11 +55,33 @@ namespace Exposeum.Controllers
 			{
 			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
 
-				if(!poi.Visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
-					poi.SetVisited();
-					displayPopUp(poi);
-					_model.CurrentStoryline.SetLastPointOfInterestVisited(poi);
-				}
+			    if (!poi.Visited)
+			    {
+                    // for TESTS:
+			        ExposeumApplication.IsExplorerMode = false;
+			        //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
+			        if (!ExposeumApplication.IsExplorerMode)
+			        {
+			            try
+			            {
+			                _model.CurrentStoryline.updateProgress(poi);
+
+							if(poi.floor != _model.CurrentFloor)
+								_model.SetCurrentFloor(poi.floor);
+							displayPopUp(poi);
+                        }
+                        catch (PointOfInterestNotVisitedException e)
+			            {
+							DisplayOutOfOrderPointOfInterestPopup(e.POI);
+			            }
+                    }
+                    else
+                    {
+                        poi.SetVisited();
+						if(poi.floor != _model.CurrentFloor)
+                        displayPopUp(poi);
+                    }
+			    }
 
 			}
 
@@ -67,7 +91,15 @@ namespace Exposeum.Controllers
 			_map_view.Update ();
 		}
 
-		public void displayPopUp(PointOfInterest selectedPOI)
+        /// <summary>
+        /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
+        /// </summary>
+	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
+	    {
+            _view.InitiateOutOfOrderPointOfInterestPopup(poi);
+	    }
+
+	    public void displayPopUp(PointOfInterest selectedPOI)
         {	
 			_map_view.InitiatePointOfInterestPopup (selectedPOI);
 			_map_view.Update (); //technically unncecessary but included for completeness

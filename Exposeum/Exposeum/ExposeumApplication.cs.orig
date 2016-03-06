@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.App;
 using Android.Runtime;
 
@@ -7,8 +7,12 @@ namespace Exposeum
 	[Application]
 	public class ExposeumApplication: Application
 	{
+<<<<<<< HEAD
 
 	    public static bool IsExplorerMode { get; set; }
+=======
+	    public static bool IsExplorerMode;
+>>>>>>> fe29a307ebaa970c78dcadac06b1c7b84254de5c
 
 	    public ExposeumApplication (IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{

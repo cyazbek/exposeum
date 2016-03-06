@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using Exposeum.Models;
+
+namespace Exposeum.Fragments
+{
+    public class OutOfOrderPointFragment : DialogFragment
+    {
+
+        private readonly PointOfInterest _point;
+
+        public OutOfOrderPointFragment(PointOfInterest point)
+        {
+            _point = point;
+        }
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            base.OnCreateView(inflater, container, savedInstanceState);
+            var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
+            view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.name_en;
+            var textview = view.FindViewById<TextView>(Resource.Id.wrongPointDesc);
+            textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
+            textview.VerticalScrollBarEnabled = true;
+            textview.HorizontalFadingEdgeEnabled = true;
+            var button = view.FindViewById<Button>(Resource.Id.wrongPointButton);
+            if (Language.getLanguage() == "fr")
+                button.Text = "Fermer";
+            
+            button.Click += (sender, e) =>
+            {
+                this.Dismiss();
+            };
+            this.Dialog.SetCanceledOnTouchOutside(true);
+            return view;
+        }
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            // Create your fragment here
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            Dialog.Window.RequestFeature(WindowFeatures.NoTitle);
+            base.OnActivityCreated(savedInstanceState);
+        }
+
+    }
+}

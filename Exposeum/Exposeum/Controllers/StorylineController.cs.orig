@@ -1,4 +1,4 @@
-using Exposeum.Models;
+﻿using Exposeum.Models;
 
 namespace Exposeum.Controllers
 {
@@ -24,6 +24,7 @@ namespace Exposeum.Controllers
 			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
         }
 
+<<<<<<< HEAD
         public void ResetStorylineProgress(StoryLine storyLine)
         {
             foreach (var poi in storyLine.poiList)
@@ -46,5 +47,11 @@ namespace Exposeum.Controllers
         {
             BeaconFinder.getInstance().findBeacons();
         }
+=======
+		//sample method that will be called when a user selects a storyline in the view
+		public void initStoryLine(/*some unique identifier that allows me to retreive the storyline from my lists of sotylines*/){
+			//I init the storyline and pass it somewhere either to a global state or to the map controller (but I don't know if the two controller should be coupled this way)
+		}
+>>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
     }
 }
