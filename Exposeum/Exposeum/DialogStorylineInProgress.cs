@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Exposeum.Controllers;
 using Exposeum.Models;
 
 namespace Exposeum
@@ -16,6 +17,7 @@ namespace Exposeum
     class DialogStorylineInProgress : DialogFragment
     {
         StoryLine storyLine;
+        StorylineController _storylineController = StorylineController.GetInstance();
         
         public DialogStorylineInProgress(StoryLine storyLine)
         {
@@ -54,12 +56,16 @@ namespace Exposeum
                 buttonToReset.Text = "Restart";
             }
 
-            buttonToResume.Click += delegate {
-               
+            buttonToResume.Click += delegate
+            {
+                _storylineController.CurrentStoryLine = storyLine;
+                //TODO: redirect to map with selected storyline
             };
 
             buttonToReset.Click += delegate {
-
+                _storylineController.ResetStorylineProgress(storyLine);
+                _storylineController.CurrentStoryLine = storyLine;
+                //TODO: redirect to map with selected storyline
             };
 
             this.Dialog.SetCanceledOnTouchOutside(true);
