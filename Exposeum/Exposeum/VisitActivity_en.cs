@@ -14,7 +14,7 @@ using Android.Content.PM;
 
 namespace Exposeum
 {
-    [Activity(Label = "Choice Of Visit", Theme = "@android:style/Theme.Holo.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity_en : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -40,8 +40,9 @@ namespace Exposeum
             storylineButton.Click += (sender, e) =>
             {
 				ExposeumApplication.IsExplorerMode = false;
-				var intent = new Intent(this, typeof(MapActivity));
+				var intent = new Intent(this, typeof(StoryLineListActivity));
 				StartActivity(intent);
+
             };
         }
             public override void OnBackPressed()

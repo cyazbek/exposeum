@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:padding="8dp">
+    <ImageView
+        android:id="@+id/StoryLineIcon"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:padding="5dp"
+        android:src="@drawable/NipperTheDog"
+        android:layout_alignParentLeft="true" />
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/TitleTextView"
+            android:layout_width="281.5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#5b2f2f"
+            android:textSize="30dip"
+            android:textStyle="bold"
+            android:paddingLeft="85dip"
+            android:text="Nipper the Dog"
+            android:layout_marginRight="0.0dp" />
+        <TextView
+            android:id="@+id/AudienceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:textColor="#4f4f4f"
+            android:paddingLeft="115dip"
+            android:textStyle="italic"
+            android:text="All Audiences" />
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:textColor="#4f4f4f"
+            android:paddingLeft="115dip"
+            android:textStyle="italic"
+            android:text="120 min" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/statusIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="5dp"
+        android:src="@drawable/inprogress"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

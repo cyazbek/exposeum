@@ -41,7 +41,7 @@ namespace Exposeum.Controllers
 				if(!poi.Visited && poi.floor.Equals(_model.CurrentFloor)) { //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
 					poi.SetVisited();
 					displayPopUp(poi);
-					_model.CurrentStoryline.addVisitedPoiToList(poi);
+					_model.CurrentStoryline.SetLastPointOfInterestVisited(poi);
 				}
 
 			}

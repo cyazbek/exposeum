@@ -206,8 +206,8 @@ namespace UnitTests.US_11
                     if (beacon != null && (_model.getCurrentStoryline.hasBeacon(beacon)))
                     {
                         PointOfInterest poi = _model.getCurrentStoryline.findPOI(beacon);
-                        poi.SetVisited();
-                        _model.getCurrentStoryline.addVisitedPoiToList(poi);
+                        poi.Visited = true;
+                        _model.getCurrentStoryline.SetLastPointOfInterestVisited(poi);
                     }
                 }
 

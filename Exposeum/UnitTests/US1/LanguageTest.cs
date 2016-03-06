@@ -37,24 +37,7 @@ namespace UnitTests
 			Language.toogleLanguage (); 
 			Assert.AreSame (Language.getLanguage (), "en");
 		}
-		[Test]
-		public void Fail ()
-		{
-			Assert.False (true);
-		}
 
-		[Test]
-		[Ignore ("another time")]
-		public void Ignore ()
-		{
-			Assert.True (false);
-		}
-
-		[Test]
-		public void Inconclusive ()
-		{
-			Assert.Inconclusive ("Inconclusive");
-		}
 
 	}
 }

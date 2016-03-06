@@ -6,21 +6,36 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
+        public StoryLine(string name_en, string name_fr, string audience_en, string audience_fr, string description_en, string description_fr, int duration, int imageId)
+        {
+            this.name_en = name_en;
+            this.name_fr = name_fr;
+            this.audience_en = audience_en;
+            this.audience_fr = audience_fr;
+            this.desc_en = description_en;
+            this.desc_fr = description_fr;
+            this.duration = duration;
+            this.ImageId = imageId;
+            this.currentStatus = Status.isNew;
+        }
+       
 
+        public int ImageId { get; set; }
+        public Status currentStatus { get; set; }
         public string name_en {get; set;}
         public string name_fr { get; set; }
         public string audience_en { get; set; }
         public string audience_fr { get; set; }
         public string desc_en { get; set; }
         public string desc_fr { get; set; }
-        public string duration { get; set; }
+        public int duration { get; set; }
         public int ID { get; set; }
         public string imgPath { get; set; }
         public int FloorsCovered { get; set; }
         public List<MapElement> ListMapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
-        public List<PointOfInterest> poiVisitedList = new List<PointOfInterest>();
-		private bool isComplete { get; set; }
+        private PointOfInterest _lastPointOfInterestVisited ;
+        public bool isComplete { get; set; }
         
         public StoryLine() 
         {
@@ -39,9 +54,14 @@ namespace Exposeum.Models
             poiList.Add(poi);
         }
 
-        public void addVisitedPoiToList(PointOfInterest poi)
+        public PointOfInterest GetLastVisitedPointOfInterest()
         {
-            poiVisitedList.Add(poi);
+            return this._lastPointOfInterestVisited;
+        }
+
+        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
+        {
+            this._lastPointOfInterestVisited = lastPoiVisited;
         }
 
         public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)

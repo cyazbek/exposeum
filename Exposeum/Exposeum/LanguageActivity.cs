@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace Exposeum
 {
-    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar",ScreenOrientation = ScreenOrientation.Portrait)]		
+    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light",ScreenOrientation = ScreenOrientation.Portrait)]		
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
@@ -22,6 +22,25 @@ namespace Exposeum
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Language);
+
+            //=========================================================================================
+            
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                base.OnBackPressed();
+            };
+
+            //=========================================================================================
+
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
             var englishButton = FindViewById<Button>(Resource.Id.englishLang);
 //            Language.getInstance(); 
