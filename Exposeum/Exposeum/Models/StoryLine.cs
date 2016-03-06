@@ -7,7 +7,6 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
-
         public string name_en {get; set;}
         public string name_fr { get; set; }
         public string audience_en { get; set; }
