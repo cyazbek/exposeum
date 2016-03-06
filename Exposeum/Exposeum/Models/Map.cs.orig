@@ -17,8 +17,8 @@ namespace Exposeum.Models
 
         public Map ()
 		{
+			_storyLines = new List<StoryLine>();
 			seedData ();
-            _storyLines = new List<StoryLine>();
         }
         
 		private void seedData(){
@@ -121,11 +121,7 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
-<<<<<<< HEAD
 			PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
-=======
-			PointOfInterest p8 = new PointOfInterest(0.98f, 0.82f, floor2);
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
@@ -159,14 +155,9 @@ namespace Exposeum.Models
 			p12.name_fr = "Le POINT 12";
 
 <<<<<<< HEAD
-            PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
-            PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth: Title"
-                    , "A Summary about the thirteenth: summary", "A Full Description about the thirteenth: Description: purple beacon");
-            p13.description = description13;
-            p13.beacon = beacon3;
 
-			storyline.AddMapElement (p1);
-			storyline.AddMapElement (p2);
+			storyline.AddMapElement(p1);
+			storyline.AddMapElement (pot1);
 			storyline.AddMapElement (p3);
 			storyline.AddMapElement (p4);
 			storyline.AddMapElement (p5);
@@ -177,27 +168,47 @@ namespace Exposeum.Models
 			storyline.AddMapElement (p10);
 			storyline.AddMapElement (p11);
 			storyline.AddMapElement (p12);
-			storyline.AddMapElement (p13);
-
-            _currentStoryline = storyline;
-=======
-			StoryLine storyline = new StoryLine ();
-
-		    storyline.addMapElement(p1);
-			storyline.addMapElement (pot1);
-			storyline.addMapElement (p3);
-			storyline.addMapElement (p4);
-			storyline.addMapElement (p5);
-			storyline.addMapElement (p6);
-			storyline.addMapElement (p7);
-			storyline.addMapElement (p8);
-			storyline.addMapElement (p9);
-			storyline.addMapElement (p10);
-			storyline.addMapElement (p11);
-			storyline.addMapElement (p12);
 
 			_currentStoryline = storyline;
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
+=======
+            PointOfInterest p13 = new PointOfInterest(0.48f, 0.12f, floor5);
+            PointOfInterestDescription description13 = new PointOfInterestDescription("The Thirteenth: Title"
+                    , "A Summary about the thirteenth: summary", "A Full Description about the thirteenth: Description: purple beacon");
+            p13.description = description13;
+            p13.beacon = beacon3;
+
+			StoryLine storyline = new StoryLine("Nipper the dog", "Le Chien Nipper","Adults", "Adultes", "A walk through different sections of RCA Victor’s production site, constructed over a period of roughly 25 years. This tour takes you through three different time zones, the 1920s, back when Montreal was the world’s largest grain hub and Canada’s productive power house, Montreal’s entertainment rich 1930s and 1943, when production at RCA Victor diversified to serve military needs.", "Une promenade à travers les différentes sections du site de production de RCA Victor, construit sur une période d’environ 25 ans. Ce circuit vous emmène à travers trois fuseaux horaires différents, les années 1920, époque où Montréal était le plus grand centre de grains du monde et la maison de puissance productive du Canada, de divertissement riches années 1930 à Montréal et 1943, lorsque la production chez RCA Victor diversifiée pour répondre aux besoins militaires.", 120 , Resource.Drawable.NipperTheDog);
+
+			storyline.addPoi (p1);
+			storyline.addPoi (p2);
+			storyline.addPoi (p3);
+			storyline.addPoi (p4);
+			storyline.addPoi (p5);
+			storyline.addPoi (p6);
+			storyline.addPoi (p7);
+			storyline.addPoi (p8);
+			storyline.addPoi (p9);
+			storyline.addPoi (p10);
+			storyline.addPoi (p11);
+			storyline.addPoi (p12);
+            storyline.addPoi(p13);
+
+			StoryLine story2 = new StoryLine("Story of Berliner","L'histoire de Berliner", "Kids","Enfants", "Description in english","Description en français", 60, Resource.Drawable.EmileBerliner);
+			StoryLine story3 = new StoryLine("Pink Panther", "Panthère Rose","All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.Pink_Panther);
+			StoryLine story4 = new StoryLine("The WW2", "La 2ième guerre Mondial", "Adults", "Adultes", "Description in english", "Description en français", 60, Resource.Drawable.army);
+			StoryLine story5 = new StoryLine("The Detective", "Le Détective", "All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.detective);
+			StoryLine story6 = new StoryLine("1940's Radio", "La radio de 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
+
+			story2.currentStatus = Status.inProgress;
+			story3.currentStatus = Status.isVisited;
+
+			this._storyLines.Add(storyline);
+			this._storyLines.Add(story2);
+			this._storyLines.Add(story3);
+			this._storyLines.Add(story4);
+			this._storyLines.Add(story5);
+			this._storyLines.Add(story6);
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
 
 		}
 

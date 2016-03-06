@@ -6,25 +6,10 @@ namespace Exposeum.Models
 {
     public class StoryLine
     {
-<<<<<<< HEAD
-        public StoryLine(string name_en, string name_fr, string audience_en, string audience_fr, string description_en, string description_fr, int duration, int imageId)
-        {
-            this.name_en = name_en;
-            this.name_fr = name_fr;
-            this.audience_en = audience_en;
-            this.audience_fr = audience_fr;
-            this.desc_en = description_en;
-            this.desc_fr = description_fr;
-            this.duration = duration;
-            this.ImageId = imageId;
-            this.currentStatus = Status.isNew;
-        }
        
 
         public int ImageId { get; set; }
         public Status currentStatus { get; set; }
-=======
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
         public string name_en {get; set;}
         public string name_fr { get; set; }
         public string audience_en { get; set; }
@@ -35,81 +20,74 @@ namespace Exposeum.Models
         public int ID { get; set; }
         public string imgPath { get; set; }
         public int FloorsCovered { get; set; }
-<<<<<<< HEAD
         public List<MapElement> MapElements { get; set; } 
         public List<PointOfInterest> poiList { get; set; }
         private PointOfInterest _lastPointOfInterestVisited ;
-        public bool isComplete { get; set; }
         
         public StoryLine() 
         {
             this.poiList = new List<PointOfInterest>();
 			this.MapElements = new List<MapElement> ();
-=======
-		public List<MapElement> ListMapElements { get;} 
-        public List<PointOfInterest> poiList { get;}
-		public List<PointOfInterest> poiVisitedList { get;}
-		private bool isComplete { get; set; }
-        
-        public StoryLine() 
-        {
-            poiList = new List<PointOfInterest>();
-			poiVisitedList = new List<PointOfInterest>();
-			ListMapElements = new List<MapElement> ();
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
-			isComplete = false;
+
         }
 
         public StoryLine(int ID)
         {
+			this.poiList = new List<PointOfInterest>();
             this.ID = ID;
+<<<<<<< HEAD
 
 			poiList = new List<PointOfInterest>();
-			poiVisitedList = new List<PointOfInterest>();
-			ListMapElements = new List<MapElement> ();
-			isComplete = false;
+			MapElements = new List<MapElement> ();
+			this.currentStatus = Status.isNew;
         }
 
 
 		/// <summary>
 		/// DEPRECATED: use addMapElement() instead
 		/// </summary>
+=======
+			isComplete = false;
+        }
+
+		public StoryLine(string name_en, string name_fr, string audience_en, string audience_fr, string description_en, string description_fr, int duration, int imageId)
+		{
+			this.name_en = name_en;
+			this.name_fr = name_fr;
+			this.audience_en = audience_en;
+			this.audience_fr = audience_fr;
+			this.desc_en = description_en;
+			this.desc_fr = description_fr;
+			this.duration = duration;
+			this.ImageId = imageId;
+			this.currentStatus = Status.isNew;
+			this.poiList = new List<PointOfInterest>();
+			isComplete = false;
+		}
+
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
         public void addPoi(PointOfInterest poi)
         {
-			ListMapElements.Add (poi);
+			MapElements.Add (poi);
             poiList.Add (poi);
         }
 
-<<<<<<< HEAD
-        public PointOfInterest GetLastVisitedPointOfInterest()
-        {
+        public PointOfInterest GetLastVisitedPointOfInterest(){
             return this._lastPointOfInterestVisited;
         }
 
 		public void AddMapElement(MapElement e)
 		{
 			MapElements.Add(e);
+			//to be removed when poiList is removed
+			if(e.GetType() == typeof(PointOfInterest))
+				poiList.Add (e as PointOfInterest);
 		}
 
         public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
         {
             this._lastPointOfInterestVisited = lastPoiVisited;
-=======
-		public void addMapElement(MapElement node)
-		{
-			ListMapElements.Add (node);
 
-			//to be removed when poiList is removed
-			if(node.GetType() == typeof(PointOfInterest))
-				poiList.Add (node as PointOfInterest);
-		}
-			
-		//TODO: this method shoudl be removed
-        public void addVisitedPoiToList(PointOfInterest poi)
-        {
-			if(poiList.Contains(poi))
-            	poiVisitedList.Add(poi);
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
         }
 
 		/// <summary>
@@ -118,7 +96,7 @@ namespace Exposeum.Models
 		public void updateProgress(MapElement mapElement){
 
 			//convert ListMapElements to a LinkedList
-			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (ListMapElements);
+			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (MapElements);
 
 			//Find the supplied mapElement in the LinkedList
 			LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find (mapElement);
@@ -151,14 +129,11 @@ namespace Exposeum.Models
 
 					MapElement currentNode = nodeStack.Pop();
 		            currentNode.SetVisited();
-
-		            if (currentNode.GetType () != typeof(PointOfInterest))
-		                addVisitedPoiToList (currentNode as PointOfInterest);
 		        }
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if(rightBoundLinkedNode.Next == null)
-					isComplete = true;
+					this.currentStatus = Status.isVisited;
 		    }
 		}
 

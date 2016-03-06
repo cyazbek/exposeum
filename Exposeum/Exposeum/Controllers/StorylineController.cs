@@ -1,28 +1,45 @@
-using Exposeum.Models;
+﻿using Exposeum.Models;
+using Android.App;
+using Android.Content;
 
 namespace Exposeum.Controllers
 {
     public class StorylineController
     {
         private static StorylineController _storylineController;
+		private static Map map = MapService.GetMapInstance();
+		private static StoryLine selectedStoryLine;
 
         public static StorylineController GetInstance()
         {
             if (_storylineController == null)
                 _storylineController = new StorylineController();
-
             return _storylineController;
         }
 
-        public StoryLine CurrentStoryLine { get; set; }
+		public static StoryLineListAdapter GetStoryLines(Activity activity){
+			return new StoryLineListAdapter(activity, map.getStoryLineList);
+		}
 
-		//here we need a method to supply to the view a list of storyline so that it can generate the visual list.
-		//public sometype getStorylines(){}
+		public static void SelectStoryLine(int storylinePosition){
+			selectedStoryLine = map.getStoryLineList[storylinePosition];
+		}
 
-        public void CreateTempStoryline ()
-		{
-			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
-        }
+		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
+			
+				
+				DialogFragment dialog;
+				if(selectedStoryLine.currentStatus==Status.inProgress)
+				{
+					dialog = new DialogStorylineInProgress(selectedStoryLine, context);
+				}
+				else
+				{
+					dialog = new DialogStoryline(selectedStoryLine, context);
+				}
+
+				dialog.Show(transaction, "Story Line title");
+		}
 
         public void ResetStorylineProgress(StoryLine storyLine)
         {
@@ -45,5 +62,9 @@ namespace Exposeum.Controllers
         {
             BeaconFinder.getInstance().findBeacons();
         }
+
+		public static void SetActiveStoryLine(){
+			map.CurrentStoryline = selectedStoryLine;
+		}
     }
 }

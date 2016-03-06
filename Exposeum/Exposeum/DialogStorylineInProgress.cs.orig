@@ -17,14 +17,14 @@ namespace Exposeum
     class DialogStorylineInProgress : DialogFragment
     {
         StoryLine storyLine;
-		Context context; 
+<<<<<<< HEAD
         StorylineController _storylineController = StorylineController.GetInstance();
         
-        public DialogStorylineInProgress(StoryLine storyLine){
-			this.storyLine = storyLine;
-		}
-        
+        public DialogStorylineInProgress(StoryLine storyLine)
+=======
+        Context context; 
         public DialogStorylineInProgress(StoryLine storyLine,Context context)
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
         {
             this.storyLine = storyLine;
             this.context = context; 
@@ -61,27 +61,33 @@ namespace Exposeum
                 buttonToResume.Text = "Resume";
                 buttonToReset.Text = "Restart";
             }
+<<<<<<< HEAD
 
             buttonToResume.Click += delegate
             {
-				//the code below is problematic
                 _storylineController.CurrentStoryLine = storyLine;
                 _storylineController.ResumeStorylineBeacons();
-				var intent = new Intent(context, typeof(MapActivity));
-                StartActivity(intent);
+                //TODO: redirect to map with selected storyline
             };
 
             buttonToReset.Click += delegate {
                 _storylineController.ResetStorylineProgress(storyLine);
                 _storylineController.ResumeStorylineBeacons();
+                //TODO: redirect to map with selected storyline
+=======
+            buttonToResume.Click += delegate {
                 var intent = new Intent(context, typeof(MapActivity));
                 StartActivity(intent);
+            };
+            buttonToReset.Click += delegate {
+                var intent = new Intent(context, typeof(MapActivity));
+                StartActivity(intent);
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
             };
 
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
-
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {

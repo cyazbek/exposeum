@@ -10,16 +10,19 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Controllers;
 
 namespace Exposeum
 {
     class DialogStoryline : DialogFragment
     {
         StoryLine storyLine;
+        Context context; 
         
-        public DialogStoryline(StoryLine storyLine)
+        public DialogStoryline(StoryLine storyLine, Context context)
         {
             this.storyLine = storyLine;
+            this.context = context;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -36,11 +39,13 @@ namespace Exposeum
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
             if (Language.getLanguage() == "fr")
-                button.Text = "Commencez l'éxperience";
+                button.Text = "Commencez l'Expérience";
             else
                 button.Text = "Begin Journey";
             button.Click += delegate {
-               
+				StoryLineController.SetActiveStoryLine();
+                var intent = new Intent(context, typeof(MapActivity));
+                StartActivity(intent);
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;

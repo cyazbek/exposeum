@@ -33,9 +33,27 @@ namespace Exposeum
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
+<<<<<<< HEAD
+            if(storyLine.currentStatus==Status.inProgress)
+            {
+                DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
+            else if (storyLine.currentStatus == Status.isNew)
+            {
+                DialogStoryline dialog = new DialogStoryline(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
+            else
+            {
+                DialogPauseStorylineConfirmation dialog = new DialogPauseStorylineConfirmation(storyLine, this);
+                dialog.Show(transaction, "delete");
+            }
+=======
 			StoryLineController.SelectStoryLine (e.Position);
 			StoryLineController.ShowSelectedStoryLineDialog (transaction, this);
 
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
         }
         
     }

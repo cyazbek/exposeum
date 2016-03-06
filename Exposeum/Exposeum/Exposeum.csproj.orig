@@ -81,13 +81,10 @@
     <Compile Include="Data\BeaconData.cs" />
     <Compile Include="Data\PoiStoryData.cs" />
     <Compile Include="Data\StoryData.cs" />
-<<<<<<< HEAD
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
-=======
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
@@ -140,17 +137,15 @@
     <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
-<<<<<<< HEAD
     <Compile Include="Views\MapProgressionFragment.cs" />
-=======
     <Compile Include="Models\PointOfTravel.cs" />
     <Compile Include="Exceptions\PointOfInterestNotVisitedException.cs" />
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
     <AndroidResource Include="Resources\drawable\floor_5.png" />
     <AndroidResource Include="Resources\drawable\floor_4.png" />
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
+    <Compile Include="Services\MapService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -175,7 +170,6 @@
     <AndroidResource Include="Resources\layout\WalkThroughFragment.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\layout\ActionBar.axml" />
     <AndroidResource Include="Resources\layout\StoryLine_Dialog.axml" />
     <AndroidResource Include="Resources\layout\StoryLineListView.axml" />
@@ -183,10 +177,8 @@
     <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Pause_confirmation.axml">
-=======
+    <AndroidResource Include="Resources\layout\Pause_confirmation.axml"/>
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -333,6 +325,10 @@
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
+<<<<<<< HEAD
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
+=======
+    <Folder Include="Services\" />
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
   </ItemGroup>
 </Project>

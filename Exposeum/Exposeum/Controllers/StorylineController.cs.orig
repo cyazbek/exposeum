@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+using Exposeum.Models;
+=======
 ﻿using Exposeum.Models;
+using Android.App;
+using Android.Content;
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
 
 namespace Exposeum.Controllers
 {
-    public class StorylineController
+    public static class StoryLineController
     {
+<<<<<<< HEAD
         private static StorylineController _storylineController;
 
         public static StorylineController GetInstance()
@@ -24,7 +31,6 @@ namespace Exposeum.Controllers
 			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
         }
 
-<<<<<<< HEAD
         public void ResetStorylineProgress(StoryLine storyLine)
         {
             foreach (var poi in storyLine.poiList)
@@ -34,7 +40,6 @@ namespace Exposeum.Controllers
 
             storyLine.SetLastPointOfInterestVisited(null);
             storyLine.currentStatus = Status.isNew;
-            storyLine.isComplete = false;
 
         }
 
@@ -48,10 +53,37 @@ namespace Exposeum.Controllers
             BeaconFinder.getInstance().findBeacons();
         }
 =======
-		//sample method that will be called when a user selects a storyline in the view
-		public void initStoryLine(/*some unique identifier that allows me to retreive the storyline from my lists of sotylines*/){
-			//I init the storyline and pass it somewhere either to a global state or to the map controller (but I don't know if the two controller should be coupled this way)
+
+		private static Map map = MapService.GetMapInstance();
+		private static StoryLine selectedStoryLine;
+
+		public static StoryLineListAdapter GetStoryLines(Activity activity){
+			return new StoryLineListAdapter(activity, map.getStoryLineList);
 		}
->>>>>>> 22b257ef2ca45873423e71664da68b9cb7a87fce
+
+		public static void SelectStoryLine(int storylinePosition){
+			selectedStoryLine = map.getStoryLineList[storylinePosition];
+		}
+
+		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
+			
+				
+				DialogFragment dialog;
+				if(selectedStoryLine.currentStatus==Status.inProgress)
+				{
+					dialog = new DialogStorylineInProgress(selectedStoryLine, context);
+				}
+				else
+				{
+					dialog = new DialogStoryline(selectedStoryLine, context);
+				}
+
+				dialog.Show(transaction, "Story Line title");
+		}
+
+		public static void SetActiveStoryLine(){
+			map.CurrentStoryline = selectedStoryLine;
+		}
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
     }
 }
