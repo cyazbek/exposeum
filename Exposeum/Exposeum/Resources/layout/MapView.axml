@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:id="@+id/linlay1">
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map_view_frame_lay">
+    <!-- map will be placed here -->
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:id="@+id/map_frag_frame_lay">
+    <!-- map progression fragment will be placed here -->
+    </FrameLayout>
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,4 +23,4 @@
         android:max="4"
         android:progress="0"
         android:indeterminate="false" />
-</LinearLayout>
+</FrameLayout>

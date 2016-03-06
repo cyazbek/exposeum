@@ -54,17 +54,21 @@ namespace Exposeum.Models
             poiList.Add(poi);
         }
 
+<<<<<<< HEAD
         public PointOfInterest GetLastVisitedPointOfInterest()
         {
             return this._lastPointOfInterestVisited;
         }
 
+        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
+=======
 		public void AddMapElement(MapElement e)
 		{
 			MapElements.Add(e);
 		}
 
-        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
+        public void addVisitedPoiToList(PointOfInterest poi)
+>>>>>>> 4374c8b70b8d0d2e2c96fbf45e0ceb7444d2e245
         {
             this._lastPointOfInterestVisited = lastPoiVisited;
         }

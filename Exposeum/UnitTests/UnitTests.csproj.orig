@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -57,9 +57,12 @@
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US1\LanguageTest.cs" />
     <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
+<<<<<<< HEAD
     <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
+=======
     <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />
     <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
+>>>>>>> 4374c8b70b8d0d2e2c96fbf45e0ceb7444d2e245
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,23 +25,20 @@ namespace Exposeum
 			base.OnCreate (savedInstanceState);
 
 			View view = LayoutInflater.Inflate (Resource.Layout.MapView, null);
-			SetContentView(view);
 
-			LinearLayout lay = (LinearLayout)view.FindViewById (Resource.Id.linlay1);
+			FrameLayout map_view_frame_layout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
+
 			MapView map_view = new MapView (this);
 
-			map_view.LayoutParameters = new ViewGroup.LayoutParams (
-				ViewGroup.LayoutParams.WrapContent,
-				ViewGroup.LayoutParams.WrapContent
-			);
-
-			lay.AddView (map_view, 1);
+			map_view_frame_layout.AddView (map_view);
 
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
 
 			_beaconFinder = BeaconFinder.getInstance ();
 			_beaconFinder.setInFocus(true);
+
+			SetContentView (view);
 		}
 
 		protected override void OnResume()

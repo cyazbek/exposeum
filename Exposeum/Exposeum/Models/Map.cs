@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Android.Content.Res;
 using Java.Util;
@@ -41,6 +41,8 @@ namespace Exposeum.Models
                 floorplan4 = new ColorDrawable();
                 floorplan5 = new ColorDrawable();
             }
+
+			StoryLine storyline = new StoryLine ();
 
             Floor floor1 = new Floor(floorplan1);
             Floor floor2 = new Floor(floorplan2);
@@ -117,7 +119,7 @@ namespace Exposeum.Models
             p7.name_en = "POINT 7";
 			p7.name_fr = "Le POINT 7";
 
-			PointOfInterest p8 = new PointOfInterest(0.38f, 0.62f, floor2);
+			PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
             PointOfInterestDescription description8 = new PointOfInterestDescription("The Eighth :: Title"
                     , "A Summary about the eighth :: summary", "A Full Description about the eighth :: Description");
             p8.description = description8;
@@ -157,21 +159,19 @@ namespace Exposeum.Models
             p13.description = description13;
             p13.beacon = beacon3;
 
-            StoryLine storyline = new StoryLine ();
-
-			storyline.addPoi (p1);
-			storyline.addPoi (p2);
-			storyline.addPoi (p3);
-			storyline.addPoi (p4);
-			storyline.addPoi (p5);
-			storyline.addPoi (p6);
-			storyline.addPoi (p7);
-			storyline.addPoi (p8);
-			storyline.addPoi (p9);
-			storyline.addPoi (p10);
-			storyline.addPoi (p11);
-			storyline.addPoi (p12);
-            storyline.addPoi(p13);
+			storyline.AddMapElement (p1);
+			storyline.AddMapElement (p2);
+			storyline.AddMapElement (p3);
+			storyline.AddMapElement (p4);
+			storyline.AddMapElement (p5);
+			storyline.AddMapElement (p6);
+			storyline.AddMapElement (p7);
+			storyline.AddMapElement (p8);
+			storyline.AddMapElement (p9);
+			storyline.AddMapElement (p10);
+			storyline.AddMapElement (p11);
+			storyline.AddMapElement (p12);
+			storyline.AddMapElement (p13);
 
             _currentStoryline = storyline;
 
