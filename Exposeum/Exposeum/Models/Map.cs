@@ -17,8 +17,8 @@ namespace Exposeum.Models
 
         public Map ()
 		{
+			_storyLines = new List<StoryLine>();
 			seedData ();
-            _storyLines = new List<StoryLine>();
         }
         
 		private void seedData(){
