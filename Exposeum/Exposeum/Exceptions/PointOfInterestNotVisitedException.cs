@@ -5,10 +5,10 @@ namespace Exposeum
 {
 	public class PointOfInterestNotVisitedException : Exception
 	{
-		public MapElement mapElement{ get;}
+		public PointOfInterest POI{ get;}
 
-		public PointOfInterestNotVisitedException (string message, MapElement element): base(message){
-			mapElement = element;
+		public PointOfInterestNotVisitedException (string message, PointOfInterest poi): base(message){
+			this.POI = poi;
 		}
 	}
 }
