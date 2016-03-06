@@ -35,7 +35,7 @@ namespace Exposeum.Data
         {
             get; set;
         }
-        public string duration
+        public int duration
         {
             get; set;
         }

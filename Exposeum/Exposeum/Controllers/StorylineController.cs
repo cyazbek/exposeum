@@ -4,6 +4,16 @@ namespace Exposeum.Controllers
 {
     public class StorylineController
     {
+        private static StorylineController _storylineController;
+
+        public static StorylineController GetInstance()
+        {
+            if (_storylineController == null)
+                _storylineController = new StorylineController();
+
+            return _storylineController;
+        }
+
         public StoryLine CurrentStoryLine { get; set; }
 
         public void CreateTempStoryline ()
@@ -18,7 +28,20 @@ namespace Exposeum.Controllers
                 poi.Visited = false;
             }
 
-            storyLine = null;
+            storyLine.SetLastPointOfInterestVisited(null);
+            storyLine.currentStatus = Status.isNew;
+            storyLine.isComplete = false;
+
+        }
+
+        public void PauseStorylineBeacons()
+        {
+            BeaconFinder.getInstance().stopRanging();
+        }
+
+        public void ResumeStorylineBeacons()
+        {
+            BeaconFinder.getInstance().findBeacons();
         }
     }
 }

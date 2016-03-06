@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:padding="8dp">
+    <ImageView
+        android:src="@drawable/NipperTheDog"
+        android:id="@+id/sotryLineDialogPic"
+        android:layout_width="95dp"
+        android:layout_height="95dp" />
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/storyLineDialogTitle"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:textColor="#5b2f2f"
+            android:textSize="25dip"
+            android:textStyle="bold"
+            android:paddingLeft="85dip"
+            android:text="Nipper the Dog" />
+        <TextView
+            android:id="@+id/storyLineDialogAudience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dip"
+            android:textColor="#4f4f4f"
+            android:paddingLeft="115dip"
+            android:textStyle="italic"
+            android:text="All Audiences" />
+        <TextView
+            android:id="@+id/storyLineDialogDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dip"
+            android:textColor="#4f4f4f"
+            android:paddingLeft="115dip"
+            android:textStyle="italic"
+            android:text="120 min" />
+        <TextView
+            android:id="@+id/storyLineDialogDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dip"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:textColor="#000000"
+            android:paddingTop="20dip"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:text="" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storyInProgress"
+            android:capitalize="sentences"
+            android:layout_marginBottom="10px" />
+        <LinearLayout
+            android:id="@+id/Text"
+            android:orientation="horizontal"
+            android:layout_width="325.0dp"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="Resume Journey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Text"
+                android:id="@+id/storyLineDialogButtonToResume"
+                android:layout_margin="10dp" />
+            <Button
+                android:text="Restart Journey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Text"
+                android:id="@+id/storyLineDialogButtonToReset"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
