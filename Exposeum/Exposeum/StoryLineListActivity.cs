@@ -58,10 +58,15 @@ namespace Exposeum
                 DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
                 dialog.Show(transaction, "Story Line title");
             }
-            else
+            else if (storyLine.currentStatus == Status.isNew)
             {
                 DialogStoryline dialog = new DialogStoryline(storyLine);
                 dialog.Show(transaction, "Story Line title");
+            }
+            else
+            {
+                DialogPauseStorylineConfirmation dialog = new DialogPauseStorylineConfirmation(storyLine, this);
+                dialog.Show(transaction, "delete");
             }
         }
         
