@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Controllers;
 
 namespace Exposeum
 {
@@ -36,11 +37,13 @@ namespace Exposeum
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
             if (Language.getLanguage() == "fr")
-                button.Text = "Commencez l'éxperience";
+                button.Text = "Commencez l'Expérience";
             else
                 button.Text = "Begin Journey";
             button.Click += delegate {
-               
+				StoryLineController.SetActiveStoryLine();
+
+				//start the activity
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
