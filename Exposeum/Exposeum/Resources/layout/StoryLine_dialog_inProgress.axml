@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/storyLineDialogTitle"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="#5b2f2f"
             android:textSize="25dip"
             android:textStyle="bold"
@@ -54,25 +54,32 @@
             android:paddingLeft="5dip"
             android:paddingRight="5dip"
             android:text="" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storyInProgress"
+            android:capitalize="sentences"
+            android:layout_marginBottom="10px" />
         <LinearLayout
             android:id="@+id/Text"
             android:orientation="horizontal"
-            android:layout_width="350dp"
+            android:layout_width="325.0dp"
             android:layout_height="wrap_content">
             <Button
                 android:text="Resume Journey"
-                android:layout_width="175dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Text"
                 android:id="@+id/storyLineDialogButtonToResume"
-                android:layout_marginTop="20dp" />
+                android:layout_margin="10dp" />
             <Button
                 android:text="Restart Journey"
-                android:layout_width="175dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Text"
                 android:id="@+id/storyLineDialogButtonToReset"
-                android:layout_marginTop="20dp" />
+                android:layout_margin="10dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
