@@ -17,8 +17,8 @@ namespace Exposeum.Models
 
         public Map ()
 		{
+			_storyLines = new List<StoryLine>();
 			seedData ();
-            _storyLines = new List<StoryLine>();
         }
         
 		private void seedData(){
@@ -157,7 +157,7 @@ namespace Exposeum.Models
             p13.description = description13;
             p13.beacon = beacon3;
 
-            StoryLine storyline = new StoryLine ();
+			StoryLine storyline = new StoryLine("Nipper the dog", "Le Chien Nipper","Adults", "Adultes", "A walk through different sections of RCA Victor’s production site, constructed over a period of roughly 25 years. This tour takes you through three different time zones, the 1920s, back when Montreal was the world’s largest grain hub and Canada’s productive power house, Montreal’s entertainment rich 1930s and 1943, when production at RCA Victor diversified to serve military needs.", "Une promenade à travers les différentes sections du site de production de RCA Victor, construit sur une période d’environ 25 ans. Ce circuit vous emmène à travers trois fuseaux horaires différents, les années 1920, époque où Montréal était le plus grand centre de grains du monde et la maison de puissance productive du Canada, de divertissement riches années 1930 à Montréal et 1943, lorsque la production chez RCA Victor diversifiée pour répondre aux besoins militaires.", 120 , Resource.Drawable.NipperTheDog);
 
 			storyline.addPoi (p1);
 			storyline.addPoi (p2);
@@ -173,7 +173,21 @@ namespace Exposeum.Models
 			storyline.addPoi (p12);
             storyline.addPoi(p13);
 
-            _currentStoryline = storyline;
+			StoryLine story2 = new StoryLine("Story of Berliner","L'histoire de Berliner", "Kids","Enfants", "Description in english","Description en français", 60, Resource.Drawable.EmileBerliner);
+			StoryLine story3 = new StoryLine("Pink Panther", "Panthère Rose","All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.Pink_Panther);
+			StoryLine story4 = new StoryLine("The WW2", "La 2ième guerre Mondial", "Adults", "Adultes", "Description in english", "Description en français", 60, Resource.Drawable.army);
+			StoryLine story5 = new StoryLine("The Detective", "Le Détective", "All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.detective);
+			StoryLine story6 = new StoryLine("1940's Radio", "La radio de 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
+
+			story2.currentStatus = Status.inProgress;
+			story3.currentStatus = Status.isVisited;
+
+			this._storyLines.Add(storyline);
+			this._storyLines.Add(story2);
+			this._storyLines.Add(story3);
+			this._storyLines.Add(story4);
+			this._storyLines.Add(story5);
+			this._storyLines.Add(story6);
 
 		}
 
