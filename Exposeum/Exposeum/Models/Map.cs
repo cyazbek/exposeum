@@ -173,11 +173,11 @@ namespace Exposeum.Models
 			storyline.addPoi (p12);
             storyline.addPoi(p13);
 
-			StoryLine story2 = new StoryLine("Story of Berliner","Histoire de Berliner", "Kids","Enfants", "Description in english","Description en français", 60, Resource.Drawable.EmileBerliner);
+			StoryLine story2 = new StoryLine("Story of Berliner","L'histoire de Berliner", "Kids","Enfants", "Description in english","Description en français", 60, Resource.Drawable.EmileBerliner);
 			StoryLine story3 = new StoryLine("Pink Panther", "Panthère Rose","All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.Pink_Panther);
-			StoryLine story4 = new StoryLine("The WW2", "La 2ême guerre Mondial", "Adults", "Adultes", "Description in english", "Description en français", 60, Resource.Drawable.army);
+			StoryLine story4 = new StoryLine("The WW2", "La 2ième guerre Mondial", "Adults", "Adultes", "Description in english", "Description en français", 60, Resource.Drawable.army);
 			StoryLine story5 = new StoryLine("The Detective", "Le Détective", "All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.detective);
-			StoryLine story6 = new StoryLine("1940's Radio", "Le radio des 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
+			StoryLine story6 = new StoryLine("1940's Radio", "La radio de 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
 
 			story2.currentStatus = Status.inProgress;
 			story3.currentStatus = Status.isVisited;
