@@ -1,5 +1,6 @@
 ﻿using Exposeum.Models;
 using Android.App;
+using Android.Content;
 
 namespace Exposeum.Controllers
 {
@@ -17,17 +18,17 @@ namespace Exposeum.Controllers
 			selectedStoryLine = map.getStoryLineList[storylinePosition];
 		}
 
-		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction){
+		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
 			
 				
 				DialogFragment dialog;
 				if(selectedStoryLine.currentStatus==Status.inProgress)
 				{
-					dialog = new DialogStorylineInProgress(selectedStoryLine);
+					dialog = new DialogStorylineInProgress(selectedStoryLine, context);
 				}
 				else
 				{
-					dialog = new DialogStoryline(selectedStoryLine);
+					dialog = new DialogStoryline(selectedStoryLine, context);
 				}
 
 				dialog.Show(transaction, "Story Line title");

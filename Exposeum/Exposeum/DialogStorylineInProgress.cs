@@ -16,10 +16,11 @@ namespace Exposeum
     class DialogStorylineInProgress : DialogFragment
     {
         StoryLine storyLine;
-        
-        public DialogStorylineInProgress(StoryLine storyLine)
+        Context context; 
+        public DialogStorylineInProgress(StoryLine storyLine,Context context)
         {
             this.storyLine = storyLine;
+            this.context = context; 
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -48,10 +49,12 @@ namespace Exposeum
                 buttonToReset.Text = "Restart Jouney";
             }
             buttonToResume.Click += delegate {
-               
+                var intent = new Intent(context, typeof(MapActivity));
+                StartActivity(intent);
             };
             buttonToReset.Click += delegate {
-
+                var intent = new Intent(context, typeof(MapActivity));
+                StartActivity(intent);
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;

@@ -17,10 +17,12 @@ namespace Exposeum
     class DialogStoryline : DialogFragment
     {
         StoryLine storyLine;
+        Context context; 
         
-        public DialogStoryline(StoryLine storyLine)
+        public DialogStoryline(StoryLine storyLine, Context context)
         {
             this.storyLine = storyLine;
+            this.context = context;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -42,8 +44,8 @@ namespace Exposeum
                 button.Text = "Begin Journey";
             button.Click += delegate {
 				StoryLineController.SetActiveStoryLine();
-
-				//start the activity
+                var intent = new Intent(context, typeof(MapActivity));
+                StartActivity(intent);
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;

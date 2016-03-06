@@ -21,6 +21,7 @@ namespace Exposeum
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            
             ListView listView;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
@@ -33,7 +34,7 @@ namespace Exposeum
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
 			StoryLineController.SelectStoryLine (e.Position);
-			StoryLineController.ShowSelectedStoryLineDialog (transaction);
+			StoryLineController.ShowSelectedStoryLineDialog (transaction, this);
 
         }
         
