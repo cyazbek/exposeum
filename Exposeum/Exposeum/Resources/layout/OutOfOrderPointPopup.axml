@@ -35,7 +35,7 @@
             android:paddingTop="20dip"
             android:paddingLeft="85dip"
             android:paddingRight="5dip"
-            android:text="Please retrace back to the last unvisited point. " />
+            android:text="Please retrace back to:  " />
     </LinearLayout>
     <Button
         android:text="Dismiss"

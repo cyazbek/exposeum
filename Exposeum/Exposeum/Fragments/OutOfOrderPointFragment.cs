@@ -28,7 +28,7 @@ namespace Exposeum.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
-            //view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.name_en;  //this is for when we know which point to redirect to.
+            view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.name_en;
             var textview = view.FindViewById<TextView>(Resource.Id.wrongPointDesc);
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
