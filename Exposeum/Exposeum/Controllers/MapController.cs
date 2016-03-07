@@ -57,8 +57,6 @@ namespace Exposeum.Controllers
 
 			    if (!poi.Visited)
 			    {
-                    // for TESTS:
-			        ExposeumApplication.IsExplorerMode = false;
 			        //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
 			        if (!ExposeumApplication.IsExplorerMode)
 			        {
