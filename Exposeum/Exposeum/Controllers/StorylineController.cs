@@ -65,6 +65,7 @@ namespace Exposeum.Controllers
 
 		public void SetActiveStoryLine(){
 			map.CurrentStoryline = selectedStoryLine;
+            BeaconFinder.getInstance().setStoryLine(selectedStoryLine);
 		}
     }
 }

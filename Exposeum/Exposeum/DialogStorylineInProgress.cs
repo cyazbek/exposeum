@@ -64,7 +64,6 @@ namespace Exposeum
 
             buttonToResume.Click += delegate
             {
-				//the code below is problematic
 				_storylineController.SetActiveStoryLine();
                 _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(context, typeof(MapActivity));
@@ -72,6 +71,8 @@ namespace Exposeum
             };
 
             buttonToReset.Click += delegate {
+
+                _storylineController.SetActiveStoryLine();
                 _storylineController.ResetStorylineProgress(storyLine);
                 _storylineController.ResumeStorylineBeacons();
                 var intent = new Intent(context, typeof(MapActivity));
