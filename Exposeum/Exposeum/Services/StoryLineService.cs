@@ -3,13 +3,13 @@ using Exposeum.Models;
 
 namespace Exposeum
 {
-	public static class MapService
+	public static class StoryLineService
 	{
 		private static Map instance;
 
 		public static Map GetMapInstance(){
 			if (instance == null)
-				instance = new Map ();
+				instance = Map.GeMapInstance();
 
 			return instance;
 		}

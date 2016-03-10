@@ -7,7 +7,7 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private static Map map = MapService.GetMapInstance();
+		private static Map map = StoryLineService.GetMapInstance();
 		private static StoryLine selectedStoryLine;
 
         public static StorylineController GetInstance()

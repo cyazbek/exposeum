@@ -8,18 +8,27 @@ namespace Exposeum.Models
 {
 	public class Map
 	{
-		private List<Floor> _floors;
+	    private static Map _map;
+        private List<Floor> _floors;
 		private Floor _currentFloor;
         private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
         private List<StoryLine> _storyLines;
 
-        public Map ()
+        private Map ()
 		{
 			_storyLines = new List<StoryLine>();
 			seedData ();
         }
+
+	    public static Map GeMapInstance()
+	    {
+	        if (_map != null)
+                _map = new Map();
+
+	        return _map;
+	    }
         
 		private void seedData(){
 
