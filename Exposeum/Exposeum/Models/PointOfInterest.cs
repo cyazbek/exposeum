@@ -9,140 +9,140 @@ namespace Exposeum.Models
 {
 	public class PointOfInterest : MapElement
     {
-        public Beacon beacon { get; set; }
-        public string name_en { get; set; }
-        public string name_fr { get; set; }
-        public string description_en { get; set; }
-        public string description_fr { get; set; }
-        public int id { get; set; }
-        public int storyID { get; set; }
-		private float _icon_scale_factor = 0.2f;
+        public Beacon Beacon { get; set; }
+        public string NameEn { get; set; }
+        public string NameFr { get; set; }
+        public string DescriptionEn { get; set; }
+        public string DescriptionFr { get; set; }
+        public int Id { get; set; }
+        public int StoryId { get; set; }
+		private float _iconScaleFactor = 0.2f;
 
-        public PointOfInterestDescription description { get; set; }
+        public PointOfInterestDescription Description { get; set; }
 
-        private Drawable _visited_icon;
-        private Drawable _unvisited_icon;
+        private Drawable _visitedIcon;
+        private Drawable _unvisitedIcon;
 
 		//TODO: Remove this constructor
         public PointOfInterest()
         {
-			setVisitedUnvisitedIcons ();
+			SetVisitedUnvisitedIcons ();
 
 			Visited = false;
-            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+            Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
         }
 
 		//TODO: Remove this constructor
         public PointOfInterest(float u, float v)
         {
-            this._u = u;
-            this._v = v;
+            this.U = u;
+            this.V = v;
 
-            beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+            Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             Visited = false;
 
-			setVisitedUnvisitedIcons ();
+			SetVisitedUnvisitedIcons ();
         }
 
 		public PointOfInterest(float u, float v, Floor floor) : base(u, v, floor)
 	    {
-			beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
-			setVisitedUnvisitedIcons ();
+			Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+			SetVisitedUnvisitedIcons ();
 	    }
 
-		public void setVisitedUnvisitedIcons()
+		public void SetVisitedUnvisitedIcons()
 		{
 			try{
-			    _visited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
+			    _visitedIcon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Activated);
 			}catch(Exception e){
-				_visited_icon = new ColorDrawable ();
+				_visitedIcon = new ColorDrawable ();
 			}
 
 			try{
-				_unvisited_icon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
+				_unvisitedIcon = Application.Context.Resources.GetDrawable (Resource.Drawable.Beacon_Inactivated);
 			}catch(Exception e){
-				_unvisited_icon = new ColorDrawable ();
+				_unvisitedIcon = new ColorDrawable ();
 			}
 
-			_visited_icon.SetBounds (0, 0, _visited_icon.IntrinsicWidth, _visited_icon.IntrinsicHeight);
-			_unvisited_icon.SetBounds (0, 0, _unvisited_icon.IntrinsicWidth, _unvisited_icon.IntrinsicHeight);
+			_visitedIcon.SetBounds (0, 0, _visitedIcon.IntrinsicWidth, _visitedIcon.IntrinsicHeight);
+			_unvisitedIcon.SetBounds (0, 0, _unvisitedIcon.IntrinsicWidth, _unvisitedIcon.IntrinsicHeight);
 
 		}
         
         public float Radius
         {
-			get { return _icon_scale_factor * (this._visited_icon.IntrinsicWidth / 2.0f);}
+			get { return _iconScaleFactor * (this._visitedIcon.IntrinsicWidth / 2.0f);}
         }
 
         public override void Draw(Canvas canvas)
         {
             canvas.Save();
 
-			canvas.Translate (_u * floor.Image.IntrinsicWidth, _v * floor.Image.IntrinsicHeight);
-			canvas.Scale (_icon_scale_factor, _icon_scale_factor);
-			canvas.Translate (-_unvisited_icon.IntrinsicWidth / 2.0f, -_unvisited_icon.IntrinsicHeight / 2.0f);
+			canvas.Translate (U * Floor.Image.IntrinsicWidth, V * Floor.Image.IntrinsicHeight);
+			canvas.Scale (_iconScaleFactor, _iconScaleFactor);
+			canvas.Translate (-_unvisitedIcon.IntrinsicWidth / 2.0f, -_unvisitedIcon.IntrinsicHeight / 2.0f);
 
 			if (Visited)
-				_visited_icon.Draw (canvas);
+				_visitedIcon.Draw (canvas);
 			else
-				_unvisited_icon.Draw (canvas);
+				_unvisitedIcon.Draw (canvas);
 
 			canvas.Restore();
 		}
 
-        public String getHTML()
+        public String GetHtml()
         {
             string summary;
 
-            if (Language.getLanguage() == "fr")
-                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", name_fr);
+            if (Language.GetLanguage() == "fr")
+                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
             else
-                summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", name_en );
+                summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
 
             return summary;
         }
 
-        public string getDescription()
+        public string GetDescription()
         {
-            if (Language.getLanguage() == "fr")
-                return this.description_fr;
+            if (Language.GetLanguage() == "fr")
+                return this.DescriptionFr;
             else
-                return this.description_en;
+                return this.DescriptionEn;
         }
 
-        public string getName()
+        public string GetName()
         {
-            if (Language.getLanguage() == "fr")
-                return this.name_fr;
+            if (Language.GetLanguage() == "fr")
+                return this.NameFr;
             else
-                return this.name_en;
+                return this.NameEn;
         }
 
-        public bool checkBeacon(Beacon b)
+        public bool CheckBeacon(Beacon b)
         {
-            if (this.beacon == null)
+            if (this.Beacon == null)
                 return false;
-            else if (this.beacon.uuid.Equals(b.uuid) & this.beacon.minor == b.minor & this.beacon.major == b.major)
+            else if (this.Beacon.Uuid.Equals(b.Uuid) & this.Beacon.Minor == b.Minor & this.Beacon.Major == b.Major)
                 return true;
             else
                 return false;
         }
 
-        public void convertFromData(Data.POIData poi)
+        public void ConvertFromData(Data.PoiData poi)
         {
             // this.visited = poi.visited;
-            this.name_en = poi.name_en;
-            this.name_fr = poi.name_fr;
-            this.description_en = poi.dscription_en;
-            this.description_fr = poi.dscription_fr;
-            this._u = poi.uCoord;
-            this._v = poi.vCoord;
-            this.id = poi.ID;
+            this.NameEn = poi.NameEn;
+            this.NameFr = poi.NameFr;
+            this.DescriptionEn = poi.DscriptionEn;
+            this.DescriptionFr = poi.DscriptionFr;
+            this.U = poi.UCoord;
+            this.V = poi.VCoord;
+            this.Id = poi.Id;
         }
 
         public string toString()
         {
-            return this.id + " " + this.getName() + " " + this.getDescription();
+            return this.Id + " " + this.GetName() + " " + this.GetDescription();
         }
     }
 }

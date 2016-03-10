@@ -18,13 +18,13 @@ namespace Exposeum
 {
 	public class MapProgressionFragment : Fragment
 	{
-		public StoryLine _storyline;
-		private MapProgressionFragmentView mapProgressionFragmentView;
+		public StoryLine Storyline;
+		private MapProgressionFragmentView _mapProgressionFragmentView;
 
 		public MapProgressionFragment() { } //necessary due to default constructor called on rotate event
 
 		public MapProgressionFragment(StoryLine storyline){
-			_storyline = storyline;
+			Storyline = storyline;
 		}
 
 		public override void OnCreate (Bundle savedInstanceState)
@@ -36,20 +36,20 @@ namespace Exposeum
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
-			mapProgressionFragmentView.SetHostFragment (this);
+			_mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
+			_mapProgressionFragmentView.SetHostFragment (this);
 			Update ();
-			return mapProgressionFragmentView;
+			return _mapProgressionFragmentView;
 		}
 
 		public void Update(){
-			mapProgressionFragmentView.Invalidate ();
+			_mapProgressionFragmentView.Invalidate ();
 		}
 
 		class MapProgressionFragmentView : LinearLayout
 		{
-			private MapProgressionFragment hostFragment;
-			private Paint bgLine, circle;
+			private MapProgressionFragment _hostFragment;
+			private Paint _bgLine, _circle;
 
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
@@ -73,7 +73,7 @@ namespace Exposeum
 				text.TextSize = 300;
 				text.Color = Color.Red;
 
-				StoryLine currentStoryline = hostFragment._storyline;
+				StoryLine currentStoryline = _hostFragment.Storyline;
 
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
@@ -82,7 +82,7 @@ namespace Exposeum
 
 					MapElement current = currentStoryline.MapElements [i];
 
-					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, bgLine);
+					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
 					if (!current.Visited)
 						unvisitedTripped = true;
@@ -91,16 +91,16 @@ namespace Exposeum
 
 						text.Color = Color.White;
 
-						circle.SetStyle (Paint.Style.Fill);
-						circle.Color = Color.Red;
+						_circle.SetStyle (Paint.Style.Fill);
+						_circle.Color = Color.Red;
 
-						canvas.DrawCircle (currentCentreX, 650, 250, circle);
+						canvas.DrawCircle (currentCentreX, 650, 250, _circle);
 
-						circle.Color = Color.White;
-						circle.SetStyle (Paint.Style.Stroke);
+						_circle.Color = Color.White;
+						_circle.SetStyle (Paint.Style.Stroke);
 					}
 
-					canvas.DrawCircle (currentCentreX, 650, 250, circle);
+					canvas.DrawCircle (currentCentreX, 650, 250, _circle);
 					canvas.DrawText ("" + (i + 1), currentCentreX - 100, 650 + 100, text);
 
 					currentCentreX += 800;
@@ -117,19 +117,19 @@ namespace Exposeum
 			}
 
 			public void SetHostFragment(MapProgressionFragment f){
-				this.hostFragment = f;
+				this._hostFragment = f;
 			}
 
 			private void ResetPaint(){
-				bgLine = new Paint ();
-				bgLine.SetStyle (Paint.Style.Stroke);
-				bgLine.Color = Color.White;
-				bgLine.StrokeWidth = 85;
+				_bgLine = new Paint ();
+				_bgLine.SetStyle (Paint.Style.Stroke);
+				_bgLine.Color = Color.White;
+				_bgLine.StrokeWidth = 85;
 
-				circle = new Paint ();
-				circle.SetStyle (Paint.Style.FillAndStroke);
-				circle.Color = Color.White;
-				circle.StrokeWidth = 55;
+				_circle = new Paint ();
+				_circle.SetStyle (Paint.Style.FillAndStroke);
+				_circle.Color = Color.White;
+				_circle.StrokeWidth = 55;
 			}
 		}
 	}

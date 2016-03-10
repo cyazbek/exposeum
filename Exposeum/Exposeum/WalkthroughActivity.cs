@@ -18,57 +18,57 @@ namespace Exposeum
     [Activity(Label = "WalkthroughActivity", Theme = "@android:style/Theme.Holo.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
     public class WalkthroughActivity : Activity
     {
-        private static ViewPager mPager;
-        private List<int> ImagesArray = new List<int>();
-        private List<int> ImagesFrench = new List<int>();
-        private List<int> ImagesEnglish = new List<int>();
-        private List<int> ImagesToDisplay;
-        Intent intent; 
+        private static ViewPager _mPager;
+        private List<int> _imagesArray = new List<int>();
+        private List<int> _imagesFrench = new List<int>();
+        private List<int> _imagesEnglish = new List<int>();
+        private List<int> _imagesToDisplay;
+        Intent _intent; 
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.WalkThrough);
-            var WalkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
+            var walkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
             string buttonText;
-            ImagesFrench.Add(Resource.Drawable.first_fr);
-            ImagesFrench.Add(Resource.Drawable.second_fr);
-            ImagesFrench.Add(Resource.Drawable.third_fr);
-            ImagesFrench.Add(Resource.Drawable.fourth_fr);
+            _imagesFrench.Add(Resource.Drawable.first_fr);
+            _imagesFrench.Add(Resource.Drawable.second_fr);
+            _imagesFrench.Add(Resource.Drawable.third_fr);
+            _imagesFrench.Add(Resource.Drawable.fourth_fr);
 
-            ImagesEnglish.Add(Resource.Drawable.first);
-            ImagesEnglish.Add(Resource.Drawable.second);
-            ImagesEnglish.Add(Resource.Drawable.third);
-            ImagesEnglish.Add(Resource.Drawable.fourth);
-            if (Language.getLanguage()=="fr")
+            _imagesEnglish.Add(Resource.Drawable.first);
+            _imagesEnglish.Add(Resource.Drawable.second);
+            _imagesEnglish.Add(Resource.Drawable.third);
+            _imagesEnglish.Add(Resource.Drawable.fourth);
+            if (Language.GetLanguage()=="fr")
             {
                 buttonText = "Sauter";
-                intent = new Intent(this, typeof(VisitActivity_fr));
-                ImagesToDisplay = ImagesFrench; 
+                _intent = new Intent(this, typeof(VisitActivityFr));
+                _imagesToDisplay = _imagesFrench; 
             }
             else
             {
                 buttonText = "Skip";
-                intent = new Intent(this, typeof(VisitActivity_en));
-                ImagesToDisplay = ImagesEnglish;
+                _intent = new Intent(this, typeof(VisitActivityEn));
+                _imagesToDisplay = _imagesEnglish;
             }
-            WalkthroughButton.Text = buttonText;
+            walkthroughButton.Text = buttonText;
 
-            init();
-            WalkthroughButton.Click += (sender, e) =>
+            Init();
+            walkthroughButton.Click += (sender, e) =>
             {
-                StartActivity(intent);
+                StartActivity(_intent);
             };
             
         }
-        private void init()
+        private void Init()
         {
-            foreach(var x in ImagesToDisplay)
+            foreach(var x in _imagesToDisplay)
             {
-                ImagesArray.Add(x); 
+                _imagesArray.Add(x); 
             }
-            mPager = (ViewPager)FindViewById(Resource.Id.WviewPager);
-            mPager.Adapter = new WalkthroughtFragmentAdapter(this, ImagesArray);
+            _mPager = (ViewPager)FindViewById(Resource.Id.WviewPager);
+            _mPager.Adapter = new WalkthroughtFragmentAdapter(this, _imagesArray);
 
 
         }

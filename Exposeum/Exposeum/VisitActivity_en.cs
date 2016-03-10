@@ -15,7 +15,7 @@ using Android.Content.PM;
 namespace Exposeum
 {
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class VisitActivity_en : Activity
+    public class VisitActivityEn : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,8 +25,8 @@ namespace Exposeum
             var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
             var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
             languageSelector.Click += (o, e) => {
-                    Language.toogleLanguage();
-                    var intent = new Intent(this, typeof(VisitActivity_fr));
+                    Language.ToogleLanguage();
+                    var intent = new Intent(this, typeof(VisitActivityFr));
                     StartActivity(intent);
             };
 

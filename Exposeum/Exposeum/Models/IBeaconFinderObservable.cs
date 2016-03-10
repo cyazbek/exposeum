@@ -4,8 +4,8 @@ namespace Exposeum
 {
 	public interface IBeaconFinderObservable
 	{
-		void addObserver(IBeaconFinderObserver observer);
-		void notifyObservers();
+		void AddObserver(IBeaconFinderObserver observer);
+		void NotifyObservers();
 	}
 }
 

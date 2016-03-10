@@ -5,13 +5,13 @@ namespace Exposeum
 {
 	public static class StoryLineService
 	{
-		private static Map instance;
+		private static Map _instance;
 
 		public static Map GetMapInstance(){
-			if (instance == null)
-				instance = Map.GeMapInstance();
+			if (_instance == null)
+				_instance = Map.GeMapInstance();
 
-			return instance;
+			return _instance;
 		}
 	}
 }

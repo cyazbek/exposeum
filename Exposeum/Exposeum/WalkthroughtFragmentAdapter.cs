@@ -15,23 +15,23 @@ namespace Exposeum
 {
     public class WalkthroughtFragmentAdapter: PagerAdapter
     {
-        private List<int> IMAGES;
-        private LayoutInflater inflater;
-        private Context context;
+        private List<int> _images;
+        private LayoutInflater _inflater;
+        private Context _context;
 
         public override int Count
         {
             get
             {
-                return IMAGES.Count;
+                return _images.Count;
             }
         }
 
-        public WalkthroughtFragmentAdapter(Context context, List<int> IMAGES)
+        public WalkthroughtFragmentAdapter(Context context, List<int> images)
         {
-            this.context = context;
-            this.IMAGES = IMAGES;
-            inflater = LayoutInflater.From(context);
+            this._context = context;
+            this._images = images;
+            _inflater = LayoutInflater.From(context);
         }
         public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object @object)
         {
@@ -41,10 +41,10 @@ namespace Exposeum
 
         public override Java.Lang.Object InstantiateItem(ViewGroup view, int position)
         {
-            View imageLayout = inflater.Inflate(Resource.Layout.WalkThroughFragment, view, false);
+            View imageLayout = _inflater.Inflate(Resource.Layout.WalkThroughFragment, view, false);
 
             ImageView imageView = (ImageView)imageLayout.FindViewById(Resource.Id.WalkThroughImageView);
-            imageView.SetImageResource(IMAGES[position]);
+            imageView.SetImageResource(_images[position]);
 
             view.AddView(imageLayout, 0);
 

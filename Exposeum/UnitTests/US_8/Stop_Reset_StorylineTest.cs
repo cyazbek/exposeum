@@ -43,13 +43,13 @@ namespace UnitTests.US_8
                 mockPointOfInterest3.Visited = true;
                 mockPointOfInterest4.Visited = false;
 
-                _mockStoryLine.addPoi(mockPointOfInterest1);
-                _mockStoryLine.addPoi(mockPointOfInterest2);
-                _mockStoryLine.addPoi(mockPointOfInterest3);
-                _mockStoryLine.addPoi(mockPointOfInterest4);
+                _mockStoryLine.AddPoi(mockPointOfInterest1);
+                _mockStoryLine.AddPoi(mockPointOfInterest2);
+                _mockStoryLine.AddPoi(mockPointOfInterest3);
+                _mockStoryLine.AddPoi(mockPointOfInterest4);
 
                 _mockStoryLine.SetLastPointOfInterestVisited(mockPointOfInterest3);
-                _mockStoryLine.currentStatus = Status.inProgress;
+                _mockStoryLine.CurrentStatus = Status.InProgress;
 
             }
        
@@ -57,9 +57,9 @@ namespace UnitTests.US_8
             [Test]
             public void TestStorylineIsInProgress()
             {
-                _status = Status.inProgress;
+                _status = Status.InProgress;
                 
-                Assert.AreEqual(_status, _mockStoryLine.currentStatus);
+                Assert.AreEqual(_status, _mockStoryLine.CurrentStatus);
             }
 
             [Test]
@@ -67,7 +67,7 @@ namespace UnitTests.US_8
             {
                 StorylineController.GetInstance().ResetStorylineProgress(_mockStoryLine);
 
-                Assert.AreEqual(Status.isNew, _mockStoryLine.currentStatus);
+                Assert.AreEqual(Status.IsNew, _mockStoryLine.CurrentStatus);
             }
 
             [Test]

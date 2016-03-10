@@ -10,30 +10,30 @@ namespace Exposeum.Controllers
 {
 	public class MapController : IBeaconFinderObserver
 	{
-		private MapView _map_view;
-		private MapProgressionFragment _map_progression_view;
+		private MapView _mapView;
+		private MapProgressionFragment _mapProgressionView;
 		private Map _model;
-		private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
+		private BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
 
 		public MapController(MapView view){
-			_map_view = view;
+			_mapView = view;
 
 			_model = StoryLineService.GetMapInstance ();
 
-			_beaconFinder.addObserver (this);
+			_beaconFinder.AddObserver (this);
 
-			_beaconFinder.setStoryLine(_model.CurrentStoryline);
-			_beaconFinder.findBeacons();
+			_beaconFinder.SetStoryLine(_model.CurrentStoryline);
+			_beaconFinder.FindBeacons();
 
 			//If we are not in free explorer mode (ie there exists a current storyline) then add the
 			//current storyline progression fragment to the map activity
 			if (!ExposeumApplication.IsExplorerMode) {
 
 				// Create a new fragment and a transaction.
-				FragmentTransaction fragmentTx = ((Activity)_map_view.Context).FragmentManager.BeginTransaction();
-				_map_progression_view = new MapProgressionFragment(_model.CurrentStoryline);
+				FragmentTransaction fragmentTx = ((Activity)_mapView.Context).FragmentManager.BeginTransaction();
+				_mapProgressionView = new MapProgressionFragment(_model.CurrentStoryline);
 
-				fragmentTx.Add(Resource.Id.map_frag_frame_lay, _map_progression_view);
+				fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
 				fragmentTx.Commit();
 
 			}
@@ -43,17 +43,17 @@ namespace Exposeum.Controllers
 			Floor newFloor = _model.Floors [newFloorIndex];
 			if (newFloor != null)
 				_model.SetCurrentFloor(newFloor);
-			_map_view.Update ();
+			_mapView.Update ();
 		}
 
-		public void beaconFinderObserverUpdate (IBeaconFinderObservable observable)
+		public void BeaconFinderObserverUpdate (IBeaconFinderObservable observable)
 		{
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
-			EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
+			EstimoteSdk.Beacon beacon = beaconFinder.GetClosestBeacon();
 
-            if (beacon != null && (_model.CurrentStoryline.hasBeacon(beacon)))
+            if (beacon != null && (_model.CurrentStoryline.HasBeacon(beacon)))
 			{
-			    PointOfInterest poi = _model.CurrentStoryline.findPOI(beacon);
+			    PointOfInterest poi = _model.CurrentStoryline.FindPoi(beacon);
 
 			    if (!poi.Visited)
 			    {
@@ -62,31 +62,31 @@ namespace Exposeum.Controllers
 			        {
 			            try
 			            {
-			                _model.CurrentStoryline.updateProgress(poi);
+			                _model.CurrentStoryline.UpdateProgress(poi);
 
-							if(poi.floor != _model.CurrentFloor)
-								_model.SetCurrentFloor(poi.floor);
-							displayPopUp(poi);
+							if(poi.Floor != _model.CurrentFloor)
+								_model.SetCurrentFloor(poi.Floor);
+							DisplayPopUp(poi);
                         }
                         catch (PointOfInterestNotVisitedException e)
 			            {
-							DisplayOutOfOrderPointOfInterestPopup(e.POI);
+							DisplayOutOfOrderPointOfInterestPopup(e.Poi);
 			            }
                     }
                     else
                     {
                         poi.SetVisited();
-						if(poi.floor != _model.CurrentFloor)
-                        displayPopUp(poi);
+						if(poi.Floor != _model.CurrentFloor)
+                        DisplayPopUp(poi);
                     }
 			    }
 
 			}
 
 			if (!ExposeumApplication.IsExplorerMode)
-				_map_progression_view.Update ();
+				_mapProgressionView.Update ();
 
-			_map_view.Update ();
+			_mapView.Update ();
 		}
 
         /// <summary>
@@ -94,15 +94,15 @@ namespace Exposeum.Controllers
         /// </summary>
 	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
 	    {
-			_map_view.InitiateOutOfOrderPointOfInterestPopup(poi);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(poi);
 	    }
 
-	    public void displayPopUp(PointOfInterest selectedPOI)
+	    public void DisplayPopUp(PointOfInterest selectedPoi)
         {	
-			_map_view.InitiatePointOfInterestPopup (selectedPOI);
-			_map_view.Update (); //technically unncecessary but included for completeness
+			_mapView.InitiatePointOfInterestPopup (selectedPoi);
+			_mapView.Update (); //technically unncecessary but included for completeness
 			if (!ExposeumApplication.IsExplorerMode)
-				_map_progression_view.Update ();
+				_mapProgressionView.Update ();
 		}
 
 		public Map Model

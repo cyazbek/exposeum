@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Exposeum.Controllers
 {
-    class DBController
+    class DbController
     {
-        public string createDB()
+        public string CreateDb()
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
@@ -22,7 +22,7 @@ namespace Exposeum.Controllers
             {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
-                db.CreateTable<POIData>();
+                db.CreateTable<PoiData>();
                 db.CreateTable<StoryData>();
                 db.CreateTable<BeaconData>();
                 db.CreateTable<PoiStoryData>();
@@ -39,13 +39,13 @@ namespace Exposeum.Controllers
             throw new NotImplementedException();
         }
 
-        public string insertBeacon(Beacon beacon)
+        public string InsertBeacon(Beacon beacon)
         {
             try {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 BeaconData data = new BeaconData();
-                data.convertBeaconToData(beacon);
+                data.ConvertBeaconToData(beacon);
                 db.Insert(data);
                 return "Added Successfully";
             }catch (Exception ex)
@@ -58,17 +58,17 @@ namespace Exposeum.Controllers
 
 
 
-        public string insertPoi(PointOfInterest poi)
+        public string InsertPoi(PointOfInterest poi)
         {
             try
             {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 BeaconData beacon = new BeaconData();
-                int beaconId=beacon.convertBeaconToData(poi.beacon);
+                int beaconId=beacon.ConvertBeaconToData(poi.Beacon);
                 db.Insert(beacon);
-                POIData poiData = new POIData();
-                poiData.convertPOIToData(poi, beaconId);
+                PoiData poiData = new PoiData();
+                poiData.ConvertPoiToData(poi, beaconId);
                 db.Insert(poiData);
                 return "POI inserted correctly";
             }
@@ -77,13 +77,13 @@ namespace Exposeum.Controllers
                 return "Error " + ex.Message; 
             }
         }
-        public String insertPoiStory(int poiId, int storId)
+        public String InsertPoiStory(int poiId, int storId)
         {
             try
             {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
-                PoiStoryData poiStory = new PoiStoryData { poiId = poiId, storyId = storId };
+                PoiStoryData poiStory = new PoiStoryData { PoiId = poiId, StoryId = storId };
                 db.Insert(poiStory);
                 return "Success";
             }
@@ -92,32 +92,32 @@ namespace Exposeum.Controllers
                 return "Error " + ex.Message;
             }
         }
-        public string insertStory(StoryLine story)
+        public string InsertStory(StoryLine story)
         {
             try
             {
                 string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 StoryData storyData = new StoryData();
-                storyData.audience_en = story.audience_en;
-                storyData.audience_fr = story.audience_fr;
-                storyData.desc_en = story.desc_en;
-                storyData.desc_fr = story.desc_fr;
-                storyData.duration = story.duration;
-                storyData.name_en = story.name_en;
-                storyData.name_fr = story.name_fr;
+                storyData.AudienceEn = story.AudienceEn;
+                storyData.AudienceFr = story.AudienceFr;
+                storyData.DescEn = story.DescEn;
+                storyData.DescFr = story.DescFr;
+                storyData.Duration = story.Duration;
+                storyData.NameEn = story.NameEn;
+                storyData.NameFr = story.NameFr;
                 db.Insert(storyData);
-                POIData poiData;
+                PoiData poiData;
                 BeaconData beaconData; 
-                foreach(var poi in story.poiList)
+                foreach(var poi in story.PoiList)
                 {
-                    poiData = new POIData();
+                    poiData = new PoiData();
                     beaconData = new BeaconData();
-                    int beaconId = beaconData.convertBeaconToData(poi.beacon);
-                    int id = poiData.convertPOIToData(poi, beaconId);
+                    int beaconId = beaconData.ConvertBeaconToData(poi.Beacon);
+                    int id = poiData.ConvertPoiToData(poi, beaconId);
                     db.Insert(beaconData);
                     db.Insert(poiData);
-                    insertPoiStory(id, storyData.id); 
+                    InsertPoiStory(id, storyData.Id); 
                 }
                 return "insert complete"; 
                 
@@ -127,52 +127,52 @@ namespace Exposeum.Controllers
                 return "Error " + ex.Message;
             }
         }
-        public SQLiteConnection getConnection()
+        public SQLiteConnection GetConnection()
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             return db; 
         }
 
-        public PointOfInterest getPoi(int id)
+        public PointOfInterest GetPoi(int id)
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
-            var result = db.Get<POIData>(id);
+            var result = db.Get<PoiData>(id);
             PointOfInterest poi = new PointOfInterest();
-            poi.convertFromData(result);
+            poi.ConvertFromData(result);
             var result2 = db.Get<BeaconData>(id);
             Beacon beacon= new Beacon();
-            beacon.convertFromData(result2);
-            poi.beacon = beacon;
+            beacon.ConvertFromData(result2);
+            poi.Beacon = beacon;
             return poi; 
         }
 
-        public Beacon getBeacon(int id)
+        public Beacon GetBeacon(int id)
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             BeaconData beaconData = new BeaconData();
             beaconData = db.Get<BeaconData>(id);
             Beacon beacon = new Beacon();
-            beacon.convertFromData(beaconData);
+            beacon.ConvertFromData(beaconData);
             return beacon;
         }
-        public StoryLine getStory(int id)
+        public StoryLine GetStory(int id)
         {
             string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             StoryData storyData = new StoryData();
             storyData = db.Get<StoryData>(id);
-            int storyId = storyData.id;
+            int storyId = storyData.Id;
             var poiList = from poi in db.Table<PoiStoryData>()
-                          where poi.storyId.Equals(storyId)
-                          select poi.poiId;
+                          where poi.StoryId.Equals(storyId)
+                          select poi.PoiId;
             StoryLine storyLine = new StoryLine();
-            storyLine.convertFromData(storyData);
+            storyLine.ConvertFromData(storyData);
             foreach(int i in poiList)
             {
-                storyLine.poiList.Add(getPoi(i)); 
+                storyLine.PoiList.Add(GetPoi(i)); 
             }
 
             return storyLine; 

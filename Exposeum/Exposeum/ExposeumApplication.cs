@@ -16,11 +16,11 @@ namespace Exposeum
 			
 		public override void OnCreate(){
 			base.OnCreate ();
-			initSingletons ();
+			InitSingletons ();
 		}
 
-		protected void initSingletons(){
-			BeaconFinder.initInstance (this);
+		protected void InitSingletons(){
+			BeaconFinder.InitInstance (this);
 		}
 	}
 }

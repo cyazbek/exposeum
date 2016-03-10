@@ -17,7 +17,7 @@ namespace Exposeum
     [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
     public class StoryLineListActivity : Activity
     {
-        public Map map;
+        public Map Map;
 		StorylineController _storylineController = StorylineController.GetInstance();
 
         protected override void OnCreate(Bundle bundle)

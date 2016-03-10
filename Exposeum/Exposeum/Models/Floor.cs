@@ -10,16 +10,16 @@ namespace Exposeum.Models
 	public class Floor
 	{
 		private Drawable _floorPlan;
-		private Paint paint = new Paint();
+		private Paint _paint = new Paint();
 
 		public Floor (Drawable floorPlan)
 		{
 			_floorPlan = floorPlan;
 			_floorPlan.SetBounds (0, 0, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
 
-			paint.SetStyle (Paint.Style.Fill);
-			paint.Color = Color.Purple;
-			paint.StrokeWidth = 20; //magic number, should extract static constant
+			_paint.SetStyle (Paint.Style.Fill);
+			_paint.Color = Color.Purple;
+			_paint.StrokeWidth = 20; //magic number, should extract static constant
 		}
 
 		public Drawable Image

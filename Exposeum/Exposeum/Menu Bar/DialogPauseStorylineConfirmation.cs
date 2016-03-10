@@ -34,7 +34,7 @@ namespace Exposeum
             var buttonToConfirmPause = view.FindViewById<Button>(Resource.Id.confirm_pause);
             var buttonToRejectPause = view.FindViewById<Button>(Resource.Id.reject_pause);
 
-            if (Language.getLanguage() == "fr")
+            if (Language.GetLanguage() == "fr")
             {
                 view.FindViewById<TextView>(Resource.Id.pause_text).Text = "Suspendre";
                 buttonToConfirmPause.Text = "Oui";

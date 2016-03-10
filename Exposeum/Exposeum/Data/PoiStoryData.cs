@@ -17,12 +17,12 @@ namespace Exposeum.Data
     public class PoiStoryData
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey(typeof(StoryData))]
-        public int storyId { get; set; }
-        [ForeignKey(typeof(POIData))]
-        public int poiId { get; set; }
+        public int StoryId { get; set; }
+        [ForeignKey(typeof(PoiData))]
+        public int PoiId { get; set; }
 
     }
 }

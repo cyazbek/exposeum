@@ -17,25 +17,25 @@ namespace Exposeum.Data
     public class BeaconData
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-        public string uuid
+        public int Id { get; set; }
+        public string Uuid
         {
             get; set;
         }
-        public int major
+        public int Major
         {
             get; set;
         }
-        public int minor
+        public int Minor
         {
             get; set;
         }
-        public int convertBeaconToData(Models.Beacon passedBeacon)
+        public int ConvertBeaconToData(Models.Beacon passedBeacon)
         {
-            this.uuid = passedBeacon.uuid.ToString();
-            this.major = passedBeacon.major;
-            this.minor = passedBeacon.minor;
-            return this.ID; 
+            this.Uuid = passedBeacon.Uuid.ToString();
+            this.Major = passedBeacon.Major;
+            this.Minor = passedBeacon.Minor;
+            return this.Id; 
         }
     }
 }

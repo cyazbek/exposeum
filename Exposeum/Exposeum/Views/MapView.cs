@@ -30,10 +30,10 @@ namespace Exposeum.Views
 		private MapController _controller;
 		private Paint _visitedEdge = new Paint ();
 		private Paint _unvisitedEdge = new Paint ();
-		private float _canvas_width, _canvas_height; 
+		private float _canvasWidth, _canvasHeight; 
 
-        private PointOfInterestPopup newPointOfInterestPopup;
-		private OutOfOrderPointFragment outOfOrderDialog;
+        private PointOfInterestPopup _newPointOfInterestPopup;
+		private OutOfOrderPointFragment _outOfOrderDialog;
 
 	    public MapView (Context context) : base(context, null, 0)
 		{            
@@ -57,7 +57,7 @@ namespace Exposeum.Views
 
 		}
 
-        public MapController getController()
+        public MapController GetController()
         {
             return _controller;
         }
@@ -73,10 +73,10 @@ namespace Exposeum.Views
 
 		public void InitiatePointOfInterestPopup(PointOfInterest poi){
 
-            if (newPointOfInterestPopup == null || ! newPointOfInterestPopup.isShowing())
+            if (_newPointOfInterestPopup == null || ! _newPointOfInterestPopup.IsShowing())
             {
-                newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
-                newPointOfInterestPopup.Show();
+                _newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
+                _newPointOfInterestPopup.Show();
             }
 		}
 
@@ -89,9 +89,9 @@ namespace Exposeum.Views
 
 			switch (action) {
 			case MotionEventActions.Down:
-				PointOfInterest selected = getSelectedPOI (ev.GetX (), ev.GetY ());
+				PointOfInterest selected = GetSelectedPoi (ev.GetX (), ev.GetY ());
 				if (selected != null) {
-					_controller.displayPopUp (selected);
+					_controller.DisplayPopUp (selected);
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
@@ -110,10 +110,10 @@ namespace Exposeum.Views
 					_translateY += deltaY;
 
 					//clamp the translation to keep the map on-screen
-					float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
-					float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
-					float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
-					float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
+					float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
+					float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
+					float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
+					float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
 
 					_translateX = Clamp (minX, maxX, _translateX);
 					_translateY = Clamp (minY, maxY, _translateY);
@@ -164,7 +164,7 @@ namespace Exposeum.Views
 
 			//draw edges and POIs on top of map
 
-			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
 
 			for (int i = 0; i < currentFloorMapElements.Count; i++) {
 
@@ -178,7 +178,7 @@ namespace Exposeum.Views
 						appropriateEdgePaintBrush = _unvisitedEdge;
 					
 					if (!ExposeumApplication.IsExplorerMode) {
-						canvas.DrawLine (current._u * _map.CurrentFloor.Image.IntrinsicWidth, current._v * _map.CurrentFloor.Image.IntrinsicHeight, next._u * _map.CurrentFloor.Image.IntrinsicWidth, next._v * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
+						canvas.DrawLine (current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight, next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
 					}
 
 				}
@@ -191,15 +191,15 @@ namespace Exposeum.Views
 		}
 			
 		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
-			_canvas_width = w;
-			_canvas_height = h;
+			_canvasWidth = w;
+			_canvasHeight = h;
 
 			//center the image on canvas size change (rotation)
 			//is also called when canvas is first instantiated
-			float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
-			float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
-			float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvas_width*0.5f);
-			float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvas_height*0.5f);
+			float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
+			float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
+			float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
+			float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
 
 			_translateX = minX + ((maxX - minX) / 2.0f); //translate half-way on both axes
 			_translateY = minY + ((maxY - minY) / 2.0f);
@@ -232,14 +232,14 @@ namespace Exposeum.Views
 			}
 		}
 
-		private PointOfInterest getSelectedPOI(float screenX, float screenY){
+		private PointOfInterest GetSelectedPoi(float screenX, float screenY){
 
-			List<PointOfInterest> currentFloorPOIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.floor.Equals(_map.CurrentFloor)).ToList();
+			List<PointOfInterest> currentFloorPoIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.Floor.Equals(_map.CurrentFloor)).ToList();
 
-			foreach (PointOfInterest poi in currentFloorPOIs) {
+			foreach (PointOfInterest poi in currentFloorPoIs) {
 
-				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi._u) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi._v) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.U) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					return poi;
@@ -253,9 +253,9 @@ namespace Exposeum.Views
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
 	        {
-				if (outOfOrderDialog == null || !outOfOrderDialog.IsVisible) {
-					outOfOrderDialog = new OutOfOrderPointFragment(poi);
-					outOfOrderDialog.Show(tr, "Wrong POI");
+				if (_outOfOrderDialog == null || !_outOfOrderDialog.IsVisible) {
+					_outOfOrderDialog = new OutOfOrderPointFragment(poi);
+					_outOfOrderDialog.Show(tr, "Wrong POI");
 				}
                 
             }

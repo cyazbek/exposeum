@@ -17,7 +17,7 @@ namespace UnitTests
 	public class BeaconFinderTestsUS13 : IBeaconFinderObserver
 	{
 
-		BeaconFinder beaconFinder = BeaconFinder.getInstance();
+		BeaconFinder beaconFinder = BeaconFinder.GetInstance();
 		private PointOfInterest myPoi;
 		private PointOfInterest myPoi1;
 		private PointOfInterest myPoi2;
@@ -36,21 +36,21 @@ namespace UnitTests
 			//Setup the storyline supplied to the BeaconFinder
 			story = new StoryLine ();
 			Exposeum.Models.Beacon beaconFiras = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
-			myPoi = new PointOfInterest(){ name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", description_en = "This is the point of interest Firas", description_fr = "Celui là est le premier point de Firas"};
-			myPoi.beacon = beaconFiras;
+			myPoi = new PointOfInterest(){ NameEn = "Point Of interest Firas", NameFr = "Point d'interet Firas", DescriptionEn = "This is the point of interest Firas", DescriptionFr = "Celui là est le premier point de Firas"};
+			myPoi.Beacon = beaconFiras;
 			Exposeum.Models.Beacon beaconOli = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
-			myPoi1 = new PointOfInterest { name_en = "Point Of interest Oli", name_fr = "Point d'interet Oli", description_en = "This is the point of interest Oli", description_fr = "Celui là est le premier point de Oli" };
-			myPoi1.beacon = beaconOli;
+			myPoi1 = new PointOfInterest { NameEn = "Point Of interest Oli", NameFr = "Point d'interet Oli", DescriptionEn = "This is the point of interest Oli", DescriptionFr = "Celui là est le premier point de Oli" };
+			myPoi1.Beacon = beaconOli;
 			Exposeum.Models.Beacon beaconFar = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 65339, 69185);
-			myPoi2 = new PointOfInterest { name_en = "Point Of interest FAR", name_fr = "Point d'interet FAR", description_en = "This is the point is far", description_fr = "Celui là est loin" };
-			myPoi2.beacon = beaconFar;
-			story.addPoi(myPoi);
-			story.addPoi(myPoi1);
+			myPoi2 = new PointOfInterest { NameEn = "Point Of interest FAR", NameFr = "Point d'interet FAR", DescriptionEn = "This is the point is far", DescriptionFr = "Celui là est loin" };
+			myPoi2.Beacon = beaconFar;
+			story.AddPoi(myPoi);
+			story.AddPoi(myPoi1);
 
 			//Setup the beaconFinder
-			beaconFinder.setStoryLine (story);
-			beaconFinder.setInFocus (true);
-			beaconFinder.addObserver (this);
+			beaconFinder.SetStoryLine (story);
+			beaconFinder.SetInFocus (true);
+			beaconFinder.AddObserver(this);
 
 			//Create dummy beacons
 			//This beacon's is the closest (immediate zone)
@@ -72,7 +72,7 @@ namespace UnitTests
 			beaconList.Add (beacon3);
 
 			//Create a dummmy ranging event
-			rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs (beaconFinder.getRegion (), beaconList);
+			rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs (beaconFinder.GetRegion (), beaconList);
 
 			//Observers have not yet been notified
 			observersNotified = false;
@@ -92,7 +92,7 @@ namespace UnitTests
 
 			//Test that the beacons are properly ordered by accuracy
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
-			SortedList<double, EstimoteSdk.Beacon> immediateBeacons = beaconFinder.getImmediateBeacons ();
+			SortedList<double, EstimoteSdk.Beacon> immediateBeacons = beaconFinder.GetImmediateBeacons ();
 
 			//make sure we have beacons on which we can run the test
 			if(immediateBeacons.Count == 0)
@@ -123,7 +123,7 @@ namespace UnitTests
 
 			//Test that the beacons are properly ordered by accuracy
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
-			SortedList<double, EstimoteSdk.Beacon> immediateBeacons = beaconFinder.getImmediateBeacons ();
+			SortedList<double, EstimoteSdk.Beacon> immediateBeacons = beaconFinder.GetImmediateBeacons ();
 
 			//make sure we have beacons on which we can run the test
 			if(immediateBeacons.Count == 0)
@@ -152,7 +152,7 @@ namespace UnitTests
 
 			triggerBeaconRanginEvent ();
 
-			EstimoteSdk.Beacon closestBeacon = beaconFinder.getClosestBeacon ();
+			EstimoteSdk.Beacon closestBeacon = beaconFinder.GetClosestBeacon ();
 
 			Assert.True (closestBeacon.Major == beacon1.Major);
 			Assert.True (closestBeacon.Minor == beacon1.Minor);
@@ -166,7 +166,7 @@ namespace UnitTests
 			beaconManagerRangingMethod.Invoke (beaconFinder, mParam);
 		}
 
-		public void beaconFinderObserverUpdate(IBeaconFinderObservable observable){
+		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
 			observersNotified = true;
 		}
         

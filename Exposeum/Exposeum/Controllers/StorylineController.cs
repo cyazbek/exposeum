@@ -7,8 +7,8 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private static Map map = StoryLineService.GetMapInstance();
-		private static StoryLine selectedStoryLine;
+		private static Map _map = StoryLineService.GetMapInstance();
+		private static StoryLine _selectedStoryLine;
 
         public static StorylineController GetInstance()
         {
@@ -18,24 +18,24 @@ namespace Exposeum.Controllers
         }
 
 		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, map.getStoryLineList);
+			return new StoryLineListAdapter(activity, _map.GetStoryLineList);
 		}
 
 		public void SelectStoryLine(int storylinePosition){
-			selectedStoryLine = map.getStoryLineList[storylinePosition];
+			_selectedStoryLine = _map.GetStoryLineList[storylinePosition];
 		}
 
 		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
 			
 				
 				DialogFragment dialog;
-				if(selectedStoryLine.currentStatus==Status.inProgress)
+				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
 				{
-					dialog = new DialogStorylineInProgress(selectedStoryLine, context);
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
 				}
 				else
 				{
-					dialog = new DialogStoryline(selectedStoryLine, context);
+					dialog = new DialogStoryline(_selectedStoryLine, context);
 				}
 
 				dialog.Show(transaction, "Story Line title");
@@ -43,29 +43,29 @@ namespace Exposeum.Controllers
 			
         public void ResetStorylineProgress(StoryLine storyLine)
         {
-            foreach (var poi in storyLine.poiList)
+            foreach (var poi in storyLine.PoiList)
             {
                 poi.Visited = false;
             }
 
             storyLine.SetLastPointOfInterestVisited(null);
-            storyLine.currentStatus = Status.isNew;
+            storyLine.CurrentStatus = Status.IsNew;
 
         }
 
         public void PauseStorylineBeacons()
         {
-            BeaconFinder.getInstance().stopRanging();
+            BeaconFinder.GetInstance().StopRanging();
         }
 
         public void ResumeStorylineBeacons()
         {
-            BeaconFinder.getInstance().findBeacons();
+            BeaconFinder.GetInstance().FindBeacons();
         }
 
 		public void SetActiveStoryLine(){
-			map.CurrentStoryline = selectedStoryLine;
-            BeaconFinder.getInstance().setStoryLine(selectedStoryLine);
+			_map.CurrentStoryline = _selectedStoryLine;
+            BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
 		}
     }
 }

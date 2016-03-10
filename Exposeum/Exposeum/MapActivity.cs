@@ -26,32 +26,32 @@ namespace Exposeum
 
 			View view = LayoutInflater.Inflate (Resource.Layout.MapView, null);
 
-			FrameLayout map_view_frame_layout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
+			FrameLayout mapViewFrameLayout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
 
-			MapView map_view = new MapView (this);
+			MapView mapView = new MapView (this);
 
-			map_view_frame_layout.AddView (map_view);
+			mapViewFrameLayout.AddView (mapView);
 
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
-			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
+			floorSeekBar.ProgressChanged += mapView.OnMapSliderProgressChange;
 
-			_beaconFinder = BeaconFinder.getInstance ();
-			_beaconFinder.setInFocus(true);
-			_beaconFinder.setNotificationDestination (this);
+			_beaconFinder = BeaconFinder.GetInstance ();
+			_beaconFinder.SetInFocus(true);
+			_beaconFinder.SetNotificationDestination (this);
 			SetContentView (view);
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			_beaconFinder.setInFocus (true);
+			_beaconFinder.SetInFocus (true);
 
 		}
 
 		protected override void OnPause()
 		{
 			base.OnPause();
-			_beaconFinder.setInFocus (false);
+			_beaconFinder.SetInFocus (false);
 		}
 	}
 }

@@ -28,13 +28,13 @@ namespace Exposeum.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
-            view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.name_en;
+            view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.NameEn;
             var textview = view.FindViewById<TextView>(Resource.Id.wrongPointDesc);
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.wrongPointButton);
-            if (Language.getLanguage() == "fr")
+            if (Language.GetLanguage() == "fr")
                 button.Text = "Fermer";
             
             button.Click += (sender, e) =>
