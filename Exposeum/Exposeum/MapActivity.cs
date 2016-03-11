@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 using Exposeum.Views;
+using Exposeum.Controllers;
 
 namespace Exposeum
 {
@@ -19,26 +20,21 @@ namespace Exposeum
 	{
 
 		private BeaconFinder _beaconFinder;
+		private MapController _mapController;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
-			View view = LayoutInflater.Inflate (Resource.Layout.MapView, null);
+			_mapController = MapController.GetInstance (this);
 
-			FrameLayout mapViewFrameLayout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
-
-			MapView mapView = new MapView (this);
-
-			mapViewFrameLayout.AddView (mapView);
-
-			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
-			floorSeekBar.ProgressChanged += mapView.OnMapSliderProgressChange;
-
+			//Configure the BeaconFinder for this activity
 			_beaconFinder = BeaconFinder.GetInstance ();
 			_beaconFinder.SetInFocus(true);
 			_beaconFinder.SetNotificationDestination (this);
-			SetContentView (view);
+
+			//Bind the _totalMapView to the Activity
+			SetContentView (_mapController._totalMapView);
 		}
 
 		protected override void OnResume()
@@ -52,6 +48,12 @@ namespace Exposeum
 		{
 			base.OnPause();
 			_beaconFinder.SetInFocus (false);
+		}
+
+		protected override void OnDestroy ()
+		{
+			base.OnDestroy ();
+			_mapController.Destroy();
 		}
 	}
 }

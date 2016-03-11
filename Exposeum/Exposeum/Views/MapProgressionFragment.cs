@@ -78,9 +78,11 @@ namespace Exposeum
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
 
-				for (int i = 0; i < currentStoryline.MapElements.Count; i++) {
+				List<PointOfInterest> currentPOIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
 
-					MapElement current = currentStoryline.MapElements [i];
+				for (int i = 0; i < currentPOIs.Count; i++) {
+
+					MapElement current = currentPOIs[i];
 
 					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
