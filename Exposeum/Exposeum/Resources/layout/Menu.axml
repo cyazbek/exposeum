@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</LinearLayout>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/LanguageItem"
+        android:icon="@drawable/Beacon_Activated"
+        android:title="@string/Language_option"
+        android:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/PauseItem"
+        android:icon="@drawable/Beacon_Activated"
+        android:title="@string/Pause_option" />
+    <item
+        android:id="@+id/QRScannerItem"
+        android:icon="@drawable/Beacon_Activated"
+        android:title="@string/QRScanner_option" />
+</menu>

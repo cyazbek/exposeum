@@ -50,5 +50,31 @@ namespace Exposeum
             var intent = new Intent(this, typeof(LanguageActivity));
             StartActivity(intent);
             }//end onBackPressed()
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            return base.OnCreateOptionsMenu(menu);
         }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+
+
+                case Resource.Id.Language_option:
+                    //do something
+                    return true;
+                case Resource.Id.Pause_option:
+                    //do something
+                    return true;
+                case Resource.Id.QRScanner_option:
+                    //do something
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+    }
 }
