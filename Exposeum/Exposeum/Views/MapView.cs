@@ -35,12 +35,12 @@ namespace Exposeum.Views
         private PointOfInterestPopup _newPointOfInterestPopup;
 		private OutOfOrderPointFragment _outOfOrderDialog;
 
-	    public MapView (Context context) : base(context, null, 0)
+		public MapView (Context context, MapController controller) : base(context, null, 0)
 		{            
             _context = context;
 			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
-			_controller = new MapController (this);
-			_map = _controller.Model;
+			_controller = controller;
+			_map = Map.GetInstance();
 
 			_visitedEdge.SetStyle (Paint.Style.Fill);
 			_visitedEdge.Color = Color.Green;
@@ -54,17 +54,6 @@ namespace Exposeum.Views
 				ViewGroup.LayoutParams.MatchParent,
 				ViewGroup.LayoutParams.MatchParent
 			);
-
-		}
-
-        public MapController GetController()
-        {
-            return _controller;
-        }
-
-        public void OnMapSliderProgressChange (object sender, SeekBar.ProgressChangedEventArgs e)
-		{
-			_controller.FloorChanged(e.Progress);
 		}
 
 		public void Update(){

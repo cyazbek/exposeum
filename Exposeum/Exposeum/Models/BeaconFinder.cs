@@ -246,6 +246,13 @@ namespace Exposeum
 		}
 
 		/// <summary>
+		/// This method allows de-register observers.
+		/// </summary>
+		public void RemoveObserver(IBeaconFinderObserver observer){
+			_observers.Remove (observer);
+		}
+
+		/// <summary>
 		/// This method notifies IBeaconFinderObservers of an event.
 		/// </summary>
 		public void NotifyObservers(){

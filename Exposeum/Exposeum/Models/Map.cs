@@ -22,13 +22,17 @@ namespace Exposeum.Models
 			SeedData ();
         }
 
-	    public static Map GetMapInstance()
+	    public static Map GetInstance()
 	    {
 	        if (_map == null)
                 _map = new Map();
 
 	        return _map;
 	    }
+
+		public void Destroy (){
+			_map = null;
+		}
         
 		private void SeedData(){
 
