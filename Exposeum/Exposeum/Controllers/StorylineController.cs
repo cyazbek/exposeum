@@ -43,9 +43,9 @@ namespace Exposeum.Controllers
 			
         public void ResetStorylineProgress(StoryLine storyLine)
         {
-            foreach (var poi in storyLine.PoiList)
+			foreach (var mapElement in storyLine.MapElements)
             {
-                poi.Visited = false;
+				mapElement.Visited = false;
             }
 
             storyLine.SetLastPointOfInterestVisited(null);
