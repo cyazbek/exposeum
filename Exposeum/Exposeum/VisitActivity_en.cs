@@ -64,13 +64,13 @@ namespace Exposeum
             {
 
 
-                case Resource.Id.Language_option:
+                case Resource.Id.LanguageItem:
                     //do something
                     return true;
-                case Resource.Id.Pause_option:
+                case Resource.Id.PauseItem:
                     //do something
                     return true;
-                case Resource.Id.QRScanner_option:
+                case Resource.Id.QRScannerItem:
                     //do something
                     return true;
             }
