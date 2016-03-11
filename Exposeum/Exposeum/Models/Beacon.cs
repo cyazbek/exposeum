@@ -6,41 +6,41 @@ namespace Exposeum.Models
 {
     public class Beacon
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public Beacon()
         { }
-        public UUID uuid
+        public UUID Uuid
         {
             get; set;
         } 
-        public int major
+        public int Major
         {
             get; set;
         } 
-        public int minor
+        public int Minor
         {
             get; set;
         }
         public Beacon (UUID uuid, int major, int minor)
         {
-            this.uuid = uuid;
-            this.major = major;
-            this.minor = minor; 
+            this.Uuid = uuid;
+            this.Major = major;
+            this.Minor = minor; 
         }
-        public bool compareBeacon(EstimoteSdk.Beacon beacon)
+        public bool CompareBeacon(EstimoteSdk.Beacon beacon)
         {
-            if (this.uuid.Equals(beacon.ProximityUUID) && this.minor == beacon.Minor && this.major == beacon.Major)
+            if (this.Uuid.Equals(beacon.ProximityUUID) && this.Minor == beacon.Minor && this.Major == beacon.Major)
                 return true;
             else
                 return false; 
         }
-        public void convertFromData(BeaconData data)
+        public void ConvertFromData(BeaconData data)
         {
-            this.id = data.ID;
-            this.uuid = UUID.FromString(data.uuid);
-            this.major = data.major;
-            this.minor = data.minor;  
+            this.Id = data.Id;
+            this.Uuid = UUID.FromString(data.Uuid);
+            this.Major = data.Major;
+            this.Minor = data.Minor;  
         }
 
         public override bool Equals(object obj)
@@ -48,7 +48,7 @@ namespace Exposeum.Models
             if (obj != null)
             {
                 Beacon other = (Beacon)obj;
-                return other.major == major && other.minor == minor;
+                return other.Major == Major && other.Minor == Minor;
             }
             return false;
         }

@@ -5,8 +5,8 @@ namespace Exposeum.Models
 {
     public abstract class MapElement
 	{
-		public float _u, _v;
-        public Floor floor;
+		public float U, V;
+        public Floor Floor;
 
         public Boolean Visited { get; set; }
 
@@ -16,11 +16,11 @@ namespace Exposeum.Models
 
 		protected MapElement(float u, float v, Floor floor)
 		{
-			this._u = u;
-			this._v = v;
+			this.U = u;
+			this.V = v;
 			Visited = false;
 
-			this.floor = floor;
+			this.Floor = floor;
 		}
 
         public void SetVisited()

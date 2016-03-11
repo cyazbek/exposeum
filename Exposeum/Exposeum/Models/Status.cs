@@ -13,5 +13,5 @@ using Android.Widget;
 namespace Exposeum.Models
 {
     public enum Status
-    { isVisited, inProgress, isNew }
+    { IsVisited, InProgress, IsNew }
 }

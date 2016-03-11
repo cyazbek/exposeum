@@ -46,8 +46,8 @@ namespace Exposeum
 //            Language.getInstance(); 
             frenchButton.Click += (sender, e)=>
             {
-                Language.setLanguage("fr");
-                Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
+                Language.SetLanguage("fr");
+                Toast.MakeText(this, Language.GetLanguage(), ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
 
@@ -55,8 +55,8 @@ namespace Exposeum
 
             englishButton.Click += (sender, e) =>
             {
-                Language.setLanguage("en");
-                Toast.MakeText(this, Language.getLanguage(), ToastLength.Short).Show();
+                Language.SetLanguage("en");
+                Toast.MakeText(this, Language.GetLanguage(), ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
             };

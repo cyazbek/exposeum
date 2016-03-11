@@ -29,7 +29,7 @@ namespace UnitTests.US07
         public void Setup()
         {
             _poi = new PointOfInterest(1f, 1f);
-            _poi.name_en = "testpoint";
+            _poi.NameEn = "testpoint";
             MockContext context = new MockContext();
             _mapview = new MapView(context);
 

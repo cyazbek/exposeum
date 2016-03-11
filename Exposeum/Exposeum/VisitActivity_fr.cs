@@ -14,7 +14,7 @@ using Android.Content.PM;
 namespace Exposeum.Models
 {
     [Activity(Label = "Choix De Visite", Theme = "@android:style/Theme.Holo.Light.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class VisitActivity_fr : Activity
+    public class VisitActivityFr : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,8 +24,8 @@ namespace Exposeum.Models
             var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
             var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
             languageSelector.Click += (o, e) => {
-                Language.toogleLanguage();
-                var intent = new Intent(this, typeof(VisitActivity_en));
+                Language.ToogleLanguage();
+                var intent = new Intent(this, typeof(VisitActivityEn));
                 StartActivity(intent);
             };
             freeVisitButton.Click += (sender, e) =>

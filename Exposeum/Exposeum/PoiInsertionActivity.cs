@@ -9,19 +9,19 @@ using Java.Util;
 namespace Exposeum
 {
     [Activity(Label = "New POI")]
-    public class POI_insertion : Activity
+    public class PoiInsertion : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             
             base.OnCreate(savedInstanceState);
-            DBController db = new DBController();
+            DbController db = new DbController();
             var result = db.createTables();
             Toast.MakeText(this, result, ToastLength.Short).Show();
-            PointOfInterest poi = new PointOfInterest { name_en = "Point Of interest Firas", name_fr = "Point d'interet Firas", description_en = "This is the point of interest Firas", description_fr = "Celui là est le premier point de Firas" };
+            PointOfInterest poi = new PointOfInterest { NameEn = "Point Of interest Firas", NameFr = "Point d'interet Firas", DescriptionEn = "This is the point of interest Firas", DescriptionFr = "Celui là est le premier point de Firas" };
             Beacon beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-            poi.beacon = beacon;
-            result= db.insertPoi(poi);
+            poi.Beacon = beacon;
+            result= db.InsertPoi(poi);
             Toast.MakeText(this, result, ToastLength.Short).Show();
 
             // Set path, create connection and create table
@@ -40,13 +40,13 @@ namespace Exposeum
                 String descriptionEnglish = FindViewById<EditText>(Resource.Id.POI_desc_en_text).Text.ToString();
                 String descriptionFrench = FindViewById<EditText>(Resource.Id.POI_desc_fr_text).Text.ToString();
                 var textView = FindViewById<TextView>(Resource.Id.successMessage);
-                PointOfInterest test = new PointOfInterest { name_en = nameEnglish, name_fr = nameFrench, description_en = descriptionEnglish, description_fr = descriptionFrench };
+                PointOfInterest test = new PointOfInterest { NameEn = nameEnglish, NameFr = nameFrench, DescriptionEn = descriptionEnglish, DescriptionFr = descriptionFrench };
                 Beacon beacon1 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-                test.beacon = beacon1;
-                string testresult = "Added test POI to db "+db.insertPoi(test);
+                test.Beacon = beacon1;
+                string testresult = "Added test POI to db "+db.InsertPoi(test);
                 Toast.MakeText(this, testresult, ToastLength.Short).Show();
                 PointOfInterest poiq = new PointOfInterest();
-                poiq = db.getPoi(4);
+                poiq = db.GetPoi(4);
                 Toast.MakeText(this, poiq.toString(), ToastLength.Short).Show();
                 
                 /*

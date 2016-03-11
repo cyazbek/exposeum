@@ -16,12 +16,18 @@ namespace Exposeum
 {
     class DialogStorylineInProgress : DialogFragment
     {
-        StoryLine storyLine;
+        StoryLine _storyLine;
+		Context _context; 
         StorylineController _storylineController = StorylineController.GetInstance();
         
-        public DialogStorylineInProgress(StoryLine storyLine)
+        public DialogStorylineInProgress(StoryLine storyLine){
+			this._storyLine = storyLine;
+		}
+        
+        public DialogStorylineInProgress(StoryLine storyLine,Context context)
         {
-            this.storyLine = storyLine;
+            this._storyLine = storyLine;
+            this._context = context; 
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -29,10 +35,10 @@ namespace Exposeum
             base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = inflater.Inflate(Resource.Layout.StoryLine_dialog_inProgress, container, false);
-                view.FindViewById<ImageView>(Resource.Id.sotryLineDialogPic).SetImageResource(storyLine.ImageId);
-                view.FindViewById<TextView>(Resource.Id.storyLineDialogTitle).Text = storyLine.getName();
-                view.FindViewById<TextView>(Resource.Id.storyLineDialogAudience).Text = storyLine.getAudience();
-                view.FindViewById<TextView>(Resource.Id.storyLineDialogDuration).Text = storyLine.duration + " min";
+                view.FindViewById<ImageView>(Resource.Id.sotryLineDialogPic).SetImageResource(_storyLine.ImageId);
+                view.FindViewById<TextView>(Resource.Id.storyLineDialogTitle).Text = _storyLine.GetName();
+                view.FindViewById<TextView>(Resource.Id.storyLineDialogAudience).Text = _storyLine.GetAudience();
+                view.FindViewById<TextView>(Resource.Id.storyLineDialogDuration).Text = _storyLine.Duration + " min";
 
             var textview = view.FindViewById<TextView>(Resource.Id.storyLineDialogDescription);
                 textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
@@ -43,7 +49,7 @@ namespace Exposeum
             var buttonToReset = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToReset);
                 
 
-            if (Language.getLanguage() == "fr")
+            if (Language.GetLanguage() == "fr")
             {
                 view.FindViewById<TextView>(Resource.Id.storyInProgress).Text = "Actuallement en cours.";
                 buttonToResume.Text = "Reprendre";
@@ -58,20 +64,25 @@ namespace Exposeum
 
             buttonToResume.Click += delegate
             {
-                _storylineController.CurrentStoryLine = storyLine;
+				_storylineController.SetActiveStoryLine();
                 _storylineController.ResumeStorylineBeacons();
-                //TODO: redirect to map with selected storyline
+				var intent = new Intent(_context, typeof(MapActivity));
+                StartActivity(intent);
             };
 
             buttonToReset.Click += delegate {
-                _storylineController.ResetStorylineProgress(storyLine);
+
+                _storylineController.SetActiveStoryLine();
+                _storylineController.ResetStorylineProgress(_storyLine);
                 _storylineController.ResumeStorylineBeacons();
-                //TODO: redirect to map with selected storyline
+                var intent = new Intent(_context, typeof(MapActivity));
+                StartActivity(intent);
             };
 
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
+
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {

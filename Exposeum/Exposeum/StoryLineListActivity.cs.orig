@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Exposeum.Models;
+using Exposeum.Controllers;
+
+namespace Exposeum
+{
+    [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
+    public class StoryLineListActivity : Activity
+    {
+        public Map map;
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            
+            ListView listView;
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.StoryLineListView);
+            listView = FindViewById<ListView>(Resource.Id.List);
+			listView.Adapter = StoryLineController.GetStoryLines(this);
+            listView.ItemClick += ListViewItemClick;
+        }
+
+        private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+<<<<<<< HEAD
+            if(storyLine.currentStatus==Status.inProgress)
+            {
+                DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
+            else if (storyLine.currentStatus == Status.isNew)
+            {
+                DialogStoryline dialog = new DialogStoryline(storyLine);
+                dialog.Show(transaction, "Story Line title");
+            }
+            else
+            {
+                DialogPauseStorylineConfirmation dialog = new DialogPauseStorylineConfirmation(storyLine, this);
+                dialog.Show(transaction, "delete");
+            }
+=======
+			StoryLineController.SelectStoryLine (e.Position);
+			StoryLineController.ShowSelectedStoryLineDialog (transaction, this);
+
+>>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
+        }
+        
+    }
+}
+

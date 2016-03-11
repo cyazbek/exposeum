@@ -15,13 +15,13 @@ namespace Exposeum
 {
     public class StoryLineListAdapter : BaseAdapter<StoryLine>
     {
-        List<StoryLine> items;
-        Activity context;
+        List<StoryLine> _items;
+        Activity _context;
         public StoryLineListAdapter(Activity context, List<StoryLine> items)
             : base()
         {
-            this.context = context;
-            this.items = items;
+            this._context = context;
+            this._items = items;
         }
         public override long GetItemId(int position)
         {
@@ -29,21 +29,21 @@ namespace Exposeum
         }
         public override StoryLine this[int position]
         {
-            get { return items[position]; }
+            get { return _items[position]; }
         }
         public override int Count
         {
-            get { return items.Count; }
+            get { return _items.Count; }
         }
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = items[position];
+            var item = _items[position];
             var icon = 0;
-            if (item.currentStatus.Equals(Status.inProgress))
+            if (item.CurrentStatus.Equals(Status.InProgress))
             {
                 icon = Resource.Drawable.inProgress;
             }
-            else if (item.currentStatus.Equals(Status.isVisited))
+            else if (item.CurrentStatus.Equals(Status.IsVisited))
             {
                 icon = Resource.Drawable.completed;
             }
@@ -53,11 +53,11 @@ namespace Exposeum
 
             View view = convertView;
             if (view == null) // no view to re-use, create new
-                view = context.LayoutInflater.Inflate(Resource.Layout.StoryLineRow, null);
+                view = _context.LayoutInflater.Inflate(Resource.Layout.StoryLineRow, null);
             view.FindViewById<ImageView>(Resource.Id.StoryLineIcon).SetImageResource(item.ImageId);
-            view.FindViewById<TextView>(Resource.Id.TitleTextView).Text = item.getName();
-            view.FindViewById<TextView>(Resource.Id.AudienceTextView).Text = item.getAudience();
-            view.FindViewById<TextView>(Resource.Id.durationTextView).Text = item.duration + " min";
+            view.FindViewById<TextView>(Resource.Id.TitleTextView).Text = item.GetName();
+            view.FindViewById<TextView>(Resource.Id.AudienceTextView).Text = item.GetAudience();
+            view.FindViewById<TextView>(Resource.Id.durationTextView).Text = item.Duration + " min";
             view.FindViewById<ImageView>(Resource.Id.statusIcon).SetImageResource(icon);
             return view;
         }

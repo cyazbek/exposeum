@@ -4,14 +4,14 @@ namespace Exposeum.Models
 {
 	public class Edge
 	{
-		private MapElement start {get; set;}
-		private MapElement end {get; set;}
-		private double distance {get; set;}
+		private MapElement Start {get; set;}
+		private MapElement End {get; set;}
+		private double Distance {get; set;}
 
 		public Edge (MapElement start, MapElement end)
 		{
-			this.start = start;
-			this.end = end;
+			this.Start = start;
+			this.End = end;
 		}
 	}
 }

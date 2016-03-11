@@ -7,35 +7,35 @@ namespace Exposeum.Data
     public class StoryData
     {
         [PrimaryKey, AutoIncrement]
-        public int id
+        public int Id
         {
             get; set;
         }
-        public string name_en
+        public string NameEn
         {
             get; set;
         }
-        public string name_fr
+        public string NameFr
         {
             get; set;
         }
-        public string audience_en
+        public string AudienceEn
         {
             get; set;
         }
-        public string audience_fr
+        public string AudienceFr
         {
             get; set;
         }
-        public string desc_en
+        public string DescEn
         {
             get; set;
         }
-        public string desc_fr
+        public string DescFr
         {
             get; set;
         }
-        public int duration
+        public int Duration
         {
             get; set;
         }

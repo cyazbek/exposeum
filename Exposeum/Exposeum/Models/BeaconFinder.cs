@@ -15,76 +15,76 @@ namespace Exposeum
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
-		private static BeaconFinder singletonInstance;
+		private static BeaconFinder _singletonInstance;
 
 		private static readonly int BeaconFoundNotificationId = 1001;
-		private NotificationManager notificationManager;
-		private BeaconManager beaconManager;
-		private EstimoteSdk.Region region;
-		private bool isRanging;
-		private bool isServiceReady;
-		private const string TAG = "BeaconFinder";
-		private int beaconCount;
-		private LinkedList<IBeaconFinderObserver> observers = new LinkedList<IBeaconFinderObserver>();
-		private SortedList<double, EstimoteSdk.Beacon> immediateBeacons;
-		private StoryLine storyLine;
-		private Context context;
-		private Context notificationDestination;
-		private bool inFocus;
+		private NotificationManager _notificationManager;
+		private BeaconManager _beaconManager;
+		private EstimoteSdk.Region _region;
+		private bool _isRanging;
+		private bool _isServiceReady;
+		private const string Tag = "BeaconFinder";
+		private int _beaconCount;
+		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
+		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
+		private StoryLine _storyLine;
+		private Context _context;
+		private Context _notificationDestination;
+		private bool _inFocus;
 
 		private BeaconFinder (Context context)
 		{
-			region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-			constructBeaconManager (context);
-			constructNotificationManager (context);
-			this.context = context;
+			_region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+			ConstructBeaconManager (context);
+			ConstructNotificationManager (context);
+			this._context = context;
 		}
 
 		/// <summary>
 		/// This method instantiate the instance of the BeaconFinder singleton
 		/// </summary>
-		public static void initInstance(Context context){
-			if (singletonInstance == null)
-				singletonInstance = new BeaconFinder (context);
+		public static void InitInstance(Context context){
+			if (_singletonInstance == null)
+				_singletonInstance = new BeaconFinder (context);
 		}
 
 		/// <summary>
 		/// This method returns the instance of the BeaconFinder singleton
 		/// </summary>
-		public static BeaconFinder getInstance(){
-			return singletonInstance;
+		public static BeaconFinder GetInstance(){
+			return _singletonInstance;
 		}
 
 		/// <summary>
 		/// This method builds the beaconManager
 		/// </summary>
-		private void constructBeaconManager(Context context){
-			beaconManager = new BeaconManager (context);
+		private void ConstructBeaconManager(Context context){
+			_beaconManager = new BeaconManager (context);
 
 			//add event handlers for ranging
-			beaconManager.Ranging += beaconManagerRanging;
+			_beaconManager.Ranging += BeaconManagerRanging;
 		}
 
 		/// <summary>
 		/// This method builds the notification manager
 		/// </summary>
-		private void constructNotificationManager(Context context){
-			notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+		private void ConstructNotificationManager(Context context){
+			_notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
 		}
 
 		/// <summary>
 		/// This method completes the building process of an android system notification for when a beacon is found.
 		/// </summary>
-		private Notification buildBeaconFoundNotification(string poiName, string poiDesc){
+		private Notification BuildBeaconFoundNotification(string poiName, string poiDesc){
 
-			Context destination = notificationDestination == null ? context : notificationDestination;
+			Context destination = _notificationDestination == null ? _context : _notificationDestination;
 
 			Intent notifyIntent = new Intent(destination, destination.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
 
-			PendingIntent pendingIntent = PendingIntent.GetActivities(context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
+			PendingIntent pendingIntent = PendingIntent.GetActivities(_context, 0, new[] { notifyIntent }, PendingIntentFlags.UpdateCurrent);
 
-			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (context)
+			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (_context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
@@ -101,34 +101,34 @@ namespace Exposeum
 		/// the event along with the sender is passed. This method will filter the beacons and notify the
 		/// registered observers
 		/// </summary>
-		private void beaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
+		private void BeaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
 			if (e.Beacons == null)
 			{
 				//If the app is not in focus, clear all potential notification associated with a beacon
-				if(!inFocus)
-					notificationManager.Cancel (BeaconFoundNotificationId);
+				if(!_inFocus)
+					_notificationManager.Cancel (BeaconFoundNotificationId);
 				Log.Debug("BeaconFinder", "e.Beacons is null");
 				return;
 			}
 
 			Log.Debug("BeaconFinder", e.Beacons.ToString());
 
-			EstimoteSdk.Beacon previousClosestBeacon = getClosestBeacon ();
+			EstimoteSdk.Beacon previousClosestBeacon = GetClosestBeacon ();
 
-			filterImmediateBeacons (e.Beacons);
+			FilterImmediateBeacons (e.Beacons);
 
-			EstimoteSdk.Beacon currentClosestBeacon = getClosestBeacon ();
-
-			if (inFocus)
-				notifyObservers();
+			EstimoteSdk.Beacon currentClosestBeacon = GetClosestBeacon ();
 
 			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
-			if(!inFocus)
-				notifyUser ();
+			if (_inFocus)
+				NotifyObservers();
+
+			if(!_inFocus)
+				NotifyUser ();
 				
 		}
 
@@ -136,16 +136,16 @@ namespace Exposeum
 		/// This method will filter am IList of beacons based on their proximity. It will only keep immediate beacons
 		/// and will put them in a sorted list, ordered by the accurary of their distance estimation.
 		/// </summary>
-		private void filterImmediateBeacons(IList<EstimoteSdk.Beacon> beacons){
-			beaconCount = beacons.Count;
-			immediateBeacons = new SortedList<double, EstimoteSdk.Beacon>();
+		private void FilterImmediateBeacons(IList<EstimoteSdk.Beacon> beacons){
+			_beaconCount = beacons.Count;
+			_immediateBeacons = new SortedList<double, EstimoteSdk.Beacon>();
 
 			Log.Debug("BeaconFinder", "Found {0} beacons.", beacons.Count);
 
 			foreach (var beacon in beacons)
 			{
 				//if the beacon is not in the storyline, skip it and move to the next one
-				if (!storyLine.hasBeacon (beacon))
+				if (!_storyLine.HasBeacon (beacon))
 					continue;
 
 				var proximity = Utils.ComputeProximity(beacon);
@@ -153,7 +153,7 @@ namespace Exposeum
 
 				if (proximity == Utils.Proximity.Immediate) {
 					try {
-						immediateBeacons.Add (accuracy, beacon);
+						_immediateBeacons.Add (accuracy, beacon);
 					} catch (System.ArgumentException ex) {
 						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: " + ex.Message);
 					}
@@ -168,22 +168,22 @@ namespace Exposeum
 		/// </summary>
 		public void OnServiceReady()
 		{
-			if (region == null)
+			if (_region == null)
 			{
 				throw new Exception("beacon reagion is null");
 			}
 			try
 			{
-				isServiceReady = true;
-				beaconManager.StartRanging(region);
-				isRanging = true;
-				Log.Debug(TAG, "Looking for beacons in the region.");
+				_isServiceReady = true;
+				_beaconManager.StartRanging(_region);
+				_isRanging = true;
+				Log.Debug(Tag, "Looking for beacons in the region.");
 			}
 			catch (RemoteException e)
 			{
-				isRanging = false;
-				isServiceReady = false;
-				Log.Error(TAG, "Cannot start ranging, {0}", e);
+				_isRanging = false;
+				_isServiceReady = false;
+				Log.Error(Tag, "Cannot start ranging, {0}", e);
 			}
 
 		}
@@ -191,27 +191,27 @@ namespace Exposeum
 		/// <summary>
 		/// This method lauch the Estimote Ibeacon finding service and connects our current instance to it.
 		/// </summary>
-		public void findBeacons(){
+		public void FindBeacons(){
 
-			if (storyLine == null) {
+			if (_storyLine == null) {
 				throw new StoryLineNotFoundException ("You must set the storyline first. Call setStorylLine");
 			}
 
-			if(checkBluetooth() && !isServiceReady){
+			if(CheckBluetooth() && !_isServiceReady){
 				//Connect ot the beacon service
-				beaconManager.Connect(this);
+				_beaconManager.Connect(this);
 
-			}else if(isServiceReady)
-				beaconManager.StartRanging(region);
+			}else if(_isServiceReady)
+				_beaconManager.StartRanging(_region);
 		}
 
 		/// <summary>
 		/// This method stops BeaconFinder from Ranging
 		/// </summary>
-		public void stopRanging(){
-			if (isRanging && isServiceReady) {
+		public void StopRanging(){
+			if (_isRanging && _isServiceReady) {
 				//Disconnect ot the beacon service
-				beaconManager.StopRanging (region);
+				_beaconManager.StopRanging (_region);
 			}
 		}
 
@@ -219,20 +219,20 @@ namespace Exposeum
 		/// This method stops BeaconFinder from Ranging, Monitoring and disconnnects the current instance from the 
 		/// Estimote Ibeacon finding service
 		/// </summary>
-		public void stopBeaconFinder(){
+		public void StopBeaconFinder(){
 			Log.Debug("BeaconFinder", "stopping everything");
-			stopRanging ();
-			beaconManager.Disconnect ();
+			StopRanging ();
+			_beaconManager.Disconnect ();
 		}
 
 		/// <summary>
 		/// This method checks the current bluetooth status
 		/// </summary>
-		private bool checkBluetooth()
+		private bool CheckBluetooth()
 		{
 			//Validation checks
-			if (!beaconManager.HasBluetooth || !beaconManager.IsBluetoothEnabled 
-				|| !beaconManager.CheckPermissionsAndService())
+			if (!_beaconManager.HasBluetooth || !_beaconManager.IsBluetoothEnabled 
+				|| !_beaconManager.CheckPermissionsAndService())
 				return false;
 
 			return true;
@@ -241,26 +241,26 @@ namespace Exposeum
 		/// <summary>
 		/// This method allows IBeaconFinderObservers to register with BeaconFinder.
 		/// </summary>
-		public void addObserver(IBeaconFinderObserver observer){
-			observers.AddLast (observer);
+		public void AddObserver(IBeaconFinderObserver observer){
+			_observers.AddLast (observer);
 		}
 
 		/// <summary>
 		/// This method notifies IBeaconFinderObservers of an event.
 		/// </summary>
-		public void notifyObservers(){
-			foreach (IBeaconFinderObserver observer in observers) {
-				observer.beaconFinderObserverUpdate (this);
+		public void NotifyObservers(){
+			foreach (IBeaconFinderObserver observer in _observers) {
+				observer.BeaconFinderObserverUpdate (this);
 			}
 		}
 
 		/// <summary>
 		/// This method sends a previously built Android Notification to the android system.
 		/// </summary>
-		private void sendBeaconFoundNotification(Notification notification){
+		private void SendBeaconFoundNotification(Notification notification){
 			notification.Defaults |= NotificationDefaults.Lights;
 			notification.Defaults |= NotificationDefaults.Sound;
-			notificationManager.Notify(BeaconFoundNotificationId, notification);
+			_notificationManager.Notify(BeaconFoundNotificationId, notification);
 
 			Log.Debug("BeaconFinder", "Sending notification");
 
@@ -269,112 +269,112 @@ namespace Exposeum
 		/// <summary>
 		/// This method returns the total (unfiltered) count of the beacons detected by the phone.
 		/// </summary>
-		public int getBeaconCount(){
-			return beaconCount;
+		public int GetBeaconCount(){
+			return _beaconCount;
 		}
 
 		/// <summary>
 		/// This method returns a sorted list of beacons found in the immediate vicinity of the phone.
 		/// </summary>
-		public SortedList<double, EstimoteSdk.Beacon> getImmediateBeacons(){
-			return immediateBeacons;
+		public SortedList<double, EstimoteSdk.Beacon> GetImmediateBeacons(){
+			return _immediateBeacons;
 		}
 
 		/// <summary>
 		/// This method returns the beacon closest to the phone.
 		/// </summary>
-		public EstimoteSdk.Beacon getClosestBeacon(){
+		public EstimoteSdk.Beacon GetClosestBeacon(){
 
-			if (immediateBeacons == null || immediateBeacons.Count == 0)
+			if (_immediateBeacons == null || _immediateBeacons.Count == 0)
 				return null;
 			
-			return immediateBeacons.Values[ 0 ];
+			return _immediateBeacons.Values[ 0 ];
 		}
 
 		/// <summary>
 		/// This method returns the current instance of the BeaconManager.
 		/// </summary>
-		public BeaconManager getBeaconManager(){
-			return beaconManager;
+		public BeaconManager GetBeaconManager(){
+			return _beaconManager;
 		}
 
 		/// <summary>
 		/// This method returns the current instance of the sotryline.
 		/// </summary>
-		public StoryLine getStoryLine(){
-			return storyLine;
+		public StoryLine GetStoryLine(){
+			return _storyLine;
 		}
 
 		/// <summary>
 		/// This method sets the current instance of the storyline.
 		/// </summary>
-		public void setStoryLine(StoryLine storyLine){
-			this.storyLine = storyLine;
+		public void SetStoryLine(StoryLine storyLine){
+			this._storyLine = storyLine;
 		}
 
 		/// <summary>
 		/// </summary>
-		private void notifyUser(){
+		private void NotifyUser(){
 
 			Log.Debug("BeaconFinder", "Notifying user");
 
 			//clear all previous notifications
-			notificationManager.Cancel (BeaconFoundNotificationId);
+			_notificationManager.Cancel (BeaconFoundNotificationId);
 
-			if (getClosestBeacon () != null) {
-				PointOfInterest poi = storyLine.findPOI (getClosestBeacon ());
+			if (GetClosestBeacon () != null) {
+				PointOfInterest poi = _storyLine.FindPoi (GetClosestBeacon ());
 				if(!poi.Visited) //don't send a notification if the beacon has already been visited
-					sendBeaconFoundNotification (buildBeaconFoundNotification (poi.getName (), poi.getDescription ()));
+					SendBeaconFoundNotification (BuildBeaconFoundNotification (poi.GetName (), poi.GetDescription ()));
 			} else {
-				notificationManager.Cancel (BeaconFoundNotificationId);
+				_notificationManager.Cancel (BeaconFoundNotificationId);
 			}
 		}
 
 		/// <summary>
 		/// This method allows you to set the focus status of the app/activity
 		/// </summary>
-		public void setInFocus(bool focus){
-			inFocus = focus;
+		public void SetInFocus(bool focus){
+			_inFocus = focus;
 		}
 
 		/// <summary>
 		/// This method allows you to get the focus status of the app/activity
 		/// </summary>
-		public bool getInFocus(){
-			return inFocus;
+		public bool GetInFocus(){
+			return _inFocus;
 		}
 
 		/// <summary>
 		/// This method allows you to set the region that the BeaconFinder will range
 		/// </summary>
-		public void setRegion(Region region){
-			if (isRanging)
+		public void SetRegion(Region region){
+			if (_isRanging)
 				throw new CantSetRegionException ("Cannot set set region since BeaconFinder is ranging. Stop ranging first, then set the region.");
 
-			this.region = region;
+			this._region = region;
 		}
 
 		/// <summary>
 		/// This method allows you to get the region that the BeaconFinder ranges
 		/// </summary>
-		public Region getRegion(){
-			return region;
+		public Region GetRegion(){
+			return _region;
 		}
 
 		/// <summary>
 		/// This method allows you to get the the context to which a a user 
 		/// will be directed after tapping the notification
 		/// </summary>
-		public Context getNotificationDestination(){
-			return notificationDestination;
+		public Context GetNotificationDestination(){
+			return _notificationDestination;
 		}
 
 		/// <summary>
 		/// This method allows you to set the the context to which a a user 
 		/// will be directed after tapping the notification
 		/// </summary>
-		public void setNotificationDestination(Context cont){
-			notificationDestination = cont;
+		public void SetNotificationDestination(Context cont){
+			_notificationDestination = cont;
 		}
 
 	}

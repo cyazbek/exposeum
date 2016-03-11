@@ -14,29 +14,29 @@ namespace Exposeum.Models
 {
     public class Language
     {
-        private static Language instance = new Language();
-        private static string lang = "";
+        private static Language _instance = new Language();
+        private static string _lang = "";
         private Language()
         {
 
         }
-        public static Language getInstance()
+        public static Language GetInstance()
         {
-            return instance;
+            return _instance;
         }
-        public static string getLanguage()
+        public static string GetLanguage()
         {
-            return lang; 
+            return _lang; 
         }
-        public static void setLanguage(string langSelected)
+        public static void SetLanguage(string langSelected)
         {
-            lang = langSelected;
+            _lang = langSelected;
         }
-        public static void toogleLanguage()
+        public static void ToogleLanguage()
         {
-            if (lang == "fr")
-                lang = "en";
-            else lang = "fr";
+            if (_lang == "fr")
+                _lang = "en";
+            else _lang = "fr";
         }
     }
 }

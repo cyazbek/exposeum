@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,36 +25,33 @@ namespace Exposeum
 			base.OnCreate (savedInstanceState);
 
 			View view = LayoutInflater.Inflate (Resource.Layout.MapView, null);
-			SetContentView(view);
 
-			LinearLayout lay = (LinearLayout)view.FindViewById (Resource.Id.linlay1);
-			MapView map_view = new MapView (this);
+			FrameLayout mapViewFrameLayout = (FrameLayout)view.FindViewById (Resource.Id.map_view_frame_lay);
 
-			map_view.LayoutParameters = new ViewGroup.LayoutParams (
-				ViewGroup.LayoutParams.WrapContent,
-				ViewGroup.LayoutParams.WrapContent
-			);
+			MapView mapView = new MapView (this);
 
-			lay.AddView (map_view, 1);
+			mapViewFrameLayout.AddView (mapView);
 
 			SeekBar floorSeekBar = view.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
-			floorSeekBar.ProgressChanged += map_view.OnMapSliderProgressChange;
+			floorSeekBar.ProgressChanged += mapView.OnMapSliderProgressChange;
 
-			_beaconFinder = BeaconFinder.getInstance ();
-			_beaconFinder.setInFocus(true);
+			_beaconFinder = BeaconFinder.GetInstance ();
+			_beaconFinder.SetInFocus(true);
+			_beaconFinder.SetNotificationDestination (this);
+			SetContentView (view);
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			_beaconFinder.setInFocus (true);
+			_beaconFinder.SetInFocus (true);
 
 		}
 
 		protected override void OnPause()
 		{
 			base.OnPause();
-			_beaconFinder.setInFocus (false);
+			_beaconFinder.SetInFocus (false);
 		}
 	}
 }

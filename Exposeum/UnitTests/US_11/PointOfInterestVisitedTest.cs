@@ -33,7 +33,7 @@ namespace UnitTests.US_11
             private EstimoteSdk.Beacon beacon3;
             private EstimoteSdk.BeaconManager.RangingEventArgs rangingEvent;
             private IList<EstimoteSdk.Beacon> _beaconList;
-            private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
+            private BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
             private MapControllerMock mapController;
 
             [SetUp]
@@ -59,8 +59,8 @@ namespace UnitTests.US_11
 
                 mapController = mapView.getController();
 
-                _beaconFinder.addObserver(mapController);
-                _beaconFinder.setInFocus(true);
+                _beaconFinder.AddObserver(mapController);
+                _beaconFinder.SetInFocus(true);
             }
 
             [TearDown]
@@ -84,11 +84,11 @@ namespace UnitTests.US_11
                 _beaconList.Add(beacon3);
 
                 //Create a dummmy ranging event
-                rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs(_beaconFinder.getRegion(), _beaconList);
+                rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs(_beaconFinder.GetRegion(), _beaconList);
                 triggerBeaconRanginEvent();
                 
                 Beacon beaconModel = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-                pointOfInterestTest = mapController.Model.getCurrentStoryline.poiList.Where(poi => poi.beacon.Equals(beaconModel)).FirstOrDefault();
+                pointOfInterestTest = mapController.Model.getCurrentStoryline.PoiList.Where(poi => poi.Beacon.Equals(beaconModel)).FirstOrDefault();
 
                 Assert.True(pointOfInterestTest.Visited);
             }
@@ -103,11 +103,11 @@ namespace UnitTests.US_11
 
 
                 //Create a dummmy ranging event
-                rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs(_beaconFinder.getRegion(), _beaconList);
+                rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs(_beaconFinder.GetRegion(), _beaconList);
                 triggerBeaconRanginEvent();
 
                 Beacon beaconModel = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982, 54450);
-                pointOfInterestTest = mapController.Model.getCurrentStoryline.poiList.Where(poi => poi.beacon.Equals(beaconModel)).FirstOrDefault();
+                pointOfInterestTest = mapController.Model.getCurrentStoryline.PoiList.Where(poi => poi.Beacon.Equals(beaconModel)).FirstOrDefault();
 
                 Assert.False(pointOfInterestTest.Visited);
             }
@@ -164,17 +164,17 @@ namespace UnitTests.US_11
                     Beacon beacon3 = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 
                     PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f);
-                    p1.beacon = beacon1;
+                    p1.Beacon = beacon1;
 
                     PointOfInterest p2 = new PointOfInterest(0.53f, 0.46f);
-                    p2.beacon = beacon2;
+                    p2.Beacon = beacon2;
 
                     PointOfInterest p3 = new PointOfInterest(0.53f, 0.46f);
-                    p3.beacon = beacon3;
+                    p3.Beacon = beacon3;
 
-                    _currentStoryLine.addPoi(p1);
-                    _currentStoryLine.addPoi(p2);
-                    _currentStoryLine.addPoi(p3);
+                    _currentStoryLine.AddPoi(p1);
+                    _currentStoryLine.AddPoi(p2);
+                    _currentStoryLine.AddPoi(p3);
             }
 
                 public StoryLine getCurrentStoryline
@@ -188,24 +188,24 @@ namespace UnitTests.US_11
             {
                 private MapMock _model;
                 private MapViewMock _view;
-                private BeaconFinder _beaconFinder = BeaconFinder.getInstance();
+                private BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
 
                 public MapControllerMock(MapViewMock view) : base(null)
                 {
                     _view = view;
                     _model = new MapMock();
-                    _beaconFinder.setStoryLine(_model.CurrentStoryline);
+                    _beaconFinder.SetStoryLine(_model.CurrentStoryline);
                 }
             
 
                  public new void beaconFinderObserverUpdate(IBeaconFinderObservable observable)
                 {
                     BeaconFinder beaconFinder = (BeaconFinder)observable;
-                    EstimoteSdk.Beacon beacon = beaconFinder.getClosestBeacon();
+                    EstimoteSdk.Beacon beacon = beaconFinder.GetClosestBeacon();
 
-                    if (beacon != null && (_model.getCurrentStoryline.hasBeacon(beacon)))
+                    if (beacon != null && (_model.getCurrentStoryline.HasBeacon(beacon)))
                     {
-                        PointOfInterest poi = _model.getCurrentStoryline.findPOI(beacon);
+                        PointOfInterest poi = _model.getCurrentStoryline.FindPoi(beacon);
                         poi.Visited = true;
                         _model.getCurrentStoryline.SetLastPointOfInterestVisited(poi);
                     }

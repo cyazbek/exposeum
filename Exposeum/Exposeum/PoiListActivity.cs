@@ -7,7 +7,7 @@ using Exposeum.Models;
 namespace Exposeum
 {
     [Activity(Label = "List of POIs")]
-    public class POI_ListDisplay : Activity
+    public class PoiListDisplay : Activity
     { 
 
         protected override void OnCreate(Bundle savedInstanceState)
