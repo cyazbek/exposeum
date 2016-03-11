@@ -9,7 +9,7 @@ namespace Exposeum
 
 		public static Map GetMapInstance(){
 			if (_instance == null)
-				_instance = Map.GeMapInstance();
+				_instance = Map.GetMapInstance();
 
 			return _instance;
 		}

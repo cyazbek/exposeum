@@ -22,9 +22,9 @@ namespace Exposeum.Models
 			SeedData ();
         }
 
-	    public static Map GeMapInstance()
+	    public static Map GetMapInstance()
 	    {
-	        if (_map != null)
+	        if (_map == null)
                 _map = new Map();
 
 	        return _map;
