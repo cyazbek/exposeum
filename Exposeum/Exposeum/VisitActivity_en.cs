@@ -19,16 +19,12 @@ namespace Exposeum
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VisitActivity_en);
             var freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
-            languageSelector.Click += (o, e) => {
-                    Language.ToogleLanguage();
-                    var intent = new Intent(this, typeof(VisitActivityFr));
-                    StartActivity(intent);
-            };
 
             freeVisitButton.Click += (sender, e) =>
             {
@@ -44,8 +40,29 @@ namespace Exposeum
 				StartActivity(intent);
 
             };
+
+
+            //=========================================================================================
+
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                base.OnBackPressed();
+            };
+
+            //=========================================================================================
+
+
         }
-            public override void OnBackPressed()
+        public override void OnBackPressed()
             {
             var intent = new Intent(this, typeof(LanguageActivity));
             StartActivity(intent);

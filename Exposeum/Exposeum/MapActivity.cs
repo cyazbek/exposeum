@@ -35,9 +35,31 @@ namespace Exposeum
 
 			//Bind the _totalMapView to the Activity
 			SetContentView (_mapController._totalMapView);
-		}
 
-		protected override void OnResume()
+            //=========================================================================================
+
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                base.OnBackPressed();
+            };
+
+
+
+
+
+            //=========================================================================================
+        }
+
+        protected override void OnResume()
 		{
 			base.OnResume();
 			_beaconFinder.SetInFocus (true);
@@ -55,5 +77,27 @@ namespace Exposeum
 			base.OnDestroy ();
 			_mapController.Destroy();
 		}
-	}
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+
+
+                case Resource.Id.LanguageItem:
+                    //Language.ToogleLanguage();
+                    //var intent = new Intent(this, typeof(VisitActivityFr));
+                    //StartActivity(intent);
+                    return true;
+                case Resource.Id.PauseItem:
+                    //do something
+                    return true;
+                case Resource.Id.QRScannerItem:
+                    //do something
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+    }
 }
