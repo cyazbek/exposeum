@@ -20,44 +20,21 @@ namespace Exposeum
     {
         private static ViewPager _mPager;
         private List<int> _imagesArray = new List<int>();
-        private List<int> _imagesFrench = new List<int>();
-        private List<int> _imagesEnglish = new List<int>();
         private List<int> _imagesToDisplay;
-        Intent _intent; 
-        
+        Intent _intent;
+        User user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.WalkThrough);
             var walkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
-            string buttonText;
-            _imagesFrench.Add(Resource.Drawable.first_fr);
-            _imagesFrench.Add(Resource.Drawable.second_fr);
-            _imagesFrench.Add(Resource.Drawable.third_fr);
-            _imagesFrench.Add(Resource.Drawable.fourth_fr);
-
-            _imagesEnglish.Add(Resource.Drawable.first);
-            _imagesEnglish.Add(Resource.Drawable.second);
-            _imagesEnglish.Add(Resource.Drawable.third);
-            _imagesEnglish.Add(Resource.Drawable.fourth);
-            if (Language.GetLanguage()=="fr")
-            {
-                buttonText = "Sauter";
-                _intent = new Intent(this, typeof(VisitActivityFr));
-                _imagesToDisplay = _imagesFrench; 
-            }
-            else
-            {
-                buttonText = "Skip";
-                _intent = new Intent(this, typeof(VisitActivityEn));
-                _imagesToDisplay = _imagesEnglish;
-            }
-            walkthroughButton.Text = buttonText;
-
+            _imagesToDisplay = user.GetImageList();
+            walkthroughButton.Text = user.GetButtonText("WalkThroughButton");
             Init();
             walkthroughButton.Click += (sender, e) =>
             {
-                StartActivity(_intent);
+                var intent = new Intent(this, typeof(VisitActivity));
+                StartActivity(intent);
             };
             
         }
