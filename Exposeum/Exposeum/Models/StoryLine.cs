@@ -154,10 +154,10 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            string lang = Language.GetLanguage();
+            Language lang = User.GetInstance()._language;
             string storyName;
 
-            if (lang.Equals("fr"))
+            if (lang.Equals(Language.FR))
                 storyName = this.NameFr;
             else
                 storyName = this.NameEn;
@@ -167,10 +167,10 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            string lang = Language.GetLanguage();
+            Language lang = User.GetInstance()._language;
             string storyDesc;
 
-            if (lang.Equals("fr"))
+            if (lang.Equals(Language.FR))
                 storyDesc = this.DescFr;
             else
                 storyDesc = this.DescEn;
@@ -180,11 +180,10 @@ namespace Exposeum.Models
 
         public string GetAudience()
         {
-            string lang = Language.GetLanguage();
+            Language lang = User.GetInstance()._language;
             string storyAudience;
-
-            if (lang.Equals("fr"))
-                storyAudience = this.AudienceFr;
+            if (lang.Equals(Language.FR))
+                storyAudience = AudienceFr; 
             else
                 storyAudience = this.AudienceEn;
 

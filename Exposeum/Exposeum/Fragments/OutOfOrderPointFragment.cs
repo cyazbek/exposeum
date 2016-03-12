@@ -34,8 +34,7 @@ namespace Exposeum.Fragments
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.wrongPointButton);
-            if (Language.GetLanguage() == "fr")
-                button.Text = "Fermer";
+            button.Text = User.GetInstance().GetButtonText("wrongPointButton");
             
             button.Click += (sender, e) =>
             {

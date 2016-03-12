@@ -17,7 +17,7 @@ namespace Exposeum
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
-
+        User user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -46,8 +46,8 @@ namespace Exposeum
 //            Language.getInstance(); 
             frenchButton.Click += (sender, e)=>
             {
-                Language.SetLanguage("fr");
-                Toast.MakeText(this, Language.GetLanguage(), ToastLength.Short).Show();
+                
+                user.SwitchLanguage(Language.FR);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
 
@@ -55,8 +55,7 @@ namespace Exposeum
 
             englishButton.Click += (sender, e) =>
             {
-                Language.SetLanguage("en");
-                Toast.MakeText(this, Language.GetLanguage(), ToastLength.Short).Show();
+                user.SwitchLanguage(Language.EN);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
             };
