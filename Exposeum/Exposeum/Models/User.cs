@@ -105,14 +105,13 @@ namespace Exposeum.Models
             if (_language == Language.EN)
             {
                 _language = Language.FR;
-                SetupLanguage();
             }
                 
             else
             {
                 _language = Language.EN;
-                SetupLanguage();
             }
+            SetupLanguage();
         }
 
     }

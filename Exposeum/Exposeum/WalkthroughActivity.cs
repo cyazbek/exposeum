@@ -23,6 +23,7 @@ namespace Exposeum
         private List<int> _imagesToDisplay;
         Intent _intent;
         User user = User.GetInstance(); 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
