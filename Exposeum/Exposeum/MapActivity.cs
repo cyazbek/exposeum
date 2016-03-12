@@ -15,7 +15,7 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]	
+	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light")]	
 	public class MapActivity : Activity
 	{
 
@@ -26,18 +26,7 @@ namespace Exposeum
 		{
 			base.OnCreate (savedInstanceState);
 
-			_mapController = MapController.GetInstance (this);
-
-			//Configure the BeaconFinder for this activity
-			_beaconFinder = BeaconFinder.GetInstance ();
-			_beaconFinder.SetInFocus(true);
-			_beaconFinder.SetNotificationDestination (this);
-
-			//Bind the _totalMapView to the Activity
-			SetContentView (_mapController._totalMapView);
-
-            //=========================================================================================
-
+            //=========================================================================================================
             //remove default bar
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetDisplayShowTitleEnabled(false);
@@ -51,13 +40,19 @@ namespace Exposeum
             {
                 base.OnBackPressed();
             };
+            //=========================================================================================================
 
 
+            _mapController = MapController.GetInstance (this);
 
+			//Configure the BeaconFinder for this activity
+			_beaconFinder = BeaconFinder.GetInstance ();
+			_beaconFinder.SetInFocus(true);
+			_beaconFinder.SetNotificationDestination (this);
 
-
-            //=========================================================================================
-        }
+			//Bind the _totalMapView to the Activity
+		    SetContentView(_mapController._totalMapView);
+		}
 
         protected override void OnResume()
 		{
@@ -79,12 +74,17 @@ namespace Exposeum
 		}
 
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
-
-
                 case Resource.Id.LanguageItem:
                     //Language.ToogleLanguage();
                     //var intent = new Intent(this, typeof(VisitActivityFr));
