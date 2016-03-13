@@ -17,5 +17,10 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+
+        public Beacon GetBeacon(int id)
+        {
+            return _db.Get<Beacon>(id);
+        }
     }
 }

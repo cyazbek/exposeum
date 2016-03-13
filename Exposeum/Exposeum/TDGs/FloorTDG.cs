@@ -16,5 +16,10 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+
+        public Floor GetFloor(int id)
+        {
+            return _db.Get<Floor>(id);
+        }
     }
 }
