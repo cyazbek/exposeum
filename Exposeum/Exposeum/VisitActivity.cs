@@ -28,6 +28,28 @@ namespace Exposeum
             freeVisitButton.Text = user.GetButtonText("freeTour");
             storylineButton.Text = user.GetButtonText("storyLine");
             languageSelector.Text = user.GetButtonText("languageButton");
+
+
+            //=======    Action Bar   =================================================================================
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                base.OnBackPressed();
+            };
+
+
+            //=========================================================================================================
+
+
+
             languageSelector.Click += (o, e) => {
                 user.ToogleLanguage();
                 this.Recreate();
@@ -53,5 +75,35 @@ namespace Exposeum
             var intent = new Intent(this, typeof(LanguageActivity));
             StartActivity(intent);
             }//end onBackPressed()
+
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            return base.OnCreateOptionsMenu(menu);
         }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+
+
+                case Resource.Id.LanguageItem:
+                    User.GetInstance().ToogleLanguage();
+                    //var intent = new Intent(this, typeof(VisitActivityFr));
+                    //StartActivity(intent);
+                    return true;
+                case Resource.Id.PauseItem:
+                    //do something
+                    return true;
+                case Resource.Id.QRScannerItem:
+                    //do something
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
+    }
 }
