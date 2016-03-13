@@ -18,6 +18,7 @@ namespace Exposeum
     public class VisitActivity : Activity
     {
         User user = User.GetInstance(); 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,8 +29,11 @@ namespace Exposeum
             freeVisitButton.Text = user.GetButtonText("freeTour");
             storylineButton.Text = user.GetButtonText("storyLine");
             languageSelector.Text = user.GetButtonText("languageButton");
+
             languageSelector.Click += (o, e) => {
+                
                 user.ToogleLanguage();
+                languageSelector.Text = user.GetButtonText("languageButton");
                 this.Recreate();
             };
 

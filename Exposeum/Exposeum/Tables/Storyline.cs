@@ -13,6 +13,8 @@ namespace Exposeum.Tables
         public int floorsCovered { get; set; }
         public int lastVisitedPoi { get; set; }
         public string status { get; set; } 
+        public int descriptionId { get; set; }
+
 
     }
 }

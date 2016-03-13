@@ -1,7 +1,7 @@
 using SQLite; 
 namespace Exposeum.Tables
 {
-    class MapElements
+    public class MapElements
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }
@@ -14,6 +14,7 @@ namespace Exposeum.Tables
         public int poiDescription { get; set; }
         public string label { get; set; }
         public int exhibitionContent { get; set; }
+        public int floorId { get; set; }
 
     }
 }

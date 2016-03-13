@@ -2,8 +2,8 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    [Table("Items")]
-    class PoiDescriptionFr
+
+    public class PoiDescriptionFr
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }

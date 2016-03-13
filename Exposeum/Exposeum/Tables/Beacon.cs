@@ -3,7 +3,7 @@ using SQLite;
 namespace Exposeum.Tables
 {
     [Table("Items")]
-    class Beacon
+    public class Beacon
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }
