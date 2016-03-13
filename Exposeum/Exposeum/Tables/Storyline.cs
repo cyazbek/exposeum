@@ -9,6 +9,7 @@ namespace Exposeum.Tables
         public string audience { get; set; }
         public int duration { get; set; }
         public int image { get; set; } 
+
         public int floorsCovered { get; set; }
         public int lastVisitedPoi { get; set; }
         public string status { get; set; } 
