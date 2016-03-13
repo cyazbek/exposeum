@@ -12,7 +12,15 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class ExhibitionContentFrTDG
+    class ExhibitionContentFrTDG:TDG
     {
+        private static ExhibitionContentFrTDG _instance;
+
+        public static ExhibitionContentFrTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new ExhibitionContentFrTDG();
+            return _instance;
+        }
     }
 }

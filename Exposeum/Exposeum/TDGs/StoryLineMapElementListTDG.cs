@@ -15,7 +15,15 @@ namespace Exposeum.TDGs
 {
     public class StoryLineMapElementListTDG:TDG
     {
-        private StoryLineMapElementListTDG _instance;
+        private static StoryLineMapElementListTDG _instance;
+
+        public static StoryLineMapElementListTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new StoryLineMapElementListTDG();
+            return _instance;
+        }
+
         
     }
 }
