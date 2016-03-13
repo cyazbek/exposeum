@@ -258,7 +258,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
   </ItemGroup>

@@ -38,8 +38,8 @@ namespace Exposeum.Models
             _englishButtonString.Add(new ButtonText("confirm_pause", "Yes"));
             _englishButtonString.Add(new ButtonText("reject_pause", "No"));
             _englishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
-
-
+            _englishButtonString.Add(new ButtonText("PauseItem", "Pause"));
+            
             _frenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
             _frenchButtonString.Add(new ButtonText("freeTour", "Visite Libre"));
             _frenchButtonString.Add(new ButtonText("storyLine", "Tours Guidés"));
@@ -53,7 +53,8 @@ namespace Exposeum.Models
             _frenchButtonString.Add(new ButtonText("confirm_pause", "Oui"));
             _frenchButtonString.Add(new ButtonText("reject_pause", "Non"));
             _frenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
-            
+            _frenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
+
             _frenchImageList.Add(Resource.Drawable.first_fr);
             _frenchImageList.Add(Resource.Drawable.second_fr);
             _frenchImageList.Add(Resource.Drawable.third_fr);

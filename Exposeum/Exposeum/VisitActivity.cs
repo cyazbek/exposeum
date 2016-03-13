@@ -86,19 +86,22 @@ namespace Exposeum
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            
+            //Toast.MakeText(this, txt, ToastLength.Long);
             switch (item.ItemId)
             {
-
-
+               
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
                     //var intent = new Intent(this, typeof(VisitActivityFr));
                     //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
-                    //do something
+                    //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
+
                     return true;
                 case Resource.Id.QRScannerItem:
+                    
                     //do something
                     return true;
             }

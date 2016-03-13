@@ -71,9 +71,9 @@ namespace Exposeum
 
 
                 case Resource.Id.LanguageItem:
-                    Language.ToogleLanguage();
-                    var intent = new Intent(this, typeof(VisitActivityFr));
-                    StartActivity(intent);
+                    User.GetInstance().ToogleLanguage();
+                    //var intent = new Intent(this, typeof(VisitActivityFr));
+                    //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
                     //do something
