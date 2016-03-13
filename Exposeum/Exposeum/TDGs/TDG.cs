@@ -1,4 +1,5 @@
 using SQLite;
+using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {

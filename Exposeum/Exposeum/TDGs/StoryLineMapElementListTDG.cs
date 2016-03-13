@@ -1,15 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
+using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
@@ -24,6 +13,10 @@ namespace Exposeum.TDGs
             return _instance;
         }
 
+        public void Add(StoryLineMapElementList item)
+        {
+            _db.Insert(item);
+        }
         
     }
 }

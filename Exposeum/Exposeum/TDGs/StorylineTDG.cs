@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Exposeum.Tables;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace Exposeum.TDGs
 {
@@ -21,6 +12,10 @@ namespace Exposeum.TDGs
             if (_instance == null)
                 _instance = new StorylineTDG();
             return _instance;
+        }
+        public void Add(Storyline item)
+        {
+            _db.Insert(item);
         }
     }
 }
