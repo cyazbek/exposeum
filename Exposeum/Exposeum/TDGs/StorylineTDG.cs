@@ -21,5 +21,10 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+        public Storyline Get(int id)
+        {
+           return _db.Get<Storyline>(id);
+        }
+
     }
 }
