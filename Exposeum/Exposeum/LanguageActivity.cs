@@ -46,11 +46,9 @@ namespace Exposeum
 //            Language.getInstance(); 
             frenchButton.Click += (sender, e)=>
             {
-                
                 user.SwitchLanguage(Language.FR);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
-
             };
 
             englishButton.Click += (sender, e) =>
