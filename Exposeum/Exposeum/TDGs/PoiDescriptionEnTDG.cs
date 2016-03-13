@@ -12,7 +12,15 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class PoiDescriptionEnTDG
+    class PoiDescriptionEnTDG:TDG
     {
+        private static PoiDescriptionEnTDG _instance;
+
+        public static PoiDescriptionEnTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new PoiDescriptionEnTDG();
+            return _instance;
+        }
     }
 }

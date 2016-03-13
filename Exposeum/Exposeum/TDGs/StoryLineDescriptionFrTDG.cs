@@ -12,7 +12,15 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class StoryLineDescriptionFrTDG
+    class StoryLineDescriptionFrTDG:TDG
     {
+        private static StoryLineDescriptionFrTDG _instance;
+
+        public static StoryLineDescriptionFrTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new StoryLineDescriptionFrTDG();
+            return _instance;
+        }
     }
 }

@@ -12,7 +12,15 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class FloorTDG
+    class FloorTDG:TDG
     {
+        private static FloorTDG _instance;
+
+        public static FloorTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new FloorTDG();
+            return _instance;
+        }
     }
 }

@@ -12,7 +12,15 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class MapElementsTDG
+    class MapElementsTDG:TDG
     {
+        private static MapElementsTDG _instance;
+
+        public static MapElementsTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new MapElementsTDG();
+            return _instance;
+        }
     }
 }
