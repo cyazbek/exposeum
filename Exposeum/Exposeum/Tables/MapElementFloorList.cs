@@ -2,7 +2,7 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    class MapElementFloorList
+    public class MapElementFloorList
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }

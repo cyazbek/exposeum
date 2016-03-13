@@ -2,8 +2,8 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    
-    class StorylineDescriptionList
+
+    public class StorylineDescriptionList
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }

@@ -4,7 +4,7 @@ namespace Exposeum.Tables
 {
     [Table("Items")]
 
-    class ExhibitionContentEn
+    public class ExhibitionContentEn
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }
