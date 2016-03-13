@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
+    <Compile Include="Data\BeaconData.cs" />
+    <Compile Include="Data\PoiStoryData.cs" />
+    <Compile Include="Data\StoryData.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
@@ -85,42 +88,13 @@
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\ButtonText.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
-    <Compile Include="Tables\Beacon.cs" />
-    <Compile Include="Tables\DBManager.cs" />
-    <Compile Include="Tables\Edge.cs" />
-    <Compile Include="Tables\ExhibitionContentEn.cs" />
-    <Compile Include="Tables\ExhibitionContentFr.cs" />
-    <Compile Include="Tables\Floor.cs" />
-    <Compile Include="Tables\Icon.cs" />
-    <Compile Include="Tables\Images.cs" />
-    <Compile Include="Tables\MapElements.cs" />
-    <Compile Include="Tables\PoiDescriptionEn.cs" />
-    <Compile Include="Tables\PoiDescriptionFr.cs" />
-    <Compile Include="Tables\Storyline.cs" />
-    <Compile Include="Tables\StoryLineDescriptionEn.cs" />
-    <Compile Include="Tables\StoryLineDescriptionFr.cs" />
-    <Compile Include="Tables\StoryLineMapElementList.cs" />
-    <Compile Include="TDGs\BeaconTDG.cs" />
-    <Compile Include="TDGs\EdgeTDG.cs" />
-    <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
-    <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
-    <Compile Include="TDGs\FloorTDG.cs" />
-    <Compile Include="TDGs\IconTDG.cs" />
-    <Compile Include="TDGs\ImagesTDG.cs" />
-    <Compile Include="TDGs\MapElementsTDG.cs" />
-    <Compile Include="TDGs\PoiDescriptionEnTDG.cs" />
-    <Compile Include="TDGs\PoiDescriptionFrTDG.cs" />
-    <Compile Include="TDGs\StoryLineDescriptionEnTDG.cs" />
-    <Compile Include="TDGs\StoryLineDescriptionFrTDG.cs" />
-    <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
-    <Compile Include="TDGs\StorylineTDG.cs" />
-    <Compile Include="TDGs\TDG.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +114,10 @@
     <AndroidResource Include="Resources\layout\Language.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <Compile Include="PoiInsertionActivity.cs" />
+    <Compile Include="PoiListActivity.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
@@ -157,6 +135,7 @@
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
@@ -167,8 +146,7 @@
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <Compile Include="Services\IStoryLineService.cs" />
-    <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
+    <Compile Include="Services\StoryLineService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -201,6 +179,9 @@
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Menu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -225,8 +206,8 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="sqlite-net">
-      <Visible>False</Visible>
       <Version>1.0.11</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
       <Version>23.0.1.3</Version>
@@ -277,7 +258,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
   </ItemGroup>
@@ -346,8 +326,5 @@
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Service Providers\" />
   </ItemGroup>
 </Project>

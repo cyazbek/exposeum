@@ -128,6 +128,17 @@ namespace Exposeum.Models
                 return false;
         }
 
+        public void ConvertFromData(Data.PoiData poi)
+        {
+            // this.visited = poi.visited;
+            this.NameEn = poi.NameEn;
+            this.NameFr = poi.NameFr;
+            this.DescriptionEn = poi.DscriptionEn;
+            this.DescriptionFr = poi.DscriptionFr;
+            this.U = poi.UCoord;
+            this.V = poi.VCoord;
+            this.Id = poi.Id;
+        }
 
         public string toString()
         {

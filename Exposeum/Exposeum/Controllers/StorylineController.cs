@@ -7,7 +7,7 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private static IStoryLineService _storyLineService = StoryLineServiceProvider.GetInstance();
+		private static Map _map = StoryLineService.GetMapInstance();
 		private static StoryLine _selectedStoryLine;
 
         public static StorylineController GetInstance()
@@ -18,11 +18,11 @@ namespace Exposeum.Controllers
         }
 
 		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, _storyLineService.GetStoryLines());
+			return new StoryLineListAdapter(activity, _map.GetStoryLineList);
 		}
 
 		public void SelectStoryLine(int storylinePosition){
-			_selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
+			_selectedStoryLine = _map.GetStoryLineList[storylinePosition];
 		}
 
 		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
@@ -64,7 +64,8 @@ namespace Exposeum.Controllers
         }
 
 		public void SetActiveStoryLine(){
-			_storyLineService.SetActiveStoryLine (_selectedStoryLine);
+			_map.CurrentStoryline = _selectedStoryLine;
+            BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
 		}
     }
 }

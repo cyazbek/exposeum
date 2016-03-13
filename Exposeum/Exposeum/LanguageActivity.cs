@@ -23,32 +23,16 @@ namespace Exposeum
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Language);
 
-            //=========================================================================================
-            
-            //remove default bar
-            ActionBar.SetDisplayShowHomeEnabled(false);
-            ActionBar.SetDisplayShowTitleEnabled(false);
-
-            //add custom bar
-            ActionBar.SetCustomView(Resource.Layout.ActionBar);
-            ActionBar.SetDisplayShowCustomEnabled(true);
-
-            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
-            backActionBarButton.Click += (s, e) =>
-            {
-                base.OnBackPressed();
-            };
-
-            //=========================================================================================
-
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
             var englishButton = FindViewById<Button>(Resource.Id.englishLang);
 //            Language.getInstance(); 
             frenchButton.Click += (sender, e)=>
             {
+                
                 user.SwitchLanguage(Language.FR);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
+
             };
 
             englishButton.Click += (sender, e) =>
