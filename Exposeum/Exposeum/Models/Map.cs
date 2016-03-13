@@ -13,7 +13,7 @@ namespace Exposeum.Models
 		private Floor _currentFloor;
         private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
-		private List<Edge> _edges;
+		private List<MapEdge> _edges;
         private List<StoryLine> _storyLines;
 
         private Map ()
