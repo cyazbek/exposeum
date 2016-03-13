@@ -92,10 +92,12 @@
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
     <Compile Include="Tables\Beacon.cs" />
+    <Compile Include="Tables\DBManager.cs" />
     <Compile Include="Tables\Edge.cs" />
     <Compile Include="Tables\ExhibitionContentEn.cs" />
     <Compile Include="Tables\ExhibitionContentFr.cs" />
     <Compile Include="Tables\Floor.cs" />
+    <Compile Include="Tables\Icon.cs" />
     <Compile Include="Tables\Images.cs" />
     <Compile Include="Tables\MapElementFloorList.cs" />
     <Compile Include="Tables\MapElements.cs" />
