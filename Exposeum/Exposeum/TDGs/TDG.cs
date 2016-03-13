@@ -1,9 +1,10 @@
 using SQLite;
+using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
     public abstract class TDG
     {
-        SQLiteConnection _db = Tables.DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = Tables.DBManager.GetInstance().getConnection();
     }
 }
