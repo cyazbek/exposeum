@@ -19,7 +19,7 @@ namespace Exposeum
         StoryLine _storyLine;
 		Context _context; 
         StorylineController _storylineController = StorylineController.GetInstance();
-        
+        User user = User.GetInstance(); 
         public DialogStorylineInProgress(StoryLine storyLine){
 			this._storyLine = storyLine;
 		}
@@ -47,20 +47,10 @@ namespace Exposeum
 
             var buttonToResume = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToResume);
             var buttonToReset = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToReset);
-                
-
-            if (Language.GetLanguage() == "fr")
-            {
-                view.FindViewById<TextView>(Resource.Id.storyInProgress).Text = "Actuallement en cours.";
-                buttonToResume.Text = "Reprendre";
-                buttonToReset.Text = "Recommencer";
-            }  
-            else
-            {
-                view.FindViewById<TextView>(Resource.Id.storyInProgress).Text = "Storyline already in progress.";
-                buttonToResume.Text = "Resume";
-                buttonToReset.Text = "Restart";
-            }
+            var textView = view.FindViewById<TextView>(Resource.Id.storyInProgress);
+            buttonToResume.Text = user.GetButtonText("storyLineDialogButtonToResume");
+            buttonToReset.Text = user.GetButtonText("storyLineDialogButtonToReset");
+            textView.Text = user.GetButtonText("storyInProgress");
 
             buttonToResume.Click += delegate
             {
