@@ -12,7 +12,8 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    class BeaconTDG
+    class BeaconTDG:TDG
     {
+
     }
 }

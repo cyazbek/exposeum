@@ -124,6 +124,7 @@
     <Compile Include="TDGs\StorylineDescriptionListTDG.cs" />
     <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
     <Compile Include="TDGs\StorylineTDG.cs" />
+    <Compile Include="TDGs\TDG.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

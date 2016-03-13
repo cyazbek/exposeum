@@ -9,10 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using SQLite;
 
 namespace Exposeum.TDGs
 {
-    class StoryLineMapElementListTDG
+    public class StoryLineMapElementListTDG:TDG
     {
+        private StoryLineMapElementListTDG _instance;
+        
     }
 }
