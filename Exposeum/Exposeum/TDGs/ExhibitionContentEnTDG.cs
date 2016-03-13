@@ -13,5 +13,9 @@ namespace Exposeum.TDGs
 
             return _instance;
         }
+        public void Add(ExhibitionContentEn item)
+        {
+            _db.Insert(item);
+        }
     }
 }

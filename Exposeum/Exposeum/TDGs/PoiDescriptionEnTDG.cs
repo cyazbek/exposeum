@@ -12,5 +12,9 @@ namespace Exposeum.TDGs
                 _instance = new PoiDescriptionEnTDG();
             return _instance;
         }
+        public void Add(PoiDescriptionEn item)
+        {
+            _db.Insert(item);
+        }
     }
 }

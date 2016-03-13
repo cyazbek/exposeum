@@ -12,5 +12,9 @@ namespace Exposeum.TDGs
                 _instance = new StoryLineDescriptionEnTDG();
             return _instance;
         }
+        public void Add(StoryLineDescriptionEn item)
+        {
+            _db.Insert(item);
+        }
     }
 }

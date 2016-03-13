@@ -2,16 +2,20 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class ImageTDG: TDG
+    public class ImagesTDG: TDG
     {
-        private static ImageTDG _instance;
+        private static ImagesTDG _instance;
 
-        public static ImageTDG GetInstance()
+        public static ImagesTDG GetInstance()
         {
             if (_instance == null)
-                _instance = new ImageTDG();
+                _instance = new ImagesTDG();
 
             return _instance;
+        }
+        public void Add(Images item)
+        {
+            _db.Insert(item);
         }
     }
 }

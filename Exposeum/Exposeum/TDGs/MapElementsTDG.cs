@@ -12,5 +12,9 @@ namespace Exposeum.TDGs
                 _instance = new MapElementsTDG();
             return _instance;
         }
+        public void Add(MapElements item)
+        {
+            _db.Insert(item);
+        }
     }
 }
