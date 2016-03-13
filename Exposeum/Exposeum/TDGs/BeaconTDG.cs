@@ -1,4 +1,4 @@
-using SQLite;
+using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
@@ -12,6 +12,11 @@ namespace Exposeum.TDGs
                 _instance = new BeaconTDG();
 
             return _instance;
+        }
+
+        public void Add(Beacon item)
+        {
+            _db.Insert(item);
         }
     }
 }
