@@ -17,5 +17,10 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+
+        public Edge GetEdge(int id)
+        {
+            return _db.Get<Edge>(id);
+        }
     }
 }

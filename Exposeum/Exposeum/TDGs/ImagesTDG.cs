@@ -21,5 +21,10 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+
+        public Images GetImages(int id)
+        {
+            return _db.Get<Images>(id);
+        }
     }
 }
