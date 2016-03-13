@@ -94,7 +94,7 @@ namespace Exposeum.Models
         {
             string summary;
 
-            if (Language.GetLanguage() == "fr")
+            if (User.GetInstance()._language.Equals(Language.FR))
                 summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
             else
                 summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
@@ -104,7 +104,7 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            if (Language.GetLanguage() == "fr")
+            if (User.GetInstance()._language.Equals(Language.FR))
                 return this.DescriptionFr;
             else
                 return this.DescriptionEn;
@@ -112,7 +112,7 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            if (Language.GetLanguage() == "fr")
+            if (User.GetInstance()._language.Equals(Language.FR))
                 return this.NameFr;
             else
                 return this.NameEn;
@@ -128,17 +128,6 @@ namespace Exposeum.Models
                 return false;
         }
 
-        public void ConvertFromData(Data.PoiData poi)
-        {
-            // this.visited = poi.visited;
-            this.NameEn = poi.NameEn;
-            this.NameFr = poi.NameFr;
-            this.DescriptionEn = poi.DscriptionEn;
-            this.DescriptionFr = poi.DscriptionFr;
-            this.U = poi.UCoord;
-            this.V = poi.VCoord;
-            this.Id = poi.Id;
-        }
 
         public string toString()
         {

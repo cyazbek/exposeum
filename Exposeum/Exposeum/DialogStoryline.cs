@@ -19,6 +19,7 @@ namespace Exposeum
         StoryLine _storyLine;
         Context _context; 
 		StorylineController _storylineController = StorylineController.GetInstance();
+        User user = User.GetInstance(); 
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
@@ -39,10 +40,7 @@ namespace Exposeum
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
-            if (Language.GetLanguage() == "fr")
-                button.Text = "Commencez l'Expérience";
-            else
-                button.Text = "Begin Journey";
+            button.Text = user.GetButtonText("storyLineDialogButton");
             button.Click += delegate {
 				_storylineController.SetActiveStoryLine();
                 var intent = new Intent(_context, typeof(MapActivity));

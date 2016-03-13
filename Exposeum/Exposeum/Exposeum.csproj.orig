@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,6 +44,14 @@
     <Reference Include="Macaw.UIComponents">
       <HintPath>..\Components\MultiImageView-1.2\lib\android\Macaw.UIComponents.dll</HintPath>
     </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\portable-win+net4+sl5+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\QuickGraph.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraphPCL.3.6.61114.2\lib\portable-win+net4+sl5+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\QuickGraph.Graphviz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SQLite-net">
       <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
     </Reference>
@@ -78,23 +86,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
-    <Compile Include="Data\BeaconData.cs" />
-    <Compile Include="Data\PoiStoryData.cs" />
-    <Compile Include="Data\StoryData.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\Beacon.cs" />
+    <Compile Include="Models\ButtonText.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+<<<<<<< HEAD
+    <Compile Include="Services\ShortestPathService.cs" />
+=======
+    <Compile Include="Models\User.cs" />
+>>>>>>> 6186d6872eaa81691bbf01fed4d4edcf53da0496
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
-    <Compile Include="VisitActivity_en.cs" />
-    <Compile Include="VisitActivity_fr.cs" />
+    <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeaconActivity.cs" />
@@ -113,16 +122,12 @@
     <AndroidResource Include="Resources\layout\Language.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <Compile Include="PoiInsertionActivity.cs" />
-    <Compile Include="PoiListActivity.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
     <Compile Include="Exceptions\CantSetRegionException.cs" />
     <Compile Include="Models\PointOfInterest.cs" />
-    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\MapEdge.cs" />
     <AndroidResource Include="Resources\layout\MapView.axml" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Models\Floor.cs" />
@@ -134,7 +139,6 @@
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
     <Compile Include="Models\Map.cs" />
-    <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
@@ -145,7 +149,7 @@
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <Compile Include="Services\MapService.cs" />
+    <Compile Include="Services\StoryLineService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -154,10 +158,7 @@
     <AndroidResource Include="Resources\layout\POI_List.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\VisitActivity_fr.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\VisitActivity_en.axml">
+    <AndroidResource Include="Resources\layout\VisitActivity.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml" />
@@ -177,7 +178,7 @@
     <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Pause_confirmation.axml"/>
+    <AndroidResource Include="Resources\layout\Pause_confirmation.axml" />
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
@@ -202,10 +203,6 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="MultiImageView">
       <Version>1.2</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="sqlite-net">
-      <Version>1.0.11</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
@@ -325,10 +322,6 @@
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
-=======
-    <Folder Include="Services\" />
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
   </ItemGroup>
 </Project>

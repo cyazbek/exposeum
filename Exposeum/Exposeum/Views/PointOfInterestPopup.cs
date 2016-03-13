@@ -19,8 +19,10 @@ namespace Exposeum.Views
 			_pwindow = new PopupWindow(popupView, WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
 
 			Button dismissButton = popupView.FindViewById<Button>(Resource.Id.pointofinterest_popup_dismiss);
+            dismissButton.Text = User.GetInstance().GetButtonText("pointofinterest_popup_dismiss");
 
-			dismissButton.Click += (sender, e) =>
+
+            dismissButton.Click += (sender, e) =>
 			{
 				_pwindow.Dismiss();
 			};

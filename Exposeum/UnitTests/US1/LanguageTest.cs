@@ -13,29 +13,29 @@ namespace UnitTests
 		[Test()]
 		public void setLanguageToFrench()
 		{
-			Language.SetLanguage ("fr"); 
-			Assert.AreSame (Language.GetLanguage (), "fr");
+			Language1.SetLanguage ("fr"); 
+			Assert.AreSame (Language1.GetLanguage (), "fr");
 		}
 		[Test()]
 		public void setLanguageToEnglish()
 		{
-			Language.SetLanguage ("en"); 
-			Assert.AreSame (Language.GetLanguage (), "en");
+			Language1.SetLanguage ("en"); 
+			Assert.AreSame (Language1.GetLanguage (), "en");
 		}
 		[Test()]
 		public void toogleLanguageTestFromEnglish()
 		{
-			Language.SetLanguage ("en"); 
-			Language.ToogleLanguage (); 
-			Assert.AreSame (Language.GetLanguage (), "fr");
+			Language1.SetLanguage ("en"); 
+			Language1.ToogleLanguage (); 
+			Assert.AreSame (Language1.GetLanguage (), "fr");
 
 		}
 		[Test()]
 		public void toogleLanguageTestFromFrench()
 		{
-			Language.SetLanguage ("fr"); 
-			Language.ToogleLanguage (); 
-			Assert.AreSame (Language.GetLanguage (), "en");
+			Language1.SetLanguage ("fr"); 
+			Language1.ToogleLanguage (); 
+			Assert.AreSame (Language1.GetLanguage (), "en");
 		}
 
 
