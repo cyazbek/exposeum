@@ -7,8 +7,11 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private static Map _map = StoryLineService.GetMapInstance();
-		private static StoryLine _selectedStoryLine;
+		private Map _map = Map.GetInstance();
+		public StoryLine _selectedStoryLine { get; set; }
+            
+        
+        
 
         public static StorylineController GetInstance()
         {
@@ -41,16 +44,15 @@ namespace Exposeum.Controllers
 				dialog.Show(transaction, "Story Line title");
 		}
 			
-        public void ResetStorylineProgress(StoryLine storyLine)
+        public void ResetStorylineProgress()
         {
-			foreach (var mapElement in storyLine.MapElements)
+			foreach (var mapElement in _selectedStoryLine.MapElements)
             {
 				mapElement.Visited = false;
             }
 
-            storyLine.SetLastPointOfInterestVisited(null);
-            storyLine.CurrentStatus = Status.IsNew;
-
+            _selectedStoryLine.SetLastPointOfInterestVisited(null);
+            _selectedStoryLine.CurrentStatus = Status.IsNew;
         }
 
         public void PauseStorylineBeacons()

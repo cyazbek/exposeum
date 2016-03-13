@@ -50,8 +50,8 @@ namespace Exposeum
 			_beaconFinder.SetInFocus(true);
 			_beaconFinder.SetNotificationDestination (this);
 
-			//Bind the _totalMapView to the Activity
-		    SetContentView(_mapController._totalMapView);
+            //Bind the _totalMapView to the Activity
+            SetContentView(_mapController._totalMapView);
 		}
 
         protected override void OnResume()
@@ -99,5 +99,6 @@ namespace Exposeum
             }
             return base.OnOptionsItemSelected(item);
         }
+
     }
 }

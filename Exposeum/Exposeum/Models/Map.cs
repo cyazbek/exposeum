@@ -197,9 +197,13 @@ namespace Exposeum.Models
 			this._storyLines.Add(story5);
 			this._storyLines.Add(story6);
 
-			//Set the storyline for the explorer mode
-			_currentStoryline = storyline;
-
+            //Set the storyline for the explorer mode
+            if (ExposeumApplication.IsExplorerMode)
+            {
+                _currentStoryline = storyline;
+            }
+            else
+                _currentStoryline = Controllers.StorylineController.GetInstance()._selectedStoryLine;
 		}
 
 		public void SetCurrentFloor(Floor floor)

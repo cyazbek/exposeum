@@ -19,6 +19,7 @@ namespace Exposeum
     {
         public Map Map;
 		StorylineController _storylineController = StorylineController.GetInstance();
+        User user = User.GetInstance();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -71,8 +72,8 @@ namespace Exposeum
 
 
                 case Resource.Id.LanguageItem:
-                    Language.ToogleLanguage();
-                    var intent = new Intent(this, typeof(VisitActivityFr));
+                    user.ToogleLanguage();
+                    var intent = new Intent(this, typeof(VisitActivity));
                     StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
