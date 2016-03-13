@@ -14,6 +14,7 @@ namespace Exposeum.Tables
         public int poiDescription { get; set; }
         public string label { get; set; }
         public int exhibitionContent { get; set; }
+        public int floorId { get; set; }
 
     }
 }
