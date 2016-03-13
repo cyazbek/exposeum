@@ -33,20 +33,10 @@ namespace Exposeum
             var view = inflater.Inflate(Resource.Layout.Pause_confirmation, container, false);
             var buttonToConfirmPause = view.FindViewById<Button>(Resource.Id.confirm_pause);
             var buttonToRejectPause = view.FindViewById<Button>(Resource.Id.reject_pause);
-
-            if (Language.GetLanguage() == "fr")
-            {
-                view.FindViewById<TextView>(Resource.Id.pause_text).Text = "Suspendre";
-                buttonToConfirmPause.Text = "Oui";
-                buttonToRejectPause.Text = "Non";
-
-            }
-            else
-            {
-                view.FindViewById<TextView>(Resource.Id.pause_text).Text = "Pause";
-                buttonToConfirmPause.Text = "Yes";
-                buttonToRejectPause.Text = "No";
-            }
+            var textView = view.FindViewById<TextView>(Resource.Id.pause_text); 
+            buttonToConfirmPause.Text = User.GetInstance().GetButtonText("confirm_pause");
+            buttonToRejectPause.Text = User.GetInstance().GetButtonText("reject_pause");
+            textView.Text = User.GetInstance().GetButtonText("pause_text");
 
 
             buttonToConfirmPause.Click += delegate
