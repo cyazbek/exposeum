@@ -17,5 +17,9 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+        public void Update(Storyline item)
+        {
+            _db.Update(item);
+        }
     }
 }

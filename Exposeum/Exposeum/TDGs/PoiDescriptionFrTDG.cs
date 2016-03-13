@@ -16,5 +16,9 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+        public void Update(PoiDescriptionFr item)
+        {
+            _db.Update(item);
+        }
     }
 }
