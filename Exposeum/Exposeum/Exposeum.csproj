@@ -167,7 +167,8 @@
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <Compile Include="Services\StoryLineService.cs" />
+    <Compile Include="Services\IStoryLineService.cs" />
+    <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -345,5 +346,8 @@
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Service Providers\" />
   </ItemGroup>
 </Project>
