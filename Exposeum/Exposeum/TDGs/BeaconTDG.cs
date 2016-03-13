@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using SQLite;
 
 namespace Exposeum.TDGs
 {
-    class BeaconTDG:TDG
+    public class BeaconTDG : TDG
     {
+        private static BeaconTDG _instance;
 
+        public static BeaconTDG GetInstance()
+        {
+            if (_instance == null)
+                _instance = new BeaconTDG();
+
+            return _instance;
+        }
     }
 }
