@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using SQLite; 
 
 namespace Exposeum.Tables
 {
-    class Storyline
+    public class Storyline
     {
+        [PrimaryKey, AutoIncrement, Column("ID")]
+        public int ID { get; set; }
+        public string audience { get; set; }
+        public int duration { get; set; }
+        public int images { get; set; } 
+        public int floorsCovered { get; set; }
+        public int lastVisitedPoi { get; set; }
+        public string status { get; set; } 
+
     }
 }
