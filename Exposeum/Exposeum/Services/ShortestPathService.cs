@@ -20,6 +20,13 @@ namespace Exposeum.Services
     /// </summary>
     public static class ShortestPathService
     {
+        /// <summary>
+        /// returns a list of MapElements representing the shortest path
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="startElement"></param>
+        /// <param name="targetElement"></param>
+        /// <returns></returns>
         public static IEnumerable<MapEdge> GetShortestPath(UndirectedGraph<MapElement, MapEdge> graph, MapElement startElement, MapElement targetElement)
         {
             // delegate with edge costs acquired from Edge distance property
@@ -31,6 +38,7 @@ namespace Exposeum.Services
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
             return tryGetPaths(targetElement, out path) ? path : null;
+
         }
 
     }
