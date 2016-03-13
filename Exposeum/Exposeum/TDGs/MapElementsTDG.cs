@@ -12,13 +12,20 @@ namespace Exposeum.TDGs
                 _instance = new MapElementsTDG();
             return _instance;
         }
+
         public void Add(MapElements item)
         {
             _db.Insert(item);
         }
+
         public void Update(MapElements item)
         {
             _db.Update(item);
+        }
+
+        public MapElements GetMapElement(int id)
+        {
+            return _db.Get<MapElements>(id);
         }
     }
 }
