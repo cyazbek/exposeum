@@ -12,6 +12,7 @@ namespace Exposeum.TDGs
                 _instance = new FloorTDG();
             return _instance;
         }
+
         public void Add(Floor item)
         {
             _db.Insert(item);

@@ -12,6 +12,7 @@ namespace Exposeum.TDGs
                 _instance = new ExhibitionContentFrTDG();
             return _instance;
         }
+
         public void Add(ExhibitionContentFr item)
         {
             _db.Insert(item);

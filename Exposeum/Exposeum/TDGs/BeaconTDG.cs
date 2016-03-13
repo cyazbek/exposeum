@@ -13,6 +13,7 @@ namespace Exposeum.TDGs
 
             return _instance;
         }
+
         public void Add(Beacon item)
         {
             _db.Insert(item);

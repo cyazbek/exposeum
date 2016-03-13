@@ -13,6 +13,7 @@ namespace Exposeum.TDGs
 
             return _instance;
         }
+
         public void Add(Edge item)
         {
             _db.Insert(item);
