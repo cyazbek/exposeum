@@ -28,11 +28,9 @@ namespace Exposeum.Tables
             _db.CreateTable<StoryLineMapElementList>();
             _db.CreateTable<StoryLineDescriptionFr>();
             _db.CreateTable<StoryLineDescriptionEn>();
-            _db.CreateTable<StorylineDescriptionList>();
             _db.CreateTable<Edge>();
             _db.CreateTable<Floor>();
             _db.CreateTable<MapElements>();
-            _db.CreateTable<MapElementFloorList>();
             _db.CreateTable<PoiDescriptionEn>();
             _db.CreateTable<PoiDescriptionFr>();
             _db.CreateTable<Beacon>();
