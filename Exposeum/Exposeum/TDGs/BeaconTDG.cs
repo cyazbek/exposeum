@@ -18,6 +18,10 @@ namespace Exposeum.TDGs
         {
             _db.Insert(item);
         }
+        public void Update(Beacon item)
+        {
+            _db.Update(item);
+        }
 
         public Beacon GetBeacon(int id)
         {

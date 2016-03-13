@@ -13,6 +13,10 @@ namespace Exposeum.TDGs
             return _instance;
         }
 
+        public void Update(Floor item)
+        {
+            _db.Update(item);
+        }
         public void Add(Floor item)
         {
             _db.Insert(item);

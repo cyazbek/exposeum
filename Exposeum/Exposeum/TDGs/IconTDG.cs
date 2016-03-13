@@ -19,6 +19,10 @@ namespace Exposeum.TDGs
             _db.Insert(item);
         }
 
+        public void Update(Icon item)
+        {
+            _db.Update(item);
+        }
         public Icon GetIcon(int id)
         {
             return _db.Get<Icon>(id);

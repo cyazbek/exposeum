@@ -18,6 +18,10 @@ namespace Exposeum.TDGs
             _db.Insert(item);
         }
 
+        public void Update(ExhibitionContentFr item)
+        {
+            _db.Update(item);
+        }
         public ExhibitionContentFr GetExhibitionContentFr(int id)
         {
             return _db.Get<ExhibitionContentFr>(id);
