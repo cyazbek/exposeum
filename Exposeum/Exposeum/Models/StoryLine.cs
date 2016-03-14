@@ -126,8 +126,10 @@ namespace Exposeum.Models
 					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
-				if(rightBoundLinkedNode.Next == null)
+				if (rightBoundLinkedNode.Next == null)
 					this.CurrentStatus = Status.IsVisited;
+				else if (this.CurrentStatus == Status.IsNew)
+					this.CurrentStatus = Status.InProgress;
 		    }
 		}
 
