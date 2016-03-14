@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
+    <Compile Include="Data\BeaconData.cs" />
+    <Compile Include="Data\PoiStoryData.cs" />
+    <Compile Include="Data\StoryData.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\ButtonText.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
@@ -110,6 +114,10 @@
     <AndroidResource Include="Resources\layout\Language.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <Compile Include="PoiInsertionActivity.cs" />
+    <Compile Include="PoiListActivity.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
@@ -127,6 +135,7 @@
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
@@ -174,6 +183,9 @@
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Menu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -195,6 +207,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="MultiImageView">
       <Version>1.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="sqlite-net">
+      <Version>1.0.11</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
@@ -246,7 +262,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
   </ItemGroup>
@@ -315,8 +330,5 @@
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Service Providers\" />
   </ItemGroup>
 </Project>

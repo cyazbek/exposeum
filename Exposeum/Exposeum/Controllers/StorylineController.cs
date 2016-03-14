@@ -1,4 +1,4 @@
-﻿using Exposeum.Models;
+using Exposeum.Models;
 using Android.App;
 using Android.Content;
 
@@ -70,5 +70,10 @@ namespace Exposeum.Controllers
 		public void SetActiveStoryLine(){
 			_storyLineService.SetActiveStoryLine (_selectedStoryLine);
 		}
+
+        public void BeginJournery()
+        {
+            _selectedStoryLine.CurrentStatus = Status.InProgress;
+        }
     }
 }

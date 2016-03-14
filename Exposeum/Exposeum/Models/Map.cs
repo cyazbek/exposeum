@@ -196,6 +196,108 @@ namespace Exposeum.Models
 			//Set the storyline for the explorer mode
 			_currentStoryline = storyline;
 
+			StoryLine nicelyDrawn = new StoryLine("Drawn lines","---","--", "---", "---", "--", 120 , Resource.Drawable.NipperTheDog);
+
+			Beacon nicelyDrawnBeaconTest = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+			PointOfInterestDescription nicelyDrawnBeaconDescriptionTest = new PointOfInterestDescription("---", "---", "---");
+
+			PointOfInterest poi0 = new PointOfInterest(0.519f, 0.580f, floor2);
+			poi0.Description = nicelyDrawnBeaconDescriptionTest;
+			poi0.NameEn = "---";
+			poi0.NameFr = "---";
+			poi0.Visited = false;
+			poi0.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint3 = new PointOfTravel(0.720f, 0.577f, floor2);
+
+			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
+			poi1.Description = nicelyDrawnBeaconDescriptionTest;
+			poi1.NameEn = "---";
+			poi1.NameFr = "---";
+			poi1.Visited = false;
+			poi1.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint4 = new PointOfTravel(0.754f, 0.538f, floor2);
+
+			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
+			poi2.Description = nicelyDrawnBeaconDescriptionTest;
+			poi2.NameEn = "---";
+			poi2.NameFr = "---";
+			poi2.Visited = false;
+			poi2.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
+			poi3.Description = nicelyDrawnBeaconDescriptionTest;
+			poi3.NameEn = "---";
+			poi3.NameFr = "---";
+			poi3.Visited = false;
+			poi3.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint5 = new PointOfTravel(0.769f, 0.549f, floor2);
+			PointOfTravel waypoint6 = new PointOfTravel(0.796f, 0.605f, floor2);
+			PointOfTravel waypoint7 = new PointOfTravel(0.712f, 0.615f, floor2);
+
+			PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
+			poi4.Description = nicelyDrawnBeaconDescriptionTest;
+			poi4.NameEn = "---";
+			poi4.NameFr = "---";
+			poi4.Visited = false;
+			poi4.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint8 = new PointOfTravel(0.645f, 0.907f, floor2);
+
+			PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
+			poi5.Description = nicelyDrawnBeaconDescriptionTest;
+			poi5.NameEn = "---";
+			poi5.NameFr = "---";
+			poi5.Visited = false;
+			poi5.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfInterest poi6 = new PointOfInterest(0.333f, 0.901f, floor2);
+			poi6.Description = nicelyDrawnBeaconDescriptionTest;
+			poi6.NameEn = "---";
+			poi6.NameFr = "---";
+			poi6.Visited = false;
+			poi6.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint9 = new PointOfTravel(0.176f, 0.894f, floor2);
+
+			PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
+			poi7.Description = nicelyDrawnBeaconDescriptionTest;
+			poi7.NameEn = "---";
+			poi7.NameFr = "---";
+			poi7.Visited = false;
+			poi7.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint10 = new PointOfTravel(0.174f, 0.612f, floor2);
+
+			PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
+			poi8.Description = nicelyDrawnBeaconDescriptionTest;
+			poi8.NameEn = "---";
+			poi8.NameFr = "---";
+			poi8.Visited = false;
+			poi8.Beacon = nicelyDrawnBeaconTest;
+
+			nicelyDrawn.AddMapElement(poi0);
+			nicelyDrawn.AddMapElement(waypoint3);
+			nicelyDrawn.AddMapElement(poi1);
+			nicelyDrawn.AddMapElement(waypoint4);
+			nicelyDrawn.AddMapElement(poi2);
+			nicelyDrawn.AddMapElement(poi3);
+			nicelyDrawn.AddMapElement(waypoint5);
+			nicelyDrawn.AddMapElement(waypoint6);
+			nicelyDrawn.AddMapElement(waypoint7);
+			nicelyDrawn.AddMapElement(poi4);
+			nicelyDrawn.AddMapElement(waypoint8);
+			nicelyDrawn.AddMapElement(poi5);
+			nicelyDrawn.AddMapElement(poi6);
+			nicelyDrawn.AddMapElement(waypoint9);
+			nicelyDrawn.AddMapElement(poi7);
+			nicelyDrawn.AddMapElement(waypoint10);
+			nicelyDrawn.AddMapElement(poi8);
+
+			_storyLines.Add (nicelyDrawn);
+
 		}
 
 		public void SetCurrentFloor(Floor floor)
