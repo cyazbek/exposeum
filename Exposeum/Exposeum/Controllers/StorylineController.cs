@@ -7,8 +7,8 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private static IStoryLineService _storyLineService = StoryLineServiceProvider.GetInstance();
-		private static StoryLine _selectedStoryLine;
+		private IStoryLineService _storyLineService;
+		private StoryLine _selectedStoryLine;
 
         public static StorylineController GetInstance()
         {
@@ -16,6 +16,10 @@ namespace Exposeum.Controllers
                 _storylineController = new StorylineController();
             return _storylineController;
         }
+
+		private StorylineController(){
+			_storyLineService = new StoryLineServiceProvider ();
+		}
 
 		public StoryLineListAdapter GetStoryLines(Activity activity){
 			return new StoryLineListAdapter(activity, _storyLineService.GetStoryLines());
