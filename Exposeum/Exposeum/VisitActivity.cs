@@ -36,6 +36,8 @@ namespace Exposeum
             freeVisitButton.Click += (sender, e) =>
             {
                 ExposeumApplication.IsExplorerMode = true;
+				ExplorerController.GetInstance().InitializeExplorerMode();
+
                 var intent = new Intent(this, typeof(MapActivity));
                 StartActivity(intent);
 

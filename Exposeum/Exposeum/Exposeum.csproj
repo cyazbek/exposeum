@@ -139,6 +139,9 @@
     <AndroidResource Include="Resources\drawable\floor_1.png" />
     <Compile Include="Services\IStoryLineService.cs" />
     <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
+    <Compile Include="Controllers\ExplorerController.cs" />
+    <Compile Include="Services\IExplorerService.cs" />
+    <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
