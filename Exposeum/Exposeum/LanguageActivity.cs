@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace Exposeum
 {
-    [Activity(Label = "@string/language_activity", Theme = "@android:style/Theme.Holo.Light",ScreenOrientation = ScreenOrientation.Portrait)]		
+	[Activity(Label = "@string/app_name", Icon = "@drawable/Logo", MainLauncher = true, Theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen",ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Locale)]	
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
@@ -42,11 +42,7 @@ namespace Exposeum
                 StartActivity(intent);
             };
         }
-        public override void OnBackPressed()
-        {
-            var intent = new Intent(this, typeof(MainActivity));
-            StartActivity(intent);
-        }//end onBackPressed()
+
     }
     
 

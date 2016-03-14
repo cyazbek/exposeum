@@ -42,13 +42,17 @@ namespace Exposeum.Views
 			_controller = controller;
 			_map = Map.GetInstance();
 
-			_visitedEdge.SetStyle (Paint.Style.Fill);
+			_visitedEdge.SetStyle (Paint.Style.FillAndStroke);
 			_visitedEdge.Color = Color.Green;
 			_visitedEdge.StrokeWidth = 20;
+			_visitedEdge.AntiAlias = true;
+			_visitedEdge.StrokeCap = Paint.Cap.Round;
 
 			_unvisitedEdge.SetStyle (Paint.Style.Stroke);
 			_unvisitedEdge.Color = Color.Red;
 			_unvisitedEdge.StrokeWidth = 25;
+			_unvisitedEdge.SetPathEffect(new DashPathEffect (new float[]{ 5,10}, 0));
+			_unvisitedEdge.AntiAlias = true;
 
 			this.LayoutParameters = new ViewGroup.LayoutParams (
 				ViewGroup.LayoutParams.MatchParent,
@@ -155,27 +159,48 @@ namespace Exposeum.Views
 
 			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
 
-			for (int i = 0; i < currentFloorMapElements.Count; i++) {
+			//draw the edges first, but only if we are in storyline mode
+			if (!ExposeumApplication.IsExplorerMode) {
 
-				MapElement current = currentFloorMapElements[i];
+				PointOfInterest lastVisitedPOI = null;
+
+				List<PointOfInterest> currentFloorPOIs = currentFloorMapElements.OfType<PointOfInterest> ().ToList();
+
+				//get a reference to the last visited POI for drawing purposes
+				for (int i = 0; i < currentFloorPOIs.Count; i++) {
+
+					if (!currentFloorPOIs [i].Visited)
+						break;
 					
-				if (i < currentFloorMapElements.Count - 1) {
-
-					MapElement next = currentFloorMapElements[i + 1];
-
-					if (!next.Visited)
-						appropriateEdgePaintBrush = _unvisitedEdge;
-					
-					if (!ExposeumApplication.IsExplorerMode) {
-						canvas.DrawLine (current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight, next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
-					}
+					lastVisitedPOI = currentFloorPOIs [i];
 
 				}
 
-				current.Draw (canvas); //draw the current guy
+				for (int i = 0; i < currentFloorMapElements.Count; i++) {
 
+					MapElement current = currentFloorMapElements[i];
+
+					if (current == lastVisitedPOI || lastVisitedPOI == null)
+						appropriateEdgePaintBrush = _unvisitedEdge;
+
+					if (i < currentFloorMapElements.Count - 1) {
+
+						MapElement next = currentFloorMapElements[i + 1];
+
+						Path path = new Path ();
+						path.MoveTo(current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight);
+						path.LineTo(next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight);
+
+						canvas.DrawPath(path, appropriateEdgePaintBrush);
+					}
+				}
 			}
 
+			//finally, draw the mapElements
+			foreach (MapElement mapElement in currentFloorMapElements) {
+				mapElement.Draw (canvas);
+			}
+				
 			canvas.Restore ();
 		}
 			
