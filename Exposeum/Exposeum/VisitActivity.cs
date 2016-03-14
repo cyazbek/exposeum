@@ -88,10 +88,16 @@ namespace Exposeum
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            var languageItem = menu.GetItem(Resource.Id.LanguageItem);
+            var pauseItem = menu.GetItem(Resource.Id.PauseItem);
+            var QRScannerItem = menu.GetItem(Resource.Id.QRScannerItem);
+            languageItem.SetTitle(user.GetButtonText("LanguageItem"));
+            pauseItem.SetTitle(user.GetButtonText("PauseItem"));
+            QRScannerItem.SetTitle(user.GetButtonText("QRScannerItem"));
             return base.OnCreateOptionsMenu(menu);
+            
         }
-
-
+        
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             
