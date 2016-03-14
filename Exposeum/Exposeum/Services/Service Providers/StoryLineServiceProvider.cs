@@ -6,20 +6,12 @@ namespace Exposeum
 {
 	public class StoryLineServiceProvider: IStoryLineService
 	{
-		private static IStoryLineService _instance;
 		private Map _mapInstance;
 		private BeaconFinder _beaconFinder;
 
-		private StoryLineServiceProvider(){
+		public StoryLineServiceProvider(){
 			_mapInstance = Map.GetInstance ();
 			_beaconFinder = BeaconFinder.GetInstance ();
-		}
-
-		public static IStoryLineService GetInstance(){
-			if (_instance == null)
-				_instance = new StoryLineServiceProvider();
-
-			return _instance;
 		}
 
 		public List<StoryLine> GetStoryLines (){

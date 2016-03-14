@@ -34,8 +34,8 @@ namespace Exposeum.Controllers
 		}
 
 		public void Destroy(){
+			//remove the current singleton from the list of observers
 			_beaconFinder.RemoveObserver (_instance);
-			_mapModel.Destroy ();
 			_instance = null;
 		}
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -86,15 +86,16 @@
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\Beacon.cs" />
+    <Compile Include="Models\ButtonText.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
-    <Compile Include="VisitActivity_en.cs" />
-    <Compile Include="VisitActivity_fr.cs" />
+    <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeaconActivity.cs" />
@@ -145,7 +146,15 @@
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <Compile Include="Services\MapService.cs" />
+<<<<<<< HEAD
+    <Compile Include="Services\IStoryLineService.cs" />
+    <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
+    <Compile Include="Controllers\ExplorerController.cs" />
+    <Compile Include="Services\IExplorerService.cs" />
+    <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
+=======
+    <Compile Include="Services\StoryLineService.cs" />
+>>>>>>> def14f612b1ab7dc6af80ba189feeba9ec572cb8
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -154,10 +163,7 @@
     <AndroidResource Include="Resources\layout\POI_List.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\VisitActivity_fr.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\VisitActivity_en.axml">
+    <AndroidResource Include="Resources\layout\VisitActivity.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Splash.axml" />
@@ -177,8 +183,11 @@
     <AndroidResource Include="Resources\layout\StoryLine_dialog_inProgress.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Pause_confirmation.axml"/>
+    <AndroidResource Include="Resources\layout\Pause_confirmation.axml" />
     <AndroidResource Include="Resources\layout\OutOfOrderPointPopup.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Menu.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -257,7 +266,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
   </ItemGroup>
@@ -325,10 +333,6 @@
   </Target>
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
-=======
-    <Folder Include="Services\" />
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
   </ItemGroup>
 </Project>

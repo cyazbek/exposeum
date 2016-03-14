@@ -29,10 +29,6 @@ namespace Exposeum.Models
 
 	        return _map;
 	    }
-
-		public void Destroy (){
-			_map = null;
-		}
         
 		private void SeedData(){
 

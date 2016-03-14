@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -146,7 +146,11 @@
     <AndroidResource Include="Resources\drawable\floor_3.png" />
     <AndroidResource Include="Resources\drawable\floor_2.png" />
     <AndroidResource Include="Resources\drawable\floor_1.png" />
-    <Compile Include="Services\StoryLineService.cs" />
+    <Compile Include="Services\IStoryLineService.cs" />
+    <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
+    <Compile Include="Controllers\ExplorerController.cs" />
+    <Compile Include="Services\IExplorerService.cs" />
+    <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

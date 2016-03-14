@@ -1,89 +1,85 @@
-<<<<<<< HEAD
-using Exposeum.Models;
-=======
 ﻿using Exposeum.Models;
 using Android.App;
 using Android.Content;
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
 
 namespace Exposeum.Controllers
 {
-    public static class StoryLineController
+    public class StorylineController
     {
-<<<<<<< HEAD
         private static StorylineController _storylineController;
+<<<<<<< HEAD
+		private IStoryLineService _storyLineService;
+		private StoryLine _selectedStoryLine;
+=======
+		private static Map _map = StoryLineService.GetMapInstance();
+		private static StoryLine _selectedStoryLine;
+>>>>>>> def14f612b1ab7dc6af80ba189feeba9ec572cb8
 
         public static StorylineController GetInstance()
         {
             if (_storylineController == null)
                 _storylineController = new StorylineController();
-
             return _storylineController;
         }
 
-        public StoryLine CurrentStoryLine { get; set; }
+		private StorylineController(){
+			_storyLineService = new StoryLineServiceProvider ();
+		}
 
-		//here we need a method to supply to the view a list of storyline so that it can generate the visual list.
-		//public sometype getStorylines(){}
+		public StoryLineListAdapter GetStoryLines(Activity activity){
+			return new StoryLineListAdapter(activity, _map.GetStoryLineList);
+		}
 
-        public void CreateTempStoryline ()
-		{
-			//currently, the dummy seed data for the current storyline is in Map.cs seedData() method.
-        }
+		public void SelectStoryLine(int storylinePosition){
+			_selectedStoryLine = _map.GetStoryLineList[storylinePosition];
+		}
 
+		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
+			
+				
+				DialogFragment dialog;
+				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
+				{
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
+				}
+				else
+				{
+					dialog = new DialogStoryline(_selectedStoryLine, context);
+				}
+
+				dialog.Show(transaction, "Story Line title");
+		}
+			
         public void ResetStorylineProgress(StoryLine storyLine)
         {
-            foreach (var poi in storyLine.poiList)
+			foreach (var mapElement in storyLine.MapElements)
             {
-                poi.Visited = false;
+				mapElement.Visited = false;
             }
 
             storyLine.SetLastPointOfInterestVisited(null);
-            storyLine.currentStatus = Status.isNew;
+            storyLine.CurrentStatus = Status.IsNew;
 
         }
 
         public void PauseStorylineBeacons()
         {
-            BeaconFinder.getInstance().stopRanging();
+            BeaconFinder.GetInstance().StopRanging();
         }
 
         public void ResumeStorylineBeacons()
         {
-            BeaconFinder.getInstance().findBeacons();
+            BeaconFinder.GetInstance().FindBeacons();
         }
-=======
 
-		private static Map map = MapService.GetMapInstance();
-		private static StoryLine selectedStoryLine;
-
-		public static StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, map.getStoryLineList);
+		public void SetActiveStoryLine(){
+			_map.CurrentStoryline = _selectedStoryLine;
+            BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
 		}
 
-		public static void SelectStoryLine(int storylinePosition){
-			selectedStoryLine = map.getStoryLineList[storylinePosition];
-		}
-
-		public static void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
-			
-				
-				DialogFragment dialog;
-				if(selectedStoryLine.currentStatus==Status.inProgress)
-				{
-					dialog = new DialogStorylineInProgress(selectedStoryLine, context);
-				}
-				else
-				{
-					dialog = new DialogStoryline(selectedStoryLine, context);
-				}
-
-				dialog.Show(transaction, "Story Line title");
-		}
-
-		public static void SetActiveStoryLine(){
-			map.CurrentStoryline = selectedStoryLine;
-		}
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
+        public void BeginJournery()
+        {
+            _selectedStoryLine.CurrentStatus = Status.InProgress;
+        }
     }
 }
