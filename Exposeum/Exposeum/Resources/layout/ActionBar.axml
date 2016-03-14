@@ -27,7 +27,7 @@
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
-        android:layout_weight="50"
+        android:layout_weight="75"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="0dp"
@@ -44,28 +44,5 @@
             android:textAllCaps="true"
             android:textSize="25dp"
             android:textStyle="bold" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_weight="25"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:id="@+id/linearLayout3"
-        android:gravity="center_horizontal">
-        <ImageView
-            android:src="@drawable/menu"
-            android:layout_width="40.0dp"
-            android:layout_height="40.0dp"
-            android:id="@+id/OptionImage"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="false" />
-        <TextView
-            android:text="Text"
-            android:layout_width="match_parent"
-            android:layout_height="22.5dp"
-            android:id="@+id/textView2"
-            android:gravity="center" />
     </LinearLayout>
 </LinearLayout>
