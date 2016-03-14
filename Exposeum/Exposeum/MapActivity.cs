@@ -96,6 +96,8 @@ namespace Exposeum
                     //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
+                    StorylineController _storylineController = StorylineController.GetInstance();
+                    _storylineController.PauseStorylineBeacons();
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
                     _storylineController.ShowPauseStoryLineDialog(transaction, this);
                     return true;
