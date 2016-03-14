@@ -67,5 +67,10 @@ namespace Exposeum.Controllers
 			_map.CurrentStoryline = _selectedStoryLine;
             BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
 		}
+
+        public void BeginJournery()
+        {
+            _selectedStoryLine.CurrentStatus = Status.InProgress;
+        }
     }
 }

@@ -19,9 +19,10 @@ namespace Exposeum
     {
         public Map Map;
 		StorylineController _storylineController = StorylineController.GetInstance();
-
+        private Bundle _bundle;
         protected override void OnCreate(Bundle bundle)
         {
+            _bundle = bundle;
             base.OnCreate(bundle);
             //=========================================================================================================
             //remove default bar
@@ -47,6 +48,11 @@ namespace Exposeum
             listView = FindViewById<ListView>(Resource.Id.List);
 			listView.Adapter = _storylineController.GetStoryLines(this);
             listView.ItemClick += ListViewItemClick;
+        }
+
+        protected override void OnRestart()
+        {
+            OnCreate(_bundle);
         }
 
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)

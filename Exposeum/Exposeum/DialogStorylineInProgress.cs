@@ -58,6 +58,7 @@ namespace Exposeum
                 _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
+                this.Dismiss();
             };
 
             buttonToReset.Click += delegate {
@@ -67,6 +68,7 @@ namespace Exposeum
                 _storylineController.ResumeStorylineBeacons();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
+                this.Dismiss();
             };
 
             this.Dialog.SetCanceledOnTouchOutside(true);
