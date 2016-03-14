@@ -84,7 +84,8 @@ namespace Exposeum
 
 					MapElement current = currentPOIs[i];
 
-					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
+					if(i < currentPOIs.Count - 1)
+						canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
 					if (!current.Visited)
 						unvisitedTripped = true;

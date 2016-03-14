@@ -16,6 +16,10 @@ namespace Exposeum.Models
     {
         public string _id { get; set; }
         public string _text { get; set; }
+        public ButtonText()
+        {
+
+        }
         public ButtonText(string id, string text)
         {
             this._id = id;

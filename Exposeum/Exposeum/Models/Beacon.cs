@@ -1,6 +1,6 @@
 using Java.Util;
 using EstimoteSdk;
-
+using Exposeum.Data;
 
 namespace Exposeum.Models
 {
@@ -35,6 +35,14 @@ namespace Exposeum.Models
             else
                 return false; 
         }
+        public void ConvertFromData(BeaconData data)
+        {
+            this.Id = data.Id;
+            this.Uuid = UUID.FromString(data.Uuid);
+            this.Major = data.Major;
+            this.Minor = data.Minor;  
+        }
+
         public override bool Equals(object obj)
         {
             if (obj != null)

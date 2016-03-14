@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Exposeum.Data;
 using System;
 
 namespace Exposeum.Models
@@ -126,8 +127,10 @@ namespace Exposeum.Models
 					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
-				if(rightBoundLinkedNode.Next == null)
+				if (rightBoundLinkedNode.Next == null)
 					this.CurrentStatus = Status.IsVisited;
+				else if (this.CurrentStatus == Status.IsNew)
+					this.CurrentStatus = Status.InProgress;
 		    }
 		}
 
@@ -189,7 +192,16 @@ namespace Exposeum.Models
             return storyAudience;
         }
 
-       
+        public void ConvertFromData(StoryData story)
+        {
+            this.AudienceEn = story.AudienceEn;
+            this.AudienceFr = story.AudienceFr;
+            this.DescEn = story.DescEn;
+            this.DescFr = story.DescFr;
+            this.Duration = story.Duration;
+            this.NameEn = story.NameEn;
+            this.NameFr = story.NameFr;
+        }
 
     }
 }
