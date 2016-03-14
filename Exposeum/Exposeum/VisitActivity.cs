@@ -28,10 +28,8 @@ namespace Exposeum
             SetContentView(Resource.Layout.VisitActivity);
             freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            languageSelector = FindViewById<Button>(Resource.Id.languageButton);
             freeVisitButton.Text = user.GetButtonText("freeTour");
             storylineButton.Text = user.GetButtonText("storyLine");
-            languageSelector.Text = user.GetButtonText("languageButton");
 
 
             //=======    Action Bar   =================================================================================
@@ -51,15 +49,6 @@ namespace Exposeum
 
 
             //=========================================================================================================
-
-
-
-            languageSelector.Click += (o, e) => {
-                user.ToogleLanguage();
-                freeVisitButton.Text = user.GetButtonText("freeTour");
-                storylineButton.Text = user.GetButtonText("storyLine");
-                languageSelector.Text = user.GetButtonText("languageButton");
-            };
 
             freeVisitButton.Click += (sender, e) =>
             {
@@ -88,12 +77,6 @@ namespace Exposeum
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Layout.Menu, menu);
-            var languageItem = menu.GetItem(Resource.Id.LanguageItem);
-            var pauseItem = menu.GetItem(Resource.Id.PauseItem);
-            var QRScannerItem = menu.GetItem(Resource.Id.QRScannerItem);
-            languageItem.SetTitle(user.GetButtonText("LanguageItem"));
-            pauseItem.SetTitle(user.GetButtonText("PauseItem"));
-            QRScannerItem.SetTitle(user.GetButtonText("QRScannerItem"));
             return base.OnCreateOptionsMenu(menu);
             
         }
@@ -109,7 +92,6 @@ namespace Exposeum
                     User.GetInstance().ToogleLanguage();
                     freeVisitButton.Text = user.GetButtonText("freeTour");
                     storylineButton.Text = user.GetButtonText("storyLine");
-                    languageSelector.Text = user.GetButtonText("languageButton");
                     return true;
                 case Resource.Id.PauseItem:
                     //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
@@ -123,5 +105,14 @@ namespace Exposeum
             return base.OnOptionsItemSelected(item);
         }
 
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("PauseItem"));
+            var menuItem3 = menu.GetItem(2).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true; 
+
+        }
+        
     }
 }
