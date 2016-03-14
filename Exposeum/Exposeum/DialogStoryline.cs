@@ -43,6 +43,7 @@ namespace Exposeum
             button.Text = user.GetButtonText("storyLineDialogButton");
             button.Click += delegate {
 				_storylineController.SetActiveStoryLine();
+                _storylineController.BeginJournery();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
                 this.Dismiss();
