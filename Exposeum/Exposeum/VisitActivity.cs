@@ -17,14 +17,18 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User user = User.GetInstance(); 
+        User user = User.GetInstance();
+        Button freeVisitButton;
+        Button storylineButton;
+        Button languageSelector;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VisitActivity);
-            var freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
-            var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
+            freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
+            storylineButton = FindViewById<Button>(Resource.Id.storyLine);
+            languageSelector = FindViewById<Button>(Resource.Id.languageButton);
             freeVisitButton.Text = user.GetButtonText("freeTour");
             storylineButton.Text = user.GetButtonText("storyLine");
             languageSelector.Text = user.GetButtonText("languageButton");
@@ -52,7 +56,9 @@ namespace Exposeum
 
             languageSelector.Click += (o, e) => {
                 user.ToogleLanguage();
-                this.Recreate();
+                freeVisitButton.Text = user.GetButtonText("freeTour");
+                storylineButton.Text = user.GetButtonText("storyLine");
+                languageSelector.Text = user.GetButtonText("languageButton");
             };
 
             freeVisitButton.Click += (sender, e) =>
@@ -95,8 +101,9 @@ namespace Exposeum
                
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    freeVisitButton.Text = user.GetButtonText("freeTour");
+                    storylineButton.Text = user.GetButtonText("storyLine");
+                    languageSelector.Text = user.GetButtonText("languageButton");
                     return true;
                 case Resource.Id.PauseItem:
                     //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
