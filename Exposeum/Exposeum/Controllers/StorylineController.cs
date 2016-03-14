@@ -50,7 +50,7 @@ namespace Exposeum.Controllers
 
 
             DialogFragment dialog;
-                dialog = new DialogPauseStorylineConfirmation(_, context);
+                dialog = new DialogPauseStorylineConfirmation(_selectedStoryLine, context);
 
             dialog.Show(transaction, "Story Line title");
         }

@@ -96,7 +96,8 @@ namespace Exposeum
                     //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
-                    //do something
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
                     return true;
                 case Resource.Id.QRScannerItem:
                     //do something
