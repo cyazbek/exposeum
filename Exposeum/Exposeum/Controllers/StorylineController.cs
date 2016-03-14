@@ -44,7 +44,17 @@ namespace Exposeum.Controllers
 
 				dialog.Show(transaction, "Story Line title");
 		}
-			
+
+        public void ShowPauseStoryLineDialog(FragmentTransaction transaction, Context context)
+        {
+
+
+            DialogFragment dialog;
+                dialog = new DialogPauseStorylineConfirmation(_, context);
+
+            dialog.Show(transaction, "Story Line title");
+        }
+
         public void ResetStorylineProgress(StoryLine storyLine)
         {
 			foreach (var mapElement in storyLine.MapElements)
