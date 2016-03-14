@@ -45,6 +45,7 @@ namespace Exposeum
 				_storylineController.SetActiveStoryLine();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
+                this.Dismiss();
             };
             this.Dialog.SetCanceledOnTouchOutside(true);
             return view;
