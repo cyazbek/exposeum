@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Util;
 using Exposeum.Views;
 using Exposeum.Controllers;
+using Exposeum.Models;
 
 namespace Exposeum
 {
@@ -76,7 +77,11 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            if (ExposeumApplication.IsExplorerMode)
+                MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            else
+                MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            
             return base.OnCreateOptionsMenu(menu);
         }
 

@@ -65,7 +65,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
