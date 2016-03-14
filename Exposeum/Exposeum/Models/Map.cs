@@ -196,35 +196,35 @@ namespace Exposeum.Models
 			//Set the storyline for the explorer mode
 			_currentStoryline = storyline;
 
-			StoryLine nicelyDrawn = new StoryLine("Drawn lines","---","--", "---", "---", "--", 120 , Resource.Drawable.NipperTheDog);
+			StoryLine nicelyDrawn = new StoryLine("The Gramophone", "Le Gramophone","All Audience", "Toute Audience", "Description in english", "Description en français", 120 , Resource.Drawable.NipperTheDog);
 
 			Beacon nicelyDrawnBeaconTest = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			PointOfInterestDescription nicelyDrawnBeaconDescriptionTest = new PointOfInterestDescription("---", "---", "---");
 
 			PointOfInterest poi0 = new PointOfInterest(0.519f, 0.580f, floor2);
-			poi0.Description = nicelyDrawnBeaconDescriptionTest;
-			poi0.NameEn = "---";
-			poi0.NameFr = "---";
+			poi0.Description = description1;
+			poi0.NameEn = "POINT 1";
+			poi0.NameFr = "Le POINT 1";
 			poi0.Visited = false;
-			poi0.Beacon = nicelyDrawnBeaconTest;
+			poi0.Beacon = beacon1;
 
 			PointOfTravel waypoint3 = new PointOfTravel(0.720f, 0.577f, floor2);
 
 			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
-			poi1.Description = nicelyDrawnBeaconDescriptionTest;
-			poi1.NameEn = "---";
-			poi1.NameFr = "---";
+			poi1.Description = description3;
+			poi1.NameEn = "POINT 2";
+			poi1.NameFr = "Le POINT 2";
 			poi1.Visited = false;
-			poi1.Beacon = nicelyDrawnBeaconTest;
+			poi1.Beacon = beacon3;
 
 			PointOfTravel waypoint4 = new PointOfTravel(0.754f, 0.538f, floor2);
 
 			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
-			poi2.Description = nicelyDrawnBeaconDescriptionTest;
-			poi2.NameEn = "---";
-			poi2.NameFr = "---";
+			poi2.Description = description4;
+			poi2.NameEn = "POINT 3";
+			poi2.NameFr = "Le POINT 2";
 			poi2.Visited = false;
-			poi2.Beacon = nicelyDrawnBeaconTest;
+			poi2.Beacon = beacon2;
 
 			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
 			poi3.Description = nicelyDrawnBeaconDescriptionTest;
