@@ -162,20 +162,11 @@ namespace Exposeum.Views
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
 
-				PointOfInterest lastVisitedPOI = null, curr;
+				PointOfInterest lastVisitedPOI = null;
 
 				List<PointOfInterest> currentFloorPOIs = currentFloorMapElements.OfType<PointOfInterest> ().ToList();
-				for (int i = 0; i < currentFloorPOIs.Count; i++) {
-					
-					curr = currentFloorPOIs [i];
 
-					if (!curr.Visited) {
-						break;
-					}
-
-					lastVisitedPOI = curr;
-				}
-
+				//get a reference to the last visited POI for drawing purposes
 				for (int i = 0; i < currentFloorPOIs.Count; i++) {
 
 					if (!currentFloorPOIs [i].Visited)
