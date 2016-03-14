@@ -256,7 +256,6 @@ namespace Exposeum.Views
 				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
-					poi.SetVisited ();
 					return poi;
 				}
 			}
