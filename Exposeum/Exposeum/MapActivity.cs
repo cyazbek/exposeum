@@ -25,6 +25,7 @@ namespace Exposeum
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
+            
 			base.OnCreate (savedInstanceState);
 
             //=========================================================================================================
@@ -97,9 +98,10 @@ namespace Exposeum
                     return true;
                 case Resource.Id.PauseItem:
                     StorylineController _storylineController = StorylineController.GetInstance();
-                    _storylineController.PauseStorylineBeacons();
+                    //_storylineController.PauseStorylineBeacons();
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
                     _storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    
                     return true;
                 case Resource.Id.QRScannerItem:
                     //do something
