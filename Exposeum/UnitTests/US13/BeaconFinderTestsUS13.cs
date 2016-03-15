@@ -21,7 +21,7 @@ namespace UnitTests
 		private EstimoteSdk.Beacon beacon1;
 		private EstimoteSdk.Beacon beacon2;
 		private EstimoteSdk.Beacon beacon3;
-		private EstimoteSdk.BeaconManager.RangingEventArgs rangingEvent;
+		private BeaconManager.RangingEventArgs rangingEvent;
 		private IList<EstimoteSdk.Beacon> beaconList;
 		private bool observersNotified;
 
@@ -51,15 +51,15 @@ namespace UnitTests
 			//Create dummy beacons
 			//This beacon's is the closest (immediate zone)
 			beacon1 = new EstimoteSdk.Beacon (UUID.FromString ("b9407f30-f5f8-466e-aff9-25556b57fe6d"),
-				"EST", EstimoteSdk.MacAddress.FromString("DA:FC:D4:B2:36:9E"), 13982, 54450, -100, -80);
+				"EST", MacAddress.FromString("DA:FC:D4:B2:36:9E"), 13982, 54450, -100, -80);
 
 			//This beacon's is the in immediate zone 
 			beacon2 = new EstimoteSdk.Beacon (UUID.FromString ("b9407f30-f5f8-466e-aff9-25556b57fe6d"),
-				"EST", EstimoteSdk.MacAddress.FromString("DA:FC:D4:B2:36:9F"), 55339, 19185, -90, -80);
+				"EST", MacAddress.FromString("DA:FC:D4:B2:36:9F"), 55339, 19185, -90, -80);
 
 			//This beacon's is the Far zone 
 			beacon3 = new EstimoteSdk.Beacon (UUID.FromString ("b9407f30-f5f8-466e-aff9-25556b57fe6d"),
-				"EST", EstimoteSdk.MacAddress.FromString("DA:FC:D4:B2:36:9F"), 65339, 69185, -50, -80);
+				"EST", MacAddress.FromString("DA:FC:D4:B2:36:9F"), 65339, 69185, -50, -80);
 
 			//create a list of dummy beacons to pass in the ranging event, add them not in order
 			beaconList = new List<EstimoteSdk.Beacon> (3);
@@ -68,7 +68,7 @@ namespace UnitTests
 			beaconList.Add (beacon3);
 
 			//Create a dummmy ranging event
-			rangingEvent = new EstimoteSdk.BeaconManager.RangingEventArgs (beaconFinder.GetRegion (), beaconList);
+			rangingEvent = new BeaconManager.RangingEventArgs (beaconFinder.GetRegion (), beaconList);
 
 			//Observers have not yet been notified
 			observersNotified = false;

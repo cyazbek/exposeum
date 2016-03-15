@@ -34,8 +34,8 @@ namespace Exposeum.Models
 		//TODO: Remove this constructor
         public PointOfInterest(float u, float v)
         {
-            this.U = u;
-            this.V = v;
+            U = u;
+            V = v;
 
             Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             Visited = false;
@@ -70,7 +70,7 @@ namespace Exposeum.Models
         
         public float Radius
         {
-			get { return _iconScaleFactor * (this._visitedIcon.IntrinsicWidth / 2.0f);}
+			get { return _iconScaleFactor * (_visitedIcon.IntrinsicWidth / 2.0f);}
         }
 
         public override void Draw(Canvas canvas)
@@ -104,24 +104,24 @@ namespace Exposeum.Models
         public string GetDescription()
         {
             if (User.GetInstance().Language.Equals(Language.Fr))
-                return this.DescriptionFr;
+                return DescriptionFr;
             else
-                return this.DescriptionEn;
+                return DescriptionEn;
         }
 
         public string GetName()
         {
             if (User.GetInstance().Language.Equals(Language.Fr))
-                return this.NameFr;
+                return NameFr;
             else
-                return this.NameEn;
+                return NameEn;
         }
 
         public bool CheckBeacon(Beacon b)
         {
-            if (this.Beacon == null)
+            if (Beacon == null)
                 return false;
-            else if (this.Beacon.Uuid.Equals(b.Uuid) & this.Beacon.Minor == b.Minor & this.Beacon.Major == b.Major)
+            else if (Beacon.Uuid.Equals(b.Uuid) & Beacon.Minor == b.Minor & Beacon.Major == b.Major)
                 return true;
             else
                 return false;
@@ -130,18 +130,18 @@ namespace Exposeum.Models
         public void ConvertFromData(Data.PoiData poi)
         {
             // this.visited = poi.visited;
-            this.NameEn = poi.NameEn;
-            this.NameFr = poi.NameFr;
-            this.DescriptionEn = poi.DscriptionEn;
-            this.DescriptionFr = poi.DscriptionFr;
-            this.U = poi.UCoord;
-            this.V = poi.VCoord;
-            this.Id = poi.Id;
+            NameEn = poi.NameEn;
+            NameFr = poi.NameFr;
+            DescriptionEn = poi.DscriptionEn;
+            DescriptionFr = poi.DscriptionFr;
+            U = poi.UCoord;
+            V = poi.VCoord;
+            Id = poi.Id;
         }
 
         public string toString()
         {
-            return this.Id + " " + this.GetName() + " " + this.GetDescription();
+            return Id + " " + GetName() + " " + GetDescription();
         }
     }
 }

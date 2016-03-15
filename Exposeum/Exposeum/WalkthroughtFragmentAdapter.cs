@@ -22,8 +22,8 @@ namespace Exposeum
 
         public WalkthroughtFragmentAdapter(Context context, List<int> images)
         {
-            this._context = context;
-            this._images = images;
+            _context = context;
+            _images = images;
             _inflater = LayoutInflater.From(context);
         }
         public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object @object)

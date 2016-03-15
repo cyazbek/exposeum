@@ -8,8 +8,8 @@
 
 		public Edge (MapElement start, MapElement end)
 		{
-			this.Start = start;
-			this.End = end;
+			Start = start;
+			End = end;
 		}
 	}
 }

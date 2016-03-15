@@ -150,7 +150,7 @@ namespace Exposeum.Controllers
 
 		public Map Model
 		{
-			get { return this._mapModel; }
+			get { return _mapModel; }
 		}
 	}
 }

@@ -48,11 +48,11 @@ namespace Exposeum
 
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
-				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-				this.Orientation = Orientation.Vertical;
-				this.SetWillNotDraw(false); //causes the OnDraw override below to be called
-				this.SetMinimumHeight(220);
-				this.SetBackgroundColor(Color.Red);
+				LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+				Orientation = Orientation.Vertical;
+				SetWillNotDraw(false); //causes the OnDraw override below to be called
+				SetMinimumHeight(220);
+				SetBackgroundColor(Color.Red);
 
 				ResetPaint();
 			}
@@ -115,7 +115,7 @@ namespace Exposeum
 			}
 
 			public void SetHostFragment(MapProgressionFragment f){
-				this._hostFragment = f;
+				_hostFragment = f;
 			}
 
 			private void ResetPaint(){

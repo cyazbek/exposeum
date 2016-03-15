@@ -77,7 +77,7 @@ namespace Exposeum.Models
         }
         public List<int> GetImageList()
         {
-            return this.CurrentImageList;
+            return CurrentImageList;
         }
         public void SwitchLanguage(Language language)
         {

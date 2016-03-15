@@ -20,10 +20,10 @@ namespace Exposeum.Data
         }
         public int ConvertBeaconToData(Models.Beacon passedBeacon)
         {
-            this.Uuid = passedBeacon.Uuid.ToString();
-            this.Major = passedBeacon.Major;
-            this.Minor = passedBeacon.Minor;
-            return this.Id; 
+            Uuid = passedBeacon.Uuid.ToString();
+            Major = passedBeacon.Major;
+            Minor = passedBeacon.Minor;
+            return Id; 
         }
     }
 }

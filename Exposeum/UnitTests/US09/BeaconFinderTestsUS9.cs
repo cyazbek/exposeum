@@ -30,13 +30,13 @@ namespace UnitTests
 
 			//Setup the storyline supplied to the BeaconFinder
 			story = new StoryLine ();
-			Exposeum.Models.Beacon beaconFiras = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
+			Beacon beaconFiras = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
 			myPoi = new PointOfInterest(){ NameEn = "Point Of interest Firas", NameFr = "Point d'interet Firas", DescriptionEn = "This is the point of interest Firas", DescriptionFr = "Celui là est le premier point de Firas"};
 			myPoi.Beacon = beaconFiras;
-			Exposeum.Models.Beacon beaconOli = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
+			Beacon beaconOli = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
 			myPoi1 = new PointOfInterest { NameEn = "Point Of interest Oli", NameFr = "Point d'interet Oli", DescriptionEn = "This is the point of interest Oli", DescriptionFr = "Celui là est le premier point de Oli" };
 			myPoi1.Beacon = beaconOli;
-			Exposeum.Models.Beacon beaconFar = new Exposeum.Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 65339, 69185);
+			Beacon beaconFar = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 65339, 69185);
 			myPoi2 = new PointOfInterest { NameEn = "Point Of interest FAR", NameFr = "Point d'interet FAR", DescriptionEn = "This is the point is far", DescriptionFr = "Celui là est loin" };
 			myPoi2.Beacon = beaconFar;
 			story.AddPoi(myPoi);

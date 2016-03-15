@@ -30,9 +30,9 @@ namespace Exposeum.Fragments
             
             button.Click += (sender, e) =>
             {
-                this.Dismiss();
+                Dismiss();
             };
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
         public override void OnCreate(Bundle savedInstanceState)

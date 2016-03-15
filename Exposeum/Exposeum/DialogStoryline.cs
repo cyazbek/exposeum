@@ -17,8 +17,8 @@ namespace Exposeum
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
-            this._storyLine = storyLine;
-            this._context = context;
+            _storyLine = storyLine;
+            _context = context;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -40,9 +40,9 @@ namespace Exposeum
                 _storylineController.BeginJournery();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
-                this.Dismiss();
+                Dismiss();
             };
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
 

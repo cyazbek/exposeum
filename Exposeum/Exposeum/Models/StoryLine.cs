@@ -24,33 +24,33 @@ namespace Exposeum.Models
         
         public StoryLine() 
         {
-            this.PoiList = new List<PointOfInterest>();
-			this.MapElements = new List<MapElement> ();
-			this.CurrentStatus = Status.IsNew;
+            PoiList = new List<PointOfInterest>();
+			MapElements = new List<MapElement> ();
+			CurrentStatus = Status.IsNew;
         }
 
         public StoryLine(int id)
         {
-            this.Id = id;
+            Id = id;
 			PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			this.CurrentStatus = Status.IsNew;
+			CurrentStatus = Status.IsNew;
         }
 
 		public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int imageId)
 		{
-			this.NameEn = nameEn;
-			this.NameFr = nameFr;
-			this.AudienceEn = audienceEn;
-			this.AudienceFr = audienceFr;
-			this.DescEn = descriptionEn;
-			this.DescFr = descriptionFr;
-			this.Duration = duration;
-			this.ImageId = imageId;
+			NameEn = nameEn;
+			NameFr = nameFr;
+			AudienceEn = audienceEn;
+			AudienceFr = audienceFr;
+			DescEn = descriptionEn;
+			DescFr = descriptionFr;
+			Duration = duration;
+			ImageId = imageId;
 
-			this.MapElements = new List<MapElement> ();
-			this.PoiList = new List<PointOfInterest>();
-			this.CurrentStatus = Status.IsNew;
+			MapElements = new List<MapElement> ();
+			PoiList = new List<PointOfInterest>();
+			CurrentStatus = Status.IsNew;
 		}
 
 
@@ -64,7 +64,7 @@ namespace Exposeum.Models
         }
 
         public PointOfInterest GetLastVisitedPointOfInterest(){
-            return this._lastPointOfInterestVisited;
+            return _lastPointOfInterestVisited;
         }
 
 		public void AddMapElement(MapElement e)
@@ -77,7 +77,7 @@ namespace Exposeum.Models
 
         public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
         {
-            this._lastPointOfInterestVisited = lastPoiVisited;
+            _lastPointOfInterestVisited = lastPoiVisited;
 
         }
 
@@ -127,9 +127,9 @@ namespace Exposeum.Models
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if (rightBoundLinkedNode.Next == null)
-					this.CurrentStatus = Status.IsVisited;
-				else if (this.CurrentStatus == Status.IsNew)
-					this.CurrentStatus = Status.InProgress;
+					CurrentStatus = Status.IsVisited;
+				else if (CurrentStatus == Status.IsNew)
+					CurrentStatus = Status.InProgress;
 		    }
 		}
 
@@ -159,9 +159,9 @@ namespace Exposeum.Models
             string storyName;
 
             if (lang.Equals(Language.Fr))
-                storyName = this.NameFr;
+                storyName = NameFr;
             else
-                storyName = this.NameEn;
+                storyName = NameEn;
 
             return storyName;
         }
@@ -172,9 +172,9 @@ namespace Exposeum.Models
             string storyDesc;
 
             if (lang.Equals(Language.Fr))
-                storyDesc = this.DescFr;
+                storyDesc = DescFr;
             else
-                storyDesc = this.DescEn;
+                storyDesc = DescEn;
 
             return storyDesc;
         }
@@ -186,20 +186,20 @@ namespace Exposeum.Models
             if (lang.Equals(Language.Fr))
                 storyAudience = AudienceFr; 
             else
-                storyAudience = this.AudienceEn;
+                storyAudience = AudienceEn;
 
             return storyAudience;
         }
 
         public void ConvertFromData(StoryData story)
         {
-            this.AudienceEn = story.AudienceEn;
-            this.AudienceFr = story.AudienceFr;
-            this.DescEn = story.DescEn;
-            this.DescFr = story.DescFr;
-            this.Duration = story.Duration;
-            this.NameEn = story.NameEn;
-            this.NameFr = story.NameFr;
+            AudienceEn = story.AudienceEn;
+            AudienceFr = story.AudienceFr;
+            DescEn = story.DescEn;
+            DescFr = story.DescFr;
+            Duration = story.Duration;
+            NameEn = story.NameEn;
+            NameFr = story.NameFr;
         }
 
     }

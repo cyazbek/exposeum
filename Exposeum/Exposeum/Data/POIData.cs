@@ -27,16 +27,16 @@ namespace Exposeum.Data
 
         public int ConvertPoiToData(Models.PointOfInterest poi, int beaconId)
         {
-            this.StoryId = poi.StoryId;
-            this.BeaconId = beaconId;
-            this.Visited = poi.Visited;
-            this.NameEn = poi.NameEn;
-            this.NameFr = poi.NameFr;
-            this.DscriptionEn = poi.DescriptionEn;
-            this.DscriptionFr = poi.DescriptionFr;
-            this.UCoord = poi.U;
-            this.VCoord = poi.V; 
-            return this.Id; 
+            StoryId = poi.StoryId;
+            BeaconId = beaconId;
+            Visited = poi.Visited;
+            NameEn = poi.NameEn;
+            NameFr = poi.NameFr;
+            DscriptionEn = poi.DescriptionEn;
+            DscriptionFr = poi.DescriptionFr;
+            UCoord = poi.U;
+            VCoord = poi.V; 
+            return Id; 
         }
     }
 }

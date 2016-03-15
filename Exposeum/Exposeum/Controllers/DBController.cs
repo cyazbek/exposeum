@@ -10,7 +10,7 @@ namespace Exposeum.Controllers
     {
         public string CreateDb()
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             return "Database Created";
         }
@@ -18,7 +18,7 @@ namespace Exposeum.Controllers
         {
             try
             {
-                string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 db.CreateTable<PoiData>();
                 db.CreateTable<StoryData>();
@@ -40,7 +40,7 @@ namespace Exposeum.Controllers
         public string InsertBeacon(Beacon beacon)
         {
             try {
-                string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 BeaconData data = new BeaconData();
                 data.ConvertBeaconToData(beacon);
@@ -60,7 +60,7 @@ namespace Exposeum.Controllers
         {
             try
             {
-                string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 BeaconData beacon = new BeaconData();
                 int beaconId=beacon.ConvertBeaconToData(poi.Beacon);
@@ -79,7 +79,7 @@ namespace Exposeum.Controllers
         {
             try
             {
-                string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 PoiStoryData poiStory = new PoiStoryData { PoiId = poiId, StoryId = storId };
                 db.Insert(poiStory);
@@ -94,7 +94,7 @@ namespace Exposeum.Controllers
         {
             try
             {
-                string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
                 var db = new SQLiteConnection(dbPath);
                 StoryData storyData = new StoryData();
                 storyData.AudienceEn = story.AudienceEn;
@@ -127,14 +127,14 @@ namespace Exposeum.Controllers
         }
         public SQLiteConnection GetConnection()
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             return db; 
         }
 
         public PointOfInterest GetPoi(int id)
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             var result = db.Get<PoiData>(id);
             PointOfInterest poi = new PointOfInterest();
@@ -148,7 +148,7 @@ namespace Exposeum.Controllers
 
         public Beacon GetBeacon(int id)
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             BeaconData beaconData = new BeaconData();
             beaconData = db.Get<BeaconData>(id);
@@ -158,7 +158,7 @@ namespace Exposeum.Controllers
         }
         public StoryLine GetStory(int id)
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Exposeum.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Exposeum.db3");
             var db = new SQLiteConnection(dbPath);
             StoryData storyData = new StoryData();
             storyData = db.Get<StoryData>(id);

@@ -51,21 +51,21 @@ namespace Exposeum.Views
 			_unvisitedEdge.SetPathEffect(new DashPathEffect (new float[]{ 5,10}, 0));
 			_unvisitedEdge.AntiAlias = true;
 
-			this.LayoutParameters = new ViewGroup.LayoutParams (
+			LayoutParameters = new ViewGroup.LayoutParams (
 				ViewGroup.LayoutParams.MatchParent,
 				ViewGroup.LayoutParams.MatchParent
 			);
 		}
 
 		public void Update(){
-			this.Invalidate();
+			Invalidate();
 		}
 
 		public void InitiatePointOfInterestPopup(PointOfInterest poi){
 
             if (_newPointOfInterestPopup == null || ! _newPointOfInterestPopup.IsShowing())
             {
-                _newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
+                _newPointOfInterestPopup = new PointOfInterestPopup(_context, poi);
                 _newPointOfInterestPopup.Show();
             }
 		}

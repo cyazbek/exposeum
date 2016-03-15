@@ -10,8 +10,8 @@ namespace Exposeum.Models
         }
         public ButtonText(string id, string text)
         {
-            this.Id = id;
-            this.Text = text; 
+            Id = id;
+            Text = text; 
         }
     }
 }

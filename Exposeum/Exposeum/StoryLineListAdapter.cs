@@ -13,8 +13,8 @@ namespace Exposeum
         public StoryLineListAdapter(Activity context, List<StoryLine> items)
             : base()
         {
-            this._context = context;
-            this._items = items;
+            _context = context;
+            _items = items;
         }
         public override long GetItemId(int position)
         {

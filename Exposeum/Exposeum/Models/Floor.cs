@@ -20,7 +20,7 @@ namespace Exposeum.Models
 
 		public Drawable Image
 		{
-			get { return this._floorPlan; }
+			get { return _floorPlan; }
 		}
 	}
 }

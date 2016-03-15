@@ -9,9 +9,9 @@
 
         public PointOfInterestDescription(string title, string summary, string description)
         {
-            this.Title = title;
-            this.Summary = summary;
-            this.Description = description;
+            Title = title;
+            Summary = summary;
+            Description = description;
         }
 
         public string GetFullDescriptionHtml()
