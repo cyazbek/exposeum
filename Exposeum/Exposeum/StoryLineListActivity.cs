@@ -58,7 +58,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -67,22 +67,20 @@ namespace Exposeum
         {
             switch (item.ItemId)
             {
-
-
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
                     //do something
                     return true;
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
-        }
+        } 
 
     }
 }
