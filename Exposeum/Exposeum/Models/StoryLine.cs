@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Exposeum.Data;
 
 namespace Exposeum.Models
 {
@@ -191,16 +190,7 @@ namespace Exposeum.Models
             return storyAudience;
         }
 
-        public void ConvertFromData(StoryData story)
-        {
-            AudienceEn = story.AudienceEn;
-            AudienceFr = story.AudienceFr;
-            DescEn = story.DescEn;
-            DescFr = story.DescFr;
-            Duration = story.Duration;
-            NameEn = story.NameEn;
-            NameFr = story.NameFr;
-        }
+        
 
     }
 }

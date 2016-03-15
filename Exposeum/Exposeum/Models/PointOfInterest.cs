@@ -127,17 +127,7 @@ namespace Exposeum.Models
                 return false;
         }
 
-        public void ConvertFromData(Data.PoiData poi)
-        {
-            // this.visited = poi.visited;
-            NameEn = poi.NameEn;
-            NameFr = poi.NameFr;
-            DescriptionEn = poi.DscriptionEn;
-            DescriptionFr = poi.DscriptionFr;
-            U = poi.UCoord;
-            V = poi.VCoord;
-            Id = poi.Id;
-        }
+       
 
         public string toString()
         {

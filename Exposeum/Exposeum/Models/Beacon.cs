@@ -1,5 +1,4 @@
 using Java.Util;
-using Exposeum.Data;
 
 namespace Exposeum.Models
 {
@@ -34,13 +33,7 @@ namespace Exposeum.Models
             else
                 return false; 
         }
-        public void ConvertFromData(BeaconData data)
-        {
-            Id = data.Id;
-            Uuid = UUID.FromString(data.Uuid);
-            Major = data.Major;
-            Minor = data.Minor;  
-        }
+        
 
         public override bool Equals(object obj)
         {
