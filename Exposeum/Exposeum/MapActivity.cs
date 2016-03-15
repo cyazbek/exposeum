@@ -83,9 +83,7 @@ namespace Exposeum
             switch (item.ItemId)
             {
                 case Resource.Id.LanguageItem:
-                    //Language.ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    User.GetInstance().ToogleLanguage();
                     return true;
                 case Resource.Id.PauseItem:
                     StorylineController _storylineController = StorylineController.GetInstance();

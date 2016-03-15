@@ -70,7 +70,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
             return base.OnCreateOptionsMenu(menu);
             
         }
@@ -87,12 +87,8 @@ namespace Exposeum
                     _freeVisitButton.Text = _user.GetButtonText("freeTour");
                     _storylineButton.Text = _user.GetButtonText("storyLine");
                     return true;
-                case Resource.Id.PauseItem:
-                    //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
 
-                    return true;
                 case Resource.Id.QRScannerItem:
-                    
                     //do something
                     return true;
             }
@@ -102,8 +98,7 @@ namespace Exposeum
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
             var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
-            var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("PauseItem"));
-            var menuItem3 = menu.GetItem(2).SetTitle(_user.GetButtonText("QRScannerItem"));
+            var menuItem2= menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
             return true; 
 
         }
