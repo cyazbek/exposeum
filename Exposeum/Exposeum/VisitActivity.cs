@@ -17,17 +17,19 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User user = User.GetInstance(); 
+        User user = User.GetInstance();
+        Button freeVisitButton;
+        Button storylineButton;
+        Button languageSelector;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VisitActivity);
-            var freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
-            var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
+            freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
+            storylineButton = FindViewById<Button>(Resource.Id.storyLine);
             freeVisitButton.Text = user.GetButtonText("freeTour");
             storylineButton.Text = user.GetButtonText("storyLine");
-            languageSelector.Text = user.GetButtonText("languageButton");
 
 
             //=======    Action Bar   =================================================================================
@@ -47,13 +49,6 @@ namespace Exposeum
 
 
             //=========================================================================================================
-
-
-
-            languageSelector.Click += (o, e) => {
-                user.ToogleLanguage();
-                this.Recreate();
-            };
 
             freeVisitButton.Click += (sender, e) =>
             {
@@ -83,9 +78,9 @@ namespace Exposeum
         {
             MenuInflater.Inflate(Resource.Layout.Menu, menu);
             return base.OnCreateOptionsMenu(menu);
+            
         }
-
-
+        
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             
@@ -95,8 +90,8 @@ namespace Exposeum
                
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    freeVisitButton.Text = user.GetButtonText("freeTour");
+                    storylineButton.Text = user.GetButtonText("storyLine");
                     return true;
                 case Resource.Id.PauseItem:
                     //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
@@ -110,5 +105,14 @@ namespace Exposeum
             return base.OnOptionsItemSelected(item);
         }
 
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("PauseItem"));
+            var menuItem3 = menu.GetItem(2).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true; 
+
+        }
+        
     }
 }

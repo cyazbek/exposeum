@@ -6,15 +6,6 @@
     android:background="@drawable/backgroudlanguagefix"
     android:minWidth="25px"
     android:minHeight="25px">
-    <ToggleButton
-        android:id="@+id/languageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textOn="EN"
-        android:textOff="FR"
-        android:checked="true"
-        android:layout_gravity="right"
-        style="@style/button_text" />
     <Button
         android:text="Explorer"
         android:id="@+id/freeTour"
