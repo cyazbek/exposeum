@@ -74,12 +74,8 @@ namespace Exposeum
         {
             switch (item.ItemId)
             {
-
-
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
@@ -87,11 +83,11 @@ namespace Exposeum
                     //do something
                     return true;
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
-        }
+        } 
 
     }
 }
