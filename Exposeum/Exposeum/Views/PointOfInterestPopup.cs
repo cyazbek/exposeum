@@ -16,7 +16,7 @@ namespace Exposeum.Views
 			View popupView  = inflater.Inflate(Resource.Layout.BeaconSummaryPopupView, null);
 
 			popupView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-			_pwindow = new PopupWindow(popupView, WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
+			_pwindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
 
 			Button dismissButton = popupView.FindViewById<Button>(Resource.Id.pointofinterest_popup_dismiss);
             dismissButton.Text = User.GetInstance().GetButtonText("pointofinterest_popup_dismiss");

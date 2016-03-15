@@ -2,14 +2,12 @@
 using EstimoteSdk;
 using Android.Util;
 using Android.OS;
-using Android.Content.PM;
 using JavaObject = Java.Lang.Object;
 using Android.Content;
 using System.Collections.Generic;
 using Android.App;
 using Android.Support.V4.App;
 using Exposeum.Models;
-using Java.Util.Concurrent;
 
 namespace Exposeum
 {
@@ -20,7 +18,7 @@ namespace Exposeum
 		private static readonly int BeaconFoundNotificationId = 1001;
 		private NotificationManager _notificationManager;
 		private BeaconManager _beaconManager;
-		private EstimoteSdk.Region _region;
+		private Region _region;
 		private bool _isRanging;
 		private bool _isServiceReady;
 		private const string Tag = "BeaconFinder";
@@ -34,10 +32,10 @@ namespace Exposeum
 
 		private BeaconFinder (Context context)
 		{
-			_region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+			_region = new Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
 			ConstructBeaconManager (context);
 			ConstructNotificationManager (context);
-			this._context = context;
+			_context = context;
 		}
 
 		/// <summary>
@@ -154,7 +152,7 @@ namespace Exposeum
 				if (proximity == Utils.Proximity.Immediate) {
 					try {
 						_immediateBeacons.Add (accuracy, beacon);
-					} catch (System.ArgumentException ex) {
+					} catch (ArgumentException ex) {
 						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: " + ex.Message);
 					}
 				}
@@ -316,7 +314,7 @@ namespace Exposeum
 		/// This method sets the current instance of the storyline.
 		/// </summary>
 		public void SetStoryLine(StoryLine storyLine){
-			this._storyLine = storyLine;
+			_storyLine = storyLine;
 		}
 
 		/// <summary>
@@ -358,7 +356,7 @@ namespace Exposeum
 			if (_isRanging)
 				throw new CantSetRegionException ("Cannot set set region since BeaconFinder is ranging. Stop ranging first, then set the region.");
 
-			this._region = region;
+			_region = region;
 		}
 
 		/// <summary>

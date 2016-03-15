@@ -1,10 +1,6 @@
-using System;
 using Exposeum.Views;
 using Exposeum.Models;
 using Android.App;
-
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -14,10 +10,10 @@ namespace Exposeum.Controllers
 	public class MapController : IBeaconFinderObserver
 	{
 		private MapView _mapView;
-		public View _totalMapView { get; private set;}
+		public View TotalMapView { get; private set;}
 		private static MapController _instance;
 		private MapProgressionFragment _mapProgressionView;
-		private Context _context{get; set;}
+		private Context Context{get; set;}
 		private Map _mapModel;
 		private BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
 
@@ -68,15 +64,15 @@ namespace Exposeum.Controllers
 		private void ConfigureMapView(Context context){
 			LayoutInflater li = LayoutInflater.FromContext (context);
 			//Load the MapView XML
-			_totalMapView = li.Inflate (Resource.Layout.MapView, null);
+			TotalMapView = li.Inflate (Resource.Layout.MapView, null);
 			//Get a reference to the frame layout in the XML
-			FrameLayout mapViewFrameLayout = (FrameLayout)_totalMapView.FindViewById (Resource.Id.map_view_frame_lay);
+			FrameLayout mapViewFrameLayout = (FrameLayout)TotalMapView.FindViewById (Resource.Id.map_view_frame_lay);
 			//create the Mapview
 			_mapView = new MapView (context, this);
 			//Add a new MapView into the frame layout
 			mapViewFrameLayout.AddView (_mapView);
 			//Get a reference to the seek bar in the view
-			SeekBar floorSeekBar = _totalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
+			SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
 			//Bind an event handler to ProgressChanged
 			floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
 		}
@@ -154,7 +150,7 @@ namespace Exposeum.Controllers
 
 		public Map Model
 		{
-			get { return this._mapModel; }
+			get { return _mapModel; }
 		}
 	}
 }

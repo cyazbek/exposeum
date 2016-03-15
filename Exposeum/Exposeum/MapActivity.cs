@@ -1,16 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Util;
-using Exposeum.Views;
 using Exposeum.Controllers;
 
 namespace Exposeum
@@ -38,7 +29,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
             //=========================================================================================================
 
@@ -51,7 +42,7 @@ namespace Exposeum
 			_beaconFinder.SetNotificationDestination (this);
 
 			//Bind the _totalMapView to the Activity
-		    SetContentView(_mapController._totalMapView);
+		    SetContentView(_mapController.TotalMapView);
 		}
 
         protected override void OnResume()

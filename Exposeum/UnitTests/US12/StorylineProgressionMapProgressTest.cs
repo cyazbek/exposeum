@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UnitTests
+﻿namespace UnitTests
 {
 	public class StorylineProgressionMapProgressTest
 	{

@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Controllers;
@@ -16,18 +10,19 @@ namespace Exposeum
 {
     class DialogStorylineInProgress : DialogFragment
     {
-        StoryLine _storyLine;
-		Context _context; 
-        StorylineController _storylineController = StorylineController.GetInstance();
-        User user = User.GetInstance(); 
+        private readonly StoryLine _storyLine;
+		private readonly Context _context; 
+        private readonly StorylineController _storylineController = StorylineController.GetInstance();
+        private readonly User _user = User.GetInstance(); 
+
         public DialogStorylineInProgress(StoryLine storyLine){
-			this._storyLine = storyLine;
+			_storyLine = storyLine;
 		}
         
         public DialogStorylineInProgress(StoryLine storyLine,Context context)
         {
-            this._storyLine = storyLine;
-            this._context = context; 
+            _storyLine = storyLine;
+            _context = context; 
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -48,9 +43,9 @@ namespace Exposeum
             var buttonToResume = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToResume);
             var buttonToReset = view.FindViewById<Button>(Resource.Id.storyLineDialogButtonToReset);
             var textView = view.FindViewById<TextView>(Resource.Id.storyInProgress);
-            buttonToResume.Text = user.GetButtonText("storyLineDialogButtonToResume");
-            buttonToReset.Text = user.GetButtonText("storyLineDialogButtonToReset");
-            textView.Text = user.GetButtonText("storyInProgress");
+            buttonToResume.Text = _user.GetButtonText("storyLineDialogButtonToResume");
+            buttonToReset.Text = _user.GetButtonText("storyLineDialogButtonToReset");
+            textView.Text = _user.GetButtonText("storyInProgress");
 
             buttonToResume.Click += delegate
             {
@@ -58,7 +53,7 @@ namespace Exposeum
                 _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
-                this.Dismiss();
+                Dismiss();
             };
 
             buttonToReset.Click += delegate {
@@ -68,10 +63,10 @@ namespace Exposeum
                 _storylineController.ResumeStorylineBeacons();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
-                this.Dismiss();
+                Dismiss();
             };
 
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
 

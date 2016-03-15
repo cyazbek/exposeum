@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Controllers;
@@ -22,7 +16,7 @@ namespace Exposeum
 
         public DialogPauseStorylineConfirmation(StoryLine storyLine, Context context)
         {
-            this._storyLine = storyLine;
+            _storyLine = storyLine;
             _context = context;
         }
 
@@ -53,7 +47,7 @@ namespace Exposeum
                 Dialog.Dismiss();
             };
 
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
 
