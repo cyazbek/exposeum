@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -17,19 +11,19 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User user = User.GetInstance();
-        Button freeVisitButton;
-        Button storylineButton;
-        Button languageSelector;
+        User _user = User.GetInstance();
+        Button _freeVisitButton;
+        Button _storylineButton;
+        Button _languageSelector;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VisitActivity);
-            freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
-            storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            freeVisitButton.Text = user.GetButtonText("freeTour");
-            storylineButton.Text = user.GetButtonText("storyLine");
+            _freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
+            _storylineButton = FindViewById<Button>(Resource.Id.storyLine);
+            _freeVisitButton.Text = _user.GetButtonText("freeTour");
+            _storylineButton.Text = _user.GetButtonText("storyLine");
 
 
             //=======    Action Bar   =================================================================================
@@ -50,7 +44,7 @@ namespace Exposeum
 
             //=========================================================================================================
 
-            freeVisitButton.Click += (sender, e) =>
+            _freeVisitButton.Click += (sender, e) =>
             {
                 ExposeumApplication.IsExplorerMode = true;
 				ExplorerController.GetInstance().InitializeExplorerMode();
@@ -59,7 +53,7 @@ namespace Exposeum
                 StartActivity(intent);
 
             };
-            storylineButton.Click += (sender, e) =>
+            _storylineButton.Click += (sender, e) =>
             {
 				ExposeumApplication.IsExplorerMode = false;
 				var intent = new Intent(this, typeof(StoryLineListActivity));
@@ -90,8 +84,8 @@ namespace Exposeum
                
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    freeVisitButton.Text = user.GetButtonText("freeTour");
-                    storylineButton.Text = user.GetButtonText("storyLine");
+                    _freeVisitButton.Text = _user.GetButtonText("freeTour");
+                    _storylineButton.Text = _user.GetButtonText("storyLine");
                     return true;
                 case Resource.Id.PauseItem:
                     //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
@@ -107,9 +101,9 @@ namespace Exposeum
 
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
-            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
-            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("PauseItem"));
-            var menuItem3 = menu.GetItem(2).SetTitle(user.GetButtonText("QRScannerItem"));
+            var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("PauseItem"));
+            var menuItem3 = menu.GetItem(2).SetTitle(_user.GetButtonText("QRScannerItem"));
             return true; 
 
         }

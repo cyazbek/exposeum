@@ -1,12 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -20,8 +13,8 @@ namespace Exposeum
         public StoryLineListAdapter(Activity context, List<StoryLine> items)
             : base()
         {
-            this._context = context;
-            this._items = items;
+            _context = context;
+            _items = items;
         }
         public override long GetItemId(int position)
         {

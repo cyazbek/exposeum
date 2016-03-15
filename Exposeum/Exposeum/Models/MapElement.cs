@@ -16,11 +16,11 @@ namespace Exposeum.Models
 
 		protected MapElement(float u, float v, Floor floor)
 		{
-			this.U = u;
-			this.V = v;
+			U = u;
+			V = v;
 			Visited = false;
 
-			this.Floor = floor;
+			Floor = floor;
 		}
 
         public void SetVisited()
