@@ -89,7 +89,8 @@ namespace Exposeum
                     return true;
 
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    var intent = new Intent(this, typeof(QRScanActivity));
+                    StartActivity(intent);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
