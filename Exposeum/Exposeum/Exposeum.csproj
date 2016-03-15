@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -115,9 +115,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <Compile Include="PoiInsertionActivity.cs" />
-    <Compile Include="PoiListActivity.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
