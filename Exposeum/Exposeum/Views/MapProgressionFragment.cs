@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
@@ -53,11 +48,11 @@ namespace Exposeum
 
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
-				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-				this.Orientation = Orientation.Vertical;
-				this.SetWillNotDraw(false); //causes the OnDraw override below to be called
-				this.SetMinimumHeight(220);
-				this.SetBackgroundColor(Color.Red);
+				LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+				Orientation = Orientation.Vertical;
+				SetWillNotDraw(false); //causes the OnDraw override below to be called
+				SetMinimumHeight(220);
+				SetBackgroundColor(Color.Red);
 
 				ResetPaint();
 			}
@@ -78,13 +73,13 @@ namespace Exposeum
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
 
-				List<PointOfInterest> currentPOIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
+				List<PointOfInterest> currentPoIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
 
-				for (int i = 0; i < currentPOIs.Count; i++) {
+				for (int i = 0; i < currentPoIs.Count; i++) {
 
-					MapElement current = currentPOIs[i];
+					MapElement current = currentPoIs[i];
 
-					if(i < currentPOIs.Count - 1)
+					if(i < currentPoIs.Count - 1)
 						canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
 					if (!current.Visited)
@@ -120,7 +115,7 @@ namespace Exposeum
 			}
 
 			public void SetHostFragment(MapProgressionFragment f){
-				this._hostFragment = f;
+				_hostFragment = f;
 			}
 
 			private void ResetPaint(){

@@ -1,13 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -38,9 +30,9 @@ namespace Exposeum.Fragments
             
             button.Click += (sender, e) =>
             {
-                this.Dismiss();
+                Dismiss();
             };
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
         public override void OnCreate(Bundle savedInstanceState)

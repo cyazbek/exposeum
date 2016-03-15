@@ -1,6 +1,4 @@
-﻿using Android.Graphics;
-
-namespace Exposeum.Models
+﻿namespace Exposeum.Models
 {
 	public class Edge
 	{
@@ -10,8 +8,8 @@ namespace Exposeum.Models
 
 		public Edge (MapElement start, MapElement end)
 		{
-			this.Start = start;
-			this.End = end;
+			Start = start;
+			End = end;
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Android.Content.Res;
 using Java.Util;
 using Android.Graphics.Drawables;
 
@@ -186,12 +185,12 @@ namespace Exposeum.Models
 			story2.CurrentStatus = Status.InProgress;
 			story3.CurrentStatus = Status.IsVisited;
 
-			this._storyLines.Add(storyline);
-			this._storyLines.Add(story2);
-			this._storyLines.Add(story3);
-			this._storyLines.Add(story4);
-			this._storyLines.Add(story5);
-			this._storyLines.Add(story6);
+			_storyLines.Add(storyline);
+			_storyLines.Add(story2);
+			_storyLines.Add(story3);
+			_storyLines.Add(story4);
+			_storyLines.Add(story5);
+			_storyLines.Add(story6);
 
 			//Set the storyline for the explorer mode
 			_currentStoryline = storyline;
@@ -307,29 +306,29 @@ namespace Exposeum.Models
 
 		public Floor CurrentFloor
 		{
-			get { return this._currentFloor; }
-			set { this._currentFloor = value; }
+			get { return _currentFloor; }
+			set { _currentFloor = value; }
 		}
 
 		public List<Floor> Floors
 		{
-			get { return this._floors; }
-			set { this._floors = value; }
+			get { return _floors; }
+			set { _floors = value; }
 		}
 
 		public StoryLine CurrentStoryline
 		{
-			get { return this._currentStoryline; }
-			set { this._currentStoryline = value; }
+			get { return _currentStoryline; }
+			set { _currentStoryline = value; }
 		}
         public void AddStoryLine(StoryLine storyline)
         {
-            this._storyLines.Add(storyline);
+            _storyLines.Add(storyline);
         }
         public List<StoryLine> GetStoryLineList
         {
-            get { return this._storyLines; }
-            set { this._storyLines = value; }
+            get { return _storyLines; }
+            set { _storyLines = value; }
         }
     }
 }

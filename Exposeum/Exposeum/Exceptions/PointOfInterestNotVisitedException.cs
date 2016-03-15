@@ -8,7 +8,7 @@ namespace Exposeum
 		public PointOfInterest Poi{ get;}
 
 		public PointOfInterestNotVisitedException (string message, PointOfInterest poi): base(message){
-			this.Poi = poi;
+			Poi = poi;
 		}
 	}
 }

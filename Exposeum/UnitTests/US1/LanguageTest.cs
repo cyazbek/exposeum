@@ -1,9 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using Android.App;
-using Exposeum;
-using System.Collections.Generic;
-using Exposeum.Models; 
+﻿using NUnit.Framework;
 
 namespace UnitTests
 {

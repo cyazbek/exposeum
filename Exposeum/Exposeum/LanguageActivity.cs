@@ -2,13 +2,8 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Renderscripts;
 using Android.Widget;
-using Exposeum.Controllers;
 using Exposeum.Models;
-using System.ComponentModel;
-using System.Globalization;
-using System.Threading;
 
 
 namespace Exposeum
@@ -17,7 +12,7 @@ namespace Exposeum
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
-        User user = User.GetInstance(); 
+        User _user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,7 +24,7 @@ namespace Exposeum
             frenchButton.Click += (sender, e)=>
             {
                 
-                user.SwitchLanguage(Language.FR);
+                _user.SwitchLanguage(Language.Fr);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
 
@@ -37,7 +32,7 @@ namespace Exposeum
 
             englishButton.Click += (sender, e) =>
             {
-                user.SwitchLanguage(Language.EN);
+                _user.SwitchLanguage(Language.En);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
             };
