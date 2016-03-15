@@ -1,16 +1,16 @@
-﻿namespace Exposeum
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Android.App;
-    using Android.Content;
-    using Android.Views;
-    using Android.Widget;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Widget;
 
-                                    /// <summary>
-                                  /// This adapter holds the names of activities in the application that can be 
-                                  /// launched from the main screen, the intent that can be used to launch them.
-                                  /// </summary>  
+namespace Exposeum
+{
+    /// <summary>
+    /// This adapter holds the names of activities in the application that can be 
+    /// launched from the main screen, the intent that can be used to launch them.
+    /// </summary>  
     public class MainMenuAdapter : BaseAdapter
 	{
 		private  readonly Dictionary<string, Intent> _gestureActivities;
@@ -19,10 +19,10 @@
 		{
             _activity = activity;
 			_gestureActivities = new Dictionary<string, Intent>
-                                     {
-                                         { activity.BaseContext.Resources.GetText(Resource.String.b_activity), new Intent(activity, typeof(BeaconActivity)) },
-                                         { activity.BaseContext.Resources.GetText(Resource.String.l_activity), new Intent(activity, typeof(LanguageActivity))}
-                                     };
+            {
+                { activity.BaseContext.Resources.GetText(Resource.String.b_activity), new Intent(activity, typeof(BeaconActivity)) },
+                { activity.BaseContext.Resources.GetText(Resource.String.l_activity), new Intent(activity, typeof(LanguageActivity))}
+            };
 		}
 
 		public override int Count { get { return _gestureActivities.Count; } }
@@ -45,16 +45,15 @@
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			TextView result = convertView as TextView;
-			if (result == null) {
-				result = new TextView (_activity)
-                             {
-                                 TextSize = 28.0f,
-                                 Text = _gestureActivities.Keys.ElementAt(position)
-                             };
-				result.SetPadding (0, 15, 0, 15);
-			}
+		    if (result != null) return result;
+		    result = new TextView (_activity)
+		    {
+		        TextSize = 28.0f,
+		        Text = _gestureActivities.Keys.ElementAt(position)
+		    };
+		    result.SetPadding (0, 15, 0, 15);
 
-			return result;
+		    return result;
 		}
 	}
 }

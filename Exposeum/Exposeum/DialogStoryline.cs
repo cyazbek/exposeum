@@ -8,12 +8,12 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-    class DialogStoryline : DialogFragment
+    public class DialogStoryline : DialogFragment
     {
-        private StoryLine _storyLine;
-        private Context _context; 
-		private StorylineController _storylineController = StorylineController.GetInstance();
-        private User _user = User.GetInstance(); 
+        private readonly StoryLine _storyLine;
+        private readonly Context _context; 
+		private readonly StorylineController _storylineController = StorylineController.GetInstance();
+        private readonly User _user = User.GetInstance(); 
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
