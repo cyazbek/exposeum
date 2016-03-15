@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,23 +78,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
-    <Compile Include="Data\BeaconData.cs" />
-    <Compile Include="Data\PoiStoryData.cs" />
-    <Compile Include="Data\StoryData.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
+    <Compile Include="Models\AudioContent.cs" />
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\ButtonText.cs" />
+    <Compile Include="Models\ExhibitionContent.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Data\POIData.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
+    <Compile Include="Tables\Beacon.cs" />
+    <Compile Include="Tables\DBManager.cs" />
+    <Compile Include="Tables\Edge.cs" />
+    <Compile Include="Tables\ExhibitionContentEn.cs" />
+    <Compile Include="Tables\ExhibitionContentFr.cs" />
+    <Compile Include="Tables\Floor.cs" />
+    <Compile Include="Tables\Icon.cs" />
+    <Compile Include="Tables\Images.cs" />
+    <Compile Include="Tables\MapElements.cs" />
+    <Compile Include="Tables\PoiDescriptionEn.cs" />
+    <Compile Include="Tables\PoiDescriptionFr.cs" />
+    <Compile Include="Tables\Storyline.cs" />
+    <Compile Include="Tables\StoryLineDescriptionEn.cs" />
+    <Compile Include="Tables\StoryLineDescriptionFr.cs" />
+    <Compile Include="Tables\StoryLineMapElementList.cs" />
+    <Compile Include="TDGs\BeaconTDG.cs" />
+    <Compile Include="TDGs\EdgeTDG.cs" />
+    <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
+    <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
+    <Compile Include="TDGs\FloorTDG.cs" />
+    <Compile Include="TDGs\IconTDG.cs" />
+    <Compile Include="TDGs\ImagesTDG.cs" />
+    <Compile Include="TDGs\MapElementsTDG.cs" />
+    <Compile Include="TDGs\PoiDescriptionEnTDG.cs" />
+    <Compile Include="TDGs\PoiDescriptionFrTDG.cs" />
+    <Compile Include="TDGs\StoryLineDescriptionEnTDG.cs" />
+    <Compile Include="TDGs\StoryLineDescriptionFrTDG.cs" />
+    <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
+    <Compile Include="TDGs\StorylineTDG.cs" />
+    <Compile Include="TDGs\TDG.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,10 +142,6 @@
     <AndroidResource Include="Resources\layout\Language.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <Compile Include="PoiInsertionActivity.cs" />
-    <Compile Include="PoiListActivity.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
     <AndroidResource Include="Resources\drawable-xhdpi\beacon_gray.png" />
     <Compile Include="ExposeumApplication.cs" />
     <Compile Include="Exceptions\StoryLineNotFoundException.cs" />
@@ -135,7 +159,6 @@
     <Compile Include="WalkthroughtFragmentAdapter.cs" />
     <Compile Include="Models\MapElement.cs" />
     <Compile Include="Models\Map.cs" />
-    <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
