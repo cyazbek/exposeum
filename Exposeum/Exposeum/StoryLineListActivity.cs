@@ -71,14 +71,10 @@ namespace Exposeum
 
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
                     return true;
-                case Resource.Id.PauseItem:
-                    //do something
-                    return true;
+
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Feature not supported yet!", ToastLength.Long);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
