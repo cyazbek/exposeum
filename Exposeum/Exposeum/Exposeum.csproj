@@ -96,7 +96,7 @@
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
-    <Compile Include="Services\ShortestPathService.cs" />
+    <Compile Include="Services\Service Providers\ShortestPathServiceProvider.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
