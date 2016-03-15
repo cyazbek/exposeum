@@ -1,8 +1,6 @@
-using SQLite;
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using Exposeum.Models;
 
 namespace Exposeum
 {

@@ -1,5 +1,4 @@
 using Java.Util;
-using EstimoteSdk;
 using Exposeum.Data;
 
 namespace Exposeum.Models

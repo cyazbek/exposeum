@@ -1,5 +1,4 @@
-﻿using System;
-using Exposeum.Models;
+﻿using Exposeum.Models;
 
 namespace Exposeum
 {

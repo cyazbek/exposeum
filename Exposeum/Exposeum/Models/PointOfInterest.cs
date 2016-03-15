@@ -2,7 +2,6 @@ using System;
 using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Text.Style;
 using Java.Util;
 
 namespace Exposeum.Models
@@ -94,7 +93,7 @@ namespace Exposeum.Models
         {
             string summary;
 
-            if (User.GetInstance()._language.Equals(Language.FR))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
             else
                 summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
@@ -104,7 +103,7 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            if (User.GetInstance()._language.Equals(Language.FR))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 return this.DescriptionFr;
             else
                 return this.DescriptionEn;
@@ -112,7 +111,7 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            if (User.GetInstance()._language.Equals(Language.FR))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 return this.NameFr;
             else
                 return this.NameEn;

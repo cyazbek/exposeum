@@ -1,6 +1,4 @@
-﻿using Android.Graphics;
-
-namespace Exposeum.Models
+﻿namespace Exposeum.Models
 {
 	public class Edge
 	{

@@ -3,8 +3,6 @@ using System.IO;
 using Exposeum.Data;
 using Exposeum.Models;
 using SQLite;
-using Java.Util;
-using System.Collections.Generic;
 
 namespace Exposeum.Controllers
 {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Exposeum.Data;
-using System;
 
 namespace Exposeum.Models
 {
@@ -156,10 +155,10 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyName;
 
-            if (lang.Equals(Language.FR))
+            if (lang.Equals(Language.Fr))
                 storyName = this.NameFr;
             else
                 storyName = this.NameEn;
@@ -169,10 +168,10 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyDesc;
 
-            if (lang.Equals(Language.FR))
+            if (lang.Equals(Language.Fr))
                 storyDesc = this.DescFr;
             else
                 storyDesc = this.DescEn;
@@ -182,9 +181,9 @@ namespace Exposeum.Models
 
         public string GetAudience()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyAudience;
-            if (lang.Equals(Language.FR))
+            if (lang.Equals(Language.Fr))
                 storyAudience = AudienceFr; 
             else
                 storyAudience = this.AudienceEn;

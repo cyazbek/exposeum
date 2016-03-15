@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Android.Graphics.Drawables;
+﻿using Android.Graphics.Drawables;
 using Android.Graphics;
-using System.Linq;
 
 namespace Exposeum.Models
 {

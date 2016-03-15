@@ -2,14 +2,10 @@
 using System.Reflection;
 using NUnit.Framework;
 using EstimoteSdk;
-using Android.App;
 using Exposeum;
 using System.Collections.Generic;
 using Exposeum.Models;
 using Java.Util;
-using System.Threading.Tasks;
-using System.Threading;
-using Android.Util;
 
 namespace UnitTests
 {

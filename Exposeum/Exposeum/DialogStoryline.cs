@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -16,10 +10,10 @@ namespace Exposeum
 {
     class DialogStoryline : DialogFragment
     {
-        StoryLine _storyLine;
-        Context _context; 
-		StorylineController _storylineController = StorylineController.GetInstance();
-        User user = User.GetInstance(); 
+        private StoryLine _storyLine;
+        private Context _context; 
+		private StorylineController _storylineController = StorylineController.GetInstance();
+        private User _user = User.GetInstance(); 
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
@@ -40,7 +34,7 @@ namespace Exposeum
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
-            button.Text = user.GetButtonText("storyLineDialogButton");
+            button.Text = _user.GetButtonText("storyLineDialogButton");
             button.Click += delegate {
 				_storylineController.SetActiveStoryLine();
                 _storylineController.BeginJournery();

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
@@ -78,13 +73,13 @@ namespace Exposeum
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
 
-				List<PointOfInterest> currentPOIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
+				List<PointOfInterest> currentPoIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
 
-				for (int i = 0; i < currentPOIs.Count; i++) {
+				for (int i = 0; i < currentPoIs.Count; i++) {
 
-					MapElement current = currentPOIs[i];
+					MapElement current = currentPoIs[i];
 
-					if(i < currentPOIs.Count - 1)
+					if(i < currentPoIs.Count - 1)
 						canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
 					if (!current.Visited)

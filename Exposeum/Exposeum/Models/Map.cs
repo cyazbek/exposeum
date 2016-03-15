@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Android.Content.Res;
 using Java.Util;
 using Android.Graphics.Drawables;
 
