@@ -5,16 +5,18 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ZXing.Mobile;
 
 namespace Exposeum.Fragments
 
 {
-    [Activity(Label = "ZXing.Net.Mobile", Theme = "@android:style/Theme.Holo.Light", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden)]
+    [Activity(Label = "Secret Finder", Theme = "@android:style/Theme.Holo.Light", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden)]
     public class FragmentActivity : global::Android.Support.V4.App.FragmentActivity
     {
         ZXingScannerFragment scanFragment;

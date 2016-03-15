@@ -14,7 +14,7 @@ using ZXing.Mobile;
 
 namespace Exposeum
 {
-    [Activity(Label = "ZXing.Net.Mobile", MainLauncher = true, Theme = "@android:style/Theme.Holo.Light", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden)]
+    [Activity(Label = "Secret Finder", MainLauncher = false, Theme = "@android:style/Theme.Holo.Light", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.KeyboardHidden)]
     public class QRScanActivity : Activity
     {
         Button buttonScanCustomView;
@@ -33,7 +33,7 @@ namespace Exposeum
             MobileBarcodeScanner.Initialize(Application);
 
             // Set our view from the "main" layout resource
-            //SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.QRScannerInit);
 
             //Create a new instance of our Scanner
             scanner = new MobileBarcodeScanner();
