@@ -2,15 +2,12 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
-using Android.Widget;
 using Exposeum.Models;
-using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 using System.Linq;
 using Android.App;
 using Exposeum.Fragments;
-using Android.Util;
 
 namespace Exposeum.Views
 {
@@ -54,21 +51,21 @@ namespace Exposeum.Views
 			_unvisitedEdge.SetPathEffect(new DashPathEffect (new float[]{ 5,10}, 0));
 			_unvisitedEdge.AntiAlias = true;
 
-			this.LayoutParameters = new ViewGroup.LayoutParams (
+			LayoutParameters = new ViewGroup.LayoutParams (
 				ViewGroup.LayoutParams.MatchParent,
 				ViewGroup.LayoutParams.MatchParent
 			);
 		}
 
 		public void Update(){
-			this.Invalidate();
+			Invalidate();
 		}
 
 		public void InitiatePointOfInterestPopup(PointOfInterest poi){
 
             if (_newPointOfInterestPopup == null || ! _newPointOfInterestPopup.IsShowing())
             {
-                _newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
+                _newPointOfInterestPopup = new PointOfInterestPopup(_context, poi);
                 _newPointOfInterestPopup.Show();
             }
 		}
@@ -162,17 +159,17 @@ namespace Exposeum.Views
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
 
-				PointOfInterest lastVisitedPOI = null;
+				PointOfInterest lastVisitedPoi = null;
 
-				List<PointOfInterest> currentFloorPOIs = currentFloorMapElements.OfType<PointOfInterest> ().ToList();
+				List<PointOfInterest> currentFloorPoIs = currentFloorMapElements.OfType<PointOfInterest> ().ToList();
 
 				//get a reference to the last visited POI for drawing purposes
-				for (int i = 0; i < currentFloorPOIs.Count; i++) {
+				for (int i = 0; i < currentFloorPoIs.Count; i++) {
 
-					if (!currentFloorPOIs [i].Visited)
+					if (!currentFloorPoIs [i].Visited)
 						break;
 					
-					lastVisitedPOI = currentFloorPOIs [i];
+					lastVisitedPoi = currentFloorPoIs [i];
 
 				}
 
@@ -180,7 +177,7 @@ namespace Exposeum.Views
 
 					MapElement current = currentFloorMapElements[i];
 
-					if (current == lastVisitedPOI || lastVisitedPOI == null)
+					if (current == lastVisitedPoi || lastVisitedPoi == null)
 						appropriateEdgePaintBrush = _unvisitedEdge;
 
 					if (i < currentFloorMapElements.Count - 1) {

@@ -24,7 +24,7 @@ namespace Exposeum
 
 			ListAdapter = new MainMenuAdapter (this);
 
-            BluetoothManager bluetoothManager = (BluetoothManager)GetSystemService(Context.BluetoothService);
+            BluetoothManager bluetoothManager = (BluetoothManager)GetSystemService(BluetoothService);
             BluetoothAdapter bluetoothAdapter = bluetoothManager.Adapter;
 
             if (bluetoothAdapter == null || !bluetoothAdapter.IsEnabled)

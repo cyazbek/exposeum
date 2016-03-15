@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Android.Graphics.Drawables;
+﻿using Android.Graphics.Drawables;
 using Android.Graphics;
-using System.Linq;
 
 namespace Exposeum.Models
 {
@@ -24,7 +20,7 @@ namespace Exposeum.Models
 
 		public Drawable Image
 		{
-			get { return this._floorPlan; }
+			get { return _floorPlan; }
 		}
 	}
 }

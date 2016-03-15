@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Util;
-using Exposeum.Views;
 using Exposeum.Controllers;
+using Exposeum.Models;
 
 namespace Exposeum
 {
@@ -24,6 +16,7 @@ namespace Exposeum
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
+            
 			base.OnCreate (savedInstanceState);
 
             //=========================================================================================================
@@ -38,7 +31,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
             //=========================================================================================================
 
@@ -51,7 +44,7 @@ namespace Exposeum
 			_beaconFinder.SetNotificationDestination (this);
 
 			//Bind the _totalMapView to the Activity
-		    SetContentView(_mapController._totalMapView);
+		    SetContentView(_mapController.TotalMapView);
 		}
 
         protected override void OnResume()
@@ -76,7 +69,11 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            if (ExposeumApplication.IsExplorerMode)
+                MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            else
+                MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -91,10 +88,13 @@ namespace Exposeum
                     //StartActivity(intent);
                     return true;
                 case Resource.Id.PauseItem:
-                    //do something
+                    StorylineController _storylineController = StorylineController.GetInstance();
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    
                     return true;
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
