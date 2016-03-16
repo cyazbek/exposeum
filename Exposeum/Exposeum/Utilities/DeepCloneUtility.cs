@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 
 namespace Exposeum.Utilities
 {
+	//This class is static and is designed as a utility class 
+	//because the Clone method forces the class to be static
 	public static class DeepCloneUtility
 	{
 		/// <summary>
