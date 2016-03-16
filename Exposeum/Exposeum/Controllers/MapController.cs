@@ -100,7 +100,7 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.GetClosestBeacon();
 
-			UpdatePointOfInterestState (beacon);
+			UpdatePointOfInterestAndStoryLineState (beacon);
 
 			if (!ExposeumApplication.IsExplorerMode)
 				_mapProgressionView.Update ();
@@ -108,7 +108,7 @@ namespace Exposeum.Controllers
 			_mapView.Update ();
 		}
 
-		private void UpdatePointOfInterestState(EstimoteSdk.Beacon beacon){
+		private void UpdatePointOfInterestAndStoryLineState(EstimoteSdk.Beacon beacon){
 			
 			if (beacon != null && (_mapModel.CurrentStoryline.HasBeacon(beacon)))
 			{
