@@ -150,55 +150,63 @@ namespace Exposeum.Views
 
 			_map.CurrentFloor.Image.Draw (canvas);
 
-			Paint appropriateEdgePaintBrush = _visitedEdge;
-
 			//draw edges and POIs on top of map
 
 			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
 
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
-
-				PointOfInterest lastVisitedPoi = null;
-
-				List<PointOfInterest> currentFloorPoIs = currentFloorMapElements.OfType<PointOfInterest> ().ToList();
-
-				//get a reference to the last visited POI for drawing purposes
-				for (int i = 0; i < currentFloorPoIs.Count; i++) {
-
-					if (!currentFloorPoIs [i].Visited)
-						break;
-					
-					lastVisitedPoi = currentFloorPoIs [i];
-
-				}
-
-				for (int i = 0; i < currentFloorMapElements.Count; i++) {
-
-					MapElement current = currentFloorMapElements[i];
-
-					if (current == lastVisitedPoi || lastVisitedPoi == null)
-						appropriateEdgePaintBrush = _unvisitedEdge;
-
-					if (i < currentFloorMapElements.Count - 1) {
-
-						MapElement next = currentFloorMapElements[i + 1];
-
-						Path path = new Path ();
-						path.MoveTo(current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight);
-						path.LineTo(next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight);
-
-						canvas.DrawPath(path, appropriateEdgePaintBrush);
-					}
-				}
+				DrawMapElementsEdges (canvas, currentFloorMapElements);
 			}
 
 			//finally, draw the mapElements
-			foreach (MapElement mapElement in currentFloorMapElements) {
-				mapElement.Draw (canvas);
-			}
+			DrawMapElements();
 				
 			canvas.Restore ();
+		}
+
+		protected void DrawMapElements(Canvas canvas, List<MapElement> mapElements){
+			foreach (MapElement mapElement in mapElements) {
+				mapElement.Draw (canvas);
+			}
+		}
+
+		protected void DrawMapElementsEdges(Canvas canvas, List<MapElement> mapElements){
+
+			Paint appropriateEdgePaintBrush = _visitedEdge;
+
+			PointOfInterest lastVisitedPoi = null;
+
+			List<PointOfInterest> currentFloorPoIs = mapElements.OfType<PointOfInterest> ().ToList();
+
+			//get a reference to the last visited POI for drawing purposes
+			for (int i = 0; i < currentFloorPoIs.Count; i++) {
+
+				if (!currentFloorPoIs [i].Visited)
+					break;
+
+				lastVisitedPoi = currentFloorPoIs [i];
+
+			}
+
+			for (int i = 0; i < mapElements.Count; i++) {
+
+				MapElement current = mapElements[i];
+
+				if (current == lastVisitedPoi || lastVisitedPoi == null)
+					appropriateEdgePaintBrush = _unvisitedEdge;
+
+				if (i < mapElements.Count - 1) {
+
+					MapElement next = mapElements[i + 1];
+
+					Path path = new Path ();
+					path.MoveTo(current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.LineTo(next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight);
+
+					canvas.DrawPath(path, appropriateEdgePaintBrush);
+				}
+			}
 		}
 			
 		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
