@@ -153,6 +153,8 @@
     <Compile Include="Services\IExplorerService.cs" />
     <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
     <Compile Include="Services\IShortestPathService.cs" />
+    <Compile Include="Models\IPath.cs" />
+    <Compile Include="Models\ShortPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
