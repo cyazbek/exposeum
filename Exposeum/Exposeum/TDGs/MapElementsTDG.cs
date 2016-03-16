@@ -1,4 +1,5 @@
 using Exposeum.Tables;
+using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
@@ -26,6 +27,11 @@ namespace Exposeum.TDGs
         public MapElements GetMapElement(int id)
         {
             return _db.Get<MapElements>(id);
+        }
+
+        public List<Tables.MapElements> GetAllMapElements()
+        {
+            return new List<MapElements>(_db.Table<MapElements>());
         }
     }
 }
