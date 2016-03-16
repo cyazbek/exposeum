@@ -156,7 +156,7 @@ namespace Exposeum.Controllers
 
 				//If the storyline is complete, we show path to the starting point
 				if(currentStoryLine.CurrentStatus == Status.IsVisited)
-					GoingBackToTheStart();
+					GoingBackToTheStart(currentStoryLine);
 			}
 			catch (PointOfInterestNotVisitedException e)
 			{
