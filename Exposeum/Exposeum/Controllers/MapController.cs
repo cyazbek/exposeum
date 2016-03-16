@@ -120,7 +120,7 @@ namespace Exposeum.Controllers
 					//Update the progress if in guided tour mode
 					if (!ExposeumApplication.IsExplorerMode)
 					{
-						UpdateStoryLineProgress ();
+						UpdateStoryLineProgress (poi);
 					}
 					else
 					{

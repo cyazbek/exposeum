@@ -4,6 +4,7 @@ using System.Linq;
 using Exposeum.Models;
 using QuickGraph;
 using QuickGraph.Algorithms;
+using Exposeum.Utilities;
 
 namespace Exposeum.Services.Service_Providers
 {
@@ -15,7 +16,6 @@ namespace Exposeum.Services.Service_Providers
 
         private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 		private static ShortestPathServiceProvider _instance;
-		private DeepCloneService _deepCloner;
 
 		/// <summary>
 		/// Constructor
@@ -24,7 +24,6 @@ namespace Exposeum.Services.Service_Providers
         {
 			_graphInstance = new UndirectedGraph<MapElement, MapEdge> ();
 			PopulateGraphFromDataSource ();
-			_deepCloner = new DeepCloneServiceProvider ();
 
         }
 
@@ -42,15 +41,15 @@ namespace Exposeum.Services.Service_Providers
 		/// <summary>
 		/// Populates the internal graph object with data
 		/// </summary>
-		/// <returns>bool</returns>
-        private bool PopulateGraphFromDataSource()
+		/// <returns></returns>
+        private void PopulateGraphFromDataSource()
         {
             //throw new NotImplementedException();
 
 			List<MapEdge> mapEdges = new List<MapEdge> ();
 			List<MapElement> mapElements = (new StoryLineServiceProvider ()).GetActiveStoryLine ().MapElements;
 
-			MapElement previous = mapElements.Last;
+			MapElement previous = mapElements.Last();
 
 			foreach (MapElement mapElement in mapElements) {
 				
@@ -119,15 +118,15 @@ namespace Exposeum.Services.Service_Providers
 
 			int i = 0;
 			foreach (MapElement mapElement in mapElements) {
-				MapElement clonedElement = _deepCloner.Clone (mapElement);
+				MapElement clonedElement = DeepCloneUtility.Clone (mapElement);
 				clonedElement.Visited = false;
 
 				//If the Map Element is a PointOfInterest, change the descriptions 
 				//and names so that the push notificationsremain relevant.
 				if (clonedElement.GetType () == typeof(PointOfInterest)) {
 					PointOfInterest poi = ((PointOfInterest)clonedElement);
-					poi.DescriptionEn = "You're on your way, " + mapElements.Count - i + " point(s) of interest to go.";
-					poi.DescriptionFr = "Il vous reste " + mapElements.Count - i + " point(s) d'interet avant d'arriver.";
+					poi.DescriptionEn = "You're on your way, " + (mapElements.Count - i) + " point(s) of interest to go.";
+					poi.DescriptionFr = "Il vous reste " + (mapElements.Count - i) + " point(s) d'interet avant d'arriver.";
 					poi.NameEn = i + " out of " + mapElements.Count;
 					poi.NameFr = i + " de " + mapElements.Count;
 				}

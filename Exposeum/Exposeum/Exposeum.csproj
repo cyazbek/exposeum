@@ -187,8 +187,7 @@
     <Compile Include="Services\IShortestPathService.cs" />
     <Compile Include="Models\IPath.cs" />
     <Compile Include="Models\ShortPath.cs" />
-    <Compile Include="Services\DeepCloneService.cs" />
-    <Compile Include="Services\Service Providers\DeepCloneServiceProvider.cs" />
+    <Compile Include="Utilities\DeepCloneUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -371,5 +370,8 @@
   <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
 </Project>

@@ -1,14 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Exposeum
+namespace Exposeum.Utilities
 {
-	public class DeepCloneServiceProvider: DeepCloneService
+	public static class DeepCloneUtility
 	{
-		public DeepCloneServiceProvider ()
-		{
-		}
-
 		/// <summary>
 		/// Perform a deep Copy of the object, using Json as a serialisation method.
 		/// </summary>
@@ -30,6 +26,7 @@ namespace Exposeum
 
 			return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source), deserializeSettings);
 		}
+
 	}
 }
 

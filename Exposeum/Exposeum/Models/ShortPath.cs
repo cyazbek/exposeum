@@ -78,9 +78,9 @@ namespace Exposeum.Models
 					if (poi.Beacon.CompareBeacon (beacon))
 						return poi;
 				}
-
-				return null;
 			}
+
+			return null;
 		}
 
 		public bool HasBeacon (EstimoteSdk.Beacon beacon){
