@@ -6,6 +6,8 @@ namespace Exposeum.TDGs
     {
         private static IconTDG _instance;
 
+        private IconTDG() { }
+
         public static IconTDG GetInstance()
         {
             if(_instance == null)
@@ -23,10 +25,12 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+
         public Icon GetIcon(int id)
         {
             return _db.Get<Icon>(id);
         }
+
         public bool Equals(Icon object1, Icon Object2)
         {
             if (object1.ID == Object2.ID && object1.path.Equals(Object2.path))

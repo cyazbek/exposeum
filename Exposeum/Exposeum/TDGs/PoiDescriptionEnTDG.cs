@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    class PoiDescriptionEnTDG:TDG
+    public class PoiDescriptionEnTDG : TDG
     {
         private static PoiDescriptionEnTDG _instance;
+
+        private PoiDescriptionEnTDG() { }
 
         public static PoiDescriptionEnTDG GetInstance()
         {

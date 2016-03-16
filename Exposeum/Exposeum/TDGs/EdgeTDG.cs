@@ -7,6 +7,8 @@ namespace Exposeum.TDGs
     {
         private static EdgeTDG _instance;
 
+        private EdgeTDG() { }
+
         public static EdgeTDG GetInstance()
         {
             if (_instance == null)
@@ -24,10 +26,12 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+
         public Edge GetEdge(int id)
         {
             return _db.Get<Edge>(id);
         }
+
         public bool Equals(Edge object1, Edge object2)
         {
             if (object1.ID == object2.ID && object1.distance==object2.distance && object1.startMapElementId == object2.startMapElementId && object1.endMapElementId == object2.endMapElementId)

@@ -8,7 +8,7 @@ namespace Exposeum.Mappers
 {
     public class MapElementsMapper
     {
-        private readonly MapElementsTDG _mapElementsTdg = new MapElementsTDG();
+        private readonly MapElementsTDG _mapElementsTdg = MapElementsTDG.GetInstance();
         private readonly List<MapElement> _listOfMapElements = new List<MapElement>();
 
         public MapElement GetMapElement(int id)

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    class MapElementsTDG:TDG
+    public class MapElementsTDG : TDG
     {
         private static MapElementsTDG _instance;
+
+        private MapElementsTDG() { }
 
         public static MapElementsTDG GetInstance()
         {

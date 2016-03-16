@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    class StoryLineDescriptionFrTDG:TDG
+    public class StoryLineDescriptionFrTDG : TDG
     {
         private static StoryLineDescriptionFrTDG _instance;
+
+        private StoryLineDescriptionFrTDG() { }
 
         public static StoryLineDescriptionFrTDG GetInstance()
         {
