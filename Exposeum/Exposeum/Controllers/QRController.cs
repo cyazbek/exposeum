@@ -9,6 +9,7 @@ namespace Exposeum.Controllers
 	{
 		private static QRController _instance;
 		private MobileBarcodeScanner _scanner;
+		private Context _context;
 
 		public static QRController GetInstance(Context context){
 			if (_instance == null)
@@ -16,8 +17,9 @@ namespace Exposeum.Controllers
 			return _instance;
 		}
 
-		public QRController (Context context)
+		private QRController (Context context)
 		{
+			this._context = context;
 			MobileBarcodeScanner.Initialize (((Activity)context).Application);
 
 			_scanner = new MobileBarcodeScanner ();
@@ -32,14 +34,10 @@ namespace Exposeum.Controllers
 			HandleScanResult (result);
 		}
 
-		async void HandleScanResult(ZXing.Result result)
+		private async void HandleScanResult(ZXing.Result result)
 		{
-			string msg = "";
-
-			if (result != null && !string.IsNullOrEmpty(result.Text))
-				msg = "Found Barcode: " + result.Text;
-			else
-				msg = "Scanning Canceled!";
+			if (result != null && !string.IsNullOrEmpty (result.Text))
+				_context.StartActivity(new Intent(Intent.ActionView, Android.Net.Uri.Parse (result.Text)));
 		}
 	}
 }
