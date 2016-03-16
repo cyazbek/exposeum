@@ -107,7 +107,8 @@ namespace Exposeum.Services.Service_Providers
         }
 
 		/// <summary>
-		/// Returns a ShortPath object representing the shortest path
+		/// Returns a ShortPath object representing the shortest path. All PointsOfInterests contained in this path
+		/// are clones of the original and have an updated description.
 		/// </summary>
 		/// <param name="startElement"></param>
 		/// <param name="targetElement"></param>
