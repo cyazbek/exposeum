@@ -160,7 +160,7 @@ namespace Exposeum.Views
 			}
 
 			//finally, draw the mapElements
-			DrawMapElements();
+			DrawMapElements(canvas, currentFloorMapElements);
 				
 			canvas.Restore ();
 		}
