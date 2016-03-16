@@ -29,7 +29,7 @@ namespace Exposeum.TDGs
             return _db.Get<MapElements>(id);
         }
 
-        public List<Tables.MapElements> GetAllMapElements()
+        public List<MapElements> GetAllMapElements()
         {
             return new List<MapElements>(_db.Table<MapElements>());
         }

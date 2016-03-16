@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Exposeum.Tables;
 
 namespace Exposeum.TDGs
@@ -34,5 +35,11 @@ namespace Exposeum.TDGs
             else
                 return false;
         }
+
+        public List<Edge> GetAllEdges()
+        {
+            return new List<Edge>(_db.Table<Edge>());
+        }
+        
     }
 }
