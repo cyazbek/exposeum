@@ -22,6 +22,14 @@ namespace Exposeum
 		/// <param name="targetElement"></param>
 		/// <returns></returns>
 		IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement);
+
+		/// <summary>
+		/// Returns a ShortPath object representing the shortest path
+		/// </summary>
+		/// <param name="startElement"></param>
+		/// <param name="targetElement"></param>
+		/// <returns>ShortPath</returns>
+		ShortPath GetShortestPath(MapElement startElement, MapElement targetElement);
 	}
 }
 

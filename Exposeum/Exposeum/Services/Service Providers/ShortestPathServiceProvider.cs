@@ -15,14 +15,23 @@ namespace Exposeum.Services.Service_Providers
 
         private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 		private static ShortestPathServiceProvider _instance;
+		private DeepCloneService _deepCloner;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
         private ShortestPathServiceProvider()
         {
 			_graphInstance = new UndirectedGraph<MapElement, MapEdge> ();
 			PopulateGraphFromDataSource ();
+			_deepCloner = new DeepCloneServiceProvider ();
+
         }
 
-
+		/// <summary>
+		/// Returns the Singleton instance of ShortestPathServiceProvider
+		/// </summary>
+		/// <returns>ShortestPathServiceProvider</returns>
 		public static ShortestPathServiceProvider GetInstance()
         {
 			return _instance ?? (_instance = new ShortestPathServiceProvider());
@@ -30,6 +39,10 @@ namespace Exposeum.Services.Service_Providers
 
 
         //TODO: Need to actually put stuff in our graph
+		/// <summary>
+		/// Populates the internal graph object with data
+		/// </summary>
+		/// <returns>bool</returns>
         private bool PopulateGraphFromDataSource()
         {
             //throw new NotImplementedException();
@@ -53,7 +66,7 @@ namespace Exposeum.Services.Service_Providers
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-        /// <returns></returns>
+		/// <returns>IEnumerable<MapEdge></returns>
         public IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement)
         {
 
@@ -73,8 +86,8 @@ namespace Exposeum.Services.Service_Providers
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-        /// <returns></returns>
-        public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
+		/// <returns>List<MapElement></returns>
+		public List<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
         {
 
             var edgeList = GetShortestPathEdgesList(startElement, targetElement).ToList();
@@ -92,6 +105,39 @@ namespace Exposeum.Services.Service_Providers
 
             return elementList;
         }
+
+		/// <summary>
+		/// Returns a ShortPath object representing the shortest path
+		/// </summary>
+		/// <param name="startElement"></param>
+		/// <param name="targetElement"></param>
+		/// <returns>ShortPath</returns>
+		public ShortPath GetShortestPath(MapElement startElement, MapElement targetElement){
+			List<MapElement> mapElements = GetShortestPathElementsList (startElement, targetElement);
+			List<MapElement> clonedMapElements = new List<MapElement> ();
+
+			int i = 0;
+			foreach (MapElement mapElement in mapElements) {
+				MapElement clonedElement = _deepCloner.Clone (mapElement);
+				clonedElement.Visited = false;
+
+				//If the Map Element is a PointOfInterest, change the descriptions 
+				//and names so that the push notificationsremain relevant.
+				if (clonedElement.GetType () == typeof(PointOfInterest)) {
+					PointOfInterest poi = ((PointOfInterest)clonedElement);
+					poi.DescriptionEn = "You're on your way, " + mapElements.Count - i + " point(s) of interest to go.";
+					poi.DescriptionFr = "Il vous reste " + mapElements.Count - i + " point(s) d'interet avant d'arriver.";
+					poi.NameEn = i + " out of " + mapElements.Count;
+					poi.NameFr = i + " de " + mapElements.Count;
+				}
+
+				clonedMapElements.Add (clonedElement);
+
+				i++;
+			}
+
+			return new ShortPath (clonedMapElements);
+		}
 
     }
 }
