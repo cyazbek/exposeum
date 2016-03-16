@@ -10,26 +10,42 @@ namespace Exposeum.Services.Service_Providers
     /// <summary>
     /// Service to return shortest path given a graph, a start node and end node.
     /// </summary>
-    public class ShortestPathServiceProvider
+	public class ShortestPathServiceProvider: IShortestPathService
     {
 
-        private static UndirectedGraph<MapElement, MapEdge> _graphInstance;
+        private UndirectedGraph<MapElement, MapEdge> _graphInstance;
+		private static ShortestPathServiceProvider _instance;
 
         private ShortestPathServiceProvider()
         {
+			_graphInstance = new UndirectedGraph<MapElement, MapEdge> ();
+			PopulateGraphFromDataSource ();
         }
 
 
-        private static UndirectedGraph<MapElement, MapEdge> GetInstance()
+		public static ShortestPathServiceProvider GetInstance()
         {
-            return _graphInstance ?? (_graphInstance = new UndirectedGraph<MapElement, MapEdge>());
+			return _instance ?? (_instance = new ShortestPathServiceProvider());
         }
 
 
         //TODO: Need to actually put stuff in our graph
-        public bool PopulateGraphFromDataSource()
+        private bool PopulateGraphFromDataSource()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+			List<MapEdge> mapEdges = new List<MapEdge> ();
+			List<MapElement> mapElements = (new StoryLineServiceProvider ()).GetActiveStoryLine ().MapElements;
+
+			MapElement previous = mapElements.Last;
+
+			foreach (MapElement mapElement in mapElements) {
+				
+				mapEdges.Add( new MapEdge(previous, mapElement) );
+				previous = mapElement;
+			}
+
+			_graphInstance.AddVerticesAndEdgeRange (mapEdges);
         }
 
         /// <summary>
@@ -38,14 +54,14 @@ namespace Exposeum.Services.Service_Providers
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
         /// <returns></returns>
-        public static IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement)
+        public IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement)
         {
 
             // delegate with edge costs acquired from Edge distance property
             Func<MapEdge, double> edgeCost = e => e.Distance;
 
             // compute paths
-            TryFunc<MapElement, IEnumerable<MapEdge>> tryGetPaths = GetInstance().ShortestPathsDijkstra(edgeCost, startElement);
+			TryFunc<MapElement, IEnumerable<MapEdge>> tryGetPaths = _graphInstance.ShortestPathsDijkstra(edgeCost, startElement);
 
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
@@ -53,12 +69,12 @@ namespace Exposeum.Services.Service_Providers
         }
 
         /// <summary>
-        /// Returns a list of MapElements representing the shortest path (FOR MAX, MAX PLEASE BE HAPPY WITH ME i love u)
+        /// Returns a list of MapElements representing the shortest path
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
         /// <returns></returns>
-        public static IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
+        public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
         {
 
             var edgeList = GetShortestPathEdgesList(startElement, targetElement).ToList();

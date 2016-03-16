@@ -4,6 +4,9 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Exposeum.Services.Service_Providers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Exposeum.Controllers
 {
@@ -16,6 +19,7 @@ namespace Exposeum.Controllers
 		private Context Context{get; set;}
 		private Map _mapModel;
 		private BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
+		private IShortestPathService _shortestPathService;
 
 
 		public static MapController GetInstance(){
@@ -38,6 +42,8 @@ namespace Exposeum.Controllers
 		private MapController(Context context){
 
 			ConfigureMapView (context);
+
+			_shortestPathService = ShortestPathServiceProvider.GetInstance ();
 
 			_mapModel = Map.GetInstance ();
 
@@ -94,42 +100,68 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.GetClosestBeacon();
 
-			if (beacon != null && (_mapModel.CurrentStoryline.HasBeacon(beacon)))
-			{
-				PointOfInterest poi = _mapModel.CurrentStoryline.FindPoi(beacon);
-
-			    if (!poi.Visited)
-			    {
-			        //don't display a popup if the beacon has already been visited or if the poi is not on app's current floor
-			        if (!ExposeumApplication.IsExplorerMode)
-			        {
-			            try
-			            {
-							_mapModel.CurrentStoryline.UpdateProgress(poi);
-
-							if(poi.Floor != _mapModel.CurrentFloor)
-								_mapModel.SetCurrentFloor(poi.Floor);
-							DisplayPopUp(poi);
-                        }
-                        catch (PointOfInterestNotVisitedException e)
-			            {
-							DisplayOutOfOrderPointOfInterestPopup(e.Poi);
-			            }
-                    }
-                    else
-                    {
-                        poi.SetVisited();
-						if(poi.Floor != _mapModel.CurrentFloor)
-                        DisplayPopUp(poi);
-                    }
-			    }
-
-			}
+			UpdatePointOfInterestAndStoryLineState (beacon);
 
 			if (!ExposeumApplication.IsExplorerMode)
 				_mapProgressionView.Update ();
 
 			_mapView.Update ();
+		}
+
+		private void UpdatePointOfInterestAndStoryLineState(EstimoteSdk.Beacon beacon){
+			
+			if (beacon != null && (_mapModel.CurrentStoryline.HasBeacon(beacon)))
+			{
+				PointOfInterest poi = _mapModel.CurrentStoryline.FindPoi(beacon);
+
+				//if POI is not visited
+				if (!poi.Visited)
+				{
+					//Update the progress if in guided tour mode
+					if (!ExposeumApplication.IsExplorerMode)
+					{
+						UpdateStoryLineProgress ();
+					}
+					else
+					{
+						//otherwise just update the state of the poi
+						poi.SetVisited();
+
+						//update the floor if the POI is located on a different floor than the one
+						//currently displayed
+						if(poi.Floor != _mapModel.CurrentFloor)
+							_mapModel.SetCurrentFloor(poi.Floor);
+						DisplayPopUp(poi);
+					}
+				}
+
+			}
+		}
+
+		private void UpdateStoryLineProgress (PointOfInterest poi){
+			StoryLine currentStoryLine = _mapModel.CurrentStoryline;
+
+			try
+			{
+				//update the storyline progress
+				currentStoryLine.UpdateProgress(poi);
+
+
+				//update the floor if the POI is located on a different floor than the one
+				//currently displayed
+				if(poi.Floor != _mapModel.CurrentFloor)
+					_mapModel.SetCurrentFloor(poi.Floor);
+				
+				DisplayPopUp(poi);
+
+				//If the storyline is complete, we show path to the starting point
+				if(currentStoryLine.CurrentStatus == Status.IsVisited)
+					GoingBackToTheStart(currentStoryLine);
+			}
+			catch (PointOfInterestNotVisitedException e)
+			{
+				DisplayOutOfOrderPointOfInterestPopup(e.Poi);
+			}
 		}
 
         /// <summary>
@@ -146,6 +178,17 @@ namespace Exposeum.Controllers
 			_mapView.Update (); //technically unncecessary but included for completeness
 			if (!ExposeumApplication.IsExplorerMode)
 				_mapProgressionView.Update ();
+		}
+
+		private void GoingBackToTheStart(StoryLine storyline){
+			
+		}
+
+		public List<MapElement> GetShortestPathToStart(StoryLine storyline){
+			MapElement start = storyline.MapElements.Last ();
+			MapElement end = storyline.MapElements.First ();
+
+			return _shortestPathService.GetShortestPathElementsList (start, end);
 		}
 
 		public Map Model
