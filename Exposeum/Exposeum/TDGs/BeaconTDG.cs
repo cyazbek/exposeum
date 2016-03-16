@@ -27,5 +27,12 @@ namespace Exposeum.TDGs
         {
             return _db.Get<Beacon>(id);
         }
+        public bool Equals(Beacon beacon1, Beacon beacon2)
+        {
+            if (beacon1.ID == beacon2.ID && beacon1.UUID.Equals(beacon2.UUID) && beacon1.minor == beacon2.minor && beacon1.major == beacon2.major)
+                return true;
+            else
+                return false;
+        }  
     }
 }
