@@ -181,7 +181,8 @@ namespace Exposeum.Controllers
 		}
 
 		private void GoingBackToTheStart(StoryLine storyline){
-			
+			List<MapElement> path = GetShortestPathToStart (storyline);
+			//draw the path on the map
 		}
 
 		public List<MapElement> GetShortestPathToStart(StoryLine storyline){
