@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Exposeum.Models
 {
-    public class StoryLine
+	public class StoryLine: IPath
     {
 
         public int ImageId { get; set; }
