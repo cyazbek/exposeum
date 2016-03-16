@@ -43,6 +43,8 @@ namespace Exposeum.Controllers
 
 			ConfigureMapView (context);
 
+			_shortestPathService = ShortestPathServiceProvider.GetInstance ();
+
 			_mapModel = Map.GetInstance ();
 
 			_beaconFinder.AddObserver (this);
@@ -152,6 +154,9 @@ namespace Exposeum.Controllers
 				
 				DisplayPopUp(poi);
 
+				//If the storyline is complete, we show path to the starting point
+				if(currentStoryLine.CurrentStatus == Status.IsVisited)
+					GoingBackToTheStart();
 			}
 			catch (PointOfInterestNotVisitedException e)
 			{
@@ -173,6 +178,17 @@ namespace Exposeum.Controllers
 			_mapView.Update (); //technically unncecessary but included for completeness
 			if (!ExposeumApplication.IsExplorerMode)
 				_mapProgressionView.Update ();
+		}
+
+		private void GoingBackToTheStart(StoryLine storyline){
+			
+		}
+
+		public List<MapElement> GetShortestPathToStart(StoryLine storyline){
+			MapElement start = storyline.MapElements.Last ();
+			MapElement end = storyline.MapElements.First ();
+
+			return _shortestPathService.GetShortestPathElementsList (start, end);
 		}
 
 		public Map Model
