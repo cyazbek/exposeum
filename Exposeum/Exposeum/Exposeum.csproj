@@ -187,6 +187,8 @@
     <Compile Include="Services\IShortestPathService.cs" />
     <Compile Include="Models\IPath.cs" />
     <Compile Include="Models\ShortPath.cs" />
+    <Compile Include="Services\DeepCloneService.cs" />
+    <Compile Include="Services\Service Providers\DeepCloneServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
