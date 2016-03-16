@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Controllers;
 using Android.Content.PM;
 
 namespace Exposeum
@@ -89,8 +90,7 @@ namespace Exposeum
                     return true;
 
                 case Resource.Id.QRScannerItem:
-                    var intent = new Intent(this, typeof(QRScanActivity));
-                    StartActivity(intent);
+					QRController.GetInstance(this).BeginQRScanning();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
