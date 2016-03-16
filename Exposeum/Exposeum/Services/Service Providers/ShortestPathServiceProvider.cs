@@ -19,10 +19,11 @@ namespace Exposeum.Services.Service_Providers
         private ShortestPathServiceProvider()
         {
 			_graphInstance = new UndirectedGraph<MapElement, MapEdge> ();
+			PopulateGraphFromDataSource ();
         }
 
 
-		private static ShortestPathServiceProvider GetInstance()
+		public static ShortestPathServiceProvider GetInstance()
         {
 			return _instance ?? (_instance = new ShortestPathServiceProvider());
         }
@@ -31,7 +32,20 @@ namespace Exposeum.Services.Service_Providers
         //TODO: Need to actually put stuff in our graph
         private bool PopulateGraphFromDataSource()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+			List<MapEdge> mapEdges = new List<MapEdge> ();
+			List<MapElement> mapElements = (new StoryLineServiceProvider ()).GetActiveStoryLine ().MapElements;
+
+			MapElement previous = mapElements.Last;
+
+			foreach (MapElement mapElement in mapElements) {
+				
+				mapEdges.Add( new MapEdge(previous, mapElement) );
+				previous = mapElement;
+			}
+
+			_graphInstance.AddVerticesAndEdgeRange (mapEdges);
         }
 
         /// <summary>
