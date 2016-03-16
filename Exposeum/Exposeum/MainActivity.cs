@@ -39,10 +39,6 @@ namespace Exposeum
 			Intent startActivity = (Intent)ListAdapter.GetItem (position);
 			StartActivity (startActivity);
 		}
-        public override void OnBackPressed()
-        {
-        var intent = new Intent(this, typeof(MainActivity));
-        StartActivity(intent);
-        }//end onBackPressed()
+        
     }
 }

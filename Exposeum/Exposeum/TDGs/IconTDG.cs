@@ -27,5 +27,11 @@ namespace Exposeum.TDGs
         {
             return _db.Get<Icon>(id);
         }
+        public bool Equals(Icon object1, Icon Object2)
+        {
+            if (object1.ID == Object2.ID && object1.path.Equals(Object2.path))
+                return true;
+            else return false;
+        }
     }
 }
