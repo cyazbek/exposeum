@@ -183,11 +183,11 @@ namespace Exposeum.Controllers
 		}
 
 		private void GoingBackToTheStart(StoryLine storyline){
-			ShortPath path = GetShortestPathToStart (storyline);
+			Path path = GetShortestPathToStart (storyline);
 			_mapModel.SetActiveShortestPath (path);
 		}
 
-		public ShortPath GetShortestPathToStart(StoryLine storyline){
+		public Path GetShortestPathToStart(StoryLine storyline){
 			MapElement start = storyline.MapElements.Last ();
 			MapElement end = storyline.MapElements.First ();
 

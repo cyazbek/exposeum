@@ -87,7 +87,7 @@ namespace Exposeum.Services.Service_Providers
         /// <param name="targetElement"></param>
         /// <param name="graphService"></param>
         /// <returns>ShortPath</returns>
-        public ShortPath GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        public Path GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService)
 		{
 
 		    List<MapElement> mapElements = GetShortestPathElementsList(startElement, targetElement, graphService).ToList();
@@ -113,7 +113,7 @@ namespace Exposeum.Services.Service_Providers
 				i++;
 			}
 
-			return new ShortPath (clonedMapElements);
+			return new Path (clonedMapElements);
 		}
 
     

@@ -32,7 +32,7 @@ namespace Exposeum
 	    /// <param name="targetElement"></param>
 	    /// <param name="graphService"></param>
 	    /// <returns>ShortPath</returns>
-	    ShortPath GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService);
+	    Path GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService);
 	}
 }
 
