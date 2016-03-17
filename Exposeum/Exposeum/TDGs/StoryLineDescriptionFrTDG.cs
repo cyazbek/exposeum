@@ -29,5 +29,11 @@ namespace Exposeum.TDGs
         {
             return _db.Get<StoryLineDescriptionFr>(id);
         }
+        public bool Equals(StoryLineDescriptionFr desc1, StoryLineDescriptionFr desc2)
+        {
+            if (desc1.ID == desc2.ID && desc1.title == desc2.title && desc1.description == desc2.description)
+                return true;
+            else return false;
+        }
     }
 }

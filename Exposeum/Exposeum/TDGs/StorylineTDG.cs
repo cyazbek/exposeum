@@ -43,5 +43,6 @@ namespace Exposeum.TDGs
                 story1.descriptionId == story2.descriptionId) return true;
             else return false; 
         }
+
     }
 }
