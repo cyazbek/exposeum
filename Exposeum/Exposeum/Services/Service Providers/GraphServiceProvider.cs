@@ -1,34 +1,25 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Exposeum.Models;
 using QuickGraph;
 
-namespace Exposeum.Services
+namespace Exposeum.Services.Service_Providers
 {
-    public class GraphService : IGraphService
+    public class GraphServiceProvider : IGraphService
     {
-		private static GraphService _instance;
+		private static GraphServiceProvider _instance;
         private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private GraphService()
+        private GraphServiceProvider()
         {
             PopulateGraph();
         }
 
 
-		public static GraphService GetInstance()
+		public static GraphServiceProvider GetInstance()
         {
 			if(_instance == null)
-				_instance = new GraphService();
+				_instance = new GraphServiceProvider();
 			return _instance;
         }
 

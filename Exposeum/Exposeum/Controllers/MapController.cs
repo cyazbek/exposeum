@@ -45,7 +45,7 @@ namespace Exposeum.Controllers
 
 			ConfigureMapView (context);
 
-			_shortestPathService = new ShortestPathServiceProvider( GraphService.GetInstance() );
+			_shortestPathService = new ShortestPathServiceProvider( GraphServiceProvider.GetInstance() );
 
             _mapModel = Map.GetInstance ();
 
