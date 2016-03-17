@@ -45,7 +45,7 @@ namespace Exposeum.Controllers
 
 			ConfigureMapView (context);
 
-            _shortestPathService = ShortestPathServiceProvider.GetInstance();
+			_shortestPathService = new ShortestPathServiceProvider( GraphService.GetInstance() );
 
             _mapModel = Map.GetInstance ();
 
@@ -192,7 +192,7 @@ namespace Exposeum.Controllers
 			MapElement end = storyline.MapElements.First ();
 
             
-			return _shortestPathService.GetShortestPath (start, end, new GraphService());
+			return _shortestPathService.GetShortestPath (start, end);
 		}
 
 		public Map Model

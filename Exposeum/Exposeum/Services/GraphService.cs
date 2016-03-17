@@ -16,18 +16,26 @@ namespace Exposeum.Services
 {
     public class GraphService : IGraphService
     {
+		private static GraphService _instance;
+        private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private static UndirectedGraph<MapElement, MapEdge> _graphInstance;
-
-        public GraphService()
+        private GraphService()
         {
             PopulateGraph();
         }
 
-        public UndirectedGraph<MapElement, MapEdge> GetGraph()
+
+		public static GraphService GetInstance()
         {
-            return _graphInstance;
+			if(_instance == null)
+				_instance = new GraphService();
+			return _instance;
         }
+
+		public UndirectedGraph<MapElement, MapEdge> GetGraph()
+		{
+			return _graphInstance;
+		}
 
         private void PopulateGraph()
         {

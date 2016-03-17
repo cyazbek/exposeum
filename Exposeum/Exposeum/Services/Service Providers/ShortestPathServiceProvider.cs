@@ -14,20 +14,11 @@ namespace Exposeum.Services.Service_Providers
 	public class ShortestPathServiceProvider : IShortestPathService
     {
 
-        private static ShortestPathServiceProvider _instance;
+		private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private ShortestPathServiceProvider()
+		public ShortestPathServiceProvider(IGraphService graphService)
         {
-        }
-
-        public static ShortestPathServiceProvider GetInstance()
-        {
-            if (_instance == null)
-            {
-                _instance = new ShortestPathServiceProvider();
-            }
-
-            return _instance;
+			_graphInstance = graphService.GetGraph();
         }
 
         /// <summary>
@@ -37,16 +28,14 @@ namespace Exposeum.Services.Service_Providers
         /// <param name="targetElement"></param>
         /// <param name="graphService"></param>
         /// <returns>IEnumerable<MapEdge></returns>
-        public IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        public IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement)
         {
-
-            var graph = graphService.GetGraph();
 
             // delegate with edge costs acquired from Edge distance property
             Func<MapEdge, double> edgeCost = e => e.Distance;
 
             // compute paths
-			TryFunc<MapElement, IEnumerable<MapEdge>> tryGetPaths = graph.ShortestPathsDijkstra(edgeCost, startElement);
+			TryFunc<MapElement, IEnumerable<MapEdge>> tryGetPaths = _graphInstance.ShortestPathsDijkstra(edgeCost, startElement);
 
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
@@ -60,10 +49,10 @@ namespace Exposeum.Services.Service_Providers
         /// <param name="targetElement"></param>
         /// <param name="graphService"></param>
         /// <returns>IEnumerable<MapElement></returns>
-        public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
         {
 
-            var edgeList = GetShortestPathEdgesList(startElement, targetElement, graphService).ToList();
+			var edgeList = GetShortestPathEdgesList(startElement, targetElement).ToList();
             List<MapElement> elementList = new List<MapElement>();
 
             foreach (MapEdge e in edgeList)
@@ -87,10 +76,10 @@ namespace Exposeum.Services.Service_Providers
         /// <param name="targetElement"></param>
         /// <param name="graphService"></param>
         /// <returns>ShortPath</returns>
-        public Path GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        public Path GetShortestPath(MapElement startElement, MapElement targetElement)
 		{
 
-		    List<MapElement> mapElements = GetShortestPathElementsList(startElement, targetElement, graphService).ToList();
+		    List<MapElement> mapElements = GetShortestPathElementsList(startElement, targetElement).ToList();
 			List<MapElement> clonedMapElements = new List<MapElement> ();
 
 			int i = 0;

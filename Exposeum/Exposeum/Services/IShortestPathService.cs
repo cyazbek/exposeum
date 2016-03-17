@@ -14,7 +14,7 @@ namespace Exposeum
 	    /// <param name="targetElement"></param>
 	    /// <param name="graphService"></param>
 	    /// <returns></returns>
-	    IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement, IGraphService graphService);
+	    IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement);
 
 	    /// <summary>
 	    /// Returns a list of MapElements representing the shortest path
@@ -23,7 +23,7 @@ namespace Exposeum
 	    /// <param name="targetElement"></param>
 	    /// <param name="graphService"></param>
 	    /// <returns></returns>
-	    IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement, IGraphService graphService);
+	    IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement);
 
 	    /// <summary>
 	    /// Returns a ShortPath object representing the shortest path
@@ -32,7 +32,7 @@ namespace Exposeum
 	    /// <param name="targetElement"></param>
 	    /// <param name="graphService"></param>
 	    /// <returns>ShortPath</returns>
-	    Path GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService);
+	    Path GetShortestPath(MapElement startElement, MapElement targetElement);
 	}
 }
 
