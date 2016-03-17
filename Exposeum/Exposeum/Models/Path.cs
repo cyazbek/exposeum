@@ -13,6 +13,7 @@ namespace Exposeum.Models
 		public Path (List<MapElement> mapElements)
 		{
 			MapElements = mapElements;
+			CurrentStatus = Status.IsNew;
 		}
 
 		public void AddMapElement (MapElement e){
