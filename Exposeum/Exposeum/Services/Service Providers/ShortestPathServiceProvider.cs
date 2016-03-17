@@ -2,24 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Models;
-using Exposeum.Services;
+using Exposeum.Utilities;
 using QuickGraph;
 using QuickGraph.Algorithms;
 
-namespace Exposeum.Utilities
+namespace Exposeum.Services.Service_Providers
 {
     /// <summary>
     /// Service to return shortest path given a graph, a start node and end node.
     /// </summary>
-	public static class ShortestPathUtility
+	public class ShortestPathServiceProvider : IShortestPathService
     {
+
+        private ShortestPathServiceProvider _instance;
+
+        private ShortestPathServiceProvider()
+        {
+        }
+
+        public ShortestPathServiceProvider GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ShortestPathServiceProvider();
+            }
+
+            return _instance;
+        }
+
         /// <summary>
         /// Returns a list of MapEdges representing the shortest path
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-		/// <returns>IEnumerable<MapEdge></returns>
-        public static IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        /// <param name="graphService"></param>
+        /// <returns>IEnumerable<MapEdge></returns>
+        public IEnumerable<MapEdge> GetShortestPathEdgesList(MapElement startElement, MapElement targetElement, IGraphService graphService)
         {
 
             var graph = graphService.GetGraph();
@@ -40,8 +58,9 @@ namespace Exposeum.Utilities
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-		/// <returns>IEnumerable<MapElement></returns>
-		public static IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        /// <param name="graphService"></param>
+        /// <returns>IEnumerable<MapElement></returns>
+        public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement, IGraphService graphService)
         {
 
             var edgeList = GetShortestPathEdgesList(startElement, targetElement, graphService).ToList();
@@ -60,14 +79,15 @@ namespace Exposeum.Utilities
             return elementList;
         }
 
-		/// <summary>
-		/// Returns a ShortPath object representing the shortest path. All PointsOfInterests contained in this path
-		/// are clones of the original and have an updated description.
-		/// </summary>
-		/// <param name="startElement"></param>
-		/// <param name="targetElement"></param>
-		/// <returns>ShortPath</returns>
-		public static ShortPath GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService)
+        /// <summary>
+        /// Returns a ShortPath object representing the shortest path. All PointsOfInterests contained in this path
+        /// are clones of the original and have an updated description.
+        /// </summary>
+        /// <param name="startElement"></param>
+        /// <param name="targetElement"></param>
+        /// <param name="graphService"></param>
+        /// <returns>ShortPath</returns>
+        public ShortPath GetShortestPath(MapElement startElement, MapElement targetElement, IGraphService graphService)
 		{
 
 		    List<MapElement> mapElements = GetShortestPathElementsList(startElement, targetElement, graphService).ToList();
@@ -96,5 +116,6 @@ namespace Exposeum.Utilities
 			return new ShortPath (clonedMapElements);
 		}
 
+    
     }
 }
