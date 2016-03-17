@@ -14,13 +14,13 @@ namespace Exposeum.Services.Service_Providers
 	public class ShortestPathServiceProvider : IShortestPathService
     {
 
-        private ShortestPathServiceProvider _instance;
+        private static ShortestPathServiceProvider _instance;
 
         private ShortestPathServiceProvider()
         {
         }
 
-        public ShortestPathServiceProvider GetInstance()
+        public static ShortestPathServiceProvider GetInstance()
         {
             if (_instance == null)
             {

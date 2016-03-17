@@ -7,6 +7,7 @@ using Android.Widget;
 using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Services;
+using Exposeum.Services.Service_Providers;
 using Exposeum.Utilities;
 
 namespace Exposeum.Controllers
@@ -44,7 +45,9 @@ namespace Exposeum.Controllers
 
 			ConfigureMapView (context);
 
-			_mapModel = Map.GetInstance ();
+            _shortestPathService = ShortestPathServiceProvider.GetInstance();
+
+            _mapModel = Map.GetInstance ();
 
 			_beaconFinder.AddObserver (this);
 
