@@ -21,6 +21,7 @@ namespace Exposeum.Tables
             }
             return _dbManager;
         }
+
         private DBManager()
         {
             Db = new SQLiteConnection(Path);
@@ -39,7 +40,8 @@ namespace Exposeum.Tables
             Db.CreateTable<Images>();
             Db.CreateTable<Icon>();
         }
-        public SQLiteConnection getConnection()
+
+        public SQLiteConnection GetConnection()
         {
             return Db;
         }

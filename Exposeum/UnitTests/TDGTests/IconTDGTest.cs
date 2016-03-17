@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly Icon _setObject = new Icon();
         public Icon _testObject;
         public readonly IconTDG _objectTDG = IconTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

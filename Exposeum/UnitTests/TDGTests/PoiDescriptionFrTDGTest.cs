@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly PoiDescriptionFr _setObject = new PoiDescriptionFr();
         public PoiDescriptionFr _testObject;
         public readonly PoiDescriptionFrTDG _objectTDG = PoiDescriptionFrTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

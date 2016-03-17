@@ -17,7 +17,7 @@ namespace UnitTests
         public readonly MapElements _setObject = new MapElements();
         public MapElements _testObject;
         public readonly MapElementsTDG _objectTDG = MapElementsTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         private readonly List<MapElements> _listOfEdgesTable = new List<MapElements>();
 
         [SetUp]

@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly ExhibitionContentFr _setObject = new ExhibitionContentFr();
         public ExhibitionContentFr _testObject;
         public readonly ExhibitionContentFrTDG _objectTDG = ExhibitionContentFrTDG.GetInstance(); 
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
