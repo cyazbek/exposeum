@@ -48,7 +48,8 @@ namespace Exposeum.Models
 					currentNode.SetVisited();
 				}
 
-				if (rightBoundLinkedNode.Value.GetType() != typeof (PointOfInterest))
+				//If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
+				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
 					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the path, set the path as completed

@@ -114,14 +114,15 @@ namespace Exposeum.Models
 		            }
 		        }
 
-		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+		        //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
 		        while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
 		            currentNode.SetVisited();
 		        }
 
-				if (rightBoundLinkedNode.Value.GetType() != typeof (PointOfInterest))
+				//If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
+				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
 					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
