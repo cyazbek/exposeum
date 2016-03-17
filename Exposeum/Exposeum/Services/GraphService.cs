@@ -19,18 +19,19 @@ namespace Exposeum.Services
 
         private static UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private GraphService()
+        public GraphService()
         {
             PopulateGraph();
         }
 
         public UndirectedGraph<MapElement, MapEdge> GetGraph()
         {
-            return _graphInstance ?? (_graphInstance = new UndirectedGraph<MapElement, MapEdge>());
+            return _graphInstance;
         }
 
         private void PopulateGraph()
         {
+            _graphInstance = new UndirectedGraph<MapElement, MapEdge>();
             List<MapEdge> mapEdges = new List<MapEdge>();
             List<MapElement> mapElements = (new StoryLineServiceProvider()).GetActiveStoryLine().MapElements;
 

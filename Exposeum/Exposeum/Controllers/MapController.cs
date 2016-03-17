@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
 using System.Linq;
+using Exposeum.Services;
 using Exposeum.Utilities;
 
 namespace Exposeum.Controllers
@@ -187,7 +188,8 @@ namespace Exposeum.Controllers
 			MapElement start = storyline.MapElements.Last ();
 			MapElement end = storyline.MapElements.First ();
 
-			return _shortestPathService.GetShortestPath (start, end);
+            
+			return _shortestPathService.GetShortestPath (start, end, new GraphService());
 		}
 
 		public Map Model
