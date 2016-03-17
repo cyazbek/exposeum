@@ -21,21 +21,21 @@ namespace UnitTests
         }
 
         [Test()]
-        public void AddBeaconTest()
+        public void AddFloorTest()
         {
             _objectTDG.Add(_setObject);
             _testObject = _db.Get<Floor>(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void GetBeaconTest()
+        public void GetFloorTest()
         {
             _objectTDG.Add(_setObject);
             _testObject = _objectTDG.GetFloor(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void UpdateBeaconTest()
+        public void UpdateFloorTest()
         {
             _testObject = new Floor();
             _testObject.ID = 1;
