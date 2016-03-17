@@ -19,7 +19,7 @@ namespace Exposeum.Services
 
         private static UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private GraphService()
+        public GraphService()
         {
             PopulateGraph();
         }
