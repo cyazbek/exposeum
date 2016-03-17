@@ -4,9 +4,9 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Exposeum.Services.Service_Providers;
 using System.Collections.Generic;
 using System.Linq;
+using Exposeum.Utilities;
 
 namespace Exposeum.Controllers
 {
@@ -42,8 +42,6 @@ namespace Exposeum.Controllers
 		private MapController(Context context){
 
 			ConfigureMapView (context);
-
-			_shortestPathService = ShortestPathServiceProvider.GetInstance ();
 
 			_mapModel = Map.GetInstance ();
 

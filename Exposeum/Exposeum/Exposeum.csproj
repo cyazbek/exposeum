@@ -99,7 +99,8 @@
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
-    <Compile Include="Services\Service Providers\ShortestPathServiceProvider.cs" />
+    <Compile Include="Services\GraphService.cs" />
+    <Compile Include="Services\IGraphService.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="StoryLineListActivity.cs" />
     <Compile Include="StoryLineListAdapter.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
     <Compile Include="TDGs\StorylineTDG.cs" />
     <Compile Include="TDGs\TDG.cs" />
+    <Compile Include="Utilities\ShortestPathUtility.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -371,7 +373,5 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
