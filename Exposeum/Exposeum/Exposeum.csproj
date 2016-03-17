@@ -80,6 +80,7 @@
     <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />

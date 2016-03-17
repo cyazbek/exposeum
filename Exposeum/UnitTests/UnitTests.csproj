@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MapperTests\BeaconMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="TDGTests\BeaconTDGTest.cs" />
@@ -66,13 +67,6 @@
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
     <Compile Include="TDGTests\IconTDGTest.cs" />
-    <Compile Include="US07\BeaconSummaryPopupTests.cs" />
-    <Compile Include="US09\BeaconFinderTestsUS9.cs" />
-    <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
-    <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />
-    <Compile Include="US13\BeaconFinderTestsUS13.cs" />
-    <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
-    <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />

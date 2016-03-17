@@ -8,8 +8,23 @@ namespace Exposeum.Mappers
 {
     public class MapElementsMapper
     {
-        private readonly MapElementsTDG _mapElementsTdg = MapElementsTDG.GetInstance();
-        private readonly List<MapElement> _listOfMapElements = new List<MapElement>();
+        private static MapElementsMapper _instance;
+        private readonly MapElementsTDG _mapElementsTdg;
+        private readonly List<MapElement> _listOfMapElements;
+
+        private MapElementsMapper()
+        {
+            _mapElementsTdg = MapElementsTDG.GetInstance();
+            _listOfMapElements = new List<MapElement>();
+        }
+
+        public static MapElementsMapper GetInstance()
+        {
+            if(_instance == null)
+                _instance = new MapElementsMapper();
+
+            return _instance;
+        }
 
         public MapElement GetMapElement(int id)
         {

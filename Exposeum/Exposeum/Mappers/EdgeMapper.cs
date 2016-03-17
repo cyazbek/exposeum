@@ -6,10 +6,25 @@ namespace Exposeum.Mappers
 {
     public class EdgeMapper
     {
-        private readonly EdgeTDG _edgeTdg = EdgeTDG.GetInstance();
-        private readonly List<Edge> _listOfEdges = new List<Edge>();
-        private readonly MapElementsMapper _mapElementsMapper = new MapElementsMapper();
+        private static EdgeMapper _instance;
+        private readonly EdgeTDG _edgeTdg;
+        private readonly List<Edge> _listOfEdges;
+        private readonly MapElementsMapper _mapElementsMapper;
 
+        private EdgeMapper()
+        {
+            _edgeTdg = EdgeTDG.GetInstance();
+            _listOfEdges = new List<Edge>();
+            _mapElementsMapper = MapElementsMapper.GetInstance();
+        }
+
+        public static EdgeMapper GetInstance()
+        {
+            if (_instance == null)
+                _instance = new EdgeMapper();
+
+            return _instance;
+        }
 
         public List<Edge> GetAllEdges()
         {
