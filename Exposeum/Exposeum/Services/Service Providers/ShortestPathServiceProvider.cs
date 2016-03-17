@@ -44,9 +44,7 @@ namespace Exposeum.Services.Service_Providers
 		/// <returns></returns>
         private void PopulateGraphFromDataSource()
         {
-            //throw new NotImplementedException();
-
-			List<MapEdge> mapEdges = new List<MapEdge> ();
+            List<MapEdge> mapEdges = new List<MapEdge> ();
 			List<MapElement> mapElements = (new StoryLineServiceProvider ()).GetActiveStoryLine ().MapElements;
 
 			MapElement previous = mapElements.Last();
@@ -85,8 +83,8 @@ namespace Exposeum.Services.Service_Providers
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-		/// <returns>List<MapElement></returns>
-		public List<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
+		/// <returns>IEnumerable<MapElement></returns>
+		public IEnumerable<MapElement> GetShortestPathElementsList(MapElement startElement, MapElement targetElement)
         {
 
             var edgeList = GetShortestPathEdgesList(startElement, targetElement).ToList();
@@ -112,8 +110,9 @@ namespace Exposeum.Services.Service_Providers
 		/// <param name="startElement"></param>
 		/// <param name="targetElement"></param>
 		/// <returns>ShortPath</returns>
-		public ShortPath GetShortestPath(MapElement startElement, MapElement targetElement){
-			List<MapElement> mapElements = GetShortestPathElementsList (startElement, targetElement);
+		public ShortPath GetShortestPath(MapElement startElement, MapElement targetElement)
+		{
+		    List<MapElement> mapElements = GetShortestPathElementsList(startElement, targetElement).ToList();
 			List<MapElement> clonedMapElements = new List<MapElement> ();
 
 			int i = 0;
