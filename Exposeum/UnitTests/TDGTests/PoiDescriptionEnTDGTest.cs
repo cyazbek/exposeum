@@ -36,7 +36,7 @@ namespace UnitTests
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void UpdateGetPoiDescriptionEnTest()
+        public void UpdatePoiDescriptionEnTest()
         {
             _testObject = new PoiDescriptionEn();
             _setObject.ID = 1;

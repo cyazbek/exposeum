@@ -70,6 +70,7 @@
     <Compile Include="TDGTests\MapElementsTDGTest.cs" />
     <Compile Include="TDGTests\PoiDescriptionEnTDGTest.cs" />
     <Compile Include="TDGTests\PoiDescriptionFrTDGTest.cs" />
+    <Compile Include="TDGTests\StorylineTDGTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />
