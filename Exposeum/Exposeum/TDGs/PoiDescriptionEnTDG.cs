@@ -29,5 +29,13 @@ namespace Exposeum.TDGs
         {
             return _db.Get<PoiDescriptionEn>(id);
         }
+        public bool Equals(PoiDescriptionEn object1, PoiDescriptionEn object2)
+        {
+            if (object1.ID == object2.ID &&
+                object1.title == object2.title &&
+                object1.summary == object2.summary)
+                return true;
+            else return false; 
+        }
     }
 }

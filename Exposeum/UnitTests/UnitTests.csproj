@@ -67,6 +67,14 @@
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
     <Compile Include="TDGTests\IconTDGTest.cs" />
+    <Compile Include="TDGTests\ImagesTDGTest.cs" />
+    <Compile Include="TDGTests\MapElementsTDGTest.cs" />
+    <Compile Include="TDGTests\PoiDescriptionEnTDGTest.cs" />
+    <Compile Include="TDGTests\PoiDescriptionFrTDGTest.cs" />
+    <Compile Include="TDGTests\StoryLineDescriptionEnTDGTest.cs" />
+    <Compile Include="TDGTests\StoryLineDescriptionFrTDGTest.cs" />
+    <Compile Include="TDGTests\StoryLineMapElementListTDGTest.cs" />
+    <Compile Include="TDGTests\StorylineTDGTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />
