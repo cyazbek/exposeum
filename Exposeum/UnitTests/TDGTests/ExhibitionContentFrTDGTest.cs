@@ -27,21 +27,21 @@ namespace UnitTests
         }
 
         [Test()]
-        public void AddBeaconTest()
+        public void AddExhibitionContentFrTest()
         {
             _objectTDG.Add(_setObject);
             _testObject = _db.Get<ExhibitionContentFr>(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void GetBeaconTest()
+        public void GetExhibitionContentFrTest()
         {
             _objectTDG.Add(_setObject);
             _testObject = _objectTDG.GetExhibitionContentFr(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void UpdateBeaconTest()
+        public void UpdateExhibitionContentFrTest()
         {
             _testObject.ID = 1;
             _testObject.title = "title";

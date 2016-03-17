@@ -7,45 +7,45 @@ using SQLite;
 namespace UnitTests
 {
     [TestFixture]
-    public class FloorTDGTest
+    public class ImagesTDGTest
     {
-        public readonly Floor _setObject = new Floor();
-        public Floor _testObject;
-        public readonly FloorTDG _objectTDG = FloorTDG.GetInstance();
+        public readonly Images _setObject = new Images();
+        public Images _testObject;
+        public readonly ImagesTDG _objectTDG = ImagesTDG.GetInstance();
         public SQLiteConnection _db = DBManager.GetInstance().getConnection();
         [SetUp()]
         public void Setup()
         {
             _setObject.ID = 1;
-            _setObject.imageId = 12;
+            _setObject.path = "Path";
         }
 
         [Test()]
-        public void AddFloorTest()
+        public void AddImagesTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<Floor>(_setObject.ID);
+            _testObject = _db.Get<Images>(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void GetFloorTest()
+        public void GetImagesTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _objectTDG.GetFloor(_setObject.ID);
+            _testObject = _objectTDG.GetImages(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
-        public void UpdateFloorTest()
+        public void UpdateImagesTest()
         {
-            _testObject = new Floor();
+            _testObject = new Images();
             _testObject.ID = 1;
-            _testObject.imageId = 12;
+            _testObject.path = "path 2";
             _objectTDG.Add(_testObject);
-            _testObject.imageId = 0;
-            int imageId = _testObject.imageId;
+            _testObject.path = "path0";
+            string imageId = _testObject.path;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetFloor(_testObject.ID);
-            Assert.AreEqual(_testObject.imageId, imageId);
+            _testObject = _objectTDG.GetImages(_testObject.ID);
+            Assert.AreEqual(_testObject.path, imageId);
         }
     }
 }

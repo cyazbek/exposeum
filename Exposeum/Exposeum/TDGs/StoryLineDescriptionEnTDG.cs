@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    class StoryLineDescriptionEnTDG:TDG
+    public class StoryLineDescriptionEnTDG : TDG
     {
         private static StoryLineDescriptionEnTDG _instance;
+
+        private StoryLineDescriptionEnTDG() { }
 
         public static StoryLineDescriptionEnTDG GetInstance()
         {
@@ -26,6 +28,12 @@ namespace Exposeum.TDGs
         public StoryLineDescriptionEn GetStoryLineDescriptionEn(int id)
         {
             return _db.Get<StoryLineDescriptionEn>(id);
+        }
+        public bool Equals(StoryLineDescriptionEn desc1, StoryLineDescriptionEn desc2)
+        {
+            if (desc1.ID == desc2.ID && desc1.title == desc2.title && desc1.description == desc2.description)
+                return true;
+            else return false; 
         }
     }
 }
