@@ -25,8 +25,9 @@ namespace Exposeum.Utilities
 			// but in 'source' these items are cleaned -
 			// without ObjectCreationHandling.Replace default constructor values will be added to result
 			var deserializeSettings = new JsonSerializerSettings {ObjectCreationHandling = ObjectCreationHandling.Replace};
+			var serializedObject = JsonConvert.SerializeObject (source);
 
-			return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source), deserializeSettings);
+			return JsonConvert.DeserializeObject<T>(serializedObject, deserializeSettings);
 		}
 
 	}
