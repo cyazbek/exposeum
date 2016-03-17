@@ -35,21 +35,13 @@ namespace Exposeum.Models
 
 				//first pass, find the leftBound
 				while(currentLinkedNode != null && !currentLinkedNode.Value.Visited) {
-
-					//if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
-					if (currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
-					{
-						nodeStack.Push(currentLinkedNode.Value);
-						currentLinkedNode = currentLinkedNode.Previous;
-					}
-					else
-					{
-						throw new PointOfInterestNotVisitedException(
-							"There is an unvisited POI between the current POI and the previously visited POI.", (PointOfInterest)currentLinkedNode.Value);
-					}
+					//pushe the MapElement we just visited in a stack
+					nodeStack.Push(currentLinkedNode.Value);
+					//move to the next (previous in the linked list) MapElement
+					currentLinkedNode = currentLinkedNode.Previous;
 				}
 
-				//Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+				//Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
 				while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
