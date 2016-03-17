@@ -11,7 +11,7 @@ namespace Exposeum.Models
         private List<Floor> _floors;
 		private Floor _currentFloor;
         private StoryLine _currentStoryline;
-		private ShortPath _activeShortestPath;
+		private Path _activeShortestPath;
 		private List<MapElement> _elements;
 		private List<MapEdge> _edges;
         private List<StoryLine> _storyLines;
@@ -332,11 +332,11 @@ namespace Exposeum.Models
             set { _storyLines = value; }
         }
 
-		public void SetActiveShortestPath(ShortPath path){
+		public void SetActiveShortestPath(Path path){
 			_activeShortestPath = path;
 		}
 
-		public ShortPath GetActiveShortestPath(){
+		public Path GetActiveShortestPath(){
 			return _activeShortestPath;
 		}
     }

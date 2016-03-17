@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace Exposeum.Models
 {
-	public class ShortPath: IPath
+	public class Path: IPath
 	{
 		public Status CurrentStatus { get; set; }
 		public List<MapElement> MapElements { get; set; }
 		private PointOfInterest _lastPointOfInterestVisited ;
 
-		public ShortPath (List<MapElement> mapElements)
+		public Path (List<MapElement> mapElements)
 		{
 			MapElements = mapElements;
 		}

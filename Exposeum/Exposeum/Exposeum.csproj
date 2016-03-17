@@ -188,7 +188,7 @@
     <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
     <Compile Include="Services\IShortestPathService.cs" />
     <Compile Include="Models\IPath.cs" />
-    <Compile Include="Models\ShortPath.cs" />
+    <Compile Include="Models\Path.cs" />
     <Compile Include="Utilities\DeepCloneUtility.cs" />
   </ItemGroup>
   <ItemGroup>

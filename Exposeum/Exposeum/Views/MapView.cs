@@ -200,7 +200,7 @@ namespace Exposeum.Views
 
 					MapElement next = mapElements[i + 1];
 
-					Path path = new Path ();
+                    Android.Graphics.Path path = new Android.Graphics.Path ();
 					path.MoveTo(current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight);
 					path.LineTo(next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight);
 
