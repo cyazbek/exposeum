@@ -161,6 +161,14 @@ namespace Exposeum.Views
 
 			//finally, draw the mapElements
 			DrawMapElements(canvas, currentFloorMapElements);
+
+			//If we have an ActiveShortestPath, we draw it
+			if (_map.GetActiveShortestPath() != null) {
+				List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements;
+
+				DrawMapElementsEdges (canvas, shortestPathMapElements);
+				DrawMapElements (canvas, shortestPathMapElements);
+			}
 				
 			canvas.Restore ();
 		}
