@@ -97,6 +97,12 @@ namespace Exposeum.Controllers
 			_mapView.Update ();
 		}
 
+		/// <summary>
+		/// Method implemented from IBeaconFinderObserver. This Method is called by the BeaconFinder to update the
+		/// observer (this)
+		/// </summary>
+		/// <param name="observable">The Observable implementation of IBeaconFinderObservable</param>
+		/// <returns></returns>
 		public void BeaconFinderObserverUpdate (IBeaconFinderObservable observable)
 		{
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
@@ -110,11 +116,19 @@ namespace Exposeum.Controllers
 			_mapView.Update ();
 		}
 
+		/// <summary>
+		/// This method will update the state of the POI associated with the beacon and 
+		/// the associated StoryLine (if any)
+		/// </summary>
+		/// <param name="beacon"></param>
+		/// <returns></returns>
 		private void UpdatePointOfInterestAndStoryLineState(EstimoteSdk.Beacon beacon){
-			
-			if (beacon != null && (_mapModel.CurrentStoryline.HasBeacon(beacon)))
+
+			StoryLine storyline = _mapModel.CurrentStoryline;
+
+			if (beacon != null && (storyline.HasBeacon(beacon)))
 			{
-				PointOfInterest poi = _mapModel.CurrentStoryline.FindPoi(beacon);
+				PointOfInterest poi = storyline.FindPoi(beacon);
 
 				//if POI is not visited
 				if (!poi.Visited)
@@ -128,11 +142,7 @@ namespace Exposeum.Controllers
 					{
 						//otherwise just update the state of the poi
 						poi.SetVisited();
-
-						//update the floor if the POI is located on a different floor than the one
-						//currently displayed
-						if(poi.Floor != _mapModel.CurrentFloor)
-							_mapModel.SetCurrentFloor(poi.Floor);
+						UpdateFloor(poi);
 						DisplayPopUp(poi);
 					}
 				}
@@ -140,6 +150,11 @@ namespace Exposeum.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method will update the state of the current storyline based on the given POI
+		/// </summary>
+		/// <param name="poi">StoryLine POI</param>
+		/// <returns></returns>
 		private void UpdateStoryLineProgress (PointOfInterest poi){
 			StoryLine currentStoryLine = _mapModel.CurrentStoryline;
 
@@ -147,23 +162,59 @@ namespace Exposeum.Controllers
 			{
 				//update the storyline progress
 				currentStoryLine.UpdateProgress(poi);
-
-
-				//update the floor if the POI is located on a different floor than the one
-				//currently displayed
-				if(poi.Floor != _mapModel.CurrentFloor)
-					_mapModel.SetCurrentFloor(poi.Floor);
-				
+				UpdateFloor(poi);
 				DisplayPopUp(poi);
 
-				//If the storyline is complete, we show path to the starting point
-				if(currentStoryLine.CurrentStatus == Status.IsVisited)
-					GoingBackToTheStart(currentStoryLine);
 			}
 			catch (PointOfInterestNotVisitedException e)
 			{
 				DisplayOutOfOrderPointOfInterestPopup(e.Poi);
 			}
+		}
+
+
+		/// <summary>
+		/// This method will update the state of the POI associated with the beacon and 
+		/// the associated Path
+		/// </summary>
+		/// <param name="beacon"></param>
+		/// <returns></returns>
+		private void UpdatePointOfInterestAnShortestPathState(EstimoteSdk.Beacon beacon){
+			Path path = _mapModel.GetActiveShortestPath ();
+			if (beacon != null && (path.HasBeacon(beacon)))
+			{
+				PointOfInterest poi = path.FindPoi(beacon);
+
+				//if POI is not visited
+				if (!poi.Visited)
+				{
+					UpdateShortestPathProgress (poi);
+				}
+			}
+		}
+
+		/// <summary>
+		/// This method will update the state of the current ShortestPath based on the given POI
+		/// </summary>
+		/// <param name="poi">Path POI</param>
+		/// <returns></returns>
+		private void UpdateShortestPathProgress (PointOfInterest poi){
+			//update the storyline progress
+			_mapModel.GetActiveShortestPath ().UpdateProgress(poi);
+			UpdateFloor(poi);
+		}
+
+		/// <summary>
+		/// This method will update the floor current floor of the map if it is 
+		/// not the same as the floor of the supplied POI
+		/// </summary>
+		/// <param name="poi"></param>
+		/// <returns></returns>
+		private void UpdateFloor(PointOfInterest poi){
+			//update the floor if the POI is located on a different floor than the one
+			//currently displayed
+			if(poi.Floor != _mapModel.CurrentFloor)
+				_mapModel.SetCurrentFloor(poi.Floor);
 		}
 
         /// <summary>
@@ -174,6 +225,11 @@ namespace Exposeum.Controllers
 			_mapView.InitiateOutOfOrderPointOfInterestPopup(poi);
 	    }
 
+		/// <summary>
+		/// This method will update display a popup in the view with contextual information about the supplied POI
+		/// </summary>
+		/// <param name="selectedPoi"></param>
+		/// <returns></returns>
 	    public void DisplayPopUp(PointOfInterest selectedPoi)
         {	
 			_mapView.InitiatePointOfInterestPopup (selectedPoi);
@@ -182,11 +238,23 @@ namespace Exposeum.Controllers
 				_mapProgressionView.Update ();
 		}
 
+		/// <summary>
+		/// This method initiate the process of going back to the starting point of a storyline 
+		/// through the shortest path
+		/// </summary>
+		/// <param name="storyline"></param>
+		/// <returns></returns>
 		private void GoingBackToTheStart(StoryLine storyline){
 			Path path = GetShortestPathToStart (storyline);
 			_mapModel.SetActiveShortestPath (path);
 		}
 
+		/// <summary>
+		/// Given a StoryLine, this method will find the shortest path from the end 
+		/// to the start if the StoryLine 
+		/// </summary>
+		/// <param name="storyline"></param>
+		/// <returns>Path</returns>
 		public Path GetShortestPathToStart(StoryLine storyline){
 			MapElement start = storyline.MapElements.Last ();
 			MapElement end = storyline.MapElements.First ();
