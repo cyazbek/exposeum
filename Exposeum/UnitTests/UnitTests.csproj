@@ -66,7 +66,10 @@
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
     <Compile Include="TDGTests\IconTDGTest.cs" />
+    <Compile Include="TDGTests\ImagesTDGTest.cs" />
     <Compile Include="TDGTests\MapElementsTDGTest.cs" />
+    <Compile Include="TDGTests\PoiDescriptionEnTDGTest.cs" />
+    <Compile Include="TDGTests\PoiDescriptionFrTDGTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />

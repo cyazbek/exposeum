@@ -8,6 +8,6 @@ namespace Exposeum.Tables
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }
         public string title { get; set; }
-        public string sumary { get; set; }
+        public string summary { get; set; }
     }
 }
