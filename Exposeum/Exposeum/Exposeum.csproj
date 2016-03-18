@@ -133,6 +133,22 @@
     <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
     <Compile Include="TDGs\StorylineTDG.cs" />
     <Compile Include="TDGs\TDG.cs" />
+    <Compile Include="TempModels\Audio.cs" />
+    <Compile Include="TempModels\Beacon.cs" />
+    <Compile Include="TempModels\Edge.cs" />
+    <Compile Include="TempModels\ExhibitionContent.cs" />
+    <Compile Include="TempModels\Floor.cs" />
+    <Compile Include="TempModels\Image.cs" />
+    <Compile Include="TempModels\Map.cs" />
+    <Compile Include="TempModels\MapElement.cs" />
+    <Compile Include="TempModels\PointOfInterest.cs" />
+    <Compile Include="TempModels\PointOfInterestDescription.cs" />
+    <Compile Include="TempModels\Storyline.cs" />
+    <Compile Include="TempModels\StorylineDescription.cs" />
+    <Compile Include="TempModels\Text.cs" />
+    <Compile Include="TempModels\Video.cs" />
+    <Compile Include="TempModels\WayPoint.cs" />
+    <Compile Include="TempModels\WaypointLabel.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -367,7 +383,5 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TempModels\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
