@@ -2,9 +2,7 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    [Table("Items")]
-
-    public class ExhibitionContentFr
+      public class ExhibitionContentFr
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }

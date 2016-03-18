@@ -82,7 +82,14 @@
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
+    <Compile Include="Mappers\ExhibitionContentMapper.cs" />
+    <Compile Include="Mappers\FloorMapper.cs" />
+    <Compile Include="Mappers\MapElementMapper.cs" />
     <Compile Include="Mappers\MapElementsMapper.cs" />
+    <Compile Include="Mappers\MapMapper.cs" />
+    <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
+    <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
+    <Compile Include="Mappers\StorylineMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\AudioContent.cs" />
