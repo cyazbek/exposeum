@@ -24,8 +24,8 @@ namespace UnitTests
         public void Setup()
         {
             _setObject.ID = 1;
-            _setObject.uCoordinate = 12;
-            _setObject.vCoordinate = 15.2;
+            _setObject.uCoordinate = 12f;
+            _setObject.vCoordinate = 15.2f;
             _setObject.discriminator = "POI";
             _setObject.visited = 1;
             _setObject.beaconId = 12;
@@ -55,8 +55,8 @@ namespace UnitTests
         public void UpdateMapElementsTest()
         {
             _testObject.ID = 1;
-            _testObject.uCoordinate = 12;
-            _testObject.vCoordinate = 15.2;
+            _testObject.uCoordinate = 12f;
+            _testObject.vCoordinate = 15.2f;
             _testObject.discriminator = "POI";
             _testObject.visited = 1;
             _testObject.beaconId = 12;

@@ -1,3 +1,4 @@
+using System;
 using Exposeum.Tables;
 using System.Collections.Generic;
 
@@ -38,8 +39,8 @@ namespace Exposeum.TDGs
         public bool Equals(MapElements element1, MapElements element2)
         {
             if (element1.ID == element2.ID &&
-            element1.uCoordinate == element2.uCoordinate &&
-            element1.vCoordinate == element2.vCoordinate &&
+            Math.Abs(element1.uCoordinate - element2.uCoordinate) < 0 &&
+            Math.Abs(element1.vCoordinate - element2.vCoordinate) < 0 &&
             element1.discriminator == element2.discriminator &&
             element1.visited == element2.visited &&
             element1.beaconId == element2.beaconId &&
