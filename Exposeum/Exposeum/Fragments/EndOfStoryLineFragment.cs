@@ -24,9 +24,9 @@ namespace Exposeum.Fragments
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
-			var buttonYes = view.FindViewById<Button>(Resource.Id.guidedBackToStartTrueButton);
-			buttonYes.Text = User.GetInstance().GetButtonText("guidedBackToStartTrueButton");
             
+			var buttonYes = view.FindViewById<Button>(Resource.Id.guidedBackToStartTrueButton);
+
 			buttonYes.Click += (sender, e) =>
             {
                 Dismiss();
@@ -35,7 +35,6 @@ namespace Exposeum.Fragments
             };
 
 			var buttonNo = view.FindViewById<Button>(Resource.Id.guidedBackToStartFalseButton);
-			buttonNo.Text = User.GetInstance().GetButtonText("guidedBackToStartFalseButton");
 
 			buttonNo.Click += (sender, e) =>
 			{

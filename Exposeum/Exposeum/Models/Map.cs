@@ -312,6 +312,8 @@ namespace Exposeum.Models
 			for (int i = 0; i < 16; i++) {
 				story6.MapElements [i].SetVisited ();
 			}
+
+			story6.CurrentStatus = Status.InProgress;
 			///////////////////////////////////////////
 
 		}

@@ -271,6 +271,7 @@ namespace Exposeum.Controllers
 		private void GoingBackToTheStart(StoryLine storyline){
 			Path path = GetShortestPathToStart (storyline);
 			_mapModel.SetActiveShortestPath (path);
+			_beaconFinder.SetPath (path);
 		}
 
 		/// <summary>
