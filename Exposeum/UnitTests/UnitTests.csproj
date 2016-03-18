@@ -70,7 +70,6 @@
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
     <Compile Include="TDGTests\IconTDGTest.cs" />
-    <Compile Include="US07\BeaconSummaryPopupTests.cs" />
     <Compile Include="US09\BeaconFinderTestsUS9.cs" />
     <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
     <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />

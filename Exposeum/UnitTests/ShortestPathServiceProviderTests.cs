@@ -33,14 +33,36 @@ namespace UnitTests
         }
 
         [Test]
+        public void GetShortestElementsListFromValidGraph()
+        {
+            MapElement p1 = ((MockGraphServiceProvider)_graphService).GetStartElement();
+            MapElement p2 = ((MockGraphServiceProvider)_graphService).GetTargetElement();
+
+            var elementsList = _shortestPathService.GetShortestPathElementsList(p1, p2);
+
+            Assert.AreEqual(3, elementsList.ToList().Count);
+        }
+
+        [Test]
+        public void GetShortestEdgesListFromValidGraph()
+        {
+            MapElement p1 = ((MockGraphServiceProvider)_graphService).GetStartElement();
+            MapElement p2 = ((MockGraphServiceProvider)_graphService).GetTargetElement();
+
+            var edgesList = _shortestPathService.GetShortestPathEdgesList(p1, p2);
+
+            Assert.AreEqual(2, edgesList.Count());
+        }
+
+        [Test]
         public void GetShortestPathFromValidGraph()
         {
             MapElement p1 = ((MockGraphServiceProvider) _graphService).GetStartElement();
-            MapElement p2= ((MockGraphServiceProvider)_graphService).GetTargetElement();
+            MapElement p2 = ((MockGraphServiceProvider)_graphService).GetTargetElement();
 
-            var x = _shortestPathService.GetShortestPathElementsList(p1, p2);
-            
-            Assert.AreEqual(3, x.ToList().Count);
+            var path = _shortestPathService.GetShortestPath(p1, p2);
+
+            Assert.AreEqual(3, path.MapElements.Count);
         }
 
     }
