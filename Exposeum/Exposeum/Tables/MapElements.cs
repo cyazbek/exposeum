@@ -11,6 +11,7 @@ namespace Exposeum.Tables
         public string discriminator { get; set; }
         public int visited { get; set; }
         public int beaconId { get; set; }
+        public int _storyLineId { get; set; }
         public int poiDescription { get; set; }
         public string label { get; set; }
         public int exhibitionContent { get; set; }

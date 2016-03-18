@@ -29,6 +29,7 @@ namespace UnitTests
             _setObject.discriminator = "POI";
             _setObject.visited = 1;
             _setObject.beaconId = 12;
+            _setObject._storyLineId = 1;
             _setObject.poiDescription = 1;
             _setObject.label = "bathroom";
             _setObject.exhibitionContent = 1;
@@ -60,6 +61,7 @@ namespace UnitTests
             _testObject.discriminator = "POI";
             _testObject.visited = 1;
             _testObject.beaconId = 12;
+            _testObject._storyLineId = 2;
             _testObject.poiDescription = 1;
             _testObject.label = "bathroom";
             _testObject.exhibitionContent = 1;

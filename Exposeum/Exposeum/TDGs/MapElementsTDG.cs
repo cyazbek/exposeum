@@ -43,6 +43,7 @@ namespace Exposeum.TDGs
             element1.discriminator == element2.discriminator &&
             element1.visited == element2.visited &&
             element1.beaconId == element2.beaconId &&
+            element1._storyLineId == element2._storyLineId &&
             element1.poiDescription == element2.poiDescription &&
             element1.label == element2.label &&
             element1.exhibitionContent == element2.exhibitionContent &&
