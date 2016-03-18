@@ -24,9 +24,8 @@ namespace Exposeum.Fragments
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
-            
 			var buttonYes = view.FindViewById<Button>(Resource.Id.guidedBackToStartTrueButton);
-
+            
 			buttonYes.Click += (sender, e) =>
             {
                 Dismiss();
