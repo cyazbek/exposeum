@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Models;
-using Exposeum.Utilities;
 using QuickGraph;
 using QuickGraph.Algorithms;
 
@@ -85,7 +84,7 @@ namespace Exposeum.Services.Service_Providers
 				clonedElement.Visited = false;
 
 				//If the Map Element is a PointOfInterest, change the descriptions 
-				//and names so that the push notificationsremain relevant.
+				//and names so that the push notifications remain relevant.
 				if (clonedElement.GetType () == typeof(PointOfInterest)) {
 					PointOfInterest poi = ((PointOfInterest)clonedElement);
 					poi.DescriptionEn = "You're on your way, " + (mapElements.Count - i) + " point(s) of interest to go.";
