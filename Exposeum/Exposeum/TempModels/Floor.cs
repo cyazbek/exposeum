@@ -6,6 +6,7 @@ namespace Exposeum.TempModels
 {
     public class Floor
     {
+        public int _floorId { get; set; }
         public int _floorPlan { get; set; } 
         public Paint _paint { get; set; }
 
