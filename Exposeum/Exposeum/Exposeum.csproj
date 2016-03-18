@@ -84,6 +84,7 @@
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
     <Compile Include="Mappers\FloorMapper.cs" />
+    <Compile Include="Mappers\ImageMapper.cs" />
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Mappers\MapMapper.cs" />
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />

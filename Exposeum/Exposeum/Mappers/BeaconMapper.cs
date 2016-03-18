@@ -1,6 +1,5 @@
-
-using Exposeum.Models;
 using Exposeum.TDGs;
+using Exposeum.TempModels;
 using Java.Util;
 
 namespace Exposeum.Mappers
@@ -44,17 +43,24 @@ namespace Exposeum.Mappers
             int major = beaconTable.major;
             int id = beaconTable.ID;
 
-            Beacon beaconModel = new Beacon(uuid, major, minor) {Id = id};
+            Beacon beaconModel = new Beacon
+            {
+                _id = id,
+                _uuid = uuid,
+                _major = major,
+                _minor = minor
+                
+            };
 
             return beaconModel;
         }
 
         public Tables.Beacon BeaconModelToTable(Beacon beacon)
         {
-            int id = beacon.Id;
-            string uuid = beacon.Uuid.ToString();
-            int major = beacon.Major;
-            int minor = beacon.Minor;
+            int id = beacon._id;
+            string uuid = beacon._uuid.ToString();
+            int major = beacon._major;
+            int minor = beacon._minor;
 
             Tables.Beacon beaconTable = new Tables.Beacon
             {
