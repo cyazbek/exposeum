@@ -308,6 +308,15 @@ namespace Exposeum.Views
             }
 	    }
 
+		public void InitiateEndOfStoryLinePopup(EndOfStoryLineFragment.Callback callback)
+		{
+			using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
+			{
+				_endOfStoryLinePopup = new EndOfStoryLineFragment(callback);
+				_endOfStoryLinePopup.Show(tr, "Storyline Complete!");
+			}
+		}
+
 		private float Clamp(float min, float max, float value){
 			return Math.Min(Math.Max(value, min), max);
 		}
