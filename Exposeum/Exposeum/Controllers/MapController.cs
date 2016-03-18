@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
-using Exposeum.Utilities;
 
 namespace Exposeum.Controllers
 {
