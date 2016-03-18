@@ -34,7 +34,11 @@ namespace Exposeum.Services.Service_Providers
             List<MapEdge> mapEdges = new List<MapEdge>();
             List<MapElement> mapElements = (new StoryLineServiceProvider()).GetActiveStoryLine().MapElements;
 
-            MapElement previous = mapElements.Last();
+			//add some waypoint betweem the start and the end 0.3306878,0.5831111
+			PointOfTravel pot1 = new PointOfTravel(0.330687f, 0.5831111f, mapElements.Last().Floor);
+			PointOfTravel pot2 = new PointOfTravel(0.2740971f,0.6113333f, mapElements.Last().Floor);
+
+			MapElement previous = pot2;
 
             foreach (MapElement mapElement in mapElements)
             {
@@ -42,6 +46,9 @@ namespace Exposeum.Services.Service_Providers
                 mapEdges.Add(new MapEdge(previous, mapElement));
                 previous = mapElement;
             }
+
+			mapEdges.Add(new MapEdge(previous, pot1));
+			mapEdges.Add(new MapEdge(pot1, pot2));
 
             _graphInstance.AddVerticesAndEdgeRange(mapEdges);
         }

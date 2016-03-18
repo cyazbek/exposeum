@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Android.App;
 using Exposeum.Fragments;
+using Android.Util;
 
 namespace Exposeum.Views
 {
@@ -85,6 +86,9 @@ namespace Exposeum.Views
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
+				float u = (_lastTouchX-_translateX)/(_map.CurrentFloor.Image.IntrinsicWidth*_scaleFactor) + 0.50f;
+				float v = (_lastTouchY-_translateY)/(_map.CurrentFloor.Image.IntrinsicHeight*_scaleFactor) + 0.50f;
+				Log.Wtf("map_press", String.Format("Map Touched: (u,v):({0},{1}", u, v));
 				_activePointerId = ev.GetPointerId (0);
 				break;
 
@@ -150,30 +154,50 @@ namespace Exposeum.Views
 
 			_map.CurrentFloor.Image.Draw (canvas);
 
-			//draw edges and POIs on top of map
+			DrawStoryLine (canvas);
 
-			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
-
-			//draw the edges first, but only if we are in storyline mode
-			if (!ExposeumApplication.IsExplorerMode) {
-				DrawMapElementsEdges (canvas, currentFloorMapElements);
+			//If we have an ActiveShortestPath, we draw it
+			if (_map.GetActiveShortestPath() != null) {
+				DrawShortestPath (canvas);
 			}
-
-			//finally, draw the mapElements
-			DrawMapElements(canvas, currentFloorMapElements);
 				
 			canvas.Restore ();
 		}
 
-		protected void DrawMapElements(Canvas canvas, List<MapElement> mapElements){
+		private void DrawShortestPath(Canvas canvas){
+			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+
+			DrawMapElementsEdges (canvas, shortestPathMapElements, 255);
+			DrawMapElements (canvas, shortestPathMapElements);
+		}
+
+		private void DrawStoryLine(Canvas canvas){
+			int storyLineAlpha = 255;
+			if (_map.GetActiveShortestPath () != null)
+				storyLineAlpha = 50;
+				
+			//draw edges and POIs on top of map
+			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+
+			//draw the edges first, but only if we are in storyline mode
+			if (!ExposeumApplication.IsExplorerMode) {
+				DrawMapElementsEdges (canvas, currentFloorMapElements, storyLineAlpha);
+			}
+
+			//finally, draw the mapElements
+			DrawMapElements(canvas, currentFloorMapElements);
+		}
+
+		private void DrawMapElements(Canvas canvas, List<MapElement> mapElements){
 			foreach (MapElement mapElement in mapElements) {
 				mapElement.Draw (canvas);
 			}
 		}
 
-		protected void DrawMapElementsEdges(Canvas canvas, List<MapElement> mapElements){
+		private void DrawMapElementsEdges(Canvas canvas, List<MapElement> mapElements, int alpha){
 
 			Paint appropriateEdgePaintBrush = _visitedEdge;
+			appropriateEdgePaintBrush.Alpha = alpha;
 
 			PointOfInterest lastVisitedPoi = null;
 
@@ -193,8 +217,10 @@ namespace Exposeum.Views
 
 				MapElement current = mapElements[i];
 
-				if (current == lastVisitedPoi || lastVisitedPoi == null)
+				if (current == lastVisitedPoi || lastVisitedPoi == null) {
 					appropriateEdgePaintBrush = _unvisitedEdge;
+					appropriateEdgePaintBrush.Alpha = alpha;
+				}
 
 				if (i < mapElements.Count - 1) {
 
