@@ -367,4 +367,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TempModels\" />
+  </ItemGroup>
 </Project>
