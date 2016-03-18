@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
+using System.Linq;
 
 namespace Exposeum.Models
 {
@@ -303,6 +304,9 @@ namespace Exposeum.Models
 			//story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
 			story6.MapElements = nicelyDrawn.MapElements;
 			story6.PoiList = nicelyDrawn.PoiList;
+			story6.PoiList.Last ().Beacon = story6.PoiList [1].Beacon;
+			story6.PoiList [1].Beacon = nicelyDrawnBeaconTest;
+
 			story6.MapElements.Reverse();
 			story6.PoiList.Reverse ();
 			for (int i = 0; i < 16; i++) {
