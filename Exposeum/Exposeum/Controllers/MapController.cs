@@ -107,17 +107,14 @@ namespace Exposeum.Controllers
 			BeaconFinder beaconFinder = (BeaconFinder)observable;
 			EstimoteSdk.Beacon beacon = beaconFinder.GetClosestBeacon ();
 
-			//if we don't have a shortest path in memory and storyline is not done, update the main beacons & storyline
-			if(_mapModel.CurrentStoryline.CurrentStatus != Status.IsVisited && _mapModel.GetActiveShortestPath() == null)
+			//if we don't have a shortest path in memory and (we are in explorer mode or the storyline is not done), update the main beacons & storyline
+			if (_mapModel.GetActiveShortestPath () == null)
 				UpdatePointOfInterestAndStoryLineState (beacon);
-
-			if (_mapModel.CurrentStoryline.CurrentStatus == Status.IsVisited) {
-				if(_mapModel.GetActiveShortestPath() == null)
-					GoingBackToTheStart(_mapModel.CurrentStoryline);
-
-				else if(_mapModel.GetActiveShortestPath().CurrentStatus != Status.IsVisited)
+			else {
+				if (_mapModel.GetActiveShortestPath ().CurrentStatus != Status.IsVisited)
 					UpdatePointOfInterestAnShortestPathState (beacon);
 			}
+
 
 				
 
