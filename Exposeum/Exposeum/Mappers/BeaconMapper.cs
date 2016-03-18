@@ -38,18 +38,13 @@ namespace Exposeum.Mappers
         {
             Tables.Beacon beaconTable = _beaconTdg.GetBeacon(beaconId);
 
-            UUID uuid = UUID.FromString(beaconTable.UUID);
-            int minor = beaconTable.minor;
-            int major = beaconTable.major;
-            int id = beaconTable.ID;
-
             Beacon beaconModel = new Beacon
             {
-                _id = id,
-                _uuid = uuid,
-                _major = major,
-                _minor = minor
-                
+                _id = beaconTable.ID,
+                _uuid = UUID.FromString(beaconTable.UUID),
+                _major = beaconTable.major,
+                _minor = beaconTable.minor
+
             };
 
             return beaconModel;
@@ -57,17 +52,12 @@ namespace Exposeum.Mappers
 
         public Tables.Beacon BeaconModelToTable(Beacon beacon)
         {
-            int id = beacon._id;
-            string uuid = beacon._uuid.ToString();
-            int major = beacon._major;
-            int minor = beacon._minor;
-
             Tables.Beacon beaconTable = new Tables.Beacon
             {
-                ID = id,
-                UUID = uuid,
-                major = major,
-                minor = minor
+                ID = beacon._id,
+                UUID = beacon._uuid.ToString(),
+                major = beacon._major,
+                minor = beacon._minor
             };
 
             return beaconTable;
