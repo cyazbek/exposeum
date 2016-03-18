@@ -10,9 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Exposeum.Mappers
+namespace Exposeum.TDGs
 {
-    class MapElementMapper
+    public abstract class ExhibitionContentTDG:TDG
     {
     }
 }

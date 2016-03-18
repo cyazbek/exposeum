@@ -84,7 +84,6 @@
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
     <Compile Include="Mappers\FloorMapper.cs" />
-    <Compile Include="Mappers\MapElementMapper.cs" />
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Mappers\MapMapper.cs" />
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="TDGs\EdgeTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
+    <Compile Include="TDGs\ExhibitionContentTDG.cs" />
     <Compile Include="TDGs\FloorTDG.cs" />
     <Compile Include="TDGs\IconTDG.cs" />
     <Compile Include="TDGs\ImagesTDG.cs" />

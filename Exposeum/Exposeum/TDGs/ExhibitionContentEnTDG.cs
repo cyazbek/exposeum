@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class ExhibitionContentEnTDG : TDG
+    public class ExhibitionContentEnTDG : ExhibitionContentTDG
     {
         private static ExhibitionContentEnTDG _instance;
 
