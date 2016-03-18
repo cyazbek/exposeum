@@ -32,6 +32,7 @@ namespace Exposeum.Views
 
         private PointOfInterestPopup _newPointOfInterestPopup;
 		private OutOfOrderPointFragment _outOfOrderDialog;
+		private EndOfStoryLineFragment _endOfStoryLinePopup;
 
 		public MapView (Context context, MapController controller) : base(context, null, 0)
 		{            
@@ -62,11 +63,12 @@ namespace Exposeum.Views
 			Invalidate();
 		}
 
-		public void InitiatePointOfInterestPopup(PointOfInterest poi){
+		public void InitiatePointOfInterestPopup(PointOfInterest poi, PointOfInterestPopup.DismissCallback callback){
 
             if (_newPointOfInterestPopup == null || ! _newPointOfInterestPopup.IsShowing())
             {
                 _newPointOfInterestPopup = new PointOfInterestPopup(_context, poi);
+				_newPointOfInterestPopup.SetDismissCallback (callback);
                 _newPointOfInterestPopup.Show();
             }
 		}
