@@ -189,6 +189,10 @@
     <Compile Include="Services\IShortestPathService.cs" />
     <Compile Include="Models\IPath.cs" />
     <Compile Include="Models\Path.cs" />
+    <Compile Include="Fragments\EndOfStoryLineFragment.cs" />
+    <AndroidResource Include="Resources\layout\EndOfStoryLinePopup.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
