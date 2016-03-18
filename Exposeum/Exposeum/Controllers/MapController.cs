@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Exposeum.Fragments;
 
 namespace Exposeum.Controllers
 {
@@ -240,10 +241,25 @@ namespace Exposeum.Controllers
 		/// <returns></returns>
 	    public void DisplayPopUp(PointOfInterest selectedPoi)
         {	
-			_mapView.InitiatePointOfInterestPopup (selectedPoi);
+			//Set the callback to execute after user dismisses popup
+			PointOfInterestPopup.DismissCallback callback = null;
+			if (_mapModel.CurrentStoryline.CurrentStatus == Status.IsVisited)
+				callback = DisplayEndOfStoryLinePopUp;
+			
+			_mapView.InitiatePointOfInterestPopup (selectedPoi, callback);
 			_mapView.Update (); //technically unncecessary but included for completeness
+
 			if (!ExposeumApplication.IsExplorerMode)
 				_mapProgressionView.Update ();
+		}
+
+		public void DisplayEndOfStoryLinePopUp(){
+			_mapView.InitiateEndOfStoryLinePopup(EndOfStoryLinePopupCallback);
+		}
+
+		private void EndOfStoryLinePopupCallback(bool directionsToStart){
+			if (directionsToStart)
+				GoingBackToTheStart (_mapModel.CurrentStoryline);
 		}
 
 		/// <summary>
