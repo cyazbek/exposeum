@@ -1,13 +1,12 @@
-
-
 using Android.Graphics;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.TempModels
 {
     public class Floor
     {
-        public int _floorId { get; set; }
-        public int _floorPlan { get; set; } 
+        public int _id { get; set; }
+        public string _plan { get; set; } 
         public Paint _paint { get; set; }
 
         public Floor()

@@ -4,7 +4,7 @@ namespace Exposeum.TempModels
 {
     public abstract class MapElement
     {
-        public int _MapElementId { get; set; }
+        public int _mapElementId { get; set; }
         public bool _visited { get; set; }
         public bool _iconId { get; set; }
         public float _uCoordinate { get; set; }
