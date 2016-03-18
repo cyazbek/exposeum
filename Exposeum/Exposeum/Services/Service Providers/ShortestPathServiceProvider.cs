@@ -81,7 +81,7 @@ namespace Exposeum.Services.Service_Providers
 
 			int i = 0;
 			foreach (MapElement mapElement in mapElements) {
-				MapElement clonedElement = DeepCloneUtility.Clone (mapElement);
+				MapElement clonedElement = mapElement.ShallowCopy();
 				clonedElement.Visited = false;
 
 				//If the Map Element is a PointOfInterest, change the descriptions 
