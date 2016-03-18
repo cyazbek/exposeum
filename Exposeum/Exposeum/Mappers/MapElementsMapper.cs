@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using Exposeum.Models;
+using Exposeum.TempModels;
 using Exposeum.Tables;
 using Exposeum.TDGs;
+using MapElement = Exposeum.TempModels.MapElement;
+using PointOfInterest = Exposeum.TempModels.PointOfInterest;
 
 
 namespace Exposeum.Mappers
@@ -35,11 +38,20 @@ namespace Exposeum.Mappers
             switch (discrinator)
             {
                 case "PointOfInterest":
-                    PointOfInterest pointOfInterest = null;
+                {
+                    PointOfInterest pointOfInterest = new PointOfInterest
+                    {
+                        _pointOfInterestId = mapElementTable.ID,
+                        _beacon = BeaconMapper.GetInstance().GetBeacon(mapElementTable.beaconId),
+                        _storyLineId = mapElementTable._storyLineId,
+                        _description = PointOfInterestDescriptionMapper.GetInstance().GetPointOfInterestDescription(mapElementTable.poiDescription),
+                        //_exhibitionContent = ExhibitionContentMapper.GetInstance().GetExhibitionContent(mapElementTable.exhibitionContent),
+                    };
                     return pointOfInterest;
+                }
                 case "WayPoint":
-                    PointOfTravel pointOfTravel = null;
-                    return pointOfTravel;
+                    WayPoint wayPoint = null;
+                    return wayPoint;
                 default:
                     return null;
             }

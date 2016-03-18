@@ -36,12 +36,12 @@ namespace Exposeum.Mappers
                 int endElement = edge.endMapElementId;
                 double distance = edge.distance;
 
-                MapElement startMapElement = _mapElementsMapper.GetMapElement(startElement);
-                MapElement endMapElement = _mapElementsMapper.GetMapElement(endElement);
+                // MapElement startMapElement = _mapElementsMapper.GetMapElement(startElement);
+                // MapElement endMapElement = _mapElementsMapper.GetMapElement(endElement);
                 
-                Edge edgeModel = new Edge(startMapElement, endMapElement, distance);
+                // Edge edgeModel = new Edge(startMapElement, endMapElement, distance);
 
-                _listOfEdges.Add(edgeModel);
+                // _listOfEdges.Add(edgeModel);
             }
 
             return _listOfEdges;
