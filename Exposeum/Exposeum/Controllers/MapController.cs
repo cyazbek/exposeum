@@ -50,7 +50,7 @@ namespace Exposeum.Controllers
 
 			_beaconFinder.AddObserver (this);
 
-			_beaconFinder.SetStoryLine(_mapModel.CurrentStoryline);
+			_beaconFinder.SetPath(_mapModel.CurrentStoryline);
 
 			//If we are not in free explorer mode (ie there exists a current storyline) then add the
 			//current storyline progression fragment to the map activity

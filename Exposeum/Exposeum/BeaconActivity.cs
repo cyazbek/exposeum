@@ -40,7 +40,7 @@ namespace Exposeum
 
 			_beaconFinder = BeaconFinder.GetInstance ();
 			_beaconFinder.SetNotificationDestination (this);
-			_beaconFinder.SetStoryLine (_story);
+			_beaconFinder.SetPath (_story);
 			_beaconFinder.AddObserver (this);
 			_beaconFinder.FindBeacons ();
 		}
@@ -56,11 +56,6 @@ namespace Exposeum
 		{
 			base.OnPause();
 			_beaconFinder.SetInFocus (false);
-		}
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
 		}
 
 		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
