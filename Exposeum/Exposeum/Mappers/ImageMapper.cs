@@ -1,6 +1,5 @@
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
 
 namespace Exposeum.Mappers
 {

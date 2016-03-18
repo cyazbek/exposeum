@@ -62,6 +62,5 @@ namespace Exposeum.Mappers
 
             return floorTable;
         }
-
     }
 }

@@ -5,5 +5,6 @@ namespace Exposeum.TempModels
         public int _storyLineDescriptionId { get; set; }
         public string _title { get; set; }
         public string _description { get; set; }
+        public Models.Language _language { get; set; }
     }
 }
