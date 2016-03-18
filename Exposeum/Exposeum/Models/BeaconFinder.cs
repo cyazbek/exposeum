@@ -25,7 +25,7 @@ namespace Exposeum
 		private int _beaconCount;
 		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
-		private StoryLine _storyLine;
+		private IPath _path;
 		private Context _context;
 		private Context _notificationDestination;
 		private bool _inFocus;
@@ -75,7 +75,7 @@ namespace Exposeum
 		/// </summary>
 		private Notification BuildBeaconFoundNotification(string poiName, string poiDesc){
 
-			Context destination = _notificationDestination == null ? _context : _notificationDestination;
+			Context destination = _notificationDestination ?? _context;
 
 			Intent notifyIntent = new Intent(destination, destination.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
@@ -142,8 +142,8 @@ namespace Exposeum
 
 			foreach (var beacon in beacons)
 			{
-				//if the beacon is not in the storyline, skip it and move to the next one
-				if (!_storyLine.HasBeacon (beacon))
+				//if the beacon is not in the path, skip it and move to the next one
+				if (!_path.HasBeacon (beacon))
 					continue;
 
 				var proximity = Utils.ComputeProximity(beacon);
@@ -191,8 +191,8 @@ namespace Exposeum
 		/// </summary>
 		public void FindBeacons(){
 
-			if (_storyLine == null) {
-				throw new StoryLineNotFoundException ("You must set the storyline first. Call setStorylLine");
+			if (_path == null) {
+				throw new PathNotFoundException ("You must set the Path first. Call setPath.");
 			}
 
 			if(CheckBluetooth() && !_isServiceReady){
@@ -306,15 +306,15 @@ namespace Exposeum
 		/// <summary>
 		/// This method returns the current instance of the sotryline.
 		/// </summary>
-		public StoryLine GetStoryLine(){
-			return _storyLine;
+		public IPath GetPath(){
+			return _path;
 		}
 
 		/// <summary>
-		/// This method sets the current instance of the storyline.
+		/// This method sets the current instance of the path.
 		/// </summary>
-		public void SetStoryLine(StoryLine storyLine){
-			_storyLine = storyLine;
+		public void SetPath(IPath path){
+			_path = path;
 		}
 
 		/// <summary>
@@ -327,7 +327,7 @@ namespace Exposeum
 			_notificationManager.Cancel (BeaconFoundNotificationId);
 
 			if (GetClosestBeacon () != null) {
-				PointOfInterest poi = _storyLine.FindPoi (GetClosestBeacon ());
+				PointOfInterest poi = _path.FindPoi (GetClosestBeacon ());
 				if(!poi.Visited) //don't send a notification if the beacon has already been visited
 					SendBeaconFoundNotification (BuildBeaconFoundNotification (poi.GetName (), poi.GetDescription ()));
 			} else {

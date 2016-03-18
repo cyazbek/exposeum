@@ -45,13 +45,13 @@ namespace Exposeum.Controllers
 
 			ConfigureMapView (context);
 
-			_shortestPathService = new ShortestPathServiceProvider( GraphService.GetInstance() );
+			_shortestPathService = new ShortestPathServiceProvider( GraphServiceProvider.GetInstance() );
 
             _mapModel = Map.GetInstance ();
 
 			_beaconFinder.AddObserver (this);
 
-			_beaconFinder.SetStoryLine(_mapModel.CurrentStoryline);
+			_beaconFinder.SetPath(_mapModel.CurrentStoryline);
 
 			//If we are not in free explorer mode (ie there exists a current storyline) then add the
 			//current storyline progression fragment to the map activity
