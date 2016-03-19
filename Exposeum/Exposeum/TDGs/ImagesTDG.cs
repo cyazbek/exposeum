@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class ImagesTDG: TDG
+    public class ImagesTDG : TDG
     {
         private static ImagesTDG _instance;
+        
+        private ImagesTDG() { }
 
         public static ImagesTDG GetInstance()
         {
@@ -13,6 +15,7 @@ namespace Exposeum.TDGs
 
             return _instance;
         }
+
         public void Add(Images item)
         {
             _db.Insert(item);
@@ -26,6 +29,12 @@ namespace Exposeum.TDGs
         public Images GetImages(int id)
         {
             return _db.Get<Images>(id);
+        }
+        public bool Equals(Images image1, Images image2)
+        {
+            if (image1.ID == image2.ID && image1.path == image2.path)
+                return true;
+            else return false; 
         }
     }
 }

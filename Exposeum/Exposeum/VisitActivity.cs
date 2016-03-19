@@ -62,11 +62,7 @@ namespace Exposeum
 
             };
         }
-            public override void OnBackPressed()
-            {
-            var intent = new Intent(this, typeof(LanguageActivity));
-            StartActivity(intent);
-            }//end onBackPressed()
+
 
 
         public override bool OnCreateOptionsMenu(IMenu menu)
