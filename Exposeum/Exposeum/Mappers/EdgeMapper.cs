@@ -36,7 +36,7 @@ namespace Exposeum.Mappers
         public void UpdateEdge(Edge edge)
         {
             Tables.Edge edgeTable = EdgeModelToTable(edge);
-            _edgeTdg.Add(edgeTable);
+            _edgeTdg.Update(edgeTable);
         }
 
         public Edge GetEdge(int edgeId)
