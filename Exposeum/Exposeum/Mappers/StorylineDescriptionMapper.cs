@@ -56,13 +56,13 @@ namespace Exposeum.Mappers
 
         public StoryLineDescription GetStoryLineDescription(int storyLineDescriptionId)
         {
-            StoryLineDescription StoryLineDescriptionModel;
+            StoryLineDescription storyLineDescriptionModel;
 
             if (User.GetInstance()._language == Language.Fr)
             {
                 _storyLineDescriptionFr = _storyLineDescriptionFrTdg.GetStoryLineDescriptionFr(storyLineDescriptionId);
 
-                StoryLineDescriptionModel = new StoryLineDescription
+                storyLineDescriptionModel = new StoryLineDescription
                 {
                     _storyLineDescriptionId = _storyLineDescriptionFr.ID,
                     _title = _storyLineDescriptionFr.title,
@@ -74,7 +74,7 @@ namespace Exposeum.Mappers
             {
                 _storyLineDescriptionEn = _storyLineDescriptionEnTdg.GetStoryLineDescriptionEn(storyLineDescriptionId);
 
-                StoryLineDescriptionModel = new StoryLineDescription
+                storyLineDescriptionModel = new StoryLineDescription
                 {
                     _storyLineDescriptionId = _storyLineDescriptionFr.ID,
                     _title = _storyLineDescriptionFr.title,
@@ -83,7 +83,7 @@ namespace Exposeum.Mappers
                 };
             }
 
-            return StoryLineDescriptionModel;
+            return storyLineDescriptionModel;
         }
 
         public StoryLineDescriptionFr StoryLineDescriptionModelToTableFr(StoryLineDescription storyLineDescription)
