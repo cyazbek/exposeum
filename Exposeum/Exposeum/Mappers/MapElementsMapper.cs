@@ -105,7 +105,7 @@ namespace Exposeum.Mappers
                     PointOfInterest poi = (PointOfInterest) mapElement;
 
                     mapElements.beaconId = poi._beacon._id;
-                    // mapElements._storyLineId = poi._storyLineId;
+                    mapElements._storyLineId = poi._storyLineId;
                     mapElements.poiDescription = poi._description._id;
                     // mapElements.exhibitionContent = poi._exhibitionContent._id;
 
