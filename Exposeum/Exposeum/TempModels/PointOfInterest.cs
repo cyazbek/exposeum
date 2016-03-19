@@ -11,5 +11,15 @@ namespace Exposeum.TempModels
         {
             _beacon = new Beacon();  
         }
+        public bool Equals(PointOfInterest obj)
+        {
+            if (base.Equals(obj) &&
+                _beacon.Equals(obj._beacon) &&
+                _storyLineId == obj._storyLineId &&
+                _description.Equals(obj._description) &&
+                _exhibitionContent.Equals(_exhibitionContent))
+                return true;
+            else return false; 
+        }
     }
 }
