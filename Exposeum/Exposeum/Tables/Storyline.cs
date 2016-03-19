@@ -11,7 +11,7 @@ namespace Exposeum.Tables
         public int image { get; set; } 
         public int floorsCovered { get; set; }
         public int lastVisitedPoi { get; set; }
-        public string status { get; set; } 
+        public int status { get; set; } 
         public int descriptionId { get; set; }
 
     }
