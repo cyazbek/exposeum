@@ -38,14 +38,7 @@ namespace Exposeum.Mappers
         public Floor GetFloor(int floorId)
         {
             Tables.Floor floorTable = _floorTdg.GetFloor(floorId);
-            string image = _imagesMapper.GetImagePath(floorTable.ID);
-
-            Floor floor = new Floor
-            {
-                _plan = image,
-                _id = floorTable.ID
-            };
-
+            Floor floor = FloorTableToTable(floorTable);
             return floor;
         }
 
@@ -62,5 +55,24 @@ namespace Exposeum.Mappers
 
             return floorTable;
         }
+        public Floor FloorTableToTable(Tables.Floor floorTable)
+        {
+            string image = _imagesMapper.GetImagePath(floorTable.ID);
+            Floor modelFloor = new Floor
+            {
+                _plan = image,
+                _id = floorTable.ID
+            };
+            return modelFloor;
+        }
+
+        public bool Equals(Floor floor1, Floor floor2)
+        {
+            if (floor1._id == floor2._id &&
+                floor1._plan == floor2._plan)
+                return true;
+            else return false; 
+        }
+
     }
 }

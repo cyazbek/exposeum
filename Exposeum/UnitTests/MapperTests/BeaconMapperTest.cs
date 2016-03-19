@@ -82,5 +82,18 @@ namespace UnitTests
             Assert.IsTrue(BeaconTDG.GetInstance().Equals(_beaconTable, expected));
         }
 
+        [Test()]
+        public void BeaconTableToModelTest()
+        {
+            Exposeum.TempModels.Beacon modelBeacon = new Exposeum.TempModels.Beacon
+            {
+                _id = _beaconTable.ID,
+                _major = _beaconTable.major,
+                _minor = _beaconTable.minor,
+                _uuid = UUID.FromString(_beaconTable.UUID)
+            };
+            Assert.IsTrue(_instance.Equals(modelBeacon,_instance.BeaconTableToModel(_beaconTable)));
+        }
+
     }
 }

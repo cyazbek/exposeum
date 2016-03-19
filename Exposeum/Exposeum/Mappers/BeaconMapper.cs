@@ -37,16 +37,7 @@ namespace Exposeum.Mappers
         public Beacon GetBeacon(int beaconId)
         {
             Tables.Beacon beaconTable = _beaconTdg.GetBeacon(beaconId);
-
-            Beacon beaconModel = new Beacon
-            {
-                _id = beaconTable.ID,
-                _uuid = UUID.FromString(beaconTable.UUID),
-                _major = beaconTable.major,
-                _minor = beaconTable.minor
-
-            };
-
+            Beacon beaconModel = BeaconTableToModel(beaconTable);
             return beaconModel;
         }
 
@@ -61,6 +52,28 @@ namespace Exposeum.Mappers
             };
 
             return beaconTable;
+        }
+
+        public Beacon BeaconTableToModel(Tables.Beacon beacon)
+        {
+            Beacon beaconModel = new Beacon
+            {
+                _id = beacon.ID,
+                _major = beacon.major,
+                _minor = beacon.minor,
+                _uuid = UUID.FromString(beacon.UUID)
+            };
+            return beaconModel;
+        }
+
+        public bool Equals(Beacon beacon1, Beacon beacon2)
+        {
+            if (beacon1._id == beacon2._id &&
+                beacon1._major == beacon2._major &&
+                beacon1._minor == beacon2._minor &&
+                beacon1._uuid.Equals(beacon2._uuid))
+                return true;
+            else return false; 
         }
 
     }
