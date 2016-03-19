@@ -88,6 +88,7 @@
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Mappers\MapMapper.cs" />
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
+    <Compile Include="Mappers\StatusMapper.cs" />
     <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
     <Compile Include="Mappers\StorylineMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
