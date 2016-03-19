@@ -1,5 +1,5 @@
 using Exposeum.Tables;
-
+using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
@@ -29,6 +29,11 @@ namespace Exposeum.TDGs
         public Storyline GetStoryline(int id)
         {
             return _db.Get<Storyline>(id);
+        }
+
+        public List<Storyline> GetAllStorylines()
+        {
+            return new List<Storyline>(_db.Table<Storyline>());
         }
 
         public bool Equals(Storyline story1, Storyline story2)

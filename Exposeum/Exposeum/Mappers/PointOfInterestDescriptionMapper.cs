@@ -65,9 +65,9 @@ namespace Exposeum.Mappers
                 pointOfInterestDescriptionModel = new PointOfInterestDescription
                 {
                     _id = _poiDescriptionFr.ID,
-                    title = _poiDescriptionFr.title,
-                    summary = _poiDescriptionFr.summary,
-                    description = _poiDescriptionFr.description,
+                    _title = _poiDescriptionFr.title,
+                    _summary = _poiDescriptionFr.summary,
+                    _description = _poiDescriptionFr.description,
                     _language = User.GetInstance()._language
                 };
             }
@@ -78,9 +78,9 @@ namespace Exposeum.Mappers
                 pointOfInterestDescriptionModel = new PointOfInterestDescription
                 {
                     _id = _poiDescriptionFr.ID,
-                    title = _poiDescriptionFr.title,
-                    summary = _poiDescriptionFr.summary,
-                    description = _poiDescriptionFr.description,
+                    _title = _poiDescriptionFr.title,
+                    _summary = _poiDescriptionFr.summary,
+                    _description = _poiDescriptionFr.description,
                     _language = User.GetInstance()._language
                 };
             }
@@ -93,9 +93,9 @@ namespace Exposeum.Mappers
             PoiDescriptionFr poiDescriptionTable = new PoiDescriptionFr
             {
                 ID = poiDescription._id,
-                title = poiDescription.title,
-                summary = poiDescription.summary,
-                description = poiDescription.description
+                title = poiDescription._title,
+                summary = poiDescription._summary,
+                description = poiDescription._description
             };
 
             return poiDescriptionTable;
@@ -106,9 +106,9 @@ namespace Exposeum.Mappers
             PoiDescriptionEn poiDescriptionTable = new PoiDescriptionEn
             {
                 ID = poiDescription._id,
-                title = poiDescription.title,
-                summary = poiDescription.summary,
-                description = poiDescription.description
+                title = poiDescription._title,
+                summary = poiDescription._summary,
+                description = poiDescription._description
             };
 
             return poiDescriptionTable;

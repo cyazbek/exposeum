@@ -72,6 +72,14 @@ namespace Exposeum.Mappers
             return edgeTable;
         }
 
+        public void UpdateEdgesList(List<Edge> list)
+        {
+            foreach(var x in list)
+            {
+                UpdateEdge(x);
+            }
+        }
+
         private Edge EdgeTableToModel(Tables.Edge edgeTable)
         {
             Edge edgeModel = new Edge

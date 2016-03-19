@@ -41,6 +41,25 @@ namespace Exposeum.Mappers
             return storyline; 
         }
 
+        public List<Storyline> GetAllStorylines()
+        {
+            List<Tables.Storyline> tableList = _storylineTdg.GetAllStorylines();
+            List<Storyline> modelList = new List<Storyline>();
+            foreach(var x in tableList)
+            {
+                modelList.Add(StorylineTableToModel(x));
+            }
+            return modelList; 
+        }
+
+        public void UpdateStorylinesList(List<Storyline> list)
+        {
+            foreach(var x in list)
+            {
+                UpdateStoryline(x);
+            }
+        }
+
         public Storyline StorylineTableToModel(Tables.Storyline storylineTable)
         {
 

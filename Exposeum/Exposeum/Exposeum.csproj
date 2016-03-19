@@ -112,6 +112,7 @@
     <Compile Include="Tables\Floor.cs" />
     <Compile Include="Tables\Icon.cs" />
     <Compile Include="Tables\Images.cs" />
+    <Compile Include="Tables\Map.cs" />
     <Compile Include="Tables\MapElements.cs" />
     <Compile Include="Tables\PoiDescriptionEn.cs" />
     <Compile Include="Tables\PoiDescriptionFr.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="TDGs\IconTDG.cs" />
     <Compile Include="TDGs\ImagesTDG.cs" />
     <Compile Include="TDGs\MapElementsTDG.cs" />
+    <Compile Include="TDGs\MapTDG.cs" />
     <Compile Include="TDGs\PoiDescriptionEnTDG.cs" />
     <Compile Include="TDGs\PoiDescriptionFrTDG.cs" />
     <Compile Include="TDGs\StoryLineDescriptionEnTDG.cs" />

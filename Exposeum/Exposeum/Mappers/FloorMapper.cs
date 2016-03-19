@@ -1,4 +1,5 @@
 using Exposeum.TDGs;
+using System.Collections.Generic;
 using Floor = Exposeum.TempModels.Floor;
 
 namespace Exposeum.Mappers
@@ -51,6 +52,24 @@ namespace Exposeum.Mappers
             return floorTable;
         }
 
+        public List<Floor> GetAllFloors()
+        {
+            List<Tables.Floor> tableFloor = _floorTdg.GetAllFloors();
+            List<Floor> modelFloor = new List<Floor>(); 
+            foreach(var x in tableFloor)
+            {
+                modelFloor.Add(FloorTableToModel(x)); 
+            }
+            return modelFloor; 
+        }
+
+        public void UpdateFloorsList(List<Floor> list)
+        {
+            foreach(var x in list)
+            {
+                UpdateFloor(x);
+            }
+        }
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
             string image = ImageMapper.GetInstance().GetImagePath(floorTable.ID);
