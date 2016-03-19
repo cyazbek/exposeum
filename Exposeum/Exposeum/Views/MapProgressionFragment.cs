@@ -109,10 +109,6 @@ namespace Exposeum
 				return true;
 			}
 
-			public void SetStoryline(StoryLine Storyline){
-				_storyline = Storyline;
-			}
-
 			private void ResetPaint(){
 				_bgLine = new Paint ();
 				_bgLine.SetStyle (Paint.Style.Stroke);
