@@ -102,7 +102,7 @@ namespace Exposeum.Mappers
             
             switch (mapElement.GetType().ToString())
             {
-                case "PointOfInterest":
+                case "Exposeum.TempModels.PointOfInterest":
                 {
                     PointOfInterest poi = (PointOfInterest) mapElement;
 
@@ -114,7 +114,7 @@ namespace Exposeum.Mappers
                     return mapElements;
                 }
 
-                case "WayPoint":
+                case "Exposeum.TempModels.WayPoint":
                 {
                     WayPoint wayPoint = (WayPoint)mapElement;
                     mapElements.label = wayPoint._label.ToString();
@@ -159,12 +159,10 @@ namespace Exposeum.Mappers
         
         public bool Equals(MapElement element1, MapElement element2)
         {
-            if (element1._id == element2._id &&
-                element1._iconId == element2._iconId &&
-                element1._uCoordinate == element2._uCoordinate &&
-                element1._vCoordinate == element2._vCoordinate)
-                return true;
-            else return false; 
+            return (element1._id == element2._id &&
+                    element1._iconId == element2._iconId &&
+                    Math.Abs(element1._uCoordinate - element2._uCoordinate) < 0 &&
+                    Math.Abs(element1._vCoordinate - element2._vCoordinate) < 0);
         }
         
 
