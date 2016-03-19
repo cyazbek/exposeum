@@ -36,10 +36,10 @@ namespace Exposeum.Controllers
 
 		private async void HandleScanResult(ZXing.Result result)
 		{
-			if (result != null && !string.IsNullOrEmpty (result.Text)) {
-				_context.StartActivity (new Intent (Intent.ActionView, Android.Net.Uri.Parse (result.Text)));
+			if (result != null && !string.IsNullOrEmpty (result.Text) && Android.Util.Patterns.WebUrl.Matcher(result.Text).Matches()) {
 
-				//TODO: handle the scanned QR string appropriately
+				_context.StartActivity(Intent.CreateChooser(new Intent(Intent.ActionView, Android.Net.Uri.Parse (result.Text.ToLower())), String.Empty));
+
 			}
 		}
 	}
