@@ -2,7 +2,7 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    [Table("Items")]
+  
     public class Beacon
     {
         [PrimaryKey, AutoIncrement, Column("ID")]

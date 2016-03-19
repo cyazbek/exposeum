@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly Images _setObject = new Images();
         public Images _testObject;
         public readonly ImagesTDG _objectTDG = ImagesTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

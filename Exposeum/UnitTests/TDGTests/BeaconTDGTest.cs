@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly Beacon _setObject = new Beacon();
         public Beacon _testObject; 
         public readonly BeaconTDG _beaconTDG = BeaconTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

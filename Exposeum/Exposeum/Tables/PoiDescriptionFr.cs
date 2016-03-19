@@ -9,5 +9,6 @@ namespace Exposeum.Tables
         public int ID { get; set; }
         public string title { get; set; }
         public string summary { get; set; }
+        public string description { get; set; }
     }
 }

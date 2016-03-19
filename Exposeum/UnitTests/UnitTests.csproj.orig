@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MapperTests\BeaconMapperTest.cs" />
+    <Compile Include="MapperTests\EdgeMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="ShortestPathServiceProviderTests.cs" />
@@ -70,23 +72,24 @@
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
     <Compile Include="TDGTests\IconTDGTest.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="TDGTests\ImagesTDGTest.cs" />
     <Compile Include="TDGTests\MapElementsTDGTest.cs" />
+    <Compile Include="TDGTests\MapTDGTest.cs" />
     <Compile Include="TDGTests\PoiDescriptionEnTDGTest.cs" />
     <Compile Include="TDGTests\PoiDescriptionFrTDGTest.cs" />
     <Compile Include="TDGTests\StoryLineDescriptionEnTDGTest.cs" />
     <Compile Include="TDGTests\StoryLineDescriptionFrTDGTest.cs" />
     <Compile Include="TDGTests\StoryLineMapElementListTDGTest.cs" />
     <Compile Include="TDGTests\StorylineTDGTest.cs" />
+<<<<<<< HEAD
     <Compile Include="US07\BeaconSummaryPopupTests.cs" />
->>>>>>> 1c6d409f2d24a927f4000bc83ae07988f99c2293
     <Compile Include="US09\BeaconFinderTestsUS9.cs" />
     <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
     <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
+=======
+>>>>>>> 729b6ebebf4c0d5c6e5a439a1fe07493bad38aae
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />

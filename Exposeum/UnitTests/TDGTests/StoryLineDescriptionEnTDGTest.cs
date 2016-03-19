@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly StoryLineDescriptionEn _setObject = new StoryLineDescriptionEn();
         public StoryLineDescriptionEn _testObject;
         public readonly StoryLineDescriptionEnTDG _objectTDG = StoryLineDescriptionEnTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

@@ -38,11 +38,12 @@ namespace Exposeum.TDGs
         public bool Equals(MapElements element1, MapElements element2)
         {
             if (element1.ID == element2.ID &&
-            element1.uCoordinate == element2.uCoordinate &&
-            element1.vCoordinate == element2.vCoordinate &&
+            element1.uCoordinate.Equals(element2.uCoordinate) &&
+            element1.vCoordinate.Equals(element2.vCoordinate) &&
             element1.discriminator == element2.discriminator &&
             element1.visited == element2.visited &&
             element1.beaconId == element2.beaconId &&
+            element1._storyLineId == element2._storyLineId &&
             element1.poiDescription == element2.poiDescription &&
             element1.label == element2.label &&
             element1.exhibitionContent == element2.exhibitionContent &&
