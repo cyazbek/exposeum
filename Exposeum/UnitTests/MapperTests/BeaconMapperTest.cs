@@ -92,7 +92,7 @@ namespace UnitTests
                 _minor = _beaconTable.minor,
                 _uuid = UUID.FromString(_beaconTable.UUID)
             };
-            Assert.IsTrue(_instance.Equals(modelBeacon,_instance.BeaconTableToModel(_beaconTable)));
+            Assert.IsTrue(modelBeacon.Equals(_instance.BeaconTableToModel(_beaconTable)));
         }
 
     }

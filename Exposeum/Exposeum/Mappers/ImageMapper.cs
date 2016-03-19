@@ -35,8 +35,7 @@ namespace Exposeum.Mappers
 
         public string GetImagePath(int imageId)
         {
-            Images image = _imageTdg.GetImages(imageId);
-            string imagePath = image.path;
+            string imagePath = _imageTdg.GetImages(imageId).path;
             return imagePath;
         }
 
@@ -49,5 +48,6 @@ namespace Exposeum.Mappers
             };
             return image;
         }
+
     }
 }

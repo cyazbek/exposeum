@@ -66,15 +66,5 @@ namespace Exposeum.Mappers
             return beaconModel;
         }
 
-        public bool Equals(Beacon beacon1, Beacon beacon2)
-        {
-            if (beacon1._id == beacon2._id &&
-                beacon1._major == beacon2._major &&
-                beacon1._minor == beacon2._minor &&
-                beacon1._uuid.Equals(beacon2._uuid))
-                return true;
-            else return false; 
-        }
-
     }
 }

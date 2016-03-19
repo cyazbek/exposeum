@@ -1,5 +1,4 @@
 using Android.Graphics;
-using Android.Graphics.Drawables;
 
 namespace Exposeum.TempModels
 {
@@ -14,5 +13,10 @@ namespace Exposeum.TempModels
             this._paint = new Paint(); 
         }
 
+        public override bool Equals(object obj)
+        {
+            Floor other = (Floor) obj;
+            return _id == other._id && _plan == other._plan;
+        }
     }
 }

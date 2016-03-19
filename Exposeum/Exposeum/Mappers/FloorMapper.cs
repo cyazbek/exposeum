@@ -62,10 +62,5 @@ namespace Exposeum.Mappers
             return modelFloor;
         }
 
-        public bool Equals(Floor floor1, Floor floor2)
-        {
-            return (floor1._id == floor2._id && floor1._plan == floor2._plan);
-        }
-
     }
 }

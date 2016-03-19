@@ -86,24 +86,9 @@ namespace Exposeum.Mappers
             _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 
-        public bool Equals(Storyline story1, Storyline story2)
+        public bool Equals(List<Storyline> list1, List<Storyline> list2)
         {
-            if (story1._storylineId == story2._storylineId &&
-                story1._imageId == story2._imageId &&
-                story1._duration == story2._duration &&
-                story1._floorsCovered == story2._floorsCovered &&
-                _mapElementsMapper.Equals(story1._mapElements, story2._mapElements) &&
-                story1._intendedAudience == story2._intendedAudience &&
-                story1._lastVisitedMapElement.Equals(story2._lastVisitedMapElement) &&
-                story1._status.Equals(story2._status) &&
-                story1._storylineDescription.Equals(story2._storylineDescription))
-                return true;
-            else return false; 
-        }
-
-        public bool Equals (List<Storyline> list1, List<Storyline> list2)
-        {
-            bool result= false;
+            bool result = false;
             if (list1.Count == list2.Count)
             {
                 for (int i = 0; i < list1.Count; i++)
@@ -115,7 +100,7 @@ namespace Exposeum.Mappers
                 }
                 return result;
             }
-            else return false; 
-
+            else return false;
+        }
     }
 }
