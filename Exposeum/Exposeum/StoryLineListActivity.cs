@@ -39,7 +39,7 @@ namespace Exposeum
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
             listView = FindViewById<ListView>(Resource.Id.List);
-			listView.Adapter = _storylineController.GetStoryLines(this);
+			listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
             listView.ItemClick += ListViewItemClick;
         }
 
