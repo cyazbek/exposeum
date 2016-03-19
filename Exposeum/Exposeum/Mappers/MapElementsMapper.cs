@@ -72,14 +72,17 @@ namespace Exposeum.Mappers
             return _listOfMapElements;
         }
 
-        public List<MapElements> GetAllMapElementsFromStoryline(int storylineId)
+        public List<MapElement> GetAllMapElementsFromStoryline(int storylineId)
         {
-            List<MapElements> listMapElementsTable = new List<MapElements>();
+            List<MapElement> listMapElementsTable = new List<MapElement>();
             List<int> mapElementIds = StoryLineMapElementListTDG.GetInstance().GetAllStorylineMapElements(storylineId);
 
             foreach (int mapElementId in mapElementIds)
-                listMapElementsTable.Add(_mapElementsTdg.GetMapElement(mapElementId));
-            
+            {
+                Tables.MapElements tableMapElement = _mapElementsTdg.GetMapElement(mapElementId);
+                listMapElementsTable.Add(MapElemenTableToModel(tableMapElement));
+            }
+
             return listMapElementsTable;
         }
 
