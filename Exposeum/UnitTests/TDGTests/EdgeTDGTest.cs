@@ -1,8 +1,13 @@
 
+using System.Collections.Generic;
+using Android.Provider;
+using Android.Widget;
 using NUnit.Framework;
 using Exposeum.Tables;
 using Exposeum.TDGs;
+using Java.IO;
 using SQLite;
+using Console = System.Console;
 
 namespace UnitTests
 {
@@ -13,7 +18,9 @@ namespace UnitTests
         public Edge _testObject;
         public readonly EdgeTDG _objectTDG = EdgeTDG.GetInstance();
         public SQLiteConnection _db = DBManager.GetInstance().getConnection();
-        [SetUp()]
+        private readonly List<Edge> _listOfEdgesTable = new List<Edge>();
+
+        [SetUp]
         public void Setup()
         {
             _setObject.ID = 1;
@@ -22,22 +29,24 @@ namespace UnitTests
             _setObject.endMapElementId = 12345;
         }
 
-        [Test()]
-        public void AddBeaconTest()
+        [Test]
+        public void AddEdgeTest()
         {
             _objectTDG.Add(_setObject);
             _testObject = _db.Get<Edge>(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject,_setObject));
         }
-        [Test()]
-        public void GetBeaconTest()
+
+        [Test]
+        public void GetEdgeTest()
         {
-            _objectTDG.Add(_setObject);
+            _objectTDG.Add(_setObject);            
             _testObject = _objectTDG.GetEdge(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
-        [Test()]
-        public void UpdateBeaconTest()
+
+        [Test]
+        public void UpdateEdgeTest()
         {
             _testObject = new Edge();
             _testObject.ID = 1;
@@ -51,5 +60,19 @@ namespace UnitTests
             _testObject = _objectTDG.GetEdge(_testObject.ID);
             Assert.AreEqual(_testObject.distance, distance);
         }
+
+        [Test]
+        public void GetAllEdgesTest()
+        {
+            int listOfEdgesSize = _db.Table<Edge>().Count();
+
+            for (int i = 0; i < listOfEdgesSize; i++)
+            {
+                _listOfEdgesTable.Add(new Edge());
+            }
+
+            Assert.AreEqual(_listOfEdgesTable.Count, _objectTDG.GetAllEdges().Count);
+        }
+        
     }
 }

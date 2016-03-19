@@ -6,6 +6,8 @@ namespace Exposeum.TDGs
     {
         private static ExhibitionContentEnTDG _instance;
 
+        private ExhibitionContentEnTDG() { }
+
         public static ExhibitionContentEnTDG GetInstance()
         {
             if (_instance == null)
@@ -23,10 +25,12 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+
         public ExhibitionContentEn GetExhibitionContentEn(int id)
         {
             return _db.Get<ExhibitionContentEn>(id);
         }
+
         public bool Equals(ExhibitionContentEn object1, ExhibitionContentEn object2)
         {
             if (object1.ID == object2.ID &&

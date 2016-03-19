@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    class PoiDescriptionFrTDG:TDG
+    public class PoiDescriptionFrTDG : TDG
     {
         private static PoiDescriptionFrTDG _instance;
+
+        private PoiDescriptionFrTDG() { }
 
         public static PoiDescriptionFrTDG GetInstance()
         {
@@ -26,6 +28,14 @@ namespace Exposeum.TDGs
         public PoiDescriptionFr GetPoiDescriptionFr(int id)
         {
             return _db.Get<PoiDescriptionFr>(id);
+        }
+        public bool Equals(PoiDescriptionFr object1, PoiDescriptionFr object2)
+        {
+            if (object1.ID == object2.ID &&
+                object1.title == object2.title &&
+                object1.summary == object2.summary)
+                return true;
+            else return false;
         }
     }
 }

@@ -2,9 +2,11 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class ExhibitionContentFrTDG:TDG
+    public class ExhibitionContentFrTDG : TDG
     {
         private static ExhibitionContentFrTDG _instance;
+
+        private ExhibitionContentFrTDG() { }
 
         public static ExhibitionContentFrTDG GetInstance()
         {
@@ -22,10 +24,12 @@ namespace Exposeum.TDGs
         {
             _db.Update(item);
         }
+
         public ExhibitionContentFr GetExhibitionContentFr(int id)
         {
             return _db.Get<ExhibitionContentFr>(id);
         }
+
         public bool Equals(ExhibitionContentFr object1, ExhibitionContentFr object2)
         {
             if (object1.ID == object2.ID &&
