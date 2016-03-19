@@ -86,12 +86,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="QRScanActivity.cs" />
-    <Compile Include="ImageActivity.cs" />
     <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
-    <Compile Include="Fragments\Fragment1.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\Beacon.cs" />
@@ -191,18 +188,6 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MenuExplorer.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ImageActivity.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\FragmentActivity.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ZxingOverlay.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\QRScannerInit.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
