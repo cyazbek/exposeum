@@ -34,7 +34,7 @@ namespace Exposeum.Controllers
 			HandleScanResult (result);
 		}
 
-		private async void HandleScanResult(ZXing.Result result)
+		private void HandleScanResult(ZXing.Result result)
 		{
 			if (result != null && !string.IsNullOrEmpty (result.Text) && Android.Util.Patterns.WebUrl.Matcher(result.Text).Matches()) {
 
