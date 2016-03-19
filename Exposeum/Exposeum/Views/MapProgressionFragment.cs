@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.Graphics;
 
 using Exposeum.Models;
+using Exposeum.Controllers;
 
 namespace Exposeum
 {
@@ -26,14 +27,11 @@ namespace Exposeum
 		{
 			base.OnCreate (savedInstanceState);
 
-			// Create your fragment here
+			_mapProgressionFragmentView = new MapProgressionFragmentView (Activity);
 		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			_mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
-			_mapProgressionFragmentView.SetHostFragment (this);
-			Update ();
 			return _mapProgressionFragmentView;
 		}
 
@@ -43,7 +41,6 @@ namespace Exposeum
 
 		class MapProgressionFragmentView : LinearLayout
 		{
-			private MapProgressionFragment _hostFragment;
 			private Paint _bgLine, _circle;
 
 			public MapProgressionFragmentView(Context context) : base(context)
@@ -68,12 +65,10 @@ namespace Exposeum
 				text.TextSize = 300;
 				text.Color = Color.Red;
 
-				StoryLine currentStoryline = _hostFragment.Storyline;
-
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
 
-				List<PointOfInterest> currentPoIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
+				List<PointOfInterest> currentPoIs = MapController.GetInstance().Model.CurrentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
 
 				for (int i = 0; i < currentPoIs.Count; i++) {
 
@@ -114,8 +109,8 @@ namespace Exposeum
 				return true;
 			}
 
-			public void SetHostFragment(MapProgressionFragment f){
-				_hostFragment = f;
+			public void SetStoryline(StoryLine Storyline){
+				_storyline = Storyline;
 			}
 
 			private void ResetPaint(){
