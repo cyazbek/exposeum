@@ -7,12 +7,10 @@ namespace Exposeum.Mappers
     {
         private static FloorMapper _instance;
         private readonly FloorTDG _floorTdg;
-        private readonly ImageMapper _imagesMapper;
 
         private FloorMapper()
         {
             _floorTdg = FloorTDG.GetInstance();
-            _imagesMapper = ImageMapper.GetInstance();
         }
 
         public static FloorMapper GetInstance()
@@ -38,26 +36,24 @@ namespace Exposeum.Mappers
         public Floor GetFloor(int floorId)
         {
             Tables.Floor floorTable = _floorTdg.GetFloor(floorId);
-            Floor floor = FloorTableToTable(floorTable);
+            Floor floor = FloorTableToModel(floorTable);
             return floor;
         }
 
         public Tables.Floor FloorModelToTable(Floor floor)
         {
-            int id = floor._id;
-            int image = _floorTdg.GetFloor(floor._id).imageId;
-
             Tables.Floor floorTable = new Tables.Floor
             {
-                ID = id,
-                imageId = image
+                ID = floor._id,
+                // imageId = ImageMapper.GetInstance().GetIdFromPath(floor._plan);
             };
 
             return floorTable;
         }
-        public Floor FloorTableToTable(Tables.Floor floorTable)
+
+        public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-            string image = _imagesMapper.GetImagePath(floorTable.ID);
+            string image = ImageMapper.GetInstance().GetImagePath(floorTable.ID);
             Floor modelFloor = new Floor
             {
                 _plan = image,
@@ -68,10 +64,7 @@ namespace Exposeum.Mappers
 
         public bool Equals(Floor floor1, Floor floor2)
         {
-            if (floor1._id == floor2._id &&
-                floor1._plan == floor2._plan)
-                return true;
-            else return false; 
+            return (floor1._id == floor2._id && floor1._plan == floor2._plan);
         }
 
     }

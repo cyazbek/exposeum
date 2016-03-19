@@ -64,7 +64,7 @@ namespace Exposeum.Mappers
 
                 pointOfInterestDescriptionModel = new PointOfInterestDescription
                 {
-                    _pointOfInterestDescriptionId = _poiDescriptionFr.ID,
+                    _id = _poiDescriptionFr.ID,
                     title = _poiDescriptionFr.title,
                     summary = _poiDescriptionFr.summary,
                     description = _poiDescriptionFr.description,
@@ -77,7 +77,7 @@ namespace Exposeum.Mappers
 
                 pointOfInterestDescriptionModel = new PointOfInterestDescription
                 {
-                    _pointOfInterestDescriptionId = _poiDescriptionFr.ID,
+                    _id = _poiDescriptionFr.ID,
                     title = _poiDescriptionFr.title,
                     summary = _poiDescriptionFr.summary,
                     description = _poiDescriptionFr.description,
@@ -92,7 +92,7 @@ namespace Exposeum.Mappers
         {
             PoiDescriptionFr poiDescriptionTable = new PoiDescriptionFr
             {
-                ID = poiDescription._pointOfInterestDescriptionId,
+                ID = poiDescription._id,
                 title = poiDescription.title,
                 summary = poiDescription.summary,
                 description = poiDescription.description
@@ -105,7 +105,7 @@ namespace Exposeum.Mappers
         {
             PoiDescriptionEn poiDescriptionTable = new PoiDescriptionEn
             {
-                ID = poiDescription._pointOfInterestDescriptionId,
+                ID = poiDescription._id,
                 title = poiDescription.title,
                 summary = poiDescription.summary,
                 description = poiDescription.description

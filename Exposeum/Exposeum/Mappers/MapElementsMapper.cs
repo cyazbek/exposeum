@@ -92,7 +92,7 @@ namespace Exposeum.Mappers
                 iconId = mapElement._iconId,
                 uCoordinate = mapElement._uCoordinate,
                 vCoordinate = mapElement._vCoordinate,
-                floorId = FloorMapper.GetInstance().GetFloor(mapElement._floor._id)._id
+                floorId = mapElement._floor._id
             };
             
             switch (mapElement.GetType().ToString())
@@ -101,10 +101,10 @@ namespace Exposeum.Mappers
                 {
                     PointOfInterest poi = (PointOfInterest) mapElement;
 
-                    mapElements.beaconId = BeaconMapper.GetInstance().GetBeacon(poi._beacon._id)._id;
-                    // mapElements._storyLineId = StorylineMapper.GetInstance().GetStoryline(poi._storyLineId)._id;
-                    mapElements.poiDescription = PointOfInterestDescriptionMapper.GetInstance().GetPointOfInterestDescription(poi._description._id)._id;
-                    // mapElements.exhibitionContent = ExhibitionContentMapper.GetInstance().GetExhibitionContent(poi._exhibitionContent._id)._id;
+                    mapElements.beaconId = poi._beacon._id;
+                    // mapElements._storyLineId = poi._storyLineId;
+                    mapElements.poiDescription = poi._description._id;
+                    // mapElements.exhibitionContent = poi._exhibitionContent._id;
 
                     return mapElements;
                 }
