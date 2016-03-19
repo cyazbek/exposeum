@@ -12,13 +12,14 @@ namespace UnitTests
         public readonly PoiDescriptionEn _setObject = new PoiDescriptionEn();
         public PoiDescriptionEn _testObject;
         public readonly PoiDescriptionEnTDG _objectTDG = PoiDescriptionEnTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
             _setObject.ID = 1;
             _setObject.title = "title";
             _setObject.summary = "summary";
+            _setObject.description = "description";
         }
 
         [Test()]
@@ -42,6 +43,7 @@ namespace UnitTests
             _setObject.ID = 1;
             _setObject.title = "title";
             _setObject.summary = "summary";
+            _setObject.description = "description";
             _objectTDG.Add(_testObject);
             _testObject.title = "title2";
             string title = _testObject.title;

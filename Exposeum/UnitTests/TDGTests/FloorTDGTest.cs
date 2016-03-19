@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly Floor _setObject = new Floor();
         public Floor _testObject;
         public readonly FloorTDG _objectTDG = FloorTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

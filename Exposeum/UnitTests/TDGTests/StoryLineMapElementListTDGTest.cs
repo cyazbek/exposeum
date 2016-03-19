@@ -15,7 +15,7 @@ namespace UnitTests
         public readonly StoryLineMapElementList _setObject3 = new StoryLineMapElementList();
         public StoryLineMapElementList _testObject;
         public readonly StoryLineMapElementListTDG _objectTDG = StoryLineMapElementListTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {

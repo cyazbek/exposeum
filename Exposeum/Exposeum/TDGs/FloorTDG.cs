@@ -1,4 +1,5 @@
 using Exposeum.Tables;
+using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
@@ -28,6 +29,11 @@ namespace Exposeum.TDGs
         public Floor GetFloor(int id)
         {
             return _db.Get<Floor>(id);
+        }
+
+        public List<Floor> GetAllFloors()
+        {
+            return new List<Floor>(_db.Table<Floor>());
         }
 
         public bool Equals(Floor object1, Floor Object2)

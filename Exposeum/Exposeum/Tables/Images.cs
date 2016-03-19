@@ -2,7 +2,6 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    [Table("Items")]
     public class Images
     {   
         [PrimaryKey, AutoIncrement, Column("ID")]

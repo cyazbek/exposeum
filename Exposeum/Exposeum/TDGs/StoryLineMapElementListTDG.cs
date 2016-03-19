@@ -33,15 +33,15 @@ namespace Exposeum.TDGs
         public List<int> GetAllStorylineMapElements(int storylineId)
         {
             List<StoryLineMapElementList> listMapElementsId = new List<StoryLineMapElementList>(_db.Table<StoryLineMapElementList>());
-            List<int> storyLineMapElementsId = new List<int>(); 
+            List<int> mapElementsId = new List<int>(); 
 
             foreach (var x in listMapElementsId)
             {
                 if(x.storyLineId==storylineId)
-                    storyLineMapElementsId.Add(x.mapElementId);
+                    mapElementsId.Add(x.mapElementId);
             }
 
-            return storyLineMapElementsId;
+            return mapElementsId;
         }
         public bool Equals(StoryLineMapElementList list1, StoryLineMapElementList list2)
         {
