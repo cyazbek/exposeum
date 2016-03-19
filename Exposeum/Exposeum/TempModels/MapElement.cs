@@ -10,15 +10,19 @@ namespace Exposeum.TempModels
         public float _uCoordinate { get; set; }
         public float _vCoordinate { get; set; }
         public Floor _floor { get; set; }
-        public bool Equals(MapElement element2)
+
+        public override bool Equals(object obj)
         {
-            if (this._id == element2._id &&
-                this._visited == element2._visited &&
-                this._iconId == element2._iconId &&
-                this._uCoordinate == element2._uCoordinate &&
-                this._vCoordinate == element2._vCoordinate &&
-                this.Equals(element2._floor))
-               return true;
+            if (obj != null)
+            {
+                MapElement other = (MapElement)obj;
+                return other._id == _id &&
+                    other._visited == _visited &&
+                    other._iconId == _iconId &&
+                    other._uCoordinate == _uCoordinate &&
+                    other._vCoordinate == _vCoordinate &&
+                    other._floor.Equals(_floor);
+            }
             else return false; 
         }
 

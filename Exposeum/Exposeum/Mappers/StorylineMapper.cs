@@ -94,9 +94,9 @@ namespace Exposeum.Mappers
                 story1._floorsCovered == story2._floorsCovered &&
                 _mapElementsMapper.Equals(story1._mapElements, story2._mapElements) &&
                 story1._intendedAudience == story2._intendedAudience &&
-                _mapElementsMapper.Equals(story1._lastVisitedMapElement, story2._lastVisitedMapElement) &&
+                story1._lastVisitedMapElement.Equals(story2._lastVisitedMapElement) &&
                 story1._status.Equals(story2._status) &&
-                _storylineDescriptionMapper.Equals(story1._storylineDescription, story2._storylineDescription))
+                story1._storylineDescription.Equals(story2._storylineDescription))
                 return true;
             else return false; 
         }

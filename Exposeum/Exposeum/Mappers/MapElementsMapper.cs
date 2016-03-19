@@ -157,12 +157,17 @@ namespace Exposeum.Mappers
             }
         }
         
-        public bool Equals(MapElement element1, MapElement element2)
+        public bool Equals(List<MapElement> list1, List<MapElement> list2)
         {
-            return (element1._id == element2._id &&
-                    element1._iconId == element2._iconId &&
-                    Math.Abs(element1._uCoordinate - element2._uCoordinate) < 0 &&
-                    Math.Abs(element1._vCoordinate - element2._vCoordinate) < 0);
+            var result = false; 
+            for(int i = 0; i<list1.Count; i++)
+            {
+                if (list1[i].Equals(list2[i]))
+                    result = true;
+                else
+                    return false;
+            }
+            return result; 
         }
         
 

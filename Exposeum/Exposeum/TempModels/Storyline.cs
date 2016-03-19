@@ -19,5 +19,23 @@ namespace Exposeum.TempModels
         {
             _mapElements = new List<MapElement>();
         }
+        public override bool Equals(object obj)
+        {
+            if (obj != null)
+            {
+                Storyline other = (Storyline)obj;
+                var result = false;
+                for (int i = 0; i < other._mapElements.Count; i++)
+                {
+                    if (other._mapElements[i].Equals(this._mapElements[i]))
+                        result = true;
+                    else return false;
+                }
+                return result && other._storylineId == _storylineId && other._imageId == _imageId && other._duration == _duration && other._floorsCovered == _floorsCovered &&
+                    _intendedAudience == other._intendedAudience && _lastVisitedMapElement.Equals(other._lastVisitedMapElement) && _status.Equals(other._status) &&
+                    _storylineDescription == other._storylineDescription;
+            }
+            else return false; 
+        }
     }
 }
