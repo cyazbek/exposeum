@@ -12,7 +12,7 @@ namespace UnitTests
         public readonly Storyline _setObject = new Storyline();
         public Storyline _testObject;
         public readonly StorylineTDG _objectTDG = StorylineTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
@@ -22,7 +22,7 @@ namespace UnitTests
             _setObject.image = 120;
             _setObject.floorsCovered = 3;
             _setObject.lastVisitedPoi = 5;
-            _setObject.status = "visited";
+            _setObject.status = 0;
             _setObject.descriptionId = 5;
         }
 
@@ -49,11 +49,11 @@ namespace UnitTests
             _setObject.image = 120;
             _setObject.floorsCovered = 3;
             _setObject.lastVisitedPoi = 5;
-            _setObject.status = "visited";
+            _setObject.status = 0;
             _setObject.descriptionId = 5;
             _objectTDG.Add(_testObject);
-            _testObject.status = "new";
-            string status = _testObject.status;
+            _testObject.status = 0;
+            int status = _testObject.status;
             _objectTDG.Update(_testObject);
             _testObject = _objectTDG.GetStoryline(_testObject.ID);
             Assert.AreEqual(_testObject.status, status);

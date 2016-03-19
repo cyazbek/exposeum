@@ -17,7 +17,7 @@ namespace UnitTests
         public readonly Edge _setObject = new Edge();
         public Edge _testObject;
         public readonly EdgeTDG _objectTDG = EdgeTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         private readonly List<Edge> _listOfEdgesTable = new List<Edge>();
 
         [SetUp]

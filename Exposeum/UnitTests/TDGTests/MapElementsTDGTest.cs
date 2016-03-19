@@ -17,18 +17,19 @@ namespace UnitTests
         public readonly MapElements _setObject = new MapElements();
         public MapElements _testObject;
         public readonly MapElementsTDG _objectTDG = MapElementsTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         private readonly List<MapElements> _listOfEdgesTable = new List<MapElements>();
 
         [SetUp]
         public void Setup()
         {
             _setObject.ID = 1;
-            _setObject.uCoordinate = 12;
-            _setObject.vCoordinate = 15.2;
+            _setObject.uCoordinate = 12f;
+            _setObject.vCoordinate = 15.2f;
             _setObject.discriminator = "POI";
             _setObject.visited = 1;
             _setObject.beaconId = 12;
+            _setObject._storyLineId = 1;
             _setObject.poiDescription = 1;
             _setObject.label = "bathroom";
             _setObject.exhibitionContent = 1;
@@ -55,11 +56,12 @@ namespace UnitTests
         public void UpdateMapElementsTest()
         {
             _testObject.ID = 1;
-            _testObject.uCoordinate = 12;
-            _testObject.vCoordinate = 15.2;
+            _testObject.uCoordinate = 12f;
+            _testObject.vCoordinate = 15.2f;
             _testObject.discriminator = "POI";
             _testObject.visited = 1;
             _testObject.beaconId = 12;
+            _testObject._storyLineId = 2;
             _testObject.poiDescription = 1;
             _testObject.label = "bathroom";
             _testObject.exhibitionContent = 1;

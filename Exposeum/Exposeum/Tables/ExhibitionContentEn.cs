@@ -2,7 +2,6 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    [Table("Items")]
 
     public class ExhibitionContentEn
     {
@@ -15,6 +14,7 @@ namespace Exposeum.Tables
         public int resolution { get; set; }
         public string encoding { get; set; }
         public string discriminator { get; set; }
+        public int storyLineId { get; set; }
         
     }
 }

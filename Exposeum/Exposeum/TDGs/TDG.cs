@@ -5,6 +5,6 @@ namespace Exposeum.TDGs
 {
     public abstract class TDG
     {
-        public SQLiteConnection _db = Tables.DBManager.GetInstance().getConnection();
+        public SQLiteConnection _db = Tables.DBManager.GetInstance().GetConnection();
     }
 }

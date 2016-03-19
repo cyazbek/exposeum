@@ -1,8 +1,9 @@
 using Exposeum.Tables;
+using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class ExhibitionContentEnTDG : TDG
+    public class ExhibitionContentEnTDG : ExhibitionContentTDG
     {
         private static ExhibitionContentEnTDG _instance;
 
@@ -29,6 +30,20 @@ namespace Exposeum.TDGs
         public ExhibitionContentEn GetExhibitionContentEn(int id)
         {
             return _db.Get<ExhibitionContentEn>(id);
+        }
+
+        public List<int> GetExhibitionContentEnByStorylineId(int id)
+        {
+            List<ExhibitionContentEn> exhibitionContent = new List<ExhibitionContentEn>(_db.Table<ExhibitionContentEn>());
+            List<int> exhibitionId = new List<int>();
+
+            foreach (var x in exhibitionContent)
+            {
+                if (x.storyLineId == id)
+                    exhibitionId.Add(x.ID);
+            }
+
+            return exhibitionId;
         }
 
         public bool Equals(ExhibitionContentEn object1, ExhibitionContentEn object2)
