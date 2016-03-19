@@ -14,13 +14,11 @@ namespace Exposeum.Mappers
         private static MapElementsMapper _instance;
         private readonly MapElementsTDG _mapElementsTdg;
         private readonly List<MapElement> _listOfMapElements;
-        private readonly FloorMapper _floorMapper; 
 
         private MapElementsMapper()
         {
             _mapElementsTdg = MapElementsTDG.GetInstance();
             _listOfMapElements = new List<MapElement>();
-            _floorMapper = FloorMapper.GetInstance();
         }
 
         public static MapElementsMapper GetInstance()
@@ -81,7 +79,7 @@ namespace Exposeum.Mappers
 
             foreach (int mapElementId in mapElementIds)
             {
-                Tables.MapElements tableMapElement = _mapElementsTdg.GetMapElement(mapElementId);
+                MapElements tableMapElement = _mapElementsTdg.GetMapElement(mapElementId);
                 listMapElementsTable.Add(MapElemenTableToModel(tableMapElement));
             }
 
@@ -156,16 +154,6 @@ namespace Exposeum.Mappers
                     return null;
             }
         }
-        
-        public bool Equals(MapElement element1, MapElement element2)
-        {
-            return (element1._id == element2._id &&
-                    element1._iconId == element2._iconId &&
-                    Math.Abs(element1._uCoordinate - element2._uCoordinate) < 0 &&
-                    Math.Abs(element1._vCoordinate - element2._vCoordinate) < 0);
-        }
-        
-
 
     }
 }
