@@ -59,6 +59,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
+    <Compile Include="MapperTests\StatusMapperTest.cs" />
     <Compile Include="MapperTests\STDescriptionMapperFrTest.cs" />
     <Compile Include="MapperTests\STDescriptionMapperEnTest.cs">
       <SubType>Code</SubType>
