@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Support.V4.App;
 using Exposeum.Models;
+using Android.Graphics.Drawables;
 
 namespace Exposeum
 {
@@ -85,11 +86,15 @@ namespace Exposeum
 			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (_context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
 				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
-				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
 				.SetContentTitle(poiName)
 				.SetContentText (poiDesc)
 				.SetPriority(2)
 				.SetVibrate(new long[] { 1000, 1000, 1000 });
+
+			try{
+				notifBuilder.SetSmallIcon(Resource.Drawable.logo_notif);// Display this icon
+			}catch(Exception e){
+			}
 
 			return notifBuilder.Build ();
 		}

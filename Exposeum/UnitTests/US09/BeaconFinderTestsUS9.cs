@@ -99,7 +99,7 @@ namespace UnitTests
 		private void triggerBeaconRanginEvent(){
 			//Using reflection to invoke beaconManagerRangingMethod and pass the dummy ranging event
 			Type beaconFinderType = typeof(BeaconFinder);
-			MethodInfo beaconManagerRangingMethod = beaconFinderType.GetMethod("beaconManagerRanging", BindingFlags.NonPublic | BindingFlags.Instance); 
+			MethodInfo beaconManagerRangingMethod = beaconFinderType.GetMethod("BeaconManagerRanging", BindingFlags.NonPublic | BindingFlags.Instance); 
 			object[] mParam = new object[] {null , rangingEvent};
 			beaconManagerRangingMethod.Invoke (beaconFinder, mParam);
 		}

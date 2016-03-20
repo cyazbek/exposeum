@@ -6,6 +6,7 @@ using Exposeum;
 using System.Collections.Generic;
 using Exposeum.Models;
 using Java.Util;
+using Android.App;
 
 namespace UnitTests
 {
@@ -13,7 +14,7 @@ namespace UnitTests
 	public class BeaconFinderTestsUS13 : IBeaconFinderObserver
 	{
 
-		BeaconFinder beaconFinder = BeaconFinder.GetInstance();
+		BeaconFinder beaconFinder;
 		private PointOfInterest myPoi;
 		private PointOfInterest myPoi1;
 		private PointOfInterest myPoi2;
@@ -22,12 +23,16 @@ namespace UnitTests
 		private EstimoteSdk.Beacon beacon2;
 		private EstimoteSdk.Beacon beacon3;
 		private BeaconManager.RangingEventArgs rangingEvent;
+		private BeaconManager.RangingEventArgs nullRangingEvent;
 		private IList<EstimoteSdk.Beacon> beaconList;
+		private IList<EstimoteSdk.Beacon> nullBeaconList;
 		private bool observersNotified;
 
 		[SetUp]
 		public void Setup ()
 		{
+			BeaconFinder.InitInstance (Android.App.Application.Context);
+			beaconFinder = BeaconFinder.GetInstance();
 
 			//Setup the storyline supplied to the BeaconFinder
 			story = new StoryLine ();
@@ -67,8 +72,12 @@ namespace UnitTests
 			beaconList.Add (beacon1);
 			beaconList.Add (beacon3);
 
+			nullBeaconList = new List<EstimoteSdk.Beacon> (1);
+			nullBeaconList.Add (beacon3);
+
 			//Create a dummmy ranging event
 			rangingEvent = new BeaconManager.RangingEventArgs (beaconFinder.GetRegion (), beaconList);
+			nullRangingEvent = new BeaconManager.RangingEventArgs (beaconFinder.GetRegion (), nullBeaconList);
 
 			//Observers have not yet been notified
 			observersNotified = false;
@@ -84,7 +93,7 @@ namespace UnitTests
 		[Test]
 		public void testImmediateBeaconOrderedByAccuracy ()
 		{
-			triggerBeaconRanginEvent ();
+			triggerBeaconRanginEvent (rangingEvent);
 
 			//Test that the beacons are properly ordered by accuracy
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
@@ -115,7 +124,7 @@ namespace UnitTests
 		[Test]
 		public void testFarBeaconIsFilteredOut ()
 		{
-			triggerBeaconRanginEvent ();
+			triggerBeaconRanginEvent (rangingEvent);
 
 			//Test that the beacons are properly ordered by accuracy
 			KeyValuePair<double, EstimoteSdk.Beacon> previousPair = new KeyValuePair<double, EstimoteSdk.Beacon>();
@@ -137,16 +146,45 @@ namespace UnitTests
 
 		[Test]
 		public void testObserversAreNotified(){
-
+			beaconFinder.SetInFocus (true);
+			//observer should not be notified if no event occured
 			Assert.False (observersNotified);
-			triggerBeaconRanginEvent ();
+			//observer should not be notified if the previous beacon and curreng beacon are the same
+			triggerBeaconRanginEvent (rangingEvent);
+			triggerBeaconRanginEvent (rangingEvent);
+			Assert.False (observersNotified);
+
+			//observer should  be notified if the previous beacon and curreng beacon are different
+			triggerBeaconRanginEvent (nullRangingEvent);
+			triggerBeaconRanginEvent (rangingEvent);
 			Assert.True (observersNotified);
+		}
+
+		[Test]
+		public void testUserNotifiedIfOutOfFocus(){
+
+			//ensure that when in focus, the observer get notified
+			Assert.False (observersNotified);
+			//observer should  be notified if the previous beacon and curreng beacon are different
+			triggerBeaconRanginEvent (nullRangingEvent);
+			triggerBeaconRanginEvent (rangingEvent);
+			Assert.True (observersNotified);
+
+			//make sure that the observer does not get notified, if the observers does not get notified, the user get notified
+			observersNotified = false;
+			beaconFinder.SetInFocus (false);
+			//observer should  be notified if the previous beacon and curreng beacon are different
+			triggerBeaconRanginEvent (nullRangingEvent);
+			triggerBeaconRanginEvent (rangingEvent);
+			Assert.False (observersNotified);
+
+
 		}
 
 		[Test]
 		public void testTheClosestBeaconIsTheClosest(){
 
-			triggerBeaconRanginEvent ();
+			triggerBeaconRanginEvent (rangingEvent);
 
 			EstimoteSdk.Beacon closestBeacon = beaconFinder.GetClosestBeacon ();
 
@@ -154,11 +192,11 @@ namespace UnitTests
 			Assert.True (closestBeacon.Minor == beacon1.Minor);
 		}
 
-		private void triggerBeaconRanginEvent(){
+		private void triggerBeaconRanginEvent(BeaconManager.RangingEventArgs e){
 			//Using reflection to invoke beaconManagerRangingMethod and pass the dummy ranging event
 			Type beaconFinderType = typeof(BeaconFinder);
-			MethodInfo beaconManagerRangingMethod = beaconFinderType.GetMethod("beaconManagerRanging", BindingFlags.NonPublic | BindingFlags.Instance); 
-			object[] mParam = new object[] {null , rangingEvent};
+			MethodInfo beaconManagerRangingMethod = beaconFinderType.GetMethod("BeaconManagerRanging", BindingFlags.NonPublic | BindingFlags.Instance); 
+			object[] mParam = new object[] {null , e};
 			beaconManagerRangingMethod.Invoke (beaconFinder, mParam);
 		}
 
