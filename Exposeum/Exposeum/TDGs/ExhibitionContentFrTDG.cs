@@ -18,7 +18,7 @@ namespace Exposeum.TDGs
 
         public void Add(ExhibitionContentFr item)
         {
-            _db.Insert(item);
+            _db.InsertOrReplace(item);
         }
 
         public void Update(ExhibitionContentFr item)

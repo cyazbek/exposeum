@@ -17,7 +17,7 @@ namespace Exposeum.TDGs
 
         public void Add(StoryLineDescriptionEn item)
         {
-            _db.Insert(item);
+            _db.InsertOrReplace(item);
         }
 
         public void Update(StoryLineDescriptionEn item)

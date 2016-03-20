@@ -1,113 +1,106 @@
-using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using StoryLineDescription = Exposeum.TempModels.StorylineDescription;
 
 namespace Exposeum.Mappers
 {
-    public class StoryLineDescriptionMapper
+    public class StorylineDescriptionMapper
     {
-        private static StoryLineDescriptionMapper _instance;
-        private readonly StoryLineDescriptionEnTDG _storyLineDescriptionEnTdg;
-        private readonly StoryLineDescriptionFrTDG _storyLineDescriptionFrTdg;
-        private StoryLineDescriptionEn _storyLineDescriptionEn;
-        private StoryLineDescriptionFr _storyLineDescriptionFr;
+        private static StorylineDescriptionMapper _instance;
+        private StoryLineDescriptionEnTDG _storyLineDescriptionEnTdg = StoryLineDescriptionEnTDG.GetInstance();
+        private StoryLineDescriptionFrTDG _storyLineDescriptionFrTdg = StoryLineDescriptionFrTDG.GetInstance();
+        private Models.User _user;
 
-        private StoryLineDescriptionMapper()
+        private StorylineDescriptionMapper()
         {
-            _storyLineDescriptionEnTdg = StoryLineDescriptionEnTDG.GetInstance();
-            _storyLineDescriptionFrTdg = StoryLineDescriptionFrTDG.GetInstance();
+            _user = Models.User.GetInstance();
         }
 
-        public static StoryLineDescriptionMapper GetInstance()
+        public static StorylineDescriptionMapper GetInstance()
         {
             if (_instance == null)
-                _instance = new StoryLineDescriptionMapper();
+                _instance = new StorylineDescriptionMapper();
             return _instance;
         }
 
-        public void AddStoryLineDescription(StoryLineDescription storyLineDescription)
+        //Method to convert from english table to model
+        public StoryLineDescriptionEn DescriptionModelToTableEn(StoryLineDescription model)
         {
-            if (storyLineDescription._language == Language.Fr)
+            StoryLineDescriptionEn table = new StoryLineDescriptionEn
             {
-                _storyLineDescriptionFr = StoryLineDescriptionModelToTableFr(storyLineDescription);
-                _storyLineDescriptionFrTdg.Add(_storyLineDescriptionFr);
-            }
-            else
-            {
-                _storyLineDescriptionEn = StoryLineDescriptionModelToTableEn(storyLineDescription);
-                _storyLineDescriptionEnTdg.Add(_storyLineDescriptionEn);
-            }
-        }
-
-        public void UpdateStoryLineDescription(StoryLineDescription storyLineDescription)
-        {
-            if (storyLineDescription._language == Language.Fr)
-            {
-                _storyLineDescriptionFr = StoryLineDescriptionModelToTableFr(storyLineDescription);
-                _storyLineDescriptionFrTdg.Update(_storyLineDescriptionFr);
-            }
-            else
-            {
-                _storyLineDescriptionEn = StoryLineDescriptionModelToTableEn(storyLineDescription);
-                _storyLineDescriptionEnTdg.Update(_storyLineDescriptionEn);
-            }
-        }
-
-        public StoryLineDescription GetStoryLineDescription(int storyLineDescriptionId)
-        {
-            StoryLineDescription storyLineDescriptionModel;
-
-            if (User.GetInstance()._language == Language.Fr)
-            {
-                _storyLineDescriptionFr = _storyLineDescriptionFrTdg.GetStoryLineDescriptionFr(storyLineDescriptionId);
-
-                storyLineDescriptionModel = new StoryLineDescription
-                {
-                    _storyLineDescriptionId = _storyLineDescriptionFr.ID,
-                    _title = _storyLineDescriptionFr.title,
-                    _description = _storyLineDescriptionFr.description,
-                    _language = User.GetInstance()._language
-                };
-            }
-            else
-            {
-                _storyLineDescriptionEn = _storyLineDescriptionEnTdg.GetStoryLineDescriptionEn(storyLineDescriptionId);
-
-                storyLineDescriptionModel = new StoryLineDescription
-                {
-                    _storyLineDescriptionId = _storyLineDescriptionFr.ID,
-                    _title = _storyLineDescriptionFr.title,
-                    _description = _storyLineDescriptionFr.description,
-                    _language = User.GetInstance()._language
-                };
-            }
-
-            return storyLineDescriptionModel;
-        }
-
-        public StoryLineDescriptionFr StoryLineDescriptionModelToTableFr(StoryLineDescription storyLineDescription)
-        {
-            StoryLineDescriptionFr storyLineDescriptionTable = new StoryLineDescriptionFr
-            {
-                ID = storyLineDescription._storyLineDescriptionId,
-                title = storyLineDescription._title,
-                description = storyLineDescription._description
+                ID = model._storyLineDescriptionId,
+                title = model._title,
+                description = model._description
             };
-
-            return storyLineDescriptionTable;
+            return table;
         }
 
-        public StoryLineDescriptionEn StoryLineDescriptionModelToTableEn(StoryLineDescription storyLineDescription)
+        public StoryLineDescriptionFr DescriptionModelToTableFr(StoryLineDescription model)
         {
-            StoryLineDescriptionEn storyLineDescriptionTable = new StoryLineDescriptionEn
+            StoryLineDescriptionFr table = new StoryLineDescriptionFr
             {
-                ID = storyLineDescription._storyLineDescriptionId,
-                title = storyLineDescription._title,
-                description = storyLineDescription._description
+                ID = model._storyLineDescriptionId,
+                title = model._title,
+                description = model._description
             };
-
-            return storyLineDescriptionTable;
+            return table;
         }
+
+        public StoryLineDescription DescriptionTableToModelFr(StoryLineDescriptionFr table)
+        {
+            StoryLineDescription model = new StoryLineDescription
+            {
+                _title = table.title,
+                _storyLineDescriptionId = table.ID,
+                _description = table.description,
+                _language = Models.Language.Fr
+            };
+            return model;
+        }
+
+        public StoryLineDescription DescriptionTableToModelEn(StoryLineDescriptionEn table)
+        {
+            StoryLineDescription model = new StoryLineDescription
+            {
+                _title = table.title,
+                _storyLineDescriptionId = table.ID,
+                _description = table.description,
+                _language = Models.Language.En
+            };
+            return model;
+        }
+
+        public void AddDescription(StoryLineDescription model)
+        {
+            if (model._language.Equals(Models.Language.Fr))
+            {
+                _storyLineDescriptionFrTdg.Add(DescriptionModelToTableFr(model));
+            }
+            else
+                _storyLineDescriptionEnTdg.Add(DescriptionModelToTableEn(model));
+        }
+
+        public StoryLineDescription GetDescription(int id)
+        {
+            if (_user._language.Equals(Models.Language.Fr))
+            {
+                return DescriptionTableToModelFr(_storyLineDescriptionFrTdg.GetStoryLineDescriptionFr(id));
+            }
+            else
+                return DescriptionTableToModelEn(_storyLineDescriptionEnTdg.GetStoryLineDescriptionEn(id));
+        }
+
+        public void UpdateDescription(StoryLineDescription model)
+        {
+            if (model._language.Equals(Models.Language.Fr))
+            {
+                _storyLineDescriptionFrTdg.Update(DescriptionModelToTableFr(model));
+            }
+            else
+                _storyLineDescriptionEnTdg.Update(DescriptionModelToTableEn(model));
+        }
+
+
+
     }
 }

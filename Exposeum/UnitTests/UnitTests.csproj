@@ -58,12 +58,15 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
-    <Compile Include="MapperTests\EdgeMapperTest.cs" />
+    <Compile Include="MapperTests\STDescriptionMapperFrTest.cs" />
+    <Compile Include="MapperTests\STDescriptionMapperEnTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="ModelsTests\UserClassTest.cs" />
     <Compile Include="TDGTests\BeaconTDGTest.cs" />
     <Compile Include="TDGTests\EdgeTDGTest.cs" />
-    <Compile Include="ModelsTests\UserClassTest.cs" />
     <Compile Include="TDGTests\ExhibitionContentEnTDGTest.cs" />
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />

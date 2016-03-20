@@ -18,7 +18,7 @@ namespace Exposeum.TDGs
 
         public void AddMap(Map map)
         {
-            _db.Insert(map);
+            _db.InsertOrReplace(map);
         }
         
         public void UpdateMap(Map map)
