@@ -88,12 +88,6 @@
     <Compile Include="US13\BeaconFinderTestsUS13.cs" />
     <Compile Include="US_11\PointOfInterestVisitedTest.cs" />
     <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
-    <Compile Include="US07\BeaconSummaryPopupTests.cs" />
-    <Compile Include="US09\BeaconFinderTestsUS9.cs" />
-    <Compile Include="US12\StorylineProgressionMapFragmentTests.cs" />
-    <Compile Include="US12\StorylineProgressionMapProgressTest.cs" />
-    <Compile Include="US13\BeaconFinderTestsUS13.cs" />
-    <Compile Include="US_8\Stop_Reset_StorylineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt" />
