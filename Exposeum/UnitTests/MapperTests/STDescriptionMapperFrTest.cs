@@ -10,83 +10,70 @@ namespace UnitTests.MapperTests
     [TestFixture]
     class STDescriptionMapperFrTest
     {
-        StoryLineDescriptionFrTDG _tdg = StoryLineDescriptionFrTDG.GetInstance();
+        readonly StoryLineDescriptionFrTDG _tdg = StoryLineDescriptionFrTDG.GetInstance();
         StorylineDescription _desc1;
         StorylineDescription _desc2;
         StorylineDescriptionMapperFr _mapper;
         StoryLineDescriptionFr _table1;
-        StoryLineDescriptionFr _table2;
-
 
         [SetUp]
         public void SetUp()
         {
             _tdg._db.DeleteAll<StoryLineDescriptionFr>();
+
             _desc1 = new StorylineDescription
             {
-                _title = "title",
-                _description = "description",
+                _title = "theTitle",
+                _description = "theDescription",
                 _language = Exposeum.Models.Language.Fr
             };
+
             _desc2 = new StorylineDescription
             {
-                _title = "title",
-                _description = "description",
+                _title = "theTitle",
+                _description = "theDescription",
                 _language = Exposeum.Models.Language.Fr
             };
+
+            _table1 = new StoryLineDescriptionFr
+            {
+                title = "theTitle",
+                description = "theDescription"
+            };
+
             _mapper = StorylineDescriptionMapperFr.GetInstance();
         }
 
-        [Test()]
+        [Test]
         public void AddGetDescriptionTest()
         {
-            _tdg._db.Delete<StoryLineDescriptionFr>(_desc1._storyLineDescriptionId);
             _mapper.AddDescription(_desc1);
-            _table1 = _tdg.GetStoryLineDescriptionFr(_desc1._storyLineDescriptionId);
-            Assert.IsTrue(_desc1.Equals(_desc2));
+            StorylineDescription expected = _mapper.GetDescription(_desc1._storyLineDescriptionId);
+            Assert.IsTrue(_desc1.Equals(expected));
         }
 
-        [Test()]
+        [Test]
         public void UpdateDescriptionTest()
         {
             _mapper.AddDescription(_desc2);
-            _desc2._description.Equals("description2");
+            _desc2._description = "description2";
             _mapper.UpdateDescription(_desc2);
-            Assert.IsTrue(_desc2._description.Equals(_mapper.GetDescription(_desc2._storyLineDescriptionId)._description));
+            Assert.IsTrue("description2".Equals(_mapper.GetDescription(_desc2._storyLineDescriptionId)._description));
         }
 
-        [Test()]
+        [Test]
         public void ConvertTableToModelTest()
         {
-            _table1 = new StoryLineDescriptionFr
-            {
-                ID = _desc1._storyLineDescriptionId,
-                description = _desc1._description,
-                title = _desc1._title
-            };
-
-            _table2 = _mapper.DescriptionModelToTable(_desc1);
-            Assert.IsTrue(_tdg.Equals(_table1, _table2));
+            StorylineDescription expected = _mapper.DescriptionTableToModel(_table1);
+            Assert.IsTrue(_desc1.Equals(expected));
         }
 
-        [Test()]
+        [Test]
         public void ConvertModelToTableTest()
         {
-            _table1 = new StoryLineDescriptionFr
-            {
-                ID = 200,
-                description = "none",
-                title = "none"
-            };
-            _desc2._storyLineDescriptionId = _table1.ID;
-            _desc2._title = _table1.title;
-            _desc2._language = Exposeum.Models.Language.Fr;
-            _desc2._description = _table1.description;
-
-            _desc1 = _mapper.DescriptionTableToModel(_table1);
-            Assert.IsTrue(_desc1.Equals(_desc2));
+            StoryLineDescriptionFr expected = _mapper.DescriptionModelToTable(_desc1);
+            Assert.IsTrue(_tdg.Equals(_table1, expected));
         }
-
 
     }
 }
