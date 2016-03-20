@@ -19,12 +19,12 @@ namespace UnitTests.ControllersTests
     [TestFixture]
     class QRControllerTest
     {
-        private Application app;
+        
 
         [SetUp]
         public void Setup()
         {
-            //app = new MockApplication();
+			
         }
 
         [TearDown]
@@ -35,7 +35,8 @@ namespace UnitTests.ControllersTests
         [Test]
         public void getInstanceTest()
         {
-            //Assert.IsNotNull(QRController.GetInstance(app.ApplicationContext));
+			Context context = Android.App.Application.Context;
+			Assert.IsNotNull(QRController.GetInstance(context));
         }
     }
 }
