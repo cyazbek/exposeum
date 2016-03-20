@@ -14,14 +14,14 @@ namespace UnitTests.MapperTests
         StorylineDescription _desc1;
         StorylineDescription _desc2;
         StorylineDescriptionMapperEn _mapper;
-        StoryLineDescriptionEn _table1;
-        StoryLineDescriptionEn _table2;
+        StoryLineDescriptionEnMapper _table1;
+        StoryLineDescriptionEnMapper _table2;
 
 
         [SetUp]
         public void SetUp()
         {
-            _tdg._db.DeleteAll<StoryLineDescriptionEn>();
+            _tdg._db.DeleteAll<StoryLineDescriptionEnMapper>();
 
             _desc1 = new StorylineDescription
             {
@@ -60,7 +60,7 @@ namespace UnitTests.MapperTests
         [Test()]
         public void ConvertTableToModelTest()
         {
-            _table1 = new StoryLineDescriptionEn
+            _table1 = new StoryLineDescriptionEnMapper
             {
                 ID = _desc1._storyLineDescriptionId,
                 description = _desc1._description,
@@ -74,7 +74,7 @@ namespace UnitTests.MapperTests
         [Test()]
         public void ConvertModelToTableTest()
         {
-            _table1 = new StoryLineDescriptionEn
+            _table1 = new StoryLineDescriptionEnMapper
             {
                 ID = 200,
                 description = "none",
