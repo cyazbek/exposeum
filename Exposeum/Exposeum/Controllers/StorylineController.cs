@@ -26,11 +26,11 @@ namespace Exposeum.Controllers
 			return new StoryLineListAdapter(activity,GetStoryLines());
 		}
 
+        //Returns a List of all storylines available in the app.
         public List<StoryLine> GetStoryLines()
         {
             return _storyLineService.GetStoryLines();
         }
-
 
 		public void SelectStoryLine(int storylinePosition){
 			_selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
