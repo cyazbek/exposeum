@@ -15,21 +15,21 @@ namespace Exposeum.TDGs
             return _instance;
         }
 
-        public void Add(StoryLineDescriptionEnMapper item)
+        public void Add(StoryLineDescriptionEn item)
         {
             _db.InsertOrReplace(item);
         }
 
-        public void Update(StoryLineDescriptionEnMapper item)
+        public void Update(StoryLineDescriptionEn item)
         {
             _db.Update(item);
         }
 
-        public StoryLineDescriptionEnMapper GetStoryLineDescriptionEn(int id)
+        public StoryLineDescriptionEn GetStoryLineDescriptionEn(int id)
         {
-            return _db.Get<StoryLineDescriptionEnMapper>(id);
+            return _db.Get<StoryLineDescriptionEn>(id);
         }
-        public bool Equals(StoryLineDescriptionEnMapper desc1, StoryLineDescriptionEnMapper desc2)
+        public bool Equals(StoryLineDescriptionEn desc1, StoryLineDescriptionEn desc2)
         {
             if (desc1.ID == desc2.ID && desc1.title == desc2.title && desc1.description==desc2.description && desc1.description == desc2.description)
                 return true;

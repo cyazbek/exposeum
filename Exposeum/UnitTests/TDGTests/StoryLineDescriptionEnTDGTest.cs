@@ -9,8 +9,8 @@ namespace UnitTests
     [TestFixture]
     public class StoryLineDescriptionEnTDGTest
     {
-        public readonly StoryLineDescriptionEnMapper _setObject = new StoryLineDescriptionEnMapper();
-        public StoryLineDescriptionEnMapper _testObject;
+        public readonly StoryLineDescriptionEn _setObject = new StoryLineDescriptionEn();
+        public StoryLineDescriptionEn _testObject;
         public readonly StoryLineDescriptionEnTDG _objectTDG = StoryLineDescriptionEnTDG.GetInstance();
         public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         [SetUp()]
@@ -25,7 +25,7 @@ namespace UnitTests
         public void AddStoryLineDescriptionEnTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<StoryLineDescriptionEnMapper>(_setObject.ID);
+            _testObject = _db.Get<StoryLineDescriptionEn>(_setObject.ID);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
@@ -38,7 +38,7 @@ namespace UnitTests
         [Test()]
         public void UpdateStoryLineDescriptionEnTest()
         {
-            _testObject = new StoryLineDescriptionEnMapper();
+            _testObject = new StoryLineDescriptionEn();
             _setObject.ID = 1;
             _setObject.title = "title";
             _setObject.description = "description";

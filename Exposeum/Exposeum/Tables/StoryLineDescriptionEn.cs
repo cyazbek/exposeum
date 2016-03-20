@@ -4,7 +4,7 @@ using SQLite;
 
 namespace Exposeum.Tables
 {
-    public class StoryLineDescriptionEnMapper
+    public class StoryLineDescriptionEn
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID { get; set; }
