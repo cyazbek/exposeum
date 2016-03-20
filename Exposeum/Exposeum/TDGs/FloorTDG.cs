@@ -23,7 +23,7 @@ namespace Exposeum.TDGs
 
         public void Add(Floor item)
         {
-            _db.Insert(item);
+            _db.InsertOrReplace(item);
         }
 
         public Floor GetFloor(int id)

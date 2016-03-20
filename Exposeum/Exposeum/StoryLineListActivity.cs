@@ -7,7 +7,7 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-    [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light")]
+	[Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]
     public class StoryLineListActivity : Activity
     {
         public Map Map;

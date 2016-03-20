@@ -19,7 +19,7 @@ namespace Exposeum.TDGs
 
         public void Add(Edge item)
         {
-            _db.Insert(item);
+            _db.InsertOrReplace(item);
         }
 
         public void Update(Edge item)
@@ -30,6 +30,11 @@ namespace Exposeum.TDGs
         public Edge GetEdge(int id)
         {
             return _db.Get<Edge>(id);
+        }
+
+        public void DeleteAll()
+        {
+            _db.DeleteAll<Edge>();
         }
 
         public bool Equals(Edge object1, Edge object2)
