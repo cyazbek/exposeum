@@ -1,6 +1,7 @@
 using Exposeum.TempModels;
 using Exposeum.Mappers;
 using NUnit.Framework;
+using Exposeum.TDGs;
 
 namespace UnitTests.MapperTests
 {
@@ -18,6 +19,8 @@ namespace UnitTests.MapperTests
         [SetUp]
         public void SetUp()
         {
+            StoryLineDescriptionEnTDG.GetInstance()._db.DeleteAll<Exposeum.Tables.StoryLineDescriptionEn>();
+            StoryLineDescriptionFrTDG.GetInstance()._db.DeleteAll<Exposeum.Tables.StoryLineDescriptionFr>();
             _modelEn = new StorylineDescription
             {
                 _storyLineDescriptionId = 1,
