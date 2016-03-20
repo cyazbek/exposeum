@@ -40,19 +40,18 @@ namespace UnitTests.MapperTests
         [Test()]
         public void AddGetDescriptionTest()
         {
-            _tdg._db.Delete<StoryLineDescriptionFr>(_desc1._storyLineDescriptionId);
             _mapper.AddDescription(_desc1);
-            _table1 = _tdg.GetStoryLineDescriptionFr(_desc1._storyLineDescriptionId);
-            Assert.IsTrue(_desc1.Equals(_desc2));
+            StorylineDescription expected = _mapper.GetDescription(_desc1._storyLineDescriptionId);
+            Assert.IsTrue(_desc1.Equals(expected));
         }
 
         [Test()]
         public void UpdateDescriptionTest()
         {
             _mapper.AddDescription(_desc2);
-            _desc2._description.Equals("description2");
+            _desc2._description = "description2";
             _mapper.UpdateDescription(_desc2);
-            Assert.IsTrue(_desc2._description.Equals(_mapper.GetDescription(_desc2._storyLineDescriptionId)._description));
+            Assert.IsTrue("description2".Equals(_mapper.GetDescription(_desc2._storyLineDescriptionId)._description));
         }
 
         [Test()]
@@ -65,8 +64,8 @@ namespace UnitTests.MapperTests
                 title = _desc1._title
             };
 
-            _table2 = _mapper.DescriptionModelToTable(_desc1);
-            Assert.IsTrue(_tdg.Equals(_table1, _table2));
+            _desc2 = _mapper.DescriptionTableToModel(_table1);
+            Assert.IsTrue(_desc2.Equals(_desc1));
         }
 
         [Test()]
@@ -78,13 +77,14 @@ namespace UnitTests.MapperTests
                 description = "none",
                 title = "none"
             };
+
             _desc2._storyLineDescriptionId = _table1.ID;
             _desc2._title = _table1.title;
-            _desc2._language = Exposeum.Models.Language.Fr;
+            _desc2._language = Exposeum.Models.Language.En;
             _desc2._description = _table1.description;
 
-            _desc1 = _mapper.DescriptionTableToModel(_table1);
-            Assert.IsTrue(_desc1.Equals(_desc2));
+            _table2 = _mapper.DescriptionModelToTable(_desc2);
+            Assert.IsTrue(_tdg.Equals(_table1, _table1));
         }
 
 

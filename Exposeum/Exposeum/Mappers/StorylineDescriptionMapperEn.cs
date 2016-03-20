@@ -23,9 +23,9 @@ namespace Exposeum.Mappers
             return _instance; 
         }
 
-        public StoryLineDescriptionEn DescriptionModelToTable(StorylineDescription model)
+        public StoryLineDescriptionEnMapper DescriptionModelToTable(StorylineDescription model)
         {
-            StoryLineDescriptionEn table = new StoryLineDescriptionEn
+            StoryLineDescriptionEnMapper table = new StoryLineDescriptionEnMapper
             {
                 ID = model._storyLineDescriptionId,
                 title = model._title, 
@@ -35,7 +35,7 @@ namespace Exposeum.Mappers
             return table;
         }
 
-        public StorylineDescription DescriptionTableToModel(StoryLineDescriptionEn table)
+        public StorylineDescription DescriptionTableToModel(StoryLineDescriptionEnMapper table)
         {
             StorylineDescription model = new StorylineDescription
             {
