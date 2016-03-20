@@ -85,7 +85,7 @@ namespace Exposeum.Controllers
 		public void FloorChanged(int newFloorIndex){
 			Floor newFloor = _mapModel.Floors [newFloorIndex];
 			if (newFloor != null)
-				_mapModel.SetCurrentFloor(newFloor);
+				_mapModel.CurrentFloor = newFloor;
 			_mapView.Update ();
 		}
 
@@ -107,9 +107,9 @@ namespace Exposeum.Controllers
 			            {
 							_mapModel.CurrentStoryline.UpdateProgress(poi);
 
-							if(poi.Floor != _mapModel.CurrentFloor)
-								_mapModel.SetCurrentFloor(poi.Floor);
-							DisplayPopUp(poi);
+			                if (poi.Floor != _mapModel.CurrentFloor)
+			                    _mapModel.CurrentFloor = poi.Floor;
+                            DisplayPopUp(poi);
                         }
                         catch (PointOfInterestNotVisitedException e)
 			            {

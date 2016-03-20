@@ -9,13 +9,12 @@ namespace Exposeum.Models
 	{
 	    private static Map _map;
         private List<Floor> _floors;
-		private Floor _currentFloor;
         private StoryLine _currentStoryline;
 		private List<MapElement> _elements;
 		private List<Edge> _edges;
         private List<StoryLine> _storyLines;
 
-        private Map ()
+	    private Map ()
 		{
 			_storyLines = new List<StoryLine>();
 			SeedData ();
@@ -66,7 +65,7 @@ namespace Exposeum.Models
 			_floors.Add (floor4);
 			_floors.Add (floor5);
 
-			_currentFloor = floor1;
+			CurrentFloor = floor1;
 
 			//set up POIs
 
@@ -299,18 +298,11 @@ namespace Exposeum.Models
 
 		}
 
-		public void SetCurrentFloor(Floor floor)
-		{
-			_currentFloor = floor;
-		}
 
-		public Floor CurrentFloor
-		{
-			get { return _currentFloor; }
-			set { _currentFloor = value; }
-		}
 
-		public List<Floor> Floors
+	    public Floor CurrentFloor { get; set; }
+
+	    public List<Floor> Floors
 		{
 			get { return _floors; }
 			set { _floors = value; }
