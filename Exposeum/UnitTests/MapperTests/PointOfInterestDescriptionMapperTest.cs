@@ -81,20 +81,63 @@ namespace UnitTests.MapperTests
         }
 
         [Test]
-        public void PointOfInterestDescriptionModelToTableTest()
+        public void PointOfInterestDescriptionModelToTableEnTest()
         {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            {
+                _id = 1,
+                _title = "theTitleEn",
+                _summary = "theSummaryEn",
+                _description = "theDescriptionEn",
+                _language = User.GetInstance()._language
+            };
+
             PoiDescriptionEn expectedEn = _instance.PoiDescriptionModelToTableEn(_pointOfInterestDescriptionModel);
             Assert.IsTrue(_tdgEn.Equals(_pointOfInterestDescriptionEnTable, expectedEn));
+        }
+
+        public void PointOfInterestDescriptionModelToTableFrTest()
+        {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            {
+                _id = 1,
+                _title = "theTitleFr",
+                _summary = "theSummaryFr",
+                _description = "theDescriptionFr",
+                _language = User.GetInstance()._language
+            };
 
             PoiDescriptionFr expectedFr = _instance.PoiDescriptionModelToTableFr(_pointOfInterestDescriptionModel);
             Assert.IsTrue(_tdgFr.Equals(_pointOfInterestDescriptionFrTable, expectedFr));
         }
 
         [Test]
-        public void PointOfInterestDescriptionTableToModelTest()
+        public void PointOfInterestDescriptionTableToModelFrTest()
         {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            {
+                _id = 1,
+                _title = "theTitleFr",
+                _summary = "theSummaryFr",
+                _description = "theDescriptionFr",
+                _language = User.GetInstance()._language
+            };
+
             PointOfInterestDescription expectedFr = _instance.PointOfInterestDescriptionTableToModelFr(_pointOfInterestDescriptionFrTable);
             Assert.IsTrue(_pointOfInterestDescriptionModel.Equals(expectedFr));
+        }
+
+        [Test]
+        public void PointOfInterestDescriptionTableToModelEnTest()
+        {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            {
+                _id = 1,
+                _title = "theTitleEn",
+                _summary = "theSummaryEn",
+                _description = "theDescriptionEn",
+                _language = User.GetInstance()._language
+            };
 
             PointOfInterestDescription expectedEn = _instance.PointOfInterestDescriptionTableToModelEn(_pointOfInterestDescriptionEnTable);
             Assert.IsTrue(_pointOfInterestDescriptionModel.Equals(expectedEn));

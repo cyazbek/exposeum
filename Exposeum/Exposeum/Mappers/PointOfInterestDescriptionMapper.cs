@@ -74,14 +74,14 @@ namespace Exposeum.Mappers
             return pointOfInterestDescriptionModel;
         }
 
-        public PointOfInterestDescription PointOfInterestDescriptionTableToModelEn(PoiDescriptionEn poiDescriptionFr)
+        public PointOfInterestDescription PointOfInterestDescriptionTableToModelEn(PoiDescriptionEn poiDescriptionEn)
         {
             PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = poiDescriptionFr.ID,
-                _title = poiDescriptionFr.title,
-                _summary = poiDescriptionFr.summary,
-                _description = poiDescriptionFr.description,
+                _id = poiDescriptionEn.ID,
+                _title = poiDescriptionEn.title,
+                _summary = poiDescriptionEn.summary,
+                _description = poiDescriptionEn.description,
                 _language = User.GetInstance()._language
             };
             return pointOfInterestDescriptionModel;
