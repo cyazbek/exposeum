@@ -13,25 +13,27 @@ namespace UnitTests
         private Exposeum.TempModels.Beacon _expected;
         private Exposeum.TempModels.Beacon _beaconModel;
         private Beacon _beaconTable;
+        readonly BeaconTDG _tdg = BeaconTDG.GetInstance();
 
         [SetUp]
         public void SetUp()
         {
             _instance = BeaconMapper.GetInstance();
+            _tdg._db.DeleteAll<Beacon>();
 
             _beaconModel = new Exposeum.TempModels.Beacon
             {
                 _id = 1,
-                _major = 12345,
-                _minor = 12345,
+                _major = 123,
+                _minor = 123,
                 _uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
             };
 
             _beaconTable = new Beacon
             {
-                ID = 3,
-                major = 3333,
-                minor = 3333,
+                ID = 1,
+                major = 123,
+                minor = 123,
                 UUID = "b9407f30-f5f8-466e-aff9-25556b57fe6d"
             };
 
@@ -52,47 +54,32 @@ namespace UnitTests
             _beaconModel = new Exposeum.TempModels.Beacon
             {
                 _id = 2,
-                _major = 12345,
-                _minor = 12345,
+                _major = 123,
+                _minor = 123,
                 _uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
             };
 
             _instance.AddBeacon(_beaconModel);
 
-            _beaconModel._major = 54321;
+            _beaconModel._major = 543;
             _instance.UpdateBeacon(_beaconModel);
 
             _expected = _instance.GetBeacon(_beaconModel._id);
-            Assert.AreEqual(54321, _expected._major);
+            Assert.AreEqual(543, _expected._major);
         }
 
         [Test]
         public void BeaconModelToTableTest()
         {
-            _beaconModel = new Exposeum.TempModels.Beacon
-            {
-                _id = 3,
-                _major = 3333,
-                _minor = 3333,
-                _uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
-            };
-
             Beacon expected = _instance.BeaconModelToTable(_beaconModel);
-
             Assert.IsTrue(BeaconTDG.GetInstance().Equals(_beaconTable, expected));
         }
 
         [Test()]
         public void BeaconTableToModelTest()
         {
-            Exposeum.TempModels.Beacon modelBeacon = new Exposeum.TempModels.Beacon
-            {
-                _id = _beaconTable.ID,
-                _major = _beaconTable.major,
-                _minor = _beaconTable.minor,
-                _uuid = UUID.FromString(_beaconTable.UUID)
-            };
-            Assert.IsTrue(modelBeacon.Equals(_instance.BeaconTableToModel(_beaconTable)));
+            Exposeum.TempModels.Beacon expected = _instance.BeaconTableToModel(_beaconTable);
+            Assert.IsTrue(_beaconModel.Equals(expected));
         }
 
     }
