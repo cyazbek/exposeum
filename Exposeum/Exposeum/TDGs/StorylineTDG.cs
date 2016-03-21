@@ -46,8 +46,7 @@ namespace Exposeum.TDGs
                 story1.LastVisitedPoi == story2.LastVisitedPoi &&
                 story1.Status == story2.Status &&
                 story1.DescriptionId == story2.DescriptionId) return true;
-            else return false; 
+            return false;
         }
-
     }
 }

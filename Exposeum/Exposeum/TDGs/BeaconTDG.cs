@@ -35,8 +35,7 @@ namespace Exposeum.TDGs
         {
             if (beacon1.Id == beacon2.Id && beacon1.Uuid.Equals(beacon2.Uuid) && beacon1.Minor == beacon2.Minor && beacon1.Major == beacon2.Major)
                 return true;
-            else
-                return false;
-        }  
+            return false;
+        }
     }
 }

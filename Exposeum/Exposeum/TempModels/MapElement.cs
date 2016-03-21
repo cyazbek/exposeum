@@ -23,8 +23,7 @@ namespace Exposeum.TempModels
                     other.VCoordinate == VCoordinate &&
                     other.Floor.Equals(Floor);
             }
-            else return false; 
+            return false;
         }
-
     }
 }

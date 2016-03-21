@@ -35,7 +35,7 @@ namespace Exposeum.TDGs
         {
             if (object1.Id == object2.Id && object1.Path.Equals(object2.Path))
                 return true;
-            else return false;
+            return false;
         }
     }
 }

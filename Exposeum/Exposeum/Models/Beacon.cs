@@ -30,10 +30,9 @@ namespace Exposeum.Models
         {
             if (Uuid.Equals(beacon.ProximityUUID) && Minor == beacon.Minor && Major == beacon.Major)
                 return true;
-            else
-                return false; 
+            return false;
         }
-        
+
 
         public override bool Equals(object obj)
         {

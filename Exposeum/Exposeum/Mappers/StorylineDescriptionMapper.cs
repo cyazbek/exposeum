@@ -44,8 +44,7 @@ namespace Exposeum.Mappers
             Models.Language language = Models.User.GetInstance().Language;
             if (language.Equals(Models.Language.Fr))
                 return _frenchInstance.GetDescription(id);
-            else
-                return _englishInstance.GetDescription(id);
+            return _englishInstance.GetDescription(id);
         }
 
 

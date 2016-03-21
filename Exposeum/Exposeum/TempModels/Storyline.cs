@@ -35,7 +35,7 @@ namespace Exposeum.TempModels
                     IntendedAudience == other.IntendedAudience && LastVisitedMapElement.Equals(other.LastVisitedMapElement) && Status.Equals(other.Status) &&
                     StorylineDescription == other.StorylineDescription;
             }
-            else return false; 
+            return false;
         }
     }
 }

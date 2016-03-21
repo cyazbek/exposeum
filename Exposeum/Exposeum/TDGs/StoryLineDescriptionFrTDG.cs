@@ -33,7 +33,7 @@ namespace Exposeum.TDGs
         {
             if (desc1.Id == desc2.Id && desc1.Title == desc2.Title && desc1.Description == desc2.Description && desc1.Description == desc2.Description)
                 return true;
-            else return false;
+            return false;
         }
     }
 }

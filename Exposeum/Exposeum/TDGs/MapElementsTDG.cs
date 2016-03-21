@@ -49,7 +49,7 @@ namespace Exposeum.TDGs
             element1.ExhibitionContent == element2.ExhibitionContent &&
             element1.FloorId == element2.FloorId)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

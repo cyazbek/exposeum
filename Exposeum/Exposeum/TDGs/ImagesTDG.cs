@@ -34,7 +34,7 @@ namespace Exposeum.TDGs
         {
             if (image1.Id == image2.Id && image1.Path == image2.Path)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

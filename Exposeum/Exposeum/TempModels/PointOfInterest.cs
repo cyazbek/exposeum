@@ -21,7 +21,7 @@ namespace Exposeum.TempModels
                 Description.Equals(other.Description) &&
                 ExhibitionContent.Equals(other.ExhibitionContent);
             }
-            else return false; 
+            return false;
         }
     }
 }

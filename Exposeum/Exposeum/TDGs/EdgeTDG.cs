@@ -41,8 +41,7 @@ namespace Exposeum.TDGs
         {
             if (object1.Id == object2.Id && object1.Distance==object2.Distance && object1.StartMapElementId == object2.StartMapElementId && object1.EndMapElementId == object2.EndMapElementId)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public List<Edge> GetAllEdges()

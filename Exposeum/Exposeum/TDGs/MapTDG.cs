@@ -35,7 +35,7 @@ namespace Exposeum.TDGs
         {
             if (map1.Id == map2.Id && map1.CurrentFloorId == map2.CurrentFloorId && map1.CurrentStoryLineId == map2.CurrentStoryLineId)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

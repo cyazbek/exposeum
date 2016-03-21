@@ -77,11 +77,11 @@ namespace Exposeum.Models
 			return null;
 		}
 
-		public bool HasBeacon (EstimoteSdk.Beacon beacon){
-			if (FindPoi (beacon) != null)
+		public bool HasBeacon (EstimoteSdk.Beacon beacon)
+		{
+		    if (FindPoi (beacon) != null)
 				return true;
-			else
-				return false;
+		    return false;
 		}
 	}
 }

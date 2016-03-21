@@ -35,7 +35,7 @@ namespace Exposeum.TDGs
                 object1.Title == object2.Title &&
                 object1.Summary == object2.Summary)
                 return true;
-            else return false;
+            return false;
         }
     }
 }

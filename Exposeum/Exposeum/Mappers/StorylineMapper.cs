@@ -119,7 +119,7 @@ namespace Exposeum.Mappers
                 }
                 return result;
             }
-            else return false;
+            return false;
         }
     }
 }

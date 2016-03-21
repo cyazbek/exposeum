@@ -12,7 +12,7 @@ namespace Exposeum.TempModels
                 WayPoint other = (WayPoint)obj;
                 return Label.Equals(other.Label);
             }
-            else return false; 
+            return false;
         }
     }
 }

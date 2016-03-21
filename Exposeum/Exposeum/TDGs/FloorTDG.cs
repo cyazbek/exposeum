@@ -40,7 +40,7 @@ namespace Exposeum.TDGs
         {
             if (object1.Id == object2.Id && object1.ImageId == object2.ImageId)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

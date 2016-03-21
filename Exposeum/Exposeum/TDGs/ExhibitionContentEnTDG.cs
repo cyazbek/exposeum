@@ -57,7 +57,7 @@ namespace Exposeum.TDGs
             object1.Encoding == object2.Encoding &&
             object1.Discriminator == object2.Discriminator)
                 return true;
-            else return false;
+            return false;
         }
     }
 }

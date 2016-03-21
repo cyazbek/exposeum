@@ -47,8 +47,7 @@ namespace Exposeum.TDGs
         {
             if (list1.Id == list2.Id && list1.MapElementId == list2.MapElementId && list1.StoryLineId == list2.StoryLineId)
                 return true;
-            else return false;
+            return false;
         }
-
     }
 }
