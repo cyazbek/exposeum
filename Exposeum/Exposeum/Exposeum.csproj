@@ -238,6 +238,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <Compile Include="Controllers\QRController.cs" />
+    <Compile Include="MapJSONParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
