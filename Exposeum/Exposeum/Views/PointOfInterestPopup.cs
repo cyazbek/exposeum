@@ -8,7 +8,7 @@ namespace Exposeum.Views
 {
 	public class PointOfInterestPopup : View
 	{
-		private PopupWindow _pwindow;
+		private readonly PopupWindow _pwindow;
 		public delegate void DismissCallback();
 		private DismissCallback _dismissCallback;
 

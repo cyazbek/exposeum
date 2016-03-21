@@ -8,8 +8,8 @@ namespace Exposeum.Controllers
 	public class QRController
 	{
 		private static QRController _instance;
-		private MobileBarcodeScanner _scanner;
-		private Context _context;
+		private readonly MobileBarcodeScanner _scanner;
+		private readonly Context _context;
 
 		public static QRController GetInstance(Context context){
 			if (_instance == null)

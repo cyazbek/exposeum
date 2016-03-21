@@ -13,7 +13,7 @@ namespace Exposeum.Services.Service_Providers
 	public class ShortestPathServiceProvider : IShortestPathService
     {
 
-		private UndirectedGraph<MapElement, MapEdge> _graphInstance;
+		private readonly UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
 		public ShortestPathServiceProvider(IGraphService graphService)
         {

@@ -23,10 +23,10 @@ namespace Exposeum
 		private bool _isServiceReady;
 		private const string Tag = "BeaconFinder";
 		private int _beaconCount;
-		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
+		private readonly LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
 		private IPath _path;
-		private Context _context;
+		private readonly Context _context;
 		private Context _notificationDestination;
 		private bool _inFocus;
 

@@ -7,11 +7,11 @@ namespace Exposeum.Mappers
     public class MapMapper
     {
         private static MapMapper _instance;
-        StorylineMapper _storylineMapper;
-        EdgeMapper _edgeMapper;
-        MapElementsMapper _mapElementsMapper;
-        FloorMapper _floorMapper; 
-        MapTDG _mapTDG; 
+        readonly StorylineMapper _storylineMapper;
+        readonly EdgeMapper _edgeMapper;
+        readonly MapElementsMapper _mapElementsMapper;
+        readonly FloorMapper _floorMapper;
+        readonly MapTDG _mapTDG; 
 
         private MapMapper()
         {

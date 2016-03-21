@@ -11,7 +11,7 @@ namespace Exposeum
     public class StoryLineListActivity : Activity
     {
         public Map Map;
-		StorylineController _storylineController = StorylineController.GetInstance();
+	    readonly StorylineController _storylineController = StorylineController.GetInstance();
         private Bundle _bundle;
         protected override void OnCreate(Bundle bundle)
         {

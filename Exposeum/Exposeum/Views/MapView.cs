@@ -23,11 +23,11 @@ namespace Exposeum.Views
 		private float _translateX;
 		private float _translateY;
 		private float _scaleFactor = 0.5f;
-		private Context _context;
-		private Map _map;
-		private MapController _controller;
-		private Paint _visitedEdge = new Paint ();
-		private Paint _unvisitedEdge = new Paint ();
+		private readonly Context _context;
+		private readonly Map _map;
+		private readonly MapController _controller;
+		private readonly Paint _visitedEdge = new Paint ();
+		private readonly Paint _unvisitedEdge = new Paint ();
 		private float _canvasWidth, _canvasHeight; 
 
         private PointOfInterestPopup _newPointOfInterestPopup;

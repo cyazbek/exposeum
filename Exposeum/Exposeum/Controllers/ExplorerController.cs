@@ -3,7 +3,7 @@
 	public class ExplorerController
 	{
 		private static ExplorerController _instance;
-		private ExplorerServiceProvider _explorerService;
+		private readonly ExplorerServiceProvider _explorerService;
 
 		private ExplorerController ()
 		{

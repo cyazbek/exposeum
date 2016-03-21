@@ -8,8 +8,8 @@ namespace Exposeum
 {
     public class StoryLineListAdapter : BaseAdapter<StoryLine>
     {
-        List<StoryLine> _items;
-        Activity _context;
+        readonly List<StoryLine> _items;
+        readonly Activity _context;
         public StoryLineListAdapter(Activity context, List<StoryLine> items)
             : base()
         {

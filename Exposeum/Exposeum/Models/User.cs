@@ -13,7 +13,7 @@ namespace Exposeum.Models
         public List<int> _frenchImageList = new List<int>();
         public List<int> _englishImageList = new List<int>();
         public Boolean _visitor;
-        private static User _user = new User(); 
+        private static readonly User _user = new User(); 
         private User()
         {
             _englishButtonString.Add(new ButtonText("WalkThroughButton", "Skip"));

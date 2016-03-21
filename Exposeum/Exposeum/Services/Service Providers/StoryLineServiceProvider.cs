@@ -5,8 +5,8 @@ namespace Exposeum
 {
 	public class StoryLineServiceProvider: IStoryLineService
 	{
-		private Map _mapInstance;
-		private BeaconFinder _beaconFinder;
+		private readonly Map _mapInstance;
+		private readonly BeaconFinder _beaconFinder;
 
 		public StoryLineServiceProvider(){
 			_mapInstance = Map.GetInstance ();

@@ -12,7 +12,7 @@ namespace Exposeum
     {
         StoryLine _storyLine;
         readonly StorylineController _storylineController = StorylineController.GetInstance();
-        private Context _context;
+        private readonly Context _context;
 
         public DialogPauseStorylineConfirmation(StoryLine storyLine, Context context)
         {

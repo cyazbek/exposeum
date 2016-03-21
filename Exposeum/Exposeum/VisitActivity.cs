@@ -12,7 +12,7 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User _user = User.GetInstance();
+        readonly User _user = User.GetInstance();
         Button _freeVisitButton;
         Button _storylineButton;
         Button _languageSelector;

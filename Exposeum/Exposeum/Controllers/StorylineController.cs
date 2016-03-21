@@ -7,7 +7,7 @@ namespace Exposeum.Controllers
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private IStoryLineService _storyLineService;
+		private readonly IStoryLineService _storyLineService;
 		private StoryLine _selectedStoryLine;
 
         public static StorylineController GetInstance()

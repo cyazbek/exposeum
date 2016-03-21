@@ -5,7 +5,7 @@ namespace Exposeum
 	public class ExplorerServiceProvider: IExplorerService
 	{
 		//this service is only concerned with the Storylines so we use the story line service
-		private IStoryLineService _storyLineService;
+		private readonly IStoryLineService _storyLineService;
 
 		public ExplorerServiceProvider ()
 		{
