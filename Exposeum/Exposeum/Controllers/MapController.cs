@@ -286,6 +286,7 @@ namespace Exposeum.Controllers
             Path path = GetShortestPathToStart(storyline);
             _mapModel.SetActiveShortestPath(path);
             _beaconFinder.SetPath(path);
+			_mapView.Update();
         }
 
         /// <summary>
