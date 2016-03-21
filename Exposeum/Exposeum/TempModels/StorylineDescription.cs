@@ -6,15 +6,16 @@ namespace Exposeum.TempModels
         public string _title { get; set; }
         public string _description { get; set; }
         public Models.Language _language { get; set; }
-        public override bool Equals(object obj)
+        public bool Equals(StorylineDescription other)
         {
-            if(obj!=null)
+            if ((object)other == null)
             {
-                StorylineDescription other = (StorylineDescription)obj;
-                return _storyLineDescriptionId == other._storyLineDescriptionId && _title.Equals(other._title) && _description.Equals(other._description)
-                    && _language.Equals(other._language);
+                return false;
             }
-            return false; 
+            return _storyLineDescriptionId == other._storyLineDescriptionId &&
+                _description.Equals(other._description) &&
+                _title.Equals(other._title) &&
+                _language.Equals(other._language);
         }
     }
 }

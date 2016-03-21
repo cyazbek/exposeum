@@ -2,6 +2,7 @@ using Exposeum.TempModels;
 using Java.Util;
 using NUnit.Framework;
 using Exposeum.Mappers;
+using Exposeum.TDGs;
 
 namespace UnitTests.MapperTests
 {
@@ -14,9 +15,11 @@ namespace UnitTests.MapperTests
         public MapElement _element1;
         public Floor _floor;
         public EdgeMapper _edgeMapper;
+        public EdgeTDG _edgeTdg; 
         [SetUp]
         public void SetUp()
         {
+            _edgeTdg.DeleteAll();
             _edgeMapper = EdgeMapper.GetInstance();
             _element1 = new WayPoint
             {

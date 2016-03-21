@@ -7,7 +7,7 @@ using Exposeum.Models;
 
 namespace Exposeum
 {
-	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light")]	
+	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light" , ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]	
 	public class MapActivity : Activity
 	{
 
@@ -83,9 +83,7 @@ namespace Exposeum
             switch (item.ItemId)
             {
                 case Resource.Id.LanguageItem:
-                    //Language.ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    User.GetInstance().ToogleLanguage(); 
                     return true;
                 case Resource.Id.PauseItem:
                     StorylineController _storylineController = StorylineController.GetInstance();
@@ -98,6 +96,15 @@ namespace Exposeum
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User _user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
+            return true;
+
         }
     }
 }

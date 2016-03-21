@@ -93,7 +93,7 @@ namespace Exposeum.Controllers
 		public void FloorChanged(int newFloorIndex){
 			Floor newFloor = _mapModel.Floors [newFloorIndex];
 			if (newFloor != null)
-				_mapModel.SetCurrentFloor(newFloor);
+				_mapModel.CurrentFloor = newFloor;
 			_mapView.Update ();
 		}
 
@@ -223,7 +223,7 @@ namespace Exposeum.Controllers
 			//update the floor if the POI is located on a different floor than the one
 			//currently displayed
 			if(poi.Floor != _mapModel.CurrentFloor)
-				_mapModel.SetCurrentFloor(poi.Floor);
+				_mapModel.CurrentFloor = poi.Floor;
 		}
 
         /// <summary>
