@@ -1,6 +1,3 @@
-using Exposeum.Tables;
-using Exposeum.TDGs;
-using Exposeum.Mappers; 
 using StoryLineDescription = Exposeum.TempModels.StorylineDescription;
 
 namespace Exposeum.Mappers

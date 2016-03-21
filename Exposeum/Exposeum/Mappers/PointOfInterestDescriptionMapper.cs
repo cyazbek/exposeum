@@ -1,8 +1,6 @@
-using System;
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
 using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
 
 namespace Exposeum.Mappers

@@ -1,7 +1,5 @@
-﻿using System;
-using Exposeum.Models;
+﻿using Exposeum.Models;
 using System.Collections.Generic;
-using Exposeum.Services;
 
 namespace Exposeum
 {

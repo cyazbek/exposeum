@@ -2,7 +2,6 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Exposeum.Models;
 
 namespace Exposeum.Fragments
 {

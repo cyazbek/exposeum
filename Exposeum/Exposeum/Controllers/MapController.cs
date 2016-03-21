@@ -4,11 +4,8 @@ using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
 using System.Linq;
-using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
-using Exposeum.Fragments;
 
 namespace Exposeum.Controllers
 {
