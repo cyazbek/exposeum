@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
+using System.Linq;
 
 namespace Exposeum.Models
 {
@@ -10,8 +11,9 @@ namespace Exposeum.Models
 	    private static Map _map;
         private List<Floor> _floors;
         private StoryLine _currentStoryline;
+		private Path _activeShortestPath;
 		private List<MapElement> _elements;
-		private List<Edge> _edges;
+		private List<MapEdge> _edges;
         private List<StoryLine> _storyLines;
 
 	    private Map ()
@@ -296,6 +298,22 @@ namespace Exposeum.Models
 
 			_storyLines.Add (nicelyDrawn);
 
+			////////////////////////////////////////////
+			//make storyline 6 a demo for shortest path
+			//story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
+			story6.MapElements = nicelyDrawn.MapElements;
+			story6.PoiList = nicelyDrawn.PoiList;
+			story6.PoiList.Last ().Beacon = story6.PoiList [1].Beacon;
+			story6.PoiList [1].Beacon = nicelyDrawnBeaconTest;
+
+			story6.MapElements.Reverse();
+			story6.PoiList.Reverse ();
+			for (int i = 0; i < 16; i++) {
+				story6.MapElements [i].SetVisited ();
+			}
+			story6.CurrentStatus = Status.InProgress;
+			///////////////////////////////////////////
+
 		}
 
 
@@ -322,5 +340,13 @@ namespace Exposeum.Models
             get { return _storyLines; }
             set { _storyLines = value; }
         }
+
+		public void SetActiveShortestPath(Path path){
+			_activeShortestPath = path;
+		}
+
+		public Path GetActiveShortestPath(){
+			return _activeShortestPath;
+		}
     }
 }

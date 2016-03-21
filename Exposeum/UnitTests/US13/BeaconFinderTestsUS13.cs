@@ -44,7 +44,7 @@ namespace UnitTests
 			story.AddPoi(myPoi1);
 
 			//Setup the beaconFinder
-			beaconFinder.SetStoryLine (story);
+			beaconFinder.SetPath (story);
 			beaconFinder.SetInFocus (true);
 			beaconFinder.AddObserver(this);
 

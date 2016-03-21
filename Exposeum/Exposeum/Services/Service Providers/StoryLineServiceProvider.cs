@@ -23,8 +23,9 @@ namespace Exposeum
 
 		public void SetActiveStoryLine (StoryLine storyline){
 			_mapInstance.CurrentStoryline = storyline;
+			_mapInstance.SetActiveShortestPath (null);
 			//update the beaconfinder with the new storyline
-			_beaconFinder.SetStoryLine(storyline);
+			_beaconFinder.SetPath(storyline);
 		}
 
 		public StoryLine GetStoryLineById(int id){
