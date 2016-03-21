@@ -89,12 +89,8 @@ namespace Exposeum
 				.SetContentTitle(poiName)
 				.SetContentText (poiDesc)
 				.SetPriority(2)
-				.SetVibrate(new long[] { 1000, 1000, 1000 });
-
-			try{
-				notifBuilder.SetSmallIcon(Resource.Drawable.logo_notif);// Display this icon
-			}catch(Exception e){
-			}
+				.SetVibrate(new long[] { 1000, 1000, 1000 })
+				.SetSmallIcon(Resource.Drawable.logo_notif);;
 
 			return notifBuilder.Build ();
 		}

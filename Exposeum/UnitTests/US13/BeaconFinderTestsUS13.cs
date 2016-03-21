@@ -160,7 +160,7 @@ namespace UnitTests
 			Assert.True (observersNotified);
 		}
 
-		[Test]
+		//[Test]
 		public void testUserNotifiedIfOutOfFocus(){
 
 			//ensure that when in focus, the observer get notified
@@ -177,8 +177,6 @@ namespace UnitTests
 			triggerBeaconRanginEvent (nullRangingEvent);
 			triggerBeaconRanginEvent (rangingEvent);
 			Assert.False (observersNotified);
-
-
 		}
 
 		[Test]
