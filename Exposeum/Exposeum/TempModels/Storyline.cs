@@ -27,7 +27,7 @@ namespace Exposeum.TempModels
                 var result = false;
                 for (int i = 0; i < other.MapElements.Count; i++)
                 {
-                    if (other.MapElements[i].Equals(this.MapElements[i]))
+                    if (other.MapElements[i].Equals(MapElements[i]))
                         result = true;
                     else return false;
                 }

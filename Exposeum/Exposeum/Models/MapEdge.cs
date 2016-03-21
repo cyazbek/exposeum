@@ -8,16 +8,16 @@ namespace Exposeum.Models
 
         public MapEdge(MapElement start, MapElement end)
         {
-            this.Source = start;
-            this.Target = end;
-            this.Distance = 1;
+            Source = start;
+            Target = end;
+            Distance = 1;
         }
 
         public MapEdge (MapElement start, MapElement end, double distance)
 		{
-			this.Source = start;
-			this.Target = end;
-		    this.Distance = distance;
+			Source = start;
+			Target = end;
+		    Distance = distance;
 		}
 
 	    public MapElement Source { get; }

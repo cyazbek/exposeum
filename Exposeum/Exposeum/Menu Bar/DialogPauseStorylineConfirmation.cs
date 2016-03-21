@@ -38,7 +38,7 @@ namespace Exposeum
                 _storylineController.PauseStorylineBeacons();
                 Toast.MakeText(_context, "Paused", ToastLength.Short).Show();
                 ((Activity)_context).OnBackPressed();
-                this.Dismiss();
+                Dismiss();
 
                 // Redirecting to list of storylines
                 //var intent = new Intent(_context, typeof(StoryLineListActivity));

@@ -10,7 +10,7 @@ namespace Exposeum.TempModels
 
         public Floor()
         {
-            this.Paint = new Paint(); 
+            Paint = new Paint(); 
         }
 
         public override bool Equals(object obj)

@@ -39,7 +39,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
 
 

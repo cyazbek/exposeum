@@ -19,7 +19,7 @@ namespace Exposeum.Controllers
 
 		private QrController (Context context)
 		{
-			this._context = context;
+			_context = context;
 			MobileBarcodeScanner.Initialize (((Activity)context).Application);
 
 		    _scanner = new MobileBarcodeScanner
