@@ -11,7 +11,7 @@ using Android.App;
 namespace UnitTests
 {
 	[TestFixture]
-	public class BeaconFinderTestsUS13 : IBeaconFinderObserver
+	public class BeaconFinderTests : IBeaconFinderObserver
 	{
 
 		BeaconFinder beaconFinder;
