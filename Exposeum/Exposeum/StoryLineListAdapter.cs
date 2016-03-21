@@ -11,7 +11,6 @@ namespace Exposeum
         readonly List<StoryLine> _items;
         readonly Activity _context;
         public StoryLineListAdapter(Activity context, List<StoryLine> items)
-            : base()
         {
             _context = context;
             _items = items;
