@@ -100,9 +100,9 @@ namespace Exposeum.Mappers
         {
             StoryLineDescription storyLineDescriptionModel = new StoryLineDescription
             {
-                _storyLineDescriptionId = _storyLineDescriptionFr.ID,
-                _title = _storyLineDescriptionFr.title,
-                _description = _storyLineDescriptionFr.description,
+                _storyLineDescriptionId = storyLineDescription.ID,
+                _title = storyLineDescription.title,
+                _description = storyLineDescription.description,
                 _language = User.GetInstance()._language
             };
 
@@ -113,9 +113,9 @@ namespace Exposeum.Mappers
         {
             StoryLineDescription storyLineDescriptionModel = new StoryLineDescription
             {
-                _storyLineDescriptionId = _storyLineDescriptionFr.ID,
-                _title = _storyLineDescriptionFr.title,
-                _description = _storyLineDescriptionFr.description,
+                _storyLineDescriptionId = storyLineDescription.ID,
+                _title = storyLineDescription.title,
+                _description = storyLineDescription.description,
                 _language = User.GetInstance()._language
             };
 

@@ -1,61 +1,140 @@
 using Exposeum.TempModels;
 using Exposeum.Mappers;
+using Exposeum.Models;
+using Exposeum.Tables;
 using NUnit.Framework;
 using Exposeum.TDGs;
+using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
 
 namespace UnitTests.MapperTests
 {
     [TestFixture]
     public class StorylineDescriptionTest
     {
-        StorylineDescriptionMapper _mapper;
-        StorylineDescriptionMapperEn _englishMapper;
-        StorylineDescriptionMapperFr _frenchMapper;
-        StorylineDescription _modelEn;
-        StorylineDescription _modelFr;
-        StorylineDescription _testModel;
-        Exposeum.Models.User _user = Exposeum.Models.User.GetInstance();
+        private static StoryLineDescriptionMapper _instance;
+        private StorylineDescription _expected;
+        private StorylineDescription _storylineDescriptionModel;
+        private StoryLineDescriptionEn _storylineDescriptionEnTable;
+        private StoryLineDescriptionFr _storylineDescriptionFrTable;
+        readonly StoryLineDescriptionEnTDG _tdgEn = StoryLineDescriptionEnTDG.GetInstance();
+        readonly StoryLineDescriptionFrTDG _tdgFr = StoryLineDescriptionFrTDG.GetInstance();
 
         [SetUp]
         public void SetUp()
         {
-            StoryLineDescriptionEnTDG.GetInstance()._db.DeleteAll<Exposeum.Tables.StoryLineDescriptionEn>();
-            StoryLineDescriptionFrTDG.GetInstance()._db.DeleteAll<Exposeum.Tables.StoryLineDescriptionFr>();
-            _modelEn = new StorylineDescription
+            _instance = StoryLineDescriptionMapper.GetInstance();
+            _tdgEn._db.DeleteAll<PoiDescriptionEn>();
+            _tdgFr._db.DeleteAll<PoiDescriptionFr>();
+
+            _storylineDescriptionModel = new StorylineDescription
             {
                 _storyLineDescriptionId = 1,
-                _description = "description",
-                _title = "title",
-                _language = Exposeum.Models.Language.En
+                _title = "theTitle",
+                _description = "theDescription",
+                _language = User.GetInstance()._language
             };
 
-            _modelFr = new StorylineDescription
+            _storylineDescriptionEnTable = new StoryLineDescriptionEn
+            {
+                ID = 1,
+                title = "theTitleEn",
+                description = "theDescriptionEn"
+            };
+
+            _storylineDescriptionFrTable = new StoryLineDescriptionFr
+            {
+                ID = 1,
+                title = "theTitleFr",
+                description = "theDescriptionFr"
+            };
+        }
+
+        [Test]
+        public void AddPointOfInterestDescriptionTest()
+        {
+            _instance.AddStoryLineDescription(_storylineDescriptionModel);
+            _expected = _instance.GetStoryLineDescription(_storylineDescriptionModel._storyLineDescriptionId);
+            Assert.True(_storylineDescriptionModel.Equals(_expected));
+        }
+
+        [Test]
+        public void UpdatePointOfInterestDescriptionTest()
+        {
+            _storylineDescriptionModel = new StorylineDescription
+            {
+                _storyLineDescriptionId = 2,
+                _title = "theTitle",
+                _description = "theDescription",
+                _language = User.GetInstance()._language
+            };
+
+            _instance.AddStoryLineDescription(_storylineDescriptionModel);
+
+            _storylineDescriptionModel._title = "titleUpdated";
+            _instance.UpdateStoryLineDescription(_storylineDescriptionModel);
+
+            _expected = _instance.GetStoryLineDescription(_storylineDescriptionModel._storyLineDescriptionId);
+            Assert.AreEqual("titleUpdated", _expected._title);
+        }
+
+        [Test]
+        public void PointOfInterestDescriptionModelToTableEnTest()
+        {
+            _storylineDescriptionModel = new StorylineDescription
             {
                 _storyLineDescriptionId = 1,
-                _description = "description",
-                _title = "title",
-                _language = Exposeum.Models.Language.Fr
+                _title = "theTitleEn",
+                _description = "theDescriptionEn",
+                _language = User.GetInstance()._language
             };
 
-            _mapper = StorylineDescriptionMapper.GetInstance();
-            _englishMapper = StorylineDescriptionMapperEn.GetInstance();
-            _frenchMapper = StorylineDescriptionMapperFr.GetInstance();
+            StoryLineDescriptionEn expectedEn = _instance.StoryLineDescriptionModelToTableEn(_storylineDescriptionModel);
+            Assert.IsTrue(_tdgEn.Equals(_storylineDescriptionEnTable, expectedEn));
         }
 
-        [Test()]
-        public void AddDescriptionEnglishTest()
+        [Test]
+        public void PointOfInterestDescriptionModelToTableFrTest()
         {
-            _mapper.AddDescription(_modelEn);
-            _testModel = _mapper.GetDescription(_modelEn._storyLineDescriptionId);
-            Assert.IsTrue(_modelEn.Equals(_testModel));
+            _storylineDescriptionModel = new StorylineDescription
+            {
+                _storyLineDescriptionId = 1,
+                _title = "theTitleFr",
+                _description = "theDescriptionFr",
+                _language = User.GetInstance()._language
+            };
+
+            StoryLineDescriptionFr expectedFr = _instance.StoryLineDescriptionModelToTableFr(_storylineDescriptionModel);
+            Assert.IsTrue(_tdgFr.Equals(_storylineDescriptionFrTable, expectedFr));
         }
 
-        [Test()]
-        public void AddDescriptionFrenchTest()
+        [Test]
+        public void PointOfInterestDescriptionTableToModelFrTest()
         {
-            _mapper.AddDescription(_modelFr);
-            _testModel = _mapper.GetDescription(_modelFr._storyLineDescriptionId);
-            Assert.IsTrue(_modelEn.Equals(_testModel));
+            _storylineDescriptionModel = new StorylineDescription
+            {
+                _storyLineDescriptionId = 1,
+                _title = "theTitleFr",
+                _description = "theDescriptionFr",
+                _language = User.GetInstance()._language
+            };
+
+            StorylineDescription expectedFr = _instance.StorylineDescriptionTableToModelFr(_storylineDescriptionFrTable);
+            Assert.IsTrue(_storylineDescriptionModel.Equals(expectedFr));
+        }
+
+        [Test]
+        public void PointOfInterestDescriptionTableToModelEnTest()
+        {
+            _storylineDescriptionModel = new StorylineDescription
+            {
+                _storyLineDescriptionId = 1,
+                _title = "theTitleEn",
+                _description = "theDescriptionEn",
+                _language = User.GetInstance()._language
+            };
+
+            StorylineDescription expectedEn = _instance.StorylineDescriptionTableToModelEn(_storylineDescriptionEnTable);
+            Assert.IsTrue(_storylineDescriptionModel.Equals(expectedEn));
         }
     }
 }

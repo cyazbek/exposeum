@@ -96,6 +96,7 @@ namespace UnitTests.MapperTests
             Assert.IsTrue(_tdgEn.Equals(_pointOfInterestDescriptionEnTable, expectedEn));
         }
 
+        [Test]
         public void PointOfInterestDescriptionModelToTableFrTest()
         {
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
