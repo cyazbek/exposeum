@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Services
 {
 	public interface IStoryLineService
 	{

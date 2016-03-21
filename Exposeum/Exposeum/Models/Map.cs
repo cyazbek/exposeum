@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
+using System.Linq;
 
 namespace Exposeum.Models
 {
@@ -9,13 +10,13 @@ namespace Exposeum.Models
 	{
 	    private static Map _map;
         private List<Floor> _floors;
-		private Floor _currentFloor;
         private StoryLine _currentStoryline;
+		private Path _activeShortestPath;
 		private List<MapElement> _elements;
-		private List<Edge> _edges;
-        private List<StoryLine> _storyLines { get; set; }
+		private List<MapEdge> _edges;
+        private List<StoryLine> _storyLines;
 
-        private Map ()
+	    private Map ()
 		{
 			_storyLines = new List<StoryLine>();
 			SeedData ();
@@ -66,7 +67,7 @@ namespace Exposeum.Models
 			_floors.Add (floor4);
 			_floors.Add (floor5);
 
-			_currentFloor = floor1;
+			CurrentFloor = floor1;
 
 			//set up POIs
 
@@ -297,20 +298,29 @@ namespace Exposeum.Models
 
 			_storyLines.Add (nicelyDrawn);
 
+			////////////////////////////////////////////
+			//make storyline 6 a demo for shortest path
+			//story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
+			story6.MapElements = nicelyDrawn.MapElements;
+			story6.PoiList = nicelyDrawn.PoiList;
+			story6.PoiList.Last ().Beacon = story6.PoiList [1].Beacon;
+			story6.PoiList [1].Beacon = nicelyDrawnBeaconTest;
+
+			story6.MapElements.Reverse();
+			story6.PoiList.Reverse ();
+			for (int i = 0; i < 16; i++) {
+				story6.MapElements [i].SetVisited ();
+			}
+			story6.CurrentStatus = Status.InProgress;
+			///////////////////////////////////////////
+
 		}
 
-		public void SetCurrentFloor(Floor floor)
-		{
-			_currentFloor = floor;
-		}
 
-		public Floor CurrentFloor
-		{
-			get { return _currentFloor; }
-			set { _currentFloor = value; }
-		}
 
-		public List<Floor> Floors
+	    public Floor CurrentFloor { get; set; }
+
+	    public List<Floor> Floors
 		{
 			get { return _floors; }
 			set { _floors = value; }
@@ -330,5 +340,13 @@ namespace Exposeum.Models
             get { return _storyLines; }
             set { _storyLines = value; }
         }
+
+		public void SetActiveShortestPath(Path path){
+			_activeShortestPath = path;
+		}
+
+		public Path GetActiveShortestPath(){
+			return _activeShortestPath;
+		}
     }
 }

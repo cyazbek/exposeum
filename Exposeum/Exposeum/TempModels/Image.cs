@@ -3,14 +3,14 @@ namespace Exposeum.TempModels
 {
     public class Image:ExhibitionContent
     {
-        public string _filePath { get; set; }
-        public int _width { get; set; }
-        public int _height { get; set; }
+        public string FilePath { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public override bool Equals(object obj)
         {
             Image other = (Image)obj;
-            return _filePath.Equals(other._filePath) && _width == other._width && _height == other._height;
+            return FilePath.Equals(other.FilePath) && Width == other.Width && Height == other.Height;
         }
     }
 }

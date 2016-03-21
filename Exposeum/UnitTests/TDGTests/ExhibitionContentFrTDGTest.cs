@@ -15,64 +15,64 @@ namespace UnitTests
         public readonly ExhibitionContentFr _setObject2 = new ExhibitionContentFr();
         public readonly ExhibitionContentFr _setObject3 = new ExhibitionContentFr();
         public ExhibitionContentFr _testObject;
-        public readonly ExhibitionContentFrTDG _objectTDG = ExhibitionContentFrTDG.GetInstance(); 
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly ExhibitionContentFrTdg _objectTDG = ExhibitionContentFrTdg.GetInstance(); 
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.title = "title";
-            _setObject.description = "description";
-            _setObject.filepath = "filepath";
-            _setObject.duration = 1;
-            _setObject.resolution = 560;
-            _setObject.encoding = "encoding";
-            _setObject.discriminator = "discriminator";
-            _setObject.storyLineId = 1;
+            _setObject.Id = 1;
+            _setObject.Title = "title";
+            _setObject.Description = "description";
+            _setObject.Filepath = "filepath";
+            _setObject.Duration = 1;
+            _setObject.Resolution = 560;
+            _setObject.Encoding = "encoding";
+            _setObject.Discriminator = "discriminator";
+            _setObject.StoryLineId = 1;
 
-            _setObject1.ID = 2;
-            _setObject1.title = "title";
-            _setObject1.description = "description";
-            _setObject1.filepath = "filepath";
-            _setObject1.duration = 1;
-            _setObject1.resolution = 560;
-            _setObject1.encoding = "encoding";
-            _setObject1.discriminator = "discriminator";
-            _setObject1.storyLineId = 1;
+            _setObject1.Id = 2;
+            _setObject1.Title = "title";
+            _setObject1.Description = "description";
+            _setObject1.Filepath = "filepath";
+            _setObject1.Duration = 1;
+            _setObject1.Resolution = 560;
+            _setObject1.Encoding = "encoding";
+            _setObject1.Discriminator = "discriminator";
+            _setObject1.StoryLineId = 1;
 
-            _setObject2.ID = 3;
-            _setObject2.title = "title";
-            _setObject2.description = "description";
-            _setObject2.filepath = "filepath";
-            _setObject2.duration = 1;
-            _setObject2.resolution = 560;
-            _setObject2.encoding = "encoding";
-            _setObject2.discriminator = "discriminator";
-            _setObject2.storyLineId = 3;
+            _setObject2.Id = 3;
+            _setObject2.Title = "title";
+            _setObject2.Description = "description";
+            _setObject2.Filepath = "filepath";
+            _setObject2.Duration = 1;
+            _setObject2.Resolution = 560;
+            _setObject2.Encoding = "encoding";
+            _setObject2.Discriminator = "discriminator";
+            _setObject2.StoryLineId = 3;
 
-            _setObject3.ID = 4;
-            _setObject3.title = "title";
-            _setObject3.description = "description";
-            _setObject3.filepath = "filepath";
-            _setObject3.duration = 1;
-            _setObject3.resolution = 560;
-            _setObject3.encoding = "encoding";
-            _setObject3.discriminator = "discriminator";
-            _setObject3.storyLineId = 2;
+            _setObject3.Id = 4;
+            _setObject3.Title = "title";
+            _setObject3.Description = "description";
+            _setObject3.Filepath = "filepath";
+            _setObject3.Duration = 1;
+            _setObject3.Resolution = 560;
+            _setObject3.Encoding = "encoding";
+            _setObject3.Discriminator = "discriminator";
+            _setObject3.StoryLineId = 2;
         }
 
         [Test()]
         public void AddExhibitionContentFrTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<ExhibitionContentFr>(_setObject.ID);
+            _testObject = _db.Get<ExhibitionContentFr>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void GetExhibitionContentFrTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _objectTDG.GetExhibitionContentFr(_setObject.ID);
+            _testObject = _objectTDG.GetExhibitionContentFr(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
 
@@ -84,27 +84,27 @@ namespace UnitTests
             _objectTDG.Add(_setObject2);
             _objectTDG.Add(_setObject3);
 
-            List<ExhibitionContentFr> numberOfEntries = _db.Query<ExhibitionContentFr>("SELECT * from ExhibitionContentFr where storyLineId = ?", _setObject.storyLineId);
-            List<int> list = _objectTDG.GetExhibitionContentEnByStorylineId(_setObject.storyLineId);
+            List<ExhibitionContentFr> numberOfEntries = _db.Query<ExhibitionContentFr>("SELECT * from ExhibitionContentFr where storyLineId = ?", _setObject.StoryLineId);
+            List<int> list = _objectTDG.GetExhibitionContentEnByStorylineId(_setObject.StoryLineId);
             Assert.AreEqual(list.Count, numberOfEntries.Count);
         }
         [Test()]
         public void UpdateExhibitionContentFrTest()
         {
-            _testObject.ID = 1;
-            _testObject.title = "title";
-            _testObject.description = "description";
-            _testObject.filepath = "filepath";
-            _testObject.duration = 1;
-            _testObject.resolution = 560;
-            _testObject.encoding = "encoding";
-            _testObject.discriminator = "discriminator";
+            _testObject.Id = 1;
+            _testObject.Title = "title";
+            _testObject.Description = "description";
+            _testObject.Filepath = "filepath";
+            _testObject.Duration = 1;
+            _testObject.Resolution = 560;
+            _testObject.Encoding = "encoding";
+            _testObject.Discriminator = "discriminator";
             _objectTDG.Add(_testObject);
-            _testObject.duration = 0;
-            double duration = _testObject.duration;
+            _testObject.Duration = 0;
+            double duration = _testObject.Duration;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetExhibitionContentFr(_testObject.ID);
-            Assert.AreEqual(_testObject.duration, duration);
+            _testObject = _objectTDG.GetExhibitionContentFr(_testObject.Id);
+            Assert.AreEqual(_testObject.Duration, duration);
         }
     }
 }

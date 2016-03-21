@@ -4,21 +4,21 @@ namespace Exposeum.TempModels
 {
     public class Map
     {
-        public int _id; 
+        public int Id; 
         private static Map _instance;
-        public List<Edge> _edges { get; set; }
-        public List<Storyline> _storylines { get; set; }
-        public List<MapElement> _mapElements { get; set; }
-        public Storyline _currentStoryline { get; set; }
-        public List<Floor> _floors { get; set; }
-        public Floor _currentFloor;  
+        public List<Edge> Edges { get; set; }
+        public List<Storyline> Storylines { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public Storyline CurrentStoryline { get; set; }
+        public List<Floor> Floors { get; set; }
+        public Floor CurrentFloor;  
 
         private Map()
         {
-            _edges = new List<Edge>();
-            _storylines = new List<Storyline>();
-            _floors = new List<Floor>();
-            _mapElements = new List<MapElement>();
+            Edges = new List<Edge>();
+            Storylines = new List<Storyline>();
+            Floors = new List<Floor>();
+            MapElements = new List<MapElement>();
         }
         
         public static Map GetInstance()

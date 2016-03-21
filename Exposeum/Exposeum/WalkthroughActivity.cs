@@ -13,10 +13,10 @@ namespace Exposeum
     public class WalkthroughActivity : Activity
     {
         private static ViewPager _mPager;
-        private List<int> _imagesArray = new List<int>();
+        private readonly List<int> _imagesArray = new List<int>();
         private List<int> _imagesToDisplay;
         Intent _intent;
-        User _user = User.GetInstance(); 
+        readonly User _user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

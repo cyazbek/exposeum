@@ -2,40 +2,40 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class IconTDG : TDG
+    public class IconTdg : Tdg
     {
-        private static IconTDG _instance;
+        private static IconTdg _instance;
 
-        private IconTDG() { }
+        private IconTdg() { }
 
-        public static IconTDG GetInstance()
+        public static IconTdg GetInstance()
         {
             if(_instance == null)
-                _instance = new IconTDG();
+                _instance = new IconTdg();
 
             return _instance;
         }
 
         public void Add(Icon item)
         {
-            _db.Insert(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(Icon item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public Icon GetIcon(int id)
         {
-            return _db.Get<Icon>(id);
+            return Db.Get<Icon>(id);
         }
 
-        public bool Equals(Icon object1, Icon Object2)
+        public bool Equals(Icon object1, Icon object2)
         {
-            if (object1.ID == Object2.ID && object1.path.Equals(Object2.path))
+            if (object1.Id == object2.Id && object1.Path.Equals(object2.Path))
                 return true;
-            else return false;
+            return false;
         }
     }
 }

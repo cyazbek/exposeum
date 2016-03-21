@@ -11,41 +11,41 @@ namespace UnitTests
     {
         public readonly Floor _setObject = new Floor();
         public Floor _testObject;
-        public readonly FloorTDG _objectTDG = FloorTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly FloorTdg _objectTDG = FloorTdg.GetInstance();
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.imageId = 12;
+            _setObject.Id = 1;
+            _setObject.ImageId = 12;
         }
 
         [Test()]
         public void AddFloorTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<Floor>(_setObject.ID);
+            _testObject = _db.Get<Floor>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void GetFloorTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _objectTDG.GetFloor(_setObject.ID);
+            _testObject = _objectTDG.GetFloor(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void UpdateFloorTest()
         {
             _testObject = new Floor();
-            _testObject.ID = 1;
-            _testObject.imageId = 12;
+            _testObject.Id = 1;
+            _testObject.ImageId = 12;
             _objectTDG.Add(_testObject);
-            _testObject.imageId = 0;
-            int imageId = _testObject.imageId;
+            _testObject.ImageId = 0;
+            int imageId = _testObject.ImageId;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetFloor(_testObject.ID);
-            Assert.AreEqual(_testObject.imageId, imageId);
+            _testObject = _objectTDG.GetFloor(_testObject.Id);
+            Assert.AreEqual(_testObject.ImageId, imageId);
         }
     }
 }

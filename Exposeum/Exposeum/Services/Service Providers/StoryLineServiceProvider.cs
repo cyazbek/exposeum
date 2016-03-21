@@ -1,12 +1,12 @@
-﻿using Exposeum.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Services.Service_Providers
 {
 	public class StoryLineServiceProvider: IStoryLineService
 	{
-		private Map _mapInstance;
-		private BeaconFinder _beaconFinder;
+		private readonly Map _mapInstance;
+		private readonly BeaconFinder _beaconFinder;
 
 		public StoryLineServiceProvider(){
 			_mapInstance = Map.GetInstance ();
@@ -23,8 +23,9 @@ namespace Exposeum
 
 		public void SetActiveStoryLine (StoryLine storyline){
 			_mapInstance.CurrentStoryline = storyline;
+			_mapInstance.SetActiveShortestPath (null);
 			//update the beaconfinder with the new storyline
-			_beaconFinder.SetStoryLine(storyline);
+			_beaconFinder.SetPath(storyline);
 		}
 
 		public StoryLine GetStoryLineById(int id){

@@ -3,44 +3,44 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class ExhibitionContentEnTDG : ExhibitionContentTDG
+    public class ExhibitionContentEnTdg : ExhibitionContentTdg
     {
-        private static ExhibitionContentEnTDG _instance;
+        private static ExhibitionContentEnTdg _instance;
 
-        private ExhibitionContentEnTDG() { }
+        private ExhibitionContentEnTdg() { }
 
-        public static ExhibitionContentEnTDG GetInstance()
+        public static ExhibitionContentEnTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new ExhibitionContentEnTDG();
+                _instance = new ExhibitionContentEnTdg();
 
             return _instance;
         }
 
         public void Add(ExhibitionContentEn item)
         {
-            _db.Insert(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(ExhibitionContentEn item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public ExhibitionContentEn GetExhibitionContentEn(int id)
         {
-            return _db.Get<ExhibitionContentEn>(id);
+            return Db.Get<ExhibitionContentEn>(id);
         }
 
         public List<int> GetExhibitionContentEnByStorylineId(int id)
         {
-            List<ExhibitionContentEn> exhibitionContent = new List<ExhibitionContentEn>(_db.Table<ExhibitionContentEn>());
+            List<ExhibitionContentEn> exhibitionContent = new List<ExhibitionContentEn>(Db.Table<ExhibitionContentEn>());
             List<int> exhibitionId = new List<int>();
 
             foreach (var x in exhibitionContent)
             {
-                if (x.storyLineId == id)
-                    exhibitionId.Add(x.ID);
+                if (x.StoryLineId == id)
+                    exhibitionId.Add(x.Id);
             }
 
             return exhibitionId;
@@ -48,16 +48,16 @@ namespace Exposeum.TDGs
 
         public bool Equals(ExhibitionContentEn object1, ExhibitionContentEn object2)
         {
-            if (object1.ID == object2.ID &&
-            object1.title == object2.title &&
-            object1.description == object2.description &&
-            object1.filepath == object2.filepath &&
-            object1.duration == object2.duration &&
-            object1.resolution == object2.resolution &&
-            object1.encoding == object2.encoding &&
-            object1.discriminator == object2.discriminator)
+            if (object1.Id == object2.Id &&
+            object1.Title == object2.Title &&
+            object1.Description == object2.Description &&
+            object1.Filepath == object2.Filepath &&
+            object1.Duration == object2.Duration &&
+            object1.Resolution == object2.Resolution &&
+            object1.Encoding == object2.Encoding &&
+            object1.Discriminator == object2.Discriminator)
                 return true;
-            else return false;
+            return false;
         }
     }
 }

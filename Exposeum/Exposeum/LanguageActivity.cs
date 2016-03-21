@@ -12,7 +12,7 @@ namespace Exposeum
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
-        User _user = User.GetInstance(); 
+	    readonly User _user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

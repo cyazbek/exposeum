@@ -4,17 +4,16 @@ namespace Exposeum.TempModels
 {
     public class Beacon
     {
-        public int _id { get; set; }
-        public UUID _uuid { get; set; }
-        public int _minor { get; set; }
-        public int _major { get; set; }
+        public int Id { get; set; }
+        public UUID Uuid { get; set; }
+        public int Minor { get; set; }
+        public int Major { get; set; }
 
         public bool CompareBeacon(EstimoteSdk.Beacon beacon)
         {
-            if (_uuid.Equals(beacon.ProximityUUID) && _minor == beacon.Minor && _major == beacon.Major)
+            if (Uuid.Equals(beacon.ProximityUUID) && Minor == beacon.Minor && Major == beacon.Major)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public override bool Equals(object obj)
@@ -22,7 +21,7 @@ namespace Exposeum.TempModels
             if (obj != null)
             {
                 Beacon other = (Beacon)obj;
-                return other._major == _major && other._minor == _minor;
+                return other.Major == Major && other.Minor == Minor;
             }
             return false;
         }

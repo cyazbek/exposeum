@@ -8,8 +8,8 @@ namespace Exposeum
 {
     public class WalkthroughtFragmentAdapter: PagerAdapter
     {
-        private List<int> _images;
-        private LayoutInflater _inflater;
+        private readonly List<int> _images;
+        private readonly LayoutInflater _inflater;
         private Context _context;
 
         public override int Count

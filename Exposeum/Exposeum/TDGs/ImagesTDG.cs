@@ -2,39 +2,39 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class ImagesTDG : TDG
+    public class ImagesTdg : Tdg
     {
-        private static ImagesTDG _instance;
+        private static ImagesTdg _instance;
         
-        private ImagesTDG() { }
+        private ImagesTdg() { }
 
-        public static ImagesTDG GetInstance()
+        public static ImagesTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new ImagesTDG();
+                _instance = new ImagesTdg();
 
             return _instance;
         }
 
         public void Add(Images item)
         {
-            _db.Insert(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(Images item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public Images GetImages(int id)
         {
-            return _db.Get<Images>(id);
+            return Db.Get<Images>(id);
         }
         public bool Equals(Images image1, Images image2)
         {
-            if (image1.ID == image2.ID && image1.path == image2.path)
+            if (image1.Id == image2.Id && image1.Path == image2.Path)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

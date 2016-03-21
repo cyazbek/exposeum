@@ -6,19 +6,19 @@ namespace Exposeum.TempModels
 {
     public class Edge
     {
-        public int _id { get; set; }
-        public double _distance { get; set; }
-        public MapElement _start { get; set; }
-        public MapElement _end { get; set; }
+        public int Id { get; set; }
+        public double Distance { get; set; }
+        public MapElement Start { get; set; }
+        public MapElement End { get; set; }
 
         public override bool Equals(object obj)
         {
             Edge other = (Edge) obj;
 
-            return _id == other._id &&
-                  Math.Abs(_distance - other._distance) < 0 &&
-                  _start.Equals(other._start) &&
-                  _end.Equals(other._end);
+            return Id == other.Id &&
+                  Math.Abs(Distance - other.Distance) < 0 &&
+                  Start.Equals(other.Start) &&
+                  End.Equals(other.End);
         }
 
     }
