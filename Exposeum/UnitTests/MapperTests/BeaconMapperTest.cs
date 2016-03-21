@@ -40,6 +40,12 @@ namespace UnitTests
         }
 
         [Test]
+        public void GetInstanceBeaconMapperTest()
+        {
+            Assert.NotNull(BeaconMapper.GetInstance());
+        }
+
+        [Test]
         public void AddBeaconTest()
         {
             _instance.AddBeacon(_beaconModel);

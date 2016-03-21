@@ -20,6 +20,12 @@ namespace UnitTests
             _setObject.path = "Path";
         }
 
+        [Test]
+        public void GetInstanceIconTdgTest()
+        {
+            Assert.NotNull(IconTDG.GetInstance());
+        }
+
         [Test()]
         public void AddIconTest()
         {

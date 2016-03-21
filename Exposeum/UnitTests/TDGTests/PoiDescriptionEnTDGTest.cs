@@ -22,6 +22,12 @@ namespace UnitTests
             _setObject.description = "description";
         }
 
+        [Test]
+        public void GetInstancePoiDescriptionEnTdgTest()
+        {
+            Assert.NotNull(PoiDescriptionEnTDG.GetInstance());
+        }
+
         [Test()]
         public void AddPoiDescriptionEnTest()
         {

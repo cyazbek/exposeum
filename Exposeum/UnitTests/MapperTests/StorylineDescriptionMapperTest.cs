@@ -9,7 +9,7 @@ using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescriptio
 namespace UnitTests.MapperTests
 {
     [TestFixture]
-    public class StorylineDescriptionTest
+    public class StorylineDescriptionMapperTest
     {
         private static StoryLineDescriptionMapper _instance;
         private StorylineDescription _expected;
@@ -47,6 +47,12 @@ namespace UnitTests.MapperTests
                 title = "theTitleFr",
                 description = "theDescriptionFr"
             };
+        }
+
+        [Test]
+        public void GetInstanceStorylineDescriptionMapperTest()
+        {
+            Assert.NotNull(StoryLineDescriptionMapper.GetInstance());
         }
 
         [Test]

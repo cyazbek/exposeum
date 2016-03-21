@@ -52,6 +52,12 @@ namespace UnitTests.MapperTests
         }
 
         [Test]
+        public void GetInstancePointOfInterestDescriptionMapperTest()
+        {
+            Assert.NotNull(PointOfInterestDescriptionMapper.GetInstance());
+        }
+
+        [Test]
         public void AddPointOfInterestDescriptionTest()
         {
             _instance.AddPointOfInterestDescription(_pointOfInterestDescriptionModel);

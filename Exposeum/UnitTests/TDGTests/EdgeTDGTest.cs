@@ -20,6 +20,12 @@ namespace UnitTests
         public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
         private readonly List<Edge> _listOfEdgesTable = new List<Edge>();
 
+        [Test]
+        public void GetInstanceEdgeTdgTest()
+        {
+            Assert.NotNull(BeaconTDG.GetInstance());
+        }
+
         [SetUp]
         public void Setup()
         {

@@ -25,6 +25,12 @@ namespace UnitTests.MapperTests
             _mapper = StatusMapper.GetInstance(); 
         }
 
+        [Test]
+        public void GetInstanceStatusMapperTest()
+        {
+            Assert.NotNull(StatusMapper.GetInstance());
+        }
+
         [Test()]
         public void StatusTableToModelNew()
         {

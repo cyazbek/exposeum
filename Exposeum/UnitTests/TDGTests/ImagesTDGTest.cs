@@ -20,6 +20,12 @@ namespace UnitTests
             _setObject.path = "Path";
         }
 
+        [Test]
+        public void GetInstanceImagesTdgTest()
+        {
+            Assert.NotNull(ImagesTDG.GetInstance());
+        }
+
         [Test()]
         public void AddImagesTest()
         {

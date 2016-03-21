@@ -37,6 +37,12 @@ namespace UnitTests
         }
 
         [Test]
+        public void GetInstanceMapElementsTdgTest()
+        {
+            Assert.NotNull(MapElementsTDG.GetInstance());
+        }
+
+        [Test]
         public void AddMapElementsTest()
         {
             _objectTDG.Add(_setObject);

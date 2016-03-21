@@ -20,6 +20,12 @@ namespace UnitTests
             _setObject.imageId = 12;
         }
 
+        [Test]
+        public void GetInstanceFloorTdgTest()
+        {
+            Assert.NotNull(FloorTDG.GetInstance());
+        }
+
         [Test()]
         public void AddFloorTest()
         {

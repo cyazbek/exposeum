@@ -21,7 +21,13 @@ namespace UnitTests
             _setObject.minor = 12345;
             _setObject.major = 12345; 
         }
-        
+
+        [Test]
+        public void GetInstanceBeaconTdgTest()
+        {
+            Assert.NotNull(BeaconTDG.GetInstance());    
+        }
+
         [Test()]
         public void AddBeaconTest()
         {

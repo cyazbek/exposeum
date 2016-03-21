@@ -9,6 +9,13 @@ namespace UnitTests
     {
         readonly User _user = User.GetInstance();
         Language _language;
+
+        [Test]
+        public void GetInstanceUserTest()
+        {
+            Assert.NotNull(User.GetInstance());
+        }
+
         [Test()]
         public void SetLanguageToFrenchTest()
 		{
@@ -16,7 +23,8 @@ namespace UnitTests
             _user._language = _language; 
 			Assert.AreEqual(_user._language.ToString(), Language.Fr.ToString());
 		}
-		[Test()]
+
+        [Test()]
 		public void SetLanguageToEnglishTest()
 		{
             _language = Language.En;

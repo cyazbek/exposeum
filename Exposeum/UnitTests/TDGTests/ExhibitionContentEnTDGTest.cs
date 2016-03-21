@@ -61,6 +61,12 @@ namespace UnitTests
             _setObject3.storyLineId = 2;
         }
 
+        [Test]
+        public void GetInstanceExhibitionContentEnTdgTest()
+        {
+            Assert.NotNull(ExhibitionContentEnTDG.GetInstance());
+        }
+
         [Test()]
         public void AddExhibitionContentEnTest()
         {

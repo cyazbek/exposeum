@@ -21,6 +21,12 @@ namespace UnitTests
             _setObject.description = "description";
         }
 
+        [Test]
+        public void GetInstanceStorylineDescrptionFrTdgTest()
+        {
+            Assert.NotNull(StoryLineDescriptionFrTDG.GetInstance());
+        }
+
         [Test()]
         public void AddStoryLineDescriptionFrTest()
         {
