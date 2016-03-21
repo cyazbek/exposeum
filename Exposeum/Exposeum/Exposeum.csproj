@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -85,6 +85,15 @@
     <Reference Include="Xamarin.Estimote.Android">
       <HintPath>..\Components\estimotesdkandroid-0.9.1.0\lib\android\Xamarin.Estimote.Android.dll</HintPath>
     </Reference>
+    <Reference Include="ZXing.Net.Mobile.Core, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\ZXing.Net.Mobile.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.portable, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\zxing.portable.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXingNetMobile, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
@@ -100,6 +109,10 @@
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
     <Compile Include="Mappers\StatusMapper.cs" />
     <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
+    <Compile Include="Mappers\StorylineDescriptionMapperFr.cs" />
+    <Compile Include="Mappers\StorylineDescriptionMapperEn.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mappers\StorylineMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
@@ -224,6 +237,7 @@
     <AndroidResource Include="Resources\layout\EndOfStoryLinePopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <Compile Include="Controllers\QRController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -294,6 +308,10 @@
     <XamarinComponentReference Include="xamandroidsupportv4-18">
       <Visible>False</Visible>
       <Version>23.1.1.1</Version>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="zxing.net.mobile">
+      <Version>2.0.4.17</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>

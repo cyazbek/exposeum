@@ -93,7 +93,7 @@ namespace Exposeum.Controllers
 		public void FloorChanged(int newFloorIndex){
 			Floor newFloor = _mapModel.Floors [newFloorIndex];
 			if (newFloor != null)
-				_mapModel.SetCurrentFloor(newFloor);
+				_mapModel.CurrentFloor = newFloor;
 			_mapView.Update ();
 		}
 
