@@ -8,13 +8,13 @@ namespace Exposeum.Mappers
     public class EdgeMapper
     {
         private static EdgeMapper _instance;
-        private readonly EdgeTDG _edgeTdg;
+        private readonly EdgeTdg _edgeTdg;
         private readonly List<Edge> _listOfEdges;
         private readonly MapElementsMapper _mapElementsMapper;
 
         private EdgeMapper()
         {
-            _edgeTdg = EdgeTDG.GetInstance();
+            _edgeTdg = EdgeTdg.GetInstance();
             _listOfEdges = new List<Edge>();
             _mapElementsMapper = MapElementsMapper.GetInstance();
         }
@@ -63,10 +63,10 @@ namespace Exposeum.Mappers
         {
             Tables.Edge edgeTable = new Tables.Edge
             {
-                ID = edge._id,
-                distance = edge._distance,
-                startMapElementId = edge._start._id,
-                endMapElementId = edge._end._id
+                Id = edge.Id,
+                Distance = edge.Distance,
+                StartMapElementId = edge.Start.Id,
+                EndMapElementId = edge.End.Id
             };
 
             return edgeTable;
@@ -84,10 +84,10 @@ namespace Exposeum.Mappers
         {
             Edge edgeModel = new Edge
             {
-                _id = edgeTable.ID,
-                _distance = edgeTable.distance,
-                _start = MapElementsMapper.GetInstance().GetMapElement(edgeTable.startMapElementId),
-                _end = MapElementsMapper.GetInstance().GetMapElement(edgeTable.endMapElementId),
+                Id = edgeTable.Id,
+                Distance = edgeTable.Distance,
+                Start = MapElementsMapper.GetInstance().GetMapElement(edgeTable.StartMapElementId),
+                End = MapElementsMapper.GetInstance().GetMapElement(edgeTable.EndMapElementId),
             };
             return edgeModel;
         }

@@ -4,18 +4,18 @@ namespace Exposeum.Tables
     public class MapElements
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
-        public int ID { get; set; }
-        public float uCoordinate { get; set; }
-        public float vCoordinate { get; set; }
-        public int iconId { get; set; }
-        public string discriminator { get; set; }
-        public int visited { get; set; }
-        public int beaconId { get; set; }
-        public int _storyLineId { get; set; }
-        public int poiDescription { get; set; }
-        public string label { get; set; }
-        public int exhibitionContent { get; set; }
-        public int floorId { get; set; }
+        public int Id { get; set; }
+        public float UCoordinate { get; set; }
+        public float VCoordinate { get; set; }
+        public int IconId { get; set; }
+        public string Discriminator { get; set; }
+        public int Visited { get; set; }
+        public int BeaconId { get; set; }
+        public int StoryLineId { get; set; }
+        public int PoiDescription { get; set; }
+        public string Label { get; set; }
+        public int ExhibitionContent { get; set; }
+        public int FloorId { get; set; }
 
     }
 }

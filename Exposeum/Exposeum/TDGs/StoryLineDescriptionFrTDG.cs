@@ -2,36 +2,36 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class StoryLineDescriptionFrTDG : TDG
+    public class StoryLineDescriptionFrTdg : Tdg
     {
-        private static StoryLineDescriptionFrTDG _instance;
+        private static StoryLineDescriptionFrTdg _instance;
 
-        private StoryLineDescriptionFrTDG() { }
+        private StoryLineDescriptionFrTdg() { }
 
-        public static StoryLineDescriptionFrTDG GetInstance()
+        public static StoryLineDescriptionFrTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new StoryLineDescriptionFrTDG();
+                _instance = new StoryLineDescriptionFrTdg();
             return _instance;
         }
 
         public void Add(StoryLineDescriptionFr item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(StoryLineDescriptionFr item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public StoryLineDescriptionFr GetStoryLineDescriptionFr(int id)
         {
-            return _db.Get<StoryLineDescriptionFr>(id);
+            return Db.Get<StoryLineDescriptionFr>(id);
         }
         public bool Equals(StoryLineDescriptionFr desc1, StoryLineDescriptionFr desc2)
         {
-            if (desc1.ID == desc2.ID && desc1.title == desc2.title && desc1.description == desc2.description && desc1.description == desc2.description)
+            if (desc1.Id == desc2.Id && desc1.Title == desc2.Title && desc1.Description == desc2.Description && desc1.Description == desc2.Description)
                 return true;
             else return false;
         }

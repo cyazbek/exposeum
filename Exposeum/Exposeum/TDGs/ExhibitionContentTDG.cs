@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Exposeum.TDGs
 {
-    public abstract class ExhibitionContentTDG:TDG
+    public abstract class ExhibitionContentTdg:Tdg
     {
     }
 }

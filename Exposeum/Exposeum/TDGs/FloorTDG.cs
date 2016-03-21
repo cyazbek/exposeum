@@ -3,42 +3,42 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class FloorTDG : TDG
+    public class FloorTdg : Tdg
     {
-        private static FloorTDG _instance;
+        private static FloorTdg _instance;
 
-        private FloorTDG() { }
+        private FloorTdg() { }
 
-        public static FloorTDG GetInstance()
+        public static FloorTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new FloorTDG();
+                _instance = new FloorTdg();
             return _instance;
         }
 
         public void Update(Floor item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public void Add(Floor item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public Floor GetFloor(int id)
         {
-            return _db.Get<Floor>(id);
+            return Db.Get<Floor>(id);
         }
 
         public List<Floor> GetAllFloors()
         {
-            return new List<Floor>(_db.Table<Floor>());
+            return new List<Floor>(Db.Table<Floor>());
         }
 
-        public bool Equals(Floor object1, Floor Object2)
+        public bool Equals(Floor object1, Floor object2)
         {
-            if (object1.ID == Object2.ID && object1.imageId == Object2.imageId)
+            if (object1.Id == object2.Id && object1.ImageId == object2.ImageId)
                 return true;
             else return false; 
         }

@@ -93,7 +93,7 @@ namespace Exposeum.Models
         {
             string summary;
 
-            if (User.GetInstance()._language.Equals(Language.Fr))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
             else
                 summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
@@ -103,7 +103,7 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            if (User.GetInstance()._language.Equals(Language.Fr))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 return DescriptionFr;
             else
                 return DescriptionEn;
@@ -111,7 +111,7 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            if (User.GetInstance()._language.Equals(Language.Fr))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 return NameFr;
             else
                 return NameEn;

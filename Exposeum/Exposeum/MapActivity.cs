@@ -86,9 +86,9 @@ namespace Exposeum
                     User.GetInstance().ToogleLanguage(); 
                     return true;
                 case Resource.Id.PauseItem:
-                    StorylineController _storylineController = StorylineController.GetInstance();
+                    StorylineController storylineController = StorylineController.GetInstance();
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    storylineController.ShowPauseStoryLineDialog(transaction, this);
                     
                     return true;
                 case Resource.Id.QRScannerItem:
@@ -100,9 +100,9 @@ namespace Exposeum
 
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
-            User _user = User.GetInstance();
-            var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
-            var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
             return true;
 
         }

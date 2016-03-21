@@ -10,15 +10,15 @@ namespace Exposeum.Mappers
     public class PointOfInterestDescriptionMapper
     {
         private static PointOfInterestDescriptionMapper _instance;
-        private readonly PoiDescriptionEnTDG _poiDescriptionEnTdg;
-        private readonly PoiDescriptionFrTDG _poiDescriptionFrTdg;
+        private readonly PoiDescriptionEnTdg _poiDescriptionEnTdg;
+        private readonly PoiDescriptionFrTdg _poiDescriptionFrTdg;
         private PoiDescriptionEn _poiDescriptionEn;
         private PoiDescriptionFr _poiDescriptionFr;
 
         private PointOfInterestDescriptionMapper()
         {
-            _poiDescriptionEnTdg = PoiDescriptionEnTDG.GetInstance();
-            _poiDescriptionFrTdg = PoiDescriptionFrTDG.GetInstance();
+            _poiDescriptionEnTdg = PoiDescriptionEnTdg.GetInstance();
+            _poiDescriptionFrTdg = PoiDescriptionFrTdg.GetInstance();
         }
 
         public static PointOfInterestDescriptionMapper GetInstance()
@@ -30,7 +30,7 @@ namespace Exposeum.Mappers
 
         public void AddPointOfInterestDescription(PointOfInterestDescription poiDescription)
         {
-            if (poiDescription._language == Language.Fr)
+            if (poiDescription.Language == Language.Fr)
             {
                 _poiDescriptionFr = PoiDescriptionModelToTableFr(poiDescription);
                 _poiDescriptionFrTdg.Add(_poiDescriptionFr);
@@ -44,7 +44,7 @@ namespace Exposeum.Mappers
 
         public void UpdatePointOfInterestDescription(PointOfInterestDescription poiDescription)
         {
-            if (poiDescription._language == Language.Fr)
+            if (poiDescription.Language == Language.Fr)
             {
                 _poiDescriptionFr = PoiDescriptionModelToTableFr(poiDescription);
                 _poiDescriptionFrTdg.Update(_poiDescriptionFr);
@@ -60,7 +60,7 @@ namespace Exposeum.Mappers
         {
             PointOfInterestDescription pointOfInterestDescriptionModel;
 
-            if (User.GetInstance()._language == Language.Fr)
+            if (User.GetInstance().Language == Language.Fr)
             {
                 _poiDescriptionFr = _poiDescriptionFrTdg.GetPoiDescriptionFr(poiDescriptionId);
                 pointOfInterestDescriptionModel = PointOfInterestDescriptionTableToModelFr(_poiDescriptionFr);
@@ -78,11 +78,11 @@ namespace Exposeum.Mappers
         {
             PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = poiDescriptionFr.ID,
-                _title = poiDescriptionFr.title,
-                _summary = poiDescriptionFr.summary,
-                _description = poiDescriptionFr.description,
-                _language = User.GetInstance()._language
+                Id = poiDescriptionFr.Id,
+                Title = poiDescriptionFr.Title,
+                Summary = poiDescriptionFr.Summary,
+                Description = poiDescriptionFr.Description,
+                Language = User.GetInstance().Language
             };
             return pointOfInterestDescriptionModel;
         }
@@ -91,11 +91,11 @@ namespace Exposeum.Mappers
         {
             PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = poiDescriptionFr.ID,
-                _title = poiDescriptionFr.title,
-                _summary = poiDescriptionFr.summary,
-                _description = poiDescriptionFr.description,
-                _language = User.GetInstance()._language
+                Id = poiDescriptionFr.Id,
+                Title = poiDescriptionFr.Title,
+                Summary = poiDescriptionFr.Summary,
+                Description = poiDescriptionFr.Description,
+                Language = User.GetInstance().Language
             };
             return pointOfInterestDescriptionModel;
         }
@@ -104,10 +104,10 @@ namespace Exposeum.Mappers
         {
             PoiDescriptionFr poiDescriptionTable = new PoiDescriptionFr
             {
-                ID = poiDescription._id,
-                title = poiDescription._title,
-                summary = poiDescription._summary,
-                description = poiDescription._description
+                Id = poiDescription.Id,
+                Title = poiDescription.Title,
+                Summary = poiDescription.Summary,
+                Description = poiDescription.Description
             };
 
             return poiDescriptionTable;
@@ -117,10 +117,10 @@ namespace Exposeum.Mappers
         {
             PoiDescriptionEn poiDescriptionTable = new PoiDescriptionEn
             {
-                ID = poiDescription._id,
-                title = poiDescription._title,
-                summary = poiDescription._summary,
-                description = poiDescription._description
+                Id = poiDescription.Id,
+                Title = poiDescription.Title,
+                Summary = poiDescription.Summary,
+                Description = poiDescription.Description
             };
 
             return poiDescriptionTable;

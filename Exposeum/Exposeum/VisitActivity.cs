@@ -86,7 +86,7 @@ namespace Exposeum
                     return true;
 
                 case Resource.Id.QRScannerItem:
-					QRController.GetInstance(this).BeginQRScanning();
+					QrController.GetInstance(this).BeginQrScanning();
                     return true;
             }
             return base.OnOptionsItemSelected(item);

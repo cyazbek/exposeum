@@ -12,12 +12,12 @@ namespace Exposeum.Mappers
     public class MapElementsMapper
     {
         private static MapElementsMapper _instance;
-        private readonly MapElementsTDG _mapElementsTdg;
+        private readonly MapElementsTdg _mapElementsTdg;
         private readonly List<MapElement> _listOfMapElements;
 
         private MapElementsMapper()
         {
-            _mapElementsTdg = MapElementsTDG.GetInstance();
+            _mapElementsTdg = MapElementsTdg.GetInstance();
             _listOfMapElements = new List<MapElement>();
         }
 
@@ -65,7 +65,7 @@ namespace Exposeum.Mappers
 
             foreach (var mapElementTable in listMapElementsTable)
             {
-                MapElement mapElementModel = GetMapElement(mapElementTable.ID);
+                MapElement mapElementModel = GetMapElement(mapElementTable.Id);
                 _listOfMapElements.Add(mapElementModel);
             }
 
@@ -75,7 +75,7 @@ namespace Exposeum.Mappers
         public List<MapElement> GetAllMapElementsFromStoryline(int storylineId)
         {
             List<MapElement> listMapElementsTable = new List<MapElement>();
-            List<int> mapElementIds = StoryLineMapElementListTDG.GetInstance().GetAllStorylineMapElements(storylineId);
+            List<int> mapElementIds = StoryLineMapElementListTdg.GetInstance().GetAllStorylineMapElements(storylineId);
 
             foreach (int mapElementId in mapElementIds)
             {
@@ -90,12 +90,12 @@ namespace Exposeum.Mappers
         {
             MapElements mapElements = new MapElements
             {
-                ID = mapElement._id,
-                visited = Convert.ToInt32(mapElement._visited),
-                iconId = mapElement._iconId,
-                uCoordinate = mapElement._uCoordinate,
-                vCoordinate = mapElement._vCoordinate,
-                floorId = mapElement._floor._id
+                Id = mapElement.Id,
+                Visited = Convert.ToInt32(mapElement.Visited),
+                IconId = mapElement.IconId,
+                UCoordinate = mapElement.UCoordinate,
+                VCoordinate = mapElement.VCoordinate,
+                FloorId = mapElement.Floor.Id
             };
             
             switch (mapElement.GetType().ToString())
@@ -104,9 +104,9 @@ namespace Exposeum.Mappers
                 {
                     PointOfInterest poi = (PointOfInterest) mapElement;
 
-                    mapElements.beaconId = poi._beacon._id;
-                    mapElements._storyLineId = poi._storyLineId;
-                    mapElements.poiDescription = poi._description._id;
+                    mapElements.BeaconId = poi.Beacon.Id;
+                    mapElements.StoryLineId = poi.StoryLineId;
+                    mapElements.PoiDescription = poi.Description.Id;
                     // mapElements.exhibitionContent = poi._exhibitionContent._id;
 
                     return mapElements;
@@ -115,7 +115,7 @@ namespace Exposeum.Mappers
                 case "Exposeum.TempModels.WayPoint":
                 {
                     WayPoint wayPoint = (WayPoint)mapElement;
-                    mapElements.label = wayPoint._label.ToString();
+                    mapElements.Label = wayPoint.Label.ToString();
                     return mapElements;
                 }
                 default:
@@ -125,7 +125,7 @@ namespace Exposeum.Mappers
 
         private MapElement MapElemenTableToModel(MapElements mapElementTable)
         {
-            string discrinator = mapElementTable.discriminator;
+            string discrinator = mapElementTable.Discriminator;
 
             switch (discrinator)
             {
@@ -133,10 +133,10 @@ namespace Exposeum.Mappers
                 {
                     PointOfInterest pointOfInterest = new PointOfInterest
                     {
-                        _id = mapElementTable.ID,
-                        _beacon = BeaconMapper.GetInstance().GetBeacon(mapElementTable.beaconId),
-                        _storyLineId = mapElementTable._storyLineId,
-                        _description = PointOfInterestDescriptionMapper.GetInstance().GetPointOfInterestDescription(mapElementTable.poiDescription),
+                        Id = mapElementTable.Id,
+                        Beacon = BeaconMapper.GetInstance().GetBeacon(mapElementTable.BeaconId),
+                        StoryLineId = mapElementTable.StoryLineId,
+                        Description = PointOfInterestDescriptionMapper.GetInstance().GetPointOfInterestDescription(mapElementTable.PoiDescription),
                         //_exhibitionContent = ExhibitionContentMapper.GetInstance().GetExhibitionContent(mapElementTable.exhibitionContent),
                     };
                     return pointOfInterest;
@@ -145,8 +145,8 @@ namespace Exposeum.Mappers
                 {
                     WayPoint wayPoint = new WayPoint
                     {
-                        _id = mapElementTable.ID,
-                        _label = (WaypointLabel)Enum.Parse(typeof(WaypointLabel), mapElementTable.label)
+                        Id = mapElementTable.Id,
+                        Label = (WaypointLabel)Enum.Parse(typeof(WaypointLabel), mapElementTable.Label)
                     };
                     return wayPoint;
                 }

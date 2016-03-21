@@ -2,38 +2,38 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class BeaconTDG : TDG
+    public class BeaconTdg : Tdg
     {
-        private static BeaconTDG _instance;
+        private static BeaconTdg _instance;
 
-        private BeaconTDG() { }
+        private BeaconTdg() { }
 
-        public static BeaconTDG GetInstance()
+        public static BeaconTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new BeaconTDG();
+                _instance = new BeaconTdg();
 
             return _instance;
         }
 
         public void Add(Beacon item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(Beacon item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public Beacon GetBeacon(int id)
         {
-            return _db.Get<Beacon>(id);
+            return Db.Get<Beacon>(id);
         }
 
         public bool Equals(Beacon beacon1, Beacon beacon2)
         {
-            if (beacon1.ID == beacon2.ID && beacon1.UUID.Equals(beacon2.UUID) && beacon1.minor == beacon2.minor && beacon1.major == beacon2.major)
+            if (beacon1.Id == beacon2.Id && beacon1.Uuid.Equals(beacon2.Uuid) && beacon1.Minor == beacon2.Minor && beacon1.Major == beacon2.Major)
                 return true;
             else
                 return false;

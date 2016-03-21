@@ -2,38 +2,38 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class PoiDescriptionFrTDG : TDG
+    public class PoiDescriptionFrTdg : Tdg
     {
-        private static PoiDescriptionFrTDG _instance;
+        private static PoiDescriptionFrTdg _instance;
 
-        private PoiDescriptionFrTDG() { }
+        private PoiDescriptionFrTdg() { }
 
-        public static PoiDescriptionFrTDG GetInstance()
+        public static PoiDescriptionFrTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new PoiDescriptionFrTDG();
+                _instance = new PoiDescriptionFrTdg();
             return _instance;
         }
 
         public void Add(PoiDescriptionFr item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(PoiDescriptionFr item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public PoiDescriptionFr GetPoiDescriptionFr(int id)
         {
-            return _db.Get<PoiDescriptionFr>(id);
+            return Db.Get<PoiDescriptionFr>(id);
         }
         public bool Equals(PoiDescriptionFr object1, PoiDescriptionFr object2)
         {
-            if (object1.ID == object2.ID &&
-                object1.title == object2.title &&
-                object1.summary == object2.summary)
+            if (object1.Id == object2.Id &&
+                object1.Title == object2.Title &&
+                object1.Summary == object2.Summary)
                 return true;
             else return false;
         }

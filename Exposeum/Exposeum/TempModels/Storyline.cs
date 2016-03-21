@@ -5,19 +5,19 @@ namespace Exposeum.TempModels
 {
     public class Storyline
     {
-        public int _storylineId { get; set; }
-        public int _imageId { get; set; }
-        public int _duration { get; set; }
-        public int _floorsCovered { get; set; }
-        public List<MapElement> _mapElements { get; set; }
-        public string _intendedAudience { get; set;}
-        public MapElement _lastVisitedMapElement { get; set; }
-        public Models.Status _status; 
-        public StorylineDescription _storylineDescription { get; set; }
+        public int StorylineId { get; set; }
+        public int ImageId { get; set; }
+        public int Duration { get; set; }
+        public int FloorsCovered { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public string IntendedAudience { get; set;}
+        public MapElement LastVisitedMapElement { get; set; }
+        public Models.Status Status; 
+        public StorylineDescription StorylineDescription { get; set; }
 
         public Storyline()
         {
-            _mapElements = new List<MapElement>();
+            MapElements = new List<MapElement>();
         }
         public override bool Equals(object obj)
         {
@@ -25,15 +25,15 @@ namespace Exposeum.TempModels
             {
                 Storyline other = (Storyline)obj;
                 var result = false;
-                for (int i = 0; i < other._mapElements.Count; i++)
+                for (int i = 0; i < other.MapElements.Count; i++)
                 {
-                    if (other._mapElements[i].Equals(this._mapElements[i]))
+                    if (other.MapElements[i].Equals(this.MapElements[i]))
                         result = true;
                     else return false;
                 }
-                return result && other._storylineId == _storylineId && other._imageId == _imageId && other._duration == _duration && other._floorsCovered == _floorsCovered &&
-                    _intendedAudience == other._intendedAudience && _lastVisitedMapElement.Equals(other._lastVisitedMapElement) && _status.Equals(other._status) &&
-                    _storylineDescription == other._storylineDescription;
+                return result && other.StorylineId == StorylineId && other.ImageId == ImageId && other.Duration == Duration && other.FloorsCovered == FloorsCovered &&
+                    IntendedAudience == other.IntendedAudience && LastVisitedMapElement.Equals(other.LastVisitedMapElement) && Status.Equals(other.Status) &&
+                    StorylineDescription == other.StorylineDescription;
             }
             else return false; 
         }

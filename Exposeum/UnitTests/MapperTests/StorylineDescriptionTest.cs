@@ -20,18 +20,18 @@ namespace UnitTests.MapperTests
         {
             _modelEn = new StorylineDescription
             {
-                _storyLineDescriptionId = 1,
-                _description = "description",
-                _title = "title",
-                _language = Exposeum.Models.Language.En
+                StoryLineDescriptionId = 1,
+                Description = "description",
+                Title = "title",
+                Language = Exposeum.Models.Language.En
             };
 
             _modelFr = new StorylineDescription
             {
-                _storyLineDescriptionId = 1,
-                _description = "description",
-                _title = "title",
-                _language = Exposeum.Models.Language.Fr
+                StoryLineDescriptionId = 1,
+                Description = "description",
+                Title = "title",
+                Language = Exposeum.Models.Language.Fr
             };
 
             _mapper = StorylineDescriptionMapper.GetInstance();
@@ -43,7 +43,7 @@ namespace UnitTests.MapperTests
         public void AddDescriptionEnglishTest()
         {
             _mapper.AddDescription(_modelEn);
-            _testModel = _mapper.GetDescription(_modelEn._storyLineDescriptionId);
+            _testModel = _mapper.GetDescription(_modelEn.StoryLineDescriptionId);
             Assert.IsTrue(_modelEn.Equals(_testModel));
         }
 
@@ -51,7 +51,7 @@ namespace UnitTests.MapperTests
         public void AddDescriptionFrenchTest()
         {
             _mapper.AddDescription(_modelFr);
-            _testModel = _mapper.GetDescription(_modelFr._storyLineDescriptionId);
+            _testModel = _mapper.GetDescription(_modelFr.StoryLineDescriptionId);
             Assert.IsTrue(_modelEn.Equals(_testModel));
         }
     }

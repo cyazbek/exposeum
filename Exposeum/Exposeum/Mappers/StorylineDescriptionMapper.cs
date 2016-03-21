@@ -26,14 +26,14 @@ namespace Exposeum.Mappers
 
         public void AddDescription(StoryLineDescription model)
         {
-            if (model._language.Equals(Models.Language.Fr))
+            if (model.Language.Equals(Models.Language.Fr))
                 _frenchInstance.AddDescription(model);
             else _englishInstance.AddDescription(model);
         }
 
         public void UpdateDescription(StoryLineDescription model)
         {
-            if (model._language.Equals(Models.Language.Fr))
+            if (model.Language.Equals(Models.Language.Fr))
                 _frenchInstance.UpdateDescription(model);
             else
                 _englishInstance.UpdateDescription(model);
@@ -41,7 +41,7 @@ namespace Exposeum.Mappers
 
         public StoryLineDescription GetDescription(int id)
         {
-            Models.Language language = Models.User.GetInstance()._language;
+            Models.Language language = Models.User.GetInstance().Language;
             if (language.Equals(Models.Language.Fr))
                 return _frenchInstance.GetDescription(id);
             else

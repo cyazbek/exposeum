@@ -11,14 +11,14 @@ namespace Exposeum.Mappers
         readonly EdgeMapper _edgeMapper;
         readonly MapElementsMapper _mapElementsMapper;
         readonly FloorMapper _floorMapper;
-        readonly MapTDG _mapTDG; 
+        readonly MapTdg _mapTdg; 
 
         private MapMapper()
         {
             _storylineMapper = StorylineMapper.GetInstance();
             _edgeMapper = EdgeMapper.GetInstance();
             _mapElementsMapper = MapElementsMapper.GetInstance();
-            _mapTDG = MapTDG.GetInstance();
+            _mapTdg = MapTdg.GetInstance();
             _floorMapper = FloorMapper.GetInstance(); 
         }
 
@@ -31,30 +31,30 @@ namespace Exposeum.Mappers
         public Map ParseMap()
         {
             Map map = Map.GetInstance();
-            map._edges = _edgeMapper.GetAllEdges();
-            map._storylines = _storylineMapper.GetAllStorylines();
-            map._mapElements = _mapElementsMapper.GetAllMapElements();
-            map._floors = _floorMapper.GetAllFloors(); 
-            Tables.Map tableMap = _mapTDG.getMap(map._id);
-            map._currentFloor = _floorMapper.GetFloor(tableMap.currentFloorID);
-            map._currentStoryline = _storylineMapper.GetStoryline(tableMap.currentStoryLineID);
+            map.Edges = _edgeMapper.GetAllEdges();
+            map.Storylines = _storylineMapper.GetAllStorylines();
+            map.MapElements = _mapElementsMapper.GetAllMapElements();
+            map.Floors = _floorMapper.GetAllFloors(); 
+            Tables.Map tableMap = _mapTdg.GetMap(map.Id);
+            map.CurrentFloor = _floorMapper.GetFloor(tableMap.CurrentFloorId);
+            map.CurrentStoryline = _storylineMapper.GetStoryline(tableMap.CurrentStoryLineId);
             return map;
         }
 
         public void UpdateMap()
         {
             Map map = Map.GetInstance();
-            _edgeMapper.UpdateEdgesList(map._edges);
-            _floorMapper.UpdateFloorsList(map._floors);
-            _storylineMapper.UpdateStorylinesList(map._storylines);
-            _mapElementsMapper.UpdateMapElementList(map._mapElements);
+            _edgeMapper.UpdateEdgesList(map.Edges);
+            _floorMapper.UpdateFloorsList(map.Floors);
+            _storylineMapper.UpdateStorylinesList(map.Storylines);
+            _mapElementsMapper.UpdateMapElementList(map.MapElements);
             Tables.Map tableMap = new Tables.Map
             {
-                ID = map._id,
-                currentFloorID = map._currentFloor._id,
-                currentStoryLineID = map._currentStoryline._storylineId
+                Id = map.Id,
+                CurrentFloorId = map.CurrentFloor.Id,
+                CurrentStoryLineId = map.CurrentStoryline.StorylineId
             };
-            _mapTDG.UpdateMap(tableMap);
+            _mapTdg.UpdateMap(tableMap);
         }
     }
 }

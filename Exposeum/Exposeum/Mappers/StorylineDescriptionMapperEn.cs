@@ -8,12 +8,12 @@ namespace Exposeum.Mappers
 {
     public class StorylineDescriptionMapperEn
     {
-        private readonly StoryLineDescriptionEnTDG _tdg;
+        private readonly StoryLineDescriptionEnTdg _tdg;
         private static StorylineDescriptionMapperEn _instance; 
 
         private StorylineDescriptionMapperEn()
         {
-            _tdg = StoryLineDescriptionEnTDG.GetInstance(); 
+            _tdg = StoryLineDescriptionEnTdg.GetInstance(); 
         }
 
         public static StorylineDescriptionMapperEn GetInstance()
@@ -27,9 +27,9 @@ namespace Exposeum.Mappers
         {
             StoryLineDescriptionEn table = new StoryLineDescriptionEn
             {
-                ID = model._storyLineDescriptionId,
-                title = model._title, 
-                description = model._description
+                Id = model.StoryLineDescriptionId,
+                Title = model.Title, 
+                Description = model.Description
             };
             
             return table;
@@ -39,10 +39,10 @@ namespace Exposeum.Mappers
         {
             StorylineDescription model = new StorylineDescription
             {
-                _storyLineDescriptionId = table.ID,
-                _description = table.description,
-                _title = table.title,
-                _language = Models.Language.En
+                StoryLineDescriptionId = table.Id,
+                Description = table.Description,
+                Title = table.Title,
+                Language = Models.Language.En
             };
             return model;
 

@@ -6,11 +6,11 @@ namespace Exposeum.Mappers
     public class ImageMapper
     {
         private static ImageMapper _instance;
-        private readonly ImagesTDG _imageTdg;
+        private readonly ImagesTdg _imageTdg;
 
         private ImageMapper()
         {
-            _imageTdg = ImagesTDG.GetInstance();
+            _imageTdg = ImagesTdg.GetInstance();
         }
 
         public static ImageMapper GetInstance()
@@ -35,7 +35,7 @@ namespace Exposeum.Mappers
 
         public string GetImagePath(int imageId)
         {
-            string imagePath = _imageTdg.GetImages(imageId).path;
+            string imagePath = _imageTdg.GetImages(imageId).Path;
             return imagePath;
         }
 
@@ -43,8 +43,8 @@ namespace Exposeum.Mappers
         {
             Images image = new Images
             {
-                ID = id,
-                path = imagePath
+                Id = id,
+                Path = imagePath
             };
             return image;
         }

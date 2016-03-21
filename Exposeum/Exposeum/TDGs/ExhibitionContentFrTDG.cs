@@ -3,43 +3,43 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class ExhibitionContentFrTDG : ExhibitionContentTDG
+    public class ExhibitionContentFrTdg : ExhibitionContentTdg
     {
-        private static ExhibitionContentFrTDG _instance;
+        private static ExhibitionContentFrTdg _instance;
 
-        private ExhibitionContentFrTDG() { }
+        private ExhibitionContentFrTdg() { }
 
-        public static ExhibitionContentFrTDG GetInstance()
+        public static ExhibitionContentFrTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new ExhibitionContentFrTDG();
+                _instance = new ExhibitionContentFrTdg();
             return _instance;
         }
 
         public void Add(ExhibitionContentFr item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(ExhibitionContentFr item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public ExhibitionContentFr GetExhibitionContentFr(int id)
         {
-            return _db.Get<ExhibitionContentFr>(id);
+            return Db.Get<ExhibitionContentFr>(id);
         }
 
         public List<int> GetExhibitionContentEnByStorylineId(int id)
         {
-            List<ExhibitionContentFr> exhibitionContent = new List<ExhibitionContentFr>(_db.Table<ExhibitionContentFr>());
+            List<ExhibitionContentFr> exhibitionContent = new List<ExhibitionContentFr>(Db.Table<ExhibitionContentFr>());
             List<int> exhibitionId = new List<int>();
 
             foreach (var x in exhibitionContent)
             {
-                if (x.storyLineId == id)
-                    exhibitionId.Add(x.ID);
+                if (x.StoryLineId == id)
+                    exhibitionId.Add(x.Id);
             }
 
             return exhibitionId;
@@ -47,14 +47,14 @@ namespace Exposeum.TDGs
 
         public bool Equals(ExhibitionContentFr object1, ExhibitionContentFr object2)
         {
-            if (object1.ID == object2.ID &&
-            object1.title == object2.title &&
-            object1.description == object2.description &&
-            object1.filepath == object2.filepath &&
-            object1.duration == object2.duration &&
-            object1.resolution == object2.resolution &&
-            object1.encoding == object2.encoding &&
-            object1.discriminator == object2.discriminator)
+            if (object1.Id == object2.Id &&
+            object1.Title == object2.Title &&
+            object1.Description == object2.Description &&
+            object1.Filepath == object2.Filepath &&
+            object1.Duration == object2.Duration &&
+            object1.Resolution == object2.Resolution &&
+            object1.Encoding == object2.Encoding &&
+            object1.Discriminator == object2.Discriminator)
                 return true;
             else return false;
         }

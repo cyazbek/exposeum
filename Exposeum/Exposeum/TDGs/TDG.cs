@@ -3,8 +3,8 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public abstract class TDG
+    public abstract class Tdg
     {
-        public SQLiteConnection _db = Tables.DBManager.GetInstance().GetConnection();
+        public SQLiteConnection Db = Tables.DbManager.GetInstance().GetConnection();
     }
 }

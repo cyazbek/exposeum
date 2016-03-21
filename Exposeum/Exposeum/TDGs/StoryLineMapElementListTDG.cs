@@ -3,49 +3,49 @@ using System.Collections.Generic;
 using System.Linq; 
 namespace Exposeum.TDGs
 {
-    public class StoryLineMapElementListTDG : TDG
+    public class StoryLineMapElementListTdg : Tdg
     {
-        private static StoryLineMapElementListTDG _instance;
+        private static StoryLineMapElementListTdg _instance;
 
-        private StoryLineMapElementListTDG() { }
+        private StoryLineMapElementListTdg() { }
 
-        public static StoryLineMapElementListTDG GetInstance()
+        public static StoryLineMapElementListTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new StoryLineMapElementListTDG();
+                _instance = new StoryLineMapElementListTdg();
             return _instance;
         }
 
         public void Add(StoryLineMapElementList item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(StoryLineMapElementList item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
         public StoryLineMapElementList GetStoryLineMapElementList(int id)
         {
-            return _db.Get<StoryLineMapElementList>(id);
+            return Db.Get<StoryLineMapElementList>(id);
         }
 
         public List<int> GetAllStorylineMapElements(int storylineId)
         {
-            List<StoryLineMapElementList> listMapElementsId = new List<StoryLineMapElementList>(_db.Table<StoryLineMapElementList>());
+            List<StoryLineMapElementList> listMapElementsId = new List<StoryLineMapElementList>(Db.Table<StoryLineMapElementList>());
             List<int> mapElementsId = new List<int>(); 
 
             foreach (var x in listMapElementsId)
             {
-                if(x.storyLineId==storylineId)
-                    mapElementsId.Add(x.mapElementId);
+                if(x.StoryLineId==storylineId)
+                    mapElementsId.Add(x.MapElementId);
             }
 
             return mapElementsId;
         }
         public bool Equals(StoryLineMapElementList list1, StoryLineMapElementList list2)
         {
-            if (list1.ID == list2.ID && list1.mapElementId == list2.mapElementId && list1.storyLineId == list2.storyLineId)
+            if (list1.Id == list2.Id && list1.MapElementId == list2.MapElementId && list1.StoryLineId == list2.StoryLineId)
                 return true;
             else return false;
         }

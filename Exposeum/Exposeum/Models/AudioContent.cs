@@ -2,11 +2,11 @@
 {
     public class AudioContent : ExhibitionContent
     {
-        private string filePath { get; set; }
-        private int durationInSeconds { get; set; }
-        private string encoding { get; set; }
+        private string FilePath { get; set; }
+        private int DurationInSeconds { get; set; }
+        private string Encoding { get; set; }
 
-        public override string htmlFormat()
+        public override string HtmlFormat()
         {
             throw new System.NotImplementedException();
         }

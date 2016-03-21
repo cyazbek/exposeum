@@ -15,39 +15,39 @@ namespace UnitTests.MapperTests
         private PointOfInterestDescription _pointOfInterestDescriptionModel;
         private PoiDescriptionEn _pointOfInterestDescriptionEnTable;
         private PoiDescriptionFr _pointOfInterestDescriptionFrTable;
-        readonly PoiDescriptionEnTDG _tdgEn = PoiDescriptionEnTDG.GetInstance();
-        readonly PoiDescriptionFrTDG _tdgFr = PoiDescriptionFrTDG.GetInstance();
+        readonly PoiDescriptionEnTdg _tdgEn = PoiDescriptionEnTdg.GetInstance();
+        readonly PoiDescriptionFrTdg _tdgFr = PoiDescriptionFrTdg.GetInstance();
 
         [SetUp]
         public void SetUp()
         {
             _instance = PointOfInterestDescriptionMapper.GetInstance();
-            _tdgEn._db.DeleteAll<PoiDescriptionEn>();
-            _tdgFr._db.DeleteAll<PoiDescriptionFr>();
+            _tdgEn.Db.DeleteAll<PoiDescriptionEn>();
+            _tdgFr.Db.DeleteAll<PoiDescriptionFr>();
 
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = 1,
-                _title = "theTitle",
-                _summary = "theSummary",
-                _description = "theDescription",
-                _language = User.GetInstance()._language
+                Id = 1,
+                Title = "theTitle",
+                Summary = "theSummary",
+                Description = "theDescription",
+                Language = User.GetInstance().Language
             };
 
             _pointOfInterestDescriptionEnTable = new PoiDescriptionEn
             {
-                ID = 1,
-                title = "theTitleEn",
-                summary = "theSummaryEn",
-                description = "theDescriptionEn"
+                Id = 1,
+                Title = "theTitleEn",
+                Summary = "theSummaryEn",
+                Description = "theDescriptionEn"
             };
 
             _pointOfInterestDescriptionFrTable = new PoiDescriptionFr
             {
-                ID = 1,
-                title = "theTitleFr",
-                summary = "theSummaryFr",
-                description = "theDescriptionFr"
+                Id = 1,
+                Title = "theTitleFr",
+                Summary = "theSummaryFr",
+                Description = "theDescriptionFr"
             };
         }
 
@@ -55,7 +55,7 @@ namespace UnitTests.MapperTests
         public void AddPointOfInterestDescriptionTest()
         {
             _instance.AddPointOfInterestDescription(_pointOfInterestDescriptionModel);
-            _expected = _instance.GetPointOfInterestDescription(_pointOfInterestDescriptionModel._id);
+            _expected = _instance.GetPointOfInterestDescription(_pointOfInterestDescriptionModel.Id);
             Assert.True(_pointOfInterestDescriptionModel.Equals(_expected));
         }
 
@@ -64,20 +64,20 @@ namespace UnitTests.MapperTests
         {
             _pointOfInterestDescriptionModel = new Exposeum.TempModels.PointOfInterestDescription
             {
-                _id = 2,
-                _title = "theTitle",
-                _summary = "theSummary",
-                _description = "theDescription",
-                _language = User.GetInstance()._language
+                Id = 2,
+                Title = "theTitle",
+                Summary = "theSummary",
+                Description = "theDescription",
+                Language = User.GetInstance().Language
             };
 
             _instance.AddPointOfInterestDescription(_pointOfInterestDescriptionModel);
 
-            _pointOfInterestDescriptionModel._title = "titleUpdated";
+            _pointOfInterestDescriptionModel.Title = "titleUpdated";
             _instance.UpdatePointOfInterestDescription(_pointOfInterestDescriptionModel);
 
-            _expected = _instance.GetPointOfInterestDescription(_pointOfInterestDescriptionModel._id);
-            Assert.AreEqual("titleUpdated", _expected._title);
+            _expected = _instance.GetPointOfInterestDescription(_pointOfInterestDescriptionModel.Id);
+            Assert.AreEqual("titleUpdated", _expected.Title);
         }
 
         [Test]

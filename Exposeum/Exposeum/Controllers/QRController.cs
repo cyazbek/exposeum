@@ -5,30 +5,32 @@ using Android.Content;
 
 namespace Exposeum.Controllers
 {
-	public class QRController
+	public class QrController
 	{
-		private static QRController _instance;
+		private static QrController _instance;
 		private readonly MobileBarcodeScanner _scanner;
 		private readonly Context _context;
 
-		public static QRController GetInstance(Context context){
+		public static QrController GetInstance(Context context){
 			if (_instance == null)
-				_instance = new QRController (context);
+				_instance = new QrController (context);
 			return _instance;
 		}
 
-		private QRController (Context context)
+		private QrController (Context context)
 		{
 			this._context = context;
 			MobileBarcodeScanner.Initialize (((Activity)context).Application);
 
-			_scanner = new MobileBarcodeScanner ();
-			_scanner.UseCustomOverlay = false;
-			_scanner.TopText = "Top Text";
-			_scanner.BottomText = "Bottom Text";
+		    _scanner = new MobileBarcodeScanner
+		    {
+		        UseCustomOverlay = false,
+		        TopText = "Top Text",
+		        BottomText = "Bottom Text"
+		    };
 		}
 
-		public async void BeginQRScanning()
+		public async void BeginQrScanning()
 		{
 			var result = await _scanner.Scan();
 			HandleScanResult (result);

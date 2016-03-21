@@ -16,31 +16,31 @@ namespace UnitTests
     {
         public readonly MapElements _setObject = new MapElements();
         public MapElements _testObject;
-        public readonly MapElementsTDG _objectTDG = MapElementsTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly MapElementsTdg _objectTDG = MapElementsTdg.GetInstance();
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         private readonly List<MapElements> _listOfEdgesTable = new List<MapElements>();
 
         [SetUp]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.uCoordinate = 12f;
-            _setObject.vCoordinate = 15.2f;
-            _setObject.discriminator = "POI";
-            _setObject.visited = 1;
-            _setObject.beaconId = 12;
-            _setObject._storyLineId = 1;
-            _setObject.poiDescription = 1;
-            _setObject.label = "bathroom";
-            _setObject.exhibitionContent = 1;
-            _setObject.floorId = 1;
+            _setObject.Id = 1;
+            _setObject.UCoordinate = 12f;
+            _setObject.VCoordinate = 15.2f;
+            _setObject.Discriminator = "POI";
+            _setObject.Visited = 1;
+            _setObject.BeaconId = 12;
+            _setObject.StoryLineId = 1;
+            _setObject.PoiDescription = 1;
+            _setObject.Label = "bathroom";
+            _setObject.ExhibitionContent = 1;
+            _setObject.FloorId = 1;
         }
 
         [Test]
         public void AddMapElementsTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<MapElements>(_setObject.ID);
+            _testObject = _db.Get<MapElements>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
 
@@ -48,30 +48,30 @@ namespace UnitTests
         public void GetMapElementsTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _objectTDG.GetMapElement(_setObject.ID);
+            _testObject = _objectTDG.GetMapElement(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
 
         [Test]
         public void UpdateMapElementsTest()
         {
-            _testObject.ID = 1;
-            _testObject.uCoordinate = 12f;
-            _testObject.vCoordinate = 15.2f;
-            _testObject.discriminator = "POI";
-            _testObject.visited = 1;
-            _testObject.beaconId = 12;
-            _testObject._storyLineId = 2;
-            _testObject.poiDescription = 1;
-            _testObject.label = "bathroom";
-            _testObject.exhibitionContent = 1;
-            _testObject.floorId = 1;
+            _testObject.Id = 1;
+            _testObject.UCoordinate = 12f;
+            _testObject.VCoordinate = 15.2f;
+            _testObject.Discriminator = "POI";
+            _testObject.Visited = 1;
+            _testObject.BeaconId = 12;
+            _testObject.StoryLineId = 2;
+            _testObject.PoiDescription = 1;
+            _testObject.Label = "bathroom";
+            _testObject.ExhibitionContent = 1;
+            _testObject.FloorId = 1;
             _objectTDG.Add(_testObject);
-            _testObject.uCoordinate = 0;
-            double uCoordinate = _testObject.uCoordinate;
+            _testObject.UCoordinate = 0;
+            double uCoordinate = _testObject.UCoordinate;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetMapElement(_testObject.ID);
-            Assert.AreEqual(_testObject.uCoordinate, uCoordinate);
+            _testObject = _objectTDG.GetMapElement(_testObject.Id);
+            Assert.AreEqual(_testObject.UCoordinate, uCoordinate);
         }
 
         [Test]
