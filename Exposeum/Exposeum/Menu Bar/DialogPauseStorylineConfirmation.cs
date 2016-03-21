@@ -6,7 +6,7 @@ using Android.Widget;
 using Exposeum.Controllers;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Menu_Bar
 {
     class DialogPauseStorylineConfirmation : DialogFragment
     {

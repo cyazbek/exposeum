@@ -1,7 +1,6 @@
-﻿using Exposeum.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
 	public interface IPath
 	{

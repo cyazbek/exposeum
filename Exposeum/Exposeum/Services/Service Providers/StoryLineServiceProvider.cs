@@ -1,7 +1,7 @@
-﻿using Exposeum.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Services.Service_Providers
 {
 	public class StoryLineServiceProvider: IStoryLineService
 	{

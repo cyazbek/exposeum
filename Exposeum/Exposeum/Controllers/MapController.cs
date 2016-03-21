@@ -5,6 +5,8 @@ using Android.Content;
 using Android.Views;
 using Android.Widget;
 using System.Linq;
+using Exposeum.Exceptions;
+using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 
 namespace Exposeum.Controllers

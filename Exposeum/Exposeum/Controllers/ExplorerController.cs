@@ -1,4 +1,6 @@
-﻿namespace Exposeum
+﻿using Exposeum.Services.Service_Providers;
+
+namespace Exposeum.Controllers
 {
 	public class ExplorerController
 	{

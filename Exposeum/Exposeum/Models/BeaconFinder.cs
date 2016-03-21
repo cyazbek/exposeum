@@ -1,15 +1,15 @@
 ﻿using System;
-using EstimoteSdk;
-using Android.Util;
-using Android.OS;
-using JavaObject = Java.Lang.Object;
-using Android.Content;
 using System.Collections.Generic;
 using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Support.V4.App;
-using Exposeum.Models;
+using Android.Util;
+using EstimoteSdk;
+using Exposeum.Exceptions;
+using JavaObject = Java.Lang.Object;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{

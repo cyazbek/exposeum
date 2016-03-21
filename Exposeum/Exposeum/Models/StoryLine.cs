@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Exposeum.Exceptions;
 
 namespace Exposeum.Models
 {

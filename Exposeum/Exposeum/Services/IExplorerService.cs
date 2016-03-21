@@ -1,4 +1,4 @@
-﻿namespace Exposeum
+﻿namespace Exposeum.Services
 {
 	public interface IExplorerService
 	{

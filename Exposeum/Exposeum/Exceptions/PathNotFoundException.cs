@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Exposeum
+namespace Exposeum.Exceptions
 {
 	public class PathNotFoundException: Exception
 	{

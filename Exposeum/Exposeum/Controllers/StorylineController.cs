@@ -1,6 +1,9 @@
 using Exposeum.Models;
 using Android.App;
 using Android.Content;
+using Exposeum.Menu_Bar;
+using Exposeum.Services;
+using Exposeum.Services.Service_Providers;
 
 namespace Exposeum.Controllers
 {
@@ -47,10 +50,7 @@ namespace Exposeum.Controllers
 
         public void ShowPauseStoryLineDialog(FragmentTransaction transaction, Context context)
         {
-
-
-            DialogFragment dialog;
-                dialog = new DialogPauseStorylineConfirmation(_selectedStoryLine, context);
+            DialogFragment dialog = new DialogPauseStorylineConfirmation(_selectedStoryLine, context);
 
             dialog.Show(transaction, "Story Line title");
         }

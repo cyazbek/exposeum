@@ -1,6 +1,6 @@
 ﻿using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Services.Service_Providers
 {
 	public class ExplorerServiceProvider: IExplorerService
 	{

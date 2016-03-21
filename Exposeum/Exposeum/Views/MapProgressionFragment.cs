@@ -2,15 +2,14 @@
 using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Android.Graphics;
-
-using Exposeum.Models;
 using Exposeum.Controllers;
+using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Views
 {
 	public class MapProgressionFragment : Fragment
 	{
