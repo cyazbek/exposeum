@@ -24,14 +24,42 @@ namespace Exposeum
 			String JSONData = await DownloadJSONAsync (JSON_URL);
 
 			//deserialize into JObject which we can iterate over
-			var json = JsonConvert.DeserializeObject (JSONData) as JObject;
+			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
 
-			foreach (var floorOBJ in json["floorPlan"]) {
-				String drawableString = (String)floorOBJ ["imagePath"];
-			}
-
+			//deserialize and store the floors from the JSON data
+			List<Floor> floors = ParseFloors (JSONPayload);
 		}
 
+		private List<Floor> ParseFloors(JObject JSONPayload){
+
+			List<Floor> floors = new List<Floor>();
+
+			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
+
+				String drawableString = (String)floorOBJ ["imagePath"];
+
+				Drawable floorDrawable; 
+
+				try
+				{
+					floorDrawable = Android.App.Application.Context.Resources.GetDrawable(Android.App.Application.Context.Resources.GetIdentifier(drawableString, "drawable", "Exposeum"));
+
+				}
+				catch(Exception e)
+				{
+					floorDrawable = new ColorDrawable();
+				}
+
+				Floor newFloor = new Floor (floorDrawable);
+
+				int floorID = int.Parse ((String)floorOBJ ["floorID"]); //get the floor ID for possible later use
+
+				floors.Add (newFloor);
+			}
+
+			return floors;
+
+		}
 		private async Task<String> DownloadJSONAsync(string url)
 		{
 			
