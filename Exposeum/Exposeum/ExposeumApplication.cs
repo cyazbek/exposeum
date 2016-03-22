@@ -19,7 +19,7 @@ namespace Exposeum
 		public override void OnCreate(){
 			base.OnCreate ();
 			InitSingletons ();
-            
+			new MapJSONParser ().ParseMapJSON ();
         }
 
 		protected void InitSingletons(){
