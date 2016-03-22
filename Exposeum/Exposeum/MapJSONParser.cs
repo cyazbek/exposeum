@@ -28,6 +28,9 @@ namespace Exposeum
 
 			//deserialize and store the floors from the JSON data
 			List<Floor> floors = ParseFloors (JSONPayload);
+
+			//deserialize and store the storylines from the JSON data
+			List<Exposeum.Models.StoryLine> storylines = ParseStorylines (JSONPayload);
 		}
 
 		private List<Floor> ParseFloors(JObject JSONPayload){
@@ -60,6 +63,25 @@ namespace Exposeum
 			return floors;
 
 		}
+
+		private List<StoryLine> ParseStorylines(JObject JSONPayload){
+
+			List<StoryLine> storylines = new List<StoryLine>();
+
+			foreach (var storylineOBJ in JSONPayload["storyline"]) {
+
+				int storylineID = int.Parse ((String)storylineOBJ ["id"]);
+
+				StoryLine newStoryline = new StoryLine (storylineID);
+
+				//TODO: associate previously-parsed MapElements to this storyline
+
+				storylines.Add (newStoryline);
+			}
+
+			return storylines;
+		}
+
 		private async Task<String> DownloadJSONAsync(string url)
 		{
 			
