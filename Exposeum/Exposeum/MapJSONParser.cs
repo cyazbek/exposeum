@@ -2,7 +2,13 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using Exposeum.Models;
+using Android.Graphics.Drawables;
 
 namespace Exposeum
 {
@@ -15,6 +21,12 @@ namespace Exposeum
 		public async void ParseMapJSON(){
 
 			String JSONData = await DownloadJSONAsync (JSON_URL);
+
+			var json = JsonConvert.DeserializeObject (JSONData) as JObject;
+
+			foreach (var floorOBJ in json["floorPlan"]) {
+				String drawableString = (String)floorOBJ ["imagePath"];
+			}
 
 		}
 
