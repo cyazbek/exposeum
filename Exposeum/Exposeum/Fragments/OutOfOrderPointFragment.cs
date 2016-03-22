@@ -11,7 +11,7 @@ namespace Exposeum.Fragments
 
         private readonly PointOfInterest _currentPoint;
 		private readonly PointOfInterest _skippedPoint;
-		public delegate void Callback(PointOfInterest poi);
+		public delegate void Callback(PointOfInterest currentPoi, PointOfInterest skippedPoi);
 		private Callback _callback;
 
 		public OutOfOrderPointFragment(PointOfInterest currentPoint, PointOfInterest skippedPoint, Callback callback)
