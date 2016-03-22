@@ -9,18 +9,23 @@ namespace Exposeum.Fragments
     public class OutOfOrderPointFragment : DialogFragment
     {
 
-        private readonly PointOfInterest _point;
+        private readonly PointOfInterest _currentPoint;
+		private readonly PointOfInterest _skippedPoint;
+		public delegate void Callback(PointOfInterest poi);
+		private Callback _callback;
 
-        public OutOfOrderPointFragment(PointOfInterest point)
+		public OutOfOrderPointFragment(PointOfInterest currentPoint, PointOfInterest skippedPoint, Callback callback)
         {
-            _point = point;
+			_currentPoint = currentPoint;
+			_skippedPoint = skippedPoint;
+			_callback = callback;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
-            view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _point.NameEn;
+			view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _skippedPoint.NameEn;
             var textview = view.FindViewById<TextView>(Resource.Id.wrongPointDesc);
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
