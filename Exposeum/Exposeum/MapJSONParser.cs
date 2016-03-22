@@ -18,10 +18,12 @@ namespace Exposeum
 
 		private static String JSON_URL = "http://mowbray.tech/exposeum/exposeum.json";
 
-		public async void ParseMapJSON(){
+		public async void FetchAndParseMapJSON(){
 
+			//fetch the JSON file from the internet
 			String JSONData = await DownloadJSONAsync (JSON_URL);
 
+			//deserialize into JObject which we can iterate over
 			var json = JsonConvert.DeserializeObject (JSONData) as JObject;
 
 			foreach (var floorOBJ in json["floorPlan"]) {
