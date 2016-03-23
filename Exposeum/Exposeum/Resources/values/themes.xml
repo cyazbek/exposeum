@@ -5,7 +5,7 @@
 </style>
 <style name="MyActionBar"
        parent="@android:style/Widget.Holo.Light">
-  <item name="android:height">90dp</item>
-  <item name="android:background">#e2141700</item>
+  <item name="android:height">60dp</item>
+  <item name="android:background">#CC0000</item>
 </style>
 </resources>

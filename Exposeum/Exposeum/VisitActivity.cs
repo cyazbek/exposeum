@@ -20,6 +20,7 @@ namespace Exposeum
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             SetContentView(Resource.Layout.VisitActivity);
             _freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             _storylineButton = FindViewById<Button>(Resource.Id.storyLine);
