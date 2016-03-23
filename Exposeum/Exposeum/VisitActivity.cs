@@ -9,7 +9,7 @@ using Android.Content.PM;
 
 namespace Exposeum
 {
-    [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Choose your Tour", Theme = "@style/CustomActionBarTheme", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
         readonly User _user = User.GetInstance();
