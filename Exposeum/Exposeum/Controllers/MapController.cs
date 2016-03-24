@@ -246,7 +246,7 @@ namespace Exposeum.Controllers
         }
 
 		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, PointOfInterest skippedPoi){
-			skippedPoi.SetVisited;
+			skippedPoi.SetVisited();
 			_mapModel.CurrentStoryline.UpdateProgress (currentPoi);
 		}
 
