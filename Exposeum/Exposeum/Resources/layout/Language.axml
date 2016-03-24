@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroudlanguagefix"
     android:id="@+id/linearLayout2"
     android:weightSum="100">
     <LinearLayout
@@ -18,7 +17,8 @@
             android:src="@drawable/Logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView1" />
+            android:id="@+id/imageView1"
+            android:layout_marginTop="43.5dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="30"
-        android:id="@+id/linearLayout6" />
+        android:id="@+id/linearLayout6"
+        android:gravity="center" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -39,6 +40,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerLang" />
+            android:id="@+id/spinnerLang"
+            android:gravity="center" />
     </LinearLayout>
 </LinearLayout>
