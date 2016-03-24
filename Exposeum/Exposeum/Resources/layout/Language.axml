@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout3"
-        android:layout_weight="50">
+        android:layout_weight="35">
         <ImageView
             android:src="@drawable/Logo"
             android:layout_width="match_parent"
@@ -26,35 +26,19 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout5"
-        android:layout_weight="25">
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerLang" />
-        <Button
-            android:text="@+string/english"
-            android:id="@+id/englishLang"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/button_text"
-            android:layout_gravity="center" />
-    </LinearLayout>
+        android:layout_weight="30"
+        android:id="@+id/linearLayout6" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout4"
-        android:layout_weight="25">
-        <Button
-            android:id="@+id/frenchLang"
-            android:text="@+string/french"
-            android:layout_height="match_parent"
+        android:id="@+id/linearLayout5"
+        android:layout_weight="30">
+        <Spinner
             android:layout_width="match_parent"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:layout_gravity="center"
-            style="@style/button_text" />
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerLang" />
     </LinearLayout>
 </LinearLayout>

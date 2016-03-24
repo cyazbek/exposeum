@@ -22,8 +22,6 @@ namespace Exposeum
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             SetContentView(Resource.Layout.Language);
 
-//======================================================================================
-
             var langList = new string[]
             {
                 "Bonjour, Hello...","Francais", "English"
@@ -47,28 +45,6 @@ namespace Exposeum
                     StartActivity(intent);
                 }
 
-            };
-
-
-
-            //======================================================================================
-            var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
-            var englishButton = FindViewById<Button>(Resource.Id.englishLang);
-//            Language.getInstance(); 
-            frenchButton.Click += (sender, e)=>
-            {
-                
-                _user.SwitchLanguage(Language.Fr);
-                var intent = new Intent(this, typeof(WalkthroughActivity));
-                StartActivity(intent);
-
-            };
-
-            englishButton.Click += (sender, e) =>
-            {
-                _user.SwitchLanguage(Language.En);
-                var intent = new Intent(this, typeof(WalkthroughActivity));
-                StartActivity(intent);
             };
         }
 
