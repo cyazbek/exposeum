@@ -32,6 +32,9 @@ namespace Exposeum.Models
             EnglishButtonString.Add(new ButtonText("PauseItem", "Pause"));
             EnglishButtonString.Add(new ButtonText("LanguageItem", "Language"));
             EnglishButtonString.Add(new ButtonText("QRScannerItem", "Scan QR"));
+            EnglishButtonString.Add(new ButtonText("TourModeTitle", "Tour Mode"));
+            EnglishButtonString.Add(new ButtonText("StorylinesListTitle", "Storylines"));
+
 
             FrenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
             FrenchButtonString.Add(new ButtonText("freeTour", "Visite Libre"));
@@ -49,6 +52,9 @@ namespace Exposeum.Models
             FrenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
             FrenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
             FrenchButtonString.Add(new ButtonText("QRScannerItem", "Scanner QR"));
+            FrenchButtonString.Add(new ButtonText("TourModeTitle", "Mode de Tour"));
+            FrenchButtonString.Add(new ButtonText("StorylinesListTitle", "Histoire"));
+
 
 
             FrenchImageList.Add(Resource.Drawable.first_fr);

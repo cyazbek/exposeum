@@ -17,14 +17,15 @@ namespace Exposeum
         Button _freeVisitButton;
         Button _storylineButton;
         Button _languageSelector;
+        TextView _actionBarTitle;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
 
-            //var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
-            //title.Text = "hhhhhhh";
+            //var _actionBarTitle = FindViewById<TextView>(Resource.Id.TitleActionBar);
+            //_actionBarTitle.Text = "hhhhhhh";
             SetContentView(Resource.Layout.VisitActivity);
             _freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             _storylineButton = FindViewById<Button>(Resource.Id.storyLine);
@@ -40,8 +41,8 @@ namespace Exposeum
             ActionBar.SetCustomView(Resource.Layout.ActionBar);
             ActionBar.SetDisplayShowCustomEnabled(true);
 
-            var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
-            title.Text = GetString(Resource.String.TourModeTitle);
+            _actionBarTitle = FindViewById<TextView>(Resource.Id.TitleActionBar);
+            _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
 
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
@@ -90,6 +91,8 @@ namespace Exposeum
                     User.GetInstance().ToogleLanguage();
                     _freeVisitButton.Text = _user.GetButtonText("freeTour");
                     _storylineButton.Text = _user.GetButtonText("storyLine");
+                    _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
+
                     return true;
 
                 case Resource.Id.QRScannerItem:

@@ -28,6 +28,9 @@ namespace Exposeum
             ActionBar.SetCustomView(Resource.Layout.ActionBar);
             ActionBar.SetDisplayShowCustomEnabled(true);
 
+            var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
+            title.Text = User.GetInstance().GetButtonText("TourModeTitle");
+
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
