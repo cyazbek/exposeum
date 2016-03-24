@@ -13,13 +13,26 @@ namespace Exposeum
 	public class LanguageActivity : Activity
 	{
         /*private Models.Database myDB = new Models.Database();*/
-	    readonly User _user = User.GetInstance(); 
+	    readonly User _user = User.GetInstance();
+
+	    private Spinner spinnerLang;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             SetContentView(Resource.Layout.Language);
 
+//======================================================================================
+
+            var langList = new string[]
+            {
+                "Francais", "English"
+            };
+            spinnerLang = FindViewById<Spinner>(Resource.Id.spinnerLang);
+
+
+
+//======================================================================================
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
             var englishButton = FindViewById<Button>(Resource.Id.englishLang);
 //            Language.getInstance(); 
@@ -44,8 +57,6 @@ namespace Exposeum
     
 
 }
-
-
 
 
 

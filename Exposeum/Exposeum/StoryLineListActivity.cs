@@ -28,7 +28,7 @@ namespace Exposeum
             ActionBar.SetDisplayShowCustomEnabled(true);
 
             var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
-            title.Text = User.GetInstance().GetButtonText("StrorylinesListTitle");
+            title.Text = User.GetInstance().GetButtonText("StorylinesListTitle");
 
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>

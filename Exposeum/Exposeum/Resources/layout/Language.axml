@@ -3,22 +3,58 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroudlanguagefix">
-    <Button
-        android:text="@+string/english"
-        android:id="@+id/englishLang"
-        android:layout_width="250dp"
+    android:background="@drawable/backgroudlanguagefix"
+    android:id="@+id/linearLayout2"
+    android:weightSum="100">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/button_text"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5.00dp"
-        android:layout_marginTop="250dp" />
-    <Button
-        android:id="@+id/frenchLang"
-        android:text="@+string/french"
+        android:id="@+id/linearLayout3"
+        android:layout_weight="50">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_Content"
+            android:id="@+id/spinnerLang" />
+        <ImageView
+            android:src="@android:drawable/back_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="250dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_gravity="center"
-        style="@style/button_text" />
+        android:id="@+id/linearLayout5"
+        android:layout_weight="25">
+        <Button
+            android:text="@+string/english"
+            android:id="@+id/englishLang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/button_text"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:layout_weight="25">
+        <Button
+            android:id="@+id/frenchLang"
+            android:text="@+string/french"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:layout_gravity="center"
+            style="@style/button_text" />
+    </LinearLayout>
 </LinearLayout>

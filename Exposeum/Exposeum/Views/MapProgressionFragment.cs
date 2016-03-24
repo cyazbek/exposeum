@@ -48,7 +48,7 @@ namespace Exposeum.Views
 				Orientation = Orientation.Vertical;
 				SetWillNotDraw(false); //causes the OnDraw override below to be called
 				SetMinimumHeight(220);
-				SetBackgroundColor(Color.Red);
+				SetBackgroundColor(Color.ParseColor("#CC0000"));
 
 				ResetPaint();
 			}
@@ -62,7 +62,7 @@ namespace Exposeum.Views
 
 				Paint text = new Paint ();
 				text.TextSize = 300;
-				text.Color = Color.Red;
+				text.Color = Color.ParseColor("#CC0000");
 
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
@@ -84,7 +84,7 @@ namespace Exposeum.Views
 						text.Color = Color.White;
 
 						_circle.SetStyle (Paint.Style.Fill);
-						_circle.Color = Color.Red;
+						_circle.Color = Color.ParseColor("#CC0000");
 
 						canvas.DrawCircle (currentCentreX, 650, 250, _circle);
 
