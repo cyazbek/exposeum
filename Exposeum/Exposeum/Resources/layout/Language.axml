@@ -14,12 +14,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout3"
         android:layout_weight="50">
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_Content"
-            android:id="@+id/spinnerLang" />
         <ImageView
-            android:src="@android:drawable/back_arrow"
+            android:src="@drawable/Logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView1" />
@@ -32,6 +28,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout5"
         android:layout_weight="25">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerLang" />
         <Button
             android:text="@+string/english"
             android:id="@+id/englishLang"

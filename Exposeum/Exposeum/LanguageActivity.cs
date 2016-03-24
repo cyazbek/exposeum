@@ -26,13 +26,32 @@ namespace Exposeum
 
             var langList = new string[]
             {
-                "Francais", "English"
+                "Bonjour, Hello...","Francais", "English"
             };
             spinnerLang = FindViewById<Spinner>(Resource.Id.spinnerLang);
+            spinnerLang.Adapter = new ArrayAdapter<string>(this, 
+                Android.Resource.Layout.SelectDialogItem, langList);
+
+            spinnerLang.ItemSelected += (sender, args) =>
+            {
+                if (args.Position == 1)
+                {
+                    _user.SwitchLanguage(Language.Fr);
+                    var intent = new Intent(this, typeof(WalkthroughActivity));
+                    StartActivity(intent);
+                }
+                else if (args.Position == 2)
+                {
+                    _user.SwitchLanguage(Language.En);
+                    var intent = new Intent(this, typeof(WalkthroughActivity));
+                    StartActivity(intent);
+                }
+
+            };
 
 
 
-//======================================================================================
+            //======================================================================================
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);
             var englishButton = FindViewById<Button>(Resource.Id.englishLang);
 //            Language.getInstance(); 
