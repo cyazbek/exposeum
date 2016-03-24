@@ -6,6 +6,7 @@ using Android.Widget;
 using Exposeum.Models;
 using Exposeum.Controllers;
 using Android.Content.PM;
+using Java.IO;
 
 namespace Exposeum
 {
@@ -21,6 +22,9 @@ namespace Exposeum
         {
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+
+            //var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
+            //title.Text = "hhhhhhh";
             SetContentView(Resource.Layout.VisitActivity);
             _freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
             _storylineButton = FindViewById<Button>(Resource.Id.storyLine);
@@ -28,14 +32,16 @@ namespace Exposeum
             _storylineButton.Text = _user.GetButtonText("storyLine");
 
 
-            //=======    Action Bar   =================================================================================
-            //remove default bar
+            //remove default action bar
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetDisplayShowTitleEnabled(false);
 
-            //add custom bar
+            //add custom action bar
             ActionBar.SetCustomView(Resource.Layout.ActionBar);
             ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var title = FindViewById<TextView>(Resource.Id.TitleActionBar);
+            title.Text = GetString(Resource.String.TourModeTitle);
 
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>

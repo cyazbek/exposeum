@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
 
@@ -16,6 +17,7 @@ namespace Exposeum
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             SetContentView(Resource.Layout.Language);
 
             var frenchButton = FindViewById<Button>(Resource.Id.frenchLang);

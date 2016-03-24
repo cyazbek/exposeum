@@ -7,7 +7,7 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-	[Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity(Label = "StoryLineListActivity", Theme = "@style/CustomActionBarTheme", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]
     public class StoryLineListActivity : Activity
     {
         public Map Map;
@@ -17,8 +17,9 @@ namespace Exposeum
         {
             _bundle = bundle;
             base.OnCreate(bundle);
-            //=========================================================================================================
-            //remove default bar
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+
+            //remove default action bar
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetDisplayShowTitleEnabled(false);
 

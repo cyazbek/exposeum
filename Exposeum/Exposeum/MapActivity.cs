@@ -7,7 +7,7 @@ using Exposeum.Models;
 
 namespace Exposeum
 {
-	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light" , ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]	
+	[Activity(Label = "@string/map_activity", Theme = "@style/CustomActionBarTheme", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]	
 	public class MapActivity : Activity
 	{
 
