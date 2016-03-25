@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -10,14 +11,14 @@ namespace Exposeum.Fragments
     {
 
         private readonly PointOfInterest _currentPoint;
-		private readonly PointOfInterest _skippedPoint;
-		public delegate void Callback(PointOfInterest currentPoi, PointOfInterest skippedPoi);
+        private readonly IEnumerable<MapElement> _skippedPoints; 
+		public delegate void Callback(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints);
 		private readonly Callback _callback;
 
-		public OutOfOrderPointFragment(PointOfInterest currentPoint, PointOfInterest skippedPoint, Callback callback)
+		public OutOfOrderPointFragment(PointOfInterest currentPoint, IEnumerable<MapElement> skippedPoint, Callback callback)
         {
 			_currentPoint = currentPoint;
-			_skippedPoint = skippedPoint;
+            _skippedPoints = skippedPoint;
 			_callback = callback;
         }
 
@@ -25,7 +26,6 @@ namespace Exposeum.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
-			view.FindViewById<TextView>(Resource.Id.wrongPointDesc).Text += _skippedPoint.NameEn;
             var textview = view.FindViewById<TextView>(Resource.Id.wrongPointDesc);
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
@@ -44,8 +44,8 @@ namespace Exposeum.Fragments
 
             yesButton.Click += (sender, e) =>
             {
+                _callback(_currentPoint, _skippedPoints);
                 Dismiss();
-                _callback(_currentPoint, _skippedPoint);
             };
 
             Dialog.SetCanceledOnTouchOutside(true);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Exposeum.Views;
 using Exposeum.Models;
 using Android.App;
@@ -185,7 +186,7 @@ namespace Exposeum.Controllers
             }
             catch (PointOfInterestNotVisitedException e)
             {
-				DisplayOutOfOrderPointOfInterestPopup(poi, e.Poi);
+                DisplayOutOfOrderPointOfInterestPopup(poi, e.UnvistedMapElements);
             }
         }
 
@@ -240,14 +241,19 @@ namespace Exposeum.Controllers
         /// <summary>
         /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
         /// </summary>
-		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, PointOfInterest skippedPoi)
+		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPois)
         {
-			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedPoi, SkipOutOfOrderPOI);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedPois, SkipOutOfOrderPOI);
         }
 
-		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, PointOfInterest skippedPoi){
-			skippedPoi.SetVisited();
+		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints){
+
+		    foreach (var x in skippedPoints)
+		    {
+		        x.SetVisited();
+		    }
 			_mapModel.CurrentStoryline.UpdateProgress (currentPoi);
+            _mapView.Update();
 		}
 
         /// <summary>

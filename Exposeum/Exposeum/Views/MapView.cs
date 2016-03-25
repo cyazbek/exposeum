@@ -296,7 +296,7 @@ namespace Exposeum.Views
 			return null;
 		}
 
-		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, PointOfInterest skippedPoi, OutOfOrderPointFragment.Callback callback)
+		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoi, OutOfOrderPointFragment.Callback callback)
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
 	        {
