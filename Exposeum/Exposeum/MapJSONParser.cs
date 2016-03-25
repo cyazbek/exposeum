@@ -7,7 +7,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-using Exposeum.Models;
+using Exposeum.TempModels;
 using Android.Graphics.Drawables;
 
 namespace Exposeum
@@ -30,7 +30,7 @@ namespace Exposeum
 			List<Floor> floors = ParseFloors (JSONPayload);
 
 			//deserialize and store the storylines from the JSON data
-			List<Exposeum.Models.StoryLine> storylines = ParseStorylines (JSONPayload);
+			List<Storyline> storylines = ParseStorylines (JSONPayload);
 		}
 
 		private List<Floor> ParseFloors(JObject JSONPayload){
@@ -41,21 +41,10 @@ namespace Exposeum
 
 				String drawableString = (String)floorOBJ ["imagePath"];
 
-				Drawable floorDrawable; 
+				Floor newFloor = new Floor ();
 
-				try
-				{
-					floorDrawable = Android.App.Application.Context.Resources.GetDrawable(Android.App.Application.Context.Resources.GetIdentifier(drawableString, "drawable", "Exposeum"));
-
-				}
-				catch(Exception e)
-				{
-					floorDrawable = new ColorDrawable();
-				}
-
-				Floor newFloor = new Floor (floorDrawable);
-
-				int floorID = int.Parse ((String)floorOBJ ["floorID"]); //get the floor ID for possible later use
+				newFloor.Plan = drawableString;
+				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]); //get the floor ID for possible later use
 
 				floors.Add (newFloor);
 			}
@@ -64,18 +53,19 @@ namespace Exposeum
 
 		}
 
-		private List<StoryLine> ParseStorylines(JObject JSONPayload){
+		private List<Storyline> ParseStorylines(JObject JSONPayload){
 
-			List<StoryLine> storylines = new List<StoryLine>();
+			List<Storyline> storylines = new List<Storyline>();
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
 				int storylineID = int.Parse ((String)storylineOBJ ["id"]);
 
-				StoryLine newStoryline = new StoryLine (storylineID);
+				Storyline newStoryline = new Storyline ();
 
 				//TODO: associate previously-parsed MapElements to this storyline
 
+				String newStoryLineDescrition = (String)storylineOBJ ["description"];
 				storylines.Add (newStoryline);
 			}
 
