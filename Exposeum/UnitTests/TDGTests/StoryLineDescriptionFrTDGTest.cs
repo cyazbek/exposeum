@@ -11,14 +11,14 @@ namespace UnitTests
     {
         public readonly StoryLineDescriptionFr _setObject = new StoryLineDescriptionFr();
         public StoryLineDescriptionFr _testObject;
-        public readonly StoryLineDescriptionFrTDG _objectTDG = StoryLineDescriptionFrTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly StoryLineDescriptionFrTdg _objectTDG = StoryLineDescriptionFrTdg.GetInstance();
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.title = "title";
-            _setObject.description = "description";
+            _setObject.Id = 1;
+            _setObject.Title = "title";
+            _setObject.Description = "description";
         }
 
         [Test]
@@ -31,29 +31,29 @@ namespace UnitTests
         public void AddStoryLineDescriptionFrTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<StoryLineDescriptionFr>(_setObject.ID);
+            _testObject = _db.Get<StoryLineDescriptionFr>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void GetStoryLineDescriptionFrTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _objectTDG.GetStoryLineDescriptionFr(_setObject.ID);
+            _testObject = _objectTDG.GetStoryLineDescriptionFr(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void UpdateStoryLineDescriptionFrTest()
         {
             _testObject = new StoryLineDescriptionFr();
-            _setObject.ID = 1;
-            _setObject.title = "title";
-            _setObject.description = "description";
+            _setObject.Id = 1;
+            _setObject.Title = "title";
+            _setObject.Description = "description";
             _objectTDG.Add(_testObject);
-            _testObject.title = "title2";
-            string title = _testObject.title;
+            _testObject.Title = "title2";
+            string title = _testObject.Title;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetStoryLineDescriptionFr(_testObject.ID);
-            Assert.AreEqual(_testObject.title, title);
+            _testObject = _objectTDG.GetStoryLineDescriptionFr(_testObject.Id);
+            Assert.AreEqual(_testObject.Title, title);
         }
     }
 }

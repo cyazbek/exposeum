@@ -2,20 +2,20 @@ namespace Exposeum.TempModels
 {
     public class StorylineDescription
     {
-        public int _storyLineDescriptionId { get; set; }
-        public string _title { get; set; }
-        public string _description { get; set; }
-        public Models.Language _language { get; set; }
+        public int StoryLineDescriptionId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Models.Language Language { get; set; }
         public bool Equals(StorylineDescription other)
         {
             if ((object)other == null)
             {
                 return false;
             }
-            return _storyLineDescriptionId == other._storyLineDescriptionId &&
-                _description.Equals(other._description) &&
-                _title.Equals(other._title) &&
-                _language.Equals(other._language);
+            return StoryLineDescriptionId == other.StoryLineDescriptionId &&
+                Description.Equals(other.Description) &&
+                Title.Equals(other.Title) &&
+                Language.Equals(other.Language);
         }
     }
 }

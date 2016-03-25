@@ -1,11 +1,11 @@
 ﻿using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Services.Service_Providers
 {
 	public class ExplorerServiceProvider: IExplorerService
 	{
 		//this service is only concerned with the Storylines so we use the story line service
-		private IStoryLineService _storyLineService;
+		private readonly IStoryLineService _storyLineService;
 
 		public ExplorerServiceProvider ()
 		{

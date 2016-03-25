@@ -4,17 +4,17 @@ namespace Exposeum.TempModels
 {
     public class PointOfInterestDescription
     {
-        public int _id { get; set; }
-        public string _title { get; set; }
-        public string _summary { get; set; }
-        public string _description { get; set; }
-        public Models.Language _language { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Description { get; set; }
+        public Models.Language Language { get; set; }
         public override bool Equals(object obj)
         {
             if(obj!=null)
             {
                 PointOfInterestDescription other = (PointOfInterestDescription)obj;
-                return other._id == _id && other._description.Equals(_description) && other._language.Equals(_language) && other._summary.Equals(_summary); 
+                return other.Id == Id && other.Description.Equals(Description) && other.Language.Equals(Language) && other.Summary.Equals(Summary); 
             }
             return false; 
         }

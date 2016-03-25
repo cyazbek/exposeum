@@ -7,11 +7,11 @@ namespace Exposeum.Mappers
     public class FloorMapper
     {
         private static FloorMapper _instance;
-        private readonly FloorTDG _floorTdg;
+        private readonly FloorTdg _floorTdg;
 
         private FloorMapper()
         {
-            _floorTdg = FloorTDG.GetInstance();
+            _floorTdg = FloorTdg.GetInstance();
         }
 
         public static FloorMapper GetInstance()
@@ -45,7 +45,7 @@ namespace Exposeum.Mappers
         {
             Tables.Floor floorTable = new Tables.Floor
             {
-                ID = floor._id,
+                Id = floor.Id,
                 // imageId = ImageMapper.GetInstance().GetIdFromPath(floor._plan);
             };
 
@@ -72,11 +72,11 @@ namespace Exposeum.Mappers
         }
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-            string image = ImageMapper.GetInstance().GetImagePath(floorTable.ID);
+            string image = ImageMapper.GetInstance().GetImagePath(floorTable.Id);
             Floor modelFloor = new Floor
             {
-                _plan = image,
-                _id = floorTable.ID
+                Plan = image,
+                Id = floorTable.Id
             };
             return modelFloor;
         }

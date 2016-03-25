@@ -11,7 +11,7 @@ namespace Exposeum
     public class StoryLineListActivity : Activity
     {
         public Map Map;
-		StorylineController _storylineController = StorylineController.GetInstance();
+	    readonly StorylineController _storylineController = StorylineController.GetInstance();
         private Bundle _bundle;
         protected override void OnCreate(Bundle bundle)
         {
@@ -35,10 +35,9 @@ namespace Exposeum
 
             //=========================================================================================================
 
-            ListView listView;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
-            listView = FindViewById<ListView>(Resource.Id.List);
+            var listView = FindViewById<ListView>(Resource.Id.List);
 			listView.Adapter = _storylineController.GetStoryLines(this);
             listView.ItemClick += ListViewItemClick;
         }
@@ -58,7 +57,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -70,17 +69,21 @@ namespace Exposeum
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
                     return true;
-                case Resource.Id.PauseItem:
-                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
-                    //do something
-                    return true;
                 case Resource.Id.QRScannerItem:
                     Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
-        } 
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true;
+
+        }
 
     }
 }

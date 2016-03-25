@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:padding="8dp">
+    <ImageView
+        android:src="@drawable/completed"
+        android:id="@+id/completedIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/completedStoryLineTitle"
+            android:layout_width="270.5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#5b2f2f"
+            android:textSize="25dip"
+            android:textStyle="bold"
+            android:paddingLeft="85dip"
+            android:text="You've completed the storyline!" />
+        <TextView
+            android:id="@+id/storyLineCompleteDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dip"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:textColor="#000000"
+            android:paddingTop="20dip"
+            android:paddingLeft="85dip"
+            android:paddingRight="5dip"
+            android:text="Do you wish to be guided back to your starting point?" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp">
+            <Button
+                android:text="Yes"
+                android:id="@+id/guidedBackToStartTrueButton"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+            <Button
+                android:text="No"
+                android:id="@+id/guidedBackToStartFalseButton"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

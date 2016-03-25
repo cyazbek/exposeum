@@ -29,5 +29,9 @@ namespace Exposeum.Models
         }
 
         public abstract void Draw(Canvas canvas);
+
+		public MapElement ShallowCopy(){
+			return (MapElement)MemberwiseClone ();
+		}
 	}
 }

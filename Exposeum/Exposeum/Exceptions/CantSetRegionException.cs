@@ -1,7 +1,6 @@
 using System;
-using JavaObject = Java.Lang.Object;
 
-namespace Exposeum
+namespace Exposeum.Exceptions
 {
 	public class CantSetRegionException : Exception
 	{

@@ -11,15 +11,15 @@ namespace UnitTests
     {
         public readonly Beacon _setObject = new Beacon();
         public Beacon _testObject; 
-        public readonly BeaconTDG _beaconTDG = BeaconTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly BeaconTdg _beaconTDG = BeaconTdg.GetInstance();
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         [SetUp()]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.UUID = "test";
-            _setObject.minor = 12345;
-            _setObject.major = 12345; 
+            _setObject.Id = 1;
+            _setObject.Uuid = "test";
+            _setObject.Minor = 12345;
+            _setObject.Major = 12345; 
         }
 
         [Test]
@@ -32,30 +32,30 @@ namespace UnitTests
         public void AddBeaconTest()
         {
             _beaconTDG.Add(_setObject);
-            _testObject = _db.Get<Beacon>(_setObject.ID);
+            _testObject = _db.Get<Beacon>(_setObject.Id);
             Assert.IsTrue(_beaconTDG.Equals(_testObject,_setObject));
         }
         [Test()]
         public void GetBeaconTest()
         {
             _beaconTDG.Add(_setObject);
-            _testObject = _beaconTDG.GetBeacon(_setObject.ID);
+            _testObject = _beaconTDG.GetBeacon(_setObject.Id);
             Assert.IsTrue(_beaconTDG.Equals(_testObject, _setObject));
         }
         [Test()]
         public void UpdateBeaconTest()
         {
             _testObject = new Beacon(); 
-            _testObject.ID = 3;
-            _testObject.UUID = "test";
-            _testObject.major = 1234;
-            _testObject.minor = 1234;
+            _testObject.Id = 3;
+            _testObject.Uuid = "test";
+            _testObject.Major = 1234;
+            _testObject.Minor = 1234;
             _beaconTDG.Add(_testObject);
-            _testObject.UUID = "test2";
-            string uuid2 = _testObject.UUID;
+            _testObject.Uuid = "test2";
+            string uuid2 = _testObject.Uuid;
             _beaconTDG.Update(_testObject);
-            _testObject = _beaconTDG.GetBeacon(_testObject.ID); 
-            Assert.AreEqual(_testObject.UUID, uuid2); 
+            _testObject = _beaconTDG.GetBeacon(_testObject.Id); 
+            Assert.AreEqual(_testObject.Uuid, uuid2); 
         }
     }
 }

@@ -3,51 +3,50 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class StorylineTDG : TDG
+    public class StorylineTdg : Tdg
     {
-        private static StorylineTDG _instance;
+        private static StorylineTdg _instance;
 
-        private StorylineTDG() { }
+        private StorylineTdg() { }
 
-        public static StorylineTDG GetInstance()
+        public static StorylineTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new StorylineTDG();
+                _instance = new StorylineTdg();
             return _instance;
         }
 
         public void Add(Storyline item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(Storyline item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public Storyline GetStoryline(int id)
         {
-            return _db.Get<Storyline>(id);
+            return Db.Get<Storyline>(id);
         }
 
         public List<Storyline> GetAllStorylines()
         {
-            return new List<Storyline>(_db.Table<Storyline>());
+            return new List<Storyline>(Db.Table<Storyline>());
         }
 
         public bool Equals(Storyline story1, Storyline story2)
         {
-            if (story1.ID == story2.ID &&
-                story1.audience == story2.audience &&
-                story1.duration == story2.duration &&
-                story1.image == story2.image &&
-                story1.floorsCovered == story2.floorsCovered &&
-                story1.lastVisitedPoi == story2.lastVisitedPoi &&
-                story1.status == story2.status &&
-                story1.descriptionId == story2.descriptionId) return true;
-            else return false; 
+            if (story1.Id == story2.Id &&
+                story1.Audience == story2.Audience &&
+                story1.Duration == story2.Duration &&
+                story1.Image == story2.Image &&
+                story1.FloorsCovered == story2.FloorsCovered &&
+                story1.LastVisitedPoi == story2.LastVisitedPoi &&
+                story1.Status == story2.Status &&
+                story1.DescriptionId == story2.DescriptionId) return true;
+            return false;
         }
-
     }
 }

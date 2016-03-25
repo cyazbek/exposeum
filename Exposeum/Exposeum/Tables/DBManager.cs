@@ -1,28 +1,27 @@
 using System;
 using SQLite;
-using System.IO;
 
 
 namespace Exposeum.Tables
 {
-    public class DBManager
+    public class DbManager
     {
-        private static DBManager _dbManager;
+        private static DbManager _dbManager;
         public SQLiteConnection Db;
         public readonly string Path = System.IO.Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.Personal),
         "Exposeum.db3");
 
-        public static DBManager GetInstance()
+        public static DbManager GetInstance()
         {
             if (_dbManager == null)
             {
-                _dbManager = new DBManager();
+                _dbManager = new DbManager();
             }
             return _dbManager;
         }
 
-        private DBManager()
+        private DbManager()
         {
             Db = new SQLiteConnection(Path);
             Db.CreateTable<Storyline>();
