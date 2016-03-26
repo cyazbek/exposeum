@@ -1,11 +1,8 @@
-using Exposeum.Models;
-using Exposeum.Tables;
-using Exposeum.TDGs;
 using StoryLineDescription = Exposeum.TempModels.StorylineDescription;
 
 namespace Exposeum.Mappers
 {
-    public class StoryLineDescriptionMapper
+    public class StorylineDescriptionMapper
     {
         private static StoryLineDescriptionMapper _instance;
         private readonly StoryLineDescriptionEnTdg _storyLineDescriptionEnTdg;
@@ -13,20 +10,20 @@ namespace Exposeum.Mappers
         private StoryLineDescriptionEn _storyLineDescriptionEn;
         private StoryLineDescriptionFr _storyLineDescriptionFr;
 
-        private StoryLineDescriptionMapper()
+        private StorylineDescriptionMapper()
         {
             _storyLineDescriptionEnTdg = StoryLineDescriptionEnTdg.GetInstance();
             _storyLineDescriptionFrTdg = StoryLineDescriptionFrTdg.GetInstance();
         }
 
-        public static StoryLineDescriptionMapper GetInstance()
+        public static StorylineDescriptionMapper GetInstance()
         {
             if (_instance == null)
-                _instance = new StoryLineDescriptionMapper();
-            return _instance;
+                _instance = new StorylineDescriptionMapper();
+            return _instance; 
         }
 
-        public void AddStoryLineDescription(StoryLineDescription storyLineDescription)
+        public void AddDescription(StoryLineDescription model)
         {
             if (storyLineDescription.Language == Language.Fr)
             {
@@ -38,23 +35,23 @@ namespace Exposeum.Mappers
                 _storyLineDescriptionEn = StoryLineDescriptionModelToTableEn(storyLineDescription);
                 _storyLineDescriptionEnTdg.Add(_storyLineDescriptionEn);
             }
-        }
+		}
 
-        public void UpdateStoryLineDescription(StoryLineDescription storyLineDescription)
+        public void UpdateDescription(StoryLineDescription model)
         {
             if (storyLineDescription.Language == Language.Fr)
             {
                 _storyLineDescriptionFr = StoryLineDescriptionModelToTableFr(storyLineDescription);
                 _storyLineDescriptionFrTdg.Update(_storyLineDescriptionFr);
             }
-            else
+			else
             {
                 _storyLineDescriptionEn = StoryLineDescriptionModelToTableEn(storyLineDescription);
                 _storyLineDescriptionEnTdg.Update(_storyLineDescriptionEn);
             }
         }
 
-        public StoryLineDescription GetStoryLineDescription(int storyLineDescriptionId)
+        public StoryLineDescription GetDescription(int id)
         {
             StoryLineDescription storyLineDescriptionModel;
 
@@ -121,5 +118,5 @@ namespace Exposeum.Mappers
 
             return storyLineDescriptionModel;
         }
-    }
+	}
 }

@@ -9,13 +9,13 @@ namespace Exposeum.Mappers
         private static StorylineMapper _instance;
         private readonly StorylineTdg _storylineTdg;
         private readonly MapElementsMapper _mapElementsMapper;
-        private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
+        private readonly StorylineDescriptionMapper _storylineDescriptionMapper;
         private readonly StatusMapper _statusMapper; 
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
             _mapElementsMapper = MapElementsMapper.GetInstance();
-            _storylineDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
+            _storylineDescriptionMapper = StorylineDescriptionMapper.GetInstance();
             _statusMapper = StatusMapper.GetInstance();
         }
 
@@ -92,7 +92,7 @@ namespace Exposeum.Mappers
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Update(storylineTable);
             _mapElementsMapper.UpdateMapElementList(list);
-            _storylineDescriptionMapper.UpdateStoryLineDescription(description);
+            _storylineDescriptionMapper.UpdateDescription(description);
         }
 
         public void AddStoryline(Storyline storyline)
@@ -102,7 +102,7 @@ namespace Exposeum.Mappers
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
             _mapElementsMapper.AddMapElementList(list);
-            _storylineDescriptionMapper.AddStoryLineDescription(description);
+            _storylineDescriptionMapper.AddDescription(description);
         }
 
         public bool Equals(List<Storyline> list1, List<Storyline> list2)
