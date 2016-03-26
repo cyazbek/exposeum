@@ -6,6 +6,8 @@ namespace Exposeum.TempModels
         public string Title { get; set; }
         public int StorylineId { get; set; }
 
+        public Models.Language Language {get; set;}
+
         public override bool Equals(object obj)
         {
             ExhibitionContent other = (ExhibitionContent)obj;
