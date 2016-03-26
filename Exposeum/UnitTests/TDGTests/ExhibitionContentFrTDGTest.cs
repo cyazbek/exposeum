@@ -64,7 +64,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceExhibitionContentFrTdgTest()
         {
-            Assert.NotNull(ExhibitionContentFrTDG.GetInstance());
+            Assert.NotNull(ExhibitionContentFrTdg.GetInstance());
         }
 
         [Test()]

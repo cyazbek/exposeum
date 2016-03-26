@@ -23,7 +23,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceIconTdgTest()
         {
-            Assert.NotNull(IconTDG.GetInstance());
+            Assert.NotNull(IconTdg.GetInstance());
         }
 
         [Test()]

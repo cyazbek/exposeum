@@ -1,12 +1,12 @@
-using Exposeum.Tables;
-using Exposeum.TDGs;
 using Exposeum.Mappers;
 using Exposeum.Models;
+using Exposeum.Tables;
+using Exposeum.TDGs;
 using NUnit.Framework;
 using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
 
 
-namespace UnitTests.MapperTests
+namespace UnitTests
 {
     public class PointOfInterestDescriptionMapperTest
     {
@@ -91,11 +91,11 @@ namespace UnitTests.MapperTests
         {
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = 1,
-                _title = "theTitleEn",
-                _summary = "theSummaryEn",
-                _description = "theDescriptionEn",
-                _language = User.GetInstance()._language
+                Id = 1,
+                Title = "theTitleEn",
+                Summary = "theSummaryEn",
+                Description = "theDescriptionEn",
+                Language = User.GetInstance().Language
             };
 
             PoiDescriptionEn expectedEn = _instance.PoiDescriptionModelToTableEn(_pointOfInterestDescriptionModel);
@@ -107,11 +107,11 @@ namespace UnitTests.MapperTests
         {
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = 1,
-                _title = "theTitleFr",
-                _summary = "theSummaryFr",
-                _description = "theDescriptionFr",
-                _language = User.GetInstance()._language
+                Id = 1,
+                Title = "theTitleFr",
+                Summary = "theSummaryFr",
+                Description = "theDescriptionFr",
+                Language = User.GetInstance().Language
             };
 
             PoiDescriptionFr expectedFr = _instance.PoiDescriptionModelToTableFr(_pointOfInterestDescriptionModel);
@@ -123,11 +123,11 @@ namespace UnitTests.MapperTests
         {
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = 1,
-                _title = "theTitleFr",
-                _summary = "theSummaryFr",
-                _description = "theDescriptionFr",
-                _language = User.GetInstance()._language
+                Id = 1,
+                Title = "theTitleFr",
+                Summary = "theSummaryFr",
+                Description = "theDescriptionFr",
+                Language = User.GetInstance().Language
             };
 
             PointOfInterestDescription expectedFr = _instance.PointOfInterestDescriptionTableToModelFr(_pointOfInterestDescriptionFrTable);
@@ -139,11 +139,11 @@ namespace UnitTests.MapperTests
         {
             _pointOfInterestDescriptionModel = new PointOfInterestDescription
             {
-                _id = 1,
-                _title = "theTitleEn",
-                _summary = "theSummaryEn",
-                _description = "theDescriptionEn",
-                _language = User.GetInstance()._language
+                Id = 1,
+                Title = "theTitleEn",
+                Summary = "theSummaryEn",
+                Description = "theDescriptionEn",
+                Language = User.GetInstance().Language
             };
 
             PointOfInterestDescription expectedEn = _instance.PointOfInterestDescriptionTableToModelEn(_pointOfInterestDescriptionEnTable);

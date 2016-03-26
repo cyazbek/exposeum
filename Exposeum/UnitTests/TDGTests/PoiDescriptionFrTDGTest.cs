@@ -25,7 +25,7 @@ namespace UnitTests
         [Test]
         public void GetInstancePoiDescriptionFrTdgTest()
         {
-            Assert.NotNull(PoiDescriptionFrTDG.GetInstance());
+            Assert.NotNull(PoiDescriptionFrTdg.GetInstance());
         }
 
         [Test()]

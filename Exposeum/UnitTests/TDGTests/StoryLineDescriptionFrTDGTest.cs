@@ -24,7 +24,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceStorylineDescrptionFrTdgTest()
         {
-            Assert.NotNull(StoryLineDescriptionFrTDG.GetInstance());
+            Assert.NotNull(StoryLineDescriptionFrTdg.GetInstance());
         }
 
         [Test()]

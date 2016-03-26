@@ -39,7 +39,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceMapElementsTdgTest()
         {
-            Assert.NotNull(MapElementsTDG.GetInstance());
+            Assert.NotNull(MapElementsTdg.GetInstance());
         }
 
         [Test]

@@ -25,7 +25,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceBeaconTdgTest()
         {
-            Assert.NotNull(BeaconTDG.GetInstance());    
+            Assert.NotNull(BeaconTdg.GetInstance());    
         }
 
         [Test()]

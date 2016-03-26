@@ -29,7 +29,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceStorylineTdgTest()
         {
-            Assert.NotNull(StorylineTDG.GetInstance());
+            Assert.NotNull(StorylineTdg.GetInstance());
         }
 
         [Test()]

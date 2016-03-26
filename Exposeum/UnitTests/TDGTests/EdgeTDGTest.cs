@@ -23,7 +23,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceEdgeTdgTest()
         {
-            Assert.NotNull(BeaconTDG.GetInstance());
+            Assert.NotNull(BeaconTdg.GetInstance());
         }
 
         [SetUp]

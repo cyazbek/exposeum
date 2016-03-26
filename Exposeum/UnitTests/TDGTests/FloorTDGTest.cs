@@ -23,7 +23,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceFloorTdgTest()
         {
-            Assert.NotNull(FloorTDG.GetInstance());
+            Assert.NotNull(FloorTdg.GetInstance());
         }
 
         [Test()]

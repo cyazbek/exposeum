@@ -36,7 +36,7 @@ namespace UnitTests
         [Test]
         public void GetInstanceStorylineMapElementListTdgTest()
         {
-            Assert.NotNull(StoryLineMapElementListTDG.GetInstance());
+            Assert.NotNull(StoryLineMapElementListTdg.GetInstance());
         }
 
         [Test()]
