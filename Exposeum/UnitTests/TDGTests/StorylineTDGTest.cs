@@ -26,6 +26,12 @@ namespace UnitTests
             _setObject.DescriptionId = 5;
         }
 
+        [Test]
+        public void GetInstanceStorylineTdgTest()
+        {
+            Assert.NotNull(StorylineTDG.GetInstance());
+        }
+
         [Test()]
         public void AddStorylineTest()
         {

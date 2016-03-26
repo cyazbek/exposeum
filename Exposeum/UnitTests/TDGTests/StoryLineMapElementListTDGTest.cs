@@ -33,6 +33,12 @@ namespace UnitTests
 
         }
 
+        [Test]
+        public void GetInstanceStorylineMapElementListTdgTest()
+        {
+            Assert.NotNull(StoryLineMapElementListTDG.GetInstance());
+        }
+
         [Test()]
         public void AddStoryLineMapElementListTest()
         {
