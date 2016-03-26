@@ -6,9 +6,9 @@ namespace Exposeum.Tables
     public class Beacon
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
-        public int ID { get; set; }
-        public string UUID { get; set; }
-        public int major { get; set; }
-        public int minor { get; set; }
+        public int Id { get; set; }
+        public string Uuid { get; set; }
+        public int Major { get; set; }
+        public int Minor { get; set; }
     }
 }

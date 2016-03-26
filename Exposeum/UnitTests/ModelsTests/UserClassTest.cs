@@ -20,53 +20,53 @@ namespace UnitTests
         public void SetLanguageToFrenchTest()
 		{
             _language = Language.Fr;
-            _user._language = _language; 
-			Assert.AreEqual(_user._language.ToString(), Language.Fr.ToString());
+            _user.Language = _language; 
+			Assert.AreEqual(_user.Language.ToString(), Language.Fr.ToString());
 		}
 
         [Test()]
 		public void SetLanguageToEnglishTest()
 		{
             _language = Language.En;
-            _user._language = _language;
-            Assert.AreEqual(_user._language.ToString(), Language.En.ToString());
+            _user.Language = _language;
+            Assert.AreEqual(_user.Language.ToString(), Language.En.ToString());
         }
 
 		[Test()]
 		public void SwitchLanguageTest()
 		{
             _user.SwitchLanguage(Language.Fr);
-            Assert.AreEqual(_user._language.ToString(), Language.Fr.ToString());
+            Assert.AreEqual(_user.Language.ToString(), Language.Fr.ToString());
         }
         [Test()]
         public void GetTextOfButtonTest()
         {
-            List<ButtonText> buttonText = _user._frenchButtonString;
+            List<ButtonText> buttonText = _user.FrenchButtonString;
             _user.SwitchLanguage(Language.Fr);
-            Assert.AreSame(_user._currentButtonString, buttonText);
+            Assert.AreSame(_user.CurrentButtonString, buttonText);
         }
         [Test()]
         public void GetFrenchImageTest()
         {
-            List<int> images = _user._frenchImageList;
+            List<int> images = _user.FrenchImageList;
             _user.SwitchLanguage(Language.Fr);
-            Assert.AreSame(_user._currentImageList, images);
+            Assert.AreSame(_user.CurrentImageList, images);
         }
         [Test()]
         public void GetEnglishImageTest()
         {
-            List<int> images = _user._englishImageList;
+            List<int> images = _user.EnglishImageList;
             _user.SwitchLanguage(Language.En);
-            Assert.AreSame(_user._currentImageList, images);
+            Assert.AreSame(_user.CurrentImageList, images);
         }
 
         [Test()]
         public void SetUpLanguageTest()
         {
-            List<ButtonText> buttonText = _user._englishButtonString;
-            _user._language = Language.En;
+            List<ButtonText> buttonText = _user.EnglishButtonString;
+            _user.Language = Language.En;
             _user.SetupLanguage();
-            Assert.AreSame(_user._currentButtonString, buttonText);
+            Assert.AreSame(_user.CurrentButtonString, buttonText);
         }
         [Test()]
         public void ToogleLanguageTest()
@@ -74,7 +74,7 @@ namespace UnitTests
             Language language1 = Language.Fr;
             _user.SwitchLanguage(language1);
             _user.ToogleLanguage();
-            Assert.AreNotEqual(_user._language.ToString(),language1.ToString());
+            Assert.AreNotEqual(_user.Language.ToString(),language1.ToString());
         }
 
 

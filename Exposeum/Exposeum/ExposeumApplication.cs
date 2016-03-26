@@ -1,6 +1,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
+using Exposeum.Models;
 
 namespace Exposeum
 {

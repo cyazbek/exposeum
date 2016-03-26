@@ -5,61 +5,61 @@ namespace Exposeum.Models
 {
     public class User
     {
-        public Language _language;
-        public List<ButtonText> _currentButtonString;
-        public List<ButtonText> _frenchButtonString = new List<ButtonText>();
-        public List<ButtonText> _englishButtonString = new List<ButtonText>();
-        public List<int> _currentImageList;
-        public List<int> _frenchImageList = new List<int>();
-        public List<int> _englishImageList = new List<int>();
-        public Boolean _visitor;
-        private static User _user = new User(); 
+        public Language Language;
+        public List<ButtonText> CurrentButtonString;
+        public List<ButtonText> FrenchButtonString = new List<ButtonText>();
+        public List<ButtonText> EnglishButtonString = new List<ButtonText>();
+        public List<int> CurrentImageList;
+        public List<int> FrenchImageList = new List<int>();
+        public List<int> EnglishImageList = new List<int>();
+        public Boolean Visitor;
+        private static readonly User _user = new User(); 
         private User()
         {
-            _englishButtonString.Add(new ButtonText("WalkThroughButton", "Skip"));
-            _englishButtonString.Add(new ButtonText("freeTour", "Free Visit"));
-            _englishButtonString.Add(new ButtonText("storyLine", "Guided Tours"));
-            _englishButtonString.Add(new ButtonText("languageButton", "FR"));
-            _englishButtonString.Add(new ButtonText("storyLineDialogButton", "Begin Journey"));
-            _englishButtonString.Add(new ButtonText("storyInProgress", "Story In Progress"));
-            _englishButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Resume"));
-            _englishButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Restart"));
-            _englishButtonString.Add(new ButtonText("wrongPointButton", "Dismiss"));
-            _englishButtonString.Add(new ButtonText("pause_text", "Pause"));
-            _englishButtonString.Add(new ButtonText("confirm_pause", "Yes"));
-            _englishButtonString.Add(new ButtonText("reject_pause", "No"));
-            _englishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
-            _englishButtonString.Add(new ButtonText("PauseItem", "Pause"));
-            _englishButtonString.Add(new ButtonText("LanguageItem", "Language"));
-            _englishButtonString.Add(new ButtonText("QRScannerItem", "Scan QR"));
+            EnglishButtonString.Add(new ButtonText("WalkThroughButton", "Skip"));
+            EnglishButtonString.Add(new ButtonText("freeTour", "Free Visit"));
+            EnglishButtonString.Add(new ButtonText("storyLine", "Guided Tours"));
+            EnglishButtonString.Add(new ButtonText("languageButton", "FR"));
+            EnglishButtonString.Add(new ButtonText("storyLineDialogButton", "Begin Journey"));
+            EnglishButtonString.Add(new ButtonText("storyInProgress", "Story In Progress"));
+            EnglishButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Resume"));
+            EnglishButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Restart"));
+            EnglishButtonString.Add(new ButtonText("wrongPointButton", "Dismiss"));
+            EnglishButtonString.Add(new ButtonText("pause_text", "Pause"));
+            EnglishButtonString.Add(new ButtonText("confirm_pause", "Yes"));
+            EnglishButtonString.Add(new ButtonText("reject_pause", "No"));
+            EnglishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
+            EnglishButtonString.Add(new ButtonText("PauseItem", "Pause"));
+            EnglishButtonString.Add(new ButtonText("LanguageItem", "Language"));
+            EnglishButtonString.Add(new ButtonText("QRScannerItem", "Scan QR"));
 
-            _frenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
-            _frenchButtonString.Add(new ButtonText("freeTour", "Visite Libre"));
-            _frenchButtonString.Add(new ButtonText("storyLine", "Tours Guidés"));
-            _frenchButtonString.Add(new ButtonText("languageButton", "EN"));
-            _frenchButtonString.Add(new ButtonText("storyLineDialogButton", "Commencer La Visite"));
-            _frenchButtonString.Add(new ButtonText("storyInProgress", "Actuellement en cours"));
-            _frenchButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Continuer"));
-            _frenchButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Recommencer"));
-            _frenchButtonString.Add(new ButtonText("wrongPointButton", "Fermer"));
-            _frenchButtonString.Add(new ButtonText("pause_text", "Suspendre"));
-            _frenchButtonString.Add(new ButtonText("confirm_pause", "Oui"));
-            _frenchButtonString.Add(new ButtonText("reject_pause", "Non"));
-            _frenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
-            _frenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
-            _frenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
-            _frenchButtonString.Add(new ButtonText("QRScannerItem", "Scanner QR"));
+            FrenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
+            FrenchButtonString.Add(new ButtonText("freeTour", "Visite Libre"));
+            FrenchButtonString.Add(new ButtonText("storyLine", "Tours Guidés"));
+            FrenchButtonString.Add(new ButtonText("languageButton", "EN"));
+            FrenchButtonString.Add(new ButtonText("storyLineDialogButton", "Commencer La Visite"));
+            FrenchButtonString.Add(new ButtonText("storyInProgress", "Actuellement en cours"));
+            FrenchButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Continuer"));
+            FrenchButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Recommencer"));
+            FrenchButtonString.Add(new ButtonText("wrongPointButton", "Fermer"));
+            FrenchButtonString.Add(new ButtonText("pause_text", "Suspendre"));
+            FrenchButtonString.Add(new ButtonText("confirm_pause", "Oui"));
+            FrenchButtonString.Add(new ButtonText("reject_pause", "Non"));
+            FrenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
+            FrenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
+            FrenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
+            FrenchButtonString.Add(new ButtonText("QRScannerItem", "Scanner QR"));
 
 
-            _frenchImageList.Add(Resource.Drawable.first_fr);
-            _frenchImageList.Add(Resource.Drawable.second_fr);
-            _frenchImageList.Add(Resource.Drawable.third_fr);
-            _frenchImageList.Add(Resource.Drawable.fourth_fr);
+            FrenchImageList.Add(Resource.Drawable.first_fr);
+            FrenchImageList.Add(Resource.Drawable.second_fr);
+            FrenchImageList.Add(Resource.Drawable.third_fr);
+            FrenchImageList.Add(Resource.Drawable.fourth_fr);
 
-            _englishImageList.Add(Resource.Drawable.first);
-            _englishImageList.Add(Resource.Drawable.second);    
-            _englishImageList.Add(Resource.Drawable.third);    
-            _englishImageList.Add(Resource.Drawable.fourth);    
+            EnglishImageList.Add(Resource.Drawable.first);
+            EnglishImageList.Add(Resource.Drawable.second);    
+            EnglishImageList.Add(Resource.Drawable.third);    
+            EnglishImageList.Add(Resource.Drawable.fourth);    
         }
         public static  User GetInstance()
         {
@@ -68,7 +68,7 @@ namespace Exposeum.Models
         public string GetButtonText(string id)
         {
             String text = null;
-            foreach (var x in _currentButtonString)
+            foreach (var x in CurrentButtonString)
             {
                 if (x.Id.Equals(id))
                     text = x.Text;
@@ -77,37 +77,37 @@ namespace Exposeum.Models
         }
         public List<int> GetImageList()
         {
-            return _currentImageList;
+            return CurrentImageList;
         }
         public void SwitchLanguage(Language language)
         {
-            _language = language;
+            Language = language;
             SetupLanguage();
         }
         public void SetupLanguage()
         {
-            if (_language == Language.Fr)
+            if (Language == Language.Fr)
             {
-                _currentButtonString = _frenchButtonString;
-                _currentImageList = _frenchImageList;
+                CurrentButtonString = FrenchButtonString;
+                CurrentImageList = FrenchImageList;
             }
             else
             {
-                _currentButtonString = _englishButtonString;
-                _currentImageList = _englishImageList;
+                CurrentButtonString = EnglishButtonString;
+                CurrentImageList = EnglishImageList;
             }
         }
         public void ToogleLanguage()
         {
-            if (_language == Language.En)
+            if (Language == Language.En)
             {
-                _language = Language.Fr;
+                Language = Language.Fr;
                 SetupLanguage();
             }
                 
             else
             {
-                _language = Language.En;
+                Language = Language.En;
                 SetupLanguage();
             }
         }

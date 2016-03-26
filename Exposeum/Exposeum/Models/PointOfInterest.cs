@@ -15,7 +15,7 @@ namespace Exposeum.Models
         public string DescriptionFr { get; set; }
         public int Id { get; set; }
         public int StoryId { get; set; }
-		private float _iconScaleFactor = 0.2f;
+		private readonly float _iconScaleFactor = 0.2f;
 
         public PointOfInterestDescription Description { get; set; }
 
@@ -93,7 +93,7 @@ namespace Exposeum.Models
         {
             string summary;
 
-            if (User.GetInstance()._language.Equals(Language.Fr))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
             else
                 summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
@@ -103,33 +103,29 @@ namespace Exposeum.Models
 
         public string GetDescription()
         {
-            if (User.GetInstance()._language.Equals(Language.Fr))
+            if (User.GetInstance().Language.Equals(Language.Fr))
                 return DescriptionFr;
-            else
-                return DescriptionEn;
+            return DescriptionEn;
         }
 
-        public string GetName()
-        {
-            if (User.GetInstance()._language.Equals(Language.Fr))
+	    public string GetName()
+	    {
+	        if (User.GetInstance().Language.Equals(Language.Fr))
                 return NameFr;
-            else
-                return NameEn;
-        }
+	        return NameEn;
+	    }
 
-        public bool CheckBeacon(Beacon b)
-        {
-            if (Beacon == null)
+	    public bool CheckBeacon(Beacon b)
+	    {
+	        if (Beacon == null)
                 return false;
-            else if (Beacon.Uuid.Equals(b.Uuid) & Beacon.Minor == b.Minor & Beacon.Major == b.Major)
-                return true;
-            else
-                return false;
-        }
+	        if (Beacon.Uuid.Equals(b.Uuid) & Beacon.Minor == b.Minor & Beacon.Major == b.Major)
+	            return true;
+	        return false;
+	    }
 
-       
 
-        public string toString()
+	    public string toString()
         {
             return Id + " " + GetName() + " " + GetDescription();
         }

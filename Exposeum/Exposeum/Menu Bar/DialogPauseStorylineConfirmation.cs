@@ -6,13 +6,13 @@ using Android.Widget;
 using Exposeum.Controllers;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Menu_Bar
 {
     class DialogPauseStorylineConfirmation : DialogFragment
     {
         StoryLine _storyLine;
         readonly StorylineController _storylineController = StorylineController.GetInstance();
-        private Context _context;
+        private readonly Context _context;
 
         public DialogPauseStorylineConfirmation(StoryLine storyLine, Context context)
         {
@@ -38,7 +38,7 @@ namespace Exposeum
                 _storylineController.PauseStorylineBeacons();
                 Toast.MakeText(_context, "Paused", ToastLength.Short).Show();
                 ((Activity)_context).OnBackPressed();
-                this.Dismiss();
+                Dismiss();
 
                 // Redirecting to list of storylines
                 //var intent = new Intent(_context, typeof(StoryLineListActivity));

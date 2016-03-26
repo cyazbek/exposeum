@@ -5,9 +5,9 @@ namespace Exposeum.Tables
     public class PoiDescriptionEn
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
-        public int ID { get; set; }
-        public string title { get; set; }
-        public string summary { get; set; }
-        public string description { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -3,53 +3,53 @@ using System.Collections.Generic;
 
 namespace Exposeum.TDGs
 {
-    public class MapElementsTDG : TDG
+    public class MapElementsTdg : Tdg
     {
-        private static MapElementsTDG _instance;
+        private static MapElementsTdg _instance;
 
-        private MapElementsTDG() { }
+        private MapElementsTdg() { }
 
-        public static MapElementsTDG GetInstance()
+        public static MapElementsTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new MapElementsTDG();
+                _instance = new MapElementsTdg();
             return _instance;
         }
 
         public void Add(MapElements item)
         {
-            _db.InsertOrReplace(item);
+            Db.InsertOrReplace(item);
         }
 
         public void Update(MapElements item)
         {
-            _db.Update(item);
+            Db.Update(item);
         }
 
         public MapElements GetMapElement(int id)
         {
-            return _db.Get<MapElements>(id);
+            return Db.Get<MapElements>(id);
         }
 
         public List<MapElements> GetAllMapElements()
         {
-            return new List<MapElements>(_db.Table<MapElements>());
+            return new List<MapElements>(Db.Table<MapElements>());
         }
         public bool Equals(MapElements element1, MapElements element2)
         {
-            if (element1.ID == element2.ID &&
-            element1.uCoordinate.Equals(element2.uCoordinate) &&
-            element1.vCoordinate.Equals(element2.vCoordinate) &&
-            element1.discriminator == element2.discriminator &&
-            element1.visited == element2.visited &&
-            element1.beaconId == element2.beaconId &&
-            element1._storyLineId == element2._storyLineId &&
-            element1.poiDescription == element2.poiDescription &&
-            element1.label == element2.label &&
-            element1.exhibitionContent == element2.exhibitionContent &&
-            element1.floorId == element2.floorId)
+            if (element1.Id == element2.Id &&
+            element1.UCoordinate.Equals(element2.UCoordinate) &&
+            element1.VCoordinate.Equals(element2.VCoordinate) &&
+            element1.Discriminator == element2.Discriminator &&
+            element1.Visited == element2.Visited &&
+            element1.BeaconId == element2.BeaconId &&
+            element1.StoryLineId == element2.StoryLineId &&
+            element1.PoiDescription == element2.PoiDescription &&
+            element1.Label == element2.Label &&
+            element1.ExhibitionContent == element2.ExhibitionContent &&
+            element1.FloorId == element2.FloorId)
                 return true;
-            else return false; 
+            return false;
         }
     }
 }

@@ -35,12 +35,6 @@ namespace Exposeum.Fragments
             Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
-        }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {

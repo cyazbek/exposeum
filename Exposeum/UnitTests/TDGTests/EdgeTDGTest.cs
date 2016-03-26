@@ -16,8 +16,8 @@ namespace UnitTests
     {
         public readonly Edge _setObject = new Edge();
         public Edge _testObject;
-        public readonly EdgeTDG _objectTDG = EdgeTDG.GetInstance();
-        public SQLiteConnection _db = DBManager.GetInstance().GetConnection();
+        public readonly EdgeTdg _objectTDG = EdgeTdg.GetInstance();
+        public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
         private readonly List<Edge> _listOfEdgesTable = new List<Edge>();
 
         [Test]
@@ -29,17 +29,17 @@ namespace UnitTests
         [SetUp]
         public void Setup()
         {
-            _setObject.ID = 1;
-            _setObject.distance = 12.5;
-            _setObject.startMapElementId = 12345;
-            _setObject.endMapElementId = 12345;
+            _setObject.Id = 1;
+            _setObject.Distance = 12.5;
+            _setObject.StartMapElementId = 12345;
+            _setObject.EndMapElementId = 12345;
         }
 
         [Test]
         public void AddEdgeTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<Edge>(_setObject.ID);
+            _testObject = _db.Get<Edge>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject,_setObject));
         }
 
@@ -47,7 +47,7 @@ namespace UnitTests
         public void GetEdgeTest()
         {
             _objectTDG.Add(_setObject);            
-            _testObject = _objectTDG.GetEdge(_setObject.ID);
+            _testObject = _objectTDG.GetEdge(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
 
@@ -55,16 +55,16 @@ namespace UnitTests
         public void UpdateEdgeTest()
         {
             _testObject = new Edge();
-            _testObject.ID = 1;
-            _testObject.distance = 12.5;
-            _testObject.startMapElementId = 12345;
-            _testObject.endMapElementId = 12345;
+            _testObject.Id = 1;
+            _testObject.Distance = 12.5;
+            _testObject.StartMapElementId = 12345;
+            _testObject.EndMapElementId = 12345;
             _objectTDG.Add(_testObject);
-            _testObject.distance = 0;
-            double distance = _testObject.distance;
+            _testObject.Distance = 0;
+            double distance = _testObject.Distance;
             _objectTDG.Update(_testObject);
-            _testObject = _objectTDG.GetEdge(_testObject.ID);
-            Assert.AreEqual(_testObject.distance, distance);
+            _testObject = _objectTDG.GetEdge(_testObject.Id);
+            Assert.AreEqual(_testObject.Distance, distance);
         }
 
         [Test]

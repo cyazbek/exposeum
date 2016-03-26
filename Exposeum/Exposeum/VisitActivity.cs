@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Controllers;
 using Android.Content.PM;
 
 namespace Exposeum
@@ -11,7 +12,7 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User _user = User.GetInstance();
+        readonly User _user = User.GetInstance();
         Button _freeVisitButton;
         Button _storylineButton;
         Button _languageSelector;
@@ -38,7 +39,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
 
 
@@ -66,7 +67,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
             return base.OnCreateOptionsMenu(menu);
             
         }
@@ -83,13 +84,9 @@ namespace Exposeum
                     _freeVisitButton.Text = _user.GetButtonText("freeTour");
                     _storylineButton.Text = _user.GetButtonText("storyLine");
                     return true;
-                case Resource.Id.PauseItem:
-                    //Toast.MakeText(context, item.GetType().ToString(), ToastLength.Long);
 
-                    return true;
                 case Resource.Id.QRScannerItem:
-                    
-                    //do something
+					QrController.GetInstance(this).BeginQrScanning();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
@@ -98,8 +95,7 @@ namespace Exposeum
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
             var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
-            var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("PauseItem"));
-            var menuItem3 = menu.GetItem(2).SetTitle(_user.GetButtonText("QRScannerItem"));
+            var menuItem2= menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
             return true; 
 
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Exceptions
 {
 	public class PointOfInterestNotVisitedException : Exception
 	{

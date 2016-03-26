@@ -83,14 +83,12 @@ namespace Exposeum
             switch (item.ItemId)
             {
                 case Resource.Id.LanguageItem:
-                    //Language.ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    User.GetInstance().ToogleLanguage(); 
                     return true;
                 case Resource.Id.PauseItem:
-                    StorylineController _storylineController = StorylineController.GetInstance();
+                    StorylineController storylineController = StorylineController.GetInstance();
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                    _storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    storylineController.ShowPauseStoryLineDialog(transaction, this);
                     
                     return true;
                 case Resource.Id.QRScannerItem:
@@ -98,6 +96,15 @@ namespace Exposeum
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true;
+
         }
     }
 }

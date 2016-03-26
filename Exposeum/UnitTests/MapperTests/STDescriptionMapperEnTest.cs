@@ -10,7 +10,7 @@ namespace UnitTests.MapperTests
     [TestFixture]
     class STDescriptionMapperEnTest
     {
-        readonly StoryLineDescriptionEnTDG _tdg = StoryLineDescriptionEnTDG.GetInstance();
+        readonly StoryLineDescriptionEnTdg _tdg = StoryLineDescriptionEnTdg.GetInstance();
         StorylineDescription _desc1;
         StorylineDescription _desc2;
         StorylineDescriptionMapperEn _mapper;
@@ -19,26 +19,26 @@ namespace UnitTests.MapperTests
         [SetUp]
         public void SetUp()
         {
-            _tdg._db.DeleteAll<StoryLineDescriptionEn>();
+            _tdg.Db.DeleteAll<StoryLineDescriptionEn>();
 
             _desc1 = new StorylineDescription
             {
-                _title = "theTitle",
-                _description = "theDescription",
-                _language = Exposeum.Models.Language.En
+                Title = "theTitle",
+                Description = "theDescription",
+                Language = Exposeum.Models.Language.En
             };
 
             _desc2 = new StorylineDescription
             {
-                _title = "theTitle",
-                _description = "theDescription",
-                _language = Exposeum.Models.Language.En
+                Title = "theTitle",
+                Description = "theDescription",
+                Language = Exposeum.Models.Language.En
             };
 
             _table1 = new StoryLineDescriptionEn
             {
-                title = "theTitle",
-                description = "theDescription"
+                Title = "theTitle",
+                Description = "theDescription"
             };
 
             _mapper = StorylineDescriptionMapperEn.GetInstance();
@@ -48,7 +48,7 @@ namespace UnitTests.MapperTests
         public void AddGetDescriptionTest()
         {
             _mapper.AddDescription(_desc1);
-            StorylineDescription expected = _mapper.GetDescription(_desc1._storyLineDescriptionId);
+            StorylineDescription expected = _mapper.GetDescription(_desc1.StoryLineDescriptionId);
             Assert.IsTrue(_desc1.Equals(expected));
         }
 
@@ -56,9 +56,9 @@ namespace UnitTests.MapperTests
         public void UpdateDescriptionTest()
         {
             _mapper.AddDescription(_desc2);
-            _desc2._description = "description2";
+            _desc2.Description = "description2";
             _mapper.UpdateDescription(_desc2);
-            Assert.IsTrue("description2".Equals(_mapper.GetDescription(_desc2._storyLineDescriptionId)._description));
+            Assert.IsTrue("description2".Equals(_mapper.GetDescription(_desc2.StoryLineDescriptionId).Description));
         }
 
         [Test]
