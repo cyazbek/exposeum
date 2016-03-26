@@ -31,10 +31,7 @@ namespace Exposeum.Fragments
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var noButton = view.FindViewById<Button>(Resource.Id.wrongPointButton);
-            noButton.Text = User.GetInstance().GetButtonText("wrongPointButton");
-
             var yesButton = view.FindViewById<Button>(Resource.Id.rightPointButton);
-            yesButton.Text = User.GetInstance().GetButtonText("rightPointButton");
 
             noButton.Click += (sender, e) =>
             {

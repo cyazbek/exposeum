@@ -106,7 +106,7 @@ namespace Exposeum.Models
                 //first pass, find the leftBound
                 while (currentLinkedNode != null && !currentLinkedNode.Value.Visited)
                 {
-                    if (!foundUnvisitedPoi && currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
+                    if (!foundUnvisitedPoi && currentLinkedNode.Value.GetType() == typeof (PointOfInterest))
                     {
                         foundUnvisitedPoi = true;
                     }
