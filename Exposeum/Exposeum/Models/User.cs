@@ -5,6 +5,7 @@ namespace Exposeum.Models
 {
     public class User
     {
+        public int Id { get; set; }
         public Language Language;
         public List<ButtonText> CurrentButtonString;
         public List<ButtonText> FrenchButtonString = new List<ButtonText>();

@@ -112,6 +112,7 @@
     <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
     <Compile Include="Mappers\StorylineMapper.cs" />
     <Compile Include="Mappers\TextContentMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Mappers\VideoMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
