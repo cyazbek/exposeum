@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
+    <Compile Include="MapperTests\MapEdgeMapperTest.cs" />
     <Compile Include="MapperTests\ExhibitionContentTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
     <Compile Include="MapperTests\StatusMapperTest.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="ShortestPathServiceProviderTests.cs" />
     <Compile Include="ModelsTests\UserClassTest.cs" />
     <Compile Include="TDGTests\BeaconTDGTest.cs" />
-    <Compile Include="TDGTests\EdgeTDGTest.cs" />
+    <Compile Include="TDGTests\MapEdgeTDGTest.cs" />
     <Compile Include="TDGTests\ExhibitionContentEnTDGTest.cs" />
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />

@@ -12,13 +12,13 @@ using Console = System.Console;
 namespace UnitTests
 {
     [TestFixture]
-    public class EdgeTDGTest
+    public class MapEdgeTDGTest
     {
-        public readonly Edge _setObject = new Edge();
-        public Edge _testObject;
-        public readonly EdgeTdg _objectTDG = EdgeTdg.GetInstance();
+        public readonly MapEdge _setObject = new MapEdge();
+        public MapEdge _testObject;
+        public readonly MapEdgeTdg _objectTDG = MapEdgeTdg.GetInstance();
         public SQLiteConnection _db = DbManager.GetInstance().GetConnection();
-        private readonly List<Edge> _listOfEdgesTable = new List<Edge>();
+        private readonly List<MapEdge> _listOfEdgesTable = new List<MapEdge>();
 
         [Test]
         public void GetInstanceEdgeTdgTest()
@@ -39,7 +39,7 @@ namespace UnitTests
         public void AddEdgeTest()
         {
             _objectTDG.Add(_setObject);
-            _testObject = _db.Get<Edge>(_setObject.Id);
+            _testObject = _db.Get<MapEdge>(_setObject.Id);
             Assert.IsTrue(_objectTDG.Equals(_testObject,_setObject));
         }
 
@@ -54,7 +54,7 @@ namespace UnitTests
         [Test]
         public void UpdateEdgeTest()
         {
-            _testObject = new Edge();
+            _testObject = new MapEdge();
             _testObject.Id = 1;
             _testObject.Distance = 12.5;
             _testObject.StartMapElementId = 12345;
@@ -70,11 +70,11 @@ namespace UnitTests
         [Test]
         public void GetAllEdgesTest()
         {
-            int listOfEdgesSize = _db.Table<Edge>().Count();
+            int listOfEdgesSize = _db.Table<MapEdge>().Count();
 
             for (int i = 0; i < listOfEdgesSize; i++)
             {
-                _listOfEdgesTable.Add(new Edge());
+                _listOfEdgesTable.Add(new MapEdge());
             }
 
             Assert.AreEqual(_listOfEdgesTable.Count, _objectTDG.GetAllEdges().Count);
