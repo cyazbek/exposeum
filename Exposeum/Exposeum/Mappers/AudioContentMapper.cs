@@ -22,37 +22,35 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public VideoContent ConvertFromTable(Tables.ExhibitionContentEn content)
+        public AudioContent ConvertFromTable(Tables.ExhibitionContentEn content)
         {
-            return new VideoContent
+            return new AudioContent
             {
                 Id = content.Id,
                 Title = content.Title,
-                Duration = content.Duration,
-                Resolution = content.Resolution,
-                Encoding = content.Encoding,
-                StorylineId = content.StoryLineId,
                 Language = Models.Language.En,
+                StorylineId = content.StoryLineId,
+                Duration = content.Duration,
+                Encoding = content.Encoding,
                 FilePath = content.Filepath
             };
         }
 
-        public VideoContent ConvertFromTable(Tables.ExhibitionContentFr content)
+        public AudioContent ConvertFromTable(Tables.ExhibitionContentFr content)
         {
-            return new VideoContent
+            return new AudioContent
             {
                 Id = content.Id,
                 Title = content.Title,
-                Duration = content.Duration,
-                Resolution = content.Resolution,
-                Encoding = content.Encoding,
-                StorylineId = content.StoryLineId,
                 Language = Models.Language.Fr,
-                FilePath = content.Filepath
+                FilePath = content.Filepath,
+                Duration = content.Duration,
+                Encoding = content.Encoding,
+                StorylineId = content.StoryLineId
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEN(VideoContent content)
+        public Tables.ExhibitionContentEn ConvertFromModelEN(AudioContent content)
         {
 
             return new Tables.ExhibitionContentEn
@@ -60,15 +58,14 @@ namespace Exposeum.Mappers
                 Id = content.Id,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
-                Discriminator = "VideoContent",
+                Discriminator = "AudioContent",
                 Filepath = content.FilePath,
                 Duration = content.Duration,
-                Resolution = content.Resolution,
                 Encoding = content.Encoding
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFR(VideoContent content)
+        public Tables.ExhibitionContentFr ConvertFromModelFR(AudioContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -76,15 +73,14 @@ namespace Exposeum.Mappers
                 Id = content.Id,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
-                Discriminator = "VideoContent",
+                Discriminator = "AudioContent",
                 Filepath = content.FilePath,
                 Duration = content.Duration,
-                Resolution = content.Resolution,
                 Encoding = content.Encoding
             };
         }
 
-        public void Add(VideoContent content)
+        public void Add(AudioContent content)
         {
             if (content.Language == Models.Language.Fr)
             {
@@ -94,7 +90,7 @@ namespace Exposeum.Mappers
                 _TdgEn.Add(ConvertFromModelEN(content));
         }
 
-        public VideoContent Get(int id)
+        public AudioContent Get(int id)
         {
             if (Models.User.GetInstance().Language == Models.Language.Fr)
             {
@@ -104,7 +100,7 @@ namespace Exposeum.Mappers
                 return ConvertFromTable(_TdgEn.GetExhibitionContentEn(id));
         }
 
-        public void Update(VideoContent content)
+        public void Update(AudioContent content)
         {
             if (content.Language == Models.Language.Fr)
                 _tdgFr.Update(ConvertFromModelFR(content));
