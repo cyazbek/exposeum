@@ -15,7 +15,7 @@ namespace Exposeum.Models
         public string DescriptionFr { get; set; }
         public int Id { get; set; }
         public int StoryId { get; set; }
-		private readonly float _iconScaleFactor = 0.2f;
+		private readonly float _iconScaleFactor = 0.1f;
 
         public PointOfInterestDescription Description { get; set; }
 

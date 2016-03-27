@@ -223,11 +223,6 @@
     <Compile Include="Views\MapProgressionFragment.cs" />
     <Compile Include="Models\PointOfTravel.cs" />
     <Compile Include="Exceptions\PointOfInterestNotVisitedException.cs" />
-    <AndroidResource Include="Resources\drawable\floor_5.png" />
-    <AndroidResource Include="Resources\drawable\floor_4.png" />
-    <AndroidResource Include="Resources\drawable\floor_3.png" />
-    <AndroidResource Include="Resources\drawable\floor_2.png" />
-    <AndroidResource Include="Resources\drawable\floor_1.png" />
     <Compile Include="Services\IStoryLineService.cs" />
     <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
     <Compile Include="Controllers\ExplorerController.cs" />
@@ -362,6 +357,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\EmileBerliner.png" />
+    <AndroidAsset Include="Assets\venue_data\floor\1\floor1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\venue_data\floor\2\floor2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\venue_data\floor\3\floor3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\venue_data\floor\4\floor4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\venue_data\floor\5\floor5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />
@@ -431,4 +441,13 @@
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\venue_data\" />
+    <Folder Include="Assets\venue_data\floor\" />
+    <Folder Include="Assets\venue_data\floor\1\" />
+    <Folder Include="Assets\venue_data\floor\2\" />
+    <Folder Include="Assets\venue_data\floor\3\" />
+    <Folder Include="Assets\venue_data\floor\4\" />
+    <Folder Include="Assets\venue_data\floor\5\" />
+  </ItemGroup>
 </Project>

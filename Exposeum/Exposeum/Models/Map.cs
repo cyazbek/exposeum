@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
 using System.Linq;
+using Android.Graphics;
 
 namespace Exposeum.Models
 {
@@ -32,23 +33,31 @@ namespace Exposeum.Models
         
 		private void SeedData(){
 
-            Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
+            BitmapDrawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
 
             try
             {
-                floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
-                floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
-                floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
-                floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
-                floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
+				Android.Util.DisplayMetrics currentDisplayMetrics = Android.App.Application.Context.Resources.DisplayMetrics;
+
+				floorplan1 = (BitmapDrawable)BitmapDrawable.CreateFromStream(Android.App.Application.Context.Assets.Open("venue_data/floor/1/floor1.png"), null);
+				floorplan1.SetTargetDensity(currentDisplayMetrics);
+				floorplan2 = (BitmapDrawable)BitmapDrawable.CreateFromStream(Android.App.Application.Context.Assets.Open("venue_data/floor/2/floor2.png"), null);
+				floorplan2.SetTargetDensity(currentDisplayMetrics);
+				floorplan3 = (BitmapDrawable)BitmapDrawable.CreateFromStream(Android.App.Application.Context.Assets.Open("venue_data/floor/3/floor3.png"), null);
+				floorplan3.SetTargetDensity(currentDisplayMetrics);
+				floorplan4 = (BitmapDrawable)BitmapDrawable.CreateFromStream(Android.App.Application.Context.Assets.Open("venue_data/floor/4/floor4.png"), null);
+				floorplan4.SetTargetDensity(currentDisplayMetrics);
+				floorplan5 = (BitmapDrawable)BitmapDrawable.CreateFromStream(Android.App.Application.Context.Assets.Open("venue_data/floor/5/floor5.png"), null);
+				floorplan5.SetTargetDensity(currentDisplayMetrics);
+
             }
             catch(Exception e)
             {
-                floorplan1 = new ColorDrawable();
-                floorplan2 = new ColorDrawable();
-                floorplan3 = new ColorDrawable();
-                floorplan4 = new ColorDrawable();
-                floorplan5 = new ColorDrawable();
+				floorplan1 = new BitmapDrawable();
+				floorplan2 = new BitmapDrawable();
+				floorplan3 = new BitmapDrawable();
+				floorplan4 = new BitmapDrawable();
+				floorplan5 = new BitmapDrawable();
             }
 
 			StoryLine storyline = new StoryLine("Nipper the dog", "Le Chien Nipper","Adults", "Adultes", "A walk through different sections of RCA Victor’s production site, constructed over a period of roughly 25 years. This tour takes you through three different time zones, the 1920s, back when Montreal was the world’s largest grain hub and Canada’s productive power house, Montreal’s entertainment rich 1930s and 1943, when production at RCA Victor diversified to serve military needs.", "Une promenade à travers les différentes sections du site de production de RCA Victor, construit sur une période d’environ 25 ans. Ce circuit vous emmène à travers trois fuseaux horaires différents, les années 1920, époque où Montréal était le plus grand centre de grains du monde et la maison de puissance productive du Canada, de divertissement riches années 1930 à Montréal et 1943, lorsque la production chez RCA Victor diversifiée pour répondre aux besoins militaires.", 120 , Resource.Drawable.NipperTheDog);
