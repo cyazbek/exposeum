@@ -47,11 +47,23 @@ namespace Exposeum
             _actionBarTitle = FindViewById<TextView>(Resource.Id.TitleActionBar);
             _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
 
-            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
-            backActionBarButton.Click += (s, e) =>
+            //==========================================================================================================
+
+            var BarButton = FindViewById<Button>(Resource.Id.butonn);
+            BarButton.Click += (s, e) =>
             {
-                OnBackPressed();
+                //var intent = new Intent(this, typeof(TestUi));
+                //StartActivity(intent);
+
+                //pull up Dialog
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                DDialog DDB = new DDialog();
+                DDB.Show(transaction, "Dialog Frag");
+
+
             };
+
+
 
 
             //=========================================================================================================

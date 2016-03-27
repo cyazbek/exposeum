@@ -23,4 +23,11 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:layout_gravity="center"
         style="@style/button_text" />
+    <Button
+        android:text="Button"
+        android:layout_width="324.5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/butonn"
+        android:layout_marginTop="105.0dp"
+        android:layout_marginLeft="31.0dp" />
 </LinearLayout>

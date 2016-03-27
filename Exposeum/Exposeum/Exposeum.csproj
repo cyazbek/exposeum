@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\StorylineController.cs" />
+    <Compile Include="DDialog.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="TempModels\Video.cs" />
     <Compile Include="TempModels\WayPoint.cs" />
     <Compile Include="TempModels\WaypointLabel.cs" />
+    <Compile Include="TestUi.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -431,5 +433,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\themes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DismissButton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_up.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_right.xml" />
   </ItemGroup>
 </Project>

@@ -11,4 +11,10 @@
     <item name="android:shadowDy" >1</item>
     <item name="android:shadowRadius" >2</item>
   </style>
+
+  <style name="dialog_animation" >
+  <item name="android:windowEnterAnimation">@anim/slide_up</item>
+  <item name="android:windowExitAnimation">@anim/slide_right</item>
+  </style>
 </resources>
+
