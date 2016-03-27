@@ -4,7 +4,7 @@ using Java.Lang;
 
 namespace Exposeum.TempModels
 {
-    public class Edge
+    public class MapEdge
     {
         public int Id { get; set; }
         public double Distance { get; set; }
@@ -13,7 +13,7 @@ namespace Exposeum.TempModels
 
         public override bool Equals(object obj)
         {
-            Edge other = (Edge) obj;
+            MapEdge other = (MapEdge) obj;
 
             return Id == other.Id &&
                   Math.Abs(Distance - other.Distance) < 0 &&

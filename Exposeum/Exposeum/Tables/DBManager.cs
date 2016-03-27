@@ -28,7 +28,7 @@ namespace Exposeum.Tables
             Db.CreateTable<StoryLineMapElementList>();
             Db.CreateTable<StoryLineDescriptionFr>();
             Db.CreateTable<StoryLineDescriptionEn>();
-            Db.CreateTable<Edge>();
+            Db.CreateTable<MapEdge>();
             Db.CreateTable<Floor>();
             Db.CreateTable<MapElements>();
             Db.CreateTable<PoiDescriptionEn>();

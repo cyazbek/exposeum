@@ -6,7 +6,7 @@ namespace Exposeum.TempModels
     {
         public int Id; 
         private static Map _instance;
-        public List<Edge> Edges { get; set; }
+        public List<MapEdge> Edges { get; set; }
         public List<Storyline> Storylines { get; set; }
         public List<MapElement> MapElements { get; set; }
         public Storyline CurrentStoryline { get; set; }
@@ -15,7 +15,7 @@ namespace Exposeum.TempModels
 
         private Map()
         {
-            Edges = new List<Edge>();
+            Edges = new List<MapEdge>();
             Storylines = new List<Storyline>();
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();

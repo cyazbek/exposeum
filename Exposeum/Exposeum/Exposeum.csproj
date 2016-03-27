@@ -99,7 +99,7 @@
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
-    <Compile Include="Mappers\EdgeMapper.cs" />
+    <Compile Include="Mappers\MapEdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
     <Compile Include="Mappers\FloorMapper.cs" />
     <Compile Include="Mappers\ImageMapper.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="StoryLineListAdapter.cs" />
     <Compile Include="Tables\Beacon.cs" />
     <Compile Include="Tables\DBManager.cs" />
-    <Compile Include="Tables\Edge.cs" />
+    <Compile Include="Tables\MapEdge.cs" />
     <Compile Include="Tables\ExhibitionContentEn.cs" />
     <Compile Include="Tables\ExhibitionContentFr.cs" />
     <Compile Include="Tables\Floor.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Tables\StoryLineDescriptionFr.cs" />
     <Compile Include="Tables\StoryLineMapElementList.cs" />
     <Compile Include="TDGs\BeaconTDG.cs" />
-    <Compile Include="TDGs\EdgeTDG.cs" />
+    <Compile Include="TDGs\MapEdgeTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
     <Compile Include="TDGs\FloorTDG.cs" />
@@ -160,7 +160,7 @@
     <Compile Include="TDGs\TDG.cs" />
     <Compile Include="TempModels\AudioContent.cs" />
     <Compile Include="TempModels\Beacon.cs" />
-    <Compile Include="TempModels\Edge.cs" />
+    <Compile Include="TempModels\MapEdge.cs" />
     <Compile Include="TempModels\ExhibitionContent.cs" />
     <Compile Include="TempModels\Floor.cs" />
     <Compile Include="TempModels\ImageContent.cs" />

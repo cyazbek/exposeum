@@ -3,50 +3,50 @@ using Exposeum.Tables;
 
 namespace Exposeum.TDGs
 {
-    public class EdgeTdg : Tdg
+    public class MapEdgeTdg : Tdg
     {
-        private static EdgeTdg _instance;
+        private static MapEdgeTdg _instance;
 
-        private EdgeTdg() { }
+        private MapEdgeTdg() { }
 
-        public static EdgeTdg GetInstance()
+        public static MapEdgeTdg GetInstance()
         {
             if (_instance == null)
-                _instance = new EdgeTdg();
+                _instance = new MapEdgeTdg();
 
             return _instance;
         }
 
-        public void Add(Edge item)
+        public void Add(MapEdge item)
         {
             Db.InsertOrReplace(item);
         }
 
-        public void Update(Edge item)
+        public void Update(MapEdge item)
         {
             Db.Update(item);
         }
 
-        public Edge GetEdge(int id)
+        public MapEdge GetEdge(int id)
         {
-            return Db.Get<Edge>(id);
+            return Db.Get<MapEdge>(id);
         }
 
         public void DeleteAll()
         {
-            Db.DeleteAll<Edge>();
+            Db.DeleteAll<MapEdge>();
         }
 
-        public bool Equals(Edge object1, Edge object2)
+        public bool Equals(MapEdge object1, MapEdge object2)
         {
             if (object1.Id == object2.Id && object1.Distance==object2.Distance && object1.StartMapElementId == object2.StartMapElementId && object1.EndMapElementId == object2.EndMapElementId)
                 return true;
             return false;
         }
 
-        public List<Edge> GetAllEdges()
+        public List<MapEdge> GetAllEdges()
         {
-            return new List<Edge>(Db.Table<Edge>());
+            return new List<MapEdge>(Db.Table<MapEdge>());
         }
         
     }
