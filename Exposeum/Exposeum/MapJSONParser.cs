@@ -40,12 +40,10 @@ namespace Exposeum
 
 			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
 
-				String drawableString = (String)floorOBJ ["imagePath"];
-
 				Floor newFloor = new Floor ();
 
-				newFloor.Plan = drawableString;
-				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]); //get the floor ID for possible later use
+				newFloor.Plan = (String)floorOBJ ["imagePath"];
+				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]);
 
 				floors.Add (newFloor);
 			}
