@@ -19,7 +19,13 @@ namespace Exposeum
             base.OnCreateView(inflater, container, savedInstanceState);
             var view = inflater.Inflate(Resource.Layout.webViewFragment, container, false);
 
-            return view;
+            var buttonDismiss = view.FindViewById<Button>(Resource.Id.buttonDismiss);
+            buttonDismiss.Click += (sender, e) =>
+            {
+                this.Dismiss();
+            };
+
+                return view;
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)

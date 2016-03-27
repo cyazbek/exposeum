@@ -7,28 +7,52 @@
     android:minHeight="400dp"
     android:background="@android:color/background_light"
     android:weightSum="100">
-    <WebView
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="40"
-        android:id="@+id/webView1" />
-    <TextView
-        android:text="Hey, Look Here!"
+        android:id="@+id/linearLayout1">
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/webView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:textColor="#3e4454"
-        android:gravity="center"
-        android:id="@+id/Title" />
-    <Button
-        android:text="Dismiss"
-        android:textColor="#ffffff"
+        android:layout_weight="50"
+        android:id="@+id/linearLayout3">
+        <TextView
+            android:text="Hey, Look Here!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#3e4454"
+            android:gravity="center"
+            android:id="@+id/Title" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        android:id="@+id/buttonDismiss"
-        android:background="@drawable/DismissButton"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="25dp" />
+        android:id="@+id/linearLayout2">
+        <Button
+            android:text="Dismiss"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonDismiss"
+            android:background="@drawable/DismissButton"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="25dp" />
+    </LinearLayout>
 </LinearLayout>
