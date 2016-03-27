@@ -16,12 +16,13 @@ namespace Exposeum
 	public class MapJSONParser
 	{
 
-		private static String JSON_URL = "http://mowbray.tech/exposeum/exposeum.json";
+		private static String JSON_BASE_URL = "http://mowbray.tech/exposeum/";
+		private static String JSON_SCHEMA_FILENAME = "exposeum.json";
 
 		public async void FetchAndParseMapJSON(){
 
 			//fetch the JSON file from the internet
-			String JSONData = await DownloadJSONAsync (JSON_URL);
+			String JSONData = await DownloadJSONAsync (JSON_BASE_URL + JSON_SCHEMA_FILENAME);
 
 			//deserialize into JObject which we can iterate over
 			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
