@@ -41,6 +41,9 @@ namespace Exposeum
             ActionBar.SetCustomView(Resource.Layout.ActionBar);
             ActionBar.SetDisplayShowCustomEnabled(true);
 
+            var backButtonDisable = FindViewById<ImageView>(Resource.Id.BackImage);
+            backButtonDisable.Visibility = ViewStates.Invisible;
+
             _actionBarTitle = FindViewById<TextView>(Resource.Id.TitleActionBar);
             _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
 

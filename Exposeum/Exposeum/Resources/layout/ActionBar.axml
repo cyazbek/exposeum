@@ -22,7 +22,9 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="11.0dp"
             android:adjustViewBounds="false"
-            android:clickable="true" />
+            android:clickable="true"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:visibility="visible" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
