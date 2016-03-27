@@ -4,6 +4,7 @@ using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
 using NUnit.Framework;
+using User = Exposeum.Models.User;
 
 namespace UnitTests
 {

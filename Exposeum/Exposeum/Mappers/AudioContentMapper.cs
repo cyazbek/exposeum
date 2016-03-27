@@ -15,7 +15,7 @@ namespace Exposeum.Mappers
             _tdgFr = ExhibitionContentFrTdg.GetInstance();
         }
 
-        public static VideoMapper GetInstance()
+        public static AudioContentMapper GetInstance()
         {
             if (_instance == null)
                 _instance = new AudioContentMapper();

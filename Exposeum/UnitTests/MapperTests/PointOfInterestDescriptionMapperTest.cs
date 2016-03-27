@@ -4,6 +4,7 @@ using Exposeum.Tables;
 using Exposeum.TDGs;
 using NUnit.Framework;
 using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
+using User = Exposeum.Models.User;
 
 
 namespace UnitTests

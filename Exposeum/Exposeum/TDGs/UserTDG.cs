@@ -30,5 +30,12 @@ namespace Exposeum.TDGs
             Db.Update(user);
         }
 
+        public bool Equals(User user1, User user2)
+        {
+            if (user1.Id == user2.Id && user1.Visitor == user2.Visitor && user1.Language == user2.Language)
+                return true;
+            return false;
+        }
+
     }
 }
