@@ -6,12 +6,12 @@ namespace Exposeum.Mappers
     public class AudioContentMapper
     {
         private static AudioContentMapper _instance;
-        private readonly ExhibitionContentEnTdg _TdgEn;
+        private readonly ExhibitionContentEnTdg _tdgEn;
         private readonly ExhibitionContentFrTdg _tdgFr;
 
         private AudioContentMapper()
         {
-            _TdgEn = ExhibitionContentEnTdg.GetInstance();
+            _tdgEn = ExhibitionContentEnTdg.GetInstance();
             _tdgFr = ExhibitionContentFrTdg.GetInstance();
         }
 
@@ -50,7 +50,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEN(AudioContent content)
+        public Tables.ExhibitionContentEn ConvertFromModelEn(AudioContent content)
         {
 
             return new Tables.ExhibitionContentEn
@@ -65,7 +65,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFR(AudioContent content)
+        public Tables.ExhibitionContentFr ConvertFromModelFr(AudioContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -84,10 +84,10 @@ namespace Exposeum.Mappers
         {
             if (content.Language == Models.Language.Fr)
             {
-                _tdgFr.Add(ConvertFromModelFR(content));
+                _tdgFr.Add(ConvertFromModelFr(content));
             }
             else
-                _TdgEn.Add(ConvertFromModelEN(content));
+                _tdgEn.Add(ConvertFromModelEn(content));
         }
 
         public AudioContent Get(int id)
@@ -97,15 +97,15 @@ namespace Exposeum.Mappers
                 return ConvertFromTable(_tdgFr.GetExhibitionContentFr(id));
             }
             else
-                return ConvertFromTable(_TdgEn.GetExhibitionContentEn(id));
+                return ConvertFromTable(_tdgEn.GetExhibitionContentEn(id));
         }
 
         public void Update(AudioContent content)
         {
             if (content.Language == Models.Language.Fr)
-                _tdgFr.Update(ConvertFromModelFR(content));
+                _tdgFr.Update(ConvertFromModelFr(content));
             else
-                _TdgEn.Update(ConvertFromModelEN(content));
+                _tdgEn.Update(ConvertFromModelEn(content));
         }
 
     }

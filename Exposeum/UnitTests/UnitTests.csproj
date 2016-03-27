@@ -58,12 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MapperTests\AudioMapperTest.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
+    <Compile Include="MapperTests\ImageContentMapperTest.cs" />
     <Compile Include="MapperTests\MapEdgeMapperTest.cs" />
     <Compile Include="MapperTests\ExhibitionContentTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
     <Compile Include="MapperTests\StatusMapperTest.cs" />
     <Compile Include="MapperTests\StorylineDescriptionMapperTest.cs" />
+    <Compile Include="MapperTests\UserMapperTest.cs" />
     <Compile Include="MapperTests\VideoMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

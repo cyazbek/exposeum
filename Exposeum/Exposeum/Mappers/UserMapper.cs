@@ -83,6 +83,5 @@ namespace Exposeum.Mappers
             Tables.User tableUser = ConvertToTable(user);
             _tdg.Update(tableUser);
         }
-
     }
 }
