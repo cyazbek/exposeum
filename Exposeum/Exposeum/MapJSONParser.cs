@@ -17,7 +17,7 @@ namespace Exposeum
 	{
 
 		private static String JSON_BASE_URL = "http://mowbray.tech/exposeum/";
-		private static String JSON_SCHEMA_FILENAME = "exposeum.json";
+		private static String JSON_SCHEMA_FILENAME = "Map.json";
 
 		public async void FetchAndParseMapJSON(){
 
