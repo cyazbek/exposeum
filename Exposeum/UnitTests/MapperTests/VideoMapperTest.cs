@@ -1,31 +1,27 @@
-using Exposeum.TempModels;
 using Exposeum.Mappers;
-using NUnit.Framework;
 using Exposeum.TDGs;
+using Exposeum.TempModels;
+using NUnit.Framework;
 using TablesEn = Exposeum.Tables.ExhibitionContentEn;
 using TablesFr = Exposeum.Tables.ExhibitionContentFr;
 
-namespace UnitTests.MapperTests
+namespace UnitTests
 {
     [TestFixture]
     public class VideoMapperTest
     {
-        public VideoMapper _mapper;
-        public ExhibitionContentEnTdg _tdgEn;
-        public ExhibitionContentFrTdg _tdgFr;
-        public VideoContent _videoEn;
-        public VideoContent _videoFr;
-        public VideoContent _expectedVideo;
-        public TablesEn _contentEn;
-        public TablesFr _contentFr;
-        public Exposeum.Models.User _user;
+        private VideoMapper _mapper;
+        private VideoContent _videoEn;
+        private VideoContent _videoFr;
+        private VideoContent _expectedVideo;
+        private TablesEn _contentEn;
+        private TablesFr _contentFr;
+        private Exposeum.Models.User _user;
 
         [SetUp]
         public void SetUp()
         {
             _mapper = VideoMapper.GetInstance();
-            _tdgEn = ExhibitionContentEnTdg.GetInstance();
-            _tdgFr = ExhibitionContentFrTdg.GetInstance();
             _user = Exposeum.Models.User.GetInstance(); 
 
             _videoEn = new VideoContent
@@ -38,6 +34,7 @@ namespace UnitTests.MapperTests
                 Duration = 1,
                 Encoding = "VideoEncoding"
             };
+
             _videoFr = new VideoContent
             {
                 Id = 1,
