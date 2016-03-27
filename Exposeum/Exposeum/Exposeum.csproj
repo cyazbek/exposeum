@@ -108,6 +108,7 @@
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Mappers\MapMapper.cs" />
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
+    <Compile Include="Mappers\PointOfInterestMapper.cs" />
     <Compile Include="Mappers\StatusMapper.cs" />
     <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
     <Compile Include="Mappers\StorylineMapper.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="StoryLineListAdapter.cs" />
     <Compile Include="Tables\Beacon.cs" />
     <Compile Include="Tables\DBManager.cs" />
+    <Compile Include="Tables\ExhibitionContentList.cs" />
     <Compile Include="Tables\MapEdge.cs" />
     <Compile Include="Tables\ExhibitionContentEn.cs" />
     <Compile Include="Tables\ExhibitionContentFr.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Tables\StoryLineMapElementList.cs" />
     <Compile Include="Tables\User.cs" />
     <Compile Include="TDGs\BeaconTDG.cs" />
+    <Compile Include="TDGs\ExhibitionContentListTDG.cs" />
     <Compile Include="TDGs\MapEdgeTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />

@@ -14,7 +14,6 @@ namespace Exposeum.Tables
         public int StoryLineId { get; set; }
         public int PoiDescription { get; set; }
         public string Label { get; set; }
-        public int ExhibitionContent { get; set; }
         public int FloorId { get; set; }
 
     }

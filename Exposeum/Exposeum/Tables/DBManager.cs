@@ -40,6 +40,7 @@ namespace Exposeum.Tables
             Db.CreateTable<Icon>();
             Db.CreateTable<User>();
             Db.CreateTable<Map>();
+            Db.CreateTable<ExhibitionContentList>(); 
         }
 
         public SQLiteConnection GetConnection()
