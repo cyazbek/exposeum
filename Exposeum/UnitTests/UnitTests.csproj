@@ -66,6 +66,7 @@
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
     <Compile Include="MapperTests\StatusMapperTest.cs" />
     <Compile Include="MapperTests\StorylineDescriptionMapperTest.cs" />
+    <Compile Include="MapperTests\TextContentMapperTest.cs" />
     <Compile Include="MapperTests\UserMapperTest.cs" />
     <Compile Include="MapperTests\VideoMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
