@@ -109,6 +109,7 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionTableToModelFrTest()
         {
+            Exposeum.Models.User.GetInstance().Language = Exposeum.Models.Language.Fr;
             _storylineDescriptionModel = new StorylineDescription
             {
                 StoryLineDescriptionId = 1,
@@ -124,6 +125,7 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionTableToModelEnTest()
         {
+            Exposeum.Models.User.GetInstance().Language = Exposeum.Models.Language.En;
             _storylineDescriptionModel = new StorylineDescription
             {
                 StoryLineDescriptionId = 1,
