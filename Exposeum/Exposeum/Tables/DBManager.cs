@@ -38,6 +38,8 @@ namespace Exposeum.Tables
             Db.CreateTable<ExhibitionContentFr>();
             Db.CreateTable<Images>();
             Db.CreateTable<Icon>();
+            Db.CreateTable<User>();
+            Db.CreateTable<Map>();
         }
 
         public SQLiteConnection GetConnection()
