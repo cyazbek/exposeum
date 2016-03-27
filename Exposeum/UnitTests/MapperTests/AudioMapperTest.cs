@@ -52,6 +52,7 @@ namespace UnitTests
         {
             _user.Language = Exposeum.Models.Language.En;
             _mapper.Add(_audioEn);
+
             _expectedAudio = _mapper.Get(_audioEn.Id);
             Assert.IsTrue(_audioEn.Equals(_expectedAudio));
         }
@@ -61,8 +62,10 @@ namespace UnitTests
         {
             _user.Language = Exposeum.Models.Language.En;
             _mapper.Add(_audioEn);
+
             _audioEn.StorylineId = 5;
             _mapper.Update(_audioEn);
+
             _expectedAudio = _mapper.Get(_audioEn.Id);
             Assert.AreEqual(5, _expectedAudio.StorylineId);
         }
@@ -90,8 +93,10 @@ namespace UnitTests
         {
             _user.Language = Exposeum.Models.Language.Fr;
             _mapper.Add(_audioFr);
+
             _audioFr.StorylineId = 5;
             _mapper.Update(_audioFr);
+
             _expectedAudio = _mapper.Get(_audioFr.Id);
             Assert.AreEqual(5, _expectedAudio.StorylineId);
         }
@@ -101,6 +106,7 @@ namespace UnitTests
         {
             _user.Language = Exposeum.Models.Language.Fr;
             _mapper.Add(_audioFr);
+
             _expectedAudio = _mapper.Get(_audioFr.Id);
             Assert.IsTrue(_audioFr.Equals(_expectedAudio));
         }

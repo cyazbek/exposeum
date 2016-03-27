@@ -60,6 +60,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapperTests\AudioMapperTest.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
+    <Compile Include="MapperTests\ImageContentMapperTest.cs" />
     <Compile Include="MapperTests\MapEdgeMapperTest.cs" />
     <Compile Include="MapperTests\ExhibitionContentTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
