@@ -128,6 +128,7 @@
     <Compile Include="Models\StoryLine.cs" />
     <Compile Include="Models\StorylineDescription.cs" />
     <Compile Include="Models\TextContent.cs" />
+    <Compile Include="Models\VideoContent.cs" />
     <Compile Include="Models\WaypointLabel.cs" />
     <Compile Include="Services\IGraphService.cs" />
     <Compile Include="Models\User.cs" />
