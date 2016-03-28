@@ -36,9 +36,46 @@ namespace Exposeum.Mappers
             foreach (var x in elements)
             {
                 if(elements.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
-
+                    _pointOfInterestMapper.Add((PointOfInterest)x);
+                else 
+                    _wayPointMapper.Add((WayPoint)x);
             }
         }
+
+        public List<MapElement> GetAllElementByStorylineId(int id)
+        {
+            List<MapElements> list = new List<MapElements>();
+            list=_mapElementsTdg.GetAllMapElements();
+            List<MapElements> tableElements = new List<MapElements>();
+            foreach (var x in list)
+            {
+                if(x.StoryLineId==id)
+                    tableElements.Add(x);
+            }
+            List<MapElement> modelList = new List<MapElement>();
+            foreach (var x in tableElements)
+            {
+                if(x.Discriminator=="PointOfInterest")
+                    modelList.Add(_pointOfInterestMapper.ConvertToModel(x));
+                else
+                {
+                    modelList.Add((_wayPointMapper.ConvertFromTable(x)));
+                }
+            }
+            return modelList;
+        }
+
+        public void UpdateList(List<MapElement> list)
+        {
+            foreach (var x in list)
+            {
+                if(x.GetType().ToString()=="Exposeum.TempModels.PointOfInterest")
+                    _pointOfInterestMapper.Update((PointOfInterest)x);
+                else 
+                    _wayPointMapper.Update((WayPoint)x);
+            }
+        }
+
 
     }
 }
