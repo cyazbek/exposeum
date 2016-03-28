@@ -126,6 +126,7 @@
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Models\StorylineDescription.cs" />
     <Compile Include="Models\WaypointLabel.cs" />
     <Compile Include="Services\IGraphService.cs" />
     <Compile Include="Models\User.cs" />
