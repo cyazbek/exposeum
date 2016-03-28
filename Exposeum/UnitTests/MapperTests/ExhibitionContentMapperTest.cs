@@ -8,6 +8,7 @@ using Java.Util;
 using NUnit.Framework;
 using AudioContent = Exposeum.TempModels.AudioContent;
 using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
+using ImageContent = Exposeum.TempModels.ImageContent;
 using PointOfInterest = Exposeum.TempModels.PointOfInterest;
 using User = Exposeum.Models.User;
 

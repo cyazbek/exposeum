@@ -94,7 +94,7 @@ namespace Exposeum.Mappers
                 UCoordinate = element.UCoordinate,
                 VCoordinate = element.VCoordinate,
                 FloorId = element.Floor.Id,
-                IconId = element.IconId,
+                IconPath = element.IconPath,
                 Label = ConvertLabelToString(element.Label)
             };
         }
@@ -112,7 +112,7 @@ namespace Exposeum.Mappers
                 Visited = vis,
                 Floor = _floorMapper.GetFloor(element.FloorId),
                 Label = ConvertStringToLabel(element.Label),
-                IconId = element.IconId,
+                IconPath = element.IconPath,
                 UCoordinate = element.UCoordinate,
                 VCoordinate = element.VCoordinate
             };
