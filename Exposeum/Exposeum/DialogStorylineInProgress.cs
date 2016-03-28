@@ -51,8 +51,6 @@ namespace Exposeum
             {
 				_storylineController.SetActiveStoryLine();
                 _storylineController.ResumeStorylineBeacons();
-                string name = _storylineController._selectedStoryLine.NameEn;
-                Toast.MakeText(_context, name, ToastLength.Long).Show();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
                 Dismiss();
@@ -60,10 +58,8 @@ namespace Exposeum
 
             buttonToReset.Click += delegate {
                 _storylineController.SetActiveStoryLine();
-                _storylineController.ResetStorylineProgress();
+                _storylineController.ResetStorylineProgress(_storyLine);
                 _storylineController.ResumeStorylineBeacons();
-                string name = _storylineController._selectedStoryLine.NameEn;
-                Toast.MakeText(_context, name, ToastLength.Long).Show();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
                 Dismiss();

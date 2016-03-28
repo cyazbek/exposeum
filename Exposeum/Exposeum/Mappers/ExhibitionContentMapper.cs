@@ -93,6 +93,7 @@ namespace Exposeum.Mappers
             }
             return tableList;
         }
+
         public List<Tables.ExhibitionContentFr> ConvertToTableFr(List<ExhibitionContent> list)
         {
             List<Tables.ExhibitionContentFr> tableList = new List<ExhibitionContentFr>();
