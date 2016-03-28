@@ -14,7 +14,7 @@ namespace Exposeum.Services.Service_Providers
 		}
 
 		public List<StoryLine> GetStoryLines (){
-			return _mapInstance.GetStoryLineList;
+			return _mapInstance.Storylines;
 		}
 
 		public StoryLine GetActiveStoryLine (){

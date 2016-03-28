@@ -9,6 +9,11 @@
 
         //Method that format's the content in html syntax.
         public abstract string HtmlFormat();
+        public override bool Equals(object obj)
+        {
+            ExhibitionContent other = (ExhibitionContent)obj;
+            return Id == other.Id && Title.Equals(other.Title) && StorylineId.Equals(other.StorylineId);
+        }
 
     }
 }

@@ -102,7 +102,6 @@ namespace Exposeum.Mappers
         {
             Tables.MapElements mapElement = _mapElementsTdg.GetMapElement(id);
             return ConvertToModel(mapElement);
-            
         }
     }
 }

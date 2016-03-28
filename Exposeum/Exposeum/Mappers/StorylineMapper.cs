@@ -10,13 +10,15 @@ namespace Exposeum.Mappers
         private readonly StorylineTdg _storylineTdg;
         private readonly MapElementsMapper _mapElementsMapper;
         private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
-        private readonly StatusMapper _statusMapper; 
+        private readonly StatusMapper _statusMapper;
+        private readonly PointOfInterestMapper _PoiMapper;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
             _mapElementsMapper = MapElementsMapper.GetInstance();
             _storylineDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
             _statusMapper = StatusMapper.GetInstance();
+            _PoiMapper = PointOfInterestMapper.GetInstance();
         }
 
         public static StorylineMapper GetInstance()
@@ -35,7 +37,7 @@ namespace Exposeum.Mappers
                 Duration = storylineModel.Duration,
                 ImagePath = storylineModel.ImageId,
                 FloorsCovered = storylineModel.FloorsCovered,
-                LastVisitedPoi = storylineModel.LastVisitedMapElement.Id,
+                LastVisitedPoi = storylineModel.LastVisitedPointOfInterest.Id,
                 Status = _statusMapper.StatusModelToTable(storylineModel.Status)
             };
             return storyline; 
@@ -71,8 +73,8 @@ namespace Exposeum.Mappers
                 FloorsCovered = storylineTable.FloorsCovered,
                 IntendedAudience = storylineTable.Audience,
                 StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
-                LastVisitedMapElement = _mapElementsMapper.GetMapElement(storylineTable.LastVisitedPoi),
-                MapElements = _mapElementsMapper.GetAllMapElementsFromStoryline(storylineTable.Id),
+                LastVisitedPointOfInterest = _PoiMapper.Get(storylineTable.LastVisitedPoi),
+                MapElements = _mapElementsMapper.GetAllElementByStorylineId(storylineTable.Id),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status)
             };
             return storyline; 
@@ -91,7 +93,7 @@ namespace Exposeum.Mappers
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Update(storylineTable);
-            _mapElementsMapper.UpdateMapElementList(list);
+            _mapElementsMapper.UpdateList(list);
             _storylineDescriptionMapper.UpdateStoryLineDescription(description);
         }
 
@@ -101,7 +103,7 @@ namespace Exposeum.Mappers
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
-            _mapElementsMapper.AddMapElementList(list);
+            _mapElementsMapper.AddList(list);
             _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 

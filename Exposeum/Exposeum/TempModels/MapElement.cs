@@ -1,5 +1,4 @@
-
-
+using Android.Graphics;
 using System;
 using Android.Graphics;
 

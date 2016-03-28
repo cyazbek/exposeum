@@ -8,8 +8,8 @@ namespace Exposeum.TempModels
     {
         public int Id { get; set; }
         public double Distance { get; set; }
-        public MapElement Start { get; set; }
-        public MapElement End { get; set; }
+        public MapElement Source { get; set; }
+        public MapElement Target { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -17,9 +17,10 @@ namespace Exposeum.TempModels
 
             return Id == other.Id &&
                   Math.Abs(Distance - other.Distance) < 0 &&
-                  Start.Equals(other.Start) &&
-                  End.Equals(other.End);
+                  Source.Equals(other.Source) &&
+                  Target.Equals(other.Target);
         }
 
     }
 }
+//transferred to Models

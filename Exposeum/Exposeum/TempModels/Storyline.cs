@@ -11,7 +11,7 @@ namespace Exposeum.TempModels
         public int FloorsCovered { get; set; }
         public List<MapElement> MapElements { get; set; }
         public string IntendedAudience { get; set;}
-        public MapElement LastVisitedMapElement { get; set; }
+        public PointOfInterest LastVisitedPointOfInterest { get; set; }
         public Models.Status Status; 
         public StorylineDescription StorylineDescription { get; set; }
 
@@ -32,7 +32,7 @@ namespace Exposeum.TempModels
                     else return false;
                 }
                 return result && other.StorylineId == StorylineId && other.ImageId == ImageId && other.Duration == Duration && other.FloorsCovered == FloorsCovered &&
-                    IntendedAudience == other.IntendedAudience && LastVisitedMapElement.Equals(other.LastVisitedMapElement) && Status.Equals(other.Status) &&
+                    IntendedAudience == other.IntendedAudience && LastVisitedPointOfInterest.Equals(other.LastVisitedPointOfInterest) && Status.Equals(other.Status) &&
                     StorylineDescription == other.StorylineDescription;
             }
             return false;
