@@ -32,18 +32,18 @@ namespace Exposeum.TDGs
             return Db.Get<ExhibitionContentEn>(id);
         }
 
-        public List<int> GetExhibitionContentEnByStorylineId(int id)
+        public List<ExhibitionContentEn> GetExhibitionContentByPoiId(int id)
         {
             List<ExhibitionContentEn> exhibitionContent = new List<ExhibitionContentEn>(Db.Table<ExhibitionContentEn>());
-            List<int> exhibitionId = new List<int>();
+            List<ExhibitionContentEn> exhibition = new List<ExhibitionContentEn>();
 
             foreach (var x in exhibitionContent)
             {
-                if (x.StoryLineId == id)
-                    exhibitionId.Add(x.Id);
+                if (x.PoiId == id)
+                    exhibition.Add(x);
             }
 
-            return exhibitionId;
+            return exhibition;
         }
 
         public bool Equals(ExhibitionContentEn object1, ExhibitionContentEn object2)
@@ -55,6 +55,7 @@ namespace Exposeum.TDGs
             object1.Duration == object2.Duration &&
             object1.Resolution == object2.Resolution &&
             object1.Encoding == object2.Encoding &&
+            object1.PoiId == object2.PoiId &&
             object1.Discriminator == object2.Discriminator)
                 return true;
             return false;
