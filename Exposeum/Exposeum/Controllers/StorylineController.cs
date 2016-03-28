@@ -4,6 +4,7 @@ using Android.Content;
 using Exposeum.Menu_Bar;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
@@ -21,7 +22,7 @@ namespace Exposeum.Controllers
         }
 
 		private StorylineController(){
-			_storyLineService = new StoryLineServiceProvider ();
+			_storyLineService = ExposeumApplication.IoCContainer.Get<IStoryLineService>();
 		}
 
 		public StoryLineListAdapter GetStoryLines(Activity activity){
