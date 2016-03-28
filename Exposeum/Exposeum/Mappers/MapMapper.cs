@@ -33,7 +33,7 @@ namespace Exposeum.Mappers
             Map map = Map.GetInstance();
             map.Edges = _edgeMapper.GetAllMapEdges();
             map.Storylines = _storylineMapper.GetAllStorylines();
-            map.MapElements = _mapElementsMapper.GetAllMapElements();
+            map.MapElements = _mapElementsMapper.GetAllElements();
             map.Floors = _floorMapper.GetAllFloors(); 
             Tables.Map tableMap = _mapTdg.GetMap(map.Id);
             map.CurrentFloor = _floorMapper.GetFloor(tableMap.CurrentFloorId);
