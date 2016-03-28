@@ -53,7 +53,7 @@ namespace Exposeum.Mappers
                 if(elements.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
                     _pointOfInterestMapper.Add((PointOfInterest)x);
                 else 
-                    _wayPointMapper.Add((PointOfTravel)x);
+                    _wayPointMapper.Add((WayPoint)x);
             }
         }
 
@@ -104,7 +104,7 @@ namespace Exposeum.Mappers
                 if(x.GetType().ToString()=="Exposeum.TempModels.PointOfInterest")
                     _pointOfInterestMapper.Update((PointOfInterest)x);
                 else 
-                    _wayPointMapper.Update((PointOfTravel)x);
+                    _wayPointMapper.Update((WayPoint)x);
             }
         }
 

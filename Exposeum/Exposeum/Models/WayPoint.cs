@@ -1,36 +1,32 @@
-using System;
+﻿using System;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 
-namespace Exposeum.TempModels
+namespace Exposeum.Models
 {
-    public class PointOfTravel:MapElement
-    {
+	public class WayPoint : MapElement
+	{
         public WaypointLabel Label { get; set; }
-
         private readonly float _iconScaleFactor = 0.2f;
-        private Drawable _Icon;
-
-        public override bool Equals(Object obj)
+        public Drawable _Icon { get; set; }
+        public WayPoint(float UCoordinate, float vCoordinate, Floor floor) : base (UCoordinate, vCoordinate, floor)
+		{
+		}
+        public bool Equals(WayPoint other)
         {
-            if (obj != null)
-            {
-                PointOfTravel other = (PointOfTravel)obj;
                 return Label.Equals(other.Label);
-            }
-            return false;
         }
-
         public override void Draw(Canvas canvas)
         {
-            canvas.Save();
+            /*canvas.Save();
 
             canvas.Translate(UCoordinate * Floor.FloorPlan.IntrinsicWidth, VCoordinate * Floor.FloorPlan.IntrinsicHeight);
             canvas.Scale(_iconScaleFactor, _iconScaleFactor);
             canvas.Translate(-_Icon.IntrinsicWidth / 2.0f, -_Icon.IntrinsicHeight / 2.0f);
             _Icon.Draw(canvas);
-            canvas.Restore();
+            canvas.Restore();*/
         }
+
     }
 }
-//transferred to Models
+

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
@@ -86,7 +86,7 @@ namespace Exposeum.Models
             p1.Visited = false;
 			p1.Beacon = beacon1;
 
-			PointOfTravel pot1 = new PointOfTravel(0.60f, 0.82f, floor1);
+			WayPoint pot1 = new WayPoint(0.60f, 0.82f, floor1);
 
 			/*PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
@@ -213,7 +213,7 @@ namespace Exposeum.Models
 			poi0.Visited = false;
 			poi0.Beacon = beacon1;
 
-			PointOfTravel waypoint3 = new PointOfTravel(0.720f, 0.577f, floor2);
+			WayPoint waypoint3 = new WayPoint(0.720f, 0.577f, floor2);
 
 			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
 			poi1.Description = description3;
@@ -222,7 +222,7 @@ namespace Exposeum.Models
 			poi1.Visited = false;
 			poi1.Beacon = beacon3;
 
-			PointOfTravel waypoint4 = new PointOfTravel(0.754f, 0.538f, floor2);
+			WayPoint waypoint4 = new WayPoint(0.754f, 0.538f, floor2);
 
 			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
 			poi2.Description = description4;
@@ -238,9 +238,9 @@ namespace Exposeum.Models
 			poi3.Visited = false;
 			poi3.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint5 = new PointOfTravel(0.769f, 0.549f, floor2);
-			PointOfTravel waypoint6 = new PointOfTravel(0.796f, 0.605f, floor2);
-			PointOfTravel waypoint7 = new PointOfTravel(0.712f, 0.615f, floor2);
+			WayPoint waypoint5 = new WayPoint(0.769f, 0.549f, floor2);
+			WayPoint waypoint6 = new WayPoint(0.796f, 0.605f, floor2);
+			WayPoint waypoint7 = new WayPoint(0.712f, 0.615f, floor2);
 
 			PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
 			poi4.Description = nicelyDrawnBeaconDescriptionTest;
@@ -249,7 +249,7 @@ namespace Exposeum.Models
 			poi4.Visited = false;
 			poi4.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint8 = new PointOfTravel(0.645f, 0.907f, floor2);
+			WayPoint waypoint8 = new WayPoint(0.645f, 0.907f, floor2);
 
 			PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
 			poi5.Description = nicelyDrawnBeaconDescriptionTest;
@@ -265,7 +265,7 @@ namespace Exposeum.Models
 			poi6.Visited = false;
 			poi6.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint9 = new PointOfTravel(0.176f, 0.894f, floor2);
+			WayPoint waypoint9 = new WayPoint(0.176f, 0.894f, floor2);
 
 			PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
 			poi7.Description = nicelyDrawnBeaconDescriptionTest;
@@ -274,7 +274,7 @@ namespace Exposeum.Models
 			poi7.Visited = false;
 			poi7.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint10 = new PointOfTravel(0.174f, 0.612f, floor2);
+			WayPoint waypoint10 = new WayPoint(0.174f, 0.612f, floor2);
 
 			PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
 			poi8.Description = nicelyDrawnBeaconDescriptionTest;
