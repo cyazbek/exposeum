@@ -1,5 +1,4 @@
 using Exposeum.Mappers;
-using Exposeum.TDGs;
 using Exposeum.TempModels;
 using NUnit.Framework;
 using TablesEn = Exposeum.Tables.ExhibitionContentEn;

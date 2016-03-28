@@ -27,6 +27,7 @@ namespace Exposeum.Mappers
                 _instance = new MapMapper();
             return _instance; 
         }
+
         public Map ParseMap()
         {
             Map map = Map.GetInstance();

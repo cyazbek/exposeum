@@ -137,7 +137,6 @@
     <Compile Include="Tables\ExhibitionContentEn.cs" />
     <Compile Include="Tables\ExhibitionContentFr.cs" />
     <Compile Include="Tables\Floor.cs" />
-    <Compile Include="Tables\Icon.cs" />
     <Compile Include="Tables\Images.cs" />
     <Compile Include="Tables\Map.cs" />
     <Compile Include="Tables\MapElements.cs" />
@@ -153,7 +152,6 @@
     <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
     <Compile Include="TDGs\FloorTDG.cs" />
-    <Compile Include="TDGs\IconTDG.cs" />
     <Compile Include="TDGs\ImagesTDG.cs" />
     <Compile Include="TDGs\MapElementsTDG.cs" />
     <Compile Include="TDGs\MapTDG.cs" />
