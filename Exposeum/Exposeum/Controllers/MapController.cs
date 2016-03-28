@@ -241,17 +241,19 @@ namespace Exposeum.Controllers
         /// <summary>
         /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
         /// </summary>
-		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPois)
+		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements)
         {
-			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedPois, SkipOutOfOrderPOI);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI);
         }
 
-		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints){
+		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements){
 
-		    foreach (var x in skippedPoints)
+			foreach (var mapElement in skippedMapElements)
 		    {
-		        x.SetVisited();
+				mapElement.SetVisited();
 		    }
+
+			//
 			_mapModel.CurrentStoryline.UpdateProgress (currentPoi);
             _mapView.Update();
 		}
