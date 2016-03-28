@@ -75,6 +75,7 @@
     <Compile Include="MapperTests\TextContentMapperTest.cs" />
     <Compile Include="MapperTests\UserMapperTest.cs" />
     <Compile Include="MapperTests\VideoMapperTest.cs" />
+    <Compile Include="MapperTests\WayPointMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="ShortestPathServiceProviderTests.cs" />
@@ -147,5 +148,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\stairs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\bathroom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\exit.png" />
   </ItemGroup>
 </Project>
