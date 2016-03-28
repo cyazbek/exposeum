@@ -13,7 +13,6 @@ namespace Exposeum.Mappers
         private readonly MapElementsTdg _mapElementsTdg;
         private readonly FloorMapper _floorMapper; 
 
-
         private PointOfInterestMapper()
         {
             _descriptionMapper = PointOfInterestDescriptionMapper.GetInstance();
@@ -104,10 +103,5 @@ namespace Exposeum.Mappers
             Tables.MapElements mapElement = _mapElementsTdg.GetMapElement(id);
             return ConvertToModel(mapElement);
         }
-
-
-
-       
-
     }
 }

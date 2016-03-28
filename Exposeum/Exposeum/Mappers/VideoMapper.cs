@@ -27,6 +27,7 @@ namespace Exposeum.Mappers
             return new VideoContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Duration = content.Duration,
                 Resolution = content.Resolution,
@@ -42,6 +43,7 @@ namespace Exposeum.Mappers
             return new VideoContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Duration = content.Duration,
                 Resolution = content.Resolution,
@@ -58,6 +60,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentEn
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "VideoContent",
@@ -74,6 +77,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentFr
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "VideoContent",

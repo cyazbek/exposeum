@@ -27,6 +27,7 @@ namespace Exposeum.Mappers
             return new TextContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Language = Models.Language.En,
                 StorylineId = content.StoryLineId,
@@ -40,6 +41,7 @@ namespace Exposeum.Mappers
             return new TextContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Language = Models.Language.Fr,
                 StorylineId = content.StoryLineId,
@@ -53,6 +55,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentEn
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "TextContent",
@@ -66,6 +69,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentFr
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "TextContent",

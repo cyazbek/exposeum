@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Android.Graphics;
 
 namespace Exposeum.TempModels
 {
@@ -32,6 +33,11 @@ namespace Exposeum.TempModels
                 ExhibitionContent.Equals(other.ExhibitionContent);
             }
             return false;
+        }
+
+        public override void Draw(Canvas canvas)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
