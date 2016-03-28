@@ -64,11 +64,12 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapperTests\AudioMapperTest.cs" />
     <Compile Include="MapperTests\BeaconMapperTest.cs" />
+    <Compile Include="MapperTests\ExhibitionContentMapperTest.cs" />
     <Compile Include="MapperTests\FloorMapperTest.cs" />
     <Compile Include="MapperTests\ImageContentMapperTest.cs" />
     <Compile Include="MapperTests\MapEdgeMapperTest.cs" />
-    <Compile Include="MapperTests\ExhibitionContentTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
+    <Compile Include="MapperTests\PointOfInterestMapperTest.cs" />
     <Compile Include="MapperTests\StatusMapperTest.cs" />
     <Compile Include="MapperTests\StorylineDescriptionMapperTest.cs" />
     <Compile Include="MapperTests\TextContentMapperTest.cs" />

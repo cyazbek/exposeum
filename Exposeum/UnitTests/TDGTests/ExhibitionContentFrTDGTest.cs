@@ -83,18 +83,6 @@ namespace UnitTests
         }
 
         [Test()]
-        public void GetExhibitionContentEnByStorylineIdTest()
-        {
-            _objectTDG.Add(_setObject);
-            _objectTDG.Add(_setObject1);
-            _objectTDG.Add(_setObject2);
-            _objectTDG.Add(_setObject3);
-
-            List<ExhibitionContentFr> numberOfEntries = _db.Query<ExhibitionContentFr>("SELECT * from ExhibitionContentFr where storyLineId = ?", _setObject.StoryLineId);
-            List<int> list = _objectTDG.GetExhibitionContentEnByStorylineId(_setObject.StoryLineId);
-            Assert.AreEqual(list.Count, numberOfEntries.Count);
-        }
-        [Test()]
         public void UpdateExhibitionContentFrTest()
         {
             _testObject.Id = 1;

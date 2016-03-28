@@ -1,6 +1,7 @@
 
 
 using System;
+using Android.Graphics;
 
 namespace Exposeum.TempModels
 {
@@ -8,7 +9,7 @@ namespace Exposeum.TempModels
     {
         public int Id { get; set; }
         public bool Visited { get; set; }
-        public string IconId { get; set; }
+        public string IconPath { get; set; }
         public float UCoordinate { get; set; }
         public float VCoordinate { get; set; }
         public Floor Floor { get; set; }
@@ -20,12 +21,15 @@ namespace Exposeum.TempModels
                 MapElement other = (MapElement)obj;
                 return other.Id == Id &&
                     other.Visited == Visited &&
-                    other.IconId == IconId &&
+                    other.IconPath == IconPath &&
                     Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
                     Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
                     other.Floor.Equals(Floor);
             }
             return false;
         }
+
+        public abstract void Draw(Canvas canvas);
+
     }
 }

@@ -92,7 +92,7 @@ namespace Exposeum.Mappers
             {
                 Id = mapElement.Id,
                 Visited = Convert.ToInt32(mapElement.Visited),
-                IconId = mapElement.IconId,
+                IconPath = mapElement.IconPath,
                 UCoordinate = mapElement.UCoordinate,
                 VCoordinate = mapElement.VCoordinate,
                 FloorId = mapElement.Floor.Id

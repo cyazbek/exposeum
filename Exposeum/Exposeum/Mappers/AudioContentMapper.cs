@@ -27,6 +27,7 @@ namespace Exposeum.Mappers
             return new AudioContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Language = Models.Language.En,
                 StorylineId = content.StoryLineId,
@@ -41,6 +42,7 @@ namespace Exposeum.Mappers
             return new AudioContent
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 Language = Models.Language.Fr,
                 FilePath = content.Filepath,
@@ -56,6 +58,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentEn
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "AudioContent",
@@ -71,6 +74,7 @@ namespace Exposeum.Mappers
             return new Tables.ExhibitionContentFr
             {
                 Id = content.Id,
+                PoiId = content.PoiId,
                 Title = content.Title,
                 StoryLineId = content.StorylineId,
                 Discriminator = "AudioContent",

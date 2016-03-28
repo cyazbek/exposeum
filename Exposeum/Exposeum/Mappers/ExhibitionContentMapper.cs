@@ -1,11 +1,7 @@
 using System.Collections.Generic;
-using Android.Accounts;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
-using Java.Security.Interfaces;
-using Javax.Crypto.Interfaces;
-using Org.XmlPull.V1;
 using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
 using User = Exposeum.Models.User;
 
@@ -16,15 +12,15 @@ namespace Exposeum.Mappers
     {
 
         private static ExhibitionContentMapper _instance;
-        private VideoMapper _videoMapper;
-        private AudioContentMapper _audioMapper;
-        private TextContentMapper _textMapper;
-        private ImageContentMapper _imageMapper;
+        private readonly VideoMapper _videoMapper;
+        private readonly AudioContentMapper _audioMapper;
+        private readonly TextContentMapper _textMapper;
+        private readonly ImageContentMapper _imageMapper;
 
-        private ExhibitionContentEnTdg _enTdg;
-        private ExhibitionContentFrTdg _frTdg;
+        private readonly ExhibitionContentEnTdg _enTdg;
+        private readonly ExhibitionContentFrTdg _frTdg;
 
-        private Models.User _user; 
+        private readonly Models.User _user; 
 
         private ExhibitionContentMapper()
         {
@@ -117,6 +113,7 @@ namespace Exposeum.Mappers
         public void AddExhibitionContent(List<ExhibitionContent> list)
         {
             var language = list[0].Language;
+
             if (language == Models.Language.En)
             {
                 List<ExhibitionContentEn> tableList = new List<ExhibitionContentEn>();
@@ -140,7 +137,8 @@ namespace Exposeum.Mappers
         public List<ExhibitionContent> GetExhibitionByPoiId(int id)
         {
             var language = _user.Language;
-            List<ExhibitionContent> modelList = new List<ExhibitionContent>();
+            List<ExhibitionContent> modelList;
+
             if (language == Models.Language.En)
             {
                 modelList = ConvertFromTableEn(_enTdg.GetExhibitionContentByPoiId(id));
