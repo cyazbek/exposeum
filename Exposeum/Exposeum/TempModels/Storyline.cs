@@ -6,14 +6,15 @@ namespace Exposeum.TempModels
     public class Storyline
     {
         public int StorylineId { get; set; }
-        public string ImageId { get; set; }
+        public string ImgPath { get; set; }
         public int Duration { get; set; }
         public int FloorsCovered { get; set; }
-        public List<MapElement> MapElements { get; set; }
-        public string IntendedAudience { get; set;}
-        public PointOfInterest LastVisitedPointOfInterest { get; set; }
-        public Models.Status Status; 
+        public Models.Status Status { get; set; }
         public StorylineDescription StorylineDescription { get; set; }
+
+        public List<MapElement> MapElements { get; set; }
+        public PointOfInterest LastVisitedPointOfInterest { get; set; }
+
 
         public Storyline()
         {
@@ -31,8 +32,8 @@ namespace Exposeum.TempModels
                         result = true;
                     else return false;
                 }
-                return result && other.StorylineId == StorylineId && other.ImageId == ImageId && other.Duration == Duration && other.FloorsCovered == FloorsCovered &&
-                    IntendedAudience == other.IntendedAudience && LastVisitedPointOfInterest.Equals(other.LastVisitedPointOfInterest) && Status.Equals(other.Status) &&
+                return result && other.StorylineId == StorylineId && other.ImgPath == ImgPath && other.Duration == Duration && other.FloorsCovered == FloorsCovered &&
+                     LastVisitedPointOfInterest.Equals(other.LastVisitedPointOfInterest) && Status.Equals(other.Status) &&
                     StorylineDescription == other.StorylineDescription;
             }
             return false;

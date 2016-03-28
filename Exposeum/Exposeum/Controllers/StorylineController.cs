@@ -36,7 +36,7 @@ namespace Exposeum.Controllers
 			
 				
 				DialogFragment dialog;
-				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
+				if(_selectedStoryLine.Status==Status.InProgress)
 				{
 					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
 				}
@@ -62,8 +62,8 @@ namespace Exposeum.Controllers
 				mapElement.Visited = false;
             }
 
-            storyLine.SetLastPointOfInterestVisited(null);
-            storyLine.CurrentStatus = Status.IsNew;
+            storyLine.LastPointOfInterestVisited = null;
+            storyLine.Status = Status.IsNew;
 
         }
 
@@ -83,7 +83,7 @@ namespace Exposeum.Controllers
 
         public void BeginJournery()
         {
-            _selectedStoryLine.CurrentStatus = Status.InProgress;
+            _selectedStoryLine.Status = Status.InProgress;
         }
     }
 }

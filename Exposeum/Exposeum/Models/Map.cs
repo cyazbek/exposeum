@@ -188,8 +188,8 @@ namespace Exposeum.Models
 			StoryLine story5 = new StoryLine("The Detective", "Le Détective", "All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.detective);
 			StoryLine story6 = new StoryLine("1940's Radio", "La radio de 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
 
-			story2.CurrentStatus = Status.InProgress;
-			story3.CurrentStatus = Status.IsVisited;
+			story2.Status = Status.InProgress;
+			story3.Status = Status.IsVisited;
 
 			Storylines.Add(storyline);
 			Storylines.Add(story2);
@@ -316,7 +316,7 @@ namespace Exposeum.Models
 			for (int i = 0; i < 16; i++) {
 				story6.MapElements [i].Visited = true;
 			}
-			story6.CurrentStatus = Status.InProgress;
+			story6.Status = Status.InProgress;
 			///////////////////////////////////////////
 
 		}

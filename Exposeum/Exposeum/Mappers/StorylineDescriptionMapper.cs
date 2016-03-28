@@ -79,7 +79,8 @@ namespace Exposeum.Mappers
             {
                 Id = storyLineDescription.StoryLineDescriptionId,
                 Title = storyLineDescription.Title,
-                Description = storyLineDescription.Description
+                Description = storyLineDescription.Description,
+                IntendedAudience = storyLineDescription.IntendedAudience
             };
 
             return storyLineDescriptionTable;
@@ -91,7 +92,8 @@ namespace Exposeum.Mappers
             {
                 Id = storyLineDescription.StoryLineDescriptionId,
                 Title = storyLineDescription.Title,
-                Description = storyLineDescription.Description
+                Description = storyLineDescription.Description,
+                IntendedAudience = storyLineDescription.IntendedAudience
             };
 
             return storyLineDescriptionTable;
@@ -104,6 +106,7 @@ namespace Exposeum.Mappers
                 StoryLineDescriptionId = storyLineDescription.Id,
                 Title = storyLineDescription.Title,
                 Description = storyLineDescription.Description,
+                IntendedAudience = storyLineDescription.IntendedAudience,
                 Language = Language.En
             };
 
@@ -117,6 +120,7 @@ namespace Exposeum.Mappers
                 StoryLineDescriptionId = storyLineDescription.Id,
                 Title = storyLineDescription.Title,
                 Description = storyLineDescription.Description,
+                IntendedAudience = storyLineDescription.IntendedAudience,
                 Language = Language.Fr
             };
 

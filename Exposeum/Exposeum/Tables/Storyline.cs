@@ -6,7 +6,6 @@ namespace Exposeum.Tables
     {
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int Id { get; set; }
-        public string Audience { get; set; }
         public int Duration { get; set; }
         public string ImagePath { get; set; } 
         public int FloorsCovered { get; set; }
