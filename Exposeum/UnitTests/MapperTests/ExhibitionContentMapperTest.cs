@@ -25,7 +25,7 @@ namespace UnitTests
 
         private readonly List<ExhibitionContent> _contents = new List<ExhibitionContent>();
         private List<ExhibitionContent> _expected;
-        private PointOfInterest poi;
+        private PointOfInterest _poi;
 
         private readonly ExhibitionContentEnTdg _tdgEn = ExhibitionContentEnTdg.GetInstance();
         private readonly ExhibitionContentFrTdg _tdgFr = ExhibitionContentFrTdg.GetInstance();
@@ -44,7 +44,7 @@ namespace UnitTests
                 Id = 1,
                 PoiId = 1,
                 Title = "AudioTitle",
-                Language = Exposeum.Models.Language.En,
+                Language = Language.En,
                 StorylineId = 1,
                 FilePath = "AudioPath",
                 Duration = 1,
@@ -56,7 +56,7 @@ namespace UnitTests
                 Id = 2,
                 PoiId = 1,
                 Title = "VideoTitle",
-                Language = Exposeum.Models.Language.En,
+                Language = Language.En,
                 StorylineId = 1,
                 FilePath = "VideoPath",
                 Duration = 1,
@@ -68,7 +68,7 @@ namespace UnitTests
                 Id = 3,
                 PoiId = 1,
                 Title = "TextTitle",
-                Language = Exposeum.Models.Language.En,
+                Language = Language.En,
                 StorylineId = 1,
                 HtmlContent = "TheContentEn"
             };
@@ -78,7 +78,7 @@ namespace UnitTests
                 Id = 4,
                 PoiId = 1,
                 Title = "ImageTitle",
-                Language = Exposeum.Models.Language.En,
+                Language = Language.En,
                 StorylineId = 1,
                 FilePath = "ImagePath",
                 Width = 250,
@@ -90,7 +90,7 @@ namespace UnitTests
             _contents.Add(_textContent);
             _contents.Add(_imageContent);
 
-            poi = new PointOfInterest
+            _poi = new PointOfInterest
             {
                 Id = 1,
                 ExhibitionContent = _contents
@@ -108,14 +108,32 @@ namespace UnitTests
         {
             _user.Language = Language.En;
             _instance.AddExhibitionContent(_contents);
-            _expected = _instance.GetExhibitionByPoiId(poi.Id);
+            _expected = _instance.GetExhibitionByPoiId(_poi.Id);
             Assert.True(ExhibitionContent.ListEquals(_contents, _expected));
         }
 
         [Test]
         public void UpdateExhibitionContentTest()
         {
-            
+            _user.Language = Language.En;
+
+            _imageContent = new ImageContent
+            {
+                Id = 5,
+                PoiId = 1,
+                Title = "ImageTitle5",
+                Language = Language.En,
+                StorylineId = 1,
+                FilePath = "ImagePath5",
+                Width = 250,
+                Height = 250
+            };
+
+            _contents.Add(_imageContent);
+
+            _instance.UpdateExhibitionList(_contents);
+            _expected = _instance.GetExhibitionByPoiId(_poi.Id);
+            Assert.AreEqual(5, _expected.Count);
         }
 
         [Test]
