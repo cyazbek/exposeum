@@ -5,7 +5,7 @@ namespace Exposeum.Models
 	public class PointOfTravel : MapElement
 	{
 
-		public PointOfTravel(float UCoordinate, float v, Floor floor) : base (UCoordinate, v, floor)
+		public PointOfTravel(float UCoordinate, float vCoordinate, Floor floor) : base (UCoordinate, vCoordinate, floor)
 		{
 		}
 

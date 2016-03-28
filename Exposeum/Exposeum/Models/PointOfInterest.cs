@@ -3,6 +3,7 @@ using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Java.Util;
+using System.Collections.Generic;
 
 namespace Exposeum.Models
 {
@@ -13,11 +14,12 @@ namespace Exposeum.Models
         public string NameFr { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionFr { get; set; }
+        public int StoryLineId { get; set; }
         public int Id { get; set; }
         public int StoryId { get; set; }
-		private readonly float _iconScaleFactor = 0.2f;
-
         public PointOfInterestDescription Description { get; set; }
+        public List<ExhibitionContent> ExhibitionContent { get; set; }
+        private readonly float _iconScaleFactor = 0.2f;
 
         private Drawable _visitedIcon;
         private Drawable _unvisitedIcon;
@@ -32,10 +34,10 @@ namespace Exposeum.Models
         }
 
 		//TODO: Remove this constructor
-        public PointOfInterest(float UCoordinate, float v)
+        public PointOfInterest(float uCoordinate, float vCoordinate)
         {
-            UCoordinate = UCoordinate;
-            V = v;
+            UCoordinate = uCoordinate;
+            VCoordinate = vCoordinate;
 
             Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             Visited = false;
@@ -43,7 +45,7 @@ namespace Exposeum.Models
 			SetVisitedUnvisitedIcons ();
         }
 
-		public PointOfInterest(float UCoordinate, float v, Floor floor) : base(UCoordinate, v, floor)
+		public PointOfInterest(float uCoordinate, float vCoordinate, Floor floor) : base(uCoordinate, vCoordinate, floor)
 	    {
 			Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
 			SetVisitedUnvisitedIcons ();
@@ -77,7 +79,7 @@ namespace Exposeum.Models
         {
             canvas.Save();
 
-			canvas.Translate (UCoordinate * Floor.Image.IntrinsicWidth, V * Floor.Image.IntrinsicHeight);
+			canvas.Translate (UCoordinate * Floor.Image.IntrinsicWidth, VCoordinate * Floor.Image.IntrinsicHeight);
 			canvas.Scale (_iconScaleFactor, _iconScaleFactor);
 			canvas.Translate (-_unvisitedIcon.IntrinsicWidth / 2.0f, -_unvisitedIcon.IntrinsicHeight / 2.0f);
 
@@ -89,30 +91,14 @@ namespace Exposeum.Models
 			canvas.Restore();
 		}
 
-        public String GetHtml()
-        {
-            string summary;
-
-            if (User.GetInstance().Language.Equals(Language.Fr))
-                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
-            else
-                summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn );
-
-            return summary;
-        }
-
         public string GetDescription()
         {
-            if (User.GetInstance().Language.Equals(Language.Fr))
-                return DescriptionFr;
-            return DescriptionEn;
+            return Description.Description;
         }
 
 	    public string GetName()
 	    {
-	        if (User.GetInstance().Language.Equals(Language.Fr))
-                return NameFr;
-	        return NameEn;
+	        return Description.Title;
 	    }
 
 	    public bool CheckBeacon(Beacon b)

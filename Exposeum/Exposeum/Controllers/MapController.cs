@@ -157,7 +157,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         //otherwise just update the state of the poi
-                        poi.SetVisited();
+                        poi.Visited = true;
                         UpdateFloor(poi);
                         DisplayPopUp(poi);
                     }

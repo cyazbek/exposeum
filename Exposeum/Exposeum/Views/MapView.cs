@@ -229,8 +229,8 @@ namespace Exposeum.Views
 					MapElement next = mapElements[i + 1];
 
                     Android.Graphics.Path path = new Android.Graphics.Path ();
-					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight);
-					path.LineTo(next.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, current.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.LineTo(next.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, next.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
 
 					canvas.DrawPath(path, appropriateEdgePaintBrush);
 				}
@@ -286,7 +286,7 @@ namespace Exposeum.Views
 			foreach (PointOfInterest poi in currentFloorPoIs) {
 
 				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.UCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
+				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.VCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					return poi;

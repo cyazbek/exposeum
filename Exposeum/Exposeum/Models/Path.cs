@@ -44,7 +44,7 @@ namespace Exposeum.Models
 				while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
-					currentNode.SetVisited();
+					currentNode.Visited = true;
 				}
 
 				//If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited

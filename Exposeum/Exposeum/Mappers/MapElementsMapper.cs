@@ -31,6 +31,21 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
+        public List<MapElement> GetAllMapElements()
+        {
+            List<MapElements> tableElements = _mapElementsTdg.GetAllMapElements();
+            List<MapElement> list = new List<MapElement>();
+            foreach (var x in tableElements)
+            {
+                if (x.Discriminator == "PointOfInterest")
+                {
+                    list.Add(_pointOfInterestMapper.ConvertToModel(x));
+                }
+                else 
+                    list.Add(_wayPointMapper.ConvertFromTable(x));
+            }
+            return list;
+        }       
         public void AddList(List<MapElement> elements)
         {
             foreach (var x in elements)

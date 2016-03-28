@@ -47,7 +47,7 @@ namespace Exposeum.Mappers
             _edgeMapper.UpdateMapEdgesList(map.Edges);
             _floorMapper.UpdateFloorsList(map.Floors);
             _storylineMapper.UpdateStorylinesList(map.Storylines);
-            _mapElementsMapper.UpdateMapElementList(map.MapElements);
+            _mapElementsMapper.UpdateList(map.MapElements);
             Tables.Map tableMap = new Tables.Map
             {
                 Id = map.Id,
