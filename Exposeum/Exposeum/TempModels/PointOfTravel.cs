@@ -4,7 +4,7 @@ using Android.Graphics.Drawables;
 
 namespace Exposeum.TempModels
 {
-    public class WayPoint:MapElement
+    public class PointOfTravel:MapElement
     {
         public WaypointLabel Label { get; set; }
 
@@ -15,7 +15,7 @@ namespace Exposeum.TempModels
         {
             if (obj != null)
             {
-                WayPoint other = (WayPoint)obj;
+                PointOfTravel other = (PointOfTravel)obj;
                 return Label.Equals(other.Label);
             }
             return false;
