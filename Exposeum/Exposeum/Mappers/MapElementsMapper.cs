@@ -42,6 +42,23 @@ namespace Exposeum.Mappers
             }
         }
 
+        public List<MapElement> GetAllElements()
+        {
+            List<MapElements> list = new List<MapElements>();
+            list = _mapElementsTdg.GetAllMapElements();
+            List<MapElement> modelList = new List<MapElement>();
+            foreach (var x in list)
+            {
+                if (x.Discriminator == "PointOfInterest")
+                    modelList.Add(_pointOfInterestMapper.ConvertToModel(x));
+                else
+                {
+                    modelList.Add((_wayPointMapper.ConvertFromTable(x)));
+                }
+            }
+            return modelList;
+        } 
+
         public List<MapElement> GetAllElementByStorylineId(int id)
         {
             List<MapElements> list = new List<MapElements>();
