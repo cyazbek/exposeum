@@ -5,27 +5,26 @@ namespace Exposeum.Models
 {
     public abstract class MapElement
     {
-        public float U, V;
-        public Floor Floor;
+        public int Id { get; set; }
+        public bool Visited { get; set; }
+        public string IconPath { get; set; }
+        public float UCoordinate { get; set; }
+        public float VCoordinate { get; set; }
+        public Floor Floor { get; set; }
 
-        public Boolean Visited { get; set; }
+        
 
         protected MapElement()
         {
         }
 
-        protected MapElement(float u, float v, Floor floor)
+        protected MapElement(float uCoordinate, float vCoordinate, Floor floor)
         {
-            U = u;
-            V = v;
+            UCoordinate = uCoordinate;
+            VCoordinate = vCoordinate;
             Visited = false;
 
             Floor = floor;
-        }
-
-        public void SetVisited()
-        {
-            Visited = true;
         }
 
         public abstract void Draw(Canvas canvas);

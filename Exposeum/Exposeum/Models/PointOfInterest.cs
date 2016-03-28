@@ -32,10 +32,10 @@ namespace Exposeum.Models
         }
 
         //TODO: Remove this constructor
-        public PointOfInterest(float u, float v)
+        public PointOfInterest(float UCoordinate, float VCoordinate)
         {
-            U = u;
-            V = v;
+            UCoordinate = UCoordinate;
+            VCoordinate = VCoordinate;
 
             Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             Visited = false;
@@ -43,7 +43,7 @@ namespace Exposeum.Models
             SetVisitedUnvisitedIcons();
         }
 
-        public PointOfInterest(float u, float v, Floor floor) : base(u, v, floor)
+        public PointOfInterest(float UCoordinate, float VCoordinate, Floor floor) : base(UCoordinate, VCoordinate, floor)
         {
             Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
             SetVisitedUnvisitedIcons();
@@ -83,7 +83,7 @@ namespace Exposeum.Models
         {
             canvas.Save();
 
-            canvas.Translate(U * Floor.Image.IntrinsicWidth, V * Floor.Image.IntrinsicHeight);
+            canvas.Translate(UCoordinate * Floor.Image.IntrinsicWidth, VCoordinate * Floor.Image.IntrinsicHeight);
             canvas.Scale(_iconScaleFactor, _iconScaleFactor);
             canvas.Translate(-_unvisitedIcon.IntrinsicWidth / 2.0f, -_unvisitedIcon.IntrinsicHeight / 2.0f);
 
