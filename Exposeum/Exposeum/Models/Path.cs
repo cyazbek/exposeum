@@ -4,14 +4,14 @@ namespace Exposeum.Models
 {
 	public class Path: IPath
 	{
-		public Status CurrentStatus { get; set; }
+		public Status Status { get; set; }
 		public List<MapElement> MapElements { get; set; }
 		private PointOfInterest _lastPointOfInterestVisited ;
 
 		public Path (List<MapElement> mapElements)
 		{
 			MapElements = mapElements;
-			CurrentStatus = Status.IsNew;
+			Status = Status.IsNew;
 		}
 
 		public void AddMapElement (MapElement e){
@@ -53,9 +53,9 @@ namespace Exposeum.Models
 
 				//finally, of this node is the last node of the path, set the path as completed
 				if (rightBoundLinkedNode.Next == null)
-					CurrentStatus = Status.IsVisited;
-				else if (CurrentStatus == Status.IsNew)
-					CurrentStatus = Status.InProgress;
+					Status = Status.IsVisited;
+				else if (Status == Status.IsNew)
+					Status = Status.InProgress;
 			}
 		}
 

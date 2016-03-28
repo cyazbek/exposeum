@@ -4,7 +4,7 @@ namespace Exposeum.Models
 {
 	public interface IPath
 	{
-		Status CurrentStatus { get; set; }
+		Status Status { get; set; }
 		List<MapElement> MapElements { get; set; }
 
 		void AddMapElement (MapElement e);
