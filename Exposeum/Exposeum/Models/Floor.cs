@@ -3,34 +3,24 @@ using Android.Graphics;
 
 namespace Exposeum.Models
 {
-	public class Floor
-	{
-        public int Id { get; set; }
-        public string ImagePath { get; set; }
-        public Drawable FloorPlan { get; set; }
-        public Paint Paint { get; set; }
+    public class Floor
+    {
+        private readonly Drawable _floorPlan;
+        private readonly Paint _paint = new Paint();
 
-        public Floor()
-        {
-            Paint = new Paint();
-        }
         public Floor(Drawable floorPlan)
         {
-            FloorPlan = floorPlan;
-            FloorPlan.SetBounds(0, 0, FloorPlan.IntrinsicWidth, FloorPlan.IntrinsicHeight);
+            _floorPlan = floorPlan;
+            _floorPlan.SetBounds(0, 0, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
 
-            Paint.SetStyle(Paint.Style.Fill);
-            Paint.Color = Color.Purple;
-            Paint.StrokeWidth = 20; //magic number, should extract static constant
+            _paint.SetStyle(Paint.Style.Fill);
+            _paint.Color = Color.Purple;
+            _paint.StrokeWidth = 20; //magic number, should extract static constant
         }
-        public override bool Equals(object obj)
+
+        public Drawable Image
         {
-            Floor other = (Floor)obj;
-            return Id == other.Id && ImagePath.Equals(other.ImagePath);
+            get { return _floorPlan; }
         }
-		public Drawable Image
-		{
-			get { return FloorPlan; }
-		}
-	}
+    }
 }
