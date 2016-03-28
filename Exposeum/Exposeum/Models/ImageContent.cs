@@ -1,12 +1,20 @@
-﻿namespace Exposeum.Models
+﻿using System;
+
+namespace Exposeum.Models
 {
     public class ImageContent : ExhibitionContent
     {
-        public string filePath { get; set; }
-        public int width { get; set; }
-        public int heigh { get; set; }
+        public string FilePath { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
-        public override string htmlFormat()
+        public override bool Equals(object obj)
+        {
+            ImageContent other = (ImageContent)obj;
+            return FilePath.Equals(other.FilePath) && Width == other.Width && Height == other.Height;
+        }
+
+        public override string HtmlFormat()
         {
             return "<img>sldks</img>";
         }

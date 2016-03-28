@@ -1,5 +1,4 @@
-
-
+using Android.Graphics;
 using System;
 
 namespace Exposeum.TempModels

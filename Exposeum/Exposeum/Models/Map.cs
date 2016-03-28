@@ -8,26 +8,31 @@ namespace Exposeum.Models
 {
 	public class Map
 	{
-	    private static Map _map;
-        private List<Floor> _floors;
-        private StoryLine _currentStoryline;
-		private Path _activeShortestPath;
-		private List<MapElement> _elements;
-		private List<MapEdge> _edges;
-        private List<StoryLine> _storyLines;
+        public int Id;
+        private static Map _instance;
+        public List<MapEdge> Edges { get; set; }
+        public List<StoryLine> Storylines { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public List<Floor> Floors { get; set; }
+        public StoryLine CurrentStoryline { get; set; }
+        public Floor CurrentFloor { get; set; }
+        private Path _activeShortestPath;
 
-	    private Map ()
+        private Map ()
 		{
-			_storyLines = new List<StoryLine>();
+            Edges = new List<MapEdge>();
+            Floors = new List<Floor>();
+            MapElements = new List<MapElement>();
+            Storylines = new List<StoryLine>();
 			SeedData ();
         }
 
 	    public static Map GetInstance()
 	    {
-	        if (_map == null)
-                _map = new Map();
+	        if (_instance == null)
+                _instance = new Map();
 
-	        return _map;
+	        return _instance;
 	    }
         
 		private void SeedData(){
@@ -59,13 +64,13 @@ namespace Exposeum.Models
             Floor floor4 = new Floor(floorplan4);
             Floor floor5 = new Floor(floorplan5);
 
-			_floors = new List<Floor> ();
+			Floors = new List<Floor> ();
 
-			_floors.Add (floor1);
-			_floors.Add (floor2);
-			_floors.Add (floor3);
-			_floors.Add (floor4);
-			_floors.Add (floor5);
+			Floors.Add (floor1);
+			Floors.Add (floor2);
+			Floors.Add (floor3);
+			Floors.Add (floor4);
+			Floors.Add (floor5);
 
 			CurrentFloor = floor1;
 
@@ -186,15 +191,15 @@ namespace Exposeum.Models
 			story2.CurrentStatus = Status.InProgress;
 			story3.CurrentStatus = Status.IsVisited;
 
-			_storyLines.Add(storyline);
-			_storyLines.Add(story2);
-			_storyLines.Add(story3);
-			_storyLines.Add(story4);
-			_storyLines.Add(story5);
-			_storyLines.Add(story6);
+			Storylines.Add(storyline);
+			Storylines.Add(story2);
+			Storylines.Add(story3);
+			Storylines.Add(story4);
+			Storylines.Add(story5);
+			Storylines.Add(story6);
 
 			//Set the storyline for the explorer mode
-			_currentStoryline = storyline;
+			CurrentStoryline = storyline;
 
 			StoryLine nicelyDrawn = new StoryLine("The Gramophone", "Le Gramophone","All Audience", "Toute Audience", "Description in english", "Description en français", 120 , Resource.Drawable.NipperTheDog);
 
@@ -296,7 +301,7 @@ namespace Exposeum.Models
 			nicelyDrawn.AddMapElement(waypoint10);
 			nicelyDrawn.AddMapElement(poi8);
 
-			_storyLines.Add (nicelyDrawn);
+			Storylines.Add (nicelyDrawn);
 
 			////////////////////////////////////////////
 			//make storyline 6 a demo for shortest path
@@ -316,30 +321,6 @@ namespace Exposeum.Models
 
 		}
 
-
-
-	    public Floor CurrentFloor { get; set; }
-
-	    public List<Floor> Floors
-		{
-			get { return _floors; }
-			set { _floors = value; }
-		}
-
-		public StoryLine CurrentStoryline
-		{
-			get { return _currentStoryline; }
-			set { _currentStoryline = value; }
-		}
-        public void AddStoryLine(StoryLine storyline)
-        {
-            _storyLines.Add(storyline);
-        }
-        public List<StoryLine> GetStoryLineList
-        {
-            get { return _storyLines; }
-            set { _storyLines = value; }
-        }
 
 		public void SetActiveShortestPath(Path path){
 			_activeShortestPath = path;
