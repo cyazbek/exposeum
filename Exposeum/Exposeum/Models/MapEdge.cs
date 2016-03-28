@@ -1,4 +1,5 @@
 ﻿using QuickGraph;
+using Java.Lang;
 
 namespace Exposeum.Models
 {
@@ -22,7 +23,15 @@ namespace Exposeum.Models
 			Target = end;
 		    Distance = distance;
 		}
+        public override bool Equals(object obj)
+        {
+            MapEdge other = (MapEdge)obj;
 
+            return Id == other.Id &&
+                  Math.Abs(Distance - other.Distance) < 0 &&
+                  Source.Equals(other.Source) &&
+                  Target.Equals(other.Target);
+        }
 
-	}
+    }
 }
