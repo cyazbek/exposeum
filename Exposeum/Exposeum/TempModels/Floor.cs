@@ -1,4 +1,3 @@
-using System.Runtime.ConstrainedExecution;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 
@@ -16,10 +15,9 @@ namespace Exposeum.TempModels
             Paint = new Paint(); 
         }
 
-        public override bool Equals(object obj)
+        public bool IsEqual(Floor floor)
         {
-            Floor other = (Floor) obj;
-            return Id == other.Id && ImagePath.Equals(other.ImagePath);
+            return Id == floor.Id && ImagePath== floor.ImagePath;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace UnitTests
         {
             _instance.AddFloor(_floorModel);
             _expected = _instance.GetFloor(_floorModel.Id);
-            Assert.True(_floorModel.Equals(_expected));
+            Assert.True(_floorModel.IsEqual(_expected));
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace UnitTests
         public void FloorTableToModelTest()
         {
             Exposeum.TempModels.Floor expected = _instance.FloorTableToModel(_floorTable);
-            Assert.IsTrue(_floorModel.Equals(expected));
+            Assert.IsTrue(_floorModel.IsEqual(expected));
         }
 
     }

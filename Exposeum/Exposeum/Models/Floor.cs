@@ -5,13 +5,15 @@ namespace Exposeum.Models
 {
     public class Floor
     {
-        private readonly Drawable _floorPlan;
+        public int Id { get; set; }
+        public string ImagePath { get; set; }
+        public Drawable FloorPlan { get; set; }
         private readonly Paint _paint = new Paint();
 
         public Floor(Drawable floorPlan)
         {
-            _floorPlan = floorPlan;
-            _floorPlan.SetBounds(0, 0, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
+            FloorPlan = floorPlan;
+            FloorPlan.SetBounds(0, 0, FloorPlan.IntrinsicWidth, FloorPlan.IntrinsicHeight);
 
             _paint.SetStyle(Paint.Style.Fill);
             _paint.Color = Color.Purple;
@@ -20,7 +22,13 @@ namespace Exposeum.Models
 
         public Drawable Image
         {
-            get { return _floorPlan; }
+            get { return FloorPlan; }
         }
+
+        public bool IsEqual(Floor floor)
+        {
+            return Id == floor.Id && ImagePath == floor.ImagePath;
+        }
+
     }
 }

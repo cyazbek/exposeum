@@ -23,7 +23,7 @@ namespace Exposeum.TempModels
                     other.IconPath == IconPath &&
                     Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
                     Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
-                    other.Floor.Equals(Floor);
+                    other.Floor.IsEqual(Floor);
             }
             return false;
         }
