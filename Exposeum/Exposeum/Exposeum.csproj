@@ -115,6 +115,7 @@
     <Compile Include="Mappers\TextContentMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Mappers\VideoMapper.cs" />
+    <Compile Include="Mappers\WayPointMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\AudioContent.cs" />
