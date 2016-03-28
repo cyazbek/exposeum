@@ -252,9 +252,13 @@ namespace Exposeum.Controllers
 		    {
 		        x.SetVisited();
 		    }
-			_mapModel.CurrentStoryline.UpdateProgress (currentPoi);
+
             _mapView.Update();
-		}
+
+            if (!ExposeumApplication.IsExplorerMode)
+                _mapProgressionView.Update();
+                    
+        }
 
         /// <summary>
         /// This method will update display a popup in the view with contextual information about the supplied POI
