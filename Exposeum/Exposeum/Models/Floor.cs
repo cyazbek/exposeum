@@ -5,22 +5,32 @@ namespace Exposeum.Models
 {
 	public class Floor
 	{
-		private readonly Drawable _floorPlan;
-		private readonly Paint _paint = new Paint();
+        public int Id { get; set; }
+        public string ImagePath { get; set; }
+        public Drawable FloorPlan { get; set; }
+        public Paint Paint { get; set; }
 
-		public Floor (Drawable floorPlan)
-		{
-			_floorPlan = floorPlan;
-			_floorPlan.SetBounds (0, 0, _floorPlan.IntrinsicWidth, _floorPlan.IntrinsicHeight);
+        public Floor()
+        {
+            Paint = new Paint();
+        }
+        public Floor(Drawable floorPlan)
+        {
+            FloorPlan = floorPlan;
+            FloorPlan.SetBounds(0, 0, FloorPlan.IntrinsicWidth, FloorPlan.IntrinsicHeight);
 
-			_paint.SetStyle (Paint.Style.Fill);
-			_paint.Color = Color.Purple;
-			_paint.StrokeWidth = 20; //magic number, should extract static constant
-		}
-
+            Paint.SetStyle(Paint.Style.Fill);
+            Paint.Color = Color.Purple;
+            Paint.StrokeWidth = 20; //magic number, should extract static constant
+        }
+        public override bool Equals(object obj)
+        {
+            Floor other = (Floor)obj;
+            return Id == other.Id && ImagePath.Equals(other.ImagePath);
+        }
 		public Drawable Image
 		{
-			get { return _floorPlan; }
+			get { return FloorPlan; }
 		}
 	}
 }

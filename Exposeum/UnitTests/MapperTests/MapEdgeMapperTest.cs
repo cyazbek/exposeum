@@ -32,8 +32,8 @@ namespace UnitTests
                 /*
                 public int Id { get; set; }
                 public double Distance { get; set; }
-                public MapElement Start { get; set; }
-                public MapElement End { get; set; }
+                public MapElement Source { get; set; }
+                public MapElement Target { get; set; }
                 */
             };
 

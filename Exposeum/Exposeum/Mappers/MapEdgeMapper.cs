@@ -64,8 +64,8 @@ namespace Exposeum.Mappers
             {
                 Id = edge.Id,
                 Distance = edge.Distance,
-                StartMapElementId = edge.Start.Id,
-                EndMapElementId = edge.End.Id
+                StartMapElementId = edge.Source.Id,
+                EndMapElementId = edge.Target.Id
             };
 
             return edgeTable;
@@ -85,8 +85,8 @@ namespace Exposeum.Mappers
             {
                 Id = edgeTable.Id,
                 Distance = edgeTable.Distance,
-                Start = MapElementsMapper.GetInstance().GetMapElement(edgeTable.StartMapElementId),
-                End = MapElementsMapper.GetInstance().GetMapElement(edgeTable.EndMapElementId),
+                Source = MapElementsMapper.GetInstance().GetMapElement(edgeTable.StartMapElementId),
+                Target = MapElementsMapper.GetInstance().GetMapElement(edgeTable.EndMapElementId),
             };
             return edgeModel;
         }

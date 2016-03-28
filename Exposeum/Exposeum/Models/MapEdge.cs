@@ -4,7 +4,10 @@ namespace Exposeum.Models
 {
 	public class MapEdge : IEdge<MapElement>
 	{
-		public double Distance {get; set;}
+        public int Id { get; set; }
+        public double Distance {get; set;}
+        public MapElement Source { get; }
+        public MapElement Target { get; }
 
         public MapEdge(MapElement start, MapElement end)
         {
@@ -20,7 +23,6 @@ namespace Exposeum.Models
 		    Distance = distance;
 		}
 
-	    public MapElement Source { get; }
-	    public MapElement Target { get; }
+
 	}
 }
