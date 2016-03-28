@@ -36,7 +36,6 @@ namespace Exposeum.Tables
             Db.CreateTable<Beacon>();
             Db.CreateTable<ExhibitionContentEn>();
             Db.CreateTable<ExhibitionContentFr>();
-            Db.CreateTable<Images>();
             Db.CreateTable<User>();
             Db.CreateTable<Map>();
             Db.CreateTable<ExhibitionContentList>(); 

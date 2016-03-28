@@ -19,7 +19,7 @@ namespace UnitTests
             _setObject.Id = 1;
             _setObject.Audience = "audience";
             _setObject.Duration = 120;
-            _setObject.Image = 120;
+            _setObject.ImagePath = "path";
             _setObject.FloorsCovered = 3;
             _setObject.LastVisitedPoi = 5;
             _setObject.Status = 0;
@@ -52,7 +52,7 @@ namespace UnitTests
             _setObject.Id = 1;
             _setObject.Audience = "audience";
             _setObject.Duration = 120;
-            _setObject.Image = 120;
+            _setObject.ImagePath = "path";
             _setObject.FloorsCovered = 3;
             _setObject.LastVisitedPoi = 5;
             _setObject.Status = 0;

@@ -32,7 +32,6 @@ namespace UnitTests
             _setObject.StoryLineId = 1;
             _setObject.PoiDescription = 1;
             _setObject.Label = "bathroom";
-            _setObject.ExhibitionContent = 1;
             _setObject.FloorId = 1;
         }
 
@@ -70,7 +69,6 @@ namespace UnitTests
             _testObject.StoryLineId = 2;
             _testObject.PoiDescription = 1;
             _testObject.Label = "bathroom";
-            _testObject.ExhibitionContent = 1;
             _testObject.FloorId = 1;
             _objectTDG.Add(_testObject);
             _testObject.UCoordinate = 0;

@@ -1,12 +1,14 @@
 
 
+using System;
+
 namespace Exposeum.TempModels
 {
     public abstract class MapElement
     {
         public int Id { get; set; }
         public bool Visited { get; set; }
-        public int IconId { get; set; }
+        public string IconId { get; set; }
         public float UCoordinate { get; set; }
         public float VCoordinate { get; set; }
         public Floor Floor { get; set; }
@@ -19,8 +21,8 @@ namespace Exposeum.TempModels
                 return other.Id == Id &&
                     other.Visited == Visited &&
                     other.IconId == IconId &&
-                    other.UCoordinate == UCoordinate &&
-                    other.VCoordinate == VCoordinate &&
+                    Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
+                    Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
                     other.Floor.Equals(Floor);
             }
             return false;

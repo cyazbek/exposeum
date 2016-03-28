@@ -41,7 +41,7 @@ namespace Exposeum.TDGs
             if (story1.Id == story2.Id &&
                 story1.Audience == story2.Audience &&
                 story1.Duration == story2.Duration &&
-                story1.Image == story2.Image &&
+                story1.ImagePath == story2.ImagePath &&
                 story1.FloorsCovered == story2.FloorsCovered &&
                 story1.LastVisitedPoi == story2.LastVisitedPoi &&
                 story1.Status == story2.Status &&
