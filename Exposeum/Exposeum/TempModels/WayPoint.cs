@@ -9,7 +9,7 @@ namespace Exposeum.TempModels
         public WaypointLabel Label { get; set; }
 
         private readonly float _iconScaleFactor = 0.2f;
-        private Drawable _Icon;
+        public Drawable Icon { get; set; }
 
         public override bool Equals(Object obj)
         {
@@ -27,8 +27,8 @@ namespace Exposeum.TempModels
 
             canvas.Translate(UCoordinate * Floor.FloorPlan.IntrinsicWidth, VCoordinate * Floor.FloorPlan.IntrinsicHeight);
             canvas.Scale(_iconScaleFactor, _iconScaleFactor);
-            canvas.Translate(-_Icon.IntrinsicWidth / 2.0f, -_Icon.IntrinsicHeight / 2.0f);
-            _Icon.Draw(canvas);
+            canvas.Translate(-Icon.IntrinsicWidth / 2.0f, -Icon.IntrinsicHeight / 2.0f);
+            Icon.Draw(canvas);
             canvas.Restore();
         }
     }

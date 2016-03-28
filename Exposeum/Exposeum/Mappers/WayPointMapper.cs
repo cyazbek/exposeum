@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Graphics.Drawables;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
@@ -18,8 +8,8 @@ namespace Exposeum.Mappers
     public class WayPointMapper
     {
         private static WayPointMapper _instance;
-        private FloorMapper _floorMapper;
-        private MapElementsTdg _mapElementsTdg; 
+        private readonly FloorMapper _floorMapper;
+        private readonly MapElementsTdg _mapElementsTdg; 
 
         private WayPointMapper()
         {
@@ -79,15 +69,14 @@ namespace Exposeum.Mappers
             }
         }
 
-        public Tables.MapElements ConvertFromModel(WayPoint element)
+        public MapElements ConvertFromModel(WayPoint element)
         {
             int vis;
             if (element.Visited == true)
                 vis = 1;
             else vis = 0;
 
-
-            return new MapElements()
+            return new MapElements
             {
                 Id = element.Id,
                 Visited = vis,
@@ -106,13 +95,14 @@ namespace Exposeum.Mappers
                 vis = false;
             else vis = true;
 
-            return new WayPoint()
+            return new WayPoint
             {
                 Id = element.Id,
                 Visited = vis,
                 Floor = _floorMapper.GetFloor(element.FloorId),
                 Label = ConvertStringToLabel(element.Label),
                 IconPath = element.IconPath,
+                Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(element.IconPath), null),
                 UCoordinate = element.UCoordinate,
                 VCoordinate = element.VCoordinate
             };
@@ -120,7 +110,7 @@ namespace Exposeum.Mappers
 
         public void Add(WayPoint element)
         {
-            Tables.MapElements mapElement = ConvertFromModel(element);
+            MapElements mapElement = ConvertFromModel(element);
             _mapElementsTdg.Add(mapElement);
             _floorMapper.AddFloor(element.Floor);
         }
@@ -136,10 +126,7 @@ namespace Exposeum.Mappers
             _mapElementsTdg.Update(ConvertFromModel(element));
             _floorMapper.UpdateFloor(element.Floor);
         }
-
-    }
-
-        
+    }   
 }
 
 
