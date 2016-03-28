@@ -10,6 +10,7 @@ using AudioContent = Exposeum.TempModels.AudioContent;
 using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
 using ImageContent = Exposeum.TempModels.ImageContent;
 using PointOfInterest = Exposeum.TempModels.PointOfInterest;
+using TextContent = Exposeum.TempModels.TextContent;
 using User = Exposeum.Models.User;
 
 namespace UnitTests

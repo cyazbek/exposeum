@@ -19,18 +19,11 @@ namespace Exposeum.TempModels
             if (obj != null)
             {
                 PointOfInterest other = (PointOfInterest)obj;
-                bool listComparator = false;
-                for (int i = 0; i < ExhibitionContent.Count; i++)
-                {
-                    if (other.ExhibitionContent[i].Equals(this.ExhibitionContent[i]))
-                        listComparator = true;
-                    else return false;
-                }
-                return Beacon.Equals(other.Beacon) &&
-                StoryLineId == other.StoryLineId &&
-                Description.Equals(other.Description) &&
-                listComparator &&
-                ExhibitionContent.Equals(other.ExhibitionContent);
+
+                return TempModels.ExhibitionContent.ListEquals(ExhibitionContent, other.ExhibitionContent) &&
+                       Beacon.Equals(other.Beacon) &&
+                       StoryLineId == other.StoryLineId &&
+                       Description.Equals(other.Description);
             }
             return false;
         }

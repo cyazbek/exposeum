@@ -20,7 +20,7 @@ namespace Exposeum.TempModels
                 MapElement other = (MapElement)obj;
                 return other.Id == Id &&
                     other.Visited == Visited &&
-                    other.IconPath == IconPath &&
+                    other.IconPath.Equals(IconPath) &&
                     Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
                     Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
                     other.Floor.IsEqual(Floor);

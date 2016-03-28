@@ -19,6 +19,10 @@ namespace UnitTests
         private PointOfInterest _expected;
         private PointOfInterest _pointOfInterestModel;
         private MapElements _pointOfInterestTable;
+        private Floor _floor;
+        private Beacon _beacon;
+        private List<ExhibitionContent> _contents;
+        private PointOfInterestDescription _pointOfInterestDescription;
         readonly MapElementsTdg _tdg = MapElementsTdg.GetInstance();
 
         [SetUp]
@@ -27,14 +31,14 @@ namespace UnitTests
             _instance = PointOfInterestMapper.GetInstance();
             _tdg.Db.DeleteAll<MapElements>();
 
-            Floor floor = new Floor
+            _floor = new Floor
             {
                 Id = 1,
                 ImagePath = "icon.png",
                 FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null)
             };
 
-            Beacon beacon = new Beacon
+            _beacon = new Beacon
             {
                 Id = 1,
                 Major = 1234,
@@ -42,7 +46,7 @@ namespace UnitTests
                 Uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
             };
 
-            PointOfInterestDescription poiDescription = new PointOfInterestDescription()
+            _pointOfInterestDescription = new PointOfInterestDescription
             {
                 Id = 1,
                 Title = "theTitle",
@@ -51,7 +55,7 @@ namespace UnitTests
                 Language = User.GetInstance().Language
             };
 
-            List<ExhibitionContent> contents = new List<ExhibitionContent>();
+            _contents = new List<ExhibitionContent>();
 
             AudioContent audioContent = new AudioContent
             {
@@ -75,8 +79,8 @@ namespace UnitTests
                 Encoding = "VideoEncoding"
            };  
 
-            contents.Add(audioContent);
-            contents.Add(videoContent);
+            _contents.Add(audioContent);
+            _contents.Add(videoContent);
 
             _pointOfInterestModel = new PointOfInterest
             {
@@ -85,11 +89,11 @@ namespace UnitTests
                 IconPath = "imagePath",
                 UCoordinate = 2f,
                 VCoordinate = 2f,
-                Floor = floor,
-                Beacon = beacon,
+                Floor = _floor,
+                Beacon = _beacon,
                 StoryLineId = 1,
-                Description = poiDescription,
-                ExhibitionContent = contents
+                Description = _pointOfInterestDescription,
+                ExhibitionContent = _contents
             };
 
             _pointOfInterestTable = new MapElements
@@ -103,6 +107,7 @@ namespace UnitTests
                 BeaconId = 1,
                 StoryLineId = 1,
                 PoiDescription = 1,
+                Discriminator = "PointOfInterest"
             };
 
         }
@@ -119,7 +124,7 @@ namespace UnitTests
             _instance.Add(_pointOfInterestModel);
             _expected = _instance.Get(_pointOfInterestModel.Id);
             Assert.True(_pointOfInterestModel.Equals(_expected));
-        }
+        }   
 
         [Test]
         public void UpdatePointOfInterestTest()
@@ -131,20 +136,20 @@ namespace UnitTests
                 IconPath = "imagePath",
                 UCoordinate = 2f,
                 VCoordinate = 2f,
-                Floor = new Floor(),
-                Beacon = new Beacon(),
+                Floor = _floor,
+                Beacon = _beacon,
                 StoryLineId = 1,
-                Description = new PointOfInterestDescription(),
-                ExhibitionContent = new List<ExhibitionContent>()
+                Description = _pointOfInterestDescription,
+                ExhibitionContent = _contents
             };
 
             _instance.Add(_pointOfInterestModel);
 
-            _pointOfInterestModel.StoryLineId = 3;
+            _pointOfInterestModel.IconPath = "imagePathUpdated";
             _instance.Update(_pointOfInterestModel);
 
             _expected = _instance.Get(_pointOfInterestModel.Id);
-            Assert.AreEqual(3, _expected.StoryLineId);
+            Assert.AreEqual("imagePathUpdated", _expected.IconPath);
         }
 
         [Test]
@@ -164,3 +169,4 @@ namespace UnitTests
 
     }
 }
+ 
