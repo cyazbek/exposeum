@@ -241,16 +241,16 @@ namespace Exposeum.Controllers
         /// <summary>
         /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
         /// </summary>
-		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPois)
+		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements)
         {
-			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedPois, SkipOutOfOrderPOI);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI);
         }
 
-		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints){
+		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements){
 
-		    foreach (var x in skippedPoints)
+			foreach (var mapElement in skippedMapElements)
 		    {
-		        x.SetVisited();
+				mapElement.SetVisited();
 		    }
 
             _mapView.Update();
@@ -258,7 +258,7 @@ namespace Exposeum.Controllers
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
                     
-        }
+		}
 
         /// <summary>
         /// This method will update display a popup in the view with contextual information about the supplied POI
