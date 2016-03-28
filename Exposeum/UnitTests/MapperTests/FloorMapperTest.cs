@@ -28,7 +28,7 @@ namespace UnitTests
             {
                 Id = 1,
                 ImagePath = "EmileBerliner.png",
-                _floorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null),
+                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null),
             };
 
             _floorTable = new Floor
@@ -60,7 +60,7 @@ namespace UnitTests
             {
                 Id = 2,
                 ImagePath = "EmileBerliner.png",
-                _floorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null)
+                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null)
             };
 
             _instance.AddFloor(_floorModel);

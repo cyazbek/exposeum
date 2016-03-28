@@ -7,7 +7,7 @@ namespace Exposeum.Tables
         public int Id { get; set; }
         public float UCoordinate { get; set; }
         public float VCoordinate { get; set; }
-        public int IconId { get; set; }
+        public string IconId { get; set; }
         public string Discriminator { get; set; }
         public int Visited { get; set; }
         public int BeaconId { get; set; }

@@ -33,7 +33,7 @@ namespace Exposeum.Mappers
                 Id = storylineModel.StorylineId,
                 Audience = storylineModel.IntendedAudience,
                 Duration = storylineModel.Duration,
-                Image = storylineModel.ImageId,
+                ImagePath = storylineModel.ImageId,
                 FloorsCovered = storylineModel.FloorsCovered,
                 LastVisitedPoi = storylineModel.LastVisitedMapElement.Id,
                 Status = _statusMapper.StatusModelToTable(storylineModel.Status)
@@ -66,7 +66,7 @@ namespace Exposeum.Mappers
             Storyline storyline = new Storyline
             {
                 StorylineId = storylineTable.Id,
-                ImageId = storylineTable.Image,
+                ImageId = storylineTable.ImagePath,
                 Duration = storylineTable.Duration,
                 FloorsCovered = storylineTable.FloorsCovered,
                 IntendedAudience = storylineTable.Audience,

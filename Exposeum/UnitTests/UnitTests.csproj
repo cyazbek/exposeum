@@ -83,7 +83,6 @@
     <Compile Include="TDGTests\ExhibitionContentEnTDGTest.cs" />
     <Compile Include="TDGTests\ExhibitionContentFrTDGTest.cs" />
     <Compile Include="TDGTests\FloorTDGTest.cs" />
-    <Compile Include="TDGTests\ImagesTDGTest.cs" />
     <Compile Include="TDGTests\MapElementsTDGTest.cs" />
     <Compile Include="TDGTests\MapTDGTest.cs" />
     <Compile Include="TDGTests\PoiDescriptionEnTDGTest.cs" />

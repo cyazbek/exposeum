@@ -6,7 +6,7 @@ namespace Exposeum.TempModels
     public class Storyline
     {
         public int StorylineId { get; set; }
-        public int ImageId { get; set; }
+        public string ImageId { get; set; }
         public int Duration { get; set; }
         public int FloorsCovered { get; set; }
         public List<MapElement> MapElements { get; set; }

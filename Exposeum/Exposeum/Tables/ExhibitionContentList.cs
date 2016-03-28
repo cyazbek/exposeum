@@ -1,4 +1,4 @@
-using SQLite; 
+using SQLite;
 
 namespace Exposeum.Tables
 {
@@ -10,3 +10,4 @@ namespace Exposeum.Tables
         public int PoiId { get; set; }
         public int ExhibitionContentId { get; set; }
     }
+}

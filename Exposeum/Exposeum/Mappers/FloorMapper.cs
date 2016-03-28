@@ -78,7 +78,7 @@ namespace Exposeum.Mappers
         {
             Floor modelFloor = new Floor
             {
-                _floorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(floorTable.ImagePath), null),
+                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(floorTable.ImagePath), null),
                 ImagePath = floorTable.ImagePath,
                 Id = floorTable.Id
             };

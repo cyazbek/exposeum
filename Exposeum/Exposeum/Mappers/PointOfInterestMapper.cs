@@ -58,16 +58,14 @@ namespace Exposeum.Mappers
                 vis = true;
             else vis = false;
             List<ExhibitionContent> exhibitionContent = new List<ExhibitionContent>();
-            
 
-            return new PointOfInterest()
+
+            return new PointOfInterest
             {
-                Id = element.Id, 
+                Id = element.Id,
                 Beacon = _beaconMapper.GetBeacon(element.BeaconId),
-                Description = _descriptionMapper.GetPointOfInterestDescription(element.PoiDescription),
-
-
-            }
+                Description = _descriptionMapper.GetPointOfInterestDescription(element.PoiDescription)
+            };
 
         }
     }
