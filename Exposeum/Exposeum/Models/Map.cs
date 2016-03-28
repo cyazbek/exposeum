@@ -1,38 +1,39 @@
 using System;
 using System.Collections.Generic;
-using Android.Content.Res;
 using Java.Util;
 using Android.Graphics.Drawables;
+using System.Linq;
 
 namespace Exposeum.Models
 {
 	public class Map
 	{
-	    private static Map _map;
-        private List<Floor> _floors;
-		private Floor _currentFloor;
-        private StoryLine _currentStoryline;
-		private List<MapElement> _elements;
-		private List<Edge> _edges;
-        private List<StoryLine> _storyLines;
+        public int Id;
+        private static Map _instance;
+        public List<MapEdge> Edges { get; set; }
+        public List<StoryLine> Storylines { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public List<Floor> Floors { get; set; }
+        public StoryLine CurrentStoryline { get; set; }
+        public Floor CurrentFloor { get; set; }
+        private Path _activeShortestPath;
 
         private Map ()
 		{
-			_storyLines = new List<StoryLine>();
+            Edges = new List<MapEdge>();
+            Floors = new List<Floor>();
+            MapElements = new List<MapElement>();
+            Storylines = new List<StoryLine>();
 			SeedData ();
         }
 
 	    public static Map GetInstance()
 	    {
-	        if (_map == null)
-                _map = new Map();
+	        if (_instance == null)
+                _instance = new Map();
 
-	        return _map;
+	        return _instance;
 	    }
-
-		public void Destroy (){
-			_map = null;
-		}
         
 		private void SeedData(){
 
@@ -63,15 +64,15 @@ namespace Exposeum.Models
             Floor floor4 = new Floor(floorplan4);
             Floor floor5 = new Floor(floorplan5);
 
-			_floors = new List<Floor> ();
+			Floors = new List<Floor> ();
 
-			_floors.Add (floor1);
-			_floors.Add (floor2);
-			_floors.Add (floor3);
-			_floors.Add (floor4);
-			_floors.Add (floor5);
+			Floors.Add (floor1);
+			Floors.Add (floor2);
+			Floors.Add (floor3);
+			Floors.Add (floor4);
+			Floors.Add (floor5);
 
-			_currentFloor = floor1;
+			CurrentFloor = floor1;
 
 			//set up POIs
 
@@ -190,52 +191,143 @@ namespace Exposeum.Models
 			story2.CurrentStatus = Status.InProgress;
 			story3.CurrentStatus = Status.IsVisited;
 
-			this._storyLines.Add(storyline);
-			this._storyLines.Add(story2);
-			this._storyLines.Add(story3);
-			this._storyLines.Add(story4);
-			this._storyLines.Add(story5);
-			this._storyLines.Add(story6);
+			Storylines.Add(storyline);
+			Storylines.Add(story2);
+			Storylines.Add(story3);
+			Storylines.Add(story4);
+			Storylines.Add(story5);
+			Storylines.Add(story6);
 
-            //Set the storyline for the explorer mode
-            if (ExposeumApplication.IsExplorerMode)
-            {
-                _currentStoryline = storyline;
-            }
-            else
-                _currentStoryline = Controllers.StorylineController.GetInstance()._selectedStoryLine;
+			//Set the storyline for the explorer mode
+			CurrentStoryline = storyline;
+
+			StoryLine nicelyDrawn = new StoryLine("The Gramophone", "Le Gramophone","All Audience", "Toute Audience", "Description in english", "Description en français", 120 , Resource.Drawable.NipperTheDog);
+
+			Beacon nicelyDrawnBeaconTest = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 00000, 00000);
+			PointOfInterestDescription nicelyDrawnBeaconDescriptionTest = new PointOfInterestDescription("---", "---", "---");
+
+			PointOfInterest poi0 = new PointOfInterest(0.519f, 0.580f, floor2);
+			poi0.Description = description1;
+			poi0.NameEn = "POINT 1";
+			poi0.NameFr = "Le POINT 1";
+			poi0.Visited = false;
+			poi0.Beacon = beacon1;
+
+			PointOfTravel waypoint3 = new PointOfTravel(0.720f, 0.577f, floor2);
+
+			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
+			poi1.Description = description3;
+			poi1.NameEn = "POINT 2";
+			poi1.NameFr = "Le POINT 2";
+			poi1.Visited = false;
+			poi1.Beacon = beacon3;
+
+			PointOfTravel waypoint4 = new PointOfTravel(0.754f, 0.538f, floor2);
+
+			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
+			poi2.Description = description4;
+			poi2.NameEn = "POINT 3";
+			poi2.NameFr = "Le POINT 2";
+			poi2.Visited = false;
+			poi2.Beacon = beacon2;
+
+			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
+			poi3.Description = nicelyDrawnBeaconDescriptionTest;
+			poi3.NameEn = "---";
+			poi3.NameFr = "---";
+			poi3.Visited = false;
+			poi3.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint5 = new PointOfTravel(0.769f, 0.549f, floor2);
+			PointOfTravel waypoint6 = new PointOfTravel(0.796f, 0.605f, floor2);
+			PointOfTravel waypoint7 = new PointOfTravel(0.712f, 0.615f, floor2);
+
+			PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
+			poi4.Description = nicelyDrawnBeaconDescriptionTest;
+			poi4.NameEn = "---";
+			poi4.NameFr = "---";
+			poi4.Visited = false;
+			poi4.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint8 = new PointOfTravel(0.645f, 0.907f, floor2);
+
+			PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
+			poi5.Description = nicelyDrawnBeaconDescriptionTest;
+			poi5.NameEn = "---";
+			poi5.NameFr = "---";
+			poi5.Visited = false;
+			poi5.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfInterest poi6 = new PointOfInterest(0.333f, 0.901f, floor2);
+			poi6.Description = nicelyDrawnBeaconDescriptionTest;
+			poi6.NameEn = "---";
+			poi6.NameFr = "---";
+			poi6.Visited = false;
+			poi6.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint9 = new PointOfTravel(0.176f, 0.894f, floor2);
+
+			PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
+			poi7.Description = nicelyDrawnBeaconDescriptionTest;
+			poi7.NameEn = "---";
+			poi7.NameFr = "---";
+			poi7.Visited = false;
+			poi7.Beacon = nicelyDrawnBeaconTest;
+
+			PointOfTravel waypoint10 = new PointOfTravel(0.174f, 0.612f, floor2);
+
+			PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
+			poi8.Description = nicelyDrawnBeaconDescriptionTest;
+			poi8.NameEn = "---";
+			poi8.NameFr = "---";
+			poi8.Visited = false;
+			poi8.Beacon = nicelyDrawnBeaconTest;
+
+			nicelyDrawn.AddMapElement(poi0);
+			nicelyDrawn.AddMapElement(waypoint3);
+			nicelyDrawn.AddMapElement(poi1);
+			nicelyDrawn.AddMapElement(waypoint4);
+			nicelyDrawn.AddMapElement(poi2);
+			nicelyDrawn.AddMapElement(poi3);
+			nicelyDrawn.AddMapElement(waypoint5);
+			nicelyDrawn.AddMapElement(waypoint6);
+			nicelyDrawn.AddMapElement(waypoint7);
+			nicelyDrawn.AddMapElement(poi4);
+			nicelyDrawn.AddMapElement(waypoint8);
+			nicelyDrawn.AddMapElement(poi5);
+			nicelyDrawn.AddMapElement(poi6);
+			nicelyDrawn.AddMapElement(waypoint9);
+			nicelyDrawn.AddMapElement(poi7);
+			nicelyDrawn.AddMapElement(waypoint10);
+			nicelyDrawn.AddMapElement(poi8);
+
+			Storylines.Add (nicelyDrawn);
+
+			////////////////////////////////////////////
+			//make storyline 6 a demo for shortest path
+			//story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
+			story6.MapElements = nicelyDrawn.MapElements;
+			story6.PoiList = nicelyDrawn.PoiList;
+			story6.PoiList.Last ().Beacon = story6.PoiList [1].Beacon;
+			story6.PoiList [1].Beacon = nicelyDrawnBeaconTest;
+
+			story6.MapElements.Reverse();
+			story6.PoiList.Reverse ();
+			for (int i = 0; i < 16; i++) {
+				story6.MapElements [i].Visited = true;
+			}
+			story6.CurrentStatus = Status.InProgress;
+			///////////////////////////////////////////
+
 		}
 
-		public void SetCurrentFloor(Floor floor)
-		{
-			_currentFloor = floor;
+
+		public void SetActiveShortestPath(Path path){
+			_activeShortestPath = path;
 		}
 
-		public Floor CurrentFloor
-		{
-			get { return this._currentFloor; }
-			set { this._currentFloor = value; }
+		public Path GetActiveShortestPath(){
+			return _activeShortestPath;
 		}
-
-		public List<Floor> Floors
-		{
-			get { return this._floors; }
-			set { this._floors = value; }
-		}
-
-		public StoryLine CurrentStoryline
-		{
-			get { return this._currentStoryline; }
-			set { this._currentStoryline = value; }
-		}
-        public void AddStoryLine(StoryLine storyline)
-        {
-            this._storyLines.Add(storyline);
-        }
-        public List<StoryLine> GetStoryLineList
-        {
-            get { return this._storyLines; }
-            set { this._storyLines = value; }
-        }
     }
 }

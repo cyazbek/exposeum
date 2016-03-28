@@ -1,17 +1,15 @@
 ﻿using System;
-using EstimoteSdk;
-using Android.Util;
-using Android.OS;
-using Android.Content.PM;
-using JavaObject = Java.Lang.Object;
-using Android.Content;
 using System.Collections.Generic;
 using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Support.V4.App;
-using Exposeum.Models;
-using Java.Util.Concurrent;
+using Android.Util;
+using EstimoteSdk;
+using Exposeum.Exceptions;
+using JavaObject = Java.Lang.Object;
 
-namespace Exposeum
+namespace Exposeum.Models
 {
 	public class BeaconFinder: JavaObject, BeaconManager.IServiceReadyCallback, IBeaconFinderObservable
 	{
@@ -20,24 +18,24 @@ namespace Exposeum
 		private static readonly int BeaconFoundNotificationId = 1001;
 		private NotificationManager _notificationManager;
 		private BeaconManager _beaconManager;
-		private EstimoteSdk.Region _region;
+		private Region _region;
 		private bool _isRanging;
 		private bool _isServiceReady;
 		private const string Tag = "BeaconFinder";
 		private int _beaconCount;
-		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
+		private readonly LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
-		private StoryLine _storyLine;
-		private Context _context;
+		private IPath _path;
+		private readonly Context _context;
 		private Context _notificationDestination;
 		private bool _inFocus;
 
 		private BeaconFinder (Context context)
 		{
-			_region = new EstimoteSdk.Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+			_region = new Region("rid", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
 			ConstructBeaconManager (context);
 			ConstructNotificationManager (context);
-			this._context = context;
+			_context = context;
 		}
 
 		/// <summary>
@@ -77,7 +75,7 @@ namespace Exposeum
 		/// </summary>
 		private Notification BuildBeaconFoundNotification(string poiName, string poiDesc){
 
-			Context destination = _notificationDestination == null ? _context : _notificationDestination;
+			Context destination = _notificationDestination ?? _context;
 
 			Intent notifyIntent = new Intent(destination, destination.GetType());
 			notifyIntent.SetFlags(ActivityFlags.SingleTop);
@@ -86,7 +84,7 @@ namespace Exposeum
 
 			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (_context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
-				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
+				.SetContentIntent (pendingIntent)  // Source 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
 				.SetContentTitle(poiName)
 				.SetContentText (poiDesc)
@@ -144,8 +142,8 @@ namespace Exposeum
 
 			foreach (var beacon in beacons)
 			{
-				//if the beacon is not in the storyline, skip it and move to the next one
-				if (!_storyLine.HasBeacon (beacon))
+				//if the beacon is not in the path, skip it and move to the next one
+				if (!_path.HasBeacon (beacon))
 					continue;
 
 				var proximity = Utils.ComputeProximity(beacon);
@@ -154,7 +152,7 @@ namespace Exposeum
 				if (proximity == Utils.Proximity.Immediate) {
 					try {
 						_immediateBeacons.Add (accuracy, beacon);
-					} catch (System.ArgumentException ex) {
+					} catch (ArgumentException ex) {
 						Log.Debug("BeaconFind", "Two beacons with the same accuracy where found, displaying only one: " + ex.Message);
 					}
 				}
@@ -193,8 +191,8 @@ namespace Exposeum
 		/// </summary>
 		public void FindBeacons(){
 
-			if (_storyLine == null) {
-				throw new StoryLineNotFoundException ("You must set the storyline first. Call setStorylLine");
+			if (_path == null) {
+				throw new PathNotFoundException ("You must set the Path first. Call setPath.");
 			}
 
 			if(CheckBluetooth() && !_isServiceReady){
@@ -308,15 +306,15 @@ namespace Exposeum
 		/// <summary>
 		/// This method returns the current instance of the sotryline.
 		/// </summary>
-		public StoryLine GetStoryLine(){
-			return _storyLine;
+		public IPath GetPath(){
+			return _path;
 		}
 
 		/// <summary>
-		/// This method sets the current instance of the storyline.
+		/// This method sets the current instance of the path.
 		/// </summary>
-		public void SetStoryLine(StoryLine storyLine){
-			this._storyLine = storyLine;
+		public void SetPath(IPath path){
+			_path = path;
 		}
 
 		/// <summary>
@@ -329,7 +327,7 @@ namespace Exposeum
 			_notificationManager.Cancel (BeaconFoundNotificationId);
 
 			if (GetClosestBeacon () != null) {
-				PointOfInterest poi = _storyLine.FindPoi (GetClosestBeacon ());
+				PointOfInterest poi = _path.FindPoi (GetClosestBeacon ());
 				if(!poi.Visited) //don't send a notification if the beacon has already been visited
 					SendBeaconFoundNotification (BuildBeaconFoundNotification (poi.GetName (), poi.GetDescription ()));
 			} else {
@@ -358,7 +356,7 @@ namespace Exposeum
 			if (_isRanging)
 				throw new CantSetRegionException ("Cannot set set region since BeaconFinder is ranging. Stop ranging first, then set the region.");
 
-			this._region = region;
+			_region = region;
 		}
 
 		/// <summary>

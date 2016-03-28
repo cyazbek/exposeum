@@ -1,28 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Controllers;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Menu_Bar
 {
     class DialogPauseStorylineConfirmation : DialogFragment
     {
         StoryLine _storyLine;
         readonly StorylineController _storylineController = StorylineController.GetInstance();
-        private Context _context;
+        private readonly Context _context;
 
         public DialogPauseStorylineConfirmation(StoryLine storyLine, Context context)
         {
-            this._storyLine = storyLine;
+            _storyLine = storyLine;
             _context = context;
         }
 
@@ -43,17 +37,19 @@ namespace Exposeum
             {
                 _storylineController.PauseStorylineBeacons();
                 Toast.MakeText(_context, "Paused", ToastLength.Short).Show();
+                ((Activity)_context).OnBackPressed();
+                Dismiss();
 
                 // Redirecting to list of storylines
-                var intent = new Intent(_context, typeof(StoryLineListActivity));
-                StartActivity(intent);
+                //var intent = new Intent(_context, typeof(StoryLineListActivity));
+                //StartActivity(intent);
             };
 
             buttonToRejectPause.Click += delegate {
                 Dialog.Dismiss();
             };
 
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
 

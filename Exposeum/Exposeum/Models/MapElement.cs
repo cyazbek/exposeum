@@ -4,30 +4,43 @@ using Android.Graphics;
 namespace Exposeum.Models
 {
     public abstract class MapElement
-	{
-		public float U, V;
-        public Floor Floor;
+    {
+        public int Id { get; set; }
+        public bool Visited { get; set;}
+        public string IconId { get; set; }
+        public float UCoordinate { get; set; }
+        public float VCoordinate { get; set; }
+        public Floor Floor { get; set; }
 
-        public Boolean Visited { get; set; }
-
-        protected MapElement ()
-		{
-		}
-
-		protected MapElement(float u, float v, Floor floor)
-		{
-			this.U = u;
-			this.V = v;
-			Visited = false;
-
-			this.Floor = floor;
-		}
-
-        public void SetVisited()
+        protected MapElement()
         {
-            Visited = true;
+            
         }
-
+        protected MapElement(float uCoordinate, float vCoordinate, Floor floor)
+		{
+			this.UCoordinate = UCoordinate;
+			this.VCoordinate = VCoordinate;
+			Visited = false;
+			Floor = floor;
+		}
         public abstract void Draw(Canvas canvas);
-	}
+
+		public MapElement ShallowCopy(){
+			return (MapElement)MemberwiseClone ();
+		}
+        public override bool Equals(object obj)
+        {
+            if (obj != null)
+            {
+                MapElement other = (MapElement)obj;
+                return other.Id == Id &&
+                    other.Visited == Visited &&
+                    other.IconId == IconId &&
+                    Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
+                    Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
+                    other.Floor.Equals(Floor);
+            }
+            return false;
+        }
+    }
 }

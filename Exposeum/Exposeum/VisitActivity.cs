@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
+using Exposeum.Controllers;
 using Android.Content.PM;
 
 namespace Exposeum
@@ -17,30 +12,49 @@ namespace Exposeum
     [Activity(Label = "Choose your Tour", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation = ScreenOrientation.Portrait)]
     public class VisitActivity : Activity
     {
-        User user = User.GetInstance(); 
+        readonly User _user = User.GetInstance();
+        Button _freeVisitButton;
+        Button _storylineButton;
+        Button _languageSelector;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.VisitActivity);
-            var freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
-            var storylineButton = FindViewById<Button>(Resource.Id.storyLine);
-            var languageSelector = FindViewById<Button>(Resource.Id.languageButton);
-            freeVisitButton.Text = user.GetButtonText("freeTour");
-            storylineButton.Text = user.GetButtonText("storyLine");
-            languageSelector.Text = user.GetButtonText("languageButton");
-            languageSelector.Click += (o, e) => {
-                user.ToogleLanguage();
-                this.Recreate();
+            _freeVisitButton = FindViewById<Button>(Resource.Id.freeTour);
+            _storylineButton = FindViewById<Button>(Resource.Id.storyLine);
+            _freeVisitButton.Text = _user.GetButtonText("freeTour");
+            _storylineButton.Text = _user.GetButtonText("storyLine");
+
+
+            //=======    Action Bar   =================================================================================
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                OnBackPressed();
             };
 
-            freeVisitButton.Click += (sender, e) =>
+
+            //=========================================================================================================
+
+            _freeVisitButton.Click += (sender, e) =>
             {
                 ExposeumApplication.IsExplorerMode = true;
+				ExplorerController.GetInstance().InitializeExplorerMode();
+
                 var intent = new Intent(this, typeof(MapActivity));
                 StartActivity(intent);
 
             };
-            storylineButton.Click += (sender, e) =>
+            _storylineButton.Click += (sender, e) =>
             {
 				ExposeumApplication.IsExplorerMode = false;
 				var intent = new Intent(this, typeof(StoryLineListActivity));
@@ -48,10 +62,43 @@ namespace Exposeum
 
             };
         }
-            public override void OnBackPressed()
-            {
-            var intent = new Intent(this, typeof(LanguageActivity));
-            StartActivity(intent);
-            }//end onBackPressed()
+
+
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            return base.OnCreateOptionsMenu(menu);
+            
         }
+        
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            
+            //Toast.MakeText(this, txt, ToastLength.Long);
+            switch (item.ItemId)
+            {
+               
+                case Resource.Id.LanguageItem:
+                    User.GetInstance().ToogleLanguage();
+                    _freeVisitButton.Text = _user.GetButtonText("freeTour");
+                    _storylineButton.Text = _user.GetButtonText("storyLine");
+                    return true;
+
+                case Resource.Id.QRScannerItem:
+					QrController.GetInstance(this).BeginQrScanning();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
+            var menuItem2= menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
+            return true; 
+
+        }
+        
+    }
 }

@@ -1,13 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
 using Exposeum.Models;
@@ -19,18 +13,17 @@ namespace Exposeum
     public class WalkthroughActivity : Activity
     {
         private static ViewPager _mPager;
-        private List<int> _imagesArray = new List<int>();
+        private readonly List<int> _imagesArray = new List<int>();
         private List<int> _imagesToDisplay;
         Intent _intent;
-        User user = User.GetInstance(); 
-
+        readonly User _user = User.GetInstance(); 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.WalkThrough);
             var walkthroughButton = FindViewById<Button>(Resource.Id.WalkThroughButton);
-            _imagesToDisplay = user.GetImageList();
-            walkthroughButton.Text = user.GetButtonText("WalkThroughButton");
+            _imagesToDisplay = _user.GetImageList();
+            walkthroughButton.Text = _user.GetButtonText("WalkThroughButton");
             Init();
             walkthroughButton.Click += (sender, e) =>
             {

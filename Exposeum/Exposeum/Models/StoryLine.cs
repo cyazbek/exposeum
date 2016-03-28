@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using System;
+using Exposeum.Exceptions;
 
 namespace Exposeum.Models
 {
-    public class StoryLine
+	public class StoryLine: IPath
     {
 
         public int ImageId { get; set; }
@@ -24,33 +24,33 @@ namespace Exposeum.Models
         
         public StoryLine() 
         {
-            this.PoiList = new List<PointOfInterest>();
-			this.MapElements = new List<MapElement> ();
-			this.CurrentStatus = Status.IsNew;
+            PoiList = new List<PointOfInterest>();
+			MapElements = new List<MapElement> ();
+			CurrentStatus = Status.IsNew;
         }
 
         public StoryLine(int id)
         {
-            this.Id = id;
+            Id = id;
 			PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			this.CurrentStatus = Status.IsNew;
+			CurrentStatus = Status.IsNew;
         }
 
 		public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int imageId)
 		{
-			this.NameEn = nameEn;
-			this.NameFr = nameFr;
-			this.AudienceEn = audienceEn;
-			this.AudienceFr = audienceFr;
-			this.DescEn = descriptionEn;
-			this.DescFr = descriptionFr;
-			this.Duration = duration;
-			this.ImageId = imageId;
+			NameEn = nameEn;
+			NameFr = nameFr;
+			AudienceEn = audienceEn;
+			AudienceFr = audienceFr;
+			DescEn = descriptionEn;
+			DescFr = descriptionFr;
+			Duration = duration;
+			ImageId = imageId;
 
-			this.MapElements = new List<MapElement> ();
-			this.PoiList = new List<PointOfInterest>();
-			this.CurrentStatus = Status.IsNew;
+			MapElements = new List<MapElement> ();
+			PoiList = new List<PointOfInterest>();
+			CurrentStatus = Status.IsNew;
 		}
 
 
@@ -64,7 +64,7 @@ namespace Exposeum.Models
         }
 
         public PointOfInterest GetLastVisitedPointOfInterest(){
-            return this._lastPointOfInterestVisited;
+            return _lastPointOfInterestVisited;
         }
 
 		public void AddMapElement(MapElement e)
@@ -77,7 +77,7 @@ namespace Exposeum.Models
 
         public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
         {
-            this._lastPointOfInterestVisited = lastPoiVisited;
+            _lastPointOfInterestVisited = lastPoiVisited;
 
         }
 
@@ -115,19 +115,22 @@ namespace Exposeum.Models
 		            }
 		        }
 
-		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+		        //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
 		        while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
-		            currentNode.SetVisited();
+		            currentNode.Visited = true;
 		        }
 
-				if (rightBoundLinkedNode.Value.GetType() != typeof (PointOfInterest))
+				//If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
+				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
 					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
-				if(rightBoundLinkedNode.Next == null)
-					this.CurrentStatus = Status.IsVisited;
+				if (rightBoundLinkedNode.Next == null)
+					CurrentStatus = Status.IsVisited;
+				else if (CurrentStatus == Status.IsNew)
+					CurrentStatus = Status.InProgress;
 		    }
 		}
 
@@ -153,43 +156,43 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyName;
 
-            if (lang.Equals(Language.FR))
-                storyName = this.NameFr;
+            if (lang.Equals(Language.Fr))
+                storyName = NameFr;
             else
-                storyName = this.NameEn;
+                storyName = NameEn;
 
             return storyName;
         }
 
         public string GetDescription()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyDesc;
 
-            if (lang.Equals(Language.FR))
-                storyDesc = this.DescFr;
+            if (lang.Equals(Language.Fr))
+                storyDesc = DescFr;
             else
-                storyDesc = this.DescEn;
+                storyDesc = DescEn;
 
             return storyDesc;
         }
 
         public string GetAudience()
         {
-            Language lang = User.GetInstance()._language;
+            Language lang = User.GetInstance().Language;
             string storyAudience;
-            if (lang.Equals(Language.FR))
+            if (lang.Equals(Language.Fr))
                 storyAudience = AudienceFr; 
             else
-                storyAudience = this.AudienceEn;
+                storyAudience = AudienceEn;
 
             return storyAudience;
         }
 
-       
+        
 
     }
 }

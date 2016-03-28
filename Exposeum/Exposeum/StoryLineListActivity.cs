@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -14,15 +7,15 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-    [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light")]
+	[Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]
     public class StoryLineListActivity : Activity
     {
         public Map Map;
-		StorylineController _storylineController = StorylineController.GetInstance();
-        User user = User.GetInstance();
-
+	    readonly StorylineController _storylineController = StorylineController.GetInstance();
+        private Bundle _bundle;
         protected override void OnCreate(Bundle bundle)
         {
+            _bundle = bundle;
             base.OnCreate(bundle);
             //=========================================================================================================
             //remove default bar
@@ -36,18 +29,22 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
 
 
             //=========================================================================================================
 
-            ListView listView;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
-            listView = FindViewById<ListView>(Resource.Id.List);
+            var listView = FindViewById<ListView>(Resource.Id.List);
 			listView.Adapter = _storylineController.GetStoryLines(this);
             listView.ItemClick += ListViewItemClick;
+        }
+
+        protected override void OnRestart()
+        {
+            OnCreate(_bundle);
         }
 
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -60,7 +57,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -69,21 +66,23 @@ namespace Exposeum
         {
             switch (item.ItemId)
             {
-
-
                 case Resource.Id.LanguageItem:
-                    user.ToogleLanguage();
-                    var intent = new Intent(this, typeof(VisitActivity));
-                    StartActivity(intent);
-                    return true;
-                case Resource.Id.PauseItem:
-                    //do something
+                    User.GetInstance().ToogleLanguage();
                     return true;
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true;
+
         }
 
     }

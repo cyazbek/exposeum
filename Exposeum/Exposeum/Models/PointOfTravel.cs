@@ -1,12 +1,11 @@
-﻿using System;
-using Android.Graphics;
+﻿using Android.Graphics;
 
 namespace Exposeum.Models
 {
 	public class PointOfTravel : MapElement
 	{
 
-		public PointOfTravel(float u, float v, Floor floor) : base (u, v, floor)
+		public PointOfTravel(float UCoordinate, float vCoordinate, Floor floor) : base (UCoordinate, vCoordinate, floor)
 		{
 		}
 

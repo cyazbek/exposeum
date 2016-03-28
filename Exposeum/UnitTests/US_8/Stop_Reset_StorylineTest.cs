@@ -1,22 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using NUnit.Framework;
 using Exposeum.Models;
-using Exposeum.Views;
 using Exposeum.Controllers;
-using Exposeum;
-using Android.Test.Mock;
-using Java.Util;
-using System.Reflection;
 
 namespace UnitTests.US_8
 {

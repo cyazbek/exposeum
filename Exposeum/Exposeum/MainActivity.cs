@@ -12,7 +12,7 @@ namespace Exposeum
     ///   The main activity is implemented as a ListActivity. When the user
     ///   clicks on a item in the ListView, we will display the appropriate activity.
     /// </summary>
-    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/Logo", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Locale)]
+    [Activity(Label = "@string/app_name", Icon = "@drawable/Logo", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Locale)]
     	public class MainActivity : ListActivity
 	{
 
@@ -24,7 +24,7 @@ namespace Exposeum
 
 			ListAdapter = new MainMenuAdapter (this);
 
-            BluetoothManager bluetoothManager = (BluetoothManager)GetSystemService(Context.BluetoothService);
+            BluetoothManager bluetoothManager = (BluetoothManager)GetSystemService(BluetoothService);
             BluetoothAdapter bluetoothAdapter = bluetoothManager.Adapter;
 
             if (bluetoothAdapter == null || !bluetoothAdapter.IsEnabled)
@@ -39,10 +39,6 @@ namespace Exposeum
 			Intent startActivity = (Intent)ListAdapter.GetItem (position);
 			StartActivity (startActivity);
 		}
-        public override void OnBackPressed()
-        {
-        var intent = new Intent(this, typeof(MainActivity));
-        StartActivity(intent);
-        }//end onBackPressed()
+        
     }
 }

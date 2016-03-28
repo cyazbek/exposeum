@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Exposeum
+﻿namespace Exposeum.Models
 {
 	public interface IBeaconFinderObservable
 	{

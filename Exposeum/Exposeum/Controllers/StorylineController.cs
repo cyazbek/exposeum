@@ -1,17 +1,17 @@
-﻿using Exposeum.Models;
+using Exposeum.Models;
 using Android.App;
 using Android.Content;
+using Exposeum.Menu_Bar;
+using Exposeum.Services;
+using Exposeum.Services.Service_Providers;
 
 namespace Exposeum.Controllers
 {
     public class StorylineController
     {
         private static StorylineController _storylineController;
-		private Map _map = Map.GetInstance();
-		public StoryLine _selectedStoryLine { get; set; }
-            
-        
-        
+		private readonly IStoryLineService _storyLineService;
+		private StoryLine _selectedStoryLine;
 
         public static StorylineController GetInstance()
         {
@@ -20,12 +20,16 @@ namespace Exposeum.Controllers
             return _storylineController;
         }
 
+		private StorylineController(){
+			_storyLineService = new StoryLineServiceProvider ();
+		}
+
 		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, _map.GetStoryLineList);
+			return new StoryLineListAdapter(activity, _storyLineService.GetStoryLines());
 		}
 
 		public void SelectStoryLine(int storylinePosition){
-			_selectedStoryLine = _map.GetStoryLineList[storylinePosition];
+			_selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
 		}
 
 		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
@@ -43,16 +47,24 @@ namespace Exposeum.Controllers
 
 				dialog.Show(transaction, "Story Line title");
 		}
-			
-        public void ResetStorylineProgress()
+
+        public void ShowPauseStoryLineDialog(FragmentTransaction transaction, Context context)
         {
-			foreach (var mapElement in _selectedStoryLine.MapElements)
+            DialogFragment dialog = new DialogPauseStorylineConfirmation(_selectedStoryLine, context);
+
+            dialog.Show(transaction, "Story Line title");
+        }
+
+        public void ResetStorylineProgress(StoryLine storyLine)
+        {
+			foreach (var mapElement in storyLine.MapElements)
             {
 				mapElement.Visited = false;
             }
 
-            _selectedStoryLine.SetLastPointOfInterestVisited(null);
-            _selectedStoryLine.CurrentStatus = Status.IsNew;
+            storyLine.SetLastPointOfInterestVisited(null);
+            storyLine.CurrentStatus = Status.IsNew;
+
         }
 
         public void PauseStorylineBeacons()
@@ -66,8 +78,12 @@ namespace Exposeum.Controllers
         }
 
 		public void SetActiveStoryLine(){
-			_map.CurrentStoryline = _selectedStoryLine;
-            BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
+			_storyLineService.SetActiveStoryLine (_selectedStoryLine);
 		}
+
+        public void BeginJournery()
+        {
+            _selectedStoryLine.CurrentStatus = Status.InProgress;
+        }
     }
 }

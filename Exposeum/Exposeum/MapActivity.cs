@@ -1,21 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Util;
-using Exposeum.Views;
 using Exposeum.Controllers;
+using Exposeum.Models;
 
 namespace Exposeum
 {
-	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light")]	
+	[Activity(Label = "@string/map_activity", Theme = "@android:style/Theme.Holo.Light" , ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]	
 	public class MapActivity : Activity
 	{
 
@@ -24,6 +16,7 @@ namespace Exposeum
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
+            
 			base.OnCreate (savedInstanceState);
 
             //=========================================================================================================
@@ -38,7 +31,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                base.OnBackPressed();
+                OnBackPressed();
             };
             //=========================================================================================================
 
@@ -50,8 +43,8 @@ namespace Exposeum
 			_beaconFinder.SetInFocus(true);
 			_beaconFinder.SetNotificationDestination (this);
 
-            //Bind the _totalMapView to the Activity
-            SetContentView(_mapController._totalMapView);
+			//Bind the _totalMapView to the Activity
+		    SetContentView(_mapController.TotalMapView);
 		}
 
         protected override void OnResume()
@@ -76,7 +69,11 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.Menu, menu);
+            if (ExposeumApplication.IsExplorerMode)
+                MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            else
+                MenuInflater.Inflate(Resource.Layout.MenuStoryline, menu);
+            
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -86,19 +83,28 @@ namespace Exposeum
             switch (item.ItemId)
             {
                 case Resource.Id.LanguageItem:
-                    //Language.ToogleLanguage();
-                    //var intent = new Intent(this, typeof(VisitActivityFr));
-                    //StartActivity(intent);
+                    User.GetInstance().ToogleLanguage(); 
                     return true;
                 case Resource.Id.PauseItem:
-                    //do something
+                    StorylineController storylineController = StorylineController.GetInstance();
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    
                     return true;
                 case Resource.Id.QRScannerItem:
-                    //do something
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
         }
 
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true;
+
+        }
     }
 }

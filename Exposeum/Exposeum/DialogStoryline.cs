@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -14,17 +8,17 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-    class DialogStoryline : DialogFragment
+    public class DialogStoryline : DialogFragment
     {
-        StoryLine _storyLine;
-        Context _context; 
-		StorylineController _storylineController = StorylineController.GetInstance();
-        User user = User.GetInstance(); 
+        private readonly StoryLine _storyLine;
+        private readonly Context _context; 
+		private readonly StorylineController _storylineController = StorylineController.GetInstance();
+        private readonly User _user = User.GetInstance(); 
         
         public DialogStoryline(StoryLine storyLine, Context context)
         {
-            this._storyLine = storyLine;
-            this._context = context;
+            _storyLine = storyLine;
+            _context = context;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -40,15 +34,15 @@ namespace Exposeum
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
             var button = view.FindViewById<Button>(Resource.Id.storyLineDialogButton);
-            button.Text = user.GetButtonText("storyLineDialogButton");
+            button.Text = _user.GetButtonText("storyLineDialogButton");
             button.Click += delegate {
 				_storylineController.SetActiveStoryLine();
-                string name = _storylineController._selectedStoryLine.NameEn;
-                Toast.MakeText(_context, name, ToastLength.Long).Show();
+                _storylineController.BeginJournery();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
+                Dismiss();
             };
-            this.Dialog.SetCanceledOnTouchOutside(true);
+            Dialog.SetCanceledOnTouchOutside(true);
             return view;
         }
 

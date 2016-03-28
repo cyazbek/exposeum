@@ -1,14 +1,14 @@
 ﻿using System;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Exceptions
 {
 	public class PointOfInterestNotVisitedException : Exception
 	{
 		public PointOfInterest Poi{ get;}
 
 		public PointOfInterestNotVisitedException (string message, PointOfInterest poi): base(message){
-			this.Poi = poi;
+			Poi = poi;
 		}
 	}
 }

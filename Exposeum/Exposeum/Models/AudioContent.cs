@@ -2,11 +2,16 @@
 {
     public class AudioContent : ExhibitionContent
     {
-        private string filePath { get; set; }
-        private int durationInSeconds { get; set; }
-        private string encoding { get; set; }
+        public string FilePath { get; set; }
+        public int Duration { get; set; }
+        public string Encoding { get; set; }
 
-        public override string htmlFormat()
+        public override bool Equals(object obj)
+        {
+            AudioContent other = (AudioContent)obj;
+            return FilePath.Equals(other.FilePath) && Duration == other.Duration && Encoding.Equals(other.Encoding);
+        }
+        public override string HtmlFormat()
         {
             throw new System.NotImplementedException();
         }

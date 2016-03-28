@@ -1,7 +1,6 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using EstimoteSdk;
 using Exposeum.Models;
 using Java.Util;
  
@@ -25,10 +24,10 @@ namespace Exposeum
 			SetContentView (Resource.Layout.Beacon);
 
 			_story = new StoryLine ();
-            Models.Beacon beaconFiras = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
+            Beacon beaconFiras = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 13982,54450);
             _myPoi = new PointOfInterest(){ NameEn = "Point Of interest Firas", NameFr = "Point d'interet Firas", DescriptionEn = "This is the point of interest Firas", DescriptionFr = "Celui là est le premier point de Firas"};
             _myPoi.Beacon = beaconFiras;
-            Models.Beacon beaconOli = new Models.Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
+            Beacon beaconOli = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 55339, 19185);
             _myPoi1 = new PointOfInterest { NameEn = "Point Of interest Oli", NameFr = "Point d'interet Oli", DescriptionEn = "This is the point of interest Oli", DescriptionFr = "Celui là est le premier point de Oli" };
             _myPoi1.Beacon = beaconOli;
             _story.AddPoi(_myPoi);
@@ -41,7 +40,7 @@ namespace Exposeum
 
 			_beaconFinder = BeaconFinder.GetInstance ();
 			_beaconFinder.SetNotificationDestination (this);
-			_beaconFinder.SetStoryLine (_story);
+			_beaconFinder.SetPath (_story);
 			_beaconFinder.AddObserver (this);
 			_beaconFinder.FindBeacons ();
 		}
@@ -57,11 +56,6 @@ namespace Exposeum
 		{
 			base.OnPause();
 			_beaconFinder.SetInFocus (false);
-		}
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
 		}
 
 		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){

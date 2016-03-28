@@ -1,12 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.View;
@@ -15,8 +8,8 @@ namespace Exposeum
 {
     public class WalkthroughtFragmentAdapter: PagerAdapter
     {
-        private List<int> _images;
-        private LayoutInflater _inflater;
+        private readonly List<int> _images;
+        private readonly LayoutInflater _inflater;
         private Context _context;
 
         public override int Count
@@ -29,8 +22,8 @@ namespace Exposeum
 
         public WalkthroughtFragmentAdapter(Context context, List<int> images)
         {
-            this._context = context;
-            this._images = images;
+            _context = context;
+            _images = images;
             _inflater = LayoutInflater.From(context);
         }
         public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object @object)

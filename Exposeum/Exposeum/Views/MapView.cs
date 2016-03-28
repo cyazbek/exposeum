@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
-using Android.Widget;
 using Exposeum.Models;
-using Exposeum.Views;
 using Exposeum.Controllers;
 using System;
 using System.Linq;
@@ -25,15 +23,16 @@ namespace Exposeum.Views
 		private float _translateX;
 		private float _translateY;
 		private float _scaleFactor = 0.5f;
-		private Context _context;
-		private Map _map;
-		private MapController _controller;
-		private Paint _visitedEdge = new Paint ();
-		private Paint _unvisitedEdge = new Paint ();
+		private readonly Context _context;
+		private readonly Map _map;
+		private readonly MapController _controller;
+		private readonly Paint _visitedEdge = new Paint ();
+		private readonly Paint _unvisitedEdge = new Paint ();
 		private float _canvasWidth, _canvasHeight; 
 
         private PointOfInterestPopup _newPointOfInterestPopup;
 		private OutOfOrderPointFragment _outOfOrderDialog;
+		private EndOfStoryLineFragment _endOfStoryLinePopup;
 
 		public MapView (Context context, MapController controller) : base(context, null, 0)
 		{            
@@ -42,29 +41,34 @@ namespace Exposeum.Views
 			_controller = controller;
 			_map = Map.GetInstance();
 
-			_visitedEdge.SetStyle (Paint.Style.Fill);
+			_visitedEdge.SetStyle (Paint.Style.FillAndStroke);
 			_visitedEdge.Color = Color.Green;
 			_visitedEdge.StrokeWidth = 20;
+			_visitedEdge.AntiAlias = true;
+			_visitedEdge.StrokeCap = Paint.Cap.Round;
 
 			_unvisitedEdge.SetStyle (Paint.Style.Stroke);
 			_unvisitedEdge.Color = Color.Red;
 			_unvisitedEdge.StrokeWidth = 25;
+			_unvisitedEdge.SetPathEffect(new DashPathEffect (new float[]{ 5,10}, 0));
+			_unvisitedEdge.AntiAlias = true;
 
-			this.LayoutParameters = new ViewGroup.LayoutParams (
+			LayoutParameters = new ViewGroup.LayoutParams (
 				ViewGroup.LayoutParams.MatchParent,
 				ViewGroup.LayoutParams.MatchParent
 			);
 		}
 
 		public void Update(){
-			this.Invalidate();
+			Invalidate();
 		}
 
-		public void InitiatePointOfInterestPopup(PointOfInterest poi){
+		public void InitiatePointOfInterestPopup(PointOfInterest poi, PointOfInterestPopup.DismissCallback callback){
 
             if (_newPointOfInterestPopup == null || ! _newPointOfInterestPopup.IsShowing())
             {
-                _newPointOfInterestPopup = new Views.PointOfInterestPopup(_context, poi);
+                _newPointOfInterestPopup = new PointOfInterestPopup(_context, poi);
+				_newPointOfInterestPopup.SetDismissCallback (callback);
                 _newPointOfInterestPopup.Show();
             }
 		}
@@ -84,6 +88,9 @@ namespace Exposeum.Views
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
+				float u = (_lastTouchX-_translateX)/(_map.CurrentFloor.Image.IntrinsicWidth*_scaleFactor) + 0.50f;
+				float v = (_lastTouchY-_translateY)/(_map.CurrentFloor.Image.IntrinsicHeight*_scaleFactor) + 0.50f;
+				Log.Wtf("map_press", String.Format("Map Touched: (u,v):({0},{1}", u, v));
 				_activePointerId = ev.GetPointerId (0);
 				break;
 
@@ -149,34 +156,85 @@ namespace Exposeum.Views
 
 			_map.CurrentFloor.Image.Draw (canvas);
 
-			Paint appropriateEdgePaintBrush = _visitedEdge;
+			DrawStoryLine (canvas);
 
+			//If we have an ActiveShortestPath, we draw it
+			if (_map.GetActiveShortestPath() != null) {
+				DrawShortestPath (canvas);
+			}
+				
+			canvas.Restore ();
+		}
+
+		private void DrawShortestPath(Canvas canvas){
+			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+
+			DrawMapElementsEdges (canvas, shortestPathMapElements, 255);
+			DrawMapElements (canvas, shortestPathMapElements);
+		}
+
+		private void DrawStoryLine(Canvas canvas){
+			int storyLineAlpha = 255;
+			if (_map.GetActiveShortestPath () != null)
+				storyLineAlpha = 50;
+				
 			//draw edges and POIs on top of map
-
 			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
 
-			for (int i = 0; i < currentFloorMapElements.Count; i++) {
+			//draw the edges first, but only if we are in storyline mode
+			if (!ExposeumApplication.IsExplorerMode) {
+				DrawMapElementsEdges (canvas, currentFloorMapElements, storyLineAlpha);
+			}
 
-				MapElement current = currentFloorMapElements[i];
-					
-				if (i < currentFloorMapElements.Count - 1) {
+			//finally, draw the mapElements
+			DrawMapElements(canvas, currentFloorMapElements);
+		}
 
-					MapElement next = currentFloorMapElements[i + 1];
+		private void DrawMapElements(Canvas canvas, List<MapElement> mapElements){
+			foreach (MapElement mapElement in mapElements) {
+				mapElement.Draw (canvas);
+			}
+		}
 
-					if (!next.Visited)
-						appropriateEdgePaintBrush = _unvisitedEdge;
-					
-					if (!ExposeumApplication.IsExplorerMode) {
-						canvas.DrawLine (current.U * _map.CurrentFloor.Image.IntrinsicWidth, current.V * _map.CurrentFloor.Image.IntrinsicHeight, next.U * _map.CurrentFloor.Image.IntrinsicWidth, next.V * _map.CurrentFloor.Image.IntrinsicHeight, appropriateEdgePaintBrush);
-					}
+		private void DrawMapElementsEdges(Canvas canvas, List<MapElement> mapElements, int alpha){
 
-				}
+			Paint appropriateEdgePaintBrush = _visitedEdge;
+			appropriateEdgePaintBrush.Alpha = alpha;
 
-				current.Draw (canvas); //draw the current guy
+			PointOfInterest lastVisitedPoi = null;
+
+			List<PointOfInterest> currentFloorPoIs = mapElements.OfType<PointOfInterest> ().ToList();
+
+			//get a reference to the last visited POI for drawing purposes
+			for (int i = 0; i < currentFloorPoIs.Count; i++) {
+
+				if (!currentFloorPoIs [i].Visited)
+					break;
+
+				lastVisitedPoi = currentFloorPoIs [i];
 
 			}
 
-			canvas.Restore ();
+			for (int i = 0; i < mapElements.Count; i++) {
+
+				MapElement current = mapElements[i];
+
+				if (current == lastVisitedPoi || lastVisitedPoi == null) {
+					appropriateEdgePaintBrush = _unvisitedEdge;
+					appropriateEdgePaintBrush.Alpha = alpha;
+				}
+
+				if (i < mapElements.Count - 1) {
+
+					MapElement next = mapElements[i + 1];
+
+                    Android.Graphics.Path path = new Android.Graphics.Path ();
+					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, current.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.LineTo(next.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, next.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
+
+					canvas.DrawPath(path, appropriateEdgePaintBrush);
+				}
+			}
 		}
 			
 		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
@@ -227,8 +285,8 @@ namespace Exposeum.Views
 
 			foreach (PointOfInterest poi in currentFloorPoIs) {
 
-				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.U) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.V) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.UCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
+				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.VCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					return poi;
@@ -249,6 +307,15 @@ namespace Exposeum.Views
                 
             }
 	    }
+
+		public void InitiateEndOfStoryLinePopup(EndOfStoryLineFragment.Callback callback)
+		{
+			using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
+			{
+				_endOfStoryLinePopup = new EndOfStoryLineFragment(callback);
+				_endOfStoryLinePopup.Show(tr, "Storyline Complete!");
+			}
+		}
 
 		private float Clamp(float min, float max, float value){
 			return Math.Min(Math.Max(value, min), max);

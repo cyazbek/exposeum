@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Graphics;
-
+using Exposeum.Controllers;
 using Exposeum.Models;
 
-namespace Exposeum
+namespace Exposeum.Views
 {
 	public class MapProgressionFragment : Fragment
 	{
@@ -31,14 +26,11 @@ namespace Exposeum
 		{
 			base.OnCreate (savedInstanceState);
 
-			// Create your fragment here
+			_mapProgressionFragmentView = new MapProgressionFragmentView (Activity);
 		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			_mapProgressionFragmentView = new MapProgressionFragmentView(Activity);
-			_mapProgressionFragmentView.SetHostFragment (this);
-			Update ();
 			return _mapProgressionFragmentView;
 		}
 
@@ -48,16 +40,15 @@ namespace Exposeum
 
 		class MapProgressionFragmentView : LinearLayout
 		{
-			private MapProgressionFragment _hostFragment;
 			private Paint _bgLine, _circle;
 
 			public MapProgressionFragmentView(Context context) : base(context)
 			{
-				this.LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-				this.Orientation = Orientation.Vertical;
-				this.SetWillNotDraw(false); //causes the OnDraw override below to be called
-				this.SetMinimumHeight(220);
-				this.SetBackgroundColor(Color.Red);
+				LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+				Orientation = Orientation.Vertical;
+				SetWillNotDraw(false); //causes the OnDraw override below to be called
+				SetMinimumHeight(220);
+				SetBackgroundColor(Color.Red);
 
 				ResetPaint();
 			}
@@ -73,18 +64,17 @@ namespace Exposeum
 				text.TextSize = 300;
 				text.Color = Color.Red;
 
-				StoryLine currentStoryline = _hostFragment.Storyline;
-
 				int currentCentreX = 400;
 				bool unvisitedTripped = false;
 
-				List<PointOfInterest> currentPOIs = currentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
+				List<PointOfInterest> currentPoIs = MapController.GetInstance().Model.CurrentStoryline.MapElements.OfType<PointOfInterest> ().ToList ();
 
-				for (int i = 0; i < currentPOIs.Count; i++) {
+				for (int i = 0; i < currentPoIs.Count; i++) {
 
-					MapElement current = currentPOIs[i];
+					MapElement current = currentPoIs[i];
 
-					canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
+					if(i < currentPoIs.Count - 1)
+						canvas.DrawLine (currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
 
 					if (!current.Visited)
 						unvisitedTripped = true;
@@ -116,10 +106,6 @@ namespace Exposeum
 			public override bool OnTouchEvent (MotionEvent ev){
 				ev.Dispose (); //dispose of the touch event, do not pass it to the map view underneath
 				return true;
-			}
-
-			public void SetHostFragment(MapProgressionFragment f){
-				this._hostFragment = f;
 			}
 
 			private void ResetPaint(){
