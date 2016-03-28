@@ -15,6 +15,7 @@ namespace Exposeum.Tables
         public string Encoding { get; set; }
         public string Discriminator { get; set; }
         public int StoryLineId { get; set; }
+        public int PoiId { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         

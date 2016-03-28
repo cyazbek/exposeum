@@ -1,23 +1,27 @@
-using System.Collections.Generic;
-using Android.Hardware;
-using Exposeum.Mappers;
-using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
-using Java.Lang.Annotation;
+using System.Collections.Generic;
 
 namespace Exposeum.Mappers
 {
     public class PointOfInterestMapper
     {
         private static PointOfInterestMapper _instance;
-        private BeaconMapper _beaconMapper;
-        private PointOfInterestDescriptionMapper _descriptionMapper; 
+        private readonly PointOfInterestDescriptionMapper _descriptionMapper;
+        private readonly ExhibitionContentMapper _exhibitionMapper;
+        private readonly BeaconMapper _beaconMapper;
+        private readonly MapElementsTdg _mapElementsTdg;
+        private readonly FloorMapper _floorMapper; 
+
 
         private PointOfInterestMapper()
         {
-            _beaconMapper = BeaconMapper.GetInstance();
             _descriptionMapper = PointOfInterestDescriptionMapper.GetInstance();
+            _exhibitionMapper = ExhibitionContentMapper.GetInstance();
+            _beaconMapper = BeaconMapper.GetInstance();
+            _mapElementsTdg = MapElementsTdg.GetInstance();
+            _floorMapper = FloorMapper.GetInstance();
+
         }
 
         public static PointOfInterestMapper GetInstance()
@@ -29,46 +33,82 @@ namespace Exposeum.Mappers
 
         public Tables.MapElements ConvertFromModel(PointOfInterest poi)
         {
-            int vis = 0;
-            if (poi.Visited == true)
-            {
+            int vis;
+            if (poi.Visited)
                 vis = 1;
-            }
-            else vis = 0; 
-
-            return new MapElements()
+            else
+                vis = 0;
+            return new Tables.MapElements()
             {
-                Id = poi.Id,
                 BeaconId = poi.Beacon.Id,
                 Discriminator = "PointOfInterest",
                 FloorId = poi.Floor.Id,
-                IconId = poi.IconId,
+                Id = poi.Id,
                 PoiDescription = poi.Description.Id,
                 StoryLineId = poi.StoryLineId,
                 UCoordinate = poi.UCoordinate,
                 VCoordinate = poi.VCoordinate,
-                Visited = vis
+                Visited = vis,
             };
         }
 
-        public PointOfInterest ConvertFromTable(Tables.MapElements element)
+        public PointOfInterest ConvertToModel(Tables.MapElements mapElement)
         {
-            bool vis = false;
-            if (element.Visited == 1)
+            Floor floor = _floorMapper.GetFloor(mapElement.FloorId);
+            PointOfInterestDescription description =
+                _descriptionMapper.GetPointOfInterestDescription(mapElement.PoiDescription);
+            Beacon beacon = _beaconMapper.GetBeacon(mapElement.BeaconId);
+            List<ExhibitionContent> content = _exhibitionMapper.GetExhibitionByPoiId(mapElement.Id);
+
+            bool vis;
+            if (mapElement.Visited == 0)
+                vis = false;
+            else
                 vis = true;
-            else vis = false;
-            List<ExhibitionContent> exhibitionContent = new List<ExhibitionContent>();
-            
 
             return new PointOfInterest()
             {
-                Id = element.Id, 
-                Beacon = _beaconMapper.GetBeacon(element.BeaconId),
-                Description = _descriptionMapper.GetPointOfInterestDescription(element.PoiDescription),
-
-
-            }
-
+                Beacon = beacon,
+                Description = description,
+                ExhibitionContent = content,
+                Floor = floor,
+                Id = mapElement.Id,
+                StoryLineId = mapElement.StoryLineId,
+                UCoordinate = mapElement.UCoordinate,
+                VCoordinate = mapElement.VCoordinate,
+                Visited = vis
+            };
         }
+        public void Add(PointOfInterest poi)
+        {
+            var mapElement = ConvertFromModel(poi);
+            _mapElementsTdg.Add(mapElement);
+            _floorMapper.AddFloor(poi.Floor);
+            _beaconMapper.AddBeacon(poi.Beacon);
+            _descriptionMapper.AddPointOfInterestDescription(poi.Description);
+            _exhibitionMapper.AddExhibitionContent(poi.ExhibitionContent);
+        }
+
+        public void Update(PointOfInterest poi)
+        {
+            Tables.MapElements mapElements = ConvertFromModel(poi);
+            _mapElementsTdg.Update(mapElements);
+            _beaconMapper.UpdateBeacon(poi.Beacon);
+            _descriptionMapper.UpdatePointOfInterestDescription(poi.Description);
+            _exhibitionMapper.UpdateExhibitionList(poi.ExhibitionContent);
+            _floorMapper.UpdateFloor(poi.Floor);
+        }
+
+        public PointOfInterest Get(int id)
+        {
+            Tables.MapElements mapElement = _mapElementsTdg.GetMapElement(id);
+            return ConvertToModel(mapElement);
+            
+        }
+
+
+
+       
+
     }
 }
