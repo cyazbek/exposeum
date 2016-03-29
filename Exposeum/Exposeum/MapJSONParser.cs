@@ -30,6 +30,9 @@ namespace Exposeum
 			//deserialize and store the floors from the JSON data
 			List<Floor> floors = ParseFloors (JSONPayload);
 
+			//deserialize and store the mapelements from the JSON data
+			List<MapElement> mapelements = ParseMapElements (JSONPayload);
+
 			//deserialize and store the storylines from the JSON data
 			List<Storyline> storylines = ParseStorylines (JSONPayload);
 		}
@@ -50,6 +53,25 @@ namespace Exposeum
 
 			return floors;
 
+		}
+
+		List<MapElement> ParseMapElements (JObject JSONPayload, List<Floor> floors)
+		{
+			List<MapElement> mapelements = new List<MapElement>();
+
+			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
+
+				//TODO: deserialize each POI
+
+			}
+
+			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
+
+				//TODO: deserialize each waypoint
+
+			}
+
+			return mapelements;
 		}
 
 		private List<Storyline> ParseStorylines(JObject JSONPayload){
