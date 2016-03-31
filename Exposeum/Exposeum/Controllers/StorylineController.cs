@@ -17,7 +17,7 @@ namespace Exposeum.Controllers
 		private readonly IShortestPathService _shortestPathService;
 		private StoryLine _selectedStoryLine;
 		private BeaconFinder _beaconFinder;
-		private DialogFragment _locatingUserFragment;
+		private SearchingForBeaconFragment _locatingUserFragment;
 
         public static StorylineController GetInstance()
         {
