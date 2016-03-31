@@ -12,12 +12,13 @@ namespace Exposeum.Services.Service_Providers
     /// </summary>
 	public class ShortestPathServiceProvider : IShortestPathService
     {
-
+		private readonly Map _mapInstance;
 		private readonly UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
 		public ShortestPathServiceProvider(IGraphService graphService)
         {
 			_graphInstance = graphService.GetGraph();
+			_mapInstance = Map.GetInstance ();
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Exposeum.Services.Service_Providers
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-        /// <returns>ShortPath</returns>
+        /// <returns>Path</returns>
         public Path GetShortestPath(MapElement startElement, MapElement targetElement)
 		{
 
@@ -101,6 +102,22 @@ namespace Exposeum.Services.Service_Providers
 			return new Path (clonedMapElements);
 		}
 
+
+		/// <summary>
+		/// Returns the active shortest Path object
+		/// </summary>
+		/// <returns>Path</returns>
+		public Path GetActiveShortestPath (){
+			return _mapInstance.GetActiveShortestPath ();
+		}
+
+		/// <summary>
+		/// Sets the active shortest path
+		/// </summary>
+		/// <param name="path"></param>
+		public void SetActiveShortestPath (Path path){
+			_mapInstance.SetActiveShortestPath (path);
+		}
     
     }
 }
