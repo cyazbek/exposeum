@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -98,6 +98,7 @@
     <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Fragments\DirectToLastPointFragment.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
@@ -275,6 +276,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MenuExplorer.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DirectToLastPointDialog.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
