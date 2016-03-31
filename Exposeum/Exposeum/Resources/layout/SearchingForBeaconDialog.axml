@@ -27,5 +27,20 @@
             android:id="@+id/SearchForBeaconSpinner"
             android:layout_width="60dp"
             android:layout_height="60dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/SearchingForBeaconInnerLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp">
+            <Button
+                android:text="Cancel"
+                android:id="@+id/SearchingForBeaconCancelButton"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

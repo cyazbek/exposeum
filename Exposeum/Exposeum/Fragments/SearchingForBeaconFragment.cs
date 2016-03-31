@@ -14,7 +14,13 @@ namespace Exposeum.Fragments
 {
     public class SearchingForBeaconFragment : DialogFragment
     {
+        public delegate void Callback();
+        private Callback _callback;
 
+        public SearchingForBeaconFragment(Callback callback)
+        {
+            _callback = callback;
+        }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
@@ -23,7 +29,13 @@ namespace Exposeum.Fragments
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
+            var cancelButton = view.FindViewById<Button>(Resource.Id.SearchingForBeaconCancelButton);
 
+            cancelButton.Click += (sender, e) =>
+            {
+                _callback();
+                Dismiss();
+            };
 
             return view;
         }
