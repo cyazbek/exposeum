@@ -52,7 +52,7 @@ namespace Exposeum.Controllers
 				DialogFragment dialog;
 				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
 				{
-					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context, DisplayDirectToLastPointFragment);
 				}
 				else
 				{
@@ -86,18 +86,24 @@ namespace Exposeum.Controllers
 			_beaconFinder.StopRanging();
         }
 
-		private void LocateUserOnGenericStoryLine(){
+		private void LocateUserOnGenericStoryLine(FragmentTransaction transaction){
 			_beaconFinder.AddObserver(this);
 			_beaconFinder.SetPath (_storyLineService.GetGenericStoryLine ());
 			_beaconFinder.FindBeacons();
-			displayLocatinUserFragment ();
+			DisplayLocatinUserFragment (transaction);
 
 		}
 
+		private void DisplayDirectToLastPointFragment(FragmentTransaction transaction){
+			DialogFragment dialog = new DirectToLastPointFragment(DisplayLocatinUserFragment);
+			dialog.Show (transaction, "Get Directions to the latest Point Of Interest visited");
 		}
 
-		private void killLocatingUserFragment(){
-		
+		private void DisplayLocatinUserFragment(FragmentTransaction transaction){
+			_searchingForBeaconFragment = new SearchingForBeaconFragment();
+			_searchingForBeaconFragment.Show (transaction, "Locating You");
+		}
+
 		private void KillLocatingUserFragment(){
 			_searchingForBeaconFragment.Dismiss ();
 		}
@@ -128,7 +134,7 @@ namespace Exposeum.Controllers
 			//deregister observer
 			_beaconFinder.RemoveObserver(this);
 			//kill the locating user fragment
-			killLocatingUserFragment();
+			KillLocatingUserFragment();
 
 		}
     }
