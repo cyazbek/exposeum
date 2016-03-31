@@ -52,7 +52,7 @@ namespace Exposeum.Controllers
 				DialogFragment dialog;
 				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
 				{
-					dialog = new DialogStorylineInProgress(_selectedStoryLine, context, DisplayDirectToLastPointFragment);
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context, LocateUserOnGenericStoryLine);
 				}
 				else
 				{
@@ -95,6 +95,7 @@ namespace Exposeum.Controllers
 		}
 
 		private void DisplayDirectToLastPointFragment(FragmentTransaction transaction){
+
 			DialogFragment dialog = new DirectToLastPointFragment(DisplayLocatinUserFragment);
 			dialog.Show (transaction, "Get Directions to the latest Point Of Interest visited");
 		}
@@ -123,6 +124,9 @@ namespace Exposeum.Controllers
         }
 
 		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
+
+
+			//check if found beacon is last poi of storyline
 
 
 			//find the poi associated with the beacon
