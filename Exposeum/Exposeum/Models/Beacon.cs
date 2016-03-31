@@ -20,6 +20,14 @@ namespace Exposeum.Models
         {
             get; set;
         }
+
+        public Beacon(EstimoteSdk.Beacon beacon)
+        {
+            Uuid = beacon.ProximityUUID;
+            Major = beacon.Major;
+            Minor = beacon.Minor;
+        }
+
         public Beacon (UUID uuid, int major, int minor)
         {
             Uuid = uuid;

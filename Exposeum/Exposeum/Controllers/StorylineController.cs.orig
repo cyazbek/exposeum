@@ -1,19 +1,23 @@
-﻿using Exposeum.Models;
+using System.Collections.Generic;
+using Exposeum.Models;
 using Android.App;
 using Android.Content;
+using Exposeum.Menu_Bar;
+using Exposeum.Fragments;
+using Exposeum.Services;
+using Exposeum.Services.Service_Providers;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
-    public class StorylineController
+    public class StorylineController : IBeaconFinderObserver
     {
         private static StorylineController _storylineController;
-<<<<<<< HEAD
-		private IStoryLineService _storyLineService;
-		private StoryLine _selectedStoryLine;
-=======
-		private static Map _map = StoryLineService.GetMapInstance();
-		private static StoryLine _selectedStoryLine;
->>>>>>> def14f612b1ab7dc6af80ba189feeba9ec572cb8
+        private readonly IStoryLineService _storyLineService;
+        private readonly IShortestPathService _shortestPathService;
+        private StoryLine _selectedStoryLine;
+        private BeaconFinder _beaconFinder;
+        private SearchingForBeaconFragment _searchingForBeaconFragment;
 
         public static StorylineController GetInstance()
         {
@@ -22,39 +26,73 @@ namespace Exposeum.Controllers
             return _storylineController;
         }
 
-		private StorylineController(){
-			_storyLineService = new StoryLineServiceProvider ();
-		}
+        private StorylineController()
+        {
+            _storyLineService = ExposeumApplication.IoCContainer.Get<IStoryLineService>();
+            _shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService>();
+            _beaconFinder = BeaconFinder.GetInstance();
+        }
 
-		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, _map.GetStoryLineList);
-		}
+        public StoryLineListAdapter GetStoryLinesListAdapter(Activity activity)
+        {
+            return new StoryLineListAdapter(activity, GetStoryLines());
+        }
 
-		public void SelectStoryLine(int storylinePosition){
-			_selectedStoryLine = _map.GetStoryLineList[storylinePosition];
-		}
+        //Returns a List of all storylines available in the app.
+        public List<StoryLine> GetStoryLines()
+        {
+            return _storyLineService.GetStoryLines();
+        }
 
+        public void SelectStoryLine(int storylinePosition)
+        {
+            _selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
+        }
+
+<<<<<<< HEAD
 		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
 			
 				
 				DialogFragment dialog;
 				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
 				{
-					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context, LocateUserOnGenericStoryLine);
 				}
 				else
 				{
 					dialog = new DialogStoryline(_selectedStoryLine, context);
 				}
+=======
+        public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context)
+        {
+>>>>>>> 9cb665d0b3a5019de1e2b3a44bc37ec7791d0f38
 
-				dialog.Show(transaction, "Story Line title");
-		}
-			
+
+            DialogFragment dialog;
+            if (_selectedStoryLine.CurrentStatus == Status.InProgress)
+            {
+                dialog = new DialogStorylineInProgress(_selectedStoryLine, context, DisplayDirectToLastPointFragment);
+            }
+            else
+            {
+                dialog = new DialogStoryline(_selectedStoryLine, context);
+            }
+
+            dialog.Show(transaction, "Story Line title");
+        }
+
+        public void ShowPauseStoryLineDialog(FragmentTransaction transaction, Context context)
+        {
+            DialogFragment dialog = new DialogPauseStorylineConfirmation(_selectedStoryLine, context);
+
+            dialog.Show(transaction, "Story Line title");
+        }
+
         public void ResetStorylineProgress(StoryLine storyLine)
         {
-			foreach (var mapElement in storyLine.MapElements)
+            foreach (var mapElement in storyLine.MapElements)
             {
-				mapElement.Visited = false;
+                mapElement.Visited = false;
             }
 
             storyLine.SetLastPointOfInterestVisited(null);
@@ -64,22 +102,111 @@ namespace Exposeum.Controllers
 
         public void PauseStorylineBeacons()
         {
-            BeaconFinder.GetInstance().StopRanging();
+            _beaconFinder.StopRanging();
+        }
+
+        private void LocateUserOnGenericStoryLine(FragmentTransaction transaction)
+        {
+            _beaconFinder.AddObserver(this);
+            _beaconFinder.SetPath(_storyLineService.GetGenericStoryLine());
+            _beaconFinder.FindBeacons();
+            DisplayLocatinUserFragment(transaction);
+
+        }
+
+<<<<<<< HEAD
+		private void DisplayDirectToLastPointFragment(FragmentTransaction transaction){
+
+			DialogFragment dialog = new DirectToLastPointFragment(DisplayLocatinUserFragment);
+			dialog.Show (transaction, "Get Directions to the latest Point Of Interest visited");
+		}
+=======
+        private void DisplayDirectToLastPointFragment(FragmentTransaction transaction)
+        {
+            DialogFragment dialog = new DirectToLastPointFragment(DisplayLocatinUserFragment);
+            dialog.Show(transaction, "Get Directions to the latest Point Of Interest visited");
+        }
+>>>>>>> 9cb665d0b3a5019de1e2b3a44bc37ec7791d0f38
+
+        private void DisplayLocatinUserFragment(FragmentTransaction transaction)
+        {
+            _searchingForBeaconFragment = new SearchingForBeaconFragment();
+            _searchingForBeaconFragment.Show(transaction, "Locating You");
+        }
+
+        private void KillLocatingUserFragment()
+        {
+            _searchingForBeaconFragment.Dismiss();
         }
 
         public void ResumeStorylineBeacons()
         {
-            BeaconFinder.GetInstance().FindBeacons();
+            _beaconFinder.FindBeacons();
         }
 
-		public void SetActiveStoryLine(){
-			_map.CurrentStoryline = _selectedStoryLine;
-            BeaconFinder.GetInstance().SetStoryLine(_selectedStoryLine);
-		}
+        public void SetActiveStoryLine()
+        {
+            _storyLineService.SetActiveStoryLine(_selectedStoryLine);
+        }
 
         public void BeginJournery()
         {
             _selectedStoryLine.CurrentStatus = Status.InProgress;
+        }
+
+        public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable)
+        {
+
+            BeaconFinder beaconFinder = observable as BeaconFinder;
+
+<<<<<<< HEAD
+			//check if found beacon is last poi of storyline
+
+
+			//find the poi associated with the beacon
+			PointOfInterest poi = _storyLineService.GetGenericStoryLine().FindPoi( ((BeaconFinder)observable).GetClosestBeacon() );
+			//compute shortest path
+			Path path = _shortestPathService.GetShortestPath(poi, _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
+			//set the active shortest path
+			_shortestPathService.SetActiveShortestPath(path);
+			//deregister observer
+			_beaconFinder.RemoveObserver(this);
+			//kill the locating user fragment
+			KillLocatingUserFragment();
+=======
+            //find the poi associated with the beacon
+            PointOfInterest discoveredPoi = _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder)observable).GetClosestBeacon());
+            PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest();
+>>>>>>> 9cb665d0b3a5019de1e2b3a44bc37ec7791d0f38
+
+            if (beaconFinder != null)
+            {
+                Beacon foundBeacon = new Beacon(beaconFinder.GetClosestBeacon());
+
+                if (!Equals(foundBeacon, lastVisited.Beacon))
+                {
+                    FindAndSetShortestPathToLastVisitedPointOfInterest(discoveredPoi);
+                }
+                else
+                {
+                    beaconFinder.SetPath(_storyLineService.GetActiveStoryLine());
+                }
+            }
+
+            //deregister observer
+            _beaconFinder.RemoveObserver(this);
+
+        }
+
+        private void FindAndSetShortestPathToLastVisitedPointOfInterest(PointOfInterest discoveredPoi)
+        {
+            //compute shortest path
+            Path path = _shortestPathService.GetShortestPath(discoveredPoi,
+                _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
+            //set the active shortest path
+            _shortestPathService.SetActiveShortestPath(path);
+            //kill the locating user fragment
+            KillLocatingUserFragment();
         }
     }
 }
