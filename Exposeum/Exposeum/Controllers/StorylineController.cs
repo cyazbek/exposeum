@@ -3,6 +3,7 @@ using Exposeum.Models;
 using Android.App;
 using Android.Content;
 using Exposeum.Menu_Bar;
+using Exposeum.Fragments;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 using Ninject;
