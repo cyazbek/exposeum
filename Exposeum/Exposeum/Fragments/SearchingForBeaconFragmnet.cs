@@ -9,18 +9,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Exposeum.Models;
 
 namespace Exposeum.Fragments
 {
-    class DirectToLastPointFragment : DialogFragment
+    class SearchingForBeaconFragmnet : DialogFragment
     {
 
 
         public delegate void Callback();
         private readonly Callback _callback;
 
-        public DirectToLastPointFragment(Callback callback)
+        public SearchingForBeaconFragmnet(Callback callback)
         {
             _callback = callback;
         }
@@ -33,22 +32,8 @@ namespace Exposeum.Fragments
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
-            var yesButton = view.FindViewById<Button>(Resource.Id.DirectYesButton);
-            var noButton = view.FindViewById<Button>(Resource.Id.DirectNoButton);
 
-            noButton.Click += (sender, e) =>
-            {
-                Dismiss();
-                // resume normal storyline
-            };
-
-            yesButton.Click += (sender, e) =>
-            {
-                // do a path to last point
-                _callback();
-                Dismiss();
-            };
-
+            
             return view;
         }
 
