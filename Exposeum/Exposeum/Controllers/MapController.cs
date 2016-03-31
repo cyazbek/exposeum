@@ -120,8 +120,10 @@ namespace Exposeum.Controllers
             if (_mapModel.GetActiveShortestPath() == null)
                 UpdatePointOfInterestAndStoryLineState(beacon);
             else {
-                if (_mapModel.GetActiveShortestPath().CurrentStatus != Status.IsVisited)
-                    UpdatePointOfInterestAnShortestPathState(beacon);
+				if (_mapModel.GetActiveShortestPath ().CurrentStatus != Status.IsVisited)
+					UpdatePointOfInterestAnShortestPathState (beacon);
+				else
+					_mapModel.GetActiveShortestPath () = null; //If the shortest path is visited it should be set to null
             }
 
 
