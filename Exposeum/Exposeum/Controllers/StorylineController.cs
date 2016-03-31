@@ -7,7 +7,7 @@ using Exposeum.Services.Service_Providers;
 
 namespace Exposeum.Controllers
 {
-    public class StorylineController
+	public class StorylineController: IBeaconFinderObserver
     {
         private static StorylineController _storylineController;
 		private readonly IStoryLineService _storyLineService;
@@ -72,6 +72,14 @@ namespace Exposeum.Controllers
             BeaconFinder.GetInstance().StopRanging();
         }
 
+		public void DirectUserToLastVisitedPoint(){
+			
+		}
+
+		private void LocateUserOnGenericStoryLine(){
+			
+		}
+
         public void ResumeStorylineBeacons()
         {
             BeaconFinder.GetInstance().FindBeacons();
@@ -85,5 +93,9 @@ namespace Exposeum.Controllers
         {
             _selectedStoryLine.CurrentStatus = Status.InProgress;
         }
+
+		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
+			
+		}
     }
 }
