@@ -17,7 +17,7 @@ namespace Exposeum.Fragments
     {
 
 
-		public delegate void Callback(FragmentTransaction transaction);
+		public delegate void Callback();
         private readonly Callback _callback;
 
         public DirectToLastPointFragment(Callback callback)
@@ -46,7 +46,7 @@ namespace Exposeum.Fragments
             {
                 // do a path to last point
 				FragmentTransaction transaction = FragmentManager.BeginTransaction();
-				_callback(transaction);
+				_callback();
                 Dismiss();
             };
 
