@@ -1,15 +1,17 @@
 ﻿using Exposeum.Services.Service_Providers;
+using Exposeum.Services;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
 	public class ExplorerController
 	{
 		private static ExplorerController _instance;
-		private readonly ExplorerServiceProvider _explorerService;
+		private readonly IExplorerService _explorerService;
 
 		private ExplorerController ()
 		{
-			_explorerService = new ExplorerServiceProvider ();
+			_explorerService = ExposeumApplication.IoCContainer.Get<IExplorerService> ();
 		}
 
 		public static ExplorerController GetInstance(){
