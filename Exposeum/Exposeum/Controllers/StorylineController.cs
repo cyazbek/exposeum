@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using Exposeum.Models;
 using Android.App;
 using Android.Content;
 using Exposeum.Menu_Bar;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
-    public class StorylineController
+	public class StorylineController: IBeaconFinderObserver
     {
         private static StorylineController _storylineController;
 		private readonly IStoryLineService _storyLineService;
@@ -21,12 +23,18 @@ namespace Exposeum.Controllers
         }
 
 		private StorylineController(){
-			_storyLineService = new StoryLineServiceProvider ();
+			_storyLineService = ExposeumApplication.IoCContainer.Get<IStoryLineService>();
 		}
 
-		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, _storyLineService.GetStoryLines());
+		public StoryLineListAdapter GetStoryLinesListAdapter(Activity activity){
+			return new StoryLineListAdapter(activity,GetStoryLines());
 		}
+
+        //Returns a List of all storylines available in the app.
+        public List<StoryLine> GetStoryLines()
+        {
+            return _storyLineService.GetStoryLines();
+        }
 
 		public void SelectStoryLine(int storylinePosition){
 			_selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
@@ -72,6 +80,14 @@ namespace Exposeum.Controllers
             BeaconFinder.GetInstance().StopRanging();
         }
 
+		public void DirectUserToLastVisitedPoint(){
+			
+		}
+
+		private void LocateUserOnGenericStoryLine(){
+			
+		}
+
         public void ResumeStorylineBeacons()
         {
             BeaconFinder.GetInstance().FindBeacons();
@@ -85,5 +101,9 @@ namespace Exposeum.Controllers
         {
             _selectedStoryLine.CurrentStatus = Status.InProgress;
         }
+
+		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
+			
+		}
     }
 }
