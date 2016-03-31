@@ -8,7 +8,7 @@ namespace Exposeum.Models
 		public float U, V;
         public Floor Floor;
 
-        public Boolean Visited { get; set; }
+        public bool Visited { get; set; }
 
         protected MapElement ()
 		{
