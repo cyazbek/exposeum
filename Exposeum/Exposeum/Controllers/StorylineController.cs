@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Exposeum.Models;
 using Android.App;
 using Android.Content;
@@ -24,9 +25,15 @@ namespace Exposeum.Controllers
 			_storyLineService = new StoryLineServiceProvider ();
 		}
 
-		public StoryLineListAdapter GetStoryLines(Activity activity){
-			return new StoryLineListAdapter(activity, _storyLineService.GetStoryLines());
+		public StoryLineListAdapter GetStoryLinesListAdapter(Activity activity){
+			return new StoryLineListAdapter(activity,GetStoryLines());
 		}
+
+        //Returns a List of all storylines available in the app.
+        public List<StoryLine> GetStoryLines()
+        {
+            return _storyLineService.GetStoryLines();
+        }
 
 		public void SelectStoryLine(int storylinePosition){
 			_selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
