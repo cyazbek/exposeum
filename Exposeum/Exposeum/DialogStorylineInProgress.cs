@@ -11,9 +11,9 @@ namespace Exposeum
     class DialogStorylineInProgress : DialogFragment
     {
         private readonly StoryLine _storyLine;
-		private readonly Context _context; 
+		private readonly Context _context;
         private readonly StorylineController _storylineController = StorylineController.GetInstance();
-        private readonly User _user = User.GetInstance(); 
+        private readonly User _user = User.GetInstance();
 
         public DialogStorylineInProgress(StoryLine storyLine){
 			_storyLine = storyLine;

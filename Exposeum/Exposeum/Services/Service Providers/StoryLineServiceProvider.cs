@@ -40,6 +40,11 @@ namespace Exposeum.Services.Service_Providers
 
 			return null;
 		}
+
+		//TODO: implement properly
+		public StoryLine GetGenericStoryLine(){
+			return _mapInstance.GetStoryLineList[0];
+		}
 	}
 }
 
