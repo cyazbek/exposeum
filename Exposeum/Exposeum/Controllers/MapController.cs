@@ -9,6 +9,7 @@ using System.Linq;
 using Exposeum.Exceptions;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
@@ -49,7 +50,7 @@ namespace Exposeum.Controllers
 
             ConfigureMapView(context);
 
-            _shortestPathService = new ShortestPathServiceProvider(GraphServiceProvider.GetInstance());
+			_shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService>();
 
             _mapModel = Map.GetInstance();
 
