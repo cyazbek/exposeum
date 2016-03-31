@@ -15,14 +15,18 @@ namespace Exposeum
         private readonly StorylineController _storylineController = StorylineController.GetInstance();
         private readonly User _user = User.GetInstance();
 
+		public delegate void Callback(FragmentTransaction transaction);
+		private readonly Callback _callback;
+
         public DialogStorylineInProgress(StoryLine storyLine){
 			_storyLine = storyLine;
 		}
         
-        public DialogStorylineInProgress(StoryLine storyLine,Context context)
+		public DialogStorylineInProgress(StoryLine storyLine,Context context, Callback callback)
         {
             _storyLine = storyLine;
             _context = context; 
+			_callback = callback;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -53,6 +57,10 @@ namespace Exposeum
                 _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
+
+				FragmentTransaction transaction = FragmentManager.BeginTransaction();
+				_callback(transaction);
+
                 Dismiss();
             };
 
