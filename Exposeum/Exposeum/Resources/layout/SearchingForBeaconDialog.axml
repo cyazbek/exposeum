@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:padding="8dp">
+    <LinearLayout
+        android:id="@+id/DirectToLastPointText"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/SearchForBeaconText"
+            android:gravity="center_horizontal"
+            android:layout_width="270.5dp"
+            android:layout_height="wrap_content"
+            android:textColor="#5b2f2f"
+            android:textSize="20dip"
+            android:textStyle="bold"
+            android:paddingLeft="50dip"
+            android:text="Searching for beacons" />
+        <ImageView
+            android:src="@drawable/beacon_inactivated"
+            android:gravity="center_horizontal"
+            android:id="@+id/SearchForBeaconSpinner"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </LinearLayout>
+</RelativeLayout>

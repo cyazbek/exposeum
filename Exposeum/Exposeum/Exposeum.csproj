@@ -102,6 +102,7 @@
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Fragments\DirectToLastPointFragment.cs" />
+    <Compile Include="Fragments\SearchingForBeaconFragmnet.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
@@ -282,6 +283,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DirectToLastPointDialog.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchingForBeaconDialog.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
