@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Exposeum.Fragments
 {
-    public class SearchingForBeaconFragmnet : DialogFragment
+    public class SearchingForBeaconFragment : DialogFragment
     {
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

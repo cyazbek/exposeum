@@ -102,7 +102,7 @@
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
     <Compile Include="Fragments\DirectToLastPointFragment.cs" />
-    <Compile Include="Fragments\SearchingForBeaconFragmnet.cs" />
+    <Compile Include="Fragments\SearchingForBeaconFragment.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
