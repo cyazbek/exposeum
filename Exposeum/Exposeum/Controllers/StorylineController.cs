@@ -13,7 +13,9 @@ namespace Exposeum.Controllers
     {
         private static StorylineController _storylineController;
 		private readonly IStoryLineService _storyLineService;
+		private readonly IShortestPathService _shortestPathService;
 		private StoryLine _selectedStoryLine;
+		private BeaconFinder _beaconFinder;
 
         public static StorylineController GetInstance()
         {
@@ -24,6 +26,8 @@ namespace Exposeum.Controllers
 
 		private StorylineController(){
 			_storyLineService = ExposeumApplication.IoCContainer.Get<IStoryLineService>();
+			_shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService> ();
+			_beaconFinder = BeaconFinder.GetInstance ();
 		}
 
 		public StoryLineListAdapter GetStoryLinesListAdapter(Activity activity){
@@ -77,20 +81,28 @@ namespace Exposeum.Controllers
 
         public void PauseStorylineBeacons()
         {
-            BeaconFinder.GetInstance().StopRanging();
+			_beaconFinder.StopRanging();
         }
 
-		public void DirectUserToLastVisitedPoint(){
-			
+		private void LocateUserOnGenericStoryLine(){
+			_beaconFinder.AddObserver(this);
+			_beaconFinder.SetPath (_storyLineService.GetGenericStoryLine ());
+			_beaconFinder.FindBeacons();
+			displayLocatinUserFragment ();
+
 		}
 
-		private void LocateUserOnGenericStoryLine(){
-			
+		private void displayLocatinUserFragment(){
+		
+		}
+
+		private void killLocatingUserFragment(){
+		
 		}
 
         public void ResumeStorylineBeacons()
         {
-            BeaconFinder.GetInstance().FindBeacons();
+			_beaconFinder.FindBeacons();
         }
 
 		public void SetActiveStoryLine(){
@@ -103,7 +115,19 @@ namespace Exposeum.Controllers
         }
 
 		public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable){
-			
+
+
+			//find the poi associated with the beacon
+			PointOfInterest poi = _storyLineService.GetGenericStoryLine().FindPoi( ((BeaconFinder)observable).GetClosestBeacon() );
+			//compute shortest path
+			Path path = _shortestPathService.GetShortestPath(poi, _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
+			//set the active shortest path
+			_shortestPathService.SetActiveShortestPath(path);
+			//deregister observer
+			_beaconFinder.RemoveObserver(this);
+			//kill the locating user fragment
+			killLocatingUserFragment();
+
 		}
     }
 }
