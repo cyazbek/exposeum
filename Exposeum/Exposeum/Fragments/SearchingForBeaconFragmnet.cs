@@ -12,17 +12,8 @@ using Android.Widget;
 
 namespace Exposeum.Fragments
 {
-    class SearchingForBeaconFragmnet : DialogFragment
+    public class SearchingForBeaconFragmnet : DialogFragment
     {
-
-
-        public delegate void Callback();
-        private readonly Callback _callback;
-
-        public SearchingForBeaconFragmnet(Callback callback)
-        {
-            _callback = callback;
-        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -33,7 +24,7 @@ namespace Exposeum.Fragments
             textview.VerticalScrollBarEnabled = true;
             textview.HorizontalFadingEdgeEnabled = true;
 
-            
+
             return view;
         }
 

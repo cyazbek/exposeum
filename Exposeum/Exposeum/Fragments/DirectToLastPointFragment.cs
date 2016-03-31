@@ -13,7 +13,7 @@ using Exposeum.Models;
 
 namespace Exposeum.Fragments
 {
-    class DirectToLastPointFragment : DialogFragment
+    public class DirectToLastPointFragment : DialogFragment
     {
 
 
