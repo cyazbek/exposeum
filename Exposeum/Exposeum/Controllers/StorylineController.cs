@@ -18,6 +18,8 @@ namespace Exposeum.Controllers
         private StoryLine _selectedStoryLine;
         private BeaconFinder _beaconFinder;
         private SearchingForBeaconFragment _searchingForBeaconFragment;
+		private FragmentManager _directToLastPointTransaction;
+		private PointOfInterest _discoveredPoi;
 
         public static StorylineController GetInstance()
         {
@@ -51,11 +53,6 @@ namespace Exposeum.Controllers
 
         public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context)
         {
-
-
-		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
-			
-				
 				DialogFragment dialog;
 				if(_selectedStoryLine.CurrentStatus==Status.InProgress)
 				{
@@ -95,24 +92,16 @@ namespace Exposeum.Controllers
 
         private void LocateUserOnGenericStoryLine(FragmentTransaction transaction)
         {
+			_directToLastPointTransaction = transaction;
             _beaconFinder.AddObserver(this);
             _beaconFinder.SetPath(_storyLineService.GetGenericStoryLine());
             _beaconFinder.FindBeacons();
-            DisplayLocatinUserFragment(transaction);
-
         }
 
         private void DisplayDirectToLastPointFragment(FragmentTransaction transaction)
         {
-            DialogFragment dialog = new DirectToLastPointFragment(DisplayLocatinUserFragment);
-            dialog.Show(transaction, "Get Directions to the latest Point Of Interest visited");
-        }
-
-
-        private void DisplayLocatinUserFragment(FragmentTransaction transaction)
-        {
-            _searchingForBeaconFragment = new SearchingForBeaconFragment();
-            _searchingForBeaconFragment.Show(transaction, "Locating You");
+			DialogFragment dialog = new DirectToLastPointFragment(FindAndSetShortestPathToLastVisitedPointOfInterest);
+			dialog.Show(_directToLastPointTransaction, "Get Directions to the latest Point Of Interest visited");
         }
 
         private void KillLocatingUserFragment()
@@ -141,7 +130,7 @@ namespace Exposeum.Controllers
             BeaconFinder beaconFinder = observable as BeaconFinder;
 
             //find the poi associated with the beacon
-            PointOfInterest discoveredPoi = _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder)observable).GetClosestBeacon());
+            _discoveredPoi = _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder)observable).GetClosestBeacon());
             PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest();
 
             if (beaconFinder != null)
@@ -150,7 +139,7 @@ namespace Exposeum.Controllers
 
                 if (!Equals(foundBeacon, lastVisited.Beacon))
                 {
-                    FindAndSetShortestPathToLastVisitedPointOfInterest(discoveredPoi);
+					DisplayDirectToLastPointFragment ();
                 }
                 else
                 {
@@ -158,16 +147,15 @@ namespace Exposeum.Controllers
                 }
             }
 
-
             //deregister observer
             _beaconFinder.RemoveObserver(this);
 
         }
 
-        private void FindAndSetShortestPathToLastVisitedPointOfInterest(PointOfInterest discoveredPoi)
+        private void FindAndSetShortestPathToLastVisitedPointOfInterest()
         {
             //compute shortest path
-            Path path = _shortestPathService.GetShortestPath(discoveredPoi,
+			Path path = _shortestPathService.GetShortestPath(_discoveredPoi,
                 _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
             //set the active shortest path
             _shortestPathService.SetActiveShortestPath(path);
