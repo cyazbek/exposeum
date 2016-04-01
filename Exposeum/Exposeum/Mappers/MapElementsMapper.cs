@@ -34,18 +34,21 @@ namespace Exposeum.Mappers
         public List<MapElement> GetAllMapElements()
         {
             List<MapElements> tableElements = _mapElementsTdg.GetAllMapElements();
-            List<MapElement> list = new List<MapElement>();
+
+            List<MapElement> modelList = new List<MapElement>();
+
             foreach (var x in tableElements)
             {
                 if (x.Discriminator == "PointOfInterest")
                 {
-                    list.Add(_pointOfInterestMapper.ConvertToModel(x));
+                    modelList.Add(_pointOfInterestMapper.PoiTableToModel(x));
                 }
                 else 
-                    list.Add(_wayPointMapper.ConvertFromTable(x));
+                    modelList.Add(_wayPointMapper.WaypointTableToModel(x));
             }
-            return list;
+            return modelList;
         }       
+
         public void AddList(List<MapElement> elements)
         {
             foreach (var x in elements)
@@ -56,23 +59,6 @@ namespace Exposeum.Mappers
                     _wayPointMapper.Add((WayPoint)x);
             }
         }
-
-        public List<MapElement> GetAllElements()
-        {
-            List<MapElements> list = new List<MapElements>();
-            list = _mapElementsTdg.GetAllMapElements();
-            List<MapElement> modelList = new List<MapElement>();
-            foreach (var x in list)
-            {
-                if (x.Discriminator == "PointOfInterest")
-                    modelList.Add(_pointOfInterestMapper.ConvertToModel(x));
-                else
-                {
-                    modelList.Add((_wayPointMapper.ConvertFromTable(x)));
-                }
-            }
-            return modelList;
-        } 
 
         public List<MapElement> GetAllElementByStorylineId(int id)
         {
@@ -88,10 +74,10 @@ namespace Exposeum.Mappers
             foreach (var x in tableElements)
             {
                 if(x.Discriminator=="PointOfInterest")
-                    modelList.Add(_pointOfInterestMapper.ConvertToModel(x));
+                    modelList.Add(_pointOfInterestMapper.PoiTableToModel(x));
                 else
                 {
-                    modelList.Add((_wayPointMapper.ConvertFromTable(x)));
+                    modelList.Add((_wayPointMapper.WaypointTableToModel(x)));
                 }
             }
             return modelList;
@@ -109,5 +95,16 @@ namespace Exposeum.Mappers
         }
 
 
+        public MapElement Get(int mapElementId)
+        {
+            MapElements mapElement = _mapElementsTdg.GetMapElement(mapElementId);
+
+            if (mapElement.Discriminator == "PointOfInterest")
+            {
+                return _pointOfInterestMapper.PoiTableToModel(mapElement);
+            }
+            else
+                return _wayPointMapper.WaypointTableToModel(mapElement);
+        }
     }
 }
