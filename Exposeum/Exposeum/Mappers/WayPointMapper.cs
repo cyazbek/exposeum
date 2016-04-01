@@ -69,7 +69,7 @@ namespace Exposeum.Mappers
             }
         }
 
-        public MapElements ConvertFromModel(WayPoint element)
+        public MapElements WaypointModelToTable(WayPoint element)
         {
             int vis;
             if (element.Visited == true)
@@ -88,7 +88,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public WayPoint ConvertFromTable(MapElements element)
+        public WayPoint WaypointTableToModel(MapElements element)
         {
             bool vis;
             if (element.Visited == 0)
@@ -110,7 +110,7 @@ namespace Exposeum.Mappers
 
         public void Add(WayPoint element)
         {
-            MapElements mapElement = ConvertFromModel(element);
+            MapElements mapElement = WaypointModelToTable(element);
             _mapElementsTdg.Add(mapElement);
             _floorMapper.AddFloor(element.Floor);
         }
@@ -118,12 +118,12 @@ namespace Exposeum.Mappers
         public WayPoint Get(int id)
         {
             MapElements mapElement = _mapElementsTdg.GetMapElement(id);
-            return ConvertFromTable(mapElement);
+            return WaypointTableToModel(mapElement);
         }
 
         public void Update(WayPoint element)
         {
-            _mapElementsTdg.Update(ConvertFromModel(element));
+            _mapElementsTdg.Update(WaypointModelToTable(element));
             _floorMapper.UpdateFloor(element.Floor);
         }
     }   

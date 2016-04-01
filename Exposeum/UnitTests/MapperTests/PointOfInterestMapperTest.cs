@@ -155,7 +155,7 @@ namespace UnitTests
         [Test]
         public void PointOfInterestModelToTableTest()
         {
-            MapElements expected = _instance.ConvertFromModel(_pointOfInterestModel);
+            MapElements expected = _instance.PoiModelToTable(_pointOfInterestModel);
 
             Assert.IsTrue(_tdg.Equals(_pointOfInterestTable, expected));
         }
@@ -163,7 +163,7 @@ namespace UnitTests
         [Test]
         public void PointOfInterestTableToModelTest()
         {
-            PointOfInterest expected = _instance.ConvertToModel(_pointOfInterestTable);
+            PointOfInterest expected = _instance.PoiTableToModel(_pointOfInterestTable);
             Assert.IsTrue(_pointOfInterestModel.Equals(expected));
         }
 

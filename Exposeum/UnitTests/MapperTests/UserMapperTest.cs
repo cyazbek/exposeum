@@ -71,14 +71,14 @@ namespace UnitTests
             _userModel.Language = Language.En;
             _userModel.Visitor = true;
 
-            User expected = _instance.ConvertToTable(_userModel);
+            User expected = _instance.UserModelToTable(_userModel);
             Assert.IsTrue(UserTdg.GetInstance().Equals(_userTable, expected));
         }
 
         [Test]
         public void UserTableToModelTest()
         {
-            Exposeum.Models.User expected = _instance.ConvertToModel(_userTable);
+            Exposeum.Models.User expected = _instance.UserTableToModel(_userTable);
             Assert.IsTrue(_userModel.Equals(expected));
         }
 

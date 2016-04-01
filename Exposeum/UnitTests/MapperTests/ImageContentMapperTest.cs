@@ -72,8 +72,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestFr()
         {
-            _contentFr = _mapper.ConvertFromModelFr(_imageFr);
-            _expectedImage = _mapper.ConvertFromTable(_contentFr);
+            _contentFr = _mapper.ImageModelToTableFr(_imageFr);
+            _expectedImage = _mapper.ImageTableToModelFr(_contentFr);
 
             Assert.IsTrue(_imageFr.Equals(_expectedImage));
         }
@@ -104,8 +104,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestEn()
         {
-            _contentEn = _mapper.ConvertFromModelEn(_imageEn);
-            _expectedImage = _mapper.ConvertFromTable(_contentEn);
+            _contentEn = _mapper.ImageModelToTableEn(_imageEn);
+            _expectedImage = _mapper.ImageTableToModelEn(_contentEn);
 
             Assert.IsTrue(_imageEn.Equals(_expectedImage));
         }

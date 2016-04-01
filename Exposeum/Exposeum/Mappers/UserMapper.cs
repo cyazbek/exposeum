@@ -9,7 +9,7 @@ namespace Exposeum.Mappers
     {
         private static UserMapper _instance;
         private UserTdg _tdg;
-        private readonly Models.User _user; 
+        private readonly User _user; 
 
         private UserMapper()
         {
@@ -24,7 +24,7 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public Tables.User ConvertToTable(Models.User user)
+        public Tables.User UserModelToTable(User user)
         {
             int id = user.Id;
             int lang;
@@ -46,7 +46,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public User ConvertToModel(Tables.User user)
+        public User UserTableToModel(Tables.User user)
         {
             Language language;
             bool visited;
@@ -69,18 +69,18 @@ namespace Exposeum.Mappers
 
         public void AddUser(User user)
         {
-            Tables.User tableUser = ConvertToTable(user);
+            Tables.User tableUser = UserModelToTable(user);
             _tdg.Add(tableUser);
         }
 
         public User GetUser(int id)
         {
-            return ConvertToModel(_tdg.Get(id));
+            return UserTableToModel(_tdg.Get(id));
         }
 
         public void UpdateUser(User user)
         {
-            Tables.User tableUser = ConvertToTable(user);
+            Tables.User tableUser = UserModelToTable(user);
             _tdg.Update(tableUser);
         }
     }

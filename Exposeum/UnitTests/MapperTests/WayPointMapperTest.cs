@@ -96,14 +96,14 @@ namespace UnitTests
         [Test]
         public void WayPointModelToTableTest()
         {
-            MapElements expected = _instance.ConvertFromModel(_wayPointModel);
+            MapElements expected = _instance.WaypointModelToTable(_wayPointModel);
             Assert.IsTrue(_tdg.Equals(_wayPointTable, expected));
         }
 
         [Test]
         public void WayPointTableToModelTest()
         {
-            WayPoint expected = _instance.ConvertFromTable(_wayPointTable);
+            WayPoint expected = _instance.WaypointTableToModel(_wayPointTable);
             Assert.IsTrue(_wayPointModel.Equals(expected));
         }
 

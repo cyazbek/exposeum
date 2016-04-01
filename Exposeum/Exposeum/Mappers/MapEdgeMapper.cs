@@ -10,7 +10,6 @@ namespace Exposeum.Mappers
         private readonly MapEdgeTdg _mapEdgeTdg;
         private readonly List<MapEdge> _listOfEdges;
         private readonly MapElementsMapper _mapElementsMapper;
-        private readonly PointOfInterestMapper _pointOfInterestMapper; 
 
 
         private MapEdgeMapper()
@@ -87,9 +86,10 @@ namespace Exposeum.Mappers
             {
                 Id = edgeTable.Id,
                 Distance = edgeTable.Distance,
-                Source = _pointOfInterestMapper.Get(edgeTable.StartMapElementId),
-                Target = _pointOfInterestMapper.Get(edgeTable.EndMapElementId),
+                Source = _mapElementsMapper.Get(edgeTable.StartMapElementId),
+                Target = _mapElementsMapper.Get(edgeTable.EndMapElementId),
             };
+
             return edgeModel;
         }
 

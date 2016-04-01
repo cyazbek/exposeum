@@ -50,8 +50,8 @@ namespace UnitTests
         [Test()]
         public void ConvertFromAndToModelTestEn()
         {
-            _contentEn = _mapper.ConvertFromModelEn(_videoEn);
-            _expectedVideo = _mapper.ConvertFromTable(_contentEn);
+            _contentEn = _mapper.VideoModelToTableEn(_videoEn);
+            _expectedVideo = _mapper.VideoTableToModelEn(_contentEn);
 
             Assert.IsTrue(_videoEn.Equals(_expectedVideo));
         }
@@ -79,8 +79,8 @@ namespace UnitTests
         [Test()]
         public void ConvertFromAndToModelTestFr()
         {
-            _contentFr = _mapper.ConvertFromModelFr(_videoFr);
-            _expectedVideo = _mapper.ConvertFromTable(_contentFr);
+            _contentFr = _mapper.VideoModelToTableFr(_videoFr);
+            _expectedVideo = _mapper.VideoTableToModelFr(_contentFr);
 
             Assert.IsTrue(_videoFr.Equals(_expectedVideo));
         }

@@ -22,7 +22,7 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public ImageContent ConvertFromTable(Tables.ExhibitionContentEn content)
+        public ImageContent ImageTableToModelEn(Tables.ExhibitionContentEn content)
         {
             return new ImageContent
             {
@@ -37,7 +37,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public ImageContent ConvertFromTable(Tables.ExhibitionContentFr content)
+        public ImageContent ImageTableToModelFr(Tables.ExhibitionContentFr content)
         {
             return new ImageContent
             {
@@ -52,7 +52,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEn(ImageContent content)
+        public Tables.ExhibitionContentEn ImageModelToTableEn(ImageContent content)
         {
 
             return new Tables.ExhibitionContentEn
@@ -68,7 +68,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFr(ImageContent content)
+        public Tables.ExhibitionContentFr ImageModelToTableFr(ImageContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -88,28 +88,28 @@ namespace Exposeum.Mappers
         {
             if (content.Language == Models.Language.Fr)
             {
-                _tdgFr.Add(ConvertFromModelFr(content));
+                _tdgFr.Add(ImageModelToTableFr(content));
             }
             else
-                _tdgEn.Add(ConvertFromModelEn(content));
+                _tdgEn.Add(ImageModelToTableEn(content));
         }
 
         public ImageContent Get(int id)
         {
             if (Models.User.GetInstance().Language == Models.Language.Fr)
             {
-                return ConvertFromTable(_tdgFr.GetExhibitionContentFr(id));
+                return ImageTableToModelFr(_tdgFr.GetExhibitionContentFr(id));
             }
             else
-                return ConvertFromTable(_tdgEn.GetExhibitionContentEn(id));
+                return ImageTableToModelEn(_tdgEn.GetExhibitionContentEn(id));
         }
 
         public void Update(ImageContent content)
         {
             if (content.Language == Models.Language.Fr)
-                _tdgFr.Update(ConvertFromModelFr(content));
+                _tdgFr.Update(ImageModelToTableFr(content));
             else
-                _tdgEn.Update(ConvertFromModelEn(content));
+                _tdgEn.Update(ImageModelToTableEn(content));
         }
 
     }

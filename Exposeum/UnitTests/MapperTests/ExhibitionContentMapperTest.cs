@@ -12,6 +12,7 @@ using ImageContent = Exposeum.TempModels.ImageContent;
 using PointOfInterest = Exposeum.TempModels.PointOfInterest;
 using TextContent = Exposeum.TempModels.TextContent;
 using User = Exposeum.Models.User;
+using VideoContent = Exposeum.TempModels.VideoContent;
 
 namespace UnitTests
 {
@@ -267,8 +268,8 @@ namespace UnitTests
         [Test]
         public void ConvertToAndFromTableFrTest()
         {
-            List<ExhibitionContentFr> contentFrTable = _instance.ConvertToTableFr(_contentsFrench);
-            List<ExhibitionContent> contentFrModel = _instance.ConvertFromTableFr(contentFrTable);
+            List<ExhibitionContentFr> contentFrTable = _instance.ContentModelToTableFr(_contentsFrench);
+            List<ExhibitionContent> contentFrModel = _instance.ContentTableToModelFr(contentFrTable);
 
             Assert.AreEqual(_contentsFrench, contentFrModel);
         }
@@ -276,8 +277,8 @@ namespace UnitTests
         [Test()]
         public void ConvertToAndFromTableEnTest()
         {
-            List<ExhibitionContentEn> contentEnTable = _instance.ConvertToTableEn(_contentsEnglish);
-            List<ExhibitionContent> contentEnModel = _instance.ConvertFromTableEn(contentEnTable);
+            List<ExhibitionContentEn> contentEnTable = _instance.ContentModelToTableEn(_contentsEnglish);
+            List<ExhibitionContent> contentEnModel = _instance.ContentTableToModelEn(contentEnTable);
 
             Assert.AreEqual(_contentsEnglish, contentEnModel);
 
