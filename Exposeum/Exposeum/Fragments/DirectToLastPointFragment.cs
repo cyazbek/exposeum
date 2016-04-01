@@ -28,7 +28,7 @@ namespace Exposeum.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            var view = inflater.Inflate(Resource.Layout.OutOfOrderPointPopup, container, false);
+            var view = inflater.Inflate(Resource.Layout.DirectToLastPointDialog, container, false);
             var textview = view.FindViewById<TextView>(Resource.Id.DirectToLastPointDesc);
             textview.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             textview.VerticalScrollBarEnabled = true;
