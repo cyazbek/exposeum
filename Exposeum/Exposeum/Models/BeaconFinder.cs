@@ -319,7 +319,8 @@ namespace Exposeum.Models
 		/// </summary>
 		public void SetPath(IPath path){
 			//clear the _immediateBeacons SortedList
-			_immediateBeacons.Clear();
+			if(_immediateBeacons != null)
+				_immediateBeacons.Clear();
 			//set the path
 			_path = path;
 		}
