@@ -118,7 +118,7 @@ namespace Exposeum.Models
 
 			EstimoteSdk.Beacon currentClosestBeacon = GetClosestBeacon ();
 
-			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
+			if (currentClosestBeacon == null || previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
