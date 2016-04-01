@@ -42,6 +42,9 @@ namespace Exposeum
 
 			//deserialize and store the storylines from the JSON data
 			ParseStorylines (JSONPayload);
+
+			//send the parsed data to be saved in the database
+			StoreParsedDataDB();
 		}
 
 		private async void ParseFloors(JObject JSONPayload){
@@ -61,11 +64,6 @@ namespace Exposeum
 
 			}
 
-			FloorTdg floorTdg = FloorTdg.GetInstance();
-
-			foreach (var floor in floors) {
-				floorTdg.Add (floor);
-			}
 		}
 
 		private void ParseMapElements (JObject JSONPayload)
@@ -139,6 +137,21 @@ namespace Exposeum
 
 				return image;
 			}
+		}
+
+		//send the parsed objects to the DB to be serialized
+		private void StoreParsedDataDB(){
+
+			//save the floors
+			FloorTdg floorTdg = FloorTdg.GetInstance();
+
+			foreach (var floor in floors) {
+				floorTdg.Add (floor);
+			}
+
+			//TODO: save the mapelements
+
+			//TODO: save the storylines
 		}
 	}
 }
