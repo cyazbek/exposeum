@@ -72,8 +72,19 @@ namespace Exposeum
 
 			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
 
-				//TODO: deserialize each POI
+				MapElements newPOI = new MapElements {
+					Id = int.Parse (poiOBJ ["id"].ToString ()),
+					UCoordinate = 0.0f, //TODO: FIX
+					VCoordinate = 0.0f,
+					IconPath = poiOBJ ["description"].ToString (),
+					Discriminator = "PointOfInterest",
+					Visited = 0 //default unvisited
 
+					//TODO: Finish this
+						
+				};
+		
+				mapelements.Add (newPOI);
 			}
 
 			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
