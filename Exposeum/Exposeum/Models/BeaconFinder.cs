@@ -254,7 +254,11 @@ namespace Exposeum.Models
 		/// This method notifies IBeaconFinderObservers of an event.
 		/// </summary>
 		public void NotifyObservers(){
-			foreach (IBeaconFinderObserver observer in _observers) {
+
+			//create a copy and Iterate over opy so that you can change (add or remove) observer
+			//will iterating, the changes to the observers will take place during the next notification
+			List<IBeaconFinderObserver> observersCopy = new List<IBeaconFinderObserver>(_observers);
+			foreach (IBeaconFinderObserver observer in observersCopy) {
 				observer.BeaconFinderObserverUpdate (this);
 			}
 		}
