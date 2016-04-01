@@ -20,6 +20,7 @@ namespace Exposeum.Controllers
         private SearchingForBeaconFragment _searchingForBeaconFragment;
         private FragmentTransaction _directToLastPointTransaction;
         private PointOfInterest _discoveredPoi;
+		private Context _context;
 
         public static StorylineController GetInstance()
         {
@@ -98,10 +99,13 @@ namespace Exposeum.Controllers
             _beaconFinder.FindBeacons();
         }
 
-        private void DisplayDirectToLastPointFragment()
+		private void DisplayDirectToLastPointFragment()
         {
-            DialogFragment dialog = new DirectToLastPointFragment(FindAndSetShortestPathToLastVisitedPointOfInterest);
-            dialog.Show(_directToLastPointTransaction, "Get Directions to the latest Point Of Interest visited");
+			using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
+			{
+				DialogFragment dialog = new DirectToLastPointFragment(FindAndSetShortestPathToLastVisitedPointOfInterest);
+				dialog.Show(tr, "Story Line title");
+			}
         }
 
         private void KillLocatingUserFragment()
@@ -167,5 +171,9 @@ namespace Exposeum.Controllers
             //kill the locating user fragment
             KillLocatingUserFragment();
         }
+
+		public void SetContext(Context context){
+			_context = context;
+		}
     }
 }
