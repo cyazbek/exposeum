@@ -51,10 +51,10 @@ namespace Exposeum
 
 				Floor newFloor = new Floor ();
 
-				newFloor.Plan = (String)floorOBJ ["imagePath"];
+				newFloor.ImagePath = (String)floorOBJ ["imagePath"];
 				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]);
 
-				BitmapDrawable floorImage = await SaveAndGetImage (newFloor.Plan);
+				BitmapDrawable floorImage = await SaveAndGetImage (newFloor.ImagePath);
 
 				floors.Add (newFloor);
 			}

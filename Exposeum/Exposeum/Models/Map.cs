@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
@@ -9,26 +9,31 @@ namespace Exposeum.Models
 {
 	public class Map
 	{
-	    private static Map _map;
-        private List<Floor> _floors;
-        private StoryLine _currentStoryline;
-		private Path _activeShortestPath;
-		private List<MapElement> _elements;
-		private List<MapEdge> _edges;
-        private List<StoryLine> _storyLines;
+        public int Id;
+        private static Map _instance;
+        public List<MapEdge> Edges { get; set; }
+        public List<StoryLine> Storylines { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public List<Floor> Floors { get; set; }
+        public StoryLine CurrentStoryline { get; set; }
+        public Floor CurrentFloor { get; set; }
+        private Path _activeShortestPath;
 
-	    private Map ()
+        private Map ()
 		{
-			_storyLines = new List<StoryLine>();
+            Edges = new List<MapEdge>();
+            Floors = new List<Floor>();
+            MapElements = new List<MapElement>();
+            Storylines = new List<StoryLine>();
 			SeedData ();
         }
 
 	    public static Map GetInstance()
 	    {
-	        if (_map == null)
-                _map = new Map();
+	        if (_instance == null)
+                _instance = new Map();
 
-	        return _map;
+	        return _instance;
 	    }
         
 		private void SeedData(){
@@ -68,13 +73,13 @@ namespace Exposeum.Models
             Floor floor4 = new Floor(floorplan4);
             Floor floor5 = new Floor(floorplan5);
 
-			_floors = new List<Floor> ();
+			Floors = new List<Floor> ();
 
-			_floors.Add (floor1);
-			_floors.Add (floor2);
-			_floors.Add (floor3);
-			_floors.Add (floor4);
-			_floors.Add (floor5);
+			Floors.Add (floor1);
+			Floors.Add (floor2);
+			Floors.Add (floor3);
+			Floors.Add (floor4);
+			Floors.Add (floor5);
 
 			CurrentFloor = floor1;
 
@@ -90,7 +95,7 @@ namespace Exposeum.Models
             p1.Visited = false;
 			p1.Beacon = beacon1;
 
-			PointOfTravel pot1 = new PointOfTravel(0.60f, 0.82f, floor1);
+			WayPoint pot1 = new WayPoint(0.60f, 0.82f, floor1);
 
 			/*PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
@@ -192,18 +197,18 @@ namespace Exposeum.Models
 			StoryLine story5 = new StoryLine("The Detective", "Le Détective", "All Audience", "Toute Audience", "Description in english", "Description en français", 90, Resource.Drawable.detective);
 			StoryLine story6 = new StoryLine("1940's Radio", "La radio de 1940", "All Audience", "Toute Audience", "Description in english", "Description en français", 30, Resource.Drawable.radio2);
 
-			story2.CurrentStatus = Status.InProgress;
-			story3.CurrentStatus = Status.IsVisited;
+			story2.Status = Status.InProgress;
+			story3.Status = Status.IsVisited;
 
-			_storyLines.Add(storyline);
-			_storyLines.Add(story2);
-			_storyLines.Add(story3);
-			_storyLines.Add(story4);
-			_storyLines.Add(story5);
-			_storyLines.Add(story6);
+			Storylines.Add(storyline);
+			Storylines.Add(story2);
+			Storylines.Add(story3);
+			Storylines.Add(story4);
+			Storylines.Add(story5);
+			Storylines.Add(story6);
 
 			//Set the storyline for the explorer mode
-			_currentStoryline = storyline;
+			CurrentStoryline = storyline;
 
 			StoryLine nicelyDrawn = new StoryLine("The Gramophone", "Le Gramophone","All Audience", "Toute Audience", "Description in english", "Description en français", 120 , Resource.Drawable.NipperTheDog);
 
@@ -217,7 +222,7 @@ namespace Exposeum.Models
 			poi0.Visited = false;
 			poi0.Beacon = beacon1;
 
-			PointOfTravel waypoint3 = new PointOfTravel(0.720f, 0.577f, floor2);
+			WayPoint waypoint3 = new WayPoint(0.720f, 0.577f, floor2);
 
 			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
 			poi1.Description = description3;
@@ -226,7 +231,7 @@ namespace Exposeum.Models
 			poi1.Visited = false;
 			poi1.Beacon = beacon3;
 
-			PointOfTravel waypoint4 = new PointOfTravel(0.754f, 0.538f, floor2);
+			WayPoint waypoint4 = new WayPoint(0.754f, 0.538f, floor2);
 
 			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
 			poi2.Description = description4;
@@ -242,9 +247,9 @@ namespace Exposeum.Models
 			poi3.Visited = false;
 			poi3.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint5 = new PointOfTravel(0.769f, 0.549f, floor2);
-			PointOfTravel waypoint6 = new PointOfTravel(0.796f, 0.605f, floor2);
-			PointOfTravel waypoint7 = new PointOfTravel(0.712f, 0.615f, floor2);
+			WayPoint waypoint5 = new WayPoint(0.769f, 0.549f, floor2);
+			WayPoint waypoint6 = new WayPoint(0.796f, 0.605f, floor2);
+			WayPoint waypoint7 = new WayPoint(0.712f, 0.615f, floor2);
 
 			PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
 			poi4.Description = nicelyDrawnBeaconDescriptionTest;
@@ -253,7 +258,7 @@ namespace Exposeum.Models
 			poi4.Visited = false;
 			poi4.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint8 = new PointOfTravel(0.645f, 0.907f, floor2);
+			WayPoint waypoint8 = new WayPoint(0.645f, 0.907f, floor2);
 
 			PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
 			poi5.Description = nicelyDrawnBeaconDescriptionTest;
@@ -269,7 +274,7 @@ namespace Exposeum.Models
 			poi6.Visited = false;
 			poi6.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint9 = new PointOfTravel(0.176f, 0.894f, floor2);
+			WayPoint waypoint9 = new WayPoint(0.176f, 0.894f, floor2);
 
 			PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
 			poi7.Description = nicelyDrawnBeaconDescriptionTest;
@@ -278,7 +283,7 @@ namespace Exposeum.Models
 			poi7.Visited = false;
 			poi7.Beacon = nicelyDrawnBeaconTest;
 
-			PointOfTravel waypoint10 = new PointOfTravel(0.174f, 0.612f, floor2);
+			WayPoint waypoint10 = new WayPoint(0.174f, 0.612f, floor2);
 
 			PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
 			poi8.Description = nicelyDrawnBeaconDescriptionTest;
@@ -305,7 +310,7 @@ namespace Exposeum.Models
 			nicelyDrawn.AddMapElement(waypoint10);
 			nicelyDrawn.AddMapElement(poi8);
 
-			_storyLines.Add (nicelyDrawn);
+			Storylines.Add (nicelyDrawn);
 
 			////////////////////////////////////////////
 			//make storyline 6 a demo for shortest path
@@ -318,37 +323,13 @@ namespace Exposeum.Models
 			story6.MapElements.Reverse();
 			story6.PoiList.Reverse ();
 			for (int i = 0; i < 16; i++) {
-				story6.MapElements [i].SetVisited ();
+				story6.MapElements [i].Visited = true;
 			}
-			story6.CurrentStatus = Status.InProgress;
+			story6.Status = Status.InProgress;
 			///////////////////////////////////////////
 
 		}
 
-
-
-	    public Floor CurrentFloor { get; set; }
-
-	    public List<Floor> Floors
-		{
-			get { return _floors; }
-			set { _floors = value; }
-		}
-
-		public StoryLine CurrentStoryline
-		{
-			get { return _currentStoryline; }
-			set { _currentStoryline = value; }
-		}
-        public void AddStoryLine(StoryLine storyline)
-        {
-            _storyLines.Add(storyline);
-        }
-        public List<StoryLine> GetStoryLineList
-        {
-            get { return _storyLines; }
-            set { _storyLines = value; }
-        }
 
 		public void SetActiveShortestPath(Path path){
 			_activeShortestPath = path;

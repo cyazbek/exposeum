@@ -1,7 +1,7 @@
 
 namespace Exposeum.TempModels
 {
-    public class Image:ExhibitionContent
+    public class ImageContent:ExhibitionContent
     {
         public string FilePath { get; set; }
         public int Width { get; set; }
@@ -9,8 +9,9 @@ namespace Exposeum.TempModels
 
         public override bool Equals(object obj)
         {
-            Image other = (Image)obj;
+            ImageContent other = (ImageContent)obj;
             return FilePath.Equals(other.FilePath) && Width == other.Width && Height == other.Height;
         }
     }
 }
+//transferred to Models

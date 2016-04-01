@@ -28,7 +28,7 @@ namespace Exposeum.Tables
             Db.CreateTable<StoryLineMapElementList>();
             Db.CreateTable<StoryLineDescriptionFr>();
             Db.CreateTable<StoryLineDescriptionEn>();
-            Db.CreateTable<Edge>();
+            Db.CreateTable<MapEdge>();
             Db.CreateTable<Floor>();
             Db.CreateTable<MapElements>();
             Db.CreateTable<PoiDescriptionEn>();
@@ -36,8 +36,8 @@ namespace Exposeum.Tables
             Db.CreateTable<Beacon>();
             Db.CreateTable<ExhibitionContentEn>();
             Db.CreateTable<ExhibitionContentFr>();
-            Db.CreateTable<Images>();
-            Db.CreateTable<Icon>();
+            Db.CreateTable<User>();
+            Db.CreateTable<Map>();
         }
 
         public SQLiteConnection GetConnection()

@@ -9,14 +9,16 @@ namespace Exposeum.Mappers
         private static StorylineMapper _instance;
         private readonly StorylineTdg _storylineTdg;
         private readonly MapElementsMapper _mapElementsMapper;
-        private readonly StorylineDescriptionMapper _storylineDescriptionMapper;
-        private readonly StatusMapper _statusMapper; 
+        private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
+        private readonly StatusMapper _statusMapper;
+        private readonly PointOfInterestMapper _PoiMapper;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
             _mapElementsMapper = MapElementsMapper.GetInstance();
-            _storylineDescriptionMapper = StorylineDescriptionMapper.GetInstance();
+            _storylineDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
             _statusMapper = StatusMapper.GetInstance();
+            _PoiMapper = PointOfInterestMapper.GetInstance();
         }
 
         public static StorylineMapper GetInstance()
@@ -31,11 +33,10 @@ namespace Exposeum.Mappers
             Tables.Storyline storyline = new Tables.Storyline
             {
                 Id = storylineModel.StorylineId,
-                Audience = storylineModel.IntendedAudience,
                 Duration = storylineModel.Duration,
-                Image = storylineModel.ImageId,
+                ImagePath = storylineModel.ImgPath,
                 FloorsCovered = storylineModel.FloorsCovered,
-                LastVisitedPoi = storylineModel.LastVisitedMapElement.Id,
+                LastVisitedPoi = storylineModel.LastVisitedPointOfInterest.Id,
                 Status = _statusMapper.StatusModelToTable(storylineModel.Status)
             };
             return storyline; 
@@ -66,13 +67,12 @@ namespace Exposeum.Mappers
             Storyline storyline = new Storyline
             {
                 StorylineId = storylineTable.Id,
-                ImageId = storylineTable.Image,
+                ImgPath = storylineTable.ImagePath,
                 Duration = storylineTable.Duration,
                 FloorsCovered = storylineTable.FloorsCovered,
-                IntendedAudience = storylineTable.Audience,
-                StorylineDescription = _storylineDescriptionMapper.GetDescription(storylineTable.DescriptionId),
-                LastVisitedMapElement = _mapElementsMapper.GetMapElement(storylineTable.LastVisitedPoi),
-                MapElements = _mapElementsMapper.GetAllMapElementsFromStoryline(storylineTable.Id),
+                StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
+                LastVisitedPointOfInterest = _PoiMapper.Get(storylineTable.LastVisitedPoi),
+                MapElements = _mapElementsMapper.GetAllElementByStorylineId(storylineTable.Id),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status)
             };
             return storyline; 
@@ -91,8 +91,8 @@ namespace Exposeum.Mappers
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Update(storylineTable);
-            _mapElementsMapper.UpdateMapElementList(list);
-            _storylineDescriptionMapper.UpdateDescription(description);
+            _mapElementsMapper.UpdateList(list);
+            _storylineDescriptionMapper.UpdateStoryLineDescription(description);
         }
 
         public void AddStoryline(Storyline storyline)
@@ -101,8 +101,8 @@ namespace Exposeum.Mappers
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
-            _mapElementsMapper.AddMapElementList(list);
-            _storylineDescriptionMapper.AddDescription(description);
+            _mapElementsMapper.AddList(list);
+            _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 
         public bool Equals(List<Storyline> list1, List<Storyline> list2)

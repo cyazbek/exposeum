@@ -1,10 +1,14 @@
 ﻿using QuickGraph;
+using Java.Lang;
 
 namespace Exposeum.Models
 {
 	public class MapEdge : IEdge<MapElement>
 	{
-		public double Distance {get; set;}
+        public int Id { get; set; }
+        public double Distance {get; set;}
+        public MapElement Source { get; }
+        public MapElement Target { get; }
 
         public MapEdge(MapElement start, MapElement end)
         {
@@ -19,8 +23,15 @@ namespace Exposeum.Models
 			Target = end;
 		    Distance = distance;
 		}
+        public override bool Equals(object obj)
+        {
+            MapEdge other = (MapEdge)obj;
 
-	    public MapElement Source { get; }
-	    public MapElement Target { get; }
-	}
+            return Id == other.Id &&
+                  Math.Abs(Distance - other.Distance) < 0 &&
+                  Source.Equals(other.Source) &&
+                  Target.Equals(other.Target);
+        }
+
+    }
 }

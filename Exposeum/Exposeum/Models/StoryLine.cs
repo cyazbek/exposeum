@@ -6,38 +6,43 @@ namespace Exposeum.Models
 	public class StoryLine: IPath
     {
 
-        public int ImageId { get; set; }
-        public Status CurrentStatus { get; set; }
+        public int StorylineId { get; set; }
+        public string ImgPath { get; set; }
+        public int Duration { get; set; }
+        public int FloorsCovered { get; set; }
+        public Status Status { get; set; }
+        public StorylineDescription StorylineDescription { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public PointOfInterest LastPointOfInterestVisited { get; set; }
+
+        public string AudienceFr { get; set; }
         public string NameEn {get; set;}
         public string NameFr { get; set; }
         public string AudienceEn { get; set; }
-        public string AudienceFr { get; set; }
+        public int ImageId { get; set; }
         public string DescEn { get; set; }
         public string DescFr { get; set; }
-        public int Duration { get; set; }
-        public int Id { get; set; }
-        public string ImgPath { get; set; }
-        public int FloorsCovered { get; set; }
-        public List<MapElement> MapElements { get; set; } 
+        
+        
         public List<PointOfInterest> PoiList { get; set; }
-        private PointOfInterest _lastPointOfInterestVisited ;
+        
         
         public StoryLine() 
         {
             PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			CurrentStatus = Status.IsNew;
+			Status = Status.IsNew;
         }
 
         public StoryLine(int id)
         {
-            Id = id;
+            StorylineId = id;
 			PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			CurrentStatus = Status.IsNew;
+			Status = Status.IsNew;
         }
 
-		public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int imageId)
+		public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int image)
 		{
 			NameEn = nameEn;
 			NameFr = nameFr;
@@ -46,11 +51,11 @@ namespace Exposeum.Models
 			DescEn = descriptionEn;
 			DescFr = descriptionFr;
 			Duration = duration;
-			ImageId = imageId;
+            ImageId = image;
 
 			MapElements = new List<MapElement> ();
 			PoiList = new List<PointOfInterest>();
-			CurrentStatus = Status.IsNew;
+			Status = Status.IsNew;
 		}
 
 
@@ -63,9 +68,6 @@ namespace Exposeum.Models
             PoiList.Add (poi);
         }
 
-        public PointOfInterest GetLastVisitedPointOfInterest(){
-            return _lastPointOfInterestVisited;
-        }
 
 		public void AddMapElement(MapElement e)
 		{
@@ -75,11 +77,7 @@ namespace Exposeum.Models
 				PoiList.Add (e as PointOfInterest);
 		}
 
-        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
-        {
-            _lastPointOfInterestVisited = lastPoiVisited;
-
-        }
+      
 
 		/// <summary>
 		/// This method will update the progress of the storyline using the passed node.
@@ -119,18 +117,18 @@ namespace Exposeum.Models
 		        while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
-		            currentNode.SetVisited();
+		            currentNode.Visited = true;
 		        }
 
-				//If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
+				//If the rightBoundLinkedNode is a point of interest save it as LastPointOfInterestVisited
 				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
-					_lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
+					LastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if (rightBoundLinkedNode.Next == null)
-					CurrentStatus = Status.IsVisited;
-				else if (CurrentStatus == Status.IsNew)
-					CurrentStatus = Status.InProgress;
+					Status = Status.IsVisited;
+				else if (Status == Status.IsNew)
+					Status = Status.InProgress;
 		    }
 		}
 
