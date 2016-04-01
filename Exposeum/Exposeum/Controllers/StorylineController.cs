@@ -133,20 +133,14 @@ namespace Exposeum.Controllers
 
             BeaconFinder beaconFinder = observable as BeaconFinder;
             EstimoteSdk.Beacon foundEstimoteBeacon = beaconFinder.GetClosestBeacon();
-            Beacon foundExposeumBeacon = new Beacon(foundEstimoteBeacon);
 
             if (_storyLineService.GetGenericStoryLine().HasBeacon((foundEstimoteBeacon)))
             {
                 _discoveredPoi =
                     _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder) observable).GetClosestBeacon());
             }
-            PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest();
-
-
-
-
-
-            if (!Equals(foundExposeumBeacon, lastVisited.Beacon))
+            
+            if (!_storyLineService.GetActiveStoryLine().HasBeacon(foundEstimoteBeacon))
             {
                 DisplayDirectToLastPointFragment();
             }
