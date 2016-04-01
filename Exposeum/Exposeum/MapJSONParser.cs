@@ -60,7 +60,7 @@ namespace Exposeum
 
 				floors.Add (newFloor);
 
-				await SaveAndGetImage (newFloor.ImagePath);
+				await FetchAndSaveImage (newFloor.ImagePath);
 
 			}
 
@@ -112,8 +112,8 @@ namespace Exposeum
 			}
 		}
 
-		//download, save, and return the insance of the image
-		private async Task<BitmapDrawable> SaveAndGetImage(string path)
+		//download and save an image to the device's storage
+		private async Task FetchAndSaveImage(string path)
 		{
 			BitmapDrawable image = new BitmapDrawable ();
 
@@ -132,10 +132,6 @@ namespace Exposeum
 
 				await fs.WriteAsync (inputStream, 0, inputStream.Length); //write the downloaded data to the device
 				fs.Close ();
-
-				image = (BitmapDrawable)BitmapDrawable.CreateFromPath (localPath); //instanciate the drawable from the just-saved data
-
-				return image;
 			}
 		}
 
