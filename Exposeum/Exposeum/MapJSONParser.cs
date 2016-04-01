@@ -7,7 +7,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-using Exposeum.TempModels;
+using Exposeum.Tables;
 using Android.Graphics.Drawables;
 
 namespace Exposeum
@@ -22,7 +22,7 @@ namespace Exposeum
 		private readonly String LOCAL_VENUE_DATA_PATH = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/venue_data";
 
 		private List<Floor> floors;
-		private List<MapElement> mapelements;
+		private List<MapElements> mapelements;
 		private List<Storyline> storylines;
 
 		public async void FetchAndParseMapJSON(){
@@ -63,7 +63,7 @@ namespace Exposeum
 
 		private void ParseMapElements (JObject JSONPayload)
 		{
-			mapelements = new List<MapElement>();
+			mapelements = new List<MapElements>();
 
 			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
 
