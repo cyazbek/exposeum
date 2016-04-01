@@ -310,6 +310,8 @@ namespace Exposeum.Models
 			story6.PoiList.Reverse ();
 			for (int i = 0; i < 16; i++) {
 				story6.MapElements [i].SetVisited ();
+				if(story6.MapElements [i] is PointOfInterest)
+					story6.SetLastPointOfInterestVisited ( (PointOfInterest)story6.MapElements [i]);
 			}
 			story6.CurrentStatus = Status.InProgress;
 			///////////////////////////////////////////
