@@ -113,8 +113,9 @@ namespace Exposeum.Controllers
             _searchingForBeaconFragment.Dismiss();
         }
 
-        public void ResumeStorylineBeacons()
+        public void ResumeStoryLine()
         {
+			_beaconFinder.SetPath(_storyLineService.GetActiveStoryLine());
             _beaconFinder.FindBeacons();
         }
 
@@ -133,26 +134,31 @@ namespace Exposeum.Controllers
 
             BeaconFinder beaconFinder = observable as BeaconFinder;
             EstimoteSdk.Beacon foundEstimoteBeacon = beaconFinder.GetClosestBeacon();
+            Beacon foundExposeumBeacon = new Beacon(foundEstimoteBeacon);
 
             if (_storyLineService.GetGenericStoryLine().HasBeacon((foundEstimoteBeacon)))
             {
                 _discoveredPoi =
                     _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder) observable).GetClosestBeacon());
             }
-            
-            if (!_storyLineService.GetActiveStoryLine().HasBeacon(foundEstimoteBeacon))
+
+            PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest();
+			int lastVisitedIndex = _storyLineService.GetActiveStoryLine().PoiList.LastIndexOf(lastVisited);
+			PointOfInterest nextToVisit = _storyLineService.GetActiveStoryLine().PoiList[lastVisitedIndex+1];
+
+			//if the found beacon does not correspond to the last visited poi or the next poi in the list that is to be visited,
+			//ask if the user wants to be redirected. Otherwise, just resume the storyline normally
+			if (!Equals(foundExposeumBeacon, lastVisited.Beacon) && !Equals(foundExposeumBeacon, nextToVisit.Beacon))
             {
                 DisplayDirectToLastPointFragment();
             }
             else
             {
-                beaconFinder.SetPath(_storyLineService.GetActiveStoryLine());
+				ResumeStoryline ();
             }
-
 
             //deregister observer
             _beaconFinder.RemoveObserver(this);
-
         }
 
         private void FindAndSetShortestPathToLastVisitedPointOfInterest()
