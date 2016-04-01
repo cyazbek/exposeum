@@ -113,8 +113,9 @@ namespace Exposeum.Controllers
             _searchingForBeaconFragment.Dismiss();
         }
 
-        public void ResumeStorylineBeacons()
+        public void ResumeStoryLine()
         {
+			_beaconFinder.SetPath(_storyLineService.GetActiveStoryLine());
             _beaconFinder.FindBeacons();
         }
 
