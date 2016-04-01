@@ -54,13 +54,10 @@ namespace Exposeum
             buttonToResume.Click += delegate
             {
 				_storylineController.SetActiveStoryLine();
-                _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(_context, typeof(MapActivity));
-                StartActivity(intent);
-
 				FragmentTransaction transaction = FragmentManager.BeginTransaction();
 				_callback(transaction);
-
+                StartActivity(intent);
                 Dismiss();
             };
 
