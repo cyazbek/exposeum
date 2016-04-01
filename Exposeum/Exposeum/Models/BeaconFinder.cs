@@ -318,6 +318,9 @@ namespace Exposeum.Models
 		/// This method sets the current instance of the path.
 		/// </summary>
 		public void SetPath(IPath path){
+			//clear the _immediateBeacons SortedList
+			_immediateBeacons.Clear();
+			//set the path
 			_path = path;
 		}
 
