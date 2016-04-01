@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 
 using Exposeum.Tables;
 using Android.Graphics.Drawables;
+using Exposeum.TDGs;
 
 namespace Exposeum
 {
@@ -54,11 +55,17 @@ namespace Exposeum
 				newFloor.ImagePath = (String)floorOBJ ["imagePath"];
 				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]);
 
-				BitmapDrawable floorImage = await SaveAndGetImage (newFloor.ImagePath);
-
 				floors.Add (newFloor);
+
+				await SaveAndGetImage (newFloor.ImagePath);
+
 			}
 
+			FloorTdg floorTdg = FloorTdg.GetInstance();
+
+			foreach (var floor in floors) {
+				floorTdg.Add (floor);
+			}
 		}
 
 		private void ParseMapElements (JObject JSONPayload)
