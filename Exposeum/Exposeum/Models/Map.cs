@@ -224,7 +224,7 @@ namespace Exposeum.Models
 			poi2.NameEn = "POINT 3";
 			poi2.NameFr = "Le POINT 2";
 			poi2.Visited = false;
-			poi2.Beacon = beacon2;
+			poi2.Beacon = nicelyDrawnBeaconTest;
 
 			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
 			poi3.Description = nicelyDrawnBeaconDescriptionTest;
