@@ -108,10 +108,6 @@ namespace Exposeum.Controllers
 			}
         }
 
-        private void KillLocatingUserFragment()
-        {
-            _searchingForBeaconFragment.Dismiss();
-        }
 
         public void ResumeStoryLine()
         {
@@ -148,13 +144,13 @@ namespace Exposeum.Controllers
 
 			//if the found beacon does not correspond to the last visited poi or the next poi in the list that is to be visited,
 			//ask if the user wants to be redirected. Otherwise, just resume the storyline normally
-			if (!Equals(foundExposeumBeacon, lastVisited.Beacon) && !Equals(foundExposeumBeacon, nextToVisit.Beacon))
+			if (!_storyLineService.GetActiveStoryLine().HasBeacon(foundEstimoteBeacon))
             {
                 DisplayDirectToLastPointFragment();
             }
             else
             {
-				ResumeStoryline ();
+				ResumeStoryLine ();
             }
 
             //deregister observer
@@ -168,8 +164,7 @@ namespace Exposeum.Controllers
                 _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
             //set the active shortest path
             _shortestPathService.SetActiveShortestPath(path);
-            //kill the locating user fragment
-            KillLocatingUserFragment();
+
         }
 
 		public void SetContext(Context context){

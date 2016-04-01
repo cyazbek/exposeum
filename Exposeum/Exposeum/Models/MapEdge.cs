@@ -10,7 +10,7 @@ namespace Exposeum.Models
         {
             Source = start;
             Target = end;
-            Distance = 0;
+            Distance = 1;
         }
 
         public MapEdge (MapElement start, MapElement end, double distance)

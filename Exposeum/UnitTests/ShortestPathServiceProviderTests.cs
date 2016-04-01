@@ -100,6 +100,8 @@ namespace UnitTests
 
             UndirectedGraph<MapElement, MapEdge> graph = new UndirectedGraph<MapElement, MapEdge>();
 
+
+
             graph.AddVerticesAndEdge(E1);
             graph.AddVerticesAndEdge(E2);
             graph.AddVerticesAndEdge(E3);

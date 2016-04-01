@@ -165,7 +165,7 @@ namespace Exposeum.Models
 
 
 			storyline.AddMapElement(p1);
-			storyline.AddMapElement (pot1);
+			//storyline.AddMapElement (pot1);
 			storyline.AddMapElement (p3);
 			storyline.AddMapElement (p4);
 			storyline.AddMapElement (p5);

@@ -246,7 +246,7 @@ namespace Exposeum.Controllers
         /// </summary>
 		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements)
         {
-			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI, GoingBackToLastPoint);
         }
 
 		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements){
@@ -262,6 +262,11 @@ namespace Exposeum.Controllers
                 _mapProgressionView.Update();
                     
 		}
+
+        private void DoNotSkipOutOfOrderPOI(PointOfInterest currentPoi)
+        {
+            
+        }
 
         /// <summary>
         /// This method will update display a popup in the view with contextual information about the supplied POI
@@ -318,6 +323,37 @@ namespace Exposeum.Controllers
             MapElement start = storyline.MapElements.Last();
             MapElement end = storyline.MapElements.First();
 
+
+            return _shortestPathService.GetShortestPath(start, end);
+        }
+
+        /// <summary>
+        /// Display path to last visited beacon
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        private void GoingBackToLastPoint(MapElement start)
+        {
+            Path path = GetShortestPathToLastPoint(start);
+            _mapModel.SetActiveShortestPath(path);
+            _beaconFinder.SetPath(path);
+            _mapView.Update();
+        }
+
+        /// <summary>
+        /// Get shortest path from incoming POI to last visited
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns>Path</returns>
+        public Path GetShortestPathToLastPoint(MapElement start)
+        {
+            
+            MapElement end = _mapModel.CurrentStoryline.GetLastVisitedPointOfInterest();
+
+            if (end == null)
+            {
+                end = _mapModel.CurrentStoryline.MapElements.First();
+            }
 
             return _shortestPathService.GetShortestPath(start, end);
         }
