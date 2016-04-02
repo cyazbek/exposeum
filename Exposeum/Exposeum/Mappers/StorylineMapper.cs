@@ -8,17 +8,20 @@ namespace Exposeum.Mappers
     {
         private static StorylineMapper _instance;
         private readonly StorylineTdg _storylineTdg;
+        private readonly StoryLineMapElementListTdg _storyLineMapElementListTdg;
         private readonly MapElementsMapper _mapElementsMapper;
         private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
         private readonly StatusMapper _statusMapper;
-        private readonly PointOfInterestMapper _PoiMapper;
+        private readonly PointOfInterestMapper _poiMapper;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
+            _storyLineMapElementListTdg = StoryLineMapElementListTdg.GetInstance();
+
             _mapElementsMapper = MapElementsMapper.GetInstance();
             _storylineDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
             _statusMapper = StatusMapper.GetInstance();
-            _PoiMapper = PointOfInterestMapper.GetInstance();
+            _poiMapper = PointOfInterestMapper.GetInstance();
         }
 
         public static StorylineMapper GetInstance()
@@ -71,8 +74,8 @@ namespace Exposeum.Mappers
                 Duration = storylineTable.Duration,
                 FloorsCovered = storylineTable.FloorsCovered,
                 StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
-                LastVisitedPointOfInterest = _PoiMapper.Get(storylineTable.LastVisitedPoi),
-                MapElements = _mapElementsMapper.GetAllElementByStorylineId(storylineTable.Id),
+                LastVisitedPointOfInterest = _poiMapper.Get(storylineTable.LastVisitedPoi),
+                MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status)
             };
             return storyline; 
@@ -83,6 +86,11 @@ namespace Exposeum.Mappers
             Tables.Storyline storylineTable=_storylineTdg.GetStoryline(id);
             Storyline storyline = StorylineTableToModel(storylineTable);
             return storyline;
+        }
+
+        public List<int> GetAllStorylineMapElementIds(int id)
+        {
+            return _storyLineMapElementListTdg.GetAllStorylineMapElements(id);
         }
 
         public void UpdateStoryline(Storyline storyline)
