@@ -124,19 +124,28 @@ namespace Exposeum
 
 		}
 
-		private void ParseStorylines(JObject JSONPayload){
+		private async void ParseStorylines(JObject JSONPayload){
 
 			storylines = new List<Storyline>();
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
-				Storyline newStoryline = new Storyline ();
+				Storyline newStoryline = new Storyline {
 
-				int storylineID = int.Parse ((String)storylineOBJ ["id"]);
+					Id = int.Parse (storylineOBJ ["id"].ToString ()),
+					Duration = int.Parse (storylineOBJ ["walkingTimeInMinutes"].ToString ()),
+					ImagePath = storylineOBJ ["thumbnail"].ToString (),
+					FloorsCovered = int.Parse (storylineOBJ ["floorsCovered"].ToString ()),
 
-				//TODO: associate previously-parsed MapElements to this storyline
+					//TODO: lastVisitedPOI!
 
-				String newStoryLineDescrition = (String)storylineOBJ ["description"];
+					Status = 0 //TODO: Check w/ Andrea or Firas
+					
+					//TODO: DescriptionId!
+
+				};
+
+				await FetchAndSaveImage (newStoryline.ImagePath); //fetch and save the thumbnail to the device
 
 				storylines.Add (newStoryline);
 			}
