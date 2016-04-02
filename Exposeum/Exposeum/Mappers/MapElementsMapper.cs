@@ -60,26 +60,17 @@ namespace Exposeum.Mappers
             }
         }
 
-        public List<MapElement> GetAllElementByStorylineId(int id)
+        public List<MapElement> GetAllElementsFromListOfMapElementIds(List<int> listMapElementsId)
         {
-            List<MapElements> list = new List<MapElements>();
-            list=_mapElementsTdg.GetAllMapElements();
-            List<MapElements> tableElements = new List<MapElements>();
-            foreach (var x in list)
-            {
-                if(x.StoryLineId==id)
-                    tableElements.Add(x);
-            }
+            List<int> mapElementsId = listMapElementsId;
+
             List<MapElement> modelList = new List<MapElement>();
-            foreach (var x in tableElements)
+
+            foreach (int x in mapElementsId)
             {
-                if(x.Discriminator=="PointOfInterest")
-                    modelList.Add(_pointOfInterestMapper.PoiTableToModel(x));
-                else
-                {
-                    modelList.Add((_wayPointMapper.WaypointTableToModel(x)));
-                }
+                modelList.Add(Get(x));
             }
+
             return modelList;
         }
 
