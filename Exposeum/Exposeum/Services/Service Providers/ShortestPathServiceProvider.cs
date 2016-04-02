@@ -38,8 +38,32 @@ namespace Exposeum.Services.Service_Providers
 
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
-            return tryGetPaths(targetElement, out path) ? path : null;
+			return tryGetPaths(targetElement, out path) ? FixPathEdgeOrder(startElement, path) : null;
         }
+
+		/// <summary>
+		/// Checks if the order of the vertices of the edges of the path are correct, if not fixes it.
+		/// </summary>
+		/// <param name="startElement"></param>
+		/// <param name="path"></param>
+		/// <returns>IEnumerable<MapEdge></returns>
+		private IEnumerable<MapEdge> FixPathEdgeOrder(MapElement startElement, IEnumerable<MapEdge> path){
+			
+			MapElement vertex = startElement;
+
+			foreach (MapEdge e in path)
+			{
+				if (e.Source != vertex) {
+					e.Target = e.Source;
+					e.Source = vertex;
+					vertex = e.Target;
+				} else
+					vertex = e.Target;
+
+			}
+
+			return path;
+		}
 
         /// <summary>
         /// Returns a list of MapElements representing the shortest path
