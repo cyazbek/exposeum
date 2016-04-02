@@ -25,6 +25,9 @@ namespace Exposeum
 		private List<Floor> floors;
 		private List<MapElements> mapelements;
 		private List<Storyline> storylines;
+		private List<Beacon> beacons;
+
+		private int newBeaconId = 0; //we aren't given but we need new beacon Ids
 
 		public async void FetchAndParseMapJSON(){
 
@@ -69,19 +72,45 @@ namespace Exposeum
 		private void ParseMapElements (JObject JSONPayload)
 		{
 			mapelements = new List<MapElements>();
+			beacons = new List<Beacon> ();
 
 			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
 
+				String newPOIBeaconUUID = poiOBJ ["ibeacon"] ["uuid"].ToString ();
+				int newPOIBeaconMaj = int.Parse (poiOBJ ["ibeacon"] ["major"].ToString ());
+				int newPOIBeaconMin = int.Parse (poiOBJ ["ibeacon"] ["minor"].ToString ());
+
+				Beacon currentPOIsBeacon = beacons.FirstOrDefault (beacon => beacon.Uuid == newPOIBeaconUUID && beacon.Major == newPOIBeaconMin && beacon.Minor == newPOIBeaconMin);
+
+				//if the current POI's beacon is not already in the list, add it to the list and use it
+
+				if (currentPOIsBeacon == null) {
+					currentPOIsBeacon = new Beacon {
+						Uuid = newPOIBeaconUUID,
+						Major = newPOIBeaconMaj,
+						Minor = newPOIBeaconMin,
+						Id = newBeaconId++ //use and then increment the new beacon ID counter
+					};
+
+					beacons.Add (currentPOIsBeacon);
+				}
+
 				MapElements newPOI = new MapElements {
+					
 					Id = int.Parse (poiOBJ ["id"].ToString ()),
 					UCoordinate = 0.0f, //TODO: FIX
 					VCoordinate = 0.0f,
 					IconPath = poiOBJ ["description"].ToString (),
 					Discriminator = "PointOfInterest",
-					Visited = 0 //default unvisited
+					Visited = 0, //default unvisited
+					BeaconId = currentPOIsBeacon.Id,
 
-					//TODO: Finish this
-						
+					//TODO: Storyline ID!
+					//TODO: POIDescription!
+					//TODO: Label!
+
+					FloorId = int.Parse (poiOBJ ["floorID"].ToString ())
+
 				};
 		
 				mapelements.Add (newPOI);
