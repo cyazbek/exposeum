@@ -14,16 +14,8 @@ namespace Exposeum.Models
         public StorylineDescription StorylineDescription { get; set; }
         public List<MapElement> MapElements { get; set; }
         public PointOfInterest LastPointOfInterestVisited { get; set; }
-
-        public string AudienceFr { get; set; }
-        public string NameEn {get; set;}
-        public string NameFr { get; set; }
-        public string AudienceEn { get; set; }
         public int ImageId { get; set; }
-        public string DescEn { get; set; }
-        public string DescFr { get; set; }
-        
-        
+
         public List<PointOfInterest> PoiList { get; set; }
         
         
@@ -41,24 +33,6 @@ namespace Exposeum.Models
 			MapElements = new List<MapElement> ();
 			Status = Status.IsNew;
         }
-
-		public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int image)
-		{
-			NameEn = nameEn;
-			NameFr = nameFr;
-			AudienceEn = audienceEn;
-			AudienceFr = audienceFr;
-			DescEn = descriptionEn;
-			DescFr = descriptionFr;
-			Duration = duration;
-            ImageId = image;
-
-			MapElements = new List<MapElement> ();
-			PoiList = new List<PointOfInterest>();
-			Status = Status.IsNew;
-		}
-
-
 		/// <summary>
 		/// DEPRECATED: use addMapElement() instead
 		/// </summary>
@@ -154,43 +128,17 @@ namespace Exposeum.Models
 
         public string GetName()
         {
-            Language lang = User.GetInstance().Language;
-            string storyName;
-
-            if (lang.Equals(Language.Fr))
-                storyName = NameFr;
-            else
-                storyName = NameEn;
-
-            return storyName;
+            return StorylineDescription.Title;
         }
 
         public string GetDescription()
         {
-            Language lang = User.GetInstance().Language;
-            string storyDesc;
-
-            if (lang.Equals(Language.Fr))
-                storyDesc = DescFr;
-            else
-                storyDesc = DescEn;
-
-            return storyDesc;
+            return StorylineDescription.Description;
         }
 
         public string GetAudience()
         {
-            Language lang = User.GetInstance().Language;
-            string storyAudience;
-            if (lang.Equals(Language.Fr))
-                storyAudience = AudienceFr; 
-            else
-                storyAudience = AudienceEn;
-
-            return storyAudience;
+            return StorylineDescription.IntendedAudience;
         }
-
-        
-
     }
 }
