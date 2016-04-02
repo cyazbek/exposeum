@@ -3,7 +3,7 @@ using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using NUnit.Framework;
-using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
+using PointOfInterestDescription = Exposeum.Models.PointOfInterestDescription;
 using User = Exposeum.Models.User;
 
 
@@ -26,12 +26,9 @@ namespace UnitTests
             _tdgEn.Db.DeleteAll<PoiDescriptionEn>();
             _tdgFr.Db.DeleteAll<PoiDescriptionFr>();
 
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 1,
-                Title = "theTitle",
-                Summary = "theSummary",
-                Description = "theDescription",
                 Language = User.GetInstance().Language
             };
 
@@ -69,12 +66,9 @@ namespace UnitTests
         [Test]
         public void UpdatePointOfInterestDescriptionTest()
         {
-            _pointOfInterestDescriptionModel = new Exposeum.TempModels.PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new Exposeum.Models.PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 2,
-                Title = "theTitle",
-                Summary = "theSummary",
-                Description = "theDescription",
                 Language = User.GetInstance().Language
             };
 
@@ -90,12 +84,9 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionModelToTableEnTest()
         {
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleEn", "theSummaryEn", "theDescriptionEn")
             {
                 Id = 1,
-                Title = "theTitleEn",
-                Summary = "theSummaryEn",
-                Description = "theDescriptionEn",
                 Language = User.GetInstance().Language
             };
 
@@ -106,12 +97,9 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionModelToTableFrTest()
         {
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleFr", "theSummaryFr", "theDescriptionFr")
             {
                 Id = 1,
-                Title = "theTitleFr",
-                Summary = "theSummaryFr",
-                Description = "theDescriptionFr",
                 Language = User.GetInstance().Language
             };
 
@@ -122,12 +110,9 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionTableToModelFrTest()
         {
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleFr", "theSummaryFr", "theDescriptionFr")
             {
                 Id = 1,
-                Title = "theTitleFr",
-                Summary = "theSummaryFr",
-                Description = "theDescriptionFr",
                 Language = User.GetInstance().Language
             };
 
@@ -138,7 +123,7 @@ namespace UnitTests
         [Test]
         public void PointOfInterestDescriptionTableToModelEnTest()
         {
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleEn", "theSummaryEn", "theDescriptionEn")
             {
                 Id = 1,
                 Title = "theTitleEn",

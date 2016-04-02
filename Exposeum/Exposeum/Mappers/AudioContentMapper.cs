@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -22,9 +22,9 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public AudioContent AudioTableToModelEn(Tables.ExhibitionContentEn content)
+        public Models.AudioContent AudioTableToModelEn(Tables.ExhibitionContentEn content)
         {
-            return new AudioContent
+            return new Models.AudioContent
             {
                 Id = content.Id,
                 PoiId = content.PoiId,

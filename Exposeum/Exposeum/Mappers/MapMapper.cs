@@ -1,4 +1,4 @@
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Exposeum.TDGs;
 
 namespace Exposeum.Mappers

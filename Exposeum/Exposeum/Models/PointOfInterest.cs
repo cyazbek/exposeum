@@ -3,6 +3,7 @@ using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Java.Util;
+using System.Collections.Generic;
 
 namespace Exposeum.Models
 {
@@ -18,6 +19,8 @@ namespace Exposeum.Models
         private readonly float _iconScaleFactor = 0.2f;
 
         public PointOfInterestDescription Description { get; set; }
+
+        public List<ExhibitionContent> ExhibitionContent { get; set; }
 
         private Drawable _visitedIcon;
         private Drawable _unvisitedIcon;

@@ -3,9 +3,9 @@ using Android.Graphics.Drawables;
 using Exposeum.Mappers;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using NUnit.Framework;
-using Floor = Exposeum.TempModels.Floor;
+using Floor = Exposeum.Models.Floor;
 
 namespace UnitTests
 {
@@ -25,14 +25,13 @@ namespace UnitTests
             _instance = WayPointMapper.GetInstance();
             _tdg.Db.DeleteAll<MapElements>();
 
-            _floor = new Floor
+            _floor = new Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null))
             {
                 Id = 1,
-                ImagePath = "icon.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null)
+                ImagePath = "icon.png"
             };
 
-            _wayPointModel = new WayPoint
+            _wayPointModel = new WayPoint(2f,2f,_floor)
             {
                 Id = 1,
                 Visited = true,
@@ -73,14 +72,11 @@ namespace UnitTests
         [Test]
         public void UpdateWayPointTest()
         {
-            _wayPointModel = new WayPoint
+            _wayPointModel = new WayPoint(2f,2f,_floor)
             {
                 Id = 2,
                 Visited = true,
                 IconPath = "exit.png",
-                UCoordinate = 2f,
-                VCoordinate = 2f,
-                Floor = _floor,
                 Label = WaypointLabel.Exit
             };
 

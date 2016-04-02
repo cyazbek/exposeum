@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -82,12 +82,10 @@ namespace Exposeum.Mappers
 
         private MapEdge MapEdgeTableToModel(Tables.MapEdge edgeTable)
         {
-            MapEdge edgeModel = new MapEdge
+            MapEdge edgeModel = new MapEdge(_mapElementsMapper.Get(edgeTable.StartMapElementId), _mapElementsMapper.Get(edgeTable.EndMapElementId))
             {
                 Id = edgeTable.Id,
                 Distance = edgeTable.Distance,
-                Source = _mapElementsMapper.Get(edgeTable.StartMapElementId),
-                Target = _mapElementsMapper.Get(edgeTable.EndMapElementId),
             };
 
             return edgeModel;

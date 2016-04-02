@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using System.Collections.Generic;
 
 namespace Exposeum.Mappers
@@ -45,7 +45,7 @@ namespace Exposeum.Mappers
                 Id = poi.Id,
                 IconPath = poi.IconPath,
                 PoiDescription = poi.Description.Id,
-                StoryLineId = poi.StoryLineId,
+                StoryLineId = poi.StoryId,
                 UCoordinate = poi.UCoordinate,
                 VCoordinate = poi.VCoordinate,
                 Visited = vis,
@@ -74,7 +74,7 @@ namespace Exposeum.Mappers
                 Floor = floor,
                 Id = mapElement.Id,
                 IconPath = mapElement.IconPath,
-                StoryLineId = mapElement.StoryLineId,
+                StoryId = mapElement.StoryLineId,
                 UCoordinate = mapElement.UCoordinate,
                 VCoordinate = mapElement.VCoordinate,
                 Visited = vis

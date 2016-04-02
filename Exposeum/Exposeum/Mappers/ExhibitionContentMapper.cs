@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
+using Exposeum.Models;
+using ExhibitionContent = Exposeum.Models.ExhibitionContent;
 using User = Exposeum.Models.User;
 
 namespace Exposeum.Mappers

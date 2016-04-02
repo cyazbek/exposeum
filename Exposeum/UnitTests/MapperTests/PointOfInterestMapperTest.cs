@@ -3,11 +3,11 @@ using Android.Graphics.Drawables;
 using Exposeum.Mappers;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Java.Util;
 using NUnit.Framework;
-using Beacon = Exposeum.TempModels.Beacon;
-using Floor = Exposeum.TempModels.Floor;
+using Beacon = Exposeum.Models.Beacon;
+using Floor = Exposeum.Models.Floor;
 using User = Exposeum.Models.User;
 
 namespace UnitTests
@@ -31,11 +31,10 @@ namespace UnitTests
             _instance = PointOfInterestMapper.GetInstance();
             _tdg.Db.DeleteAll<MapElements>();
 
-            _floor = new Floor
+            _floor = new Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null))
             {
                 Id = 1,
-                ImagePath = "icon.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null)
+                ImagePath = "icon.png"
             };
 
             _beacon = new Beacon
@@ -46,7 +45,7 @@ namespace UnitTests
                 Uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
             };
 
-            _pointOfInterestDescription = new PointOfInterestDescription
+            _pointOfInterestDescription = new PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 1,
                 Title = "theTitle",
@@ -91,7 +90,7 @@ namespace UnitTests
                 VCoordinate = 2f,
                 Floor = _floor,
                 Beacon = _beacon,
-                StoryLineId = 1,
+                StoryId = 1,
                 Description = _pointOfInterestDescription,
                 ExhibitionContent = _contents
             };
@@ -138,7 +137,7 @@ namespace UnitTests
                 VCoordinate = 2f,
                 Floor = _floor,
                 Beacon = _beacon,
-                StoryLineId = 1,
+                StoryId = 1,
                 Description = _pointOfInterestDescription,
                 ExhibitionContent = _contents
             };

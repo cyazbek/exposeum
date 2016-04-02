@@ -4,7 +4,7 @@ using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
 using NUnit.Framework;
-using MapEdge = Exposeum.TempModels.MapEdge;
+using MapEdge = Exposeum.Models.MapEdge;
 
 namespace UnitTests
 {
@@ -24,7 +24,7 @@ namespace UnitTests
 
             _tdg.Db.DeleteAll<Exposeum.Tables.MapEdge>();
 
-            _mapEdgeModel = new MapEdge
+            _mapEdgeModel = new MapEdge(null,null)
             {
                 Id = 1,
                 Distance = 2.0,
@@ -54,7 +54,7 @@ namespace UnitTests
         [Test]
         public void UpdateMapEdgeTest()
         {
-            _mapEdgeModel = new MapEdge
+            _mapEdgeModel = new MapEdge(null,null)
             {
                 
             };

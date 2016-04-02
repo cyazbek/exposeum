@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Enum = System.Enum;
-using MapElement = Exposeum.TempModels.MapElement;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
+using MapElement = Exposeum.Models.MapElement;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
 
 namespace Exposeum.Mappers
 {
