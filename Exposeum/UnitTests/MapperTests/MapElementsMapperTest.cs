@@ -161,6 +161,7 @@ namespace UnitTests
             {
                 Id = 3,
                 Visited = true,
+                Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null),
                 IconPath = "exit.png",
                 UCoordinate = 2f,
                 VCoordinate = 2f,
