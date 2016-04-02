@@ -118,7 +118,25 @@ namespace Exposeum
 
 			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
 
-				//TODO: deserialize each waypoint
+				MapElements newWaypoint = new MapElements {
+
+					Id = int.Parse (waypointOBJ ["id"].ToString ()),
+					UCoordinate = 0.0f, //TODO: FIX
+					VCoordinate = 0.0f,
+					IconPath = String.Empty, //TODO: check with Andrea or Firas about this
+					Discriminator = "Waypoint",
+					Visited = 0, //default unvisited
+					BeaconId = -1, //TODO: check with Andrea or Firas about this
+
+					//TODO: Storyline ID!
+					//TODO: POIDescription!
+					//TODO: Label!
+
+					FloorId = int.Parse (waypointOBJ ["floorID"].ToString ())
+
+				};
+
+				mapelements.Add (newWaypoint);
 
 			}
 
