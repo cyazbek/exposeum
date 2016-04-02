@@ -99,6 +99,7 @@
     <Compile Include="DDialog.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Fragments\ProgressFrag.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\EdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
@@ -114,6 +115,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mappers\StorylineMapper.cs" />
+    <Compile Include="MapProgressFragmentView.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\AudioContent.cs" />
@@ -280,6 +282,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\webViewFragment.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ProgressFragLayout.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

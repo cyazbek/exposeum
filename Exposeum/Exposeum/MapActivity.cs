@@ -4,6 +4,9 @@ using Android.Views;
 using Android.Widget;
 using Exposeum.Controllers;
 using Exposeum.Models;
+using Android.Support.V7.App;
+using Android.Support.V4.Widget;
+using SupportFragment = Android.Support.V4.App.Fragment;
 
 namespace Exposeum
 {
@@ -46,6 +49,10 @@ namespace Exposeum
 			_beaconFinder.SetInFocus(true);
 			_beaconFinder.SetNotificationDestination (this);
 
+
+
+
+
 			//Bind the _totalMapView to the Activity
 		    SetContentView(_mapController.TotalMapView);
 		}
@@ -70,6 +77,15 @@ namespace Exposeum
 		}
 
 
+        //====================================================================================================================
+
+
+
+
+
+        //====================================================================================================================
+
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             if (ExposeumApplication.IsExplorerMode)
@@ -88,14 +104,15 @@ namespace Exposeum
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage(); 
                     return true;
+
+                case Resource.Id.QRScannerItem:
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
+                    return true;
+
                 case Resource.Id.PauseItem:
                     StorylineController storylineController = StorylineController.GetInstance();
                     FragmentTransaction transaction = FragmentManager.BeginTransaction();
                     storylineController.ShowPauseStoryLineDialog(transaction, this);
-                    
-                    return true;
-                case Resource.Id.QRScannerItem:
-                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
                     return true;
             }
             return base.OnOptionsItemSelected(item);

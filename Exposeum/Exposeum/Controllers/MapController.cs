@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using System.Linq;
 using Exposeum.Exceptions;
+using Exposeum.Fragments;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 
@@ -63,8 +64,11 @@ namespace Exposeum.Controllers
 
                 // Create a new fragment and a transaction.
                 FragmentTransaction fragmentTx = ((Activity)_mapView.Context).FragmentManager.BeginTransaction();
+                var progressFrag = new ProgressFrag();
                 _mapProgressionView = new MapProgressionFragment(_mapModel.CurrentStoryline);
-
+                fragmentTx.Add(Resource.Id.map_frag_frame_, progressFrag);
+                fragmentTx.Show(progressFrag);
+                fragmentTx.AddToBackStack(null);
                 fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
                 fragmentTx.Commit();
 

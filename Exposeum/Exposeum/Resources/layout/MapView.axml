@@ -2,25 +2,36 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:fadingEdge="vertical"
+    android:verticalScrollbarPosition="left">
     <FrameLayout
+        android:id="@+id/map_view_frame_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map_view_frame_lay">
+        android:layout_height="wrap_content">
     <!-- map will be placed here -->
     </FrameLayout>
     <FrameLayout
+        android:id="@+id/map_frag_frame_"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:id="@+id/map_frag_frame_lay">
+        android:layout_height="wrap_content">
+    <!-- map Progression Place -->
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/map_frag_frame_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <!-- map progression fragment will be placed here -->
     </FrameLayout>
     <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/floor_seek_bar"
         android:max="4"
         android:progress="0"
-        android:indeterminate="false" />
+        android:indeterminate="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:rotation="90" />
 </FrameLayout>
