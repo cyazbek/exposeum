@@ -194,9 +194,28 @@ namespace Exposeum
 				floorTdg.Add (floor);
 			}
 
-			//TODO: save the mapelements
+			//save the mapelements
+			MapElementsTdg mapElementsTdg = MapElementsTdg.GetInstance();
 
-			//TODO: save the storylines
+			foreach (var mapelement in mapelements) {
+				mapElementsTdg.Add (mapelement);
+			}
+
+			//save the storylines
+
+			StorylineTdg storylineTdg = StorylineTdg.GetInstance();
+
+			foreach (var storyline in storylines) {
+				storylineTdg.Add (storyline);
+			}
+
+			//save the beacons
+
+			BeaconTdg beaconTdg = BeaconTdg.GetInstance();
+
+			foreach (var beacon in beacons) {
+				beaconTdg.Add (beacon);
+			}
 		}
 	}
 }
