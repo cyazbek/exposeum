@@ -123,7 +123,7 @@ namespace UnitTests
         {
             _instance.Add(_pointOfInterestModel);
             _expected = _instance.Get(_pointOfInterestModel.Id);
-            Assert.True(_pointOfInterestModel.Equals(_expected));
+            Assert.True(_pointOfInterestModel.AreEquals(_expected));
         }   
 
         [Test]
@@ -164,7 +164,7 @@ namespace UnitTests
         public void PointOfInterestTableToModelTest()
         {
             PointOfInterest expected = _instance.PoiTableToModel(_pointOfInterestTable);
-            Assert.IsTrue(_pointOfInterestModel.Equals(expected));
+            Assert.IsTrue(_pointOfInterestModel.AreEquals(expected));
         }
 
     }

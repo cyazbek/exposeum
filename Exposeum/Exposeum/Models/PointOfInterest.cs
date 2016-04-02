@@ -138,5 +138,15 @@ namespace Exposeum.Models
         {
             return Id + " " + GetName() + " " + GetDescription();
         }
+
+        public bool AreEquals(PointOfInterest other)
+        {
+            return Models.ExhibitionContent.ListEquals(ExhibitionContent, other.ExhibitionContent) &&
+                    Beacon.Equals(other.Beacon) &&
+                    StoryId == other.StoryId &&
+                    Description.Equals(other.Description);
+            
+            return false;
+        }
     }
 }
