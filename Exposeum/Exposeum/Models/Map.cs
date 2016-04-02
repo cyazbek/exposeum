@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
 using System.Linq;
+using Exposeum.Observers;
 
 namespace Exposeum.Models
 {

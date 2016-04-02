@@ -1,7 +1,7 @@
 using Android.Graphics.Drawables;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -95,16 +95,13 @@ namespace Exposeum.Mappers
                 vis = false;
             else vis = true;
 
-            return new WayPoint
+            return new WayPoint(element.UCoordinate, element.VCoordinate, _floorMapper.GetFloor(element.FloorId))
             {
                 Id = element.Id,
                 Visited = vis,
-                Floor = _floorMapper.GetFloor(element.FloorId),
                 Label = ConvertStringToLabel(element.Label),
                 IconPath = element.IconPath,
                 Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(element.IconPath), null),
-                UCoordinate = element.UCoordinate,
-                VCoordinate = element.VCoordinate
             };
         }
 

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Enum = System.Enum;
-using MapElement = Exposeum.TempModels.MapElement;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
+using MapElement = Exposeum.Models.MapElement;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
 
 namespace Exposeum.Mappers
 {
@@ -53,7 +53,7 @@ namespace Exposeum.Mappers
         {
             foreach (var x in elements)
             {
-                if(x.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
+                if(x.GetType().ToString() == "Exposeum.Models.PointOfInterest")
                     _pointOfInterestMapper.Add((PointOfInterest)x);
                 else 
                     _wayPointMapper.Add((WayPoint)x);
@@ -78,7 +78,7 @@ namespace Exposeum.Mappers
         {
             foreach (var x in list)
             {
-                if(x.GetType().ToString()=="Exposeum.TempModels.PointOfInterest")
+                if(x.GetType().ToString()=="Exposeum.Models.PointOfInterest")
                     _pointOfInterestMapper.Update((PointOfInterest)x);
                 else 
                     _wayPointMapper.Update((WayPoint)x);

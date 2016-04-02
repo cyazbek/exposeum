@@ -8,7 +8,8 @@ namespace Exposeum.Models
 	{
         public WaypointLabel Label { get; set; }
         private readonly float _iconScaleFactor = 0.2f;
-        public Drawable _Icon { get; set; }
+        public int PoiId { get; set; }
+        public Drawable Icon { get; set; }
         public WayPoint(float UCoordinate, float vCoordinate, Floor floor) : base (UCoordinate, vCoordinate, floor)
 		{
 		}
@@ -16,6 +17,7 @@ namespace Exposeum.Models
         {
                 return Label.Equals(other.Label);
         }
+
         public override void Draw(Canvas canvas)
         {
             /*canvas.Save();

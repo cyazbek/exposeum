@@ -8,6 +8,7 @@ namespace Exposeum.Models
         public string Title { get; set; }
         public Language Language { get; set; }
         public int StorylineId { get; set; }
+        public int PoiId { get; set; }
 
         //Method that format's the content in html syntax.
         public abstract string HtmlFormat();

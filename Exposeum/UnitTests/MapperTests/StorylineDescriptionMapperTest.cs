@@ -4,7 +4,7 @@ using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.TempModels;
 using NUnit.Framework;
-using StorylineDescription = Exposeum.TempModels.StorylineDescription;
+using StorylineDescription = Exposeum.Models.StorylineDescription;
 using User = Exposeum.Models.User;
 
 namespace UnitTests

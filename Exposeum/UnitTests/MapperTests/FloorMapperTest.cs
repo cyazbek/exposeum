@@ -13,8 +13,8 @@ namespace UnitTests
     public class FloorMapperTest
     {
         private static FloorMapper _instance;
-        private Exposeum.TempModels.Floor _expected;
-        private Exposeum.TempModels.Floor _floorModel;
+        private Exposeum.Models.Floor _expected;
+        private Exposeum.Models.Floor _floorModel;
         private Floor _floorTable;
         readonly FloorTdg _tdg = FloorTdg.GetInstance();
 
@@ -24,11 +24,10 @@ namespace UnitTests
             _instance = FloorMapper.GetInstance();
             _tdg.Db.DeleteAll<Floor>();
 
-            _floorModel = new Exposeum.TempModels.Floor
+            _floorModel = new Exposeum.Models.Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null))
             {
                 Id = 1,
-                ImagePath = "EmileBerliner.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null),
+                ImagePath = "EmileBerliner.png"
             };
 
             _floorTable = new Floor
@@ -56,11 +55,10 @@ namespace UnitTests
         [Test]
         public void UpdateFloorTest()
         {
-            _floorModel = new Exposeum.TempModels.Floor
+            _floorModel = new Exposeum.Models.Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null))
             {
                 Id = 2,
                 ImagePath = "EmileBerliner.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("EmileBerliner.png"), null)
             };
 
             _instance.AddFloor(_floorModel);
@@ -82,7 +80,7 @@ namespace UnitTests
         [Test()]
         public void FloorTableToModelTest()
         {
-            Exposeum.TempModels.Floor expected = _instance.FloorTableToModel(_floorTable);
+            Exposeum.Models.Floor expected = _instance.FloorTableToModel(_floorTable);
             Assert.IsTrue(_floorModel.IsEqual(expected));
         }
 

@@ -6,17 +6,17 @@ using Exposeum.Tables;
 using Exposeum.TDGs;
 using Java.Util;
 using NUnit.Framework;
-using AudioContent = Exposeum.TempModels.AudioContent;
-using Beacon = Exposeum.TempModels.Beacon;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
-using Floor = Exposeum.TempModels.Floor;
-using MapElement = Exposeum.TempModels.MapElement;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
-using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
+using AudioContent = Exposeum.Models.AudioContent;
+using Beacon = Exposeum.Models.Beacon;
+using ExhibitionContent = Exposeum.Models.ExhibitionContent;
+using Floor = Exposeum.Models.Floor;
+using MapElement = Exposeum.Models.MapElement;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
+using PointOfInterestDescription = Exposeum.Models.PointOfInterestDescription;
 using User = Exposeum.Models.User;
-using VideoContent = Exposeum.TempModels.VideoContent;
-using WaypointLabel = Exposeum.TempModels.WaypointLabel;
-using WayPoint = Exposeum.TempModels.WayPoint;
+using VideoContent = Exposeum.Models.VideoContent;
+using WaypointLabel = Exposeum.Models.WaypointLabel;
+using WayPoint = Exposeum.Models.WayPoint;
 
 namespace UnitTests
 {
@@ -48,11 +48,10 @@ namespace UnitTests
 
             User.GetInstance().Language = Language.En;
 
-            Floor floor = new Floor
+            Floor floor = new Floor ((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null))
             {
                 Id = 1,
-                ImagePath = "icon.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null)
+                ImagePath = "icon.png"
             };
 
             Beacon beacon = new Beacon
@@ -63,12 +62,9 @@ namespace UnitTests
                 Uuid = UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d")
             };
 
-            PointOfInterestDescription pointOfInterestDescription = new PointOfInterestDescription
+            PointOfInterestDescription pointOfInterestDescription = new PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 1,
-                Title = "theTitle",
-                Summary = "theSummary",
-                Description = "theDescription",
                 Language = User.GetInstance().Language
             };
 
@@ -138,7 +134,7 @@ namespace UnitTests
                 VCoordinate = 2f,
                 Floor = floor,
                 Beacon = beacon,
-                StoryLineId = 1,
+                StoryId = 1,
                 Description = pointOfInterestDescription,
                 ExhibitionContent = contents
             };
@@ -152,31 +148,24 @@ namespace UnitTests
                 VCoordinate = 2f,
                 Floor = floor,
                 Beacon = beacon,
-                StoryLineId = 1,
+                StoryId = 1,
                 Description = pointOfInterestDescription,
                 ExhibitionContent = contents2
             };
 
-            _waypoint = new WayPoint
+            _waypoint = new WayPoint(2f,2f,floor)
             {
                 Id = 3,
                 Visited = true,
-                Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null),
                 IconPath = "exit.png",
-                UCoordinate = 2f,
-                VCoordinate = 2f,
-                Floor = floor,
                 Label = WaypointLabel.Exit
             };
 
-            _wayPoint2 = new WayPoint
+            _wayPoint2 = new WayPoint(2f, 2f, floor)
             {
                 Id = 4,
                 Visited = true,
                 IconPath = "exit.png",
-                UCoordinate = 2f,
-                VCoordinate = 2f,
-                Floor = floor,
                 Label = WaypointLabel.Exit
             };
 
@@ -212,14 +201,14 @@ namespace UnitTests
             Assert.AreEqual(_elements, _expectedElements);
             Assert.IsTrue(_elements.Count == _expectedElements.Count);
 
-            _poi1.StoryLineId = 2;
+            _poi1.StoryId = 2;
             _waypoint.Label = WaypointLabel.Elevator;
 
             _instance.UpdateList(_elements);
             _expectedElements = _instance.GetAllMapElements();
 
             Assert.AreEqual(_elements, _expectedElements);
-            Assert.AreEqual(2, ((PointOfInterest)_expectedElements[0]).StoryLineId);
+            Assert.AreEqual(2, ((PointOfInterest)_expectedElements[0]).StoryId);
             Assert.AreEqual(WaypointLabel.Elevator, ((WayPoint)_expectedElements[2]).Label);
         }
 
