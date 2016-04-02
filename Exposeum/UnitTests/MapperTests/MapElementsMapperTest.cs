@@ -190,6 +190,28 @@ namespace UnitTests
         }
 
         [Test]
+        public void UpdateListTest()
+        {
+            _mapElementsTdg.Db.DeleteAll<MapElements>();
+
+            _instance.AddList(_elements);
+            _expectedElements = _instance.GetAllMapElements();
+
+            Assert.AreEqual(_elements, _expectedElements);
+            Assert.IsTrue(_elements.Count == _expectedElements.Count);
+
+            _poi1.StoryLineId = 2;
+            _waypoint.Label = WaypointLabel.Elevator;
+
+            _instance.UpdateList(_elements);
+            _expectedElements = _instance.GetAllMapElements();
+
+            Assert.AreEqual(_elements, _expectedElements);
+            Assert.AreEqual(2, ((PointOfInterest)_expectedElements[0]).StoryLineId);
+            Assert.AreEqual(WaypointLabel.Elevator, ((WayPoint)_expectedElements[2]).Label);
+        }
+
+        [Test]
         public void GetMapElementTest()
         {
             _poiMapper.Add(_poi1);
