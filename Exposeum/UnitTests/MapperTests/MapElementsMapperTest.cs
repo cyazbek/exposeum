@@ -33,7 +33,9 @@ namespace UnitTests
         private List<MapElement> _expectedElements;
 
         private readonly MapElementsTdg _mapElementsTdg = MapElementsTdg.GetInstance();
-        
+
+        private PointOfInterest _poi1;
+        private WayPoint _waypoint;
 
         [SetUp]
         public void SetUp()
@@ -127,7 +129,7 @@ namespace UnitTests
             contents2.Add(audioContent2);
             contents2.Add(videoContent2);
 
-            PointOfInterest poi1 = new PointOfInterest
+            _poi1 = new PointOfInterest
             {
                 Id = 1,
                 Visited = true,
@@ -155,7 +157,7 @@ namespace UnitTests
                 ExhibitionContent = contents2
             };
 
-            WayPoint waypoint = new WayPoint
+            _waypoint = new WayPoint
             {
                 Id = 3,
                 Visited = true,
@@ -166,7 +168,7 @@ namespace UnitTests
                 Label = WaypointLabel.Exit
             };
 
-            _elements = new List<MapElement> {poi1, poi2, waypoint};
+            _elements = new List<MapElement> {_poi1, poi2, _waypoint};
         }
 
         [Test]
@@ -185,7 +187,19 @@ namespace UnitTests
 
             Assert.AreEqual(_elements, _expectedElements);
             Assert.IsTrue(_elements.Count == _expectedElements.Count);
+        }
 
+        [Test]
+        public void GetMapElementTest()
+        {
+            _poiMapper.Add(_poi1);
+            _wayPointMapper.Add(_waypoint);
+
+            MapElement expected = _instance.Get(_poi1.Id);
+            Assert.AreEqual(_poi1, expected);
+
+            expected = _instance.Get(_waypoint.Id);
+            Assert.AreEqual(_waypoint, expected);
         }
 
     }
