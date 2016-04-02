@@ -18,6 +18,7 @@ using WayPoint = Exposeum.TempModels.WayPoint;
 
 namespace UnitTests
 {
+    /*
     [TestFixture]
     public class MapEdgeMapperTest
     {
@@ -168,4 +169,5 @@ namespace UnitTests
         }
         
     }
+    */
 }
