@@ -17,10 +17,15 @@ namespace Exposeum.Fragments
 {
     public class ProgressFrag : Fragment
     {
+        private Context context;
+        public ProgressFrag(Context context)
+        {
+            this.context = context;
+        }
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            var ll = new MapProgressionFragmentView(context);
             // Create your fragment here
         }
 
@@ -28,7 +33,10 @@ namespace Exposeum.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var ll = new MapProgressionFragmentView(context);
             View view = inflater.Inflate(Resource.Layout.ProgressFragLayout, container, false);
+            LinearLayout frfr = view.FindViewById<LinearLayout>(Resource.Id.progg);
+            frfr.AddView(ll);
             return view;
         }
     }

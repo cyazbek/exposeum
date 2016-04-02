@@ -5,8 +5,7 @@
     android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:fadingEdge="vertical"
-    android:verticalScrollbarPosition="left">
+    android:fadingEdge="vertical">
     <FrameLayout
         android:id="@+id/map_view_frame_lay"
         android:layout_width="match_parent"
@@ -22,7 +21,9 @@
     <FrameLayout
         android:id="@+id/map_frag_frame_lay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:isScrollContainer="true">
     <!-- map progression fragment will be placed here -->
     </FrameLayout>
     <SeekBar
@@ -32,6 +33,8 @@
         android:indeterminate="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:rotation="90" />
+        android:rotation="-90"
+        android:layout_marginLeft="0.0dp"
+        android:layout_marginBottom="0.0dp"
+        android:layout_gravity="center_vertical" />
 </FrameLayout>

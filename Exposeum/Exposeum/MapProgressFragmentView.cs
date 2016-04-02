@@ -14,7 +14,7 @@ using Exposeum.Controllers;
 using Exposeum.Models;
 namespace Exposeum
 {
-    class MapProgressionFragmentView : TableLayout
+    class MapProgressionFragmentView : LinearLayout
     {
         private Paint _bgLine, _circle;
 
@@ -26,6 +26,7 @@ namespace Exposeum
             SetWillNotDraw(false); //causes the OnDraw override below to be called
             SetMinimumHeight(220);
             SetBackgroundColor(Color.ParseColor("#CC0000"));
+            //SetGravity(GravityFlags.Bottom);
 
             ResetPaint();
         }
