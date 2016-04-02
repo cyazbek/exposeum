@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using Android.Graphics.Drawables;
 using Exposeum.Mappers;
 using Exposeum.Models;
@@ -35,7 +33,9 @@ namespace UnitTests
         private readonly MapElementsTdg _mapElementsTdg = MapElementsTdg.GetInstance();
 
         private PointOfInterest _poi1;
+        private PointOfInterest _poi2;
         private WayPoint _waypoint;
+        private WayPoint _wayPoint2;
 
         [SetUp]
         public void SetUp()
@@ -143,7 +143,7 @@ namespace UnitTests
                 ExhibitionContent = contents
             };
 
-            PointOfInterest poi2 = new PointOfInterest
+            _poi2 = new PointOfInterest
             {
                 Id = 2,
                 Visited = true,
@@ -168,7 +168,18 @@ namespace UnitTests
                 Label = WaypointLabel.Exit
             };
 
-            _elements = new List<MapElement> {_poi1, poi2, _waypoint};
+            _wayPoint2 = new WayPoint
+            {
+                Id = 4,
+                Visited = true,
+                IconPath = "exit.png",
+                UCoordinate = 2f,
+                VCoordinate = 2f,
+                Floor = floor,
+                Label = WaypointLabel.Exit
+            };
+
+            _elements = new List<MapElement> {_poi1, _poi2, _waypoint};
         }
 
         [Test]
@@ -222,6 +233,18 @@ namespace UnitTests
 
             expected = _instance.Get(_waypoint.Id);
             Assert.AreEqual(_waypoint, expected);
+        }
+
+        [Test]
+        public void GetAllElementFromListOfIdsTest()
+        {
+            _elements.Add(_wayPoint2);
+            _instance.AddList(_elements);
+
+            List<int> mapElementIds = new List<int> {1, 2, 3, 4};
+            _expectedElements = _instance.GetAllElementsFromListOfMapElementIds(mapElementIds);
+
+            Assert.AreEqual(_elements, _expectedElements);
         }
 
     }
