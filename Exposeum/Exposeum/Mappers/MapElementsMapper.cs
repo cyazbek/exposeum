@@ -53,7 +53,7 @@ namespace Exposeum.Mappers
         {
             foreach (var x in elements)
             {
-                if(elements.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
+                if(x.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
                     _pointOfInterestMapper.Add((PointOfInterest)x);
                 else 
                     _wayPointMapper.Add((WayPoint)x);
