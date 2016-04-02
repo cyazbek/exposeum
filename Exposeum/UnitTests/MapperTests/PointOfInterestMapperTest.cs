@@ -31,6 +31,8 @@ namespace UnitTests
             _instance = PointOfInterestMapper.GetInstance();
             _tdg.Db.DeleteAll<MapElements>();
 
+            User.GetInstance().Language = Exposeum.Models.Language.En;
+
             _floor = new Floor
             {
                 Id = 1,
@@ -62,6 +64,7 @@ namespace UnitTests
                 Id = 1,
                 Title = "AudioTitle",
                 Language = Exposeum.Models.Language.En,
+                PoiId = 1,
                 StorylineId = 1,
                 FilePath = "AudioPath",
                 Duration = 1,
@@ -70,9 +73,10 @@ namespace UnitTests
 
             VideoContent videoContent = new VideoContent
             {
-                Id = 1,
+                Id = 2,
                 Title = "VideoTitle",
                 Language = Exposeum.Models.Language.En,
+                PoiId = 1,
                 StorylineId = 1,
                 FilePath = "VideoPath",
                 Duration = 1,
