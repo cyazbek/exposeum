@@ -204,7 +204,30 @@ namespace UnitTests
         [Test]
         public void UpdateMapEdgesListTest()
         {
-            
+            _tdg.Db.DeleteAll<Exposeum.Tables.MapEdge>();
+
+            _instance.AddMapEdge(_mapEdgeModel);
+            _instance.AddMapEdge(_mapEdgeModel2);
+            _instance.AddMapEdge(_mapEdgeModel3);
+
+            List<MapEdge> mapEdges = new List<MapEdge> { _mapEdgeModel, _mapEdgeModel2, _mapEdgeModel3 };
+            List<MapEdge> mapEdgesExpected = _instance.GetAllMapEdges();
+
+            Assert.AreEqual(mapEdges, mapEdgesExpected);
+
+            _mapEdgeModel.Distance = 5f;
+            _mapEdgeModel2.Distance = 5f;
+            _mapEdgeModel3.Distance = 5f;
+
+            _instance.UpdateMapEdgesList(mapEdges);
+            mapEdgesExpected = _instance.GetAllMapEdges();
+
+            Assert.AreEqual(mapEdges, mapEdgesExpected);
+
+            Assert.AreEqual(5f, mapEdgesExpected[0].Distance);
+            Assert.AreEqual(5f, mapEdgesExpected[1].Distance);
+            Assert.AreEqual(_poi1.Id, mapEdgesExpected[2].Source.Id);
         }
     }
 }
+ 
