@@ -59,7 +59,7 @@ namespace Exposeum.Mappers
             return _listOfEdges;
         }
 
-        private Tables.MapEdge MapEdgeModelToTable(MapEdge edge)
+        public Tables.MapEdge MapEdgeModelToTable(MapEdge edge)
         {
             Tables.MapEdge edgeTable = new Tables.MapEdge
             {
@@ -80,7 +80,7 @@ namespace Exposeum.Mappers
             }
         }
 
-        private MapEdge MapEdgeTableToModel(Tables.MapEdge edgeTable)
+        public MapEdge MapEdgeTableToModel(Tables.MapEdge edgeTable)
         {
             MapEdge edgeModel = new MapEdge(_mapElementsMapper.Get(edgeTable.StartMapElementId), _mapElementsMapper.Get(edgeTable.EndMapElementId))
             {
