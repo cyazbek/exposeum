@@ -15,7 +15,13 @@ namespace Exposeum.Models
 		}
         public bool Equals(WayPoint other)
         {
-                return Label.Equals(other.Label);
+            return other.Id == Id &&
+                    other.Visited == Visited &&
+                    other.IconPath.Equals(IconPath) &&
+                    Math.Abs(other.UCoordinate - UCoordinate) <= 0 &&
+                    Math.Abs(other.VCoordinate - VCoordinate) <= 0 &&
+                    other.Floor.IsEqual(Floor) && 
+                    Label.Equals(other.Label);
         }
 
         public override void Draw(Canvas canvas)

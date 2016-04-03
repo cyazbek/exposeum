@@ -141,12 +141,16 @@ namespace Exposeum.Models
 
         public bool AreEquals(PointOfInterest other)
         {
-            return Models.ExhibitionContent.ListEquals(ExhibitionContent, other.ExhibitionContent) &&
+            return other.Id == Id &&
+                   other.Visited == Visited &&
+                   other.IconPath.Equals(IconPath) &&
+                   Math.Abs(other.UCoordinate - UCoordinate) <= 0 &&
+                   Math.Abs(other.VCoordinate - VCoordinate) <= 0 &&
+                   other.Floor.IsEqual(Floor) && 
+                    Models.ExhibitionContent.ListEquals(ExhibitionContent, other.ExhibitionContent) &&
                     Beacon.Equals(other.Beacon) &&
                     StoryId == other.StoryId &&
                     Description.Equals(other.Description);
-            
-            return false;
         }
     }
 }
