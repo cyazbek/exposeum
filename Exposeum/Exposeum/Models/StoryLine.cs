@@ -111,8 +111,6 @@ namespace Exposeum.Models
 		    }
 		}
 
-    }
-
     public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
     {
         return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));

@@ -251,7 +251,7 @@ namespace Exposeum.Controllers
 
 			foreach (var mapElement in skippedMapElements)
 		    {
-				mapElement.SetVisited();
+				mapElement.Visited = true;
 		    }
 
             _mapView.Update();
