@@ -21,8 +21,8 @@ namespace Exposeum.TempModels
                 return other.Id == Id &&
                     other.Visited == Visited &&
                     other.IconPath.Equals(IconPath) &&
-                    Math.Abs(other.UCoordinate - UCoordinate) < 0 &&
-                    Math.Abs(other.VCoordinate - VCoordinate) < 0 &&
+                    Math.Abs(other.UCoordinate - UCoordinate) <= 0 &&
+                    Math.Abs(other.VCoordinate - VCoordinate) <= 0 &&
                     other.Floor.IsEqual(Floor);
             }
             return false;
