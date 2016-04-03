@@ -10,6 +10,7 @@ using Exposeum.Exceptions;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 using Ninject;
+using System.Threading;
 
 namespace Exposeum.Controllers
 {
@@ -122,12 +123,7 @@ namespace Exposeum.Controllers
             else {
 				if (_mapModel.GetActiveShortestPath ().CurrentStatus != Status.IsVisited)
 					UpdatePointOfInterestAnShortestPathState (beacon);
-				else
-					_mapModel.SetActiveShortestPath (null); //If the shortest path is visited it should be set to null
             }
-
-
-
 
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
@@ -225,6 +221,15 @@ namespace Exposeum.Controllers
             //update the storyline progress
             _mapModel.GetActiveShortestPath().UpdateProgress(poi);
             UpdateFloor(poi);
+
+			//If the shortest path is visited it should be set to null and the storyline 
+			//should be restored on the beacon finder
+			if (_mapModel.GetActiveShortestPath ().CurrentStatus == Status.IsVisited){
+				_mapModel.SetActiveShortestPath (null);
+				_mapView.Update();
+				_beaconFinder.SetPath (_mapModel.CurrentStoryline);
+
+			}
         }
 
         /// <summary>
