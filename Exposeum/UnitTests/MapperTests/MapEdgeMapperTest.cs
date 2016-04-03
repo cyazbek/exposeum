@@ -26,6 +26,7 @@ namespace UnitTests
         private readonly MapEdgeTdg _tdg = MapEdgeTdg.GetInstance();
         private PointOfInterest _poi1;
         private WayPoint _waypoint;
+        private List<MapEdge> _mapEdges;
 
         [SetUp]
         public void SetUp()
@@ -140,6 +141,8 @@ namespace UnitTests
                 StartMapElementId = 1,
                 EndMapElementId = 2
             };
+
+            _mapEdges = new List<MapEdge> { _mapEdgeModel, _mapEdgeModel2, _mapEdgeModel3 };
         }
 
         [Test]
