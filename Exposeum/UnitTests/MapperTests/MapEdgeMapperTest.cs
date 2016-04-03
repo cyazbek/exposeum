@@ -22,21 +22,23 @@ namespace UnitTests
         private MapEdge _mapEdgeModel;
         private Exposeum.Tables.MapEdge _mapEdgeTable;
         private readonly MapEdgeTdg _tdg = MapEdgeTdg.GetInstance();
+        private PointOfInterest _poi1;
+        private WayPoint _waypoint;
 
         [SetUp]
         public void SetUp()
-        { 
+        {
             _instance = MapEdgeMapper.GetInstance();
 
+            MapElementsTdg.GetInstance().Db.DeleteAll<MapElements>();
             _tdg.Db.DeleteAll<Exposeum.Tables.MapEdge>();
 
             Exposeum.Models.User.GetInstance().Language = Language.En;
 
-            Floor floor = new Floor
+            Floor floor = new Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null))
             {
                 Id = 1,
-                ImagePath = "icon.png",
-                FloorPlan = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("icon.png"), null)
+                ImagePath = "icon.png"
             };
 
             Beacon beacon = new Beacon
