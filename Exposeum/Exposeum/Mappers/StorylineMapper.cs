@@ -1,6 +1,7 @@
 using Exposeum.TDGs;
 using Exposeum.Models;
 using System.Collections.Generic;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Mappers
 {
@@ -76,7 +77,8 @@ namespace Exposeum.Mappers
                 StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
                 LastPointOfInterestVisited = _poiMapper.Get(storylineTable.LastVisitedPoi),
                 MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
-                Status = _statusMapper.StatusTableToModel(storylineTable.Status)
+                Status = _statusMapper.StatusTableToModel(storylineTable.Status),
+                Image = Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(storylineTable.ImagePath), null)
             };
             return storyline; 
         }

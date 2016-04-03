@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Exposeum.Exceptions;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Models
 {
@@ -15,7 +16,7 @@ namespace Exposeum.Models
         public List<MapElement> MapElements { get; set; }
         public PointOfInterest LastPointOfInterestVisited { get; set; }
         public int ImageId { get; set; }
-
+        public Drawable Image { get; set; }
         public List<PointOfInterest> PoiList { get; set; }
 
         public StoryLine()
