@@ -151,13 +151,34 @@ namespace UnitTests
         [Test]
         public void MapEdgeModelToTableTest()
         {
-            
+            _mapEdgeModel = _instance.MapEdgeTableToModel(_mapEdgeTable);
+            Exposeum.Tables.MapEdge expectedTable = _instance.MapEdgeModelToTable(_mapEdgeModel);
+
+            Assert.AreEqual(_mapEdgeTable.Id, expectedTable.Id);
+            Assert.AreEqual(_mapEdgeTable.Distance, expectedTable.Distance);
+            Assert.AreEqual(_mapEdgeTable.StartMapElementId, expectedTable.StartMapElementId);
+            Assert.AreEqual(_mapEdgeTable.EndMapElementId, expectedTable.EndMapElementId);
         }
         
         [Test]
         public void MapEdgeTableToModelTest()
         {
+            _mapEdgeTable = _instance.MapEdgeModelToTable(_mapEdgeModel);
+            MapEdge expectedModel = _instance.MapEdgeTableToModel(_mapEdgeTable);
+
+            Assert.IsTrue(_mapEdgeModel.Equals(expectedModel));
+        }
+
+        [Test]
+        public void GetAllMapEdgesTest()
+        {
             
-        }        
+        }
+
+        [Test]
+        public void UpdateMapEdgesListTest()
+        {
+            
+        }
     }
 }
