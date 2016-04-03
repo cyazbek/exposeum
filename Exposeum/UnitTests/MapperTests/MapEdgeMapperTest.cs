@@ -20,6 +20,8 @@ namespace UnitTests
         private static MapEdgeMapper _instance;
         private MapEdge _expected;
         private MapEdge _mapEdgeModel;
+        private MapEdge _mapEdgeModel2;
+        private MapEdge _mapEdgeModel3;
         private Exposeum.Tables.MapEdge _mapEdgeTable;
         private readonly MapEdgeTdg _tdg = MapEdgeTdg.GetInstance();
         private PointOfInterest _poi1;
@@ -116,6 +118,18 @@ namespace UnitTests
             _mapEdgeModel = new MapEdge(_poi1, _waypoint)
             {
                 Id = 1,
+                Distance = 2.0,
+            };
+
+            _mapEdgeModel2 = new MapEdge(_poi1, _waypoint)
+            {
+                Id = 2,
+                Distance = 2.0,
+            };
+
+            _mapEdgeModel3 = new MapEdge(_poi1, _waypoint)
+            {
+                Id = 3,
                 Distance = 2.0,
             };
 
