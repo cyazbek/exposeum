@@ -186,7 +186,16 @@ namespace UnitTests
         [Test]
         public void GetAllMapEdgesTest()
         {
-            
+            _tdg.Db.DeleteAll<Exposeum.Tables.MapEdge>();
+
+            _instance.AddMapEdge(_mapEdgeModel);
+            _instance.AddMapEdge(_mapEdgeModel2);
+            _instance.AddMapEdge(_mapEdgeModel3);
+
+            List<MapEdge> mapEdges = new List<MapEdge> {_mapEdgeModel, _mapEdgeModel2, _mapEdgeModel3};
+            List<MapEdge> mapEdgesExpected = _instance.GetAllMapEdges();
+
+            Assert.AreEqual(mapEdges, mapEdgesExpected);
         }
 
         [Test]
