@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
 using System.Linq;
+using Exposeum.Mappers;
 using Exposeum.Observers;
 
 namespace Exposeum.Models
 {
-	public class Map
-	{
+	public class Map: LanguageObserver
+    {
         public int Id;
         private static Map _instance;
         public List<MapEdge> Edges { get; set; }
@@ -26,7 +27,8 @@ namespace Exposeum.Models
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
 			SeedData ();
-        }
+            User.GetInstance().Register(this);
+		}
 
 	    public static Map GetInstance()
 	    {
@@ -651,5 +653,17 @@ namespace Exposeum.Models
 		public Path GetActiveShortestPath(){
 			return _activeShortestPath;
 		}
+
+	    public override void Update()
+	    {
+	        StorylineMapper storyLineMapper = StorylineMapper.GetInstance();
+            MapElementsMapper mapElementMapper = MapElementsMapper.GetInstance();
+
+            storyLineMapper.UpdateStorylinesList(Storylines);
+	        Storylines = storyLineMapper.GetAllStorylines();
+
+            mapElementMapper.UpdateList(MapElements);
+	        MapElements = mapElementMapper.GetAllMapElements();
+	    }
     }
 }

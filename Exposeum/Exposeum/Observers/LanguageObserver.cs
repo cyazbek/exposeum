@@ -5,9 +5,7 @@ namespace Exposeum.Observers
 {
     public abstract class LanguageObserver
     {
-        protected User User { get; set; }
-        protected Map map;
-
+        protected LanguageSubject Subject; 
         public abstract void Update();
 
     }

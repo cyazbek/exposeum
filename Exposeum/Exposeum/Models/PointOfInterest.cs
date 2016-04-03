@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Exposeum.Models
 {
-    public class PointOfInterest : MapElement
+    public class PointOfInterest : MapElement 
     {
         public Beacon Beacon { get; set; }
         public int Id { get; set; }
@@ -139,5 +139,7 @@ namespace Exposeum.Models
                     StoryId == other.StoryId &&
                     Description.Equals(other.Description);
         }
+
+       
     }
 }
