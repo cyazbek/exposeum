@@ -14,7 +14,7 @@ namespace Exposeum.Services.Service_Providers
 		}
 
 		public List<StoryLine> GetStoryLines (){
-			return _mapInstance.GetStoryLineList;
+			return _mapInstance.Storylines;
 		}
 
 		public StoryLine GetActiveStoryLine (){
@@ -33,7 +33,7 @@ namespace Exposeum.Services.Service_Providers
 			//with the matching id
 			foreach(StoryLine storyLine in GetStoryLines()){
 
-				if (storyLine.Id == id)
+				if (storyLine.StorylineId == id)
 					return storyLine;
 
 			}

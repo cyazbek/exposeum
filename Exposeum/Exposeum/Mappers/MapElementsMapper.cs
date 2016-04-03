@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Enum = System.Enum;
-using MapElement = Exposeum.TempModels.MapElement;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
+using MapElement = Exposeum.Models.MapElement;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
 
 namespace Exposeum.Mappers
 {
@@ -13,12 +13,14 @@ namespace Exposeum.Mappers
     {
         private static MapElementsMapper _instance;
         private readonly MapElementsTdg _mapElementsTdg;
-        private readonly List<MapElement> _listOfMapElements;
+        private readonly PointOfInterestMapper _pointOfInterestMapper;
+        private readonly WayPointMapper _wayPointMapper;
 
         private MapElementsMapper()
         {
             _mapElementsTdg = MapElementsTdg.GetInstance();
-            _listOfMapElements = new List<MapElement>();
+            _pointOfInterestMapper = PointOfInterestMapper.GetInstance();
+            _wayPointMapper = WayPointMapper.GetInstance();
         }
 
         public static MapElementsMapper GetInstance()
@@ -29,131 +31,71 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public void AddMapElement(MapElement mapElement)
-        {
-            MapElements mapElementTable = MapElementModelToTable(mapElement);
-            _mapElementsTdg.Add(mapElementTable);
-        }
-
-        public void AddMapElementList(List<MapElement> mapElements)
-        {
-            foreach(var mapElement in mapElements)
-                AddMapElement(mapElement);            
-        }
-
-        public void UpdateMapElement(MapElement mapElement)
-        {
-            MapElements mapElementTable = MapElementModelToTable(mapElement);
-            _mapElementsTdg.Update(mapElementTable);
-        }
-
-        public void UpdateMapElementList(List<MapElement> mapElements)
-        {
-            foreach (var mapElement in mapElements)
-                UpdateMapElement(mapElement);
-        }
-
-        public MapElement GetMapElement(int id)
-        {
-            MapElements mapElementTable = _mapElementsTdg.GetMapElement(id);
-            return MapElemenTableToModel(mapElementTable);
-        }
-
         public List<MapElement> GetAllMapElements()
         {
-            List<MapElements> listMapElementsTable = _mapElementsTdg.GetAllMapElements();
+            List<MapElements> tableElements = _mapElementsTdg.GetAllMapElements();
 
-            foreach (var mapElementTable in listMapElementsTable)
+            List<MapElement> modelList = new List<MapElement>();
+
+            foreach (var x in tableElements)
             {
-                MapElement mapElementModel = GetMapElement(mapElementTable.Id);
-                _listOfMapElements.Add(mapElementModel);
+                if (x.Discriminator == "PointOfInterest")
+                {
+                    modelList.Add(_pointOfInterestMapper.PoiTableToModel(x));
+                }
+                else 
+                    modelList.Add(_wayPointMapper.WaypointTableToModel(x));
             }
+            return modelList;
+        }       
 
-            return _listOfMapElements;
-        }
-
-        public List<MapElement> GetAllMapElementsFromStoryline(int storylineId)
+        public void AddList(List<MapElement> elements)
         {
-            List<MapElement> listMapElementsTable = new List<MapElement>();
-            List<int> mapElementIds = StoryLineMapElementListTdg.GetInstance().GetAllStorylineMapElements(storylineId);
-
-            foreach (int mapElementId in mapElementIds)
+            foreach (var x in elements)
             {
-                MapElements tableMapElement = _mapElementsTdg.GetMapElement(mapElementId);
-                listMapElementsTable.Add(MapElemenTableToModel(tableMapElement));
+                if(x.GetType().ToString() == "Exposeum.Models.PointOfInterest")
+                    _pointOfInterestMapper.Add((PointOfInterest)x);
+                else 
+                    _wayPointMapper.Add((WayPoint)x);
             }
-
-            return listMapElementsTable;
         }
 
-        private MapElements MapElementModelToTable(MapElement mapElement)
+        public List<MapElement> GetAllElementsFromListOfMapElementIds(List<int> listMapElementsId)
         {
-            MapElements mapElements = new MapElements
+            List<int> mapElementsId = listMapElementsId;
+
+            List<MapElement> modelList = new List<MapElement>();
+
+            foreach (int x in mapElementsId)
             {
-                Id = mapElement.Id,
-                Visited = Convert.ToInt32(mapElement.Visited),
-                IconId = mapElement.IconId,
-                UCoordinate = mapElement.UCoordinate,
-                VCoordinate = mapElement.VCoordinate,
-                FloorId = mapElement.Floor.Id
-            };
-            
-            switch (mapElement.GetType().ToString())
-            {
-                case "Exposeum.TempModels.PointOfInterest":
-                {
-                    PointOfInterest poi = (PointOfInterest) mapElement;
-
-                    mapElements.BeaconId = poi.Beacon.Id;
-                    mapElements.StoryLineId = poi.StoryLineId;
-                    mapElements.PoiDescription = poi.Description.Id;
-                    // mapElements.exhibitionContent = poi._exhibitionContent._id;
-
-                    return mapElements;
-                }
-
-                case "Exposeum.TempModels.WayPoint":
-                {
-                    WayPoint wayPoint = (WayPoint)mapElement;
-                    mapElements.Label = wayPoint.Label.ToString();
-                    return mapElements;
-                }
-                default:
-                    return null;
+                modelList.Add(Get(x));
             }
+
+            return modelList;
         }
 
-        private MapElement MapElemenTableToModel(MapElements mapElementTable)
+        public void UpdateList(List<MapElement> list)
         {
-            string discrinator = mapElementTable.Discriminator;
-
-            switch (discrinator)
+            foreach (var x in list)
             {
-                case "PointOfInterest":
-                {
-                    PointOfInterest pointOfInterest = new PointOfInterest
-                    {
-                        Id = mapElementTable.Id,
-                        Beacon = BeaconMapper.GetInstance().GetBeacon(mapElementTable.BeaconId),
-                        StoryLineId = mapElementTable.StoryLineId,
-                        Description = PointOfInterestDescriptionMapper.GetInstance().GetPointOfInterestDescription(mapElementTable.PoiDescription),
-                        //_exhibitionContent = ExhibitionContentMapper.GetInstance().GetExhibitionContent(mapElementTable.exhibitionContent),
-                    };
-                    return pointOfInterest;
-                }
-                case "WayPoint":
-                {
-                    WayPoint wayPoint = new WayPoint
-                    {
-                        Id = mapElementTable.Id,
-                        Label = (WaypointLabel)Enum.Parse(typeof(WaypointLabel), mapElementTable.Label)
-                    };
-                    return wayPoint;
-                }
-                default:
-                    return null;
+                if(x.GetType().ToString()=="Exposeum.Models.PointOfInterest")
+                    _pointOfInterestMapper.Update((PointOfInterest)x);
+                else 
+                    _wayPointMapper.Update((WayPoint)x);
             }
         }
 
+
+        public MapElement Get(int mapElementId)
+        {
+            MapElements mapElement = _mapElementsTdg.GetMapElement(mapElementId);
+
+            if (mapElement.Discriminator == "PointOfInterest")
+            {
+                return _pointOfInterestMapper.PoiTableToModel(mapElement);
+            }
+            else
+                return _wayPointMapper.WaypointTableToModel(mapElement);
+        }
     }
 }

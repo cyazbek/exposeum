@@ -120,7 +120,7 @@ namespace Exposeum.Controllers
             if (_mapModel.GetActiveShortestPath() == null)
                 UpdatePointOfInterestAndStoryLineState(beacon);
             else {
-                if (_mapModel.GetActiveShortestPath().CurrentStatus != Status.IsVisited)
+                if (_mapModel.GetActiveShortestPath().Status != Status.IsVisited)
                     UpdatePointOfInterestAnShortestPathState(beacon);
             }
 
@@ -159,7 +159,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         //otherwise just update the state of the poi
-                        poi.SetVisited();
+                        poi.Visited = true;
                         UpdateFloor(poi);
                         DisplayPopUp(poi);
                     }
@@ -251,7 +251,7 @@ namespace Exposeum.Controllers
 
 			foreach (var mapElement in skippedMapElements)
 		    {
-				mapElement.SetVisited();
+				mapElement.Visited = true;
 		    }
 
             _mapView.Update();
@@ -270,7 +270,7 @@ namespace Exposeum.Controllers
         {
             //Set the callback to execute after user dismisses popup
             PointOfInterestPopup.DismissCallback callback = null;
-            if (_mapModel.CurrentStoryline.CurrentStatus == Status.IsVisited)
+            if (_mapModel.CurrentStoryline.Status == Status.IsVisited)
                 callback = DisplayEndOfStoryLinePopUp;
 
             _mapView.InitiatePointOfInterestPopup(selectedPoi, callback);

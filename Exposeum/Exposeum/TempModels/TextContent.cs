@@ -1,7 +1,7 @@
 
 namespace Exposeum.TempModels
 {
-    public class Text:ExhibitionContent
+    public class TextContent:ExhibitionContent
     {
         public string HtmlContent { get; set; }
 
@@ -9,10 +9,12 @@ namespace Exposeum.TempModels
         {
             if(obj!=null)
             {
-                Text other = (Text)obj;
+                TextContent other = (TextContent)obj;
                 return HtmlContent.Equals(other.HtmlContent);
             }
             return false; 
         }
+
     }
 }
+//moved to models. 

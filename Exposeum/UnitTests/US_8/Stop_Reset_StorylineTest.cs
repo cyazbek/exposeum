@@ -32,8 +32,8 @@ namespace UnitTests.US_8
                 _mockStoryLine.AddPoi(mockPointOfInterest3);
                 _mockStoryLine.AddPoi(mockPointOfInterest4);
 
-                _mockStoryLine.SetLastPointOfInterestVisited(mockPointOfInterest3);
-                _mockStoryLine.CurrentStatus = Status.InProgress;
+                _mockStoryLine.LastPointOfInterestVisited=mockPointOfInterest3;
+                _mockStoryLine.Status = Status.InProgress;
 
             }
        
@@ -43,7 +43,7 @@ namespace UnitTests.US_8
             {
                 _status = Status.InProgress;
                 
-                Assert.AreEqual(_status, _mockStoryLine.CurrentStatus);
+                Assert.AreEqual(_status, _mockStoryLine.Status);
             }
 
             [Test]
@@ -51,14 +51,14 @@ namespace UnitTests.US_8
             {
                 StorylineController.GetInstance().ResetStorylineProgress(_mockStoryLine);
 
-                Assert.AreEqual(Status.IsNew, _mockStoryLine.CurrentStatus);
+                Assert.AreEqual(Status.IsNew, _mockStoryLine.Status);
             }
 
             [Test]
             public void TestLastVisitedPoiIsNullAfterReset()
             {
                 StorylineController.GetInstance().ResetStorylineProgress(_mockStoryLine);
-                Assert.IsNull(_mockStoryLine.GetLastVisitedPointOfInterest());
+                Assert.IsNull(_mockStoryLine.LastPointOfInterestVisited);
 
             }
         }           

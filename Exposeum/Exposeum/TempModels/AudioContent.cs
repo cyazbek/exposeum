@@ -1,7 +1,7 @@
 
 namespace Exposeum.TempModels
 {
-    public class Audio:ExhibitionContent
+    public class AudioContent:ExhibitionContent
     {
         public string FilePath { get; set; }
         public int Duration { get; set; }
@@ -9,9 +9,10 @@ namespace Exposeum.TempModels
 
         public override bool Equals(object obj)
         {
-            Audio other = (Audio)obj;
+            AudioContent other = (AudioContent)obj;
             return FilePath.Equals(other.FilePath) && Duration == other.Duration && Encoding.Equals(other.Encoding);
         }
 
     }
 }
+//moved to Models

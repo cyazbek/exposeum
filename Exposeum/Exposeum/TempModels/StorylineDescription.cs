@@ -5,6 +5,7 @@ namespace Exposeum.TempModels
         public int StoryLineDescriptionId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string IntendedAudience { get; set; }
         public Models.Language Language { get; set; }
         public bool Equals(StorylineDescription other)
         {
@@ -19,3 +20,4 @@ namespace Exposeum.TempModels
         }
     }
 }
+//moved to models 

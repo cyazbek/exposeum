@@ -1,12 +1,13 @@
-using Exposeum.Tables;
-using Exposeum.TDGs;
 using Exposeum.Mappers;
 using Exposeum.Models;
+using Exposeum.Tables;
+using Exposeum.TDGs;
 using NUnit.Framework;
-using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
+using PointOfInterestDescription = Exposeum.Models.PointOfInterestDescription;
+using User = Exposeum.Models.User;
 
 
-namespace UnitTests.MapperTests
+namespace UnitTests
 {
     public class PointOfInterestDescriptionMapperTest
     {
@@ -25,12 +26,9 @@ namespace UnitTests.MapperTests
             _tdgEn.Db.DeleteAll<PoiDescriptionEn>();
             _tdgFr.Db.DeleteAll<PoiDescriptionFr>();
 
-            _pointOfInterestDescriptionModel = new PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 1,
-                Title = "theTitle",
-                Summary = "theSummary",
-                Description = "theDescription",
                 Language = User.GetInstance().Language
             };
 
@@ -52,6 +50,12 @@ namespace UnitTests.MapperTests
         }
 
         [Test]
+        public void GetInstancePointOfInterestDescriptionMapperTest()
+        {
+            Assert.NotNull(PointOfInterestDescriptionMapper.GetInstance());
+        }
+
+        [Test]
         public void AddPointOfInterestDescriptionTest()
         {
             _instance.AddPointOfInterestDescription(_pointOfInterestDescriptionModel);
@@ -62,12 +66,9 @@ namespace UnitTests.MapperTests
         [Test]
         public void UpdatePointOfInterestDescriptionTest()
         {
-            _pointOfInterestDescriptionModel = new Exposeum.TempModels.PointOfInterestDescription
+            _pointOfInterestDescriptionModel = new Exposeum.Models.PointOfInterestDescription("theTitle", "theSummary", "theDescription")
             {
                 Id = 2,
-                Title = "theTitle",
-                Summary = "theSummary",
-                Description = "theDescription",
                 Language = User.GetInstance().Language
             };
 
@@ -81,20 +82,55 @@ namespace UnitTests.MapperTests
         }
 
         [Test]
-        public void PointOfInterestDescriptionModelToTableTest()
+        public void PointOfInterestDescriptionModelToTableEnTest()
         {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleEn", "theSummaryEn", "theDescriptionEn")
+            {
+                Id = 1,
+                Language = User.GetInstance().Language
+            };
+
             PoiDescriptionEn expectedEn = _instance.PoiDescriptionModelToTableEn(_pointOfInterestDescriptionModel);
             Assert.IsTrue(_tdgEn.Equals(_pointOfInterestDescriptionEnTable, expectedEn));
+        }
+
+        [Test]
+        public void PointOfInterestDescriptionModelToTableFrTest()
+        {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleFr", "theSummaryFr", "theDescriptionFr")
+            {
+                Id = 1,
+                Language = User.GetInstance().Language
+            };
 
             PoiDescriptionFr expectedFr = _instance.PoiDescriptionModelToTableFr(_pointOfInterestDescriptionModel);
             Assert.IsTrue(_tdgFr.Equals(_pointOfInterestDescriptionFrTable, expectedFr));
         }
 
         [Test]
-        public void PointOfInterestDescriptionTableToModelTest()
+        public void PointOfInterestDescriptionTableToModelFrTest()
         {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleFr", "theSummaryFr", "theDescriptionFr")
+            {
+                Id = 1,
+                Language = User.GetInstance().Language
+            };
+
             PointOfInterestDescription expectedFr = _instance.PointOfInterestDescriptionTableToModelFr(_pointOfInterestDescriptionFrTable);
             Assert.IsTrue(_pointOfInterestDescriptionModel.Equals(expectedFr));
+        }
+
+        [Test]
+        public void PointOfInterestDescriptionTableToModelEnTest()
+        {
+            _pointOfInterestDescriptionModel = new PointOfInterestDescription("theTitleEn", "theSummaryEn", "theDescriptionEn")
+            {
+                Id = 1,
+                Title = "theTitleEn",
+                Summary = "theSummaryEn",
+                Description = "theDescriptionEn",
+                Language = User.GetInstance().Language
+            };
 
             PointOfInterestDescription expectedEn = _instance.PointOfInterestDescriptionTableToModelEn(_pointOfInterestDescriptionEnTable);
             Assert.IsTrue(_pointOfInterestDescriptionModel.Equals(expectedEn));
