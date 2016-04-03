@@ -186,7 +186,7 @@ namespace UnitTests
             _instance.AddList(_elements);
             _expectedElements = _instance.GetAllMapElements();
 
-            Assert.AreEqual(_elements, _expectedElements);
+            Assert.IsTrue(MapElement.ListEquals(_elements, _expectedElements));
             Assert.IsTrue(_elements.Count == _expectedElements.Count);
         }
 
@@ -198,7 +198,7 @@ namespace UnitTests
             _instance.AddList(_elements);
             _expectedElements = _instance.GetAllMapElements();
 
-            Assert.AreEqual(_elements, _expectedElements);
+            Assert.IsTrue(MapElement.ListEquals(_elements, _expectedElements));
             Assert.IsTrue(_elements.Count == _expectedElements.Count);
 
             _poi1.StoryId = 2;
@@ -207,7 +207,7 @@ namespace UnitTests
             _instance.UpdateList(_elements);
             _expectedElements = _instance.GetAllMapElements();
 
-            Assert.AreEqual(_elements, _expectedElements);
+            Assert.IsTrue(MapElement.ListEquals(_elements, _expectedElements));
             Assert.AreEqual(2, ((PointOfInterest)_expectedElements[0]).StoryId);
             Assert.AreEqual(WaypointLabel.Elevator, ((WayPoint)_expectedElements[2]).Label);
         }
@@ -219,10 +219,10 @@ namespace UnitTests
             _wayPointMapper.Add(_waypoint);
 
             MapElement expected = _instance.Get(_poi1.Id);
-            Assert.AreEqual(_poi1, expected);
+            Assert.IsTrue(_poi1.AreEquals((PointOfInterest)expected));
 
             expected = _instance.Get(_waypoint.Id);
-            Assert.AreEqual(_waypoint, expected);
+            Assert.IsTrue(_waypoint.Equals((WayPoint)expected));
         }
 
         [Test]
@@ -234,7 +234,7 @@ namespace UnitTests
             List<int> mapElementIds = new List<int> {1, 2, 3, 4};
             _expectedElements = _instance.GetAllElementsFromListOfMapElementIds(mapElementIds);
 
-            Assert.AreEqual(_elements, _expectedElements);
+            Assert.IsTrue(MapElement.ListEquals(_elements, _expectedElements));
         }
 
     }
