@@ -15,7 +15,8 @@
     <FrameLayout
         android:id="@+id/map_frag_frame_"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="130dp"
+        android:layout_gravity="bottom">
     <!-- map Progression Place -->
     </FrameLayout>
     <FrameLayout
@@ -26,15 +27,11 @@
         android:isScrollContainer="true">
     <!-- map progression fragment will be placed here -->
     </FrameLayout>
-    <SeekBar
-        android:id="@+id/floor_seek_bar"
-        android:max="4"
-        android:progress="0"
-        android:indeterminate="false"
+    <FrameLayout
+        android:id="@+id/floor_selector_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:rotation="-90"
-        android:layout_marginLeft="0.0dp"
-        android:layout_marginBottom="0.0dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_height="match_parent"
+        android:layout_gravity="top">
+    <!-- map progression fragment will be placed here -->
+    </FrameLayout>
 </FrameLayout>

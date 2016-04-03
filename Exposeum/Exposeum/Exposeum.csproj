@@ -126,6 +126,7 @@
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Fragments\FloorSelectorFragment.cs" />
     <Compile Include="Services\IGraphService.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\Service Providers\GraphServiceProvider.cs" />
@@ -285,6 +286,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ProgressFragLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FloorSelectorLayout.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -447,5 +451,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\anim\slide_right.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floor_selector_bg.png" />
   </ItemGroup>
 </Project>

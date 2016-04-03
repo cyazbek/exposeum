@@ -6,12 +6,13 @@ using Exposeum.Controllers;
 using Exposeum.Models;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
+using Exposeum.Resources.layout;
 using SupportFragment = Android.Support.V4.App.Fragment;
 
 namespace Exposeum
 {
 	[Activity(Label = "@string/map_activity", Theme = "@style/CustomActionBarTheme", ScreenOrientation=Android.Content.PM.ScreenOrientation.Portrait)]	
-	public class MapActivity : Activity
+	public class MapActivity : Activity, View.IOnTouchListener
 	{
 
 		private BeaconFinder _beaconFinder;
@@ -49,12 +50,18 @@ namespace Exposeum
 			_beaconFinder.SetInFocus(true);
 			_beaconFinder.SetNotificationDestination (this);
 
+            FragmentTransaction fragmentTx = FragmentManager.BeginTransaction();
+
+            var floorselectofrag = new FloorSelectorFragment();
+            FrameLayout floorFrameLayout = FindViewById<FrameLayout>(Resource.Id.floor_selector_frame);
+            fragmentTx.Add(Resource.Id.floor_selector_frame, floorselectofrag);
+            fragmentTx.Commit();
 
 
 
 
-			//Bind the _totalMapView to the Activity
-		    SetContentView(_mapController.TotalMapView);
+            //Bind the _totalMapView to the Activity
+            SetContentView(_mapController.TotalMapView);
 		}
 
         protected override void OnResume()
@@ -75,15 +82,6 @@ namespace Exposeum
 			base.OnDestroy ();
 			_mapController.Destroy();
 		}
-
-
-        //====================================================================================================================
-
-
-
-
-
-        //====================================================================================================================
 
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -126,5 +124,10 @@ namespace Exposeum
             return true;
 
         }
-    }
+
+	    public bool OnTouch(View v, MotionEvent e)
+	    {
+	        throw new System.NotImplementedException();
+	    }
+	}
 }

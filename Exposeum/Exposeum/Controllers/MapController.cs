@@ -7,6 +7,7 @@ using Android.Widget;
 using System.Linq;
 using Exposeum.Exceptions;
 using Exposeum.Fragments;
+using Exposeum.Resources.layout;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 
@@ -57,6 +58,8 @@ namespace Exposeum.Controllers
 
             _beaconFinder.SetPath(_mapModel.CurrentStoryline);
 
+
+            
             //If we are not in free explorer mode (ie there exists a current storyline) then add the
             //current storyline progression fragment to the map activity
             if (!ExposeumApplication.IsExplorerMode)
@@ -68,10 +71,8 @@ namespace Exposeum.Controllers
                 _mapProgressionView = new MapProgressionFragment(_mapModel.CurrentStoryline);
                 fragmentTx.Add(Resource.Id.map_frag_frame_, progressFrag);
                 fragmentTx.Show(progressFrag);
-                fragmentTx.AddToBackStack(null);
                 fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
                 fragmentTx.Commit();
-
             }
 
             _beaconFinder.FindBeacons();
@@ -89,9 +90,9 @@ namespace Exposeum.Controllers
             //Add a new MapView into the frame layout
             mapViewFrameLayout.AddView(_mapView);
             //Get a reference to the seek bar in the view
-            SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
+            //SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
             //Bind an event handler to ProgressChanged
-            floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
+            //floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
         }
 
         public void OnMapSliderProgressChange(object sender, SeekBar.ProgressChangedEventArgs e)
