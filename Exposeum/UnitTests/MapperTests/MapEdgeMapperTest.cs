@@ -159,7 +159,7 @@ namespace UnitTests
             _instance.UpdateMapEdge(_mapEdgeModel);
 
             _expected = _instance.GetMapEdge(_mapEdgeModel.Id);
-            Assert.AreEqual(5.0, _mapEdgeModel.Distance);
+            Assert.AreEqual(5.0, _expected.Distance);
         }
 
         [Test]
