@@ -8,14 +8,13 @@ namespace Exposeum.Mappers
     {
         private static MapEdgeMapper _instance;
         private readonly MapEdgeTdg _mapEdgeTdg;
-        private readonly List<MapEdge> _listOfEdges;
+        
         private readonly MapElementsMapper _mapElementsMapper;
 
 
         private MapEdgeMapper()
         {
             _mapEdgeTdg = MapEdgeTdg.GetInstance();
-            _listOfEdges = new List<MapEdge>();
             _mapElementsMapper = MapElementsMapper.GetInstance();
         }
 
@@ -49,7 +48,7 @@ namespace Exposeum.Mappers
         public List<MapEdge> GetAllMapEdges()
         {
             List<Tables.MapEdge> listEdges = _mapEdgeTdg.GetAllEdges();
-
+            List<MapEdge> _listOfEdges = new List<MapEdge>();
             foreach (var edge in listEdges)
             {
                 MapEdge edgeModel = MapEdgeTableToModel(edge);
