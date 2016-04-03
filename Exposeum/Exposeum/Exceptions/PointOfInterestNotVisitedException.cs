@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exposeum.Models;
 
 namespace Exposeum.Exceptions
 {
 	public class PointOfInterestNotVisitedException : Exception
 	{
-		public PointOfInterest Poi{ get;}
+	    public IEnumerable<MapElement> UnvistedMapElements { get; }
 
-		public PointOfInterestNotVisitedException (string message, PointOfInterest poi): base(message){
-			Poi = poi;
+	    public PointOfInterestNotVisitedException (string message, IEnumerable<MapElement> elements): base(message){
+            UnvistedMapElements = elements;
 		}
 	}
 }
