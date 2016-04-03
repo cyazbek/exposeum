@@ -20,7 +20,7 @@ namespace Exposeum.Models
 		    Distance = distance;
 		}
 
-	    public MapElement Source { get; }
-	    public MapElement Target { get; }
+		public MapElement Source { get; set;}
+		public MapElement Target { get; set;}
 	}
 }
