@@ -5,16 +5,7 @@ using Exposeum.Models;
 using Exposeum.TDGs;
 using Java.Util;
 using NUnit.Framework;
-using AudioContent = Exposeum.TempModels.AudioContent;
-using Beacon = Exposeum.TempModels.Beacon;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
-using Floor = Exposeum.TempModels.Floor;
-using MapEdge = Exposeum.TempModels.MapEdge;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
-using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
-using VideoContent = Exposeum.TempModels.VideoContent;
-using WaypointLabel = Exposeum.TempModels.WaypointLabel;
-using WayPoint = Exposeum.TempModels.WayPoint;
+
 
 namespace UnitTests
 {

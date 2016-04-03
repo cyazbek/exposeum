@@ -2,7 +2,6 @@ using Exposeum.Mappers;
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
 using NUnit.Framework;
 using StorylineDescription = Exposeum.Models.StorylineDescription;
 using User = Exposeum.Models.User;
