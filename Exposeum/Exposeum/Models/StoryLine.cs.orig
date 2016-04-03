@@ -1,99 +1,124 @@
 using System.Collections.Generic;
-using Exposeum.Data;
-using System;
+using Exposeum.Exceptions;
 
 namespace Exposeum.Models
 {
-    public class StoryLine
+    public class StoryLine : IPath
     {
-       
 
+<<<<<<< HEAD
+        public int StorylineId { get; set; }
+=======
         public int ImageId { get; set; }
-        public Status currentStatus { get; set; }
-        public string name_en {get; set;}
-        public string name_fr { get; set; }
-        public string audience_en { get; set; }
-        public string audience_fr { get; set; }
-        public string desc_en { get; set; }
-        public string desc_fr { get; set; }
-        public int duration { get; set; }
-        public int ID { get; set; }
-        public string imgPath { get; set; }
+        public Status CurrentStatus { get; set; }
+        public string NameEn { get; set; }
+        public string NameFr { get; set; }
+        public string AudienceEn { get; set; }
+        public string AudienceFr { get; set; }
+        public string DescEn { get; set; }
+        public string DescFr { get; set; }
+        public int Duration { get; set; }
+        public int Id { get; set; }
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
+        public string ImgPath { get; set; }
+        public int Duration { get; set; }
         public int FloorsCovered { get; set; }
-        public List<MapElement> MapElements { get; set; } 
-        public List<PointOfInterest> poiList { get; set; }
-        private PointOfInterest _lastPointOfInterestVisited ;
+<<<<<<< HEAD
+        public Status Status { get; set; }
+        public StorylineDescription StorylineDescription { get; set; }
+        public List<MapElement> MapElements { get; set; }
+        public PointOfInterest LastPointOfInterestVisited { get; set; }
+        public int ImageId { get; set; }
+
+        public List<PointOfInterest> PoiList { get; set; }
+        
         
         public StoryLine() 
         {
-            this.poiList = new List<PointOfInterest>();
-			this.MapElements = new List<MapElement> ();
-
-        }
-
-        public StoryLine(int ID)
-        {
-			this.poiList = new List<PointOfInterest>();
-            this.ID = ID;
-<<<<<<< HEAD
-
-			poiList = new List<PointOfInterest>();
+            PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			this.currentStatus = Status.isNew;
+			Status = Status.IsNew;
+=======
+        public List<MapElement> MapElements { get; set; }
+        public List<PointOfInterest> PoiList { get; set; }
+        private PointOfInterest _lastPointOfInterestVisited;
+
+        public StoryLine()
+        {
+            PoiList = new List<PointOfInterest>();
+            MapElements = new List<MapElement>();
+            CurrentStatus = Status.IsNew;
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
         }
 
-
+        public StoryLine(int id)
+        {
+<<<<<<< HEAD
+            StorylineId = id;
+			PoiList = new List<PointOfInterest>();
+			MapElements = new List<MapElement> ();
+			Status = Status.IsNew;
+        }
 		/// <summary>
 		/// DEPRECATED: use addMapElement() instead
 		/// </summary>
 =======
-			isComplete = false;
+            Id = id;
+            PoiList = new List<PointOfInterest>();
+            MapElements = new List<MapElement>();
+            CurrentStatus = Status.IsNew;
         }
 
-		public StoryLine(string name_en, string name_fr, string audience_en, string audience_fr, string description_en, string description_fr, int duration, int imageId)
-		{
-			this.name_en = name_en;
-			this.name_fr = name_fr;
-			this.audience_en = audience_en;
-			this.audience_fr = audience_fr;
-			this.desc_en = description_en;
-			this.desc_fr = description_fr;
-			this.duration = duration;
-			this.ImageId = imageId;
-			this.currentStatus = Status.isNew;
-			this.poiList = new List<PointOfInterest>();
-			isComplete = false;
-		}
-
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
-        public void addPoi(PointOfInterest poi)
+        public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int imageId)
         {
-			MapElements.Add (poi);
-            poiList.Add (poi);
+            NameEn = nameEn;
+            NameFr = nameFr;
+            AudienceEn = audienceEn;
+            AudienceFr = audienceFr;
+            DescEn = descriptionEn;
+            DescFr = descriptionFr;
+            Duration = duration;
+            ImageId = imageId;
+
+            MapElements = new List<MapElement>();
+            PoiList = new List<PointOfInterest>();
+            CurrentStatus = Status.IsNew;
         }
 
-        public PointOfInterest GetLastVisitedPointOfInterest(){
-            return this._lastPointOfInterestVisited;
-        }
 
-		public void AddMapElement(MapElement e)
-		{
-			MapElements.Add(e);
-			//to be removed when poiList is removed
-			if(e.GetType() == typeof(PointOfInterest))
-				poiList.Add (e as PointOfInterest);
-		}
-
-        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
+        /// <summary>
+        /// DEPRECATED: use addMapElement() instead
+        /// </summary>
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
+        public void AddPoi(PointOfInterest poi)
         {
-            this._lastPointOfInterestVisited = lastPoiVisited;
-
+            MapElements.Add(poi);
+            PoiList.Add(poi);
         }
 
+<<<<<<< HEAD
+=======
+        public PointOfInterest GetLastVisitedPointOfInterest()
+        {
+            return _lastPointOfInterestVisited;
+        }
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
+
+        public void AddMapElement(MapElement e)
+        {
+            MapElements.Add(e);
+            //to be removed when poiList is removed
+            if (e.GetType() == typeof(PointOfInterest))
+                PoiList.Add(e as PointOfInterest);
+        }
+
+      
+
+<<<<<<< HEAD
 		/// <summary>
 		/// This method will update the progress of the storyline using the passed node.
 		/// </summary>
-		public void updateProgress(MapElement mapElement){
+		public void UpdateProgress(MapElement mapElement){
 
 			//convert ListMapElements to a LinkedList
 			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (MapElements);
@@ -124,88 +149,168 @@ namespace Exposeum.Models
 		            }
 		        }
 
-		        //Now that the leftbound was found, pop the stack and set as visited all the Nodes in it
+		        //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
 		        while (nodeStack.Count > 0) {
 
 					MapElement currentNode = nodeStack.Pop();
-		            currentNode.SetVisited();
+		            currentNode.Visited = true;
 		        }
 
+				//If the rightBoundLinkedNode is a point of interest save it as LastPointOfInterestVisited
+				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
+					LastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
+
 				//finally, of this node is the last node of the tour, set the tour as completed
-				if(rightBoundLinkedNode.Next == null)
-					this.currentStatus = Status.isVisited;
+				if (rightBoundLinkedNode.Next == null)
+					Status = Status.IsVisited;
+				else if (Status == Status.IsNew)
+					Status = Status.InProgress;
 		    }
 		}
 
-        public PointOfInterest findPOI(EstimoteSdk.Beacon beacon)
+        public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
+=======
+        /// <summary>
+        /// This method will update the progress of the storyline using the passed node.
+        /// </summary>
+        public void UpdateProgress(MapElement mapElement)
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
         {
-            return poiList.Find(x => x.beacon.compareBeacon(beacon));
-        }
 
-        public bool hasBeacon(EstimoteSdk.Beacon beacon)
-        {
-            foreach (var poi in poiList)
+            bool foundUnvisitedPoi = false;
+
+            //convert ListMapElements to a LinkedList
+            LinkedList<MapElement> nodeList = new LinkedList<MapElement>(MapElements);
+
+            //Find the supplied mapElement in the LinkedList
+            LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find(mapElement);
+
+            if (rightBoundLinkedNode != null)
             {
-                if (poi.beacon.compareBeacon(beacon))
-                    return true;
-            }
-            return false;
+                LinkedListNode<MapElement> currentLinkedNode = rightBoundLinkedNode.Previous;
+                Stack<MapElement> nodeStack = new Stack<MapElement>();
+
+                nodeStack.Push(rightBoundLinkedNode.Value);
+
+                //first pass, find the leftBound
+                while (currentLinkedNode != null && !currentLinkedNode.Value.Visited)
+                {
+                    if (!foundUnvisitedPoi && currentLinkedNode.Value.GetType() == typeof (PointOfInterest))
+                    {
+                        foundUnvisitedPoi = true;
+                    }
+
+                    nodeStack.Push(currentLinkedNode.Value);
+                    currentLinkedNode = currentLinkedNode.Previous;
+         
+                }
+
+                if (foundUnvisitedPoi)
+                {
+                    throw new PointOfInterestNotVisitedException(
+                        "Unvisited POI(s) between the current POI and the previously visited POI.", nodeStack);
+                }
+
+                //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
+                while (nodeStack.Count > 0)
+                {
+
+                    MapElement currentNode = nodeStack.Pop();
+                    currentNode.SetVisited();
+                }
+
+                //If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
+                if (rightBoundLinkedNode.Value.GetType() == typeof(PointOfInterest))
+                    _lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
+
+                //finally, of this node is the last node of the tour, set the tour as completed
+                if (rightBoundLinkedNode.Next == null)
+                    CurrentStatus = Status.IsVisited;
+                else if (CurrentStatus == Status.IsNew)
+                    CurrentStatus = Status.InProgress;
+            
+
         }
 
-        public int getSize()
+<<<<<<< HEAD
+        public string GetName()
         {
-            return poiList.Count;
-        }
-
-        public string getName()
-        {
-            string lang = Language.getLanguage();
-            string storyName;
-
-            if (lang.Equals("fr"))
-                storyName = this.name_fr;
-            else
-                storyName = this.name_en;
-
-            return storyName;
-        }
-
-        public string getDescription()
-        {
-            string lang = Language.getLanguage();
-            string storyDesc;
-
-            if (lang.Equals("fr"))
-                storyDesc = this.desc_fr;
-            else
-                storyDesc = this.desc_en;
-
-            return storyDesc;
-        }
-
-        public string getAudience()
-        {
-            string lang = Language.getLanguage();
-            string storyAudience;
-
-            if (lang.Equals("fr"))
-                storyAudience = this.audience_fr;
-            else
-                storyAudience = this.audience_en;
-
-            return storyAudience;
-        }
-
-        public void convertFromData(StoryData story)
-        {
-            this.audience_en = story.audience_en;
-            this.audience_fr = story.audience_fr;
-            this.desc_en = story.desc_en;
-            this.desc_fr = story.desc_fr;
-            this.duration = story.duration;
-            this.name_en = story.name_en;
-            this.name_fr = story.name_fr;
-        }
-
+            return StorylineDescription.Title;
+=======
     }
+
+    public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
+    {
+        return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));
+    }
+
+    public bool HasBeacon(EstimoteSdk.Beacon beacon)
+    {
+        foreach (var poi in PoiList)
+        {
+            if (poi.Beacon.CompareBeacon(beacon))
+                return true;
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
+        }
+        return false;
+    }
+
+<<<<<<< HEAD
+        public string GetDescription()
+        {
+            return StorylineDescription.Description;
+        }
+
+        public string GetAudience()
+        {
+            return StorylineDescription.IntendedAudience;
+        }
+=======
+    public int GetSize()
+    {
+        return PoiList.Count;
+    }
+
+    public string GetName()
+    {
+        Language lang = User.GetInstance().Language;
+        string storyName;
+
+        if (lang.Equals(Language.Fr))
+            storyName = NameFr;
+        else
+            storyName = NameEn;
+
+        return storyName;
+    }
+
+    public string GetDescription()
+    {
+        Language lang = User.GetInstance().Language;
+        string storyDesc;
+
+        if (lang.Equals(Language.Fr))
+            storyDesc = DescFr;
+        else
+            storyDesc = DescEn;
+
+        return storyDesc;
+    }
+
+    public string GetAudience()
+    {
+        Language lang = User.GetInstance().Language;
+        string storyAudience;
+        if (lang.Equals(Language.Fr))
+            storyAudience = AudienceFr;
+        else
+            storyAudience = AudienceEn;
+
+        return storyAudience;
+>>>>>>> eff99aa0dee2aaaace6efeef6df1abe00060b07d
+    }
+
+
+
+}
 }

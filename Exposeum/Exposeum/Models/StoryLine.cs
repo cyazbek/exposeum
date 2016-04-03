@@ -3,7 +3,7 @@ using Exposeum.Exceptions;
 
 namespace Exposeum.Models
 {
-	public class StoryLine: IPath
+    public class StoryLine : IPath
     {
 
         public int StorylineId { get; set; }
@@ -17,9 +17,8 @@ namespace Exposeum.Models
         public int ImageId { get; set; }
 
         public List<PointOfInterest> PoiList { get; set; }
-        
-        
-        public StoryLine() 
+
+        public StoryLine()
         {
             PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
@@ -33,62 +32,68 @@ namespace Exposeum.Models
 			MapElements = new List<MapElement> ();
 			Status = Status.IsNew;
         }
-		/// <summary>
-		/// DEPRECATED: use addMapElement() instead
-		/// </summary>
+        /// <summary>
+        /// DEPRECATED: use addMapElement() instead
+        /// </summary>
         public void AddPoi(PointOfInterest poi)
         {
-			MapElements.Add (poi);
-            PoiList.Add (poi);
+            MapElements.Add(poi);
+            PoiList.Add(poi);
         }
 
 
-		public void AddMapElement(MapElement e)
-		{
-			MapElements.Add(e);
-			//to be removed when poiList is removed
-			if(e.GetType() == typeof(PointOfInterest))
-				PoiList.Add (e as PointOfInterest);
-		}
+        public void AddMapElement(MapElement e)
+        {
+            MapElements.Add(e);
+            //to be removed when poiList is removed
+            if (e.GetType() == typeof(PointOfInterest))
+                PoiList.Add(e as PointOfInterest);
+        }
 
-      
 
-		/// <summary>
-		/// This method will update the progress of the storyline using the passed node.
-		/// </summary>
-		public void UpdateProgress(MapElement mapElement){
+        /// <summary>
+        /// This method will update the progress of the storyline using the passed node.
+        /// </summary>
+        public void UpdateProgress(MapElement mapElement)
+        {
 
-			//convert ListMapElements to a LinkedList
-			LinkedList<MapElement> nodeList = new LinkedList<MapElement> (MapElements);
+            bool foundUnvisitedPoi = false;
 
-			//Find the supplied mapElement in the LinkedList
-			LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find (mapElement);
+            //convert ListMapElements to a LinkedList
+            LinkedList<MapElement> nodeList = new LinkedList<MapElement>(MapElements);
 
-		    if (rightBoundLinkedNode != null)
-		    {
-				LinkedListNode<MapElement> currentLinkedNode = rightBoundLinkedNode.Previous;
-				Stack<MapElement> nodeStack = new Stack<MapElement>();
+            //Find the supplied mapElement in the LinkedList
+            LinkedListNode<MapElement> rightBoundLinkedNode = nodeList.Find(mapElement);
 
-		        nodeStack.Push (rightBoundLinkedNode.Value);
+            if (rightBoundLinkedNode != null)
+            {
+                LinkedListNode<MapElement> currentLinkedNode = rightBoundLinkedNode.Previous;
+                Stack<MapElement> nodeStack = new Stack<MapElement>();
 
-		        //first pass, find the leftBound
-		        while(currentLinkedNode != null && !currentLinkedNode.Value.Visited) {
+                nodeStack.Push(rightBoundLinkedNode.Value);
 
-		            //if the node is of type PointOfInterest then it means that the user skipped a POI, throw an exception
-		            if (currentLinkedNode.Value.GetType() != typeof (PointOfInterest))
-		            {
-		                nodeStack.Push(currentLinkedNode.Value);
-		                currentLinkedNode = currentLinkedNode.Previous;
-		            }
-		            else
-		            {
-		                throw new PointOfInterestNotVisitedException(
-							"There is an unvisited POI between the current POI and the previously visited POI.", (PointOfInterest)currentLinkedNode.Value);
-		            }
-		        }
+                //first pass, find the leftBound
+                while (currentLinkedNode != null && !currentLinkedNode.Value.Visited)
+                {
+                    if (!foundUnvisitedPoi && currentLinkedNode.Value.GetType() == typeof (PointOfInterest))
+                    {
+                        foundUnvisitedPoi = true;
+                    }
 
-		        //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
-		        while (nodeStack.Count > 0) {
+                    nodeStack.Push(currentLinkedNode.Value);
+                    currentLinkedNode = currentLinkedNode.Previous;
+         
+                }
+
+                if (foundUnvisitedPoi)
+                {
+                    throw new PointOfInterestNotVisitedException(
+                        "Unvisited POI(s) between the current POI and the previously visited POI.", nodeStack);
+                }
+
+                //Now that the leftbound is found, pop the stack and set as visited all the Nodes in it
+                while (nodeStack.Count > 0)
+                {
 
 					MapElement currentNode = nodeStack.Pop();
 		            currentNode.Visited = true;
@@ -106,25 +111,26 @@ namespace Exposeum.Models
 		    }
 		}
 
-        public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
-        {
-            return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));
-        }
+    public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
+    {
+        return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));
+    }
 
-        public bool HasBeacon(EstimoteSdk.Beacon beacon)
+    public bool HasBeacon(EstimoteSdk.Beacon beacon)
+    {
+        foreach (var poi in PoiList)
         {
-            foreach (var poi in PoiList)
-            {
-                if (poi.Beacon.CompareBeacon(beacon))
-                    return true;
-            }
-            return false;
+            if (poi.Beacon.CompareBeacon(beacon))
+                return true;
         }
+        return false;
+    }
 
-        public int GetSize()
-        {
-            return PoiList.Count;
-        }
+    public int GetSize()
+    {
+        return PoiList.Count;
+    }
+
 
         public string GetName()
         {
@@ -139,6 +145,6 @@ namespace Exposeum.Models
         public string GetAudience()
         {
             return StorylineDescription.IntendedAudience;
-        }
-    }
+    	}
+	}
 }
