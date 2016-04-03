@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Graphics;
 
 namespace Exposeum.Models
@@ -32,6 +33,34 @@ namespace Exposeum.Models
         public MapElement ShallowCopy()
         {
             return (MapElement)MemberwiseClone();
+        }
+
+        public static bool ListEquals(List<MapElement> contents, List<MapElement> expected)
+        {
+            if (contents.Count != expected.Count)
+                return false;
+
+            bool areEquals = false;
+
+            for (int i = 0; i < contents.Count; i++)
+            {
+                if (contents[i].GetType().ToString() == "Exposeum.Models.PointOfInterest")
+                    areEquals = ((PointOfInterest)contents[i]).AreEquals((PointOfInterest)expected[i]);
+                else
+                    areEquals = ((WayPoint)contents[i]).Equals((WayPoint)expected[i]);
+            }
+
+            return areEquals;
+        }
+
+        public bool AreEquals(MapElement m2)
+        {
+            if (GetType().ToString() == "Exposeum.Models.PointOfInterest" && m2.GetType().ToString() == "Exposeum.Models.PointOfInterest")
+                return ((PointOfInterest) this).AreEquals((PointOfInterest) m2);
+            if (GetType().ToString() == "Exposeum.Models.WayPoint" && m2.GetType().ToString() == "Exposeum.Models.WayPoint")
+                return ((WayPoint) this).Equals((WayPoint) m2);
+            else
+                return false;
         }
     }
 }

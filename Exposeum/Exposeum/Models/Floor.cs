@@ -10,6 +10,7 @@ namespace Exposeum.Models
         public Drawable FloorPlan { get; set; }
         private readonly Paint _paint = new Paint();
 
+
         public Floor(Drawable floorPlan)
         {
             FloorPlan = floorPlan;

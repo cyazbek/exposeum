@@ -1,6 +1,6 @@
 using Exposeum.Mappers;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using NUnit.Framework;
 using TablesEn = Exposeum.Tables.ExhibitionContentEn;
 using TablesFr = Exposeum.Tables.ExhibitionContentFr;
@@ -73,8 +73,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestFr()
         {
-            _contentFr = _mapper.ConvertFromModelFr(_audioFr);
-            _expectedAudio = _mapper.ConvertFromTable(_contentFr);
+            _contentFr = _mapper.AudioModelToTableFr(_audioFr);
+            _expectedAudio = _mapper.AudioTableToModelFr(_contentFr);
 
             Assert.IsTrue(_audioFr.Equals(_expectedAudio));
         }
@@ -82,8 +82,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestEn()
         {
-            _contentEn = _mapper.ConvertFromModelEn(_audioEn);
-            _expectedAudio = _mapper.ConvertFromTable(_contentEn);
+            _contentEn = _mapper.AudioModelToTableEn(_audioEn);
+            _expectedAudio = _mapper.AudioTableToModelEn(_contentEn);
 
             Assert.IsTrue(_audioEn.Equals(_expectedAudio));
         }

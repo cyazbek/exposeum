@@ -3,15 +3,14 @@ using Exposeum.Mappers;
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
-using Java.Util;
 using NUnit.Framework;
-using AudioContent = Exposeum.TempModels.AudioContent;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
-using ImageContent = Exposeum.TempModels.ImageContent;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
-using TextContent = Exposeum.TempModels.TextContent;
+using AudioContent = Exposeum.Models.AudioContent;
+using ExhibitionContent = Exposeum.Models.ExhibitionContent;
+using ImageContent = Exposeum.Models.ImageContent;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
+using TextContent = Exposeum.Models.TextContent;
 using User = Exposeum.Models.User;
+using VideoContent = Exposeum.Models.VideoContent;
 
 namespace UnitTests
 {
@@ -267,8 +266,8 @@ namespace UnitTests
         [Test]
         public void ConvertToAndFromTableFrTest()
         {
-            List<ExhibitionContentFr> contentFrTable = _instance.ConvertToTableFr(_contentsFrench);
-            List<ExhibitionContent> contentFrModel = _instance.ConvertFromTableFr(contentFrTable);
+            List<ExhibitionContentFr> contentFrTable = _instance.ContentModelToTableFr(_contentsFrench);
+            List<ExhibitionContent> contentFrModel = _instance.ContentTableToModelFr(contentFrTable);
 
             Assert.AreEqual(_contentsFrench, contentFrModel);
         }
@@ -276,8 +275,8 @@ namespace UnitTests
         [Test()]
         public void ConvertToAndFromTableEnTest()
         {
-            List<ExhibitionContentEn> contentEnTable = _instance.ConvertToTableEn(_contentsEnglish);
-            List<ExhibitionContent> contentEnModel = _instance.ConvertFromTableEn(contentEnTable);
+            List<ExhibitionContentEn> contentEnTable = _instance.ContentModelToTableEn(_contentsEnglish);
+            List<ExhibitionContent> contentEnModel = _instance.ContentTableToModelEn(contentEnTable);
 
             Assert.AreEqual(_contentsEnglish, contentEnModel);
 

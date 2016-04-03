@@ -1,5 +1,5 @@
 using Exposeum.Mappers;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using NUnit.Framework;
 using TablesEn = Exposeum.Tables.ExhibitionContentEn;
 using TablesFr = Exposeum.Tables.ExhibitionContentFr;
@@ -68,8 +68,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestFr()
         {
-            _contentFr = _mapper.ConvertFromModelFr(_textFr);
-            _expectedText = _mapper.ConvertFromTable(_contentFr);
+            _contentFr = _mapper.TextModelToTableFr(_textFr);
+            _expectedText = _mapper.TextTableToModelFr(_contentFr);
 
             Assert.IsTrue(_textFr.Equals(_expectedText));
         }
@@ -100,8 +100,8 @@ namespace UnitTests
         [Test]
         public void ConvertFromAndToModelTestEn()
         {
-            _contentEn = _mapper.ConvertFromModelEn(_textEn);
-            _expectedText = _mapper.ConvertFromTable(_contentEn);
+            _contentEn = _mapper.TextModelToTableEn(_textEn);
+            _expectedText = _mapper.TextTableToModelEn(_contentEn);
 
             Assert.IsTrue(_textEn.Equals(_expectedText));
         }

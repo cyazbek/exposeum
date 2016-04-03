@@ -1,7 +1,7 @@
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using StoryLineDescription = Exposeum.TempModels.StorylineDescription;
+using StoryLineDescription = Exposeum.Models.StorylineDescription;
 using User = Exposeum.Models.User;
 
 namespace Exposeum.Mappers

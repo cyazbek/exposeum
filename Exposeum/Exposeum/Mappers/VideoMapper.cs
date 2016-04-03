@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels; 
+using Exposeum.Models; 
 
 namespace Exposeum.Mappers
 {
@@ -22,7 +22,7 @@ namespace Exposeum.Mappers
             return _instance; 
         }
 
-        public VideoContent ConvertFromTable(Tables.ExhibitionContentEn content)
+        public VideoContent VideoTableToModelEn(Tables.ExhibitionContentEn content)
         {
             return new VideoContent
             {
@@ -38,7 +38,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public VideoContent ConvertFromTable(Tables.ExhibitionContentFr content)
+        public VideoContent VideoTableToModelFr(Tables.ExhibitionContentFr content)
         {
             return new VideoContent
             {
@@ -54,7 +54,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEn(VideoContent content)
+        public Tables.ExhibitionContentEn VideoModelToTableEn(VideoContent content)
         {
         
             return new Tables.ExhibitionContentEn
@@ -71,7 +71,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFr(VideoContent content)
+        public Tables.ExhibitionContentFr VideoModelToTableFr(VideoContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -92,28 +92,28 @@ namespace Exposeum.Mappers
         {
             if (content.Language == Models.Language.Fr)
             {
-                _tdgFr.Add(ConvertFromModelFr(content));
+                _tdgFr.Add(VideoModelToTableFr(content));
             }
             else
-                _tdgEn.Add(ConvertFromModelEn(content));
+                _tdgEn.Add(VideoModelToTableEn(content));
         }
 
         public VideoContent Get(int id)
         {
             if (Models.User.GetInstance().Language == Models.Language.Fr)
             {
-                return ConvertFromTable(_tdgFr.GetExhibitionContentFr(id));
+                return VideoTableToModelFr(_tdgFr.GetExhibitionContentFr(id));
             }
             else
-                return ConvertFromTable(_tdgEn.GetExhibitionContentEn(id));
+                return VideoTableToModelEn(_tdgEn.GetExhibitionContentEn(id));
         }
 
         public void Update(VideoContent content)
         {
             if (content.Language == Models.Language.Fr)
-                _tdgFr.Update(ConvertFromModelFr(content));
+                _tdgFr.Update(VideoModelToTableFr(content));
             else
-                _tdgEn.Update(ConvertFromModelEn(content));
+                _tdgEn.Update(VideoModelToTableEn(content));
         }
 
     }

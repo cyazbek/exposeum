@@ -8,14 +8,22 @@ namespace Exposeum.Models
 	{
         public WaypointLabel Label { get; set; }
         private readonly float _iconScaleFactor = 0.2f;
-        public Drawable _Icon { get; set; }
+        public int PoiId { get; set; }
+        public Drawable Icon { get; set; }
         public WayPoint(float UCoordinate, float vCoordinate, Floor floor) : base (UCoordinate, vCoordinate, floor)
 		{
 		}
         public bool Equals(WayPoint other)
         {
-                return Label.Equals(other.Label);
+            return other.Id == Id &&
+                    other.Visited == Visited &&
+                    other.IconPath.Equals(IconPath) &&
+                    Math.Abs(other.UCoordinate - UCoordinate) <= 0 &&
+                    Math.Abs(other.VCoordinate - VCoordinate) <= 0 &&
+                    other.Floor.IsEqual(Floor) && 
+                    Label.Equals(other.Label);
         }
+
         public override void Draw(Canvas canvas)
         {
             /*canvas.Save();

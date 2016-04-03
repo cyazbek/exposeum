@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using System.Collections.Generic;
 
 namespace Exposeum.Mappers
@@ -30,7 +30,7 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public Tables.MapElements ConvertFromModel(PointOfInterest poi)
+        public Tables.MapElements PoiModelToTable(PointOfInterest poi)
         {
             int vis;
             if (poi.Visited)
@@ -45,14 +45,14 @@ namespace Exposeum.Mappers
                 Id = poi.Id,
                 IconPath = poi.IconPath,
                 PoiDescription = poi.Description.Id,
-                StoryLineId = poi.StoryLineId,
+                StoryLineId = poi.StoryId,
                 UCoordinate = poi.UCoordinate,
                 VCoordinate = poi.VCoordinate,
                 Visited = vis,
             };
         }
 
-        public PointOfInterest ConvertToModel(Tables.MapElements mapElement)
+        public PointOfInterest PoiTableToModel(Tables.MapElements mapElement)
         {
             Floor floor = _floorMapper.GetFloor(mapElement.FloorId);
             PointOfInterestDescription description =
@@ -74,7 +74,7 @@ namespace Exposeum.Mappers
                 Floor = floor,
                 Id = mapElement.Id,
                 IconPath = mapElement.IconPath,
-                StoryLineId = mapElement.StoryLineId,
+                StoryId = mapElement.StoryLineId,
                 UCoordinate = mapElement.UCoordinate,
                 VCoordinate = mapElement.VCoordinate,
                 Visited = vis
@@ -82,7 +82,7 @@ namespace Exposeum.Mappers
         }
         public void Add(PointOfInterest poi)
         {
-            var mapElement = ConvertFromModel(poi);
+            var mapElement = PoiModelToTable(poi);
             _mapElementsTdg.Add(mapElement);
             _floorMapper.AddFloor(poi.Floor);
             _beaconMapper.AddBeacon(poi.Beacon);
@@ -92,7 +92,7 @@ namespace Exposeum.Mappers
 
         public void Update(PointOfInterest poi)
         {
-            Tables.MapElements mapElements = ConvertFromModel(poi);
+            Tables.MapElements mapElements = PoiModelToTable(poi);
             _mapElementsTdg.Update(mapElements);
             _beaconMapper.UpdateBeacon(poi.Beacon);
             _descriptionMapper.UpdatePointOfInterestDescription(poi.Description);
@@ -103,7 +103,7 @@ namespace Exposeum.Mappers
         public PointOfInterest Get(int id)
         {
             Tables.MapElements mapElement = _mapElementsTdg.GetMapElement(id);
-            return ConvertToModel(mapElement);
+            return PoiTableToModel(mapElement);
         }
     }
 }

@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -22,7 +22,7 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public TextContent ConvertFromTable(Tables.ExhibitionContentEn content)
+        public TextContent TextTableToModelEn(Tables.ExhibitionContentEn content)
         {
             return new TextContent
             {
@@ -36,7 +36,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public TextContent ConvertFromTable(Tables.ExhibitionContentFr content)
+        public TextContent TextTableToModelFr(Tables.ExhibitionContentFr content)
         {
             return new TextContent
             {
@@ -49,7 +49,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEn(TextContent content)
+        public Tables.ExhibitionContentEn TextModelToTableEn(TextContent content)
         {
 
             return new Tables.ExhibitionContentEn
@@ -63,7 +63,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFr(TextContent content)
+        public Tables.ExhibitionContentFr TextModelToTableFr(TextContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -81,28 +81,28 @@ namespace Exposeum.Mappers
         {
             if (content.Language == Models.Language.Fr)
             {
-                _tdgFr.Add(ConvertFromModelFr(content));
+                _tdgFr.Add(TextModelToTableFr(content));
             }
             else
-                _tdgEn.Add(ConvertFromModelEn(content));
+                _tdgEn.Add(TextModelToTableEn(content));
         }
 
         public TextContent Get(int id)
         {
             if (Models.User.GetInstance().Language == Models.Language.Fr)
             {
-                return ConvertFromTable(_tdgFr.GetExhibitionContentFr(id));
+                return TextTableToModelFr(_tdgFr.GetExhibitionContentFr(id));
             }
             else
-                return ConvertFromTable(_tdgEn.GetExhibitionContentEn(id));
+                return TextTableToModelEn(_tdgEn.GetExhibitionContentEn(id));
         }
 
         public void Update(TextContent content)
         {
             if (content.Language == Models.Language.Fr)
-                _tdgFr.Update(ConvertFromModelFr(content));
+                _tdgFr.Update(TextModelToTableFr(content));
             else
-                _tdgEn.Update(ConvertFromModelEn(content));
+                _tdgEn.Update(TextModelToTableEn(content));
         }
 
     }

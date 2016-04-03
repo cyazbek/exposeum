@@ -20,3 +20,4 @@ namespace Exposeum.TempModels
         }
     }
 }
+//moved to models 

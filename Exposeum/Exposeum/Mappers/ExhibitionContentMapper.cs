@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
+using Exposeum.Models;
+using ExhibitionContent = Exposeum.Models.ExhibitionContent;
 using User = Exposeum.Models.User;
 
 namespace Exposeum.Mappers
@@ -20,7 +20,7 @@ namespace Exposeum.Mappers
         private readonly ExhibitionContentEnTdg _enTdg;
         private readonly ExhibitionContentFrTdg _frTdg;
 
-        private readonly Models.User _user; 
+        private readonly User _user; 
 
         private ExhibitionContentMapper()
         {
@@ -40,72 +40,72 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public List<ExhibitionContent> ConvertFromTableEn(List<Tables.ExhibitionContentEn> list)
+        public List<ExhibitionContent> ContentTableToModelEn(List<ExhibitionContentEn> list)
         {
             List<ExhibitionContent> modelsList= new List<ExhibitionContent>();
             
             foreach (var x in list)
             {
                 if (x.Discriminator == "TextContent")
-                    modelsList.Add(_textMapper.ConvertFromTable(x));
+                    modelsList.Add(_textMapper.TextTableToModelEn(x));
                 else if (x.Discriminator == "AudioContent")
-                    modelsList.Add(_audioMapper.ConvertFromTable(x));
+                    modelsList.Add(_audioMapper.AudioTableToModelEn(x));
                 else if (x.Discriminator == "ImageContent")
-                    modelsList.Add(_imageMapper.ConvertFromTable(x));
+                    modelsList.Add(_imageMapper.ImageTableToModelEn(x));
                 else 
-                    modelsList.Add(_videoMapper.ConvertFromTable(x));
+                    modelsList.Add(_videoMapper.VideoTableToModelEn(x));
             } 
             return modelsList;
         }
 
-        public List<ExhibitionContent> ConvertFromTableFr(List<Tables.ExhibitionContentFr> list)
+        public List<ExhibitionContent> ContentTableToModelFr(List<ExhibitionContentFr> list)
         {
             List<ExhibitionContent> modelsList = new List<ExhibitionContent>();
 
             foreach (var x in list)
             {
                 if (x.Discriminator == "TextContent")
-                    modelsList.Add(_textMapper.ConvertFromTable(x));
+                    modelsList.Add(_textMapper.TextTableToModelFr(x));
                 else if (x.Discriminator == "AudioContent")
-                    modelsList.Add(_audioMapper.ConvertFromTable(x));
+                    modelsList.Add(_audioMapper.AudioTableToModelFr(x));
                 else if (x.Discriminator == "ImageContent")
-                    modelsList.Add(_imageMapper.ConvertFromTable(x));
+                    modelsList.Add(_imageMapper.ImageTableToModelFr(x));
                 else
-                    modelsList.Add(_videoMapper.ConvertFromTable(x));
+                    modelsList.Add(_videoMapper.VideoTableToModelFr(x));
             }
             return modelsList;
         }
 
-        public List<Tables.ExhibitionContentEn> ConvertToTableEn(List<ExhibitionContent> list)
+        public List<ExhibitionContentEn> ContentModelToTableEn(List<ExhibitionContent> list)
         {
-            List<Tables.ExhibitionContentEn> tableList = new List<ExhibitionContentEn>();
+            List<ExhibitionContentEn> tableList = new List<ExhibitionContentEn>();
             foreach (var x in list)
             {
-                if (x.GetType().ToString() == "Exposeum.TempModels.AudioContent")
-                    tableList.Add(_audioMapper.ConvertFromModelEn((AudioContent)x));
-                else if (x.GetType().ToString() == "Exposeum.TempModels.VideoContent")
-                    tableList.Add(_videoMapper.ConvertFromModelEn((VideoContent)x));
-                else if (x.GetType().ToString() == "Exposeum.TempModels.TextContent")
-                    tableList.Add(_textMapper.ConvertFromModelEn((TextContent)x));
+                if (x.GetType().ToString() == "Exposeum.Models.AudioContent")
+                    tableList.Add(_audioMapper.AudioModelToTableEn((AudioContent)x));
+                else if (x.GetType().ToString() == "Exposeum.Models.VideoContent")
+                    tableList.Add(_videoMapper.VideoModelToTableEn((VideoContent)x));
+                else if (x.GetType().ToString() == "Exposeum.Models.TextContent")
+                    tableList.Add(_textMapper.TextModelToTableEn((TextContent)x));
                 else 
-                    tableList.Add(_imageMapper.ConvertFromModelEn((ImageContent)x));
+                    tableList.Add(_imageMapper.ImageModelToTableEn((ImageContent)x));
 
             }
             return tableList;
         }
-        public List<Tables.ExhibitionContentFr> ConvertToTableFr(List<ExhibitionContent> list)
+        public List<ExhibitionContentFr> ContentModelToTableFr(List<ExhibitionContent> list)
         {
-            List<Tables.ExhibitionContentFr> tableList = new List<ExhibitionContentFr>();
+            List<ExhibitionContentFr> tableList = new List<ExhibitionContentFr>();
             foreach (var x in list)
             {
-                if (x.GetType().ToString() == "Exposeum.TempModels.AudioContent")
-                    tableList.Add(_audioMapper.ConvertFromModelFr((AudioContent)x));
-                else if (x.GetType().ToString() == "Exposeum.TempModels.VideoContent")
-                    tableList.Add(_videoMapper.ConvertFromModelFr((VideoContent)x));
-                else if (x.GetType().ToString() == "Exposeum.TempModels.TextContent")
-                    tableList.Add(_textMapper.ConvertFromModelFr((TextContent)x));
+                if (x.GetType().ToString() == "Exposeum.Models.AudioContent")
+                    tableList.Add(_audioMapper.AudioModelToTableFr((AudioContent)x));
+                else if (x.GetType().ToString() == "Exposeum.Models.VideoContent")
+                    tableList.Add(_videoMapper.VideoModelToTableFr((VideoContent)x));
+                else if (x.GetType().ToString() == "Exposeum.Models.TextContent")
+                    tableList.Add(_textMapper.TextModelToTableFr((TextContent)x));
                 else
-                    tableList.Add(_imageMapper.ConvertFromModelFr((ImageContent)x));
+                    tableList.Add(_imageMapper.ImageModelToTableFr((ImageContent)x));
             }
             return tableList;
         }
@@ -117,7 +117,7 @@ namespace Exposeum.Mappers
             if (language == Models.Language.En)
             {
                 List<ExhibitionContentEn> tableList = new List<ExhibitionContentEn>();
-                tableList = ConvertToTableEn(list);
+                tableList = ContentModelToTableEn(list);
                 foreach (var x in tableList)
                 {
                     _enTdg.Add(x);
@@ -126,7 +126,7 @@ namespace Exposeum.Mappers
             else
             {
                 List<ExhibitionContentFr> tableList = new List<ExhibitionContentFr>();
-                tableList = ConvertToTableFr(list);
+                tableList = ContentModelToTableFr(list);
                 foreach (var x in tableList)
                 {
                     _frTdg.Add(x);
@@ -141,10 +141,10 @@ namespace Exposeum.Mappers
 
             if (language == Models.Language.En)
             {
-                modelList = ConvertFromTableEn(_enTdg.GetExhibitionContentByPoiId(id));
+                modelList = ContentTableToModelEn(_enTdg.GetExhibitionContentByPoiId(id));
             }
             else
-                modelList = ConvertFromTableFr(_frTdg.GetExhibitionContentByPoiId(id));
+                modelList = ContentTableToModelFr(_frTdg.GetExhibitionContentByPoiId(id));
 
             return modelList;
         }
@@ -153,11 +153,11 @@ namespace Exposeum.Mappers
         {
             foreach (var x in list)
             {
-                if(x.GetType().ToString()=="Exposeum.TempModels.TextContent")
+                if(x.GetType().ToString()=="Exposeum.Models.TextContent")
                     _textMapper.Update((TextContent)x);
-                else if (x.GetType().ToString() == "Exposeum.TempModels.AudioContent")
+                else if (x.GetType().ToString() == "Exposeum.Models.AudioContent")
                     _audioMapper.Update((AudioContent)x);
-                else if (x.GetType().ToString() == "Exposeum.TempModels.VideoContent")
+                else if (x.GetType().ToString() == "Exposeum.Models.VideoContent")
                     _videoMapper.Update((VideoContent)x);
                 else 
                     _imageMapper.Update((ImageContent)x);

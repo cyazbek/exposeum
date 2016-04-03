@@ -68,6 +68,7 @@
     <Compile Include="MapperTests\FloorMapperTest.cs" />
     <Compile Include="MapperTests\ImageContentMapperTest.cs" />
     <Compile Include="MapperTests\MapEdgeMapperTest.cs" />
+    <Compile Include="MapperTests\MapElementsMapperTest.cs" />
     <Compile Include="MapperTests\PointOfInterestDescriptionMapperTest.cs" />
     <Compile Include="MapperTests\PointOfInterestMapperTest.cs" />
     <Compile Include="MapperTests\StatusMapperTest.cs" />

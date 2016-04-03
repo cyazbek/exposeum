@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -22,9 +22,9 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public AudioContent ConvertFromTable(Tables.ExhibitionContentEn content)
+        public Models.AudioContent AudioTableToModelEn(Tables.ExhibitionContentEn content)
         {
-            return new AudioContent
+            return new Models.AudioContent
             {
                 Id = content.Id,
                 PoiId = content.PoiId,
@@ -37,7 +37,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public AudioContent ConvertFromTable(Tables.ExhibitionContentFr content)
+        public AudioContent AudioTableToModelFr(Tables.ExhibitionContentFr content)
         {
             return new AudioContent
             {
@@ -52,7 +52,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentEn ConvertFromModelEn(AudioContent content)
+        public Tables.ExhibitionContentEn AudioModelToTableEn(AudioContent content)
         {
 
             return new Tables.ExhibitionContentEn
@@ -68,7 +68,7 @@ namespace Exposeum.Mappers
             };
         }
 
-        public Tables.ExhibitionContentFr ConvertFromModelFr(AudioContent content)
+        public Tables.ExhibitionContentFr AudioModelToTableFr(AudioContent content)
         {
 
             return new Tables.ExhibitionContentFr
@@ -88,28 +88,28 @@ namespace Exposeum.Mappers
         {
             if (content.Language == Models.Language.Fr)
             {
-                _tdgFr.Add(ConvertFromModelFr(content));
+                _tdgFr.Add(AudioModelToTableFr(content));
             }
             else
-                _tdgEn.Add(ConvertFromModelEn(content));
+                _tdgEn.Add(AudioModelToTableEn(content));
         }
 
         public AudioContent Get(int id)
         {
             if (Models.User.GetInstance().Language == Models.Language.Fr)
             {
-                return ConvertFromTable(_tdgFr.GetExhibitionContentFr(id));
+                return AudioTableToModelFr(_tdgFr.GetExhibitionContentFr(id));
             }
             else
-                return ConvertFromTable(_tdgEn.GetExhibitionContentEn(id));
+                return AudioTableToModelEn(_tdgEn.GetExhibitionContentEn(id));
         }
 
         public void Update(AudioContent content)
         {
             if (content.Language == Models.Language.Fr)
-                _tdgFr.Update(ConvertFromModelFr(content));
+                _tdgFr.Update(AudioModelToTableFr(content));
             else
-                _tdgEn.Update(ConvertFromModelEn(content));
+                _tdgEn.Update(AudioModelToTableEn(content));
         }
 
     }
