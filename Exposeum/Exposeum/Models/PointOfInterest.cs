@@ -10,7 +10,6 @@ namespace Exposeum.Models
     public class PointOfInterest : MapElement 
     {
         public Beacon Beacon { get; set; }
-        public int Id { get; set; }
         public int StoryId { get; set; }
         private readonly float _iconScaleFactor = 0.2f;
         public PointOfInterestDescription Description { get; set; }

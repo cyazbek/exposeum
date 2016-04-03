@@ -52,5 +52,15 @@ namespace Exposeum.Models
 
             return areEquals;
         }
+
+        public bool AreEquals(MapElement m2)
+        {
+            if (GetType().ToString() == "Exposeum.Models.PointOfInterest" && m2.GetType().ToString() == "Exposeum.Models.PointOfInterest")
+                return ((PointOfInterest) this).AreEquals((PointOfInterest) m2);
+            if (GetType().ToString() == "Exposeum.Models.WayPoint" && m2.GetType().ToString() == "Exposeum.Models.WayPoint")
+                return ((WayPoint) this).Equals((WayPoint) m2);
+            else
+                return false;
+        }
     }
 }

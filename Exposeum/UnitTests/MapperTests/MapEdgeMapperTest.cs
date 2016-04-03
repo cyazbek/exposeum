@@ -2,14 +2,18 @@ using System.Collections.Generic;
 using Android.Graphics.Drawables;
 using Exposeum.Mappers;
 using Exposeum.Models;
+using Exposeum.Tables;
 using Exposeum.TDGs;
 using Java.Util;
 using NUnit.Framework;
+using Beacon = Exposeum.Models.Beacon;
+using Floor = Exposeum.Models.Floor;
+using MapEdge = Exposeum.Models.MapEdge;
 
 
 namespace UnitTests
 {
-    /*
+    
     [TestFixture]
     public class MapEdgeMapperTest
     {
