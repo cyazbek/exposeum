@@ -95,9 +95,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeaconActivity.cs" />
     <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="Mappers\AudioContentMapper.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
     <Compile Include="Mappers\MapEdgeMapper.cs" />
@@ -179,10 +181,8 @@
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BeaconActivity.cs" />
     <Compile Include="LanguageActivity.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="Models\BeaconFinder.cs" />
     <Compile Include="Models\IBeaconFinderObservable.cs" />
     <Compile Include="Models\IBeaconFinderObserver.cs" />

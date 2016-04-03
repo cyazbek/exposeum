@@ -7,6 +7,11 @@
         public string Summary { get; set; }
         public string Description { get; set; }
         public Models.Language Language { get; set; }
+
+        public PointOfInterestDescription()
+        {
+            
+        }
         public PointOfInterestDescription(string title, string summary, string description)
         {
             Title = title;

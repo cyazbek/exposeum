@@ -10,18 +10,11 @@ namespace Exposeum.Models
     public class PointOfInterest : MapElement
     {
         public Beacon Beacon { get; set; }
-        public string NameEn { get; set; }
-        public string NameFr { get; set; }
-        public string DescriptionEn { get; set; }
-        public string DescriptionFr { get; set; }
         public int Id { get; set; }
         public int StoryId { get; set; }
         private readonly float _iconScaleFactor = 0.2f;
-
         public PointOfInterestDescription Description { get; set; }
-
         public List<ExhibitionContent> ExhibitionContent { get; set; }
-
         private Drawable _visitedIcon;
         private Drawable _unvisitedIcon;
 
@@ -100,28 +93,22 @@ namespace Exposeum.Models
 
         public String GetHtml()
         {
-            string summary;
-
-            if (User.GetInstance().Language.Equals(Language.Fr))
-                summary = String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", NameFr);
-            else
-                summary = String.Format("<html><body>You selected {0}!<br><br></body></html>", NameEn);
-
-            return summary;
+            return String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", GetSummary());   
         }
 
         public string GetDescription()
         {
-            if (User.GetInstance().Language.Equals(Language.Fr))
-                return DescriptionFr;
-            return DescriptionEn;
+            return Description.Description;
         }
 
         public string GetName()
         {
-            if (User.GetInstance().Language.Equals(Language.Fr))
-                return NameFr;
-            return NameEn;
+            return Description.Title;
+        }
+
+        public string GetSummary()
+        {
+            return Description.Summary;
         }
 
         public bool CheckBeacon(Beacon b)
