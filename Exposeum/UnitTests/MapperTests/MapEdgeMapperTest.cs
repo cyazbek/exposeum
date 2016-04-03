@@ -158,8 +158,6 @@ namespace UnitTests
         public void MapEdgeTableToModelTest()
         {
             
-        }
-        
+        }        
     }
-    */
 }

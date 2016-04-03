@@ -35,28 +35,28 @@ namespace UnitTests
 		[Test()]
 		public void SwitchLanguageTest()
 		{
-            _user.SwitchLanguage(Language.Fr);
+            _user.SwitchLanguageTo(Language.Fr);
             Assert.AreEqual(_user.Language.ToString(), Language.Fr.ToString());
         }
         [Test()]
         public void GetTextOfButtonTest()
         {
             List<ButtonText> buttonText = _user.FrenchButtonString;
-            _user.SwitchLanguage(Language.Fr);
+            _user.SwitchLanguageTo(Language.Fr);
             Assert.AreSame(_user.CurrentButtonString, buttonText);
         }
         [Test()]
         public void GetFrenchImageTest()
         {
             List<int> images = _user.FrenchImageList;
-            _user.SwitchLanguage(Language.Fr);
+            _user.SwitchLanguageTo(Language.Fr);
             Assert.AreSame(_user.CurrentImageList, images);
         }
         [Test()]
         public void GetEnglishImageTest()
         {
             List<int> images = _user.EnglishImageList;
-            _user.SwitchLanguage(Language.En);
+            _user.SwitchLanguageTo(Language.En);
             Assert.AreSame(_user.CurrentImageList, images);
         }
 
@@ -72,7 +72,7 @@ namespace UnitTests
         public void ToogleLanguageTest()
         {
             Language language1 = Language.Fr;
-            _user.SwitchLanguage(language1);
+            _user.SwitchLanguageTo(language1);
             _user.ToogleLanguage();
             Assert.AreNotEqual(_user.Language.ToString(),language1.ToString());
         }

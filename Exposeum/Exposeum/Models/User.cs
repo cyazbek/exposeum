@@ -16,7 +16,7 @@ namespace Exposeum.Models
         public List<int> EnglishImageList = new List<int>();
         public bool Visitor;
         private static User _user ;
-        public List<LanguageObserver> LanguageObservers = new List<LanguageObserver>(); 
+        public List<LanguageObserver> LanguageObservers;
 
         private User()
         {
@@ -63,7 +63,9 @@ namespace Exposeum.Models
             EnglishImageList.Add(Resource.Drawable.first);
             EnglishImageList.Add(Resource.Drawable.second);    
             EnglishImageList.Add(Resource.Drawable.third);    
-            EnglishImageList.Add(Resource.Drawable.fourth);    
+            EnglishImageList.Add(Resource.Drawable.fourth);
+
+            LanguageObservers = new List<LanguageObserver>();
         }
         public static  User GetInstance()
         {
@@ -87,7 +89,7 @@ namespace Exposeum.Models
         {
             return CurrentImageList;
         }
-        public void SwitchLanguage(Language language)
+        public void SwitchLanguageTo(Language language)
         {
             Language = language;
             SetupLanguage();
@@ -104,6 +106,7 @@ namespace Exposeum.Models
                 CurrentButtonString = EnglishButtonString;
                 CurrentImageList = EnglishImageList;
             }
+            //NotifyAll();
         }
 
         public void ToogleLanguage()
