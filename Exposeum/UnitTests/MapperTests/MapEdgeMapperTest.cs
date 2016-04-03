@@ -87,7 +87,7 @@ namespace UnitTests
             contents.Add(audioContent);
             contents.Add(videoContent);
 
-            PointOfInterest poi1 = new PointOfInterest
+            _poi1 = new PointOfInterest
             {
                 Id = 1,
                 Visited = true,
@@ -96,32 +96,27 @@ namespace UnitTests
                 VCoordinate = 2f,
                 Floor = floor,
                 Beacon = beacon,
-                StoryLineId = 1,
+                StoryId = 1,
                 Description = pointOfInterestDescription,
                 ExhibitionContent = contents
             };
 
-            WayPoint waypoint = new WayPoint
+            _waypoint = new WayPoint(2f, 2f, floor)
             {
                 Id = 2,
                 Visited = true,
                 IconPath = "exit.png",
                 Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open("exit.png"), null),
-                UCoordinate = 2f,
-                VCoordinate = 2f,
-                Floor = floor,
                 Label = WaypointLabel.Exit
             };
 
-            PointOfInterestMapper.GetInstance().Add(poi1);
-            WayPointMapper.GetInstance().Add(waypoint);
+            PointOfInterestMapper.GetInstance().Add(_poi1);
+            WayPointMapper.GetInstance().Add(_waypoint);
 
-            _mapEdgeModel = new MapEdge
+            _mapEdgeModel = new MapEdge(_poi1, _waypoint)
             {
                 Id = 1,
                 Distance = 2.0,
-                Source = poi1,
-                Target = waypoint
             };
 
             _mapEdgeTable = new Exposeum.Tables.MapEdge
@@ -138,7 +133,7 @@ namespace UnitTests
         {
             _instance.AddMapEdge(_mapEdgeModel);
             _expected = _instance.GetMapEdge(_mapEdgeModel.Id);
-            Assert.True(_mapEdgeModel.Equals( _expected));
+            Assert.True(_mapEdgeModel.Equals(_expected));
         }
 
         [Test]
