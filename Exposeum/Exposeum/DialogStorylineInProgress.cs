@@ -22,7 +22,7 @@ namespace Exposeum
 			_storyLine = storyLine;
 		}
         
-		public DialogStorylineInProgress(StoryLine storyLine,Context context, Callback callback)
+		public DialogStorylineInProgress(StoryLine storyLine, Context context, Callback callback)
         {
             _storyLine = storyLine;
             _context = context; 
