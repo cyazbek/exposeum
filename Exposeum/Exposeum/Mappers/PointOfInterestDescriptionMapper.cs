@@ -1,7 +1,7 @@
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using PointOfInterestDescription = Exposeum.TempModels.PointOfInterestDescription;
+using PointOfInterestDescription = Exposeum.Models.PointOfInterestDescription;
 using User = Exposeum.Models.User;
 
 namespace Exposeum.Mappers
@@ -73,14 +73,14 @@ namespace Exposeum.Mappers
             return pointOfInterestDescriptionModel;
         }
 
-        public PointOfInterestDescription PointOfInterestDescriptionTableToModelEn(PoiDescriptionEn poiDescriptionFr)
+        public PointOfInterestDescription PointOfInterestDescriptionTableToModelEn(PoiDescriptionEn poiDescriptionEn)
         {
-            PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription
+            PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription(poiDescriptionEn.Title, poiDescriptionEn.Summary, poiDescriptionEn.Description)
             {
-                Id = poiDescriptionFr.Id,
-                Title = poiDescriptionFr.Title,
-                Summary = poiDescriptionFr.Summary,
-                Description = poiDescriptionFr.Description,
+                Id = poiDescriptionEn.Id,
+                Title = poiDescriptionEn.Title,
+                Summary = poiDescriptionEn.Summary,
+                Description = poiDescriptionEn.Description,
                 Language = User.GetInstance().Language
             };
             return pointOfInterestDescriptionModel;
@@ -88,12 +88,9 @@ namespace Exposeum.Mappers
 
         public PointOfInterestDescription PointOfInterestDescriptionTableToModelFr(PoiDescriptionFr poiDescriptionFr)
         {
-            PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription
+            PointOfInterestDescription pointOfInterestDescriptionModel = new PointOfInterestDescription (poiDescriptionFr.Title,poiDescriptionFr.Summary,poiDescriptionFr.Description)
             {
                 Id = poiDescriptionFr.Id,
-                Title = poiDescriptionFr.Title,
-                Summary = poiDescriptionFr.Summary,
-                Description = poiDescriptionFr.Description,
                 Language = User.GetInstance().Language
             };
             return pointOfInterestDescriptionModel;

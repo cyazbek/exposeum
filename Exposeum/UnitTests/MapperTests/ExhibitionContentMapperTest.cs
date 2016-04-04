@@ -3,16 +3,14 @@ using Exposeum.Mappers;
 using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
-using Java.Util;
 using NUnit.Framework;
-using AudioContent = Exposeum.TempModels.AudioContent;
-using ExhibitionContent = Exposeum.TempModels.ExhibitionContent;
-using ImageContent = Exposeum.TempModels.ImageContent;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
-using TextContent = Exposeum.TempModels.TextContent;
+using AudioContent = Exposeum.Models.AudioContent;
+using ExhibitionContent = Exposeum.Models.ExhibitionContent;
+using ImageContent = Exposeum.Models.ImageContent;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
+using TextContent = Exposeum.Models.TextContent;
 using User = Exposeum.Models.User;
-using VideoContent = Exposeum.TempModels.VideoContent;
+using VideoContent = Exposeum.Models.VideoContent;
 
 namespace UnitTests
 {

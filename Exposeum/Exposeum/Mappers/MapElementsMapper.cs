@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Enum = System.Enum;
-using MapElement = Exposeum.TempModels.MapElement;
-using PointOfInterest = Exposeum.TempModels.PointOfInterest;
+using MapElement = Exposeum.Models.MapElement;
+using PointOfInterest = Exposeum.Models.PointOfInterest;
 
 namespace Exposeum.Mappers
 {
@@ -53,33 +53,24 @@ namespace Exposeum.Mappers
         {
             foreach (var x in elements)
             {
-                if(elements.GetType().ToString() == "Exposeum.TempModels.PointOfInterest")
+                if(x.GetType().ToString() == "Exposeum.Models.PointOfInterest")
                     _pointOfInterestMapper.Add((PointOfInterest)x);
                 else 
                     _wayPointMapper.Add((WayPoint)x);
             }
         }
 
-        public List<MapElement> GetAllElementByStorylineId(int id)
+        public List<MapElement> GetAllElementsFromListOfMapElementIds(List<int> listMapElementsId)
         {
-            List<MapElements> list = new List<MapElements>();
-            list=_mapElementsTdg.GetAllMapElements();
-            List<MapElements> tableElements = new List<MapElements>();
-            foreach (var x in list)
-            {
-                if(x.StoryLineId==id)
-                    tableElements.Add(x);
-            }
+            List<int> mapElementsId = listMapElementsId;
+
             List<MapElement> modelList = new List<MapElement>();
-            foreach (var x in tableElements)
+
+            foreach (int x in mapElementsId)
             {
-                if(x.Discriminator=="PointOfInterest")
-                    modelList.Add(_pointOfInterestMapper.PoiTableToModel(x));
-                else
-                {
-                    modelList.Add((_wayPointMapper.WaypointTableToModel(x)));
-                }
+                modelList.Add(Get(x));
             }
+
             return modelList;
         }
 
@@ -87,7 +78,7 @@ namespace Exposeum.Mappers
         {
             foreach (var x in list)
             {
-                if(x.GetType().ToString()=="Exposeum.TempModels.PointOfInterest")
+                if(x.GetType().ToString()=="Exposeum.Models.PointOfInterest")
                     _pointOfInterestMapper.Update((PointOfInterest)x);
                 else 
                     _wayPointMapper.Update((WayPoint)x);

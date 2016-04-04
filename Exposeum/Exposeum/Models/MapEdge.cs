@@ -7,8 +7,8 @@ namespace Exposeum.Models
 	{
         public int Id { get; set; }
         public double Distance {get; set;}
-        public MapElement Source { get; }
-        public MapElement Target { get; }
+        public MapElement Source { get; set; }
+        public MapElement Target { get; set; }
 
         public MapEdge(MapElement start, MapElement end)
         {
@@ -28,9 +28,9 @@ namespace Exposeum.Models
             MapEdge other = (MapEdge)obj;
 
             return Id == other.Id &&
-                  Math.Abs(Distance - other.Distance) < 0 &&
-                  Source.Equals(other.Source) &&
-                  Target.Equals(other.Target);
+                  Math.Abs(Distance - other.Distance) <= 0 &&
+                  Source.AreEquals(other.Source) &&
+                  Target.AreEquals(other.Target);
         }
 
     }

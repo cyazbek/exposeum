@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Android.Graphics;
 
@@ -13,7 +13,11 @@ namespace Exposeum.Models
         public float VCoordinate { get; set; }
         public Floor Floor { get; set; }
 
+<<<<<<< .merge_file_LTZqhw
         
+=======
+        public bool Visited { get; set; }
+>>>>>>> .merge_file_tFuYKx
 
         protected MapElement()
         {

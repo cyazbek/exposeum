@@ -35,13 +35,27 @@
             android:paddingTop="20dip"
             android:paddingLeft="85dip"
             android:paddingRight="5dip"
-            android:text="Please retrace back to:  " />
+            android:text="Continue the storyline from this point?" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp">
+            <Button
+                android:text="Yes"
+                android:id="@+id/rightPointButton"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+            <Button
+                android:text="No"
+                android:id="@+id/wrongPointButton"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+        </LinearLayout>
     </LinearLayout>
-    <Button
-        android:text="Dismiss"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Text"
-        android:id="@+id/wrongPointButton"
-        android:layout_marginTop="20dp" />
 </RelativeLayout>

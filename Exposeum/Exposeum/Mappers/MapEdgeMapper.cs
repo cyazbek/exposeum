@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 
 namespace Exposeum.Mappers
 {
@@ -8,14 +8,13 @@ namespace Exposeum.Mappers
     {
         private static MapEdgeMapper _instance;
         private readonly MapEdgeTdg _mapEdgeTdg;
-        private readonly List<MapEdge> _listOfEdges;
+        
         private readonly MapElementsMapper _mapElementsMapper;
 
 
         private MapEdgeMapper()
         {
             _mapEdgeTdg = MapEdgeTdg.GetInstance();
-            _listOfEdges = new List<MapEdge>();
             _mapElementsMapper = MapElementsMapper.GetInstance();
         }
 
@@ -49,7 +48,7 @@ namespace Exposeum.Mappers
         public List<MapEdge> GetAllMapEdges()
         {
             List<Tables.MapEdge> listEdges = _mapEdgeTdg.GetAllEdges();
-
+            List<MapEdge> _listOfEdges = new List<MapEdge>();
             foreach (var edge in listEdges)
             {
                 MapEdge edgeModel = MapEdgeTableToModel(edge);
@@ -59,7 +58,7 @@ namespace Exposeum.Mappers
             return _listOfEdges;
         }
 
-        private Tables.MapEdge MapEdgeModelToTable(MapEdge edge)
+        public Tables.MapEdge MapEdgeModelToTable(MapEdge edge)
         {
             Tables.MapEdge edgeTable = new Tables.MapEdge
             {
@@ -80,14 +79,12 @@ namespace Exposeum.Mappers
             }
         }
 
-        private MapEdge MapEdgeTableToModel(Tables.MapEdge edgeTable)
+        public MapEdge MapEdgeTableToModel(Tables.MapEdge edgeTable)
         {
-            MapEdge edgeModel = new MapEdge
+            MapEdge edgeModel = new MapEdge(_mapElementsMapper.Get(edgeTable.StartMapElementId), _mapElementsMapper.Get(edgeTable.EndMapElementId))
             {
                 Id = edgeTable.Id,
                 Distance = edgeTable.Distance,
-                Source = _mapElementsMapper.Get(edgeTable.StartMapElementId),
-                Target = _mapElementsMapper.Get(edgeTable.EndMapElementId),
             };
 
             return edgeModel;

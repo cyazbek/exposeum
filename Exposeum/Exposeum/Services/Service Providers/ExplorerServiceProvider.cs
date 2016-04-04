@@ -7,9 +7,9 @@ namespace Exposeum.Services.Service_Providers
 		//this service is only concerned with the Storylines so we use the story line service
 		private readonly IStoryLineService _storyLineService;
 
-		public ExplorerServiceProvider ()
+		public ExplorerServiceProvider (IStoryLineService storyLineService)
 		{
-			_storyLineService = new StoryLineServiceProvider ();
+			_storyLineService = storyLineService;
 		}
 
 		public void SetExplorerStoryLineAsActive(){

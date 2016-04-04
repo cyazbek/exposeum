@@ -24,7 +24,7 @@ namespace Exposeum
             frenchButton.Click += (sender, e)=>
             {
                 
-                _user.SwitchLanguage(Language.Fr);
+                _user.SwitchLanguageTo(Language.Fr);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
 
@@ -32,7 +32,7 @@ namespace Exposeum
 
             englishButton.Click += (sender, e) =>
             {
-                _user.SwitchLanguage(Language.En);
+                _user.SwitchLanguageTo(Language.En);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
                 StartActivity(intent);
             };
