@@ -100,12 +100,10 @@ namespace Exposeum
 					Id = int.Parse (poiOBJ ["id"].ToString ()),
 					UCoordinate = 0.0f, //TODO: FIX
 					VCoordinate = 0.0f,
-					IconPath = poiOBJ ["description"].ToString (),
 					Discriminator = "PointOfInterest",
 					Visited = 0, //default unvisited
 					BeaconId = currentPOIsBeacon.Id,
-
-					//TODO: Storyline ID!
+					StoryLineId = int.Parse(poiOBJ["storyPoint"].First["storylineID"].ToString()),
 					//TODO: POIDescription!
 					//TODO: Label!
 
@@ -123,15 +121,10 @@ namespace Exposeum
 					Id = int.Parse (waypointOBJ ["id"].ToString ()),
 					UCoordinate = 0.0f, //TODO: FIX
 					VCoordinate = 0.0f,
-					IconPath = String.Empty, //TODO: check with Andrea or Firas about this
+					IconPath = String.Empty,
 					Discriminator = "Waypoint",
 					Visited = 0, //default unvisited
-					BeaconId = -1, //TODO: check with Andrea or Firas about this
-
-					//TODO: Storyline ID!
-					//TODO: POIDescription!
-					//TODO: Label!
-
+					Label = (waypointOBJ ["label"].ToString ()),
 					FloorId = int.Parse (waypointOBJ ["floorID"].ToString ())
 
 				};
@@ -157,7 +150,7 @@ namespace Exposeum
 
 					//TODO: lastVisitedPOI!
 
-					Status = 0 //TODO: Check w/ Andrea or Firas
+					Status = 2
 					
 					//TODO: DescriptionId!
 
