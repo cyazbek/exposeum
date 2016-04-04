@@ -17,6 +17,7 @@ namespace Exposeum
 
 		private BeaconFinder _beaconFinder;
 		private MapController _mapController;
+	    private float mLastPosY;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -57,6 +58,7 @@ namespace Exposeum
             fragmentTx.Add(Resource.Id.floor_selector_frame, floorselectofrag);
             fragmentTx.Commit();
 
+            //floorFrameLayout.SetOnTouchListener(this);
 
 
 
@@ -127,7 +129,31 @@ namespace Exposeum
 
 	    public bool OnTouch(View v, MotionEvent e)
 	    {
-	        throw new System.NotImplementedException();
+	        switch (e.Action)
+	        {
+                case MotionEventActions.Down:
+	                mLastPosY = e.GetY();
+	                return true;
+
+                case MotionEventActions.Move:
+	                var currentPosition = e.GetY();
+	                var deltaY = mLastPosY - currentPosition;
+
+	                var transY = v.TranslationY;
+
+	                transY -= deltaY;
+
+	                if (transY < 0)
+	                {
+	                    transY = 0;
+	                }
+
+	                v.TranslationY = transY;
+
+	                return true;
+	        }
+
+	        return true;
 	    }
 	}
 }

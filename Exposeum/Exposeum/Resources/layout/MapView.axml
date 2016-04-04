@@ -31,7 +31,8 @@
         android:id="@+id/floor_selector_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="top">
+        android:layout_gravity="top"
+        android:translationY="10dp">
     <!-- map progression fragment will be placed here -->
     </FrameLayout>
 </FrameLayout>

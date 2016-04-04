@@ -455,4 +455,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\floor_selector_bg.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\seekthumb.png" />
+  </ItemGroup>
 </Project>
