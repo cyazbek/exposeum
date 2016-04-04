@@ -133,19 +133,17 @@ namespace Exposeum.Mappers
 
         public bool Equals(List<StoryLine> list1, List<StoryLine> list2)
         {
-            bool result = false;
-            if (list1.Count == list2.Count)
+            if (list1.Count != list2.Count)
+                return false;
+
+            bool areEquals = false;
+
+            for (int i = 0; i < list1.Count; i++)
             {
-                for (int i = 0; i < list1.Count; i++)
-                {
-                    if (Equals(list1[i], list2[i]))
-                        result = true;
-                    else
-                        return false;
-                }
-                return result;
+               areEquals = list1[i].AreEquals(list2[i]);
             }
-            return false;
+
+            return areEquals;
         }
     }
 }
