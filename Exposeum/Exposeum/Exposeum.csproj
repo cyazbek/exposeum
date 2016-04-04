@@ -462,4 +462,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\anim\slide_up_up.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floor3.png" />
+  </ItemGroup>
 </Project>

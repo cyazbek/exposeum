@@ -26,7 +26,7 @@ namespace Exposeum.Models
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
-			SeedData ();
+			SeedDD ();
             User.GetInstance().Register(this);
 		}
 
@@ -37,8 +37,129 @@ namespace Exposeum.Models
 
 	        return _instance;
 	    }
-        
-		private void SeedData()
+
+	    private void SeedDD()
+	    {
+	        Drawable floorplan1;
+
+	        try
+	        {
+	            floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor3);
+	        }
+	        catch (Exception e)
+	        {
+	            floorplan1 = new ColorDrawable();
+	        }
+
+            Floor floor1 = new Floor(floorplan1);
+            Floors = new List<Floor>();
+
+            Floors.Add(floor1);
+	        CurrentFloor = floor1;
+
+
+            PointOfInterestDescription DescriptionEn1 = new PointOfInterestDescription()
+            {
+                Id = 0,
+                Language = Language.En,
+                Summary = "",
+                Description = "Professor's office",
+                Title = "EV 3.187"
+            };
+
+            PointOfInterestDescription DescriptionEn2 = new PointOfInterestDescription()
+            {
+                Id = 1,
+                Language = Language.En,
+                Summary = "",
+                Description = "Read the instructions carefully for your safety!",
+                Title = "Follow the exit signs"
+            };
+
+            PointOfInterestDescription DescriptionEn3 = new PointOfInterestDescription()
+            {
+                Id = 2,
+                Language = Language.En,
+                Summary = "",
+                Description = "Get some rest. It's over!",
+                Title = "End of your demo"
+            };
+
+/*
+            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
+            Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 11163, 7229);
+            Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 32561, 47495);
+*/
+            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
+            Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
+            Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 49800, 5890);
+
+            PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
+            p1.Description = DescriptionEn1;
+            p1.Visited = false;
+            p1.Beacon = beacon1;
+
+            PointOfInterest p2 = new PointOfInterest(0.408163f, 0.17157f, floor1);
+            p2.Description = DescriptionEn2;
+            p2.Visited = false;
+            p2.Beacon = beacon2;
+
+            PointOfInterest p3= new PointOfInterest(0.219780f, 0.171571f, floor1);
+            p3.Description = DescriptionEn3;
+            p3.Visited = false;
+            p3.Beacon = beacon3;
+
+
+
+            WayPoint waypoint0 = new WayPoint(0.7849f, 0.2339f, floor1);
+            WayPoint waypoint1 = new WayPoint(0.7849f, 0.3119f, floor1);
+            WayPoint waypoint2 = new WayPoint(0.7692f, 0.3275f, floor1);
+            WayPoint waypoint3 = new WayPoint(0.7692f, 0.4055f, floor1);
+            WayPoint waypoint4 = new WayPoint(0.5023f, 0.4055f, floor1);
+            WayPoint waypoint5 = new WayPoint(0.5023f, 0.1871f, floor1);
+            WayPoint waypoint6 = new WayPoint(0.3610f, 0.1871f, floor1);
+            WayPoint waypoint7 = new WayPoint(0.7849f, 0.1871f, floor1);
+
+
+            StorylineDescription storyDescriptionEn1 = new StorylineDescription
+            {
+                StoryLineDescriptionId = 1,
+                Title = "Demo Storyline",
+                IntendedAudience = "Students",
+                Description = "Let's see how good is your mobile app!",
+                Language = Language.En
+            };
+
+
+            StoryLine storyline = new StoryLine
+            {
+                StorylineId = 1,
+                StorylineDescription = storyDescriptionEn1,
+                Duration = 20,
+                ImageId = Resource.Drawable.NipperTheDog
+            };
+
+            storyline.AddMapElement(p1);
+            storyline.AddMapElement(waypoint0);
+            storyline.AddMapElement(waypoint1);
+            storyline.AddMapElement(waypoint2);
+            storyline.AddMapElement(waypoint3);
+            storyline.AddMapElement(waypoint4);
+            storyline.AddMapElement(waypoint5);
+            storyline.AddMapElement(waypoint6);
+            storyline.AddMapElement(p2);
+            storyline.AddMapElement(waypoint7);
+            storyline.AddMapElement(p3);
+
+
+            Storylines.Add(storyline);
+
+            //Set the storyline for the explorer mode
+            CurrentStoryline = storyline;
+
+        }
+
+        private void SeedData()
 		{
             //setting up Floors
 
