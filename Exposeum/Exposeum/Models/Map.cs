@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
@@ -44,22 +44,12 @@ namespace Exposeum.Models
 
 		    Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
 
-		    try
-		    {
-		        floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
-		        floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
-		        floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
-		        floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
-		        floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
-		    }
-		    catch (Exception e)
-		    {
-                floorplan1 = new ColorDrawable();
-                floorplan2 = new ColorDrawable();
-                floorplan3 = new ColorDrawable();
-                floorplan4 = new ColorDrawable();
-                floorplan5 = new ColorDrawable();
-            }
+            floorplan1 = new ColorDrawable();
+            floorplan2 = new ColorDrawable();
+            floorplan3 = new ColorDrawable();
+            floorplan4 = new ColorDrawable();
+            floorplan5 = new ColorDrawable();
+
 
 		    Floor floor1 = new Floor(floorplan1),
 		        floor2 = new Floor(floorplan2),
