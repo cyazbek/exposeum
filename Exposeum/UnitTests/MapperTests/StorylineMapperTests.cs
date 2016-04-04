@@ -64,6 +64,21 @@ namespace UnitTests
             Assert.IsTrue(_storyLine.AreEquals(expected));
         }
 
+        [Test]
+        public void UpdateStorylineTest()
+        {
+            _storylineMapper.AddStoryline(_storyLine);
+            StoryLine expected = _storylineMapper.GetStoryline(_storyLine.StorylineId);
+            Assert.IsTrue(_storyLine.AreEquals(expected));
+
+            _storyLine.Duration = 10;
+            _storylineMapper.UpdateStoryline(_storyLine);
+
+            expected = _storylineMapper.GetStoryline(_storyLine.StorylineId);
+            Assert.IsTrue(_storyLine.AreEquals(expected));
+            Assert.AreEqual(10, expected.Duration);
+        }
+
         public List<MapElement> SetMapElements()
         {
             List<MapElement> mapElements = new List<MapElement>();
