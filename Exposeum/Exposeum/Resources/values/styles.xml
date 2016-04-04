@@ -16,5 +16,10 @@
   <item name="android:windowEnterAnimation">@anim/slide_up</item>
   <item name="android:windowExitAnimation">@anim/slide_right</item>
   </style>
+
+  <style name="dialog_upup">
+    <item name="android:windowEnterAnimation">@anim/slide_up</item>
+    <item name="android:windowExitAnimation">@anim/slide_up_up</item>
+  </style>
 </resources>
 

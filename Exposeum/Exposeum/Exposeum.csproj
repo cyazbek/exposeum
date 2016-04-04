@@ -459,4 +459,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\bblue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_up_up.xml" />
+  </ItemGroup>
 </Project>

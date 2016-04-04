@@ -48,7 +48,7 @@ namespace Exposeum
             _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
 
             //==========================================================================================================
-
+            /*
             var BarButton = FindViewById<Button>(Resource.Id.butonn);
             BarButton.Click += (s, e) =>
             {
@@ -62,7 +62,7 @@ namespace Exposeum
 
 
             };
-
+            */
 
 
 

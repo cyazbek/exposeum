@@ -56,7 +56,7 @@ namespace Exposeum.Menu_Bar
         {
             Dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnActivityCreated(savedInstanceState);
-            Dialog.Window.Attributes.WindowAnimations = Resource.Style.dialog_animation;
+            Dialog.Window.Attributes.WindowAnimations = Resource.Style.dialog_upup;
         }
 
     }
