@@ -26,7 +26,7 @@ namespace Exposeum
 			InitSingletons ();          
 			InitIoCContainer ();
 			InitIoCBindings ();
-			new MapJSONParser ().FetchAndParseMapJSON ();
+			new MapJSONParser ().	FetchAndParseMapJSON ();
         }
 
 		protected void InitSingletons(){

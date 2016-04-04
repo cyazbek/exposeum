@@ -27,6 +27,7 @@ namespace Exposeum
 		private List<MapElements> mapelements;
 		private List<Storyline> storylines;
 		private List<Beacon> beacons;
+		private List<MapEdge> edges;
 
 		private List<PoiDescriptionEn> englishPOIDescriptions;
 		private List<PoiDescriptionFr> frenchPOIDescriptions;
@@ -34,8 +35,12 @@ namespace Exposeum
 		private List<ExhibitionContentEn> englishExhibitionContent;
 		private List<ExhibitionContentFr> frenchExhibitionContent;
 
+		private List<StoryLineDescriptionEn> englishStorylineDescriptions;
+		private List<StoryLineDescriptionFr> frenchStorylineDescriptions;
+
 		private int newBeaconId = 0; //we aren't given but we need new beacon Ids
 		private int newPoiDescriptionId = 0, newStorylineDescriptionId = 0;
+		private int newEdgeId = 0;
 
 		private int audioId = 0, videoId = 0, imageId = 0;
 
@@ -55,6 +60,9 @@ namespace Exposeum
 
 			//deserialize and store the storylines from the JSON data
 			ParseStorylines (JSONPayload);
+
+			//deserialize and store the storylines from the JSON data
+			ParseEdges (JSONPayload);
 
 			//send the parsed data to be saved in the database
 			StoreParsedDataDB();
@@ -88,6 +96,9 @@ namespace Exposeum
 
 			englishExhibitionContent = new List<ExhibitionContentEn>();
 			frenchExhibitionContent = new List<ExhibitionContentFr> ();
+
+			englishStorylineDescriptions = new List<StoryLineDescriptionEn> ();
+			frenchStorylineDescriptions = new List<StoryLineDescriptionFr> ();
 
 			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
 
@@ -188,6 +199,9 @@ namespace Exposeum
 					Description = storylineOBJ["description"].ToString(),
 				};
 
+				englishStorylineDescriptions.Add (newStorylineDescriptionEN);
+				frenchStorylineDescriptions.Add (newStorylineDescriptionFR);
+
 				Storyline newStoryline = new Storyline {
 
 					Id = int.Parse (storylineOBJ ["id"].ToString ()),
@@ -202,6 +216,23 @@ namespace Exposeum
 				await FetchAndSaveImage (newStoryline.ImagePath); //fetch and save the thumbnail to the device
 
 				storylines.Add (newStoryline);
+			}
+		}
+
+		private async void ParseEdges(JObject JSONPayload){
+
+			edges = new List<MapEdge>();
+
+			foreach (var edgeObj in JSONPayload["edge"]) {
+
+				MapEdge newEdge = new MapEdge {
+					Id = newEdgeId++,
+					StartMapElementId = int.Parse (edgeObj ["startNode"].ToString ()),
+					EndMapElementId = int.Parse (edgeObj ["endNode"].ToString ()),
+					Distance = float.Parse (edgeObj ["distance"].ToString ())
+				};
+
+				edges.Add (newEdge);
 			}
 		}
 
@@ -269,6 +300,48 @@ namespace Exposeum
 
 			foreach (var beacon in beacons) {
 				beaconTdg.Add (beacon);
+			}
+
+			ExhibitionContentEnTdg EnContentTdg = ExhibitionContentEnTdg.GetInstance();
+
+			foreach (var content in englishExhibitionContent) {
+				EnContentTdg.Add (content);
+			}
+
+			ExhibitionContentFrTdg FrContentTdg = ExhibitionContentFrTdg.GetInstance();
+
+			foreach (var content in frenchExhibitionContent) {
+				FrContentTdg.Add (content);
+			}
+
+			PoiDescriptionEnTdg EnPoiDescriptionTdg = PoiDescriptionEnTdg.GetInstance();
+
+			foreach (var description in englishPOIDescriptions) {
+				EnPoiDescriptionTdg.Add (description);
+			}
+
+			PoiDescriptionFrTdg FrPoiDescriptionTdg = PoiDescriptionFrTdg.GetInstance();
+
+			foreach (var description in frenchPOIDescriptions) {
+				FrPoiDescriptionTdg.Add (description);
+			}
+
+			StoryLineDescriptionEnTdg EnStorylineDescriptionTdg = StoryLineDescriptionEnTdg.GetInstance();
+
+			foreach (var description in englishStorylineDescriptions) {
+				EnStorylineDescriptionTdg.Add (description);
+			}
+
+			StoryLineDescriptionFrTdg FrStorylineDescriptionTdg = StoryLineDescriptionFrTdg.GetInstance();
+
+			foreach (var description in frenchStorylineDescriptions) {
+				FrStorylineDescriptionTdg.Add (description);
+			}
+
+			MapEdgeTdg MapEdgeTdg = MapEdgeTdg.GetInstance ();
+
+			foreach (var edge in edges) {
+				MapEdgeTdg.Add (edge);
 			}
 		}
 
