@@ -16,6 +16,7 @@ namespace Exposeum
 
 	public class MapJSONParser
 	{
+		String JSONData;
 
 		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum";
 		private readonly String JSON_SCHEMA_FILENAME = "Map.json";
@@ -27,12 +28,21 @@ namespace Exposeum
 		private List<Storyline> storylines;
 		private List<Beacon> beacons;
 
+		private List<PoiDescriptionEn> englishPOIDescriptions;
+		private List<PoiDescriptionFr> frenchPOIDescriptions;
+
+		private List<ExhibitionContentEn> englishExhibitionContent;
+		private List<ExhibitionContentFr> frenchExhibitionContent;
+
 		private int newBeaconId = 0; //we aren't given but we need new beacon Ids
+		private int newPoiDescriptionId = 0, newStorylineDescriptionId = 0;
+
+		private int audioId = 0, videoId = 0, imageId = 0;
 
 		public async void FetchAndParseMapJSON(){
 
 			//fetch the JSON file from the internet
-			String JSONData = await DownloadJSONAsync (JSON_BASE_URL + "/" + JSON_SCHEMA_FILENAME);
+			JSONData = await DownloadJSONAsync (JSON_BASE_URL + "/" + JSON_SCHEMA_FILENAME);
 
 			//deserialize into JObject which we can iterate over
 			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
@@ -73,6 +83,11 @@ namespace Exposeum
 		{
 			mapelements = new List<MapElements>();
 			beacons = new List<Beacon> ();
+			englishPOIDescriptions = new List<PoiDescriptionEn>();
+			frenchPOIDescriptions = new List<PoiDescriptionFr>();
+
+			englishExhibitionContent = new List<ExhibitionContentEn>();
+			frenchExhibitionContent = new List<ExhibitionContentFr> ();
 
 			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
 
@@ -95,23 +110,42 @@ namespace Exposeum
 					beacons.Add (currentPOIsBeacon);
 				}
 
+				PoiDescriptionEn newPOIDescriptionEN = new PoiDescriptionEn
+				{
+					Id = newPoiDescriptionId, //TODO: extract data from the html??
+					Title = poiOBJ["description"].First["description"].ToString(),
+					Summary = poiOBJ["description"].First["description"].ToString(),
+					Description = poiOBJ["description"].First["description"].ToString()
+				};
+
+				PoiDescriptionFr newPOIDescriptionFR = new PoiDescriptionFr
+				{
+					Id = newPoiDescriptionId,
+					Title = poiOBJ["description"].First["description"].ToString(), //TODO: extract data from the html??
+					Summary = poiOBJ["description"].First["description"].ToString(),
+					Description = poiOBJ["description"].First["description"].ToString()
+				};
+
+				englishPOIDescriptions.Add (newPOIDescriptionEN);
+				frenchPOIDescriptions.Add (newPOIDescriptionFR);
+
 				MapElements newPOI = new MapElements {
 					
 					Id = int.Parse (poiOBJ ["id"].ToString ()),
-					UCoordinate = 0.0f, //TODO: FIX
-					VCoordinate = 0.0f,
 					Discriminator = "PointOfInterest",
 					Visited = 0, //default unvisited
 					BeaconId = currentPOIsBeacon.Id,
 					StoryLineId = int.Parse(poiOBJ["storyPoint"].First["storylineID"].ToString()),
-					//TODO: POIDescription!
-					//TODO: Label!
-
-					FloorId = int.Parse (poiOBJ ["floorID"].ToString ())
-
+					PoiDescription = newPoiDescriptionId++, //increment
+					FloorId = int.Parse (poiOBJ ["floorID"].ToString ()),
+					UCoordinate = float.Parse(poiOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (poiOBJ ["floorID"].ToString ())),
+					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (poiOBJ ["floorID"].ToString ()))
 				};
 		
+				AddExhibitionContent (newPOI.Id, poiOBJ ["media"]);
+
 				mapelements.Add (newPOI);
+
 			}
 
 			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
@@ -119,14 +153,13 @@ namespace Exposeum
 				MapElements newWaypoint = new MapElements {
 
 					Id = int.Parse (waypointOBJ ["id"].ToString ()),
-					UCoordinate = 0.0f, //TODO: FIX
-					VCoordinate = 0.0f,
 					IconPath = String.Empty,
 					Discriminator = "Waypoint",
 					Visited = 0, //default unvisited
 					Label = (waypointOBJ ["label"].ToString ()),
-					FloorId = int.Parse (waypointOBJ ["floorID"].ToString ())
-
+					FloorId = int.Parse (waypointOBJ ["floorID"].ToString ()),
+					UCoordinate = float.Parse(waypointOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (waypointOBJ ["floorID"].ToString ())),
+					VCoordinate = float.Parse(waypointOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (waypointOBJ ["floorID"].ToString ()))
 				};
 
 				mapelements.Add (newWaypoint);
@@ -141,18 +174,28 @@ namespace Exposeum
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
+				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
+				{
+					Id = newStorylineDescriptionId, //TODO: extract data from the html??
+					Title = storylineOBJ["title"].ToString(),
+					Description = storylineOBJ["description"].ToString(),
+				};
+
+				StoryLineDescriptionFr newStorylineDescriptionFR = new StoryLineDescriptionFr
+				{
+					Id = newStorylineDescriptionId, //increment
+					Title = storylineOBJ["title"].ToString(),
+					Description = storylineOBJ["description"].ToString(),
+				};
+
 				Storyline newStoryline = new Storyline {
 
 					Id = int.Parse (storylineOBJ ["id"].ToString ()),
 					Duration = int.Parse (storylineOBJ ["walkingTimeInMinutes"].ToString ()),
 					ImagePath = storylineOBJ ["thumbnail"].ToString (),
 					FloorsCovered = int.Parse (storylineOBJ ["floorsCovered"].ToString ()),
-
-					//TODO: lastVisitedPOI!
-
-					Status = 2
-					
-					//TODO: DescriptionId!
+					Status = 2,
+					DescriptionId = newStorylineDescriptionId++
 
 				};
 
@@ -227,6 +270,100 @@ namespace Exposeum
 			foreach (var beacon in beacons) {
 				beaconTdg.Add (beacon);
 			}
+		}
+
+		private void AddExhibitionContent(int PoiID, JToken JsonObj){
+
+			//loop for video
+
+			foreach (var videoObj in JsonObj["video"]) {
+				
+				ExhibitionContentEn newEnglishExContent = new ExhibitionContentEn {
+					Id = videoId,
+					Title = (videoObj["caption"]).ToString(),
+					PoiId = PoiID,
+					Filepath = (videoObj["path"]).ToString(),
+					Duration = -1, //not given by map team
+					Encoding = string.Empty, //not gven by map team
+					Resolution = -1 //not given by map team
+				};
+
+				ExhibitionContentFr newFrenchExContent = new ExhibitionContentFr {
+					Id = videoId,
+					Title = (videoObj["caption"]).ToString(),
+					PoiId = PoiID,
+					Filepath = (videoObj["path"]).ToString(),
+					Duration = -1, //not given by map team
+					Encoding = string.Empty, //not gven by map team
+					Resolution = -1 //not given by map team
+				};
+
+				englishExhibitionContent.Add (newEnglishExContent);
+				frenchExhibitionContent.Add (newFrenchExContent);
+
+				FetchAndSaveImage (newEnglishExContent.Filepath);
+				FetchAndSaveImage (newFrenchExContent.Filepath);
+					
+			}
+
+			//loop for audio
+
+			foreach (var audioObj in JsonObj["audio"]) {
+				//not yet implemented by map team
+			}
+
+			//loop for images
+
+			foreach (var imageObj in JsonObj["image"]) {
+
+				ExhibitionContentEn newEnglishExContent = new ExhibitionContentEn {
+					Id = imageId,
+					Title = (imageObj["caption"]).ToString(),
+					PoiId = PoiID,
+					Filepath = (imageObj["path"]).ToString(),
+				};
+
+				ExhibitionContentFr newFrenchExContent = new ExhibitionContentFr {
+					Id = imageId++,
+					Title = (imageObj["caption"]).ToString(),
+					PoiId = PoiID,
+					Filepath = (imageObj["path"]).ToString(),
+				};
+
+				englishExhibitionContent.Add (newEnglishExContent);
+				frenchExhibitionContent.Add (newFrenchExContent);
+
+				FetchAndSaveImage (newEnglishExContent.Filepath);
+				FetchAndSaveImage (newFrenchExContent.Filepath);
+			}
+		}
+
+		private float getFloorWidth(int floorID){
+
+			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
+
+			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
+
+				if (int.Parse ((String)floorOBJ ["floorID"]) == floorID) {
+					return float.Parse ((String)floorOBJ ["imageWidth"]);
+				}
+			}
+
+			return -1.0f; //not found
+
+		}
+
+		private float getFloorHeight(int floorID){
+			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
+
+			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
+
+				if (int.Parse ((String)floorOBJ ["floorID"]) == floorID) {
+					return float.Parse ((String)floorOBJ ["imageHeight"]);
+				}
+			}
+
+			return -1.0f; //not found
 		}
 	}
 }
