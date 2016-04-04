@@ -155,6 +155,19 @@ namespace UnitTests
             Assert.AreEqual(mapElementsIds, expected);
         }
 
+        [Test]
+        public void GetAllStorylinesTest()
+        {
+            _storylineMapper.AddStoryline(_storyLine);
+            _storylineMapper.AddStoryline(_storyLine2);
+            _storylineMapper.AddStoryline(_storyLine3);
+
+            List<StoryLine> storyLinesList = new List<StoryLine> {_storyLine, _storyLine2, _storyLine3};
+            List<StoryLine> expected = _storylineMapper.GetAllStorylines();
+
+            Assert.IsTrue(_storylineMapper.ListEquals(storyLinesList, expected));
+        }
+
         public List<MapElement> SetMapElements()
         {
             List<MapElement> mapElements = new List<MapElement>();
