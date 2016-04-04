@@ -18,6 +18,8 @@ namespace UnitTests
         private StorylineTdg _storyTdg = StorylineTdg.GetInstance();
 
         private StoryLine _storyLine;
+        private Storyline _storylineTable;
+        int _storylineMapElementId;
 
         [SetUp]
         public void SetUp()
@@ -48,6 +50,17 @@ namespace UnitTests
                 MapElements = mapElements,
                 LastPointOfInterestVisited = (PointOfInterest) mapElements[0],
             };
+
+            _storylineTable = new Storyline
+            {
+                Id = 1,
+                ImagePath = "icon.png",
+                Duration = 20,
+                FloorsCovered = 3,
+                Status = 2,
+                DescriptionId = 1,
+                LastVisitedPoi = 1
+            };
         }
 
         [Test]
@@ -77,6 +90,32 @@ namespace UnitTests
             expected = _storylineMapper.GetStoryline(_storyLine.StorylineId);
             Assert.IsTrue(_storyLine.AreEquals(expected));
             Assert.AreEqual(10, expected.Duration);
+        }
+
+        [Test]
+        public void StorylineModelToTableTest()
+        {
+            _storyLine = _storylineMapper.StorylineTableToModel(_storylineTable);
+            Storyline expectedTable = _storylineMapper.StorylineModelToTable(_storyLine);
+
+            Assert.AreEqual(_storylineTable.Id, expectedTable.Id);
+            Assert.AreEqual(_storylineTable.DescriptionId, expectedTable.DescriptionId);
+            Assert.AreEqual(_storylineTable.Duration, expectedTable.Duration);
+            Assert.AreEqual(_storylineTable.FloorsCovered, expectedTable.FloorsCovered);
+            Assert.AreEqual(_storylineTable.ImagePath, expectedTable.ImagePath);
+            Assert.AreEqual(_storylineTable.LastVisitedPoi, expectedTable.LastVisitedPoi);
+            Assert.AreEqual(_storylineTable.Status, expectedTable.Status);
+        }
+
+        [Test]
+        public void StorylineTableToModelTest()
+        {
+            AddStorylineTest();
+
+            _storylineTable = _storylineMapper.StorylineModelToTable(_storyLine);
+            StoryLine expectedModel = _storylineMapper.StorylineTableToModel(_storylineTable);
+
+            Assert.IsTrue(_storyLine.AreEquals(expectedModel));
         }
 
         public List<MapElement> SetMapElements()
