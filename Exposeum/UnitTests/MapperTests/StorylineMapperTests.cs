@@ -18,6 +18,8 @@ namespace UnitTests
         private StorylineTdg _storyTdg = StorylineTdg.GetInstance();
 
         private StoryLine _storyLine;
+        private StoryLine _storyLine2;
+        private StoryLine _storyLine3;
         private Storyline _storylineTable;
         int _storylineMapElementId;
 
@@ -49,6 +51,30 @@ namespace UnitTests
                 StorylineDescription = storyDescription,
                 MapElements = mapElements,
                 LastPointOfInterestVisited = (PointOfInterest) mapElements[0],
+            };
+
+            _storyLine2 = new StoryLine
+            {
+                StorylineId = 2,
+                ImgPath = "icon.png",
+                Duration = 20,
+                FloorsCovered = 3,
+                Status = Status.IsNew,
+                StorylineDescription = storyDescription,
+                MapElements = mapElements,
+                LastPointOfInterestVisited = (PointOfInterest)mapElements[0],
+            };
+
+            _storyLine3 = new StoryLine
+            {
+                StorylineId = 3,
+                ImgPath = "icon.png",
+                Duration = 20,
+                FloorsCovered = 3,
+                Status = Status.IsNew,
+                StorylineDescription = storyDescription,
+                MapElements = mapElements,
+                LastPointOfInterestVisited = (PointOfInterest)mapElements[0],
             };
 
             _storylineTable = new Storyline
