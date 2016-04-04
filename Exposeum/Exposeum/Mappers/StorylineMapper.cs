@@ -131,7 +131,7 @@ namespace Exposeum.Mappers
             _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 
-        public bool Equals(List<StoryLine> list1, List<StoryLine> list2)
+        public bool ListEquals(List<StoryLine> list1, List<StoryLine> list2)
         {
             if (list1.Count != list2.Count)
                 return false;
