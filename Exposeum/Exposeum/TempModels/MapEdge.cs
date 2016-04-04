@@ -4,22 +4,23 @@ using Java.Lang;
 
 namespace Exposeum.TempModels
 {
-    public class Edge
+    public class MapEdge
     {
         public int Id { get; set; }
         public double Distance { get; set; }
-        public MapElement Start { get; set; }
-        public MapElement End { get; set; }
+        public MapElement Source { get; set; }
+        public MapElement Target { get; set; }
 
         public override bool Equals(object obj)
         {
-            Edge other = (Edge) obj;
+            MapEdge other = (MapEdge) obj;
 
             return Id == other.Id &&
                   Math.Abs(Distance - other.Distance) < 0 &&
-                  Start.Equals(other.Start) &&
-                  End.Equals(other.End);
+                  Source.Equals(other.Source) &&
+                  Target.Equals(other.Target);
         }
 
     }
 }
+//transferred to Models

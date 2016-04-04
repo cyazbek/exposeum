@@ -1,15 +1,22 @@
-﻿namespace Exposeum.Models
+﻿using System;
+
+namespace Exposeum.Models
 {
     public class VideoContent : ExhibitionContent
     {
-        private string filePath { get; set; }
-        private int durationInSeconds { get; set; }
-        private int resolution { get; set; }
-        private string encoding { get; set; }
+        public string FilePath { get; set; }
+        public int Duration { get; set; }
+        public int Resolution { get; set; }
+        public string Encoding { get; set; }
 
-        public override string htmlFormat()
+        public bool Equals(VideoContent other)
         {
-            throw new System.NotImplementedException();
+            return FilePath.Equals(other.FilePath) && Duration == other.Duration && Resolution == other.Resolution && Encoding.Equals(other.Encoding);
+        }
+
+        public override string HtmlFormat()
+        {
+            return "";
         }
     }
 }

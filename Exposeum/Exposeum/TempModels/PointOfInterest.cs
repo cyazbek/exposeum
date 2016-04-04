@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using Android.Graphics;
+
 namespace Exposeum.TempModels
 {
     public class PointOfInterest:MapElement
@@ -6,7 +9,7 @@ namespace Exposeum.TempModels
         public Beacon Beacon {get; set; }      
         public int StoryLineId { get; set; }
         public PointOfInterestDescription Description { get; set; }
-        public ExhibitionContent ExhibitionContent { get; set; }
+        public List<ExhibitionContent> ExhibitionContent { get; set; }
         public PointOfInterest()
         {
             Beacon = new Beacon();  
@@ -16,12 +19,18 @@ namespace Exposeum.TempModels
             if (obj != null)
             {
                 PointOfInterest other = (PointOfInterest)obj;
-                return Beacon.Equals(other.Beacon) &&
-                StoryLineId == other.StoryLineId &&
-                Description.Equals(other.Description) &&
-                ExhibitionContent.Equals(other.ExhibitionContent);
+
+                return TempModels.ExhibitionContent.ListEquals(ExhibitionContent, other.ExhibitionContent) &&
+                       Beacon.Equals(other.Beacon) &&
+                       StoryLineId == other.StoryLineId &&
+                       Description.Equals(other.Description);
             }
             return false;
+        }
+
+        public override void Draw(Canvas canvas)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

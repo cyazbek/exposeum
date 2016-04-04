@@ -35,11 +35,9 @@ namespace Exposeum.Services.Service_Providers
                     , "External Summary", "External POI should still trigger shortest path");
             pExternal.Description = dExternal;
             pExternal.Beacon = new Beacon(UUID.FromString("b9407f30-f5f8-466e-aff9-25556b57fe6d"), 49800, 5890);
-
-
-            //add some waypoint betweem the start and the end 0.3306878,0.5831111
-            PointOfTravel pot1 = new PointOfTravel(0.330687f, 0.5831111f, mapElements.Last().Floor);
-			PointOfTravel pot2 = new PointOfTravel(0.2740971f,0.6113333f, mapElements.Last().Floor);
+			//add some waypoint betweem the start and the end 0.3306878,0.5831111
+			WayPoint pot1 = new WayPoint(0.330687f, 0.5831111f, mapElements.Last().Floor);
+			WayPoint pot2 = new WayPoint(0.2740971f,0.6113333f, mapElements.Last().Floor);
 
 
 

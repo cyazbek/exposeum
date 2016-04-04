@@ -84,7 +84,7 @@ namespace Exposeum.Models
 
 			NotificationCompat.Builder notifBuilder =  new NotificationCompat.Builder (_context)
 				.SetAutoCancel (true)                    // Dismiss from the notif. area when clicked
-				.SetContentIntent (pendingIntent)  // Start 2nd activity when the intent is clicked.
+				.SetContentIntent (pendingIntent)  // Source 2nd activity when the intent is clicked.
 				.SetSmallIcon(Resource.Drawable.logo_notif)// Display this icon
 				.SetContentTitle(poiName)
 				.SetContentText (poiDesc)

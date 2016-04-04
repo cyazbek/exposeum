@@ -1,5 +1,5 @@
 using Exposeum.TDGs;
-using Exposeum.TempModels;
+using Exposeum.Models;
 using System.Collections.Generic;
 
 namespace Exposeum.Mappers
@@ -8,15 +8,20 @@ namespace Exposeum.Mappers
     {
         private static StorylineMapper _instance;
         private readonly StorylineTdg _storylineTdg;
+        private readonly StoryLineMapElementListTdg _storyLineMapElementListTdg;
         private readonly MapElementsMapper _mapElementsMapper;
-        private readonly StorylineDescriptionMapper _storylineDescriptionMapper;
-        private readonly StatusMapper _statusMapper; 
+        private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
+        private readonly StatusMapper _statusMapper;
+        private readonly PointOfInterestMapper _poiMapper;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
+            _storyLineMapElementListTdg = StoryLineMapElementListTdg.GetInstance();
+
             _mapElementsMapper = MapElementsMapper.GetInstance();
-            _storylineDescriptionMapper = StorylineDescriptionMapper.GetInstance();
+            _storylineDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
             _statusMapper = StatusMapper.GetInstance();
+            _poiMapper = PointOfInterestMapper.GetInstance();
         }
 
         public static StorylineMapper GetInstance()
@@ -26,25 +31,24 @@ namespace Exposeum.Mappers
             return _instance;
         }
 
-        public Tables.Storyline StorylineModelToTable(Storyline storylineModel)
+        public Tables.Storyline StorylineModelToTable(StoryLine storylineModel)
         {
             Tables.Storyline storyline = new Tables.Storyline
             {
                 Id = storylineModel.StorylineId,
-                Audience = storylineModel.IntendedAudience,
                 Duration = storylineModel.Duration,
-                Image = storylineModel.ImageId,
+                ImagePath = storylineModel.ImgPath,
                 FloorsCovered = storylineModel.FloorsCovered,
-                LastVisitedPoi = storylineModel.LastVisitedMapElement.Id,
+                LastVisitedPoi = storylineModel.LastPointOfInterestVisited.Id,
                 Status = _statusMapper.StatusModelToTable(storylineModel.Status)
             };
             return storyline; 
         }
 
-        public List<Storyline> GetAllStorylines()
+        public List<StoryLine> GetAllStorylines()
         {
             List<Tables.Storyline> tableList = _storylineTdg.GetAllStorylines();
-            List<Storyline> modelList = new List<Storyline>();
+            List<StoryLine> modelList = new List<StoryLine>();
             foreach(var x in tableList)
             {
                 modelList.Add(StorylineTableToModel(x));
@@ -52,7 +56,7 @@ namespace Exposeum.Mappers
             return modelList; 
         }
 
-        public void UpdateStorylinesList(List<Storyline> list)
+        public void UpdateStorylinesList(List<StoryLine> list)
         {
             foreach(var x in list)
             {
@@ -60,52 +64,56 @@ namespace Exposeum.Mappers
             }
         }
 
-        public Storyline StorylineTableToModel(Tables.Storyline storylineTable)
+        public StoryLine StorylineTableToModel(Tables.Storyline storylineTable)
         {
 
-            Storyline storyline = new Storyline
+            StoryLine storyline = new StoryLine
             {
                 StorylineId = storylineTable.Id,
-                ImageId = storylineTable.Image,
+                ImgPath = storylineTable.ImagePath,
                 Duration = storylineTable.Duration,
                 FloorsCovered = storylineTable.FloorsCovered,
-                IntendedAudience = storylineTable.Audience,
-                StorylineDescription = _storylineDescriptionMapper.GetDescription(storylineTable.DescriptionId),
-                LastVisitedMapElement = _mapElementsMapper.GetMapElement(storylineTable.LastVisitedPoi),
-                MapElements = _mapElementsMapper.GetAllMapElementsFromStoryline(storylineTable.Id),
+                StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
+                LastPointOfInterestVisited = _poiMapper.Get(storylineTable.LastVisitedPoi),
+                MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status)
             };
             return storyline; 
         }
 
-        public Storyline GetStoryline(int id)
+        public StoryLine GetStoryline(int id)
         {
             Tables.Storyline storylineTable=_storylineTdg.GetStoryline(id);
-            Storyline storyline = StorylineTableToModel(storylineTable);
+            StoryLine storyline = StorylineTableToModel(storylineTable);
             return storyline;
         }
 
-        public void UpdateStoryline(Storyline storyline)
+        public List<int> GetAllStorylineMapElementIds(int id)
+        {
+            return _storyLineMapElementListTdg.GetAllStorylineMapElements(id);
+        }
+
+        public void UpdateStoryline(StoryLine storyline)
         {
             Tables.Storyline storylineTable = StorylineModelToTable(storyline);
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Update(storylineTable);
-            _mapElementsMapper.UpdateMapElementList(list);
-            _storylineDescriptionMapper.UpdateDescription(description);
+            _mapElementsMapper.UpdateList(list);
+            _storylineDescriptionMapper.UpdateStoryLineDescription(description);
         }
 
-        public void AddStoryline(Storyline storyline)
+        public void AddStoryline(StoryLine storyline)
         {
             Tables.Storyline storylineTable = StorylineModelToTable(storyline);
             List<MapElement> list = storyline.MapElements;
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
-            _mapElementsMapper.AddMapElementList(list);
-            _storylineDescriptionMapper.AddDescription(description);
+            _mapElementsMapper.AddList(list);
+            _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 
-        public bool Equals(List<Storyline> list1, List<Storyline> list2)
+        public bool Equals(List<StoryLine> list1, List<StoryLine> list2)
         {
             bool result = false;
             if (list1.Count == list2.Count)

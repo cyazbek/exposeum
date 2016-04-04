@@ -31,11 +31,11 @@ namespace Exposeum
         {
             var item = _items[position];
             var icon = 0;
-            if (item.CurrentStatus.Equals(Status.InProgress))
+            if (item.Status.Equals(Status.InProgress))
             {
                 icon = Resource.Drawable.inProgress;
             }
-            else if (item.CurrentStatus.Equals(Status.IsVisited))
+            else if (item.Status.Equals(Status.IsVisited))
             {
                 icon = Resource.Drawable.completed;
             }

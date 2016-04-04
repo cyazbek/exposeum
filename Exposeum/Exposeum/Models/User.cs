@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Exposeum.Observers;
 
 namespace Exposeum.Models
 {
-    public class User
+    public class User:LanguageSubject
     {
+        public int Id { get; set; }
         public Language Language;
         public List<ButtonText> CurrentButtonString;
         public List<ButtonText> FrenchButtonString = new List<ButtonText>();
@@ -12,8 +14,10 @@ namespace Exposeum.Models
         public List<int> CurrentImageList;
         public List<int> FrenchImageList = new List<int>();
         public List<int> EnglishImageList = new List<int>();
-        public Boolean Visitor;
-        private static readonly User _user = new User(); 
+        public bool Visitor;
+        private static User _user ;
+        public List<LanguageObserver> LanguageObservers;
+
         private User()
         {
             EnglishButtonString.Add(new ButtonText("WalkThroughButton", "Skip"));
@@ -59,12 +63,17 @@ namespace Exposeum.Models
             EnglishImageList.Add(Resource.Drawable.first);
             EnglishImageList.Add(Resource.Drawable.second);    
             EnglishImageList.Add(Resource.Drawable.third);    
-            EnglishImageList.Add(Resource.Drawable.fourth);    
+            EnglishImageList.Add(Resource.Drawable.fourth);
+
+            LanguageObservers = new List<LanguageObserver>();
         }
         public static  User GetInstance()
         {
+            if(_user==null)
+                _user = new User();
             return _user; 
         }
+
         public string GetButtonText(string id)
         {
             String text = null;
@@ -75,11 +84,12 @@ namespace Exposeum.Models
             }
             return text;
         }
+
         public List<int> GetImageList()
         {
             return CurrentImageList;
         }
-        public void SwitchLanguage(Language language)
+        public void SwitchLanguageTo(Language language)
         {
             Language = language;
             SetupLanguage();
@@ -96,7 +106,9 @@ namespace Exposeum.Models
                 CurrentButtonString = EnglishButtonString;
                 CurrentImageList = EnglishImageList;
             }
+            //NotifyAll();
         }
+
         public void ToogleLanguage()
         {
             if (Language == Language.En)
@@ -111,6 +123,17 @@ namespace Exposeum.Models
                 SetupLanguage();
             }
         }
+        public void Register(LanguageObserver o)
+        {
+            LanguageObservers.Add(o);
+        }
 
+        public void NotifyAll()
+        {
+            foreach (var o in LanguageObservers)
+            {
+                o.Update();
+            }
+        }
     }
 }

@@ -52,17 +52,18 @@ namespace Exposeum.Controllers
             _selectedStoryLine = _storyLineService.GetStoryLines()[storylinePosition];
         }
 
-        public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context)
-        {
-            DialogFragment dialog;
-            if (_selectedStoryLine.CurrentStatus == Status.InProgress)
-            {
-                dialog = new DialogStorylineInProgress(_selectedStoryLine, context, LocateUserOnGenericStoryLine);
-            }
-            else
-            {
-                dialog = new DialogStoryline(_selectedStoryLine, context);
-            }
+		public void ShowSelectedStoryLineDialog(FragmentTransaction transaction, Context context){
+			
+				
+				DialogFragment dialog;
+				if(_selectedStoryLine.Status==Status.InProgress)
+				{
+					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
+				}
+				else
+				{
+					dialog = new DialogStoryline(_selectedStoryLine, context);
+				}
 
             dialog.Show(transaction, "Story Line title");
         }
@@ -81,8 +82,8 @@ namespace Exposeum.Controllers
                 mapElement.Visited = false;
             }
 
-            storyLine.SetLastPointOfInterestVisited(null);
-            storyLine.CurrentStatus = Status.IsNew;
+            storyLine.LastPointOfInterestVisited = null;
+            storyLine.Status = Status.IsNew;
 
         }
 
@@ -122,7 +123,7 @@ namespace Exposeum.Controllers
 
         public void BeginJournery()
         {
-            _selectedStoryLine.CurrentStatus = Status.InProgress;
+            _selectedStoryLine.Status = Status.InProgress;
         }
 
         public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable)

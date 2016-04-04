@@ -112,10 +112,19 @@ namespace Exposeum.Services.Service_Providers
 				//and names so that the push notifications remain relevant.
 				if (clonedElement.GetType () == typeof(PointOfInterest)) {
 					PointOfInterest poi = ((PointOfInterest)clonedElement);
-					poi.DescriptionEn = "You're on your way, " + (mapElements.Count - i) + " point(s) of interest to go.";
-					poi.DescriptionFr = "Il vous reste " + (mapElements.Count - i) + " point(s) d'interet avant d'arriver.";
-					poi.NameEn = i + " out of " + mapElements.Count;
-					poi.NameFr = i + " de " + mapElements.Count;
+                    PointOfInterestDescription description = new PointOfInterestDescription();
+				    if (User.GetInstance().Language == Language.En)
+				    {
+				        description.Description = "You're on your way, " + (mapElements.Count - i) + " point(s) of interest to go.";
+				        description.Title = i + " out of " + mapElements.Count;
+				    }
+				    else
+				    {
+				        description.Description = "Il vous reste " + (mapElements.Count - i) +
+				                                  " point(s) d'interet avant d'arriver.";
+				        description.Title = i + " de " + mapElements.Count;
+				    }
+				    poi.Description = description;
 				}
 
 				clonedMapElements.Add (clonedElement);

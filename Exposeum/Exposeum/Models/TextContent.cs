@@ -1,12 +1,24 @@
-﻿namespace Exposeum.Models
+﻿using System;
+
+namespace Exposeum.Models
 {
     public class TextContent : ExhibitionContent
     {
-        public string text { get; set; }
+        public string HtmlContent { get; set; }
 
-        public override string htmlFormat()
+        public override bool Equals(object obj)
         {
-            throw new System.NotImplementedException();
+            if (obj != null)
+            {
+                TextContent other = (TextContent)obj;
+                return HtmlContent.Equals(other.HtmlContent);
+            }
+            return false;
+        }
+
+        public override string HtmlFormat()
+        {
+            return "";
         }
     }
 }

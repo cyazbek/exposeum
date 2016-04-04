@@ -61,6 +61,12 @@ namespace UnitTests
             _setObject3.StoryLineId = 2;
         }
 
+        [Test]
+        public void GetInstanceExhibitionContentEnTdgTest()
+        {
+            Assert.NotNull(ExhibitionContentEnTdg.GetInstance());
+        }
+
         [Test()]
         public void AddExhibitionContentEnTest()
         {
@@ -76,19 +82,7 @@ namespace UnitTests
             Assert.IsTrue(_objectTDG.Equals(_testObject, _setObject));
         }
 
-        [Test()]
-        public void GetExhibitionContentEnByStorylineIdTest()
-        {
-            _objectTDG.Add(_setObject);
-            _objectTDG.Add(_setObject1);
-            _objectTDG.Add(_setObject2);
-            _objectTDG.Add(_setObject3);
-
-            List<ExhibitionContentEn> numberOfEntries = _db.Query<ExhibitionContentEn>("SELECT * from ExhibitionContentEn where storyLineId = ?", _setObject.StoryLineId);
-            List<int> list = _objectTDG.GetExhibitionContentEnByStorylineId(_setObject.StoryLineId);
-            Assert.AreEqual(list.Count, numberOfEntries.Count);
-        }
-
+  
         [Test()]
         public void UpdateExhibitionContentEnTest()
         {

@@ -6,54 +6,32 @@ namespace Exposeum.Models
     public class StoryLine : IPath
     {
 
-        public int ImageId { get; set; }
-        public Status CurrentStatus { get; set; }
-        public string NameEn { get; set; }
-        public string NameFr { get; set; }
-        public string AudienceEn { get; set; }
-        public string AudienceFr { get; set; }
-        public string DescEn { get; set; }
-        public string DescFr { get; set; }
-        public int Duration { get; set; }
-        public int Id { get; set; }
+        public int StorylineId { get; set; }
         public string ImgPath { get; set; }
+        public int Duration { get; set; }
         public int FloorsCovered { get; set; }
+        public Status Status { get; set; }
+        public StorylineDescription StorylineDescription { get; set; }
         public List<MapElement> MapElements { get; set; }
+        public PointOfInterest LastPointOfInterestVisited { get; set; }
+        public int ImageId { get; set; }
+
         public List<PointOfInterest> PoiList { get; set; }
-        private PointOfInterest _lastPointOfInterestVisited;
 
         public StoryLine()
         {
             PoiList = new List<PointOfInterest>();
-            MapElements = new List<MapElement>();
-            CurrentStatus = Status.IsNew;
+			MapElements = new List<MapElement> ();
+			Status = Status.IsNew;
         }
 
         public StoryLine(int id)
         {
-            Id = id;
-            PoiList = new List<PointOfInterest>();
-            MapElements = new List<MapElement>();
-            CurrentStatus = Status.IsNew;
+            StorylineId = id;
+			PoiList = new List<PointOfInterest>();
+			MapElements = new List<MapElement> ();
+			Status = Status.IsNew;
         }
-
-        public StoryLine(string nameEn, string nameFr, string audienceEn, string audienceFr, string descriptionEn, string descriptionFr, int duration, int imageId)
-        {
-            NameEn = nameEn;
-            NameFr = nameFr;
-            AudienceEn = audienceEn;
-            AudienceFr = audienceFr;
-            DescEn = descriptionEn;
-            DescFr = descriptionFr;
-            Duration = duration;
-            ImageId = imageId;
-
-            MapElements = new List<MapElement>();
-            PoiList = new List<PointOfInterest>();
-            CurrentStatus = Status.IsNew;
-        }
-
-
         /// <summary>
         /// DEPRECATED: use addMapElement() instead
         /// </summary>
@@ -63,10 +41,6 @@ namespace Exposeum.Models
             PoiList.Add(poi);
         }
 
-        public PointOfInterest GetLastVisitedPointOfInterest()
-        {
-            return _lastPointOfInterestVisited;
-        }
 
         public void AddMapElement(MapElement e)
         {
@@ -76,11 +50,6 @@ namespace Exposeum.Models
                 PoiList.Add(e as PointOfInterest);
         }
 
-        public void SetLastPointOfInterestVisited(PointOfInterest lastPoiVisited)
-        {
-            _lastPointOfInterestVisited = lastPoiVisited;
-
-        }
 
         /// <summary>
         /// This method will update the progress of the storyline using the passed node.
@@ -126,24 +95,21 @@ namespace Exposeum.Models
                 while (nodeStack.Count > 0)
                 {
 
-                    MapElement currentNode = nodeStack.Pop();
-                    currentNode.SetVisited();
-                }
+					MapElement currentNode = nodeStack.Pop();
+		            currentNode.Visited = true;
+		        }
 
-                //If the rightBoundLinkedNode is a point of interest save it as _lastPointOfInterestVisited
-                if (rightBoundLinkedNode.Value.GetType() == typeof(PointOfInterest))
-                    _lastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
+				//If the rightBoundLinkedNode is a point of interest save it as LastPointOfInterestVisited
+				if (rightBoundLinkedNode.Value.GetType() == typeof (PointOfInterest))
+					LastPointOfInterestVisited = (PointOfInterest)rightBoundLinkedNode.Value;
 
-                //finally, of this node is the last node of the tour, set the tour as completed
-                if (rightBoundLinkedNode.Next == null)
-                    CurrentStatus = Status.IsVisited;
-                else if (CurrentStatus == Status.IsNew)
-                    CurrentStatus = Status.InProgress;
-            
-
-        }
-
-    }
+				//finally, of this node is the last node of the tour, set the tour as completed
+				if (rightBoundLinkedNode.Next == null)
+					Status = Status.IsVisited;
+				else if (Status == Status.IsNew)
+					Status = Status.InProgress;
+		    }
+		}
 
     public PointOfInterest FindPoi(EstimoteSdk.Beacon beacon)
     {
@@ -165,45 +131,20 @@ namespace Exposeum.Models
         return PoiList.Count;
     }
 
-    public string GetName()
-    {
-        Language lang = User.GetInstance().Language;
-        string storyName;
 
-        if (lang.Equals(Language.Fr))
-            storyName = NameFr;
-        else
-            storyName = NameEn;
+        public string GetName()
+        {
+            return StorylineDescription.Title;
+        }
 
-        return storyName;
-    }
+        public string GetDescription()
+        {
+            return StorylineDescription.Description;
+        }
 
-    public string GetDescription()
-    {
-        Language lang = User.GetInstance().Language;
-        string storyDesc;
-
-        if (lang.Equals(Language.Fr))
-            storyDesc = DescFr;
-        else
-            storyDesc = DescEn;
-
-        return storyDesc;
-    }
-
-    public string GetAudience()
-    {
-        Language lang = User.GetInstance().Language;
-        string storyAudience;
-        if (lang.Equals(Language.Fr))
-            storyAudience = AudienceFr;
-        else
-            storyAudience = AudienceEn;
-
-        return storyAudience;
-    }
-
-
-
-}
+        public string GetAudience()
+        {
+            return StorylineDescription.IntendedAudience;
+    	}
+	}
 }

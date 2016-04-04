@@ -17,13 +17,18 @@ namespace UnitTests
         public void Setup()
         {
             _setObject.Id = 1;
-            _setObject.Audience = "audience";
             _setObject.Duration = 120;
-            _setObject.Image = 120;
+            _setObject.ImagePath = "path";
             _setObject.FloorsCovered = 3;
             _setObject.LastVisitedPoi = 5;
             _setObject.Status = 0;
             _setObject.DescriptionId = 5;
+        }
+
+        [Test]
+        public void GetInstanceStorylineTdgTest()
+        {
+            Assert.NotNull(StorylineTdg.GetInstance());
         }
 
         [Test()]
@@ -44,9 +49,8 @@ namespace UnitTests
         public void UpdateStorylineTest()
         {
             _setObject.Id = 1;
-            _setObject.Audience = "audience";
             _setObject.Duration = 120;
-            _setObject.Image = 120;
+            _setObject.ImagePath = "path";
             _setObject.FloorsCovered = 3;
             _setObject.LastVisitedPoi = 5;
             _setObject.Status = 0;
