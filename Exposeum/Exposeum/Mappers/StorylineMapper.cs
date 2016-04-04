@@ -15,7 +15,7 @@ namespace Exposeum.Mappers
         private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
         private readonly StatusMapper _statusMapper;
         private readonly PointOfInterestMapper _poiMapper;
-        private int storylineMapElementId = 0;
+        private int _storylineMapElementId = 0;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
@@ -117,7 +117,7 @@ namespace Exposeum.Mappers
             {
                 StoryLineMapElementList element = new StoryLineMapElementList
                 {
-                    Id = storylineMapElementId++,
+                    Id = _storylineMapElementId++,
                     StoryLineId = storyline.StorylineId,
                     MapElementId = mapElement.Id
                 };
