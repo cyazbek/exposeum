@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Exposeum.Exceptions;
 using Android.Graphics.Drawables;
+using Exposeum.Mappers;
 
 namespace Exposeum.Models
 {
@@ -147,5 +148,17 @@ namespace Exposeum.Models
         {
             return StorylineDescription.IntendedAudience;
     	}
-	}
+
+        public bool AreEquals(StoryLine other)
+        {
+            return StorylineId == other.StorylineId &&
+                   ImgPath == other.ImgPath &&
+                   Duration == other.Duration &&
+                   FloorsCovered == other.FloorsCovered &&
+                   StorylineDescription.Equals(other.StorylineDescription) &&
+                   MapElement.ListEquals(MapElements, other.MapElements) &&
+                   LastPointOfInterestVisited.AreEquals(other.LastPointOfInterestVisited);
+        }
+    }
 }
+ 
