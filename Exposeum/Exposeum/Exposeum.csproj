@@ -253,6 +253,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <Compile Include="Controllers\QRController.cs" />
+    <Compile Include="Services\Service Providers\GraphServiceProviderS4Demo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
