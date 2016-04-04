@@ -2,6 +2,7 @@ using Exposeum.TDGs;
 using Exposeum.Models;
 using System.Collections.Generic;
 using Android.Graphics.Drawables;
+using Exposeum.Tables;
 
 namespace Exposeum.Mappers
 {
@@ -14,6 +15,7 @@ namespace Exposeum.Mappers
         private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
         private readonly StatusMapper _statusMapper;
         private readonly PointOfInterestMapper _poiMapper;
+        private int storylineMapElementId = 0;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
@@ -41,7 +43,8 @@ namespace Exposeum.Mappers
                 ImagePath = storylineModel.ImgPath,
                 FloorsCovered = storylineModel.FloorsCovered,
                 LastVisitedPoi = storylineModel.LastPointOfInterestVisited.Id,
-                Status = _statusMapper.StatusModelToTable(storylineModel.Status)
+                Status = _statusMapper.StatusModelToTable(storylineModel.Status),
+                DescriptionId = storylineModel.StorylineDescription.StoryLineDescriptionId
             };
             return storyline; 
         }
@@ -109,6 +112,19 @@ namespace Exposeum.Mappers
         {
             Tables.Storyline storylineTable = StorylineModelToTable(storyline);
             List<MapElement> list = storyline.MapElements;
+
+            foreach (var mapElement in list)
+            {
+                StoryLineMapElementList element = new StoryLineMapElementList
+                {
+                    Id = storylineMapElementId++,
+                    StoryLineId = storyline.StorylineId,
+                    MapElementId = mapElement.Id
+                };
+
+                _storyLineMapElementListTdg.Add(element);
+            }
+
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
             _mapElementsMapper.AddList(list);
