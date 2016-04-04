@@ -10,8 +10,8 @@ namespace UnitTests
     public class BeaconMapperTest
     {
         private static BeaconMapper _instance;
-        private Exposeum.TempModels.Beacon _expected;
-        private Exposeum.TempModels.Beacon _beaconModel;
+        private Exposeum.Models.Beacon _expected;
+        private Exposeum.Models.Beacon _beaconModel;
         private Beacon _beaconTable;
         readonly BeaconTdg _tdg = BeaconTdg.GetInstance();
 
@@ -21,7 +21,7 @@ namespace UnitTests
             _instance = BeaconMapper.GetInstance();
             _tdg.Db.DeleteAll<Beacon>();
 
-            _beaconModel = new Exposeum.TempModels.Beacon
+            _beaconModel = new Exposeum.Models.Beacon
             {
                 Id = 1,
                 Major = 123,
@@ -40,6 +40,12 @@ namespace UnitTests
         }
 
         [Test]
+        public void GetInstanceBeaconMapperTest()
+        {
+            Assert.NotNull(BeaconMapper.GetInstance());
+        }
+
+        [Test]
         public void AddBeaconTest()
         {
             _instance.AddBeacon(_beaconModel);
@@ -51,7 +57,7 @@ namespace UnitTests
         [Test]
         public void UpdateBeaconTest()
         {
-            _beaconModel = new Exposeum.TempModels.Beacon
+            _beaconModel = new Exposeum.Models.Beacon
             {
                 Id = 2,
                 Major = 123,
@@ -78,7 +84,7 @@ namespace UnitTests
         [Test()]
         public void BeaconTableToModelTest()
         {
-            Exposeum.TempModels.Beacon expected = _instance.BeaconTableToModel(_beaconTable);
+            Exposeum.Models.Beacon expected = _instance.BeaconTableToModel(_beaconTable);
             Assert.IsTrue(_beaconModel.Equals(expected));
         }
 

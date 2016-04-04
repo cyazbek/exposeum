@@ -2,25 +2,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Exposeum.Models;
 using QuickGraph;
+using Ninject;
 
 namespace Exposeum.Services.Service_Providers
 {
     public class GraphServiceProvider : IGraphService
     {
-		private static GraphServiceProvider _instance;
         private UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
-        private GraphServiceProvider()
+        public GraphServiceProvider()
         {
+			_graphInstance = new UndirectedGraph<MapElement, MapEdge>();
             PopulateGraph();
-        }
-
-
-		public static GraphServiceProvider GetInstance()
-        {
-			if(_instance == null)
-				_instance = new GraphServiceProvider();
-			return _instance;
         }
 
 		public UndirectedGraph<MapElement, MapEdge> GetGraph()
@@ -30,13 +23,12 @@ namespace Exposeum.Services.Service_Providers
 
         private void PopulateGraph()
         {
-            _graphInstance = new UndirectedGraph<MapElement, MapEdge>();
             List<MapEdge> mapEdges = new List<MapEdge>();
-            List<MapElement> mapElements = (new StoryLineServiceProvider()).GetActiveStoryLine().MapElements;
+			List<MapElement> mapElements = ExposeumApplication.IoCContainer.Get<IStoryLineService>().GetActiveStoryLine().MapElements;
 
 			//add some waypoint betweem the start and the end 0.3306878,0.5831111
-			PointOfTravel pot1 = new PointOfTravel(0.330687f, 0.5831111f, mapElements.Last().Floor);
-			PointOfTravel pot2 = new PointOfTravel(0.2740971f,0.6113333f, mapElements.Last().Floor);
+			WayPoint pot1 = new WayPoint(0.330687f, 0.5831111f, mapElements.Last().Floor);
+			WayPoint pot2 = new WayPoint(0.2740971f,0.6113333f, mapElements.Last().Floor);
 
 			MapElement previous = pot2;
 

@@ -1,6 +1,7 @@
 using Exposeum.TDGs;
 using System.Collections.Generic;
-using Floor = Exposeum.TempModels.Floor;
+using Android.Graphics.Drawables;
+using Floor = Exposeum.Models.Floor;
 
 namespace Exposeum.Mappers
 {
@@ -41,25 +42,16 @@ namespace Exposeum.Mappers
             return floor;
         }
 
-        public Tables.Floor FloorModelToTable(Floor floor)
-        {
-            Tables.Floor floorTable = new Tables.Floor
-            {
-                Id = floor.Id,
-                // imageId = ImageMapper.GetInstance().GetIdFromPath(floor._plan);
-            };
-
-            return floorTable;
-        }
-
         public List<Floor> GetAllFloors()
         {
             List<Tables.Floor> tableFloor = _floorTdg.GetAllFloors();
-            List<Floor> modelFloor = new List<Floor>(); 
-            foreach(var x in tableFloor)
+            List<Floor> modelFloor = new List<Floor>();
+
+            foreach (var x in tableFloor)
             {
                 modelFloor.Add(FloorTableToModel(x)); 
             }
+
             return modelFloor; 
         }
 
@@ -70,12 +62,23 @@ namespace Exposeum.Mappers
                 UpdateFloor(x);
             }
         }
+
+        public Tables.Floor FloorModelToTable(Floor floor)
+        {
+            Tables.Floor floorTable = new Tables.Floor
+            {
+                Id = floor.Id,
+                ImagePath = floor.ImagePath
+            };
+
+            return floorTable;
+        }
+
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-            string image = ImageMapper.GetInstance().GetImagePath(floorTable.Id);
-            Floor modelFloor = new Floor
+            Floor modelFloor = new Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(floorTable.ImagePath), null))
             {
-                Plan = image,
+                ImagePath = floorTable.ImagePath,
                 Id = floorTable.Id
             };
             return modelFloor;

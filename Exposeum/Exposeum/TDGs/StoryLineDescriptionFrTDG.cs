@@ -31,7 +31,7 @@ namespace Exposeum.TDGs
         }
         public bool Equals(StoryLineDescriptionFr desc1, StoryLineDescriptionFr desc2)
         {
-            if (desc1.Id == desc2.Id && desc1.Title == desc2.Title && desc1.Description == desc2.Description && desc1.Description == desc2.Description)
+            if (desc1.Id == desc2.Id && desc1.Title == desc2.Title && desc1.Description == desc2.Description && desc1.IntendedAudience == desc2.IntendedAudience)
                 return true;
             return false;
         }

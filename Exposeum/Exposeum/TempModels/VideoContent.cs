@@ -1,7 +1,7 @@
 
 namespace Exposeum.TempModels
 {
-    public class Video:ExhibitionContent
+    public class VideoContent:ExhibitionContent
     {
         public string FilePath { get; set; }
         public int Duration { get; set; }
@@ -10,8 +10,9 @@ namespace Exposeum.TempModels
 
         public override bool Equals(object obj)
         {
-            Video other = (Video)obj;
+            VideoContent other = (VideoContent)obj;
             return FilePath.Equals(other.FilePath) && Duration == other.Duration && Resolution == other.Resolution && Encoding.Equals(other.Encoding);
         }
     }
 }
+//moved to models

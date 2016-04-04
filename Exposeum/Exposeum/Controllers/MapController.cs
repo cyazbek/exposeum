@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Exposeum.Views;
 using Exposeum.Models;
 using Android.App;
@@ -10,6 +11,7 @@ using Exposeum.Fragments;
 using Exposeum.Resources.layout;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Ninject;
 
 namespace Exposeum.Controllers
 {
@@ -50,7 +52,7 @@ namespace Exposeum.Controllers
 
             ConfigureMapView(context);
 
-            _shortestPathService = new ShortestPathServiceProvider(GraphServiceProvider.GetInstance());
+			_shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService>();
 
             _mapModel = Map.GetInstance();
 
@@ -123,7 +125,7 @@ namespace Exposeum.Controllers
             if (_mapModel.GetActiveShortestPath() == null)
                 UpdatePointOfInterestAndStoryLineState(beacon);
             else {
-                if (_mapModel.GetActiveShortestPath().CurrentStatus != Status.IsVisited)
+                if (_mapModel.GetActiveShortestPath().Status != Status.IsVisited)
                     UpdatePointOfInterestAnShortestPathState(beacon);
             }
 
@@ -162,7 +164,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         //otherwise just update the state of the poi
-                        poi.SetVisited();
+                        poi.Visited = true;
                         UpdateFloor(poi);
                         DisplayPopUp(poi);
                     }
@@ -190,7 +192,7 @@ namespace Exposeum.Controllers
             }
             catch (PointOfInterestNotVisitedException e)
             {
-                DisplayOutOfOrderPointOfInterestPopup(e.Poi);
+                DisplayOutOfOrderPointOfInterestPopup(poi, e.UnvistedMapElements);
             }
         }
 
@@ -245,10 +247,24 @@ namespace Exposeum.Controllers
         /// <summary>
         /// Method to display informational toast to Visitors when out of sequence POI visited in storyline
         /// </summary>
-	    private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest poi)
+		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements)
         {
-            _mapView.InitiateOutOfOrderPointOfInterestPopup(poi);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI);
         }
+
+		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements){
+
+			foreach (var mapElement in skippedMapElements)
+		    {
+				mapElement.Visited = true;
+		    }
+
+            _mapView.Update();
+
+            if (!ExposeumApplication.IsExplorerMode)
+                _mapProgressionView.Update();
+                    
+		}
 
         /// <summary>
         /// This method will update display a popup in the view with contextual information about the supplied POI
@@ -259,7 +275,7 @@ namespace Exposeum.Controllers
         {
             //Set the callback to execute after user dismisses popup
             PointOfInterestPopup.DismissCallback callback = null;
-            if (_mapModel.CurrentStoryline.CurrentStatus == Status.IsVisited)
+            if (_mapModel.CurrentStoryline.Status == Status.IsVisited)
                 callback = DisplayEndOfStoryLinePopUp;
 
             _mapView.InitiatePointOfInterestPopup(selectedPoi, callback);

@@ -46,7 +46,6 @@ namespace Exposeum.TDGs
             element1.StoryLineId == element2.StoryLineId &&
             element1.PoiDescription == element2.PoiDescription &&
             element1.Label == element2.Label &&
-            element1.ExhibitionContent == element2.ExhibitionContent &&
             element1.FloorId == element2.FloorId)
                 return true;
             return false;
