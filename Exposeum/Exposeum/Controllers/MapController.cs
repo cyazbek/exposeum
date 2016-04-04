@@ -71,8 +71,8 @@ namespace Exposeum.Controllers
                 FragmentTransaction fragmentTx = ((Activity)_mapView.Context).FragmentManager.BeginTransaction();
                 var progressFrag = new ProgressFrag(context);
                 _mapProgressionView = new MapProgressionFragment(_mapModel.CurrentStoryline);
-                fragmentTx.Add(Resource.Id.map_frag_frame_, progressFrag);
-                fragmentTx.Show(progressFrag);
+               // fragmentTx.Add(Resource.Id.map_frag_frame_, progressFrag);
+                //fragmentTx.Show(progressFrag);
                 fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
                 fragmentTx.Commit();
             }
@@ -92,9 +92,9 @@ namespace Exposeum.Controllers
             //Add a new MapView into the frame layout
             mapViewFrameLayout.AddView(_mapView);
             //Get a reference to the seek bar in the view
-            //SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
+            SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
             //Bind an event handler to ProgressChanged
-            //floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
+            floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
         }
 
         public void OnMapSliderProgressChange(object sender, SeekBar.ProgressChangedEventArgs e)

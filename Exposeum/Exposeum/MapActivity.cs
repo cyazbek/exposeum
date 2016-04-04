@@ -53,13 +53,13 @@ namespace Exposeum
 
             FragmentTransaction fragmentTx = FragmentManager.BeginTransaction();
 
-            var floorselectofrag = new FloorSelectorFragment();
+            /*var floorselectofrag = new FloorSelectorFragment();
             FrameLayout floorFrameLayout = FindViewById<FrameLayout>(Resource.Id.floor_selector_frame);
             fragmentTx.Add(Resource.Id.floor_selector_frame, floorselectofrag);
             fragmentTx.Commit();
 
             //floorFrameLayout.SetOnTouchListener(this);
-
+            */
 
 
             //Bind the _totalMapView to the Activity

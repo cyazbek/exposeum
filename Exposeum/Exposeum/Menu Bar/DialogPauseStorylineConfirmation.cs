@@ -32,7 +32,6 @@ namespace Exposeum.Menu_Bar
             buttonToRejectPause.Text = User.GetInstance().GetButtonText("reject_pause");
             textView.Text = User.GetInstance().GetButtonText("pause_text");
 
-
             buttonToConfirmPause.Click += delegate
             {
                 _storylineController.PauseStorylineBeacons();
@@ -57,6 +56,7 @@ namespace Exposeum.Menu_Bar
         {
             Dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnActivityCreated(savedInstanceState);
+            Dialog.Window.Attributes.WindowAnimations = Resource.Style.dialog_animation;
         }
 
     }

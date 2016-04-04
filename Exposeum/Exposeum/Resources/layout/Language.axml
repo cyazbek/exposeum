@@ -14,7 +14,7 @@
         android:id="@+id/linearLayout3"
         android:layout_weight="35">
         <ImageView
-            android:src="@drawable/Logo"
+            android:src="@drawable/logo_notif"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView1"
@@ -41,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerLang"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginRight="47.5dp"
+            android:layout_marginLeft="36.5dp" />
     </LinearLayout>
 </LinearLayout>

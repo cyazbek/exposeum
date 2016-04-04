@@ -178,22 +178,6 @@
     <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
     <Compile Include="TDGs\StorylineTDG.cs" />
     <Compile Include="TDGs\TDG.cs" />
-    <Compile Include="TempModels\Audio.cs" />
-    <Compile Include="TempModels\Beacon.cs" />
-    <Compile Include="TempModels\Edge.cs" />
-    <Compile Include="TempModels\ExhibitionContent.cs" />
-    <Compile Include="TempModels\Floor.cs" />
-    <Compile Include="TempModels\Image.cs" />
-    <Compile Include="TempModels\Map.cs" />
-    <Compile Include="TempModels\MapElement.cs" />
-    <Compile Include="TempModels\PointOfInterest.cs" />
-    <Compile Include="TempModels\PointOfInterestDescription.cs" />
-    <Compile Include="TempModels\Storyline.cs" />
-    <Compile Include="TempModels\StorylineDescription.cs" />
-    <Compile Include="TempModels\Text.cs" />
-    <Compile Include="TempModels\Video.cs" />
-    <Compile Include="TempModels\WayPoint.cs" />
-    <Compile Include="TempModels\WaypointLabel.cs" />
     <Compile Include="TestUi.cs" />
     <Compile Include="TDGs\UserTDG.cs" />
     <Compile Include="VisitActivity.cs" />
@@ -468,5 +452,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\seekthumb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\blue_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bblue.png" />
   </ItemGroup>
 </Project>

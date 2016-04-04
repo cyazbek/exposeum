@@ -24,7 +24,7 @@ namespace Exposeum
 
             var langList = new string[]
             {
-                "Bonjour, Hello...","Francais", "English"
+                "Choose your Language","Francais", "English"
             };
             spinnerLang = FindViewById<Spinner>(Resource.Id.spinnerLang);
             spinnerLang.Adapter = new ArrayAdapter<string>(this, 
@@ -34,13 +34,13 @@ namespace Exposeum
             {
                 if (args.Position == 1)
                 {
-                    _user.SwitchLanguage(Language.Fr);
+                    _user.SwitchLanguageTo(Language.Fr);
                     var intent = new Intent(this, typeof(WalkthroughActivity));
                     StartActivity(intent);
                 }
                 else if (args.Position == 2)
                 {
-                    _user.SwitchLanguage(Language.En);
+                    _user.SwitchLanguageTo(Language.En);
                     var intent = new Intent(this, typeof(WalkthroughActivity));
                     StartActivity(intent);
                 }
