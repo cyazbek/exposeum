@@ -22,7 +22,7 @@
         public string GetFullDescriptionHtml()
         {
             return string.Format("<html><body><h1 style=\"color:#c91215;\" >{0}</h1><h2>{1}</h2>" +
-                                 "<img src=\"EmileBerliner.png\"/></body></html>"
+                                 "</body></html>"
                 , Title,Description);
         }
 

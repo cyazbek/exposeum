@@ -39,7 +39,7 @@ namespace Exposeum
 		protected void InitIoCBindings(){
 			IoCContainer.Bind<IStoryLineService> ().To<StoryLineServiceProvider> ();
 			IoCContainer.Bind<IShortestPathService> ().To<ShortestPathServiceProvider> ();
-			IoCContainer.Bind<IGraphService> ().To<GraphServiceProvider> ().InSingletonScope();
+			IoCContainer.Bind<IGraphService> ().To<GraphServiceProviderS4Demo> ().InSingletonScope();
 			IoCContainer.Bind<IExplorerService> ().To<ExplorerServiceProvider> ();
 		}
        

@@ -23,6 +23,7 @@ namespace Exposeum.Services.Service_Providers
 
         private void PopulateGraph()
         {
+			
             List<MapEdge> mapEdges = new List<MapEdge>();
 			List<MapElement> mapElements = ExposeumApplication.IoCContainer.Get<IStoryLineService>().GetActiveStoryLine().MapElements;
 

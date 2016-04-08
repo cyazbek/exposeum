@@ -85,15 +85,15 @@ namespace Exposeum.Models
                 Title = "End of your demo"
             };
 
-/*
+
             Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
             Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 11163, 7229);
             Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 32561, 47495);
-*/
+/*
             Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
             Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
             Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 49800, 5890);
-
+*/
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;
             p1.Visited = false;
@@ -119,6 +119,8 @@ namespace Exposeum.Models
             WayPoint waypoint5 = new WayPoint(0.5023f, 0.1871f, floor1);
             WayPoint waypoint6 = new WayPoint(0.3610f, 0.1871f, floor1);
             WayPoint waypoint7 = new WayPoint(0.7849f, 0.1871f, floor1);
+            WayPoint waypoint8 = new WayPoint(0.3610f, 0.1871f, floor1);
+            WayPoint waypoint9 = new WayPoint(0.7849f, 0.1871f, floor1);
 
 
             StorylineDescription storyDescriptionEn1 = new StorylineDescription
@@ -146,9 +148,9 @@ namespace Exposeum.Models
             storyline.AddMapElement(waypoint3);
             storyline.AddMapElement(waypoint4);
             storyline.AddMapElement(waypoint5);
-            storyline.AddMapElement(waypoint6);
+            //storyline.AddMapElement(waypoint6);
             storyline.AddMapElement(p2);
-            storyline.AddMapElement(waypoint7);
+            storyline.AddMapElement(waypoint8);
             storyline.AddMapElement(p3);
 
 
@@ -156,6 +158,19 @@ namespace Exposeum.Models
 
             //Set the storyline for the explorer mode
             CurrentStoryline = storyline;
+
+
+	        Edges.Add(new MapEdge(p1,waypoint0, 22.360679774997898));
+            Edges.Add(new MapEdge(waypoint0, waypoint1, 50));
+            Edges.Add(new MapEdge(waypoint1, waypoint2, 14.142135));
+            Edges.Add(new MapEdge(waypoint2, waypoint3, 50));
+            Edges.Add(new MapEdge(waypoint3, waypoint4, 170));
+            Edges.Add(new MapEdge(waypoint5, waypoint4, 140));
+            Edges.Add(new MapEdge(waypoint5, waypoint7, 180));
+            Edges.Add(new MapEdge(waypoint7, waypoint0, 30));
+            Edges.Add(new MapEdge(p2, waypoint5, 60.8276));
+            Edges.Add(new MapEdge(p2, waypoint6, 31.6227));
+            Edges.Add(new MapEdge(waypoint6, p3, 90.5538));
 
         }
 
