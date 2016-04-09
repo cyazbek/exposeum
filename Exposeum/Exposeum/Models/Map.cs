@@ -10,7 +10,7 @@ namespace Exposeum.Models
 {
 	public class Map: LanguageObserver
     {
-        public int Id;
+        public int Id { get; set; }  
         private static Map _instance;
         public List<MapEdge> Edges { get; set; }
         public List<StoryLine> Storylines { get; set; }
@@ -28,6 +28,7 @@ namespace Exposeum.Models
             Storylines = new List<StoryLine>();
 			SeedData ();
             User.GetInstance().Register(this);
+            Id = 1; 
 		}
 
 	    public static Map GetInstance()
