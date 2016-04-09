@@ -26,7 +26,7 @@ namespace Exposeum.Models
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
-			SeedData ();
+			//SeedData ();
             User.GetInstance().Register(this);
             Id = 1; 
 		}

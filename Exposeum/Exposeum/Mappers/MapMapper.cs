@@ -35,12 +35,13 @@ namespace Exposeum.Mappers
             map.Storylines = _storylineMapper.GetAllStorylines();
             map.MapElements = _mapElementsMapper.GetAllMapElements();
             map.Floors = _floorMapper.GetAllFloors(); 
-            if(_mapTdg.GetSize()!=0)
-            {
-                Tables.Map tableMap = _mapTdg.GetMap(map.Id);
-                map.CurrentFloor = _floorMapper.GetFloor(tableMap.CurrentFloorId);
-                map.CurrentStoryline = _storylineMapper.GetStoryline(tableMap.CurrentStoryLineId);
-            }
+			if (_mapTdg.GetSize () != 0) {
+				Tables.Map tableMap = _mapTdg.GetMap (map.Id);
+				map.CurrentFloor = _floorMapper.GetFloor (tableMap.CurrentFloorId);
+				map.CurrentStoryline = _storylineMapper.GetStoryline (tableMap.CurrentStoryLineId);
+			} else {
+				map.CurrentFloor = map.Floors [0];
+			}
             return map;
         }
 

@@ -32,6 +32,8 @@ namespace Exposeum
 		private List<PoiDescriptionEn> englishPOIDescriptions;
 		private List<PoiDescriptionFr> frenchPOIDescriptions;
 
+		private List<StoryLineMapElementList> mapelementsSLList;
+
 		private List<ExhibitionContentEn> englishExhibitionContent;
 		private List<ExhibitionContentFr> frenchExhibitionContent;
 
@@ -43,6 +45,7 @@ namespace Exposeum
 		private int newEdgeId = 0;
 
 		private int audioId = 0, videoId = 0, imageId = 0;
+		private int SLAssocMapelementID = 0;
 
 		public void FetchAndParseMapJSON(){
 
@@ -156,6 +159,8 @@ namespace Exposeum
 					UCoordinate = float.Parse(poiOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (poiOBJ ["floorID"].ToString ())),
 					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (poiOBJ ["floorID"].ToString ()))
 				};
+
+
 		
 				AddExhibitionContent (newPOI.Id, poiOBJ ["media"]);
 
@@ -186,6 +191,7 @@ namespace Exposeum
 		private void ParseStorylines(JObject JSONPayload){
 
 			storylines = new List<Storyline>();
+			mapelementsSLList = new List<StoryLineMapElementList> ();
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
@@ -220,6 +226,17 @@ namespace Exposeum
 				FetchAndSaveImage (storylineOBJ ["thumbnail"].ToString ()); //fetch and save the thumbnail to the device
 
 				storylines.Add (newStoryline);
+
+				//add the associations between the current storyline and the mapelements it contains
+				foreach (var mapelementID in storylineOBJ["path"]) {
+
+					mapelementsSLList.Add(new StoryLineMapElementList {
+							Id = SLAssocMapelementID++,
+							StoryLineId = newStoryline.Id,
+							MapElementId = int.Parse(mapelementID.ToString())
+						}
+					);
+				}
 			}
 		}
 
@@ -345,6 +362,12 @@ namespace Exposeum
 
 			foreach (var edge in edges) {
 				MapEdgeTdg.Add (edge);
+			}
+
+			StoryLineMapElementListTdg SLMELTDG = StoryLineMapElementListTdg.GetInstance ();
+
+			foreach (var association in mapelementsSLList) {
+				SLMELTDG.Add (association);
 			}
 		}
 

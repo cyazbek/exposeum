@@ -179,7 +179,7 @@ namespace Exposeum.Views
 				storyLineAlpha = 50;
 				
 			//draw edges and POIs on top of map
-			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
