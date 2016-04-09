@@ -106,7 +106,7 @@ namespace Exposeum.Models
                 CurrentButtonString = EnglishButtonString;
                 CurrentImageList = EnglishImageList;
             }
-            //NotifyAll();
+            NotifyAll();
         }
 
         public void ToogleLanguage()
