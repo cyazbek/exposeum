@@ -69,7 +69,9 @@ namespace Exposeum.Mappers
             Tables.Floor floorTable = new Tables.Floor
             {
                 Id = floor.Id,
-                ImagePath = floor.ImagePath
+                ImagePath = floor.ImagePath,
+                Height = floor.Height,
+                Width = floor.Width
             };
 
             return floorTable;
@@ -83,7 +85,9 @@ namespace Exposeum.Mappers
 			Floor modelFloor = new Floor(floorImageDrawable)
             {
                 ImagePath = floorTable.ImagePath,
-                Id = floorTable.Id
+                Id = floorTable.Id,
+                Height = floorTable.Height,
+                Width = floorTable.Width
             };
             return modelFloor;
         }

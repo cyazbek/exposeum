@@ -9,7 +9,8 @@ namespace Exposeum.Models
         public string ImagePath { get; set; }
         public Drawable FloorPlan { get; set; }
         private readonly Paint _paint = new Paint();
-
+        public float Width { get; set; }
+        public float Height { get; set; }
 
         public Floor(Drawable floorPlan)
         {
