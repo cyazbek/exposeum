@@ -210,7 +210,7 @@ namespace Exposeum
 
 					Id = int.Parse (storylineOBJ ["id"].ToString ()),
 					Duration = int.Parse (storylineOBJ ["walkingTimeInMinutes"].ToString ()),
-					ImagePath = LOCAL_VENUE_DATA_PATH + "/" + storylineOBJ ["thumbnail"].ToString (),
+					ImagePath = LOCAL_VENUE_DATA_PATH + storylineOBJ ["thumbnail"].ToString (),
 					FloorsCovered = int.Parse (storylineOBJ ["floorsCovered"].ToString ()),
 					Status = 2,
 					DescriptionId = newStorylineDescriptionId++
