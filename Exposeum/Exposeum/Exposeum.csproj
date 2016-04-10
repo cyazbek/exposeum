@@ -475,4 +475,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\cancel_X.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\treedots.png" />
+  </ItemGroup>
 </Project>
