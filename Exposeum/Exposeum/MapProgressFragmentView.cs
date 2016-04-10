@@ -27,9 +27,6 @@ namespace Exposeum
             SetWillNotDraw(false); //causes the OnDraw override below to be called
             SetMinimumHeight(220);
             SetBackgroundColor(Color.ParseColor("#CC0000"));
-            //Settings.BuiltInZoomControls = true;
-            //Settings.DisplayZoomControls = false;
-            //SetGravity(GravityFlags.Bottom);
 
             ResetPaint();
         }
