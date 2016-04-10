@@ -18,11 +18,15 @@ namespace Exposeum
     class MapProgressionFragmentView : LinearLayout
     {
         private Paint _bgLine, _circle;
+        private const int LEFT_STARTING_POSITION = 100;
+        private const int INTER_CIRCLE_DISTANCE = 160;
 
         public MapProgressionFragmentView(Context context) : base(context)
         {
+            int numberOfPOIs = MapController.GetInstance().Model.CurrentStoryline.MapElements.OfType<PointOfInterest>().ToList().Count;
+            int fragmentWidth = LEFT_STARTING_POSITION + (numberOfPOIs*INTER_CIRCLE_DISTANCE) - 60;
 
-            LayoutParameters = new ViewGroup.LayoutParams(1800, 250);
+            LayoutParameters = new ViewGroup.LayoutParams(fragmentWidth, LayoutParams.MatchParent);
             Orientation = Orientation.Horizontal;
             SetWillNotDraw(false); //causes the OnDraw override below to be called
             SetMinimumHeight(220);
@@ -36,13 +40,12 @@ namespace Exposeum
             base.OnDraw(canvas);
 
             canvas.Save();
-            canvas.Scale(0.20f, 0.20f);
 
             Paint text = new Paint();
-            text.TextSize = 300;
+            text.TextSize = 60;
             text.Color = Color.ParseColor("#CC0000");
 
-            int currentCentreX = 400;
+            int currentCentreX = LEFT_STARTING_POSITION; //left starting point
             bool unvisitedTripped = false;
 
             List<PointOfInterest> currentPoIs = MapController.GetInstance().Model.CurrentStoryline.MapElements.OfType<PointOfInterest>().ToList();
@@ -53,7 +56,7 @@ namespace Exposeum
                 MapElement current = currentPoIs[i];
 
                 if (i < currentPoIs.Count - 1)
-                    canvas.DrawLine(currentCentreX, 650, currentCentreX + 800, 650, _bgLine);
+                    canvas.DrawLine(currentCentreX, 130, currentCentreX + INTER_CIRCLE_DISTANCE, 130, _bgLine);
 
                 if (!current.Visited)
                     unvisitedTripped = true;
@@ -66,16 +69,18 @@ namespace Exposeum
                     _circle.SetStyle(Paint.Style.Fill);
                     _circle.Color = Color.ParseColor("#CC0000");
 
-                    canvas.DrawCircle(currentCentreX, 650, 250, _circle);
+                    canvas.DrawCircle(currentCentreX, 130, 50, _circle);
 
                     _circle.Color = Color.White;
                     _circle.SetStyle(Paint.Style.Stroke);
                 }
 
-                canvas.DrawCircle(currentCentreX, 650, 250, _circle);
-                canvas.DrawText("" + (i + 1), currentCentreX - 100, 650 + 100, text);
+                canvas.DrawCircle(currentCentreX, 130, 50, _circle);
+                // textSpacing logic for values with 2 digits.
+                int textSpacing = i < 9 ? 16 : 34;
+                canvas.DrawText("" + (i + 1), currentCentreX - textSpacing, 130 + 16, text);
 
-                currentCentreX += 800;
+                currentCentreX += INTER_CIRCLE_DISTANCE;
             }
 
             canvas.Restore();
@@ -94,12 +99,12 @@ namespace Exposeum
             _bgLine = new Paint();
             _bgLine.SetStyle(Paint.Style.Stroke);
             _bgLine.Color = Color.White;
-            _bgLine.StrokeWidth = 85;
+            _bgLine.StrokeWidth = 17;
 
             _circle = new Paint();
             _circle.SetStyle(Paint.Style.FillAndStroke);
             _circle.Color = Color.White;
-            _circle.StrokeWidth = 55;
+            _circle.StrokeWidth = 11;
         }
 
         public override void Invalidate()
