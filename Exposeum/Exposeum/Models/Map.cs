@@ -640,7 +640,7 @@ namespace Exposeum.Models
 			for (int i = 0; i < 16; i++) {
 				story6.MapElements [i].Visited = true;
 				if(story6.MapElements [i] is PointOfInterest)
-					story6.SetLastPointOfInterestVisited ( (PointOfInterest)story6.MapElements [i]);
+					story6.LastPointOfInterestVisited = ((PointOfInterest)story6.MapElements [i]);
 				story6.MapElements [i].Visited = true;
 			}
 			story6.Status = Status.InProgress;

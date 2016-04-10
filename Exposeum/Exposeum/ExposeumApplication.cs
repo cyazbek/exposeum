@@ -37,7 +37,7 @@ namespace Exposeum
 		}
 
 		protected void InitIoCBindings(){
-			IoCContainer.Bind<IStoryLineService> ().To<StoryLineServiceProvider> ();
+			IoCContainer.Bind<IStoryLineService> ().To<StoryLineServiceProvider> ().InSingletonScope();
 			IoCContainer.Bind<IShortestPathService> ().To<ShortestPathServiceProvider> ();
 			IoCContainer.Bind<IGraphService> ().To<GraphServiceProvider> ().InSingletonScope();
 			IoCContainer.Bind<IExplorerService> ().To<ExplorerServiceProvider> ();

@@ -58,7 +58,7 @@ namespace Exposeum.Controllers
 				DialogFragment dialog;
 				if(_selectedStoryLine.Status==Status.InProgress)
 				{
-					dialog = new DialogStorylineInProgress(_selectedStoryLine, context);
+				dialog = new DialogStorylineInProgress(_selectedStoryLine, context, LocateUserOnGenericStoryLine);
 				}
 				else
 				{
@@ -124,6 +124,7 @@ namespace Exposeum.Controllers
         public void BeginJournery()
         {
             _selectedStoryLine.Status = Status.InProgress;
+			ResumeStoryLine ();
         }
 
         public void BeaconFinderObserverUpdate(IBeaconFinderObservable observable)
@@ -139,13 +140,13 @@ namespace Exposeum.Controllers
                     _storyLineService.GetGenericStoryLine().FindPoi(((BeaconFinder) observable).GetClosestBeacon());
             }
 
-            PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest();
+			PointOfInterest lastVisited = _storyLineService.GetActiveStoryLine().LastPointOfInterestVisited;
 			int lastVisitedIndex = _storyLineService.GetActiveStoryLine().PoiList.LastIndexOf(lastVisited);
 			PointOfInterest nextToVisit = _storyLineService.GetActiveStoryLine().PoiList[lastVisitedIndex+1];
 
 			//if the found beacon does not correspond to the last visited poi or the next poi in the list that is to be visited,
 			//ask if the user wants to be redirected. Otherwise, just resume the storyline normally
-			if (!_storyLineService.GetActiveStoryLine().HasBeacon(foundEstimoteBeacon))
+			if (!_storyLineService.GetActiveStoryLine().HasBeacon(foundEstimoteBeacon) && lastVisited != null)
             {
                 DisplayDirectToLastPointFragment();
             }
@@ -160,11 +161,16 @@ namespace Exposeum.Controllers
 
         private void FindAndSetShortestPathToLastVisitedPointOfInterest()
         {
+			PointOfInterest lastVisitedPOIGenericEquivalent = _storyLineService.GetGenericStoryLine ().FindPoi (
+				_storyLineService.GetActiveStoryLine ().LastPointOfInterestVisited.Beacon);
+
             //compute shortest path
-            Path path = _shortestPathService.GetShortestPath(_discoveredPoi,
-                _storyLineService.GetActiveStoryLine().GetLastVisitedPointOfInterest());
+            Path path = _shortestPathService.GetShortestPath(_discoveredPoi,lastVisitedPOIGenericEquivalent);
             //set the active shortest path
             _shortestPathService.SetActiveShortestPath(path);
+
+			//bad! temporary..
+			MapController.GetInstance().MapViewUpdate();
 
         }
 

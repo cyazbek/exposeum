@@ -116,6 +116,11 @@ namespace Exposeum.Models
         return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));
     }
 
+		public PointOfInterest FindPoi(Beacon beacon)
+		{
+			return PoiList.Find(x => x.Beacon.CompareBeacon(beacon));
+		}
+
     public bool HasBeacon(EstimoteSdk.Beacon beacon)
     {
         foreach (var poi in PoiList)

@@ -32,6 +32,13 @@ namespace Exposeum.Models
             return false;
         }
 
+		public bool CompareBeacon(Beacon beacon)
+		{
+			if (Uuid.Equals(beacon.Uuid) && Minor == beacon.Minor && Major == beacon.Major)
+				return true;
+			return false;
+		}
+
 
         public override bool Equals(object obj)
         {

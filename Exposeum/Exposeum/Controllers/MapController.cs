@@ -57,8 +57,6 @@ namespace Exposeum.Controllers
 
             _beaconFinder.AddObserver(this);
 
-            _beaconFinder.SetPath(_mapModel.CurrentStoryline);
-
             //If we are not in free explorer mode (ie there exists a current storyline) then add the
             //current storyline progression fragment to the map activity
             if (!ExposeumApplication.IsExplorerMode)
@@ -224,7 +222,7 @@ namespace Exposeum.Controllers
 
 			//If the shortest path is visited it should be set to null and the storyline 
 			//should be restored on the beacon finder
-			if (_mapModel.GetActiveShortestPath ().CurrentStatus == Status.IsVisited){
+			if (_mapModel.GetActiveShortestPath ().Status == Status.IsVisited){
 				_mapModel.SetActiveShortestPath (null);
 				_mapView.Update();
 				_beaconFinder.SetPath (_mapModel.CurrentStoryline);
@@ -353,7 +351,7 @@ namespace Exposeum.Controllers
         public Path GetShortestPathToLastPoint(MapElement start)
         {
             
-            MapElement end = _mapModel.CurrentStoryline.GetLastVisitedPointOfInterest();
+			MapElement end = _mapModel.CurrentStoryline.LastPointOfInterestVisited;
 
             if (end == null)
             {
@@ -367,5 +365,9 @@ namespace Exposeum.Controllers
         {
             get { return _mapModel; }
         }
+
+		public void MapViewUpdate(){
+			_mapView.Update();
+		}
     }
 }

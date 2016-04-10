@@ -23,7 +23,7 @@ namespace Exposeum.Models
 		private bool _isServiceReady;
 		private const string Tag = "BeaconFinder";
 		private int _beaconCount;
-		private readonly LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
+		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
 		private IPath _path;
 		private readonly Context _context;
@@ -101,7 +101,7 @@ namespace Exposeum.Models
 		/// </summary>
 		private void BeaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
-			if (e.Beacons == null)
+			if (e.Beacons == null || e.Beacons.Count == 0)
 			{
 				//If the app is not in focus, clear all potential notification associated with a beacon
 				if(!_inFocus)
