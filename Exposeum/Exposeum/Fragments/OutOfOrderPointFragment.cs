@@ -38,13 +38,13 @@ namespace Exposeum.Fragments
             var noButton = view.FindViewById<Button>(Resource.Id.wrongPointButton);
             var yesButton = view.FindViewById<Button>(Resource.Id.rightPointButton);
 
-            noButton.Click += (sender, e) =>
+            yesButton.Click += (sender, e) =>
             {
                 _callbackReturn(_currentPoint);
                 Dismiss();
             };
 
-            yesButton.Click += (sender, e) =>
+            noButton.Click += (sender, e) =>
             {
                 _callbackSkip(_currentPoint, _skippedPoints);
                 Dismiss();
