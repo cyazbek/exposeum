@@ -74,7 +74,7 @@ namespace Exposeum
                     User.GetInstance().ToogleLanguage();
                     return true;
                 case Resource.Id.QRScannerItem:
-                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
+                    QrController.GetInstance(this).BeginQrScanning();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
