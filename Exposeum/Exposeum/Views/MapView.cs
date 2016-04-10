@@ -88,8 +88,8 @@ namespace Exposeum.Views
 				}
 				_lastTouchX = ev.GetX ();
 				_lastTouchY = ev.GetY ();
-				float u = (_lastTouchX-_translateX)/(_map.CurrentFloor.Image.IntrinsicWidth*_scaleFactor) + 0.50f;
-				float v = (_lastTouchY-_translateY)/(_map.CurrentFloor.Image.IntrinsicHeight*_scaleFactor) + 0.50f;
+				float u = (_lastTouchX-_translateX)/(_map.CurrentFloor.Width*_scaleFactor) + 0.50f;
+				float v = (_lastTouchY-_translateY)/(_map.CurrentFloor.Height*_scaleFactor) + 0.50f;
 				Log.Wtf("map_press", String.Format("Map Touched: (u,v):({0},{1}", u, v));
 				_activePointerId = ev.GetPointerId (0);
 				break;
@@ -106,10 +106,10 @@ namespace Exposeum.Views
 					_translateY += deltaY;
 
 					//clamp the translation to keep the map on-screen
-					float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-					float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-					float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-					float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
+					float maxX = (_scaleFactor * _map.CurrentFloor.Width / 2) + (_canvasWidth*0.5f);
+					float maxY = (_scaleFactor * _map.CurrentFloor.Height / 2) + (_canvasHeight*0.5f);
+					float minX = (_scaleFactor * -_map.CurrentFloor.Width / 2) + (_canvasWidth*0.5f);
+					float minY = (_scaleFactor * -_map.CurrentFloor.Height / 2) + (_canvasHeight*0.5f);
 
 					_translateX = Clamp (minX, maxX, _translateX);
 					_translateY = Clamp (minY, maxY, _translateY);
@@ -151,7 +151,7 @@ namespace Exposeum.Views
 			base.OnDraw (canvas);
 
 			canvas.Save ();
-			canvas.Translate (_translateX + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2, _translateY + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2);
+			canvas.Translate (_translateX + _scaleFactor * -_map.CurrentFloor.Width / 2, _translateY + _scaleFactor * -_map.CurrentFloor.Height / 2);
 			canvas.Scale (_scaleFactor, _scaleFactor);
 
 			_map.CurrentFloor.Image.Draw (canvas);
@@ -167,7 +167,7 @@ namespace Exposeum.Views
 		}
 
 		private void DrawShortestPath(Canvas canvas){
-			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			DrawMapElementsEdges (canvas, shortestPathMapElements, 255);
 			DrawMapElements (canvas, shortestPathMapElements);
@@ -229,8 +229,8 @@ namespace Exposeum.Views
 					MapElement next = mapElements[i + 1];
 
                     Android.Graphics.Path path = new Android.Graphics.Path ();
-					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, current.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
-					path.LineTo(next.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, next.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Width, current.VCoordinate * _map.CurrentFloor.Height);
+					path.LineTo(next.UCoordinate * _map.CurrentFloor.Width, next.VCoordinate * _map.CurrentFloor.Height);
 
 					canvas.DrawPath(path, appropriateEdgePaintBrush);
 				}
@@ -243,10 +243,10 @@ namespace Exposeum.Views
 
 			//center the image on canvas size change (rotation)
 			//is also called when canvas is first instantiated
-			float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-			float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-			float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-			float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
+			float maxX = (_scaleFactor * _map.CurrentFloor.Width / 2) + (_canvasWidth*0.5f);
+			float maxY = (_scaleFactor * _map.CurrentFloor.Height / 2) + (_canvasHeight*0.5f);
+			float minX = (_scaleFactor * -_map.CurrentFloor.Width / 2) + (_canvasWidth*0.5f);
+			float minY = (_scaleFactor * -_map.CurrentFloor.Height / 2) + (_canvasHeight*0.5f);
 
 			_translateX = minX + ((maxX - minX) / 2.0f); //translate half-way on both axes
 			_translateY = minY + ((maxY - minY) / 2.0f);
@@ -281,12 +281,12 @@ namespace Exposeum.Views
 
 		private PointOfInterest GetSelectedPoi(float screenX, float screenY){
 
-			List<PointOfInterest> currentFloorPoIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<PointOfInterest> currentFloorPoIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			foreach (PointOfInterest poi in currentFloorPoIs) {
 
-				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.UCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.VCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Width * poi.UCoordinate) - ((_scaleFactor * _map.CurrentFloor.Width) / 2);
+				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Height * poi.VCoordinate) - ((_scaleFactor * _map.CurrentFloor.Height) / 2);
 
 				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
 					return poi;
