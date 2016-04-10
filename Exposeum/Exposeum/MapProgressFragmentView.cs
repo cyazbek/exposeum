@@ -22,7 +22,7 @@ namespace Exposeum
         public MapProgressionFragmentView(Context context) : base(context)
         {
 
-            LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+            LayoutParameters = new ViewGroup.LayoutParams(1800, 250);
             Orientation = Orientation.Horizontal;
             SetWillNotDraw(false); //causes the OnDraw override below to be called
             SetMinimumHeight(220);
