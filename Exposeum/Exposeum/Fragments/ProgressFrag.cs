@@ -35,7 +35,7 @@ namespace Exposeum.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             var ll = new MapProgressionFragmentView(context);
             View view = inflater.Inflate(Resource.Layout.ProgressFragLayout, container, false);
-            //LinearLayout frfr = view.FindViewById<LinearLayout>(Resource.Id.progg);
+            HorizontalScrollView frfr = view.FindViewById<HorizontalScrollView>(Resource.Id.horizontalScrollView1);
             //frfr.AddView(ll);
             return view;
         }

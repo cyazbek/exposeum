@@ -9,6 +9,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
 using Exposeum.Controllers;
 using Exposeum.Models;
@@ -21,11 +22,13 @@ namespace Exposeum
         public MapProgressionFragmentView(Context context) : base(context)
         {
 
-            LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-            Orientation = Orientation.Vertical;
+            LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+            Orientation = Orientation.Horizontal;
             SetWillNotDraw(false); //causes the OnDraw override below to be called
             SetMinimumHeight(220);
             SetBackgroundColor(Color.ParseColor("#CC0000"));
+            //Settings.BuiltInZoomControls = true;
+            //Settings.DisplayZoomControls = false;
             //SetGravity(GravityFlags.Bottom);
 
             ResetPaint();

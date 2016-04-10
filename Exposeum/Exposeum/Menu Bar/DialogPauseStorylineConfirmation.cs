@@ -28,8 +28,8 @@ namespace Exposeum.Menu_Bar
             var buttonToConfirmPause = view.FindViewById<Button>(Resource.Id.confirm_pause);
             var buttonToRejectPause = view.FindViewById<Button>(Resource.Id.reject_pause);
             var textView = view.FindViewById<TextView>(Resource.Id.pause_text); 
-            buttonToConfirmPause.Text = User.GetInstance().GetButtonText("confirm_pause");
-            buttonToRejectPause.Text = User.GetInstance().GetButtonText("reject_pause");
+            //buttonToConfirmPause.Text = User.GetInstance().GetButtonText("confirm_pause");
+            //buttonToRejectPause.Text = User.GetInstance().GetButtonText("reject_pause");
             textView.Text = User.GetInstance().GetButtonText("pause_text");
 
             buttonToConfirmPause.Click += delegate

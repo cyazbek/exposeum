@@ -2,30 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:minWidth="300dp"
-    android:minHeight="400dp"
+    android:minHeight="100dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/relativeLayout1"
     android:weightSum="100"
-    android:background="@drawable/bblue">
+    android:background="@drawable/bblueW">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="30"
+        android:layout_weight="60"
         android:gravity="center"
+        android:weightSum="100"
         android:id="@+id/linearLayout1">
         <TextView
             android:id="@+id/pause_text"
             android:textColor="#ffffff"
             android:textSize="30dip"
             android:textStyle="bold"
-            android:text="Pause"
+            android:text="Pause?"
             android:layout_width="match_parent"
             android:layout_height="52.5dp"
+            android:layout_weight="20"
             android:gravity="center" />
+    <!--  <ImageView
+            android:src="@drawable/Pause"
+            android:layout_width="100.5dp"
+            android:layout_height="75dp"
+            android:scaleType="fitXY"
+            android:layout_weight="20"
+            android:id="@+id/imageView1"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50.0dp" /> -->
+        <Button
+            android:text=""
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/Text"
+            android:id="@+id/confirm_pause"
+            android:background="@drawable/Pause"
+            android:textColor="#ffffff"
+            android:layout_marginTop="42.0dp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/Text"
@@ -35,26 +57,19 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_weight="70"
+        android:gravity="bottom|center"
+        android:layout_weight="40"
         android:weightSum="10">
         <Button
-            android:text="Yes"
-            android:layout_width="match_parent"
-            android:layout_height="73.5dp"
-            android:layout_below="@id/Text"
-            android:id="@+id/confirm_pause"
-            android:layout_marginLeft="22.0dp"
-            android:layout_marginRight="22.0dp"
-            android:textColor="#ffffff" />
-        <Button
-            android:text="No"
-            android:layout_width="match_parent"
-            android:layout_height="78.0dp"
+            android:text=""
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_below="@id/Text"
             android:id="@+id/reject_pause"
             android:layout_marginRight="22.0dp"
             android:layout_marginLeft="22.0dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:background="@drawable/cancel_X"
+            android:layout_marginBottom="19.0dp" />
     </LinearLayout>
 </LinearLayout>

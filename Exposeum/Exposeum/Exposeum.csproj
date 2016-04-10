@@ -466,4 +466,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\floor3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bblueW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cancel_X.png" />
+  </ItemGroup>
 </Project>

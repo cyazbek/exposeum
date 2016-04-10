@@ -5,7 +5,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroudlanguagefix"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:weightSum="100">
+    <TextView
+        android:text="Choose your Tour Mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        android:layout_weight="20"
+        android:gravity="center" />
     <Button
         android:text="Explorer"
         android:id="@+id/freeTour"
@@ -14,7 +24,9 @@
         style="@style/button_text"
         android:layout_gravity="center"
         android:layout_marginBottom="5.00dp"
-        android:layout_marginTop="200dp" />
+        android:background="@android:color/transparent"
+        android:textColor="#ffffff"
+        android:layout_weight="40" />
     <Button
         android:id="@+id/storyLine"
         android:text="Guided Tour"
@@ -22,5 +34,8 @@
         android:layout_width="250dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:textColor="#ffffff"
+        android:layout_weight="40"
         style="@style/button_text" />
 </LinearLayout>

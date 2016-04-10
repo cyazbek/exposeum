@@ -26,7 +26,7 @@ namespace Exposeum.Models
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
-			SeedDD ();
+			SeedData ();
             User.GetInstance().Register(this);
 		}
 
@@ -86,14 +86,14 @@ namespace Exposeum.Models
             };
 
 
-            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
+            //Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
             Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 11163, 7229);
             Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 32561, 47495);
-/*
-            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
-            Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
-            Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 49800, 5890);
-*/
+
+            //Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
+            //Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
+            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 49800, 5890);
+
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;
             p1.Visited = false;

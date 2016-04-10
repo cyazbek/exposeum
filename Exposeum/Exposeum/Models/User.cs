@@ -29,9 +29,9 @@ namespace Exposeum.Models
             EnglishButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Resume"));
             EnglishButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Restart"));
             EnglishButtonString.Add(new ButtonText("wrongPointButton", "Dismiss"));
-            EnglishButtonString.Add(new ButtonText("pause_text", "Pause"));
-            EnglishButtonString.Add(new ButtonText("confirm_pause", "Yes"));
-            EnglishButtonString.Add(new ButtonText("reject_pause", "No"));
+            EnglishButtonString.Add(new ButtonText("pause_text", "Pause?"));
+            EnglishButtonString.Add(new ButtonText("confirm_pause", ""));
+            EnglishButtonString.Add(new ButtonText("reject_pause", ""));
             EnglishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
             EnglishButtonString.Add(new ButtonText("PauseItem", "Pause"));
             EnglishButtonString.Add(new ButtonText("LanguageItem", "Language"));
@@ -49,9 +49,9 @@ namespace Exposeum.Models
             FrenchButtonString.Add(new ButtonText("storyLineDialogButtonToResume", "Continuer"));
             FrenchButtonString.Add(new ButtonText("storyLineDialogButtonToReset", "Recommencer"));
             FrenchButtonString.Add(new ButtonText("wrongPointButton", "Fermer"));
-            FrenchButtonString.Add(new ButtonText("pause_text", "Suspendre"));
-            FrenchButtonString.Add(new ButtonText("confirm_pause", "Oui"));
-            FrenchButtonString.Add(new ButtonText("reject_pause", "Non"));
+            FrenchButtonString.Add(new ButtonText("pause_text", "Suspendre?"));
+            FrenchButtonString.Add(new ButtonText("confirm_pause", ""));
+            FrenchButtonString.Add(new ButtonText("reject_pause", ""));
             FrenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
             FrenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
             FrenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
