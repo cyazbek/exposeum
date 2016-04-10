@@ -11,8 +11,8 @@
     <HorizontalScrollView
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_width="4000dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/horizontalScrollView1">
         <LinearLayout
             android:orientation="horizontal"
@@ -20,37 +20,37 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1">
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="108.5dp"
-                android:layout_height="59.5dp"
-                android:id="@+id/imageView1" />
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="111.0dp"
-                android:layout_height="72.0dp"
-                android:id="@+id/imageView2" />
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="216.0dp"
-                android:layout_height="83.0dp"
-                android:id="@+id/imageView3" />
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="102.0dp"
-                android:layout_height="79.5dp"
-                android:id="@+id/imageView4" />
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="103.0dp"
-                android:layout_height="106.5dp"
-                android:id="@+id/imageView5" />
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="84.0dp"
-                android:layout_height="63.0dp"
-                android:id="@+id/imageView6" />
+            android:id="@+id/linearLayoutHH">
+            <Button
+                android:text="Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button1" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button2" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button3" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button4" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button5" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button6" />
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>

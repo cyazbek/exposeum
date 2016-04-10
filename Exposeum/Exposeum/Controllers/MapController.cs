@@ -73,7 +73,7 @@ namespace Exposeum.Controllers
                 _mapProgressionView = new MapProgressionFragment(_mapModel.CurrentStoryline);
                 fragmentTx.Add(Resource.Id.map_frag_frame_, progressFrag);
                 //fragmentTx.Show(progressFrag);
-                //fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
+                fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
                 fragmentTx.Commit();
             }
 

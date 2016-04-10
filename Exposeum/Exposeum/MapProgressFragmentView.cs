@@ -104,5 +104,10 @@ namespace Exposeum
             _circle.Color = Color.White;
             _circle.StrokeWidth = 55;
         }
+
+        public override void Invalidate()
+        {
+            
+        }
     }
 }
