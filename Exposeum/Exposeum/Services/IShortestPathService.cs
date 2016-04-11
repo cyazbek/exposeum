@@ -26,8 +26,20 @@ namespace Exposeum.Services
 	    /// </summary>
 	    /// <param name="startElement"></param>
 	    /// <param name="targetElement"></param>
-	    /// <returns>ShortPath</returns>
+	    /// <returns>Path</returns>
 	    Path GetShortestPath(MapElement startElement, MapElement targetElement);
+
+		/// <summary>
+		/// Returns the active shortest Path object
+		/// </summary>
+		/// <returns>Path</returns>
+		Path GetActiveShortestPath ();
+
+		/// <summary>
+		/// Sets the active shortest path
+		/// </summary>
+		/// <param name="path"></param>
+		void SetActiveShortestPath (Path path);
 	}
 }
 

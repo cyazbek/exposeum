@@ -11,6 +11,19 @@ namespace Exposeum.Models
 
         public Beacon()
         { }
+<<<<<<< HEAD
+        public UUID Uuid
+        {
+            get; set;
+        } 
+        public int Major
+        {
+            get; set;
+        } 
+        public int Minor
+        {
+            get; set;
+        }
 
         public Beacon(EstimoteSdk.Beacon beacon)
         {
@@ -19,6 +32,8 @@ namespace Exposeum.Models
             Minor = beacon.Minor;
         }
 
+=======
+>>>>>>> c1c62bd984134a864543ccfbd4ccb8f74728ef78
         public Beacon (UUID uuid, int major, int minor)
         {
             Uuid = uuid;
@@ -31,13 +46,6 @@ namespace Exposeum.Models
                 return true;
             return false;
         }
-
-		public bool CompareBeacon(Beacon beacon)
-		{
-			if (Uuid.Equals(beacon.Uuid) && Minor == beacon.Minor && Major == beacon.Major)
-				return true;
-			return false;
-		}
 
 
         public override bool Equals(object obj)
