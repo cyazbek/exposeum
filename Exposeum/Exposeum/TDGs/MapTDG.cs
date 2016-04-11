@@ -31,6 +31,11 @@ namespace Exposeum.TDGs
             return Db.Get<Map>(id);
         }
 
+        public int GetSize()
+        {
+            return Db.Table<Map>().Count();
+        }
+
         public bool Equals(Map map1, Map map2)
         {
             if (map1.Id == map2.Id && map1.CurrentFloorId == map2.CurrentFloorId && map1.CurrentStoryLineId == map2.CurrentStoryLineId)

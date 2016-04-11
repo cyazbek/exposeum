@@ -30,7 +30,7 @@ namespace Exposeum
             base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = inflater.Inflate(Resource.Layout.StoryLine_dialog_inProgress, container, false);
-                view.FindViewById<ImageView>(Resource.Id.sotryLineDialogPic).SetImageResource(_storyLine.ImageId);
+				view.FindViewById<ImageView> (Resource.Id.sotryLineDialogPic).SetImageDrawable (_storyLine.Image);
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogTitle).Text = _storyLine.GetName();
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogAudience).Text = _storyLine.GetAudience();
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogDuration).Text = _storyLine.Duration + " min";

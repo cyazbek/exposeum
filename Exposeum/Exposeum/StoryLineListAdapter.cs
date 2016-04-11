@@ -46,7 +46,7 @@ namespace Exposeum
             View view = convertView;
             if (view == null) // no view to re-use, create new
                 view = _context.LayoutInflater.Inflate(Resource.Layout.StoryLineRow, null);
-            view.FindViewById<ImageView>(Resource.Id.StoryLineIcon).SetImageResource(item.ImageId);
+			view.FindViewById<ImageView>(Resource.Id.StoryLineIcon).SetImageDrawable(item.Image);
             view.FindViewById<TextView>(Resource.Id.TitleTextView).Text = item.GetName();
             view.FindViewById<TextView>(Resource.Id.AudienceTextView).Text = item.GetAudience();
             view.FindViewById<TextView>(Resource.Id.durationTextView).Text = item.Duration + " min";

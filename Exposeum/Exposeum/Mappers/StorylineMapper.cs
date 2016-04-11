@@ -1,6 +1,8 @@
 using Exposeum.TDGs;
 using Exposeum.Models;
 using System.Collections.Generic;
+using Android.Graphics.Drawables;
+using Exposeum.Tables;
 
 namespace Exposeum.Mappers
 {
@@ -13,6 +15,7 @@ namespace Exposeum.Mappers
         private readonly StoryLineDescriptionMapper _storylineDescriptionMapper;
         private readonly StatusMapper _statusMapper;
         private readonly PointOfInterestMapper _poiMapper;
+        private int _storylineMapElementId = 0;
         private StorylineMapper()
         {
             _storylineTdg = StorylineTdg.GetInstance();
@@ -40,7 +43,8 @@ namespace Exposeum.Mappers
                 ImagePath = storylineModel.ImgPath,
                 FloorsCovered = storylineModel.FloorsCovered,
                 LastVisitedPoi = storylineModel.LastPointOfInterestVisited.Id,
-                Status = _statusMapper.StatusModelToTable(storylineModel.Status)
+                Status = _statusMapper.StatusModelToTable(storylineModel.Status),
+                DescriptionId = storylineModel.StorylineDescription.StoryLineDescriptionId
             };
             return storyline; 
         }
@@ -66,7 +70,7 @@ namespace Exposeum.Mappers
 
         public StoryLine StorylineTableToModel(Tables.Storyline storylineTable)
         {
-
+			
             StoryLine storyline = new StoryLine
             {
                 StorylineId = storylineTable.Id,
@@ -76,7 +80,8 @@ namespace Exposeum.Mappers
                 StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
                 LastPointOfInterestVisited = _poiMapper.Get(storylineTable.LastVisitedPoi),
                 MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
-                Status = _statusMapper.StatusTableToModel(storylineTable.Status)
+                Status = _statusMapper.StatusTableToModel(storylineTable.Status),
+				Image = (BitmapDrawable)Drawable.CreateFromStream (System.IO.File.OpenRead (storylineTable.ImagePath), null)
             };
             return storyline; 
         }
@@ -107,27 +112,38 @@ namespace Exposeum.Mappers
         {
             Tables.Storyline storylineTable = StorylineModelToTable(storyline);
             List<MapElement> list = storyline.MapElements;
+
+            foreach (var mapElement in list)
+            {
+                StoryLineMapElementList element = new StoryLineMapElementList
+                {
+                    Id = _storylineMapElementId++,
+                    StoryLineId = storyline.StorylineId,
+                    MapElementId = mapElement.Id
+                };
+
+                _storyLineMapElementListTdg.Add(element);
+            }
+
             StorylineDescription description = storyline.StorylineDescription;
             _storylineTdg.Add(storylineTable);
             _mapElementsMapper.AddList(list);
             _storylineDescriptionMapper.AddStoryLineDescription(description);
         }
 
-        public bool Equals(List<StoryLine> list1, List<StoryLine> list2)
+        public bool ListEquals(List<StoryLine> list1, List<StoryLine> list2)
         {
-            bool result = false;
-            if (list1.Count == list2.Count)
+            if (list1.Count != list2.Count)
+                return false;
+
+            bool areEquals = false;
+
+            for (int i = 0; i < list1.Count; i++)
             {
-                for (int i = 0; i < list1.Count; i++)
-                {
-                    if (Equals(list1[i], list2[i]))
-                        result = true;
-                    else
-                        return false;
-                }
-                return result;
+               areEquals = list1[i].AreEquals(list2[i]);
             }
-            return false;
+
+            return areEquals;
         }
     }
 }
