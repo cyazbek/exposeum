@@ -1,4 +1,4 @@
-using QuickGraph;
+﻿using QuickGraph;
 using Java.Lang;
 
 namespace Exposeum.Models
@@ -33,5 +33,11 @@ namespace Exposeum.Models
                   Target.AreEquals(other.Target);
         }
 
+<<<<<<< HEAD
+		public MapElement Source { get; set;}
+		public MapElement Target { get; set;}
+	}
+=======
     }
+>>>>>>> c1c62bd984134a864543ccfbd4ccb8f74728ef78
 }

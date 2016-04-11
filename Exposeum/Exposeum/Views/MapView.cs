@@ -296,12 +296,12 @@ namespace Exposeum.Views
 			return null;
 		}
 
-		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoi, OutOfOrderPointFragment.Callback callback)
+		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoi, OutOfOrderPointFragment.CallbackSkipUnvisitedPoints callbackSkip, OutOfOrderPointFragment.CallbackReturnToLastPoint callbackReturn)
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
 	        {
 				if (_outOfOrderDialog == null || !_outOfOrderDialog.IsVisible) {
-					_outOfOrderDialog = new OutOfOrderPointFragment(currentPoi, skippedPoi, callback);
+					_outOfOrderDialog = new OutOfOrderPointFragment(currentPoi, skippedPoi, callbackSkip, callbackReturn);
 					_outOfOrderDialog.Show(tr, "Wrong POI");
 				}
                 

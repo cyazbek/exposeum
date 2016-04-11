@@ -119,6 +119,9 @@
     <Compile Include="Controllers\StorylineController.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Fragments\DirectToLastPointFragment.cs" />
+    <Compile Include="Fragments\SearchingForBeaconFragment.cs" />
+
     <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="Mappers\AudioContentMapper.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
@@ -284,6 +287,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MenuExplorer.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DirectToLastPointDialog.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchingForBeaconDialog.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
