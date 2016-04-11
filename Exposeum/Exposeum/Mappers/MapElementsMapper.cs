@@ -74,6 +74,14 @@ namespace Exposeum.Mappers
             return modelList;
         }
 
+        internal void Update(MapElement mapElement)
+        {
+            if (mapElement.GetType().ToString() == "Exposeum.Models.PointOfInterest")
+                _pointOfInterestMapper.Update((PointOfInterest)mapElement);
+            else
+                _wayPointMapper.Update((WayPoint)mapElement);
+        }
+
         public void UpdateList(List<MapElement> list)
         {
             foreach (var x in list)

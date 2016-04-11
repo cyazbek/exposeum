@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Android.Graphics;
+using Exposeum.Mappers;
 
 namespace Exposeum.Models
 {
@@ -61,6 +62,11 @@ namespace Exposeum.Models
                 return ((WayPoint) this).Equals((WayPoint) m2);
             else
                 return false;
+        }
+        public void SetVisited(bool visited)
+        {
+            Visited = visited;
+            MapElementsMapper.GetInstance().Update(this);
         }
     }
 }

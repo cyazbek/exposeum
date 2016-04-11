@@ -647,14 +647,21 @@ namespace Exposeum.Models
 
 	    public override void Update()
 	    {
-	        StorylineMapper storyLineMapper = StorylineMapper.GetInstance();
-            MapElementsMapper mapElementMapper = MapElementsMapper.GetInstance();
+	        StoryLineDescriptionMapper storyLineMapper = StoryLineDescriptionMapper.GetInstance();
+            PointOfInterestDescriptionMapper poiMapper = PointOfInterestDescriptionMapper.GetInstance();
+            MapElementsMapper mapElementsMapper = MapElementsMapper.GetInstance();
 
-            storyLineMapper.UpdateStorylinesList(Storylines);
-	        Storylines = storyLineMapper.GetAllStorylines();
+	        foreach (var x in Storylines)
+	        {
+	            x.StorylineDescription =
+	                storyLineMapper.GetStoryLineDescription(x.StorylineDescription.StoryLineDescriptionId);
+	            foreach (PointOfInterest y in x.PoiList)
+	            {
+	                y.Description = poiMapper.GetPointOfInterestDescription(y.Description.Id);
+	            }
+	        }
+	        MapElements = mapElementsMapper.GetAllMapElements();
 
-            mapElementMapper.UpdateList(MapElements);
-	        MapElements = mapElementMapper.GetAllMapElements();
 	    }
     }
 }

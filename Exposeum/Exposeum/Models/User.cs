@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Exposeum.Mappers;
 using Exposeum.Observers;
 
 namespace Exposeum.Models
@@ -135,5 +136,13 @@ namespace Exposeum.Models
                 o.Update();
             }
         }
+
+        public void SetVisitor(bool visited)
+        {
+            Visitor = visited;
+            UserMapper.GetInstance().UpdateUser(this);
+        }
+
+
     }
 }

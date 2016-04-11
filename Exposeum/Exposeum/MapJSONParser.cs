@@ -71,7 +71,7 @@ namespace Exposeum
 			StoreParsedDataDB();
 
 			//add all the objects from the database into the map instance
-			MapMapper.GetInstance ().ParseMap ();
+			
 
 		}
 

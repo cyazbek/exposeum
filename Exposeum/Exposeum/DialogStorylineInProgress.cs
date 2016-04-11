@@ -60,7 +60,7 @@ namespace Exposeum
 
                 _storylineController.SetActiveStoryLine();
                 _storylineController.ResetStorylineProgress(_storyLine);
-                _storyLine.Status = Status.InProgress;
+                _storyLine.SetStatus(Status.InProgress);
                 _storylineController.ResumeStorylineBeacons();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
