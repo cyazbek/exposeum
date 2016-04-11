@@ -102,7 +102,8 @@ namespace Exposeum.Controllers
             Floor newFloor = _mapModel.Floors[newFloorIndex];
             if (newFloor != null)
                 _mapModel.CurrentFloor = newFloor;
-            _mapView.Update();
+			_mapView.LoadFloorPlan (_mapModel.CurrentFloor);
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -130,7 +131,7 @@ namespace Exposeum.Controllers
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
 
-            _mapView.Update();
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace Exposeum.Controllers
 				mapElement.Visited = true;
 		    }
 
-            _mapView.Update();
+			_mapView.Invalidate();
 
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
@@ -274,7 +275,7 @@ namespace Exposeum.Controllers
                 callback = DisplayEndOfStoryLinePopUp;
 
             _mapView.InitiatePointOfInterestPopup(selectedPoi, callback);
-            _mapView.Update(); //technically unncecessary but included for completeness
+			_mapView.Invalidate(); //technically unncecessary but included for completeness
 
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
@@ -302,7 +303,7 @@ namespace Exposeum.Controllers
             Path path = GetShortestPathToStart(storyline);
             _mapModel.SetActiveShortestPath(path);
             _beaconFinder.SetPath(path);
-			_mapView.Update();
+			_mapView.Invalidate();
         }
 
         /// <summary>
