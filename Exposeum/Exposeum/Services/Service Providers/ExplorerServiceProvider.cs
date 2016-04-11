@@ -15,9 +15,9 @@ namespace Exposeum.Services.Service_Providers
 		public void SetExplorerStoryLineAsActive(){
 			//TODO: temporary implementation, should set the active storyline to a storyline
 			//actually dedicated to the explorer mode
-
-			StoryLine firstStoryLine = _storyLineService.GetStoryLines() [0];
-			_storyLineService.SetActiveStoryLine (firstStoryLine);
+			StoryLine genericStoryline = _storyLineService.GetGenericStoryLine();
+			_storyLineService.SetActiveStoryLine (genericStoryline);
+			BeaconFinder.GetInstance ().SetPath (genericStoryline);
 		}
 	}
 }
