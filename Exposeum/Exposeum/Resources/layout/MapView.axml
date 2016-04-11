@@ -13,14 +13,20 @@
     <!-- map will be placed here -->
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/map_frag_frame_"
+        android:id="@+id/map_frag_floorSelector"
         android:layout_width="match_parent"
         android:layout_height="130dp"
+        android:layout_marginBottom="80dp"
         android:layout_gravity="bottom">
-    <!-- map Progression Place -->
+    <!-- Floor selector Button is placed here-->
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/floor_select_button" />
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/map_frag_frame_lay"
+        android:id="@+id/map_frag_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

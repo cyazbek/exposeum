@@ -31,7 +31,10 @@ namespace Exposeum.Views
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			return _mapProgressionFragmentView;
+            View view = inflater.Inflate(Resource.Layout.ProgressFragLayout, container, false);
+            LinearLayout frfr = view.FindViewById<LinearLayout>(Resource.Id.linearLayoutHH);
+            frfr.AddView(_mapProgressionFragmentView);
+            return view;
 		}
 
 		public void Update(){

@@ -3,25 +3,44 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/WviewPager"
+    android:background="#FFFFFF"
+    android:weightSum="100">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="514.0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp" />
-    <Button
-        android:text=""
-        android:id="@+id/WalkThroughButton"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp" />
+        android:layout_height="match_parent"
+        android:layout_weight="70"
+        android:id="@+id/linearLayout1">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/WviewPager"
+            android:layout_width="match_parent"
+            android:layout_height="457.5dp"
+            android:layout_marginBottom="15.0dp"
+            android:layout_marginTop="40.5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="124.0dp"
+        android:layout_weight="30"
+        android:gravity="center"
+        android:id="@+id/linearLayout2">
+        <Button
+            android:text=""
+            android:id="@+id/WalkThroughButton"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_gravity="center" />
+    </LinearLayout>
 </LinearLayout>
