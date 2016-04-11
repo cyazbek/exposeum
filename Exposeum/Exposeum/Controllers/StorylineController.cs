@@ -67,11 +67,11 @@ namespace Exposeum.Controllers
         {
 			foreach (var mapElement in storyLine.MapElements)
             {
-				mapElement.Visited = false;
+				mapElement.SetVisited(false);
             }
 
             storyLine.LastPointOfInterestVisited = null;
-            storyLine.Status = Status.IsNew;
+            storyLine.SetStatus(Status.IsNew);
 
         }
 
@@ -91,7 +91,7 @@ namespace Exposeum.Controllers
 
         public void BeginJournery()
         {
-            _selectedStoryLine.Status = Status.InProgress;
+            _selectedStoryLine.SetStatus(Status.InProgress); 
         }
     }
 }

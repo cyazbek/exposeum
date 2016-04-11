@@ -24,7 +24,6 @@ namespace Exposeum.Models
         {
             PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			Status = Status.IsNew;
         }
 
         public StoryLine(int id)
@@ -32,7 +31,6 @@ namespace Exposeum.Models
             StorylineId = id;
 			PoiList = new List<PointOfInterest>();
 			MapElements = new List<MapElement> ();
-			Status = Status.IsNew;
         }
         /// <summary>
         /// DEPRECATED: use addMapElement() instead
@@ -98,7 +96,7 @@ namespace Exposeum.Models
                 {
 
 					MapElement currentNode = nodeStack.Pop();
-		            currentNode.Visited = true;
+		            currentNode.SetVisited(true);
 		        }
 
 				//If the rightBoundLinkedNode is a point of interest save it as LastPointOfInterestVisited
@@ -107,9 +105,9 @@ namespace Exposeum.Models
 
 				//finally, of this node is the last node of the tour, set the tour as completed
 				if (rightBoundLinkedNode.Next == null)
-					Status = Status.IsVisited;
+					SetStatus(Status.IsVisited); 
 				else if (Status == Status.IsNew)
-					Status = Status.InProgress;
+                    SetStatus(Status.InProgress);  
 		    }
 		}
 
@@ -158,6 +156,13 @@ namespace Exposeum.Models
                    StorylineDescription.Equals(other.StorylineDescription) &&
                    MapElement.ListEquals(MapElements, other.MapElements) &&
                    LastPointOfInterestVisited.AreEquals(other.LastPointOfInterestVisited);
+        }
+
+        public void SetStatus(Status status)
+        {
+            this.Status = status;
+            StorylineMapper.GetInstance().UpdateStoryline(this);
+            
         }
     }
 }

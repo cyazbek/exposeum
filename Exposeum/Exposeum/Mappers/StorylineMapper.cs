@@ -70,7 +70,7 @@ namespace Exposeum.Mappers
 
         public StoryLine StorylineTableToModel(Tables.Storyline storylineTable)
         {
-
+			
             StoryLine storyline = new StoryLine
             {
                 StorylineId = storylineTable.Id,
@@ -81,7 +81,7 @@ namespace Exposeum.Mappers
                 LastPointOfInterestVisited = _poiMapper.Get(storylineTable.LastVisitedPoi),
                 MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status),
-                Image = Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(storylineTable.ImagePath), null)
+				Image = (BitmapDrawable)Drawable.CreateFromStream (System.IO.File.OpenRead (storylineTable.ImagePath), null)
             };
             return storyline; 
         }

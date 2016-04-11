@@ -81,7 +81,7 @@ namespace Exposeum.Services.Service_Providers
 			int i = 0;
 			foreach (MapElement mapElement in mapElements) {
 				MapElement clonedElement = mapElement.ShallowCopy();
-				clonedElement.Visited = false;
+				clonedElement.SetVisited(false);
 
 				//If the Map Element is a PointOfInterest, change the descriptions 
 				//and names so that the push notifications remain relevant.

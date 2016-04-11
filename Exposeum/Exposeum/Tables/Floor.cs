@@ -8,6 +8,8 @@ namespace Exposeum.Tables
         [PrimaryKey, AutoIncrement, Column("ID")]
         public int Id { get; set; }
         public string ImagePath { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
 
     }
 }

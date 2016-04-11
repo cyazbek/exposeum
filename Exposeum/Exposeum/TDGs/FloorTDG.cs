@@ -38,7 +38,7 @@ namespace Exposeum.TDGs
 
         public bool Equals(Floor object1, Floor object2)
         {
-            if (object1.Id == object2.Id && object1.ImagePath.Equals(object2.ImagePath))
+            if (object1.Id == object2.Id && object1.ImagePath.Equals(object2.ImagePath) && object1.Height==object2.Height && object1.Width == object2.Width)
                 return true;
             return false;
         }

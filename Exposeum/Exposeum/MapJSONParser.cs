@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -10,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Exposeum.Tables;
 using Android.Graphics.Drawables;
 using Exposeum.TDGs;
+using Exposeum.Mappers;
 
 namespace Exposeum
 {
@@ -21,7 +21,7 @@ namespace Exposeum
 		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum";
 		private readonly String JSON_SCHEMA_FILENAME = "Map.json";
 
-		private readonly String LOCAL_VENUE_DATA_PATH = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/venue_data";
+		public static readonly String LOCAL_VENUE_DATA_PATH = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/MuseeDesOndes/venue_data";
 
 		private List<Floor> floors;
 		private List<MapElements> mapelements;
@@ -31,6 +31,8 @@ namespace Exposeum
 
 		private List<PoiDescriptionEn> englishPOIDescriptions;
 		private List<PoiDescriptionFr> frenchPOIDescriptions;
+
+		private List<StoryLineMapElementList> mapelementsSLList;
 
 		private List<ExhibitionContentEn> englishExhibitionContent;
 		private List<ExhibitionContentFr> frenchExhibitionContent;
@@ -43,11 +45,12 @@ namespace Exposeum
 		private int newEdgeId = 0;
 
 		private int audioId = 0, videoId = 0, imageId = 0;
+		private int SLAssocMapelementID = 0;
 
-		public async void FetchAndParseMapJSON(){
+		public void FetchAndParseMapJSON(){
 
 			//fetch the JSON file from the internet
-			JSONData = await DownloadJSONAsync (JSON_BASE_URL + "/" + JSON_SCHEMA_FILENAME);
+			JSONData = DownloadJSON (JSON_BASE_URL + "/" + JSON_SCHEMA_FILENAME);
 
 			//deserialize into JObject which we can iterate over
 			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
@@ -66,9 +69,13 @@ namespace Exposeum
 
 			//send the parsed data to be saved in the database
 			StoreParsedDataDB();
+
+			//add all the objects from the database into the map instance
+			
+
 		}
 
-		private async void ParseFloors(JObject JSONPayload){
+		private void ParseFloors(JObject JSONPayload){
 
 			floors = new List<Floor>();
 
@@ -76,12 +83,12 @@ namespace Exposeum
 
 				Floor newFloor = new Floor ();
 
-				newFloor.ImagePath = (String)floorOBJ ["imagePath"];
+				newFloor.ImagePath = LOCAL_VENUE_DATA_PATH + (String)floorOBJ ["imagePath"];
 				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]);
 
 				floors.Add (newFloor);
 
-				await FetchAndSaveImage (newFloor.ImagePath);
+				FetchAndSaveImage ((String)floorOBJ ["imagePath"]);
 
 			}
 
@@ -152,6 +159,8 @@ namespace Exposeum
 					UCoordinate = float.Parse(poiOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (poiOBJ ["floorID"].ToString ())),
 					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (poiOBJ ["floorID"].ToString ()))
 				};
+
+
 		
 				AddExhibitionContent (newPOI.Id, poiOBJ ["media"]);
 
@@ -179,9 +188,10 @@ namespace Exposeum
 
 		}
 
-		private async void ParseStorylines(JObject JSONPayload){
+		private void ParseStorylines(JObject JSONPayload){
 
 			storylines = new List<Storyline>();
+			mapelementsSLList = new List<StoryLineMapElementList> ();
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
@@ -195,8 +205,8 @@ namespace Exposeum
 				StoryLineDescriptionFr newStorylineDescriptionFR = new StoryLineDescriptionFr
 				{
 					Id = newStorylineDescriptionId, //increment
-					Title = storylineOBJ["title"].ToString(),
-					Description = storylineOBJ["description"].ToString(),
+					Title = "Le demo de du storyline"/*storylineOBJ["title"].ToString()*/,
+					Description = "la description en Français" /*storylineOBJ["description"].ToString()*/,
 				};
 
 				englishStorylineDescriptions.Add (newStorylineDescriptionEN);
@@ -206,20 +216,31 @@ namespace Exposeum
 
 					Id = int.Parse (storylineOBJ ["id"].ToString ()),
 					Duration = int.Parse (storylineOBJ ["walkingTimeInMinutes"].ToString ()),
-					ImagePath = storylineOBJ ["thumbnail"].ToString (),
+					ImagePath = LOCAL_VENUE_DATA_PATH + storylineOBJ ["thumbnail"].ToString (),
 					FloorsCovered = int.Parse (storylineOBJ ["floorsCovered"].ToString ()),
 					Status = 2,
 					DescriptionId = newStorylineDescriptionId++
 
 				};
 
-				await FetchAndSaveImage (newStoryline.ImagePath); //fetch and save the thumbnail to the device
+				FetchAndSaveImage (storylineOBJ ["thumbnail"].ToString ()); //fetch and save the thumbnail to the device
 
 				storylines.Add (newStoryline);
+
+				//add the associations between the current storyline and the mapelements it contains
+				foreach (var mapelementID in storylineOBJ["path"]) {
+
+					mapelementsSLList.Add(new StoryLineMapElementList {
+							Id = SLAssocMapelementID++,
+							StoryLineId = newStoryline.Id,
+							MapElementId = int.Parse(mapelementID.ToString())
+						}
+					);
+				}
 			}
 		}
 
-		private async void ParseEdges(JObject JSONPayload){
+		private void ParseEdges(JObject JSONPayload){
 
 			edges = new List<MapEdge>();
 
@@ -236,36 +257,35 @@ namespace Exposeum
 			}
 		}
 
-		private async Task<String> DownloadJSONAsync(string url)
+		private String DownloadJSON(string url)
 		{
 			using (HttpClient client = new HttpClient())
-			using (HttpResponseMessage response = await client.GetAsync(url))
+			using (HttpResponseMessage response = client.GetAsync(url).Result)
 			{
-				string result = await response.Content.ReadAsStringAsync();
+				string result = response.Content.ReadAsStringAsync().Result;
 				return result;
 			}
 		}
 
 		//download and save an image to the device's storage
-		private async Task FetchAndSaveImage(string path)
+		private void FetchAndSaveImage(string path)
 		{
-			BitmapDrawable image = new BitmapDrawable ();
-
 			using (HttpClient client = new HttpClient())
-			using (HttpResponseMessage response = await client.GetAsync(JSON_BASE_URL + path))
+			using (HttpResponseMessage response = client.GetAsync(JSON_BASE_URL + path).Result)
 			{
 				response.EnsureSuccessStatusCode ();
 
-				var inputStream = await response.Content.ReadAsByteArrayAsync ();
+				byte[] inputStream = response.Content.ReadAsByteArrayAsync ().Result;
 
 				string localPath = LOCAL_VENUE_DATA_PATH + path;
 
 				System.IO.Directory.CreateDirectory (Path.GetDirectoryName (localPath)); //create folder if it doesn't already exist
 
-				FileStream fs = new FileStream (localPath, FileMode.Create);
+				using(var fs = File.Create(localPath, inputStream.Length)){
+					fs.Write (inputStream, 0, inputStream.Length); //write the downloaded data to the device
+					fs.Close ();
+				}
 
-				await fs.WriteAsync (inputStream, 0, inputStream.Length); //write the downloaded data to the device
-				fs.Close ();
 			}
 		}
 
@@ -343,6 +363,12 @@ namespace Exposeum
 			foreach (var edge in edges) {
 				MapEdgeTdg.Add (edge);
 			}
+
+			StoryLineMapElementListTdg SLMELTDG = StoryLineMapElementListTdg.GetInstance ();
+
+			foreach (var association in mapelementsSLList) {
+				SLMELTDG.Add (association);
+			}
 		}
 
 		private void AddExhibitionContent(int PoiID, JToken JsonObj){
@@ -355,7 +381,7 @@ namespace Exposeum
 					Id = videoId,
 					Title = (videoObj["caption"]).ToString(),
 					PoiId = PoiID,
-					Filepath = (videoObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (videoObj["path"]).ToString(),
 					Duration = -1, //not given by map team
 					Encoding = string.Empty, //not gven by map team
 					Resolution = -1 //not given by map team
@@ -365,7 +391,7 @@ namespace Exposeum
 					Id = videoId,
 					Title = (videoObj["caption"]).ToString(),
 					PoiId = PoiID,
-					Filepath = (videoObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (videoObj["path"]).ToString(),
 					Duration = -1, //not given by map team
 					Encoding = string.Empty, //not gven by map team
 					Resolution = -1 //not given by map team
@@ -374,8 +400,8 @@ namespace Exposeum
 				englishExhibitionContent.Add (newEnglishExContent);
 				frenchExhibitionContent.Add (newFrenchExContent);
 
-				FetchAndSaveImage (newEnglishExContent.Filepath);
-				FetchAndSaveImage (newFrenchExContent.Filepath);
+				FetchAndSaveImage ("/" + (videoObj["path"]).ToString());
+				//FetchAndSaveImage (newFrenchExContent.Filepath);
 					
 			}
 
@@ -393,21 +419,21 @@ namespace Exposeum
 					Id = imageId,
 					Title = (imageObj["caption"]).ToString(),
 					PoiId = PoiID,
-					Filepath = (imageObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (imageObj["path"]).ToString(),
 				};
 
 				ExhibitionContentFr newFrenchExContent = new ExhibitionContentFr {
 					Id = imageId++,
 					Title = (imageObj["caption"]).ToString(),
 					PoiId = PoiID,
-					Filepath = (imageObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (imageObj["path"]).ToString(),
 				};
 
 				englishExhibitionContent.Add (newEnglishExContent);
 				frenchExhibitionContent.Add (newFrenchExContent);
 
-				FetchAndSaveImage (newEnglishExContent.Filepath);
-				FetchAndSaveImage (newFrenchExContent.Filepath);
+				FetchAndSaveImage ("/" + (imageObj["path"]).ToString());
+				//FetchAndSaveImage (newFrenchExContent.Filepath);
 			}
 		}
 

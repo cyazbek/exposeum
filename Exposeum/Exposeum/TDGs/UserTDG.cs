@@ -37,5 +37,10 @@ namespace Exposeum.TDGs
             return false;
         }
 
+        public int GetSize()
+        {
+            return Db.Table<User>().Count();
+        }
+
     }
 }

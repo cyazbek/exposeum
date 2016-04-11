@@ -15,7 +15,6 @@ namespace Exposeum
         readonly User _user = User.GetInstance();
         Button _freeVisitButton;
         Button _storylineButton;
-        Button _languageSelector;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,7 +38,7 @@ namespace Exposeum
             var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
             backActionBarButton.Click += (s, e) =>
             {
-                OnBackPressed();
+                  OnBackPressed();         
             };
 
 
@@ -63,7 +62,7 @@ namespace Exposeum
             };
         }
 
-
+       
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -71,6 +70,7 @@ namespace Exposeum
             return base.OnCreateOptionsMenu(menu);
             
         }
+        
         
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

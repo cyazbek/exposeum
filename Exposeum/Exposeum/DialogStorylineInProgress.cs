@@ -30,7 +30,7 @@ namespace Exposeum
             base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = inflater.Inflate(Resource.Layout.StoryLine_dialog_inProgress, container, false);
-                view.FindViewById<ImageView>(Resource.Id.sotryLineDialogPic).SetImageResource(_storyLine.ImageId);
+				view.FindViewById<ImageView> (Resource.Id.sotryLineDialogPic).SetImageDrawable (_storyLine.Image);
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogTitle).Text = _storyLine.GetName();
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogAudience).Text = _storyLine.GetAudience();
                 view.FindViewById<TextView>(Resource.Id.storyLineDialogDuration).Text = _storyLine.Duration + " min";
@@ -60,6 +60,7 @@ namespace Exposeum
 
                 _storylineController.SetActiveStoryLine();
                 _storylineController.ResetStorylineProgress(_storyLine);
+                _storyLine.SetStatus(Status.InProgress);
                 _storylineController.ResumeStorylineBeacons();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
