@@ -88,7 +88,7 @@ namespace Exposeum.Mappers
                 Id = floorTable.Id,
                 Height = floorTable.Height,
                 Width = floorTable.Width,
-				Image = floorImageDrawable
+				Image = new ColorDrawable()
             };
             return modelFloor;
         }
