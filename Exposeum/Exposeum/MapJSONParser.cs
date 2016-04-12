@@ -18,7 +18,7 @@ namespace Exposeum
 	{
 		String JSONData;
 
-		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum";
+		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum2";
 		private readonly String JSON_SCHEMA_FILENAME = "Map.json";
 
 		public static readonly String LOCAL_VENUE_DATA_PATH = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/MuseeDesOndes/venue_data";
@@ -109,7 +109,7 @@ namespace Exposeum
 			englishStorylineDescriptions = new List<StoryLineDescriptionEn> ();
 			frenchStorylineDescriptions = new List<StoryLineDescriptionFr> ();
 
-			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
+			foreach (var poiOBJ in JSONPayload["node"]["poi"]) {
 
 				String newPOIBeaconUUID = poiOBJ ["ibeacon"] ["uuid"].ToString ();
 				int newPOIBeaconMaj = int.Parse (poiOBJ ["ibeacon"] ["major"].ToString ());
@@ -168,7 +168,7 @@ namespace Exposeum
 
 			}
 
-			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
+			foreach (var waypointOBJ in JSONPayload["node"]["pot"]) {
 
 				MapElements newWaypoint = new MapElements {
 
@@ -195,18 +195,18 @@ namespace Exposeum
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
+				StoryLineDescriptionFr newStorylineDescriptionFR = new StoryLineDescriptionFr
+				{
+					Id = newStorylineDescriptionId,
+					Title = storylineOBJ["title"].First["title"].ToString(),
+					Description = storylineOBJ["description"].First["description"].ToString()
+				};
+
 				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
 				{
 					Id = newStorylineDescriptionId, //TODO: extract data from the html??
-					Title = storylineOBJ["title"].ToString(),
-					Description = storylineOBJ["description"].ToString(),
-				};
-
-				StoryLineDescriptionFr newStorylineDescriptionFR = new StoryLineDescriptionFr
-				{
-					Id = newStorylineDescriptionId, //increment
-					Title = storylineOBJ["title"].ToString(),
-					Description = "Decription en francais" //storylineOBJ["description"].ToString(),
+					Title = storylineOBJ["title"][1]["title"].ToString(),
+					Description = storylineOBJ["description"][1]["description"].ToString()
 				};
 
 				englishStorylineDescriptions.Add (newStorylineDescriptionEN);

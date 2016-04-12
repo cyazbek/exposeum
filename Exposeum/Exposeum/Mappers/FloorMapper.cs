@@ -79,16 +79,13 @@ namespace Exposeum.Mappers
 
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-			var floorImageStream = System.IO.File.OpenRead (floorTable.ImagePath);
-			Drawable floorImageDrawable = (BitmapDrawable)Drawable.CreateFromStream (floorImageStream, null);
 
-			Floor modelFloor = new Floor(floorImageDrawable)
+			Floor modelFloor = new Floor(new ColorDrawable())
             {
                 ImagePath = floorTable.ImagePath,
                 Id = floorTable.Id,
                 Height = floorTable.Height,
-                Width = floorTable.Width,
-				Image = new ColorDrawable() //floorImageDrawable
+                Width = floorTable.Width
             };
             return modelFloor;
         }
