@@ -1,82 +1,62 @@
-using System;
-using System.Collections.Generic;
-using Java.Util;
 using Android.Graphics.Drawables;
+using Exposeum.Models;
+using Java.Util;
+using Javax.Security.Auth;
+using System;
 using System.Linq;
-using Exposeum.Mappers;
-using Exposeum.Observers;
 
-namespace Exposeum.Models
+namespace Exposeum.Mappers
 {
-	public class Map: LanguageObserver
+    public class PopulatingDB
     {
-        public int Id { get; set; }  
-        private static Map _instance;
-        public List<MapEdge> Edges { get; set; }
-        public List<StoryLine> Storylines { get; set; }
-        public List<MapElement> MapElements { get; set; }
-        public List<Floor> Floors { get; set; }
-        public StoryLine CurrentStoryline { get; set; }
-        public Floor CurrentFloor { get; set; }
-        private Path _activeShortestPath;
-
-        private Map ()
-		{
-            Edges = new List<MapEdge>();
-            Floors = new List<Floor>();
-            MapElements = new List<MapElement>();
-            Storylines = new List<StoryLine>();
-			//SeedData ();
-            User.GetInstance().Register(this);
-            Id = 1; 
-		}
-
-	    public static Map GetInstance()
-	    {
-	        if (_instance == null)
-                _instance = new Map();
-
-	        return _instance;
-	    }
+        private MapElementsMapper _mapElementsMapper;
+        private StoryLineDescriptionMapper _storyDescriptionMapper;
+        private StorylineMapper _storyMapper;
+        private PointOfInterestDescriptionMapper _poiDescriptionMapper;
         
-		private void SeedData()
-		{
-            //setting up Floors
+        private static PopulatingDB _instance;
 
-		    Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
+        private PopulatingDB()
+        {
+            _mapElementsMapper = MapElementsMapper.GetInstance();
+            _storyDescriptionMapper = StoryLineDescriptionMapper.GetInstance();
+            _storyMapper = StorylineMapper.GetInstance();
+            _poiDescriptionMapper = PointOfInterestDescriptionMapper.GetInstance();
 
-            floorplan1 = new ColorDrawable();
-            floorplan2 = new ColorDrawable();
-            floorplan3 = new ColorDrawable();
-            floorplan4 = new ColorDrawable();
-            floorplan5 = new ColorDrawable();
+            Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
 
+            try
+            {
+                floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
+                floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
+                floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
+                floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
+                floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
+            }
+            catch (Exception e)
+            {
+                floorplan1 = new ColorDrawable();
+                floorplan2 = new ColorDrawable();
+                floorplan3 = new ColorDrawable();
+                floorplan4 = new ColorDrawable();
+                floorplan5 = new ColorDrawable();
+            }
 
-		    Floor floor1 = new Floor(floorplan1),
-		        floor2 = new Floor(floorplan2),
-		        floor3 = new Floor(floorplan3),
-		        floor4 = new Floor(floorplan4),
+            Floor floor1 = new Floor(floorplan1),
+                floor2 = new Floor(floorplan2),
+                floor3 = new Floor(floorplan3),
+                floor4 = new Floor(floorplan4),
                 floor5 = new Floor(floorplan5);
-
-            Floors = new List<Floor>();
-
-            Floors.Add(floor1);
-            Floors.Add(floor2);
-            Floors.Add(floor3);
-            Floors.Add(floor4);
-            Floors.Add(floor5);
-
-            CurrentFloor = floor1;
 
             //setup PointOfInterestDecriptions
             PointOfInterestDescription DescriptionEn1 = new PointOfInterestDescription()
-		    {
-		        Id = 1,
-		        Language = Language.En,
-		        Summary = "This Summary of POI1",
-		        Description = "This is a Description OF POI1",
-		        Title = "Title for POI1"
-		    };
+            {
+                Id = 1,
+                Language = Language.En,
+                Summary = "This Summary of POI1",
+                Description = "This is a Description OF POI1",
+                Title = "Title for POI1"
+            };
 
             PointOfInterestDescription DescriptionFR1 = new PointOfInterestDescription()
             {
@@ -279,13 +259,13 @@ namespace Exposeum.Models
 
 
             PointOfInterest p1 = new PointOfInterest(0.53f, 0.46f, floor1);
-		    p1.Description = DescriptionEn1;
+            p1.Description = DescriptionEn1;
             p1.Visited = false;
-			p1.Beacon = beacon1;
+            p1.Beacon = beacon1;
 
-			WayPoint pot1 = new WayPoint(0.60f, 0.82f, floor1);
+            WayPoint pot1 = new WayPoint(0.60f, 0.82f, floor1);
 
-			/*PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
+            /*PointOfInterest p2 = new PointOfInterest(0.60f, 0.82f, floor1);
             PointOfInterestDescription description2 = new PointOfInterestDescription("The Second :: Title"
                     , "A Summary about the second :: summary", "A Full Description about the second :: Description");
             p2.description = description2;
@@ -294,54 +274,54 @@ namespace Exposeum.Models
 			p2.Visited = false;
 			p2.beacon = beacon3;*/
 
-			
-			PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f, floor1);
-            p3.Description = DescriptionEn3;
-			p3.Visited = false;
-			p3.Beacon = beacon3;
 
-			PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
+            PointOfInterest p3 = new PointOfInterest(0.1f, 0.92f, floor1);
+            p3.Description = DescriptionEn3;
+            p3.Visited = false;
+            p3.Beacon = beacon3;
+
+            PointOfInterest p4 = new PointOfInterest(0.40f, 0.42f, floor1);
             p4.Description = DescriptionEn4;
 
-			PointOfInterest p5 = new PointOfInterest(0.30f, 0.12f, floor1);
+            PointOfInterest p5 = new PointOfInterest(0.30f, 0.12f, floor1);
             p5.Description = DescriptionEn5;
 
-			PointOfInterest p6 = new PointOfInterest(0.48f, 0.12f, floor1);
+            PointOfInterest p6 = new PointOfInterest(0.48f, 0.12f, floor1);
             p6.Description = DescriptionEn6;
 
-			PointOfInterest p7 = new PointOfInterest(0.38f, 0.62f, floor2);
+            PointOfInterest p7 = new PointOfInterest(0.38f, 0.62f, floor2);
             p7.Description = DescriptionEn7;
 
-			PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
+            PointOfInterest p8 = new PointOfInterest(0.18f, 0.92f, floor2);
             p8.Description = DescriptionEn8;
 
-			PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
+            PointOfInterest p9 = new PointOfInterest(0.53f, 0.46f, floor5);
             p9.Description = DescriptionEn9;
 
-			
-			PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f, floor5);
-		    p10.Description = DescriptionEn10;
 
-			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, floor4);
-			p11.Description = DescriptionEn11;
+            PointOfInterest p10 = new PointOfInterest(0.53f, 0.76f, floor5);
+            p10.Description = DescriptionEn10;
 
-			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, floor4);
-			p12.Description = DescriptionEn12;
+            PointOfInterest p11 = new PointOfInterest(0.53f, 0.46f, floor4);
+            p11.Description = DescriptionEn11;
 
-		    StorylineDescription storyDescriptionEn1 = new StorylineDescription
-		    {
-		        StoryLineDescriptionId = 1,
-		        Title = "Nipper the dog",
-		        IntendedAudience = "Adults",
-		        Description = "A walk through different sections of RCA Victorâ€™s production site, constructed over a period of roughly 25 years. This tour takes you through three different time zones, the 1920s, back when Montreal was the worldâ€™s largest grain hub and Canadaâ€™s productive power house, Montrealâ€™s entertainment rich 1930s and 1943, when production at RCA Victor diversified to serve military needs.",
-		        Language = Language.En
-		    };
+            PointOfInterest p12 = new PointOfInterest(0.73f, 0.16f, floor4);
+            p12.Description = DescriptionEn12;
+
+            StorylineDescription storyDescriptionEn1 = new StorylineDescription
+            {
+                StoryLineDescriptionId = 1,
+                Title = "Nipper the dog",
+                IntendedAudience = "Adults",
+                Description = "A walk through different sections of RCA Victor’s production site, constructed over a period of roughly 25 years. This tour takes you through three different time zones, the 1920s, back when Montreal was the world’s largest grain hub and Canada’s productive power house, Montreal’s entertainment rich 1930s and 1943, when production at RCA Victor diversified to serve military needs.",
+                Language = Language.En
+            };
             StorylineDescription storyDescriptionFr1 = new StorylineDescription
             {
                 StoryLineDescriptionId = 1,
                 Title = "Le Chien Nipper",
                 IntendedAudience = "Adultes",
-                Description = "Une promenade Ã  travers les diffÃ©rentes sections du site de production de RCA Victor, construit sur une pÃ©riode dâ€™environ 25 ans. Ce circuit vous emmÃ¨ne Ã  travers trois fuseaux horaires diffÃ©rents, les annÃ©es 1920, Ã©poque oÃ¹ MontrÃ©al Ã©tait le plus grand centre de grains du monde et la maison de puissance productive du Canada, de divertissement riches annÃ©es 1930 Ã  MontrÃ©al et 1943, lorsque la production chez RCA Victor diversifiÃ©e pour rÃ©pondre aux besoins militaires.",
+                Description = "Une promenade à travers les différentes sections du site de production de RCA Victor, construit sur une période d’environ 25 ans. Ce circuit vous emmène à travers trois fuseaux horaires différents, les années 1920, époque où Montréal était le plus grand centre de grains du monde et la maison de puissance productive du Canada, de divertissement riches années 1930 à Montréal et 1943, lorsque la production chez RCA Victor diversifiée pour répondre aux besoins militaires.",
                 Language = Language.Fr
             };
 
@@ -373,7 +353,7 @@ namespace Exposeum.Models
             StorylineDescription storyDescriptionFr3 = new StorylineDescription
             {
                 StoryLineDescriptionId = 3,
-                Title = "PanthÃ¨re Rose",
+                Title = "Panthère Rose",
                 IntendedAudience = "Tout Ages",
                 Description = "Description Fr",
                 Language = Language.Fr
@@ -392,7 +372,7 @@ namespace Exposeum.Models
                 StoryLineDescriptionId = 4,
                 Title = "La 2EME Guerre",
                 IntendedAudience = "Adultes",
-                Description = "Description en FranÃ§ais",
+                Description = "Description en Français",
                 Language = Language.Fr
             };
 
@@ -407,9 +387,9 @@ namespace Exposeum.Models
             StorylineDescription storyDescriptionFr5 = new StorylineDescription
             {
                 StoryLineDescriptionId = 5,
-                Title = "Le DÃ©tÃ©ctive",
+                Title = "Le Détéctive",
                 IntendedAudience = "Toute Audience",
-                Description = "Desciption en FranÃ§ais",
+                Description = "Desciption en Français",
                 Language = Language.Fr
             };
 
@@ -426,7 +406,7 @@ namespace Exposeum.Models
                 StoryLineDescriptionId = 6,
                 Title = "La radio des '40",
                 IntendedAudience = "Toute Audience",
-                Description = "Description en FranÃ§ais",
+                Description = "Description en Français",
                 Language = Language.Fr
             };
 
@@ -443,7 +423,7 @@ namespace Exposeum.Models
                 StoryLineDescriptionId = 6,
                 Title = "Le Gramophone",
                 IntendedAudience = "Enfants",
-                Description = "Description en FranÃ§ais",
+                Description = "Description en Français",
                 Language = Language.Fr
             };
 
@@ -451,35 +431,35 @@ namespace Exposeum.Models
 
             //creating Nipper the dog StoryLine 
             StoryLine storyline = new StoryLine
-		    {
+            {
                 StorylineId = 1,
                 StorylineDescription = storyDescriptionEn1,
-		        Duration = 120,
-		        ImageId = Resource.Drawable.NipperTheDog
-		    };
+                Duration = 120,
+                ImageId = Resource.Drawable.NipperTheDog
+            };
 
             storyline.AddMapElement(p1);
-			storyline.AddMapElement (pot1);
-			storyline.AddMapElement (p3);
-			storyline.AddMapElement (p4);
-			storyline.AddMapElement (p5);
-			storyline.AddMapElement (p6);
-			storyline.AddMapElement (p7);
-			storyline.AddMapElement (p8);
-			storyline.AddMapElement (p9);
-			storyline.AddMapElement (p10);
-			storyline.AddMapElement (p11);
-			storyline.AddMapElement (p12);
+            storyline.AddMapElement(pot1);
+            storyline.AddMapElement(p3);
+            storyline.AddMapElement(p4);
+            storyline.AddMapElement(p5);
+            storyline.AddMapElement(p6);
+            storyline.AddMapElement(p7);
+            storyline.AddMapElement(p8);
+            storyline.AddMapElement(p9);
+            storyline.AddMapElement(p10);
+            storyline.AddMapElement(p11);
+            storyline.AddMapElement(p12);
 
 
-		    StoryLine story2 = new StoryLine
-		    {
+            StoryLine story2 = new StoryLine
+            {
                 StorylineId = 2,
                 StorylineDescription = storyDescriptionEn2,
                 Duration = 60,
-		        ImageId = Resource.Drawable.EmileBerliner,
+                ImageId = Resource.Drawable.EmileBerliner,
                 Status = Status.InProgress
-		    };
+            };
 
             StoryLine story3 = new StoryLine
             {
@@ -522,149 +502,139 @@ namespace Exposeum.Models
                 ImageId = Resource.Drawable.NipperTheDog
             };
 
+            PointOfInterestDescription nicelyDrawnBeaconDescriptionTest = new PointOfInterestDescription("---", "---", "---");
+
+            PointOfInterest poi0 = new PointOfInterest(0.519f, 0.580f, floor2);
+            poi0.Description = DescriptionEn1;
+            poi0.Visited = false;
+            poi0.Beacon = beacon1;
+
+            WayPoint waypoint3 = new WayPoint(0.720f, 0.577f, floor2);
+
+            PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
+            poi1.Description = DescriptionEn3;
+            poi1.Visited = false;
+            poi1.Beacon = beacon3;
+
+            WayPoint waypoint4 = new WayPoint(0.754f, 0.538f, floor2);
+
+            PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
+            poi2.Description = DescriptionEn4;
+            poi2.Visited = false;
+            poi2.Beacon = beacon2;
+
+            PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
+            poi3.Description = nicelyDrawnBeaconDescriptionTest;
+            poi3.Visited = false;
+            poi3.Beacon = nicelyDrawnBeaconTest;
+
+            WayPoint waypoint5 = new WayPoint(0.769f, 0.549f, floor2);
+            WayPoint waypoint6 = new WayPoint(0.796f, 0.605f, floor2);
+            WayPoint waypoint7 = new WayPoint(0.712f, 0.615f, floor2);
+
+            PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
+            poi4.Description = nicelyDrawnBeaconDescriptionTest;
+            poi4.Visited = false;
+            poi4.Beacon = nicelyDrawnBeaconTest;
+
+            WayPoint waypoint8 = new WayPoint(0.645f, 0.907f, floor2);
+
+            PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
+            poi5.Description = nicelyDrawnBeaconDescriptionTest;
+            poi5.Visited = false;
+            poi5.Beacon = nicelyDrawnBeaconTest;
+
+            PointOfInterest poi6 = new PointOfInterest(0.333f, 0.901f, floor2);
+            poi6.Description = nicelyDrawnBeaconDescriptionTest;
+            poi6.Visited = false;
+            poi6.Beacon = nicelyDrawnBeaconTest;
+
+            WayPoint waypoint9 = new WayPoint(0.176f, 0.894f, floor2);
+
+            PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
+            poi7.Description = nicelyDrawnBeaconDescriptionTest;
+            poi7.Visited = false;
+            poi7.Beacon = nicelyDrawnBeaconTest;
+
+            WayPoint waypoint10 = new WayPoint(0.174f, 0.612f, floor2);
+
+            PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
+            poi8.Description = nicelyDrawnBeaconDescriptionTest;
+            poi8.Visited = false;
+            poi8.Beacon = nicelyDrawnBeaconTest;
+
+            nicelyDrawn.AddMapElement(poi0);
+            nicelyDrawn.AddMapElement(waypoint3);
+            nicelyDrawn.AddMapElement(poi1);
+            nicelyDrawn.AddMapElement(waypoint4);
+            nicelyDrawn.AddMapElement(poi2);
+            nicelyDrawn.AddMapElement(poi3);
+            nicelyDrawn.AddMapElement(waypoint5);
+            nicelyDrawn.AddMapElement(waypoint6);
+            nicelyDrawn.AddMapElement(waypoint7);
+            nicelyDrawn.AddMapElement(poi4);
+            nicelyDrawn.AddMapElement(waypoint8);
+            nicelyDrawn.AddMapElement(poi5);
+            nicelyDrawn.AddMapElement(poi6);
+            nicelyDrawn.AddMapElement(waypoint9);
+            nicelyDrawn.AddMapElement(poi7);
+            nicelyDrawn.AddMapElement(waypoint10);
+            nicelyDrawn.AddMapElement(poi8);
 
 
-            Storylines.Add(storyline);
-			Storylines.Add(story2);
-			Storylines.Add(story3);
-			Storylines.Add(story4);
-			Storylines.Add(story5);
-			Storylines.Add(story6);
+            ////////////////////////////////////////////
+            //make storyline 6 a demo for shortest path
+            //story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
+            story6.MapElements = nicelyDrawn.MapElements;
+            story6.PoiList = nicelyDrawn.PoiList;
+            story6.PoiList.Last().Beacon = story6.PoiList[1].Beacon;
+            story6.PoiList[1].Beacon = nicelyDrawnBeaconTest;
 
-			//Set the storyline for the explorer mode
-			CurrentStoryline = storyline;
+            story6.MapElements.Reverse();
+            story6.PoiList.Reverse();
+            for (int i = 0; i < 16; i++)
+            {
+                story6.MapElements[i].Visited = true;
+            }
+            story6.Status = Status.InProgress;
 
-			
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr1);
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr2);
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr3);
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr4);
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr5);
+            _storyDescriptionMapper.AddStoryLineDescription(storyDescriptionFr6);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR1);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR2);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR3);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR4);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR5);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR6);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR7);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR8);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR9);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR10);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR11);
+            _poiDescriptionMapper.AddPointOfInterestDescription(DescriptionFR12);
+            _storyMapper.AddStoryline(storyline);
+            _storyMapper.AddStoryline(story2);
+            _storyMapper.AddStoryline(story3);
+            _storyMapper.AddStoryline(story4);
+            _storyMapper.AddStoryline(story5);
+            _storyMapper.AddStoryline(story6);
+            _storyMapper.AddStoryline(nicelyDrawn);
 
-			
-			PointOfInterestDescription nicelyDrawnBeaconDescriptionTest = new PointOfInterestDescription("---", "---", "---");
+            ///////////////////////////////////////////
+        }
 
-			PointOfInterest poi0 = new PointOfInterest(0.519f, 0.580f, floor2);
-			poi0.Description = DescriptionEn1;
-			poi0.Visited = false;
-			poi0.Beacon = beacon1;
-
-			WayPoint waypoint3 = new WayPoint(0.720f, 0.577f, floor2);
-
-			PointOfInterest poi1 = new PointOfInterest(0.745f, 0.544f, floor2);
-			poi1.Description = DescriptionEn3;
-			poi1.Visited = false;
-			poi1.Beacon = beacon3;
-
-			WayPoint waypoint4 = new WayPoint(0.754f, 0.538f, floor2);
-
-			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
-			poi2.Description = DescriptionEn4;
-			poi2.Visited = false;
-			poi2.Beacon = nicelyDrawnBeaconTest;
-
-			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
-			poi3.Description = nicelyDrawnBeaconDescriptionTest;
-			poi3.Visited = false;
-			poi3.Beacon = nicelyDrawnBeaconTest;
-
-			WayPoint waypoint5 = new WayPoint(0.769f, 0.549f, floor2);
-			WayPoint waypoint6 = new WayPoint(0.796f, 0.605f, floor2);
-			WayPoint waypoint7 = new WayPoint(0.712f, 0.615f, floor2);
-
-			PointOfInterest poi4 = new PointOfInterest(0.656f, 0.835f, floor2);
-			poi4.Description = nicelyDrawnBeaconDescriptionTest;
-			poi4.Visited = false;
-			poi4.Beacon = nicelyDrawnBeaconTest;
-
-			WayPoint waypoint8 = new WayPoint(0.645f, 0.907f, floor2);
-
-			PointOfInterest poi5 = new PointOfInterest(0.592f, 0.907f, floor2);
-			poi5.Description = nicelyDrawnBeaconDescriptionTest;
-			poi5.Visited = false;
-			poi5.Beacon = nicelyDrawnBeaconTest;
-
-			PointOfInterest poi6 = new PointOfInterest(0.333f, 0.901f, floor2);
-			poi6.Description = nicelyDrawnBeaconDescriptionTest;
-			poi6.Visited = false;
-			poi6.Beacon = nicelyDrawnBeaconTest;
-
-			WayPoint waypoint9 = new WayPoint(0.176f, 0.894f, floor2);
-
-			PointOfInterest poi7 = new PointOfInterest(0.173f, 0.853f, floor2);
-			poi7.Description = nicelyDrawnBeaconDescriptionTest;
-			poi7.Visited = false;
-			poi7.Beacon = nicelyDrawnBeaconTest;
-
-			WayPoint waypoint10 = new WayPoint(0.174f, 0.612f, floor2);
-
-			PointOfInterest poi8 = new PointOfInterest(0.080f, 0.612f, floor2);
-			poi8.Description = nicelyDrawnBeaconDescriptionTest;
-			poi8.Visited = false;
-			poi8.Beacon = nicelyDrawnBeaconTest;
-
-			nicelyDrawn.AddMapElement(poi0);
-			nicelyDrawn.AddMapElement(waypoint3);
-			nicelyDrawn.AddMapElement(poi1);
-			nicelyDrawn.AddMapElement(waypoint4);
-			nicelyDrawn.AddMapElement(poi2);
-			nicelyDrawn.AddMapElement(poi3);
-			nicelyDrawn.AddMapElement(waypoint5);
-			nicelyDrawn.AddMapElement(waypoint6);
-			nicelyDrawn.AddMapElement(waypoint7);
-			nicelyDrawn.AddMapElement(poi4);
-			nicelyDrawn.AddMapElement(waypoint8);
-			nicelyDrawn.AddMapElement(poi5);
-			nicelyDrawn.AddMapElement(poi6);
-			nicelyDrawn.AddMapElement(waypoint9);
-			nicelyDrawn.AddMapElement(poi7);
-			nicelyDrawn.AddMapElement(waypoint10);
-			nicelyDrawn.AddMapElement(poi8);
-
-			Storylines.Add (nicelyDrawn);
-
-			////////////////////////////////////////////
-			//make storyline 6 a demo for shortest path
-			//story6.MapElements = Exposeum.Utilities.DeepCloneUtility.Clone(nicelyDrawn.MapElements);
-			story6.MapElements = nicelyDrawn.MapElements;
-			story6.PoiList = nicelyDrawn.PoiList;
-			story6.PoiList.Last ().Beacon = story6.PoiList [1].Beacon;
-			story6.PoiList [1].Beacon = nicelyDrawnBeaconTest;
-
-			story6.MapElements.Reverse();
-			story6.PoiList.Reverse ();
-			for (int i = 0; i < 16; i++) {
-				story6.MapElements [i].Visited = true;
-				if(story6.MapElements [i] is PointOfInterest)
-					story6.LastPointOfInterestVisited = ((PointOfInterest)story6.MapElements [i]);
-				story6.MapElements [i].Visited = true;
-			}
-			story6.Status = Status.InProgress;
-			///////////////////////////////////////////
-
-		}
+        public static PopulatingDB GetInstance()
+        {
+            if(_instance==null)
+                _instance = new PopulatingDB();
+            return _instance;
+        }
 
 
-		public void SetActiveShortestPath(Path path){
-			_activeShortestPath = path;
-		}
 
-		public Path GetActiveShortestPath(){
-			return _activeShortestPath;
-		}
-
-	    public override void Update()
-	    {
-	        StoryLineDescriptionMapper storyLineMapper = StoryLineDescriptionMapper.GetInstance();
-            PointOfInterestDescriptionMapper poiMapper = PointOfInterestDescriptionMapper.GetInstance();
-            MapElementsMapper mapElementsMapper = MapElementsMapper.GetInstance();
-
-	        foreach (var x in Storylines)
-	        {
-	            x.StorylineDescription =
-	                storyLineMapper.GetStoryLineDescription(x.StorylineDescription.StoryLineDescriptionId);
-	            foreach (PointOfInterest y in x.PoiList)
-	            {
-	                y.Description = poiMapper.GetPointOfInterestDescription(y.Description.Id);
-	            }
-	        }
-	        MapElements = mapElementsMapper.GetAllMapElements();
-
-	    }
     }
 }

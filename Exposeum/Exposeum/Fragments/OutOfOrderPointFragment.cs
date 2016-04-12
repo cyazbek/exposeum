@@ -12,14 +12,18 @@ namespace Exposeum.Fragments
 
         private readonly PointOfInterest _currentPoint;
         private readonly IEnumerable<MapElement> _skippedPoints; 
-		public delegate void Callback(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints);
-		private readonly Callback _callback;
+		public delegate void CallbackSkipUnvisitedPoints(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoints);
+        private readonly CallbackSkipUnvisitedPoints _callbackSkip;
 
-		public OutOfOrderPointFragment(PointOfInterest currentPoint, IEnumerable<MapElement> skippedPoint, Callback callback)
+        public delegate void CallbackReturnToLastPoint(PointOfInterest start);
+        private readonly CallbackReturnToLastPoint _callbackReturn;
+
+		public OutOfOrderPointFragment(PointOfInterest currentPoint, IEnumerable<MapElement> skippedPoint, CallbackSkipUnvisitedPoints callbackSkip, CallbackReturnToLastPoint callbackReturn)
         {
 			_currentPoint = currentPoint;
             _skippedPoints = skippedPoint;
-			_callback = callback;
+            _callbackSkip = callbackSkip;
+		    _callbackReturn = callbackReturn;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -34,15 +38,15 @@ namespace Exposeum.Fragments
             var noButton = view.FindViewById<Button>(Resource.Id.wrongPointButton);
             var yesButton = view.FindViewById<Button>(Resource.Id.rightPointButton);
 
-            noButton.Click += (sender, e) =>
-            {
-                Dismiss();
-                // maybe add shortest path to skipped poi if needed
-            };
-
             yesButton.Click += (sender, e) =>
             {
-                _callback(_currentPoint, _skippedPoints);
+                _callbackReturn(_currentPoint);
+                Dismiss();
+            };
+
+            noButton.Click += (sender, e) =>
+            {
+                _callbackSkip(_currentPoint, _skippedPoints);
                 Dismiss();
             };
 

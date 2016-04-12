@@ -12,12 +12,13 @@ namespace Exposeum.Services.Service_Providers
     /// </summary>
 	public class ShortestPathServiceProvider : IShortestPathService
     {
-
+		private readonly Map _mapInstance;
 		private readonly UndirectedGraph<MapElement, MapEdge> _graphInstance;
 
 		public ShortestPathServiceProvider(IGraphService graphService)
         {
 			_graphInstance = graphService.GetGraph();
+			_mapInstance = Map.GetInstance ();
         }
 
         /// <summary>
@@ -37,8 +38,32 @@ namespace Exposeum.Services.Service_Providers
 
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
-            return tryGetPaths(targetElement, out path) ? path : null;
+			return tryGetPaths(targetElement, out path) ? FixPathEdgeOrder(startElement, path) : null;
         }
+
+		/// <summary>
+		/// Checks if the order of the vertices of the edges of the path are correct, if not fixes it.
+		/// </summary>
+		/// <param name="startElement"></param>
+		/// <param name="path"></param>
+		/// <returns>IEnumerable<MapEdge></returns>
+		private IEnumerable<MapEdge> FixPathEdgeOrder(MapElement startElement, IEnumerable<MapEdge> path){
+			
+			MapElement vertex = startElement;
+
+			foreach (MapEdge e in path)
+			{
+				if (e.Source != vertex) {
+					e.Target = e.Source;
+					e.Source = vertex;
+					vertex = e.Target;
+				} else
+					vertex = e.Target;
+
+			}
+
+			return path;
+		}
 
         /// <summary>
         /// Returns a list of MapElements representing the shortest path
@@ -71,7 +96,7 @@ namespace Exposeum.Services.Service_Providers
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="targetElement"></param>
-        /// <returns>ShortPath</returns>
+        /// <returns>Path</returns>
         public Path GetShortestPath(MapElement startElement, MapElement targetElement)
 		{
 
@@ -81,7 +106,7 @@ namespace Exposeum.Services.Service_Providers
 			int i = 0;
 			foreach (MapElement mapElement in mapElements) {
 				MapElement clonedElement = mapElement.ShallowCopy();
-				clonedElement.Visited = false;
+				clonedElement.SetVisited(false);
 
 				//If the Map Element is a PointOfInterest, change the descriptions 
 				//and names so that the push notifications remain relevant.
@@ -110,6 +135,22 @@ namespace Exposeum.Services.Service_Providers
 			return new Path (clonedMapElements);
 		}
 
+
+		/// <summary>
+		/// Returns the active shortest Path object
+		/// </summary>
+		/// <returns>Path</returns>
+		public Path GetActiveShortestPath (){
+			return _mapInstance.GetActiveShortestPath ();
+		}
+
+		/// <summary>
+		/// Sets the active shortest path
+		/// </summary>
+		/// <param name="path"></param>
+		public void SetActiveShortestPath (Path path){
+			_mapInstance.SetActiveShortestPath (path);
+		}
     
     }
 }

@@ -1,4 +1,4 @@
-﻿using Android.Graphics.Drawables;
+using Android.Graphics.Drawables;
 using Android.Graphics;
 
 namespace Exposeum.Models
@@ -14,8 +14,7 @@ namespace Exposeum.Models
 
         public Floor(Drawable floorPlan)
         {
-            Image = floorPlan;
-			//Image.SetBounds(0, 0, Image.IntrinsicWidth, Image.IntrinsicHeight);
+            Image = new ColorDrawable();
 
             _paint.SetStyle(Paint.Style.Fill);
             _paint.Color = Color.Purple;

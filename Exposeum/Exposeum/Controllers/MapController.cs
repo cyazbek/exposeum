@@ -10,6 +10,7 @@ using Exposeum.Exceptions;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
 using Ninject;
+using System.Threading;
 
 namespace Exposeum.Controllers
 {
@@ -55,8 +56,6 @@ namespace Exposeum.Controllers
             _mapModel = Map.GetInstance();
 
             _beaconFinder.AddObserver(this);
-
-            _beaconFinder.SetPath(_mapModel.CurrentStoryline);
 
             //If we are not in free explorer mode (ie there exists a current storyline) then add the
             //current storyline progression fragment to the map activity
@@ -125,9 +124,6 @@ namespace Exposeum.Controllers
                     UpdatePointOfInterestAnShortestPathState(beacon);
             }
 
-
-
-
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
 
@@ -160,7 +156,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         //otherwise just update the state of the poi
-                        poi.Visited = true;
+                        poi.SetVisited(true); 
                         UpdateFloor(poi);
                         DisplayPopUp(poi);
                     }
@@ -224,6 +220,15 @@ namespace Exposeum.Controllers
             //update the storyline progress
             _mapModel.GetActiveShortestPath().UpdateProgress(poi);
             UpdateFloor(poi);
+
+			//If the shortest path is visited it should be set to null and the storyline 
+			//should be restored on the beacon finder
+			if (_mapModel.GetActiveShortestPath ().Status == Status.IsVisited){
+				_mapModel.SetActiveShortestPath (null);
+				_mapView.Invalidate();
+				_beaconFinder.SetPath (_mapModel.CurrentStoryline);
+
+			}
         }
 
         /// <summary>
@@ -245,14 +250,14 @@ namespace Exposeum.Controllers
         /// </summary>
 		private void DisplayOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements)
         {
-			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI);
+			_mapView.InitiateOutOfOrderPointOfInterestPopup(currentPoi, skippedMapElements, SkipOutOfOrderPOI, GoingBackToLastPoint);
         }
 
 		private void SkipOutOfOrderPOI(PointOfInterest currentPoi, IEnumerable<MapElement> skippedMapElements){
 
 			foreach (var mapElement in skippedMapElements)
 		    {
-				mapElement.Visited = true;
+				mapElement.SetVisited(true);
 		    }
 
 			_mapView.Invalidate();
@@ -261,6 +266,11 @@ namespace Exposeum.Controllers
                 _mapProgressionView.Update();
                     
 		}
+
+        private void DoNotSkipOutOfOrderPOI(PointOfInterest currentPoi)
+        {
+            
+        }
 
         /// <summary>
         /// This method will update display a popup in the view with contextual information about the supplied POI
@@ -321,9 +331,44 @@ namespace Exposeum.Controllers
             return _shortestPathService.GetShortestPath(start, end);
         }
 
+        /// <summary>
+        /// Display path to last visited beacon
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        private void GoingBackToLastPoint(MapElement start)
+        {
+            Path path = GetShortestPathToLastPoint(start);
+            _mapModel.SetActiveShortestPath(path);
+            _beaconFinder.SetPath(path);
+			_mapView.Invalidate();
+        }
+
+        /// <summary>
+        /// Get shortest path from incoming POI to last visited
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns>Path</returns>
+        public Path GetShortestPathToLastPoint(MapElement start)
+        {
+            
+			MapElement end = _mapModel.CurrentStoryline.LastPointOfInterestVisited;
+
+            if (end == null)
+            {
+                end = _mapModel.CurrentStoryline.MapElements.First();
+            }
+
+            return _shortestPathService.GetShortestPath(start, end);
+        }
+
         public Map Model
         {
             get { return _mapModel; }
         }
+
+		public void MapViewUpdate(){
+			_mapView.Invalidate();
+		}
     }
 }

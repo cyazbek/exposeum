@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
@@ -71,7 +71,7 @@ namespace Exposeum
 			StoreParsedDataDB();
 
 			//add all the objects from the database into the map instance
-			MapMapper.GetInstance ().ParseMap ();
+			
 
 		}
 
@@ -204,9 +204,9 @@ namespace Exposeum
 
 				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
 				{
-					Id = newStorylineDescriptionId, //TODO: extract data from the html??
-					Title = storylineOBJ["title"][1]["title"].ToString(),
-					Description = storylineOBJ["description"][1]["description"].ToString()
+					Id = newStorylineDescriptionId, //increment
+					Title = "Le demo de du storyline"/*storylineOBJ["title"].ToString()*/,
+					Description = "la description en Français" /*storylineOBJ["description"].ToString()*/,
 				};
 
 				englishStorylineDescriptions.Add (newStorylineDescriptionEN);

@@ -79,7 +79,6 @@ namespace Exposeum.Mappers
 
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-
 			Floor modelFloor = new Floor(new ColorDrawable())
             {
                 ImagePath = floorTable.ImagePath,

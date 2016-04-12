@@ -36,16 +36,20 @@ namespace Exposeum.Mappers
 
         public Tables.Storyline StorylineModelToTable(StoryLine storylineModel)
         {
+            
             Tables.Storyline storyline = new Tables.Storyline
             {
                 Id = storylineModel.StorylineId,
                 Duration = storylineModel.Duration,
                 ImagePath = storylineModel.ImgPath,
                 FloorsCovered = storylineModel.FloorsCovered,
-                LastVisitedPoi = storylineModel.LastPointOfInterestVisited.Id,
                 Status = _statusMapper.StatusModelToTable(storylineModel.Status),
                 DescriptionId = storylineModel.StorylineDescription.StoryLineDescriptionId
             };
+
+            if (storylineModel.LastPointOfInterestVisited != null)
+                storyline.LastVisitedPoi = storylineModel.LastPointOfInterestVisited.Id;
+
             return storyline; 
         }
 

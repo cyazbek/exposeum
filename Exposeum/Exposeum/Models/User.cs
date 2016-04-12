@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Exposeum.Mappers;
 using Exposeum.Observers;
 
 namespace Exposeum.Models
@@ -34,7 +35,7 @@ namespace Exposeum.Models
             EnglishButtonString.Add(new ButtonText("reject_pause", "No"));
             EnglishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
             EnglishButtonString.Add(new ButtonText("PauseItem", "Pause"));
-            EnglishButtonString.Add(new ButtonText("LanguageItem", "Language"));
+            EnglishButtonString.Add(new ButtonText("LanguageItem", "Français"));
             EnglishButtonString.Add(new ButtonText("QRScannerItem", "Scan QR"));
 
             FrenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
@@ -51,7 +52,7 @@ namespace Exposeum.Models
             FrenchButtonString.Add(new ButtonText("reject_pause", "Non"));
             FrenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
             FrenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
-            FrenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
+            FrenchButtonString.Add(new ButtonText("LanguageItem", "English"));
             FrenchButtonString.Add(new ButtonText("QRScannerItem", "Scanner QR"));
 
 
@@ -135,5 +136,13 @@ namespace Exposeum.Models
                 o.Update();
             }
         }
+
+        public void SetVisitor(bool visited)
+        {
+            Visitor = visited;
+            UserMapper.GetInstance().UpdateUser(this);
+        }
+
+
     }
 }

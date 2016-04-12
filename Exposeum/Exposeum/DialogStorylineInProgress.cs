@@ -11,18 +11,22 @@ namespace Exposeum
     class DialogStorylineInProgress : DialogFragment
     {
         private readonly StoryLine _storyLine;
-		private readonly Context _context; 
+		private readonly Context _context;
         private readonly StorylineController _storylineController = StorylineController.GetInstance();
-        private readonly User _user = User.GetInstance(); 
+        private readonly User _user = User.GetInstance();
+
+		public delegate void Callback(FragmentTransaction transaction);
+		private readonly Callback _callback;
 
         public DialogStorylineInProgress(StoryLine storyLine){
 			_storyLine = storyLine;
 		}
         
-        public DialogStorylineInProgress(StoryLine storyLine,Context context)
+		public DialogStorylineInProgress(StoryLine storyLine, Context context, Callback callback)
         {
             _storyLine = storyLine;
             _context = context; 
+			_callback = callback;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -50,8 +54,9 @@ namespace Exposeum
             buttonToResume.Click += delegate
             {
 				_storylineController.SetActiveStoryLine();
-                _storylineController.ResumeStorylineBeacons();
 				var intent = new Intent(_context, typeof(MapActivity));
+				FragmentTransaction transaction = FragmentManager.BeginTransaction();
+				_callback(transaction);
                 StartActivity(intent);
                 Dismiss();
             };
@@ -60,7 +65,8 @@ namespace Exposeum
 
                 _storylineController.SetActiveStoryLine();
                 _storylineController.ResetStorylineProgress(_storyLine);
-                _storylineController.ResumeStorylineBeacons();
+                _storyLine.SetStatus(Status.InProgress);
+				_storylineController.ResumeStoryLine();
                 var intent = new Intent(_context, typeof(MapActivity));
                 StartActivity(intent);
                 Dismiss();
