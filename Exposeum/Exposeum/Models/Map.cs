@@ -556,7 +556,7 @@ namespace Exposeum.Models
 			PointOfInterest poi2 = new PointOfInterest(0.762f, 0.522f, floor2);
 			poi2.Description = DescriptionEn4;
 			poi2.Visited = false;
-			poi2.Beacon = beacon2;
+			poi2.Beacon = nicelyDrawnBeaconTest;
 
 			PointOfInterest poi3 = new PointOfInterest(0.777f, 0.446f, floor2);
 			poi3.Description = nicelyDrawnBeaconDescriptionTest;
@@ -629,6 +629,9 @@ namespace Exposeum.Models
 			story6.MapElements.Reverse();
 			story6.PoiList.Reverse ();
 			for (int i = 0; i < 16; i++) {
+				story6.MapElements [i].Visited = true;
+				if(story6.MapElements [i] is PointOfInterest)
+					story6.LastPointOfInterestVisited = ((PointOfInterest)story6.MapElements [i]);
 				story6.MapElements [i].Visited = true;
 			}
 			story6.Status = Status.InProgress;

@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
+using Android.Database;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Exposeum.Models;
@@ -14,48 +8,94 @@ using Exposeum.Controllers;
 
 namespace Exposeum
 {
-    [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light.NoActionBar")]
+    [Activity(Label = "StoryLineListActivity", Theme = "@android:style/Theme.Holo.Light",
+        ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class StoryLineListActivity : Activity
     {
-        public Map map;
+        public Map Map;
+        readonly StorylineController _storylineController = StorylineController.GetInstance();
+        private Bundle _bundle;
+        private ListView listView;
+        private StoryLineListAdapter adapter;
+        private DataSetObserver observer; 
         protected override void OnCreate(Bundle bundle)
         {
+            _bundle = bundle;
             base.OnCreate(bundle);
-            
-            ListView listView;
+            //=========================================================================================================
+            //remove default bar
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+
+            //add custom bar
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+            var backActionBarButton = FindViewById<ImageView>(Resource.Id.BackImage);
+            backActionBarButton.Click += (s, e) =>
+            {
+                OnBackPressed();
+            };
+
+
+            //=========================================================================================================
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
+<<<<<<< HEAD
             listView = FindViewById<ListView>(Resource.Id.List);
-			listView.Adapter = StoryLineController.GetStoryLines(this);
+            listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
+=======
+            var listView = FindViewById<ListView>(Resource.Id.List);
+			listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
+			_storylineController.SetContext (this);
+>>>>>>> 5bbad27ab15e5adf7b2e718292cc62402609faf1
             listView.ItemClick += ListViewItemClick;
+        }
+
+        protected override void OnRestart()
+        {
+            OnCreate(_bundle);
         }
 
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-<<<<<<< HEAD
-            if(storyLine.currentStatus==Status.inProgress)
-            {
-                DialogStorylineInProgress dialog = new DialogStorylineInProgress(storyLine);
-                dialog.Show(transaction, "Story Line title");
-            }
-            else if (storyLine.currentStatus == Status.isNew)
-            {
-                DialogStoryline dialog = new DialogStoryline(storyLine);
-                dialog.Show(transaction, "Story Line title");
-            }
-            else
-            {
-                DialogPauseStorylineConfirmation dialog = new DialogPauseStorylineConfirmation(storyLine, this);
-                dialog.Show(transaction, "delete");
-            }
-=======
-			StoryLineController.SelectStoryLine (e.Position);
-			StoryLineController.ShowSelectedStoryLineDialog (transaction, this);
-
->>>>>>> a3cb22d576291c7769d9f594af3a48092b31cf65
+            _storylineController.SelectStoryLine(e.Position);
+            _storylineController.ShowSelectedStoryLineDialog(transaction, this);
         }
-        
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.LanguageItem:
+                    User.GetInstance().ToogleLanguage();
+                    listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
+                    return true;
+                case Resource.Id.QRScannerItem:
+                    Toast.MakeText(this, "Not Available", ToastLength.Long).Show();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            User user = User.GetInstance();
+            var menuItem1 = menu.GetItem(0).SetTitle(user.GetButtonText("LanguageItem"));
+            var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
+            return true;
+
+        }
     }
 }
+
 
