@@ -155,7 +155,7 @@ namespace Exposeum.Controllers
                     else
                     {
                         //otherwise just update the state of the poi
-                        poi.Visited = true;
+                        poi.SetVisited(true); 
                         UpdateFloor(poi);
                         DisplayPopUp(poi);
                     }
@@ -256,7 +256,7 @@ namespace Exposeum.Controllers
 
 			foreach (var mapElement in skippedMapElements)
 		    {
-				mapElement.Visited = true;
+				mapElement.SetVisited(true);
 		    }
 
             _mapView.Update();

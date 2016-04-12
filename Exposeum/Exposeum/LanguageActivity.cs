@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
+using Exposeum.Mappers;
 using Exposeum.Models;
 
 
@@ -26,6 +27,7 @@ namespace Exposeum
                 
                 _user.SwitchLanguageTo(Language.Fr);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
+                MapMapper.GetInstance().ParseMap();
                 StartActivity(intent);
 
             };
@@ -34,6 +36,7 @@ namespace Exposeum
             {
                 _user.SwitchLanguageTo(Language.En);
                 var intent = new Intent(this, typeof(WalkthroughActivity));
+                MapMapper.GetInstance().ParseMap();
                 StartActivity(intent);
             };
         }

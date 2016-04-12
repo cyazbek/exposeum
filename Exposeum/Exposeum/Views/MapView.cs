@@ -22,7 +22,7 @@ namespace Exposeum.Views
 		private float _lastTouchY;
 		private float _translateX;
 		private float _translateY;
-		private float _scaleFactor = 0.5f;
+		private float _scaleFactor = 1.5f;
 		private readonly Context _context;
 		private readonly Map _map;
 		private readonly MapController _controller;
@@ -179,7 +179,7 @@ namespace Exposeum.Views
 				storyLineAlpha = 50;
 				
 			//draw edges and POIs on top of map
-			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
@@ -266,11 +266,11 @@ namespace Exposeum.Views
 				_view._scaleFactor *= detector.ScaleFactor;
 
 				// put a limit on how small or big the image can get.
-				if (_view._scaleFactor > 3.0f) {
-					_view._scaleFactor = 3.0f;
+				if (_view._scaleFactor > 6.0f) {
+					_view._scaleFactor = 6.0f;
 				}
-				if (_view._scaleFactor < 0.5f) {
-					_view._scaleFactor = 0.5f;
+				if (_view._scaleFactor < 1.5f) {
+					_view._scaleFactor = 1.5f;
 				}
 
 				_view.Invalidate ();

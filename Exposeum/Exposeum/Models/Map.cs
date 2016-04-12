@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Java.Util;
 using Android.Graphics.Drawables;
@@ -10,7 +10,7 @@ namespace Exposeum.Models
 {
 	public class Map: LanguageObserver
     {
-        public int Id;
+        public int Id { get; set; }  
         private static Map _instance;
         public List<MapEdge> Edges { get; set; }
         public List<StoryLine> Storylines { get; set; }
@@ -26,8 +26,9 @@ namespace Exposeum.Models
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
-			SeedData ();
+			//SeedData ();
             User.GetInstance().Register(this);
+            Id = 1; 
 		}
 
 	    public static Map GetInstance()
@@ -44,22 +45,12 @@ namespace Exposeum.Models
 
 		    Drawable floorplan1, floorplan2, floorplan3, floorplan4, floorplan5;
 
-		    try
-		    {
-		        floorplan1 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_1);
-		        floorplan2 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_2);
-		        floorplan3 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_3);
-		        floorplan4 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_4);
-		        floorplan5 = Android.App.Application.Context.Resources.GetDrawable(Resource.Drawable.floor_5);
-		    }
-		    catch (Exception e)
-		    {
-                floorplan1 = new ColorDrawable();
-                floorplan2 = new ColorDrawable();
-                floorplan3 = new ColorDrawable();
-                floorplan4 = new ColorDrawable();
-                floorplan5 = new ColorDrawable();
-            }
+            floorplan1 = new ColorDrawable();
+            floorplan2 = new ColorDrawable();
+            floorplan3 = new ColorDrawable();
+            floorplan4 = new ColorDrawable();
+            floorplan5 = new ColorDrawable();
+
 
 		    Floor floor1 = new Floor(floorplan1),
 		        floor2 = new Floor(floorplan2),
@@ -659,14 +650,21 @@ namespace Exposeum.Models
 
 	    public override void Update()
 	    {
-	        StorylineMapper storyLineMapper = StorylineMapper.GetInstance();
-            MapElementsMapper mapElementMapper = MapElementsMapper.GetInstance();
+	        StoryLineDescriptionMapper storyLineMapper = StoryLineDescriptionMapper.GetInstance();
+            PointOfInterestDescriptionMapper poiMapper = PointOfInterestDescriptionMapper.GetInstance();
+            MapElementsMapper mapElementsMapper = MapElementsMapper.GetInstance();
 
-            storyLineMapper.UpdateStorylinesList(Storylines);
-	        Storylines = storyLineMapper.GetAllStorylines();
+	        foreach (var x in Storylines)
+	        {
+	            x.StorylineDescription =
+	                storyLineMapper.GetStoryLineDescription(x.StorylineDescription.StoryLineDescriptionId);
+	            foreach (PointOfInterest y in x.PoiList)
+	            {
+	                y.Description = poiMapper.GetPointOfInterestDescription(y.Description.Id);
+	            }
+	        }
+	        MapElements = mapElementsMapper.GetAllMapElements();
 
-            mapElementMapper.UpdateList(MapElements);
-	        MapElements = mapElementMapper.GetAllMapElements();
 	    }
     }
 }

@@ -101,7 +101,7 @@ namespace Exposeum.Mappers
                 Visited = vis,
                 Label = ConvertStringToLabel(element.Label),
                 IconPath = element.IconPath,
-                Icon = (BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(element.IconPath), null),
+				//Icon = (BitmapDrawable)Drawable.CreateFromStream (System.IO.File.OpenRead (element.IconPath), null) //not yet implemented in JSON
             };
         }
 

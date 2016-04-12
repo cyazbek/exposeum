@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Java.Util;
 using System.Collections.Generic;
+using Exposeum.Mappers;
 
 namespace Exposeum.Models
 {
@@ -138,6 +139,8 @@ namespace Exposeum.Models
                     StoryId == other.StoryId &&
                     Description.Equals(other.Description);
         }
+
+       
 
        
     }
