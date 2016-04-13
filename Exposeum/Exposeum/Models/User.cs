@@ -21,8 +21,8 @@ namespace Exposeum.Models
         private User()
         {
             EnglishButtonString.Add(new ButtonText("WalkThroughButton", "Skip"));
-            EnglishButtonString.Add(new ButtonText("freeTour", "Free Visit"));
-            EnglishButtonString.Add(new ButtonText("storyLine", "Guided Tours"));
+            EnglishButtonString.Add(new ButtonText("freeTour", "Explorer Tour"));
+            EnglishButtonString.Add(new ButtonText("storyLine", "Guided Tour"));
             EnglishButtonString.Add(new ButtonText("languageButton", "FR"));
             EnglishButtonString.Add(new ButtonText("storyLineDialogButton", "Begin Journey"));
             EnglishButtonString.Add(new ButtonText("storyInProgress", "Story In Progress"));
@@ -42,7 +42,7 @@ namespace Exposeum.Models
 
             FrenchButtonString.Add(new ButtonText("WalkThroughButton", "Sauter"));
             FrenchButtonString.Add(new ButtonText("freeTour", "Visite Libre"));
-            FrenchButtonString.Add(new ButtonText("storyLine", "Tours Guidés"));
+            FrenchButtonString.Add(new ButtonText("storyLine", "Tour Guidé"));
             FrenchButtonString.Add(new ButtonText("languageButton", "EN"));
             FrenchButtonString.Add(new ButtonText("storyLineDialogButton", "Commencer La Visite"));
             FrenchButtonString.Add(new ButtonText("storyInProgress", "Actuellement en cours"));

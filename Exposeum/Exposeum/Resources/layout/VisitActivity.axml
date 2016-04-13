@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView1"
             android:textColor="#ffffff"
-            android:textSize="30dp"
+            android:textSize="23dp"
             android:gravity="center_horizontal"
             android:layout_gravity="top"
             android:layout_marginTop="35.0dp" />
@@ -56,14 +56,30 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:gravity="center"
+        android:weightSum="100"
         android:id="@+id/linearLayout3">
         <ImageView
-            android:src="@drawable/tourSelectionSeparator"
-            android:layout_width="285.0dp"
+            android:src="@drawable/Separator_"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/imageView1"
+            android:layout_weight="45"
             android:layout_marginLeft="46.5dp"
-            android:layout_marginRight="36.0dp" />
+            android:layout_marginRight="20.5dp" />
+        <TextView
+            android:text="Or"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            android:textColor="#000000" />
+        <ImageView
+            android:src="@drawable/Separator_"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView2"
+            android:layout_weight="45"
+            android:layout_marginLeft="20.5dp"
+            android:layout_marginRight="46.5dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

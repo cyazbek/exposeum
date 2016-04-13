@@ -512,4 +512,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Separator_.png" />
+  </ItemGroup>
 </Project>
