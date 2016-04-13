@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/tourSelectionExplorerBttn"
+            android:background="@drawable/ExplorerButton"
             android:textColor="#e2346d"
             android:layout_marginRight="81.5dp"
             android:layout_marginLeft="86.5dp"
@@ -59,9 +59,11 @@
         android:id="@+id/linearLayout3">
         <ImageView
             android:src="@drawable/tourSelectionSeparator"
-            android:layout_width="wrap_content"
+            android:layout_width="285.0dp"
             android:layout_height="match_parent"
-            android:id="@+id/imageView1" />
+            android:id="@+id/imageView1"
+            android:layout_marginLeft="46.5dp"
+            android:layout_marginRight="36.0dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

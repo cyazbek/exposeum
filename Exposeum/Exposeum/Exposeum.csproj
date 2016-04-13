@@ -496,4 +496,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\tourSelectionSeparator.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ExplorerButton.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
 </Project>
