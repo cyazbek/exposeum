@@ -106,7 +106,11 @@ namespace Exposeum.Models
 				//If the app is not in focus, clear all potential notification associated with a beacon
 				if(!_inFocus)
 					_notificationManager.Cancel (BeaconFoundNotificationId);
-				Log.Debug("BeaconFinder", "e.Beacons is null");
+
+				if(e.Beacons == null)
+					Log.Debug("BeaconFinder", "e.Beacons is null");
+				else
+					Log.Debug("BeaconFinder", "e.Beacons is empty");
 				return;
 			}
 
