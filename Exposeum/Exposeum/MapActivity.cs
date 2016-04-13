@@ -110,9 +110,7 @@ namespace Exposeum
                     return true;
 
                 case Resource.Id.PauseItem:
-                    StorylineController storylineController = StorylineController.GetInstance();
-                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                    storylineController.ShowPauseStoryLineDialog(transaction, this);
+                    PauseTrigger();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
@@ -125,6 +123,18 @@ namespace Exposeum
             var menuItem2 = menu.GetItem(1).SetTitle(user.GetButtonText("QRScannerItem"));
             return true;
 
+        }
+
+/*	    public override void OnBackPressed()
+	    {
+	        PauseTrigger();
+	    }
+*/
+	    public void PauseTrigger()
+	    {
+            StorylineController storylineController = StorylineController.GetInstance();
+            FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            storylineController.ShowPauseStoryLineDialog(transaction, this);
         }
 
 	    public bool OnTouch(View v, MotionEvent e)

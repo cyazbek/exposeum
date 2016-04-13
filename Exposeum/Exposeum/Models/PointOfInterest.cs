@@ -110,8 +110,11 @@ namespace Exposeum.Models
             }
             else
             {
-                string str = "<h1>it works</h1>";
-                str += ExhibitionContent[0].HtmlFormat();
+                string str = "";
+                foreach (var content in ExhibitionContent)
+                {
+                    str += content.HtmlFormat();
+                }
                 return str;
             }
         }

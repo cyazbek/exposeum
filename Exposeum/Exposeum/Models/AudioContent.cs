@@ -1,4 +1,6 @@
-﻿namespace Exposeum.Models
+﻿using System;
+
+namespace Exposeum.Models
 {
     public class AudioContent : ExhibitionContent
     {
@@ -12,7 +14,9 @@
         }
         public override string HtmlFormat()
         {
-            throw new System.NotImplementedException();
+            return String.Format("<div><audio controls autoplay> "+ 
+                "<source src = \"{0}\" type = \"audio/mpeg\" >" +
+                                 "</audio></div>", FilePath);
         }
     }
 }

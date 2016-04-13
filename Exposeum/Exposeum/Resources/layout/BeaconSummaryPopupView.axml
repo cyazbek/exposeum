@@ -3,23 +3,55 @@
     android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff">
-    <WebView
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="339.0dp"
-        android:id="@+id/pointofinterest_popup_webview"
-        android:layout_marginLeft="20.0dp"
-        android:layout_marginRight="20.0dp"
-        android:layout_marginTop="73.0dp"
-        android:layout_marginBottom="5.0dp" />
-    <Button
-        android:text="Dismiss"
-        android:layout_width="325.0dp"
-        android:layout_height="70.0dp"
-        android:id="@+id/pointofinterest_popup_dismiss"
-        android:layout_marginTop="15.0dp"
-        android:layout_marginBottom="40.0dp"
-        android:layout_marginLeft="25.0dp"
-        android:layout_marginRight="25.0dp" />
+        android:layout_height="519.5dp"
+        android:background="@drawable/popupbg"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="45.0dp"
+        android:layout_marginBottom="30.0dp"
+        android:gravity="center">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <ScrollView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="344.0dp"
+                android:id="@+id/scrollView1"
+                android:layout_marginBottom="11.5dp">
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="245.0dp"
+                    android:id="@+id/pointofinterest_popup_webview"
+                    android:layout_marginLeft="20.0dp"
+                    android:layout_marginRight="20.0dp"
+                    android:layout_marginTop="3.0dp"
+                    android:layout_marginBottom="12.0dp"
+                    android:minHeight="245.0dp" />
+            </ScrollView>
+        </LinearLayout>
+        <Button
+            android:text="Dismiss"
+            android:layout_width="227.0dp"
+            android:layout_height="60.0dp"
+            android:id="@+id/pointofinterest_popup_dismiss"
+            android:layout_marginTop="52.0dp"
+            android:layout_marginBottom="5.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:background="@drawable/DismissBoxBG" />
+    </LinearLayout>
 </LinearLayout>

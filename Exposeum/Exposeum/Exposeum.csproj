@@ -527,4 +527,13 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\N3E.mp4" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\J3E.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\popupbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DismissBoxBG.png" />
+  </ItemGroup>
 </Project>

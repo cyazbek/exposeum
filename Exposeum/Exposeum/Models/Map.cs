@@ -101,13 +101,18 @@ namespace Exposeum.Models
 
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;
-            VideoContent exhibition = new VideoContent
+            VideoContent video = new VideoContent
             {
                 FilePath = "N3E.mp4"
             };
+            AudioContent audio = new AudioContent
+            {
+                FilePath = "J3E.mp3"
+            };
             p1.ExhibitionContent = new List<ExhibitionContent>();
 	   
-            p1.ExhibitionContent.Add(exhibition);
+            p1.ExhibitionContent.Add(video);
+            p1.ExhibitionContent.Add(audio);
             p1.Visited = false;
             p1.Beacon = beacon1;
 
