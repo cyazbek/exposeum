@@ -26,7 +26,7 @@ namespace Exposeum.Models
             Floors = new List<Floor>();
             MapElements = new List<MapElement>();
             Storylines = new List<StoryLine>();
-			SeedData ();
+			SeedDD ();
             User.GetInstance().Register(this);
 		}
 
@@ -63,8 +63,15 @@ namespace Exposeum.Models
                 Id = 0,
                 Language = Language.En,
                 Summary = "",
-                Description = "Professor's office",
-                Title = "EV 3.187"
+                Description = "<p>You can start an exploration tour on your own. " +
+                              "Just keep your smart phone handy and walk. " +
+                              "You will get notefied when you can listen to a audioclip, a video," +
+                              " images or written information on the building and its fascinating history. " +
+                              "Happy walk!</p> "
+                              + " <div><video width =\"320\" height=\"240\" controls>" +
+                                 "<source src = \"N3E.mp4\" type = \"video/mp4\" >" +
+                                 "</video></div>",
+                Title = "<h1>MOEB Start for all tours</h1>"
             };
 
             PointOfInterestDescription DescriptionEn2 = new PointOfInterestDescription()
@@ -92,10 +99,12 @@ namespace Exposeum.Models
 
             Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
             Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
-            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
+            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 49800, 5890);
 
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;
+            VideoContent exhibition = new VideoContent();
+          //  p1.ExhibitionContent.Add(exhibition);
             p1.Visited = false;
             p1.Beacon = beacon1;
 

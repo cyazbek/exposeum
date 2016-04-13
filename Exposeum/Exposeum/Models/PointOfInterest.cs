@@ -92,7 +92,28 @@ namespace Exposeum.Models
 
         public String GetHtml()
         {
-            return String.Format("<html><body>Vous avez selectionnez {0}!<br><br></body></html>", GetSummary());   
+            if (!Visited)
+            {
+                return String.Format(Description.Title + Description.Summary);
+            }
+            else
+            {
+                return String.Format(Description.Title + Description.Description + ExhibitionContentBuild());
+            }
+        }
+
+        private string ExhibitionContentBuild()
+        {
+            if (ExhibitionContent.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                string str = "";
+                str += ExhibitionContent[0].HtmlFormat();
+                return str;
+            }
         }
 
         public string GetDescription()

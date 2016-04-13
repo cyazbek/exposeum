@@ -524,4 +524,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\testa.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\N3E.mp4" />
+  </ItemGroup>
 </Project>
