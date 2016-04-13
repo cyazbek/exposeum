@@ -17,7 +17,7 @@ namespace Exposeum.Services.Service_Providers
 		public StoryLineServiceProvider(){
 			_mapInstance = Map.GetInstance ();
 			_beaconFinder = BeaconFinder.GetInstance ();
-			_graphInstance = ExposeumApplication.IoCContainer.Get<IGraphService>();
+			_graphInstance = ExposeumApplication.IoCContainer.Get<IGraphService>().GetGraph();
 			BuildGenericStoryLine ();
 		}
 
