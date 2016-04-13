@@ -515,4 +515,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Separator_.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\languageBanner.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\languageBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\testa.gif" />
+  </ItemGroup>
 </Project>
