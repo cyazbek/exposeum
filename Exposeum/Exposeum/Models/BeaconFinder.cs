@@ -153,7 +153,7 @@ namespace Exposeum.Models
 				var proximity = Utils.ComputeProximity(beacon);
 				var accuracy = Utils.ComputeAccuracy(beacon);
 
-				if (proximity == Utils.Proximity.Immediate) {
+				if (proximity == Utils.Proximity.Near) {
 					try {
 						_immediateBeacons.Add (accuracy, beacon);
 					} catch (ArgumentException ex) {
