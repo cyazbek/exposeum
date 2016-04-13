@@ -205,8 +205,8 @@ namespace Exposeum
 				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
 				{
 					Id = newStorylineDescriptionId, //increment
-					Title = "Le demo de du storyline"/*storylineOBJ["title"].ToString()*/,
-					Description = "la description en Français" /*storylineOBJ["description"].ToString()*/,
+					Title = storylineOBJ["title"][1]["title"].ToString(),
+					Description = storylineOBJ["description"][1]["description"].ToString()
 				};
 
 				englishStorylineDescriptions.Add (newStorylineDescriptionEN);
