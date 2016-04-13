@@ -24,6 +24,7 @@ namespace Exposeum.Controllers
         private readonly Map _mapModel;
         private readonly BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
         private readonly IShortestPathService _shortestPathService;
+		private readonly IStoryLineService _storyLineServiceProvider;
 
 
         public static MapController GetInstance()
@@ -52,6 +53,7 @@ namespace Exposeum.Controllers
             ConfigureMapView(context);
 
 			_shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService>();
+			_storyLineServiceProvider = ExposeumApplication.IoCContainer.Get<IStoryLineService> ();
 
             _mapModel = Map.GetInstance();
 
@@ -328,7 +330,16 @@ namespace Exposeum.Controllers
             MapElement end = storyline.MapElements.First();
 
 
-            return _shortestPathService.GetShortestPath(start, end);
+			//if the start and the end are POIs get their generic equivalent from the generic storyline that is found in the graph
+			MapElement genericStart = start;
+			if ( start.GetType() == typeof(PointOfInterest) )
+				genericStart = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)start).Beacon );
+
+			MapElement genericEnd = end;
+			if( end.GetType() == typeof(PointOfInterest) )
+				genericEnd = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)end).Beacon);
+
+			return _shortestPathService.GetShortestPath(genericStart, genericEnd);
         }
 
         /// <summary>
@@ -351,15 +362,23 @@ namespace Exposeum.Controllers
         /// <returns>Path</returns>
         public Path GetShortestPathToLastPoint(MapElement start)
         {
-            
 			MapElement end = _mapModel.CurrentStoryline.LastPointOfInterestVisited;
+
+			//if the start and the end are POIs get their generic equivalent from the generic storyline that is found in the graph
+			MapElement genericStart = start;
+			if ( start.GetType() == typeof(PointOfInterest) )
+				genericStart = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)start).Beacon );
+
+			MapElement genericEnd = end;
+			if( end.GetType() == typeof(PointOfInterest) )
+				genericEnd = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)end).Beacon);
 
             if (end == null)
             {
                 end = _mapModel.CurrentStoryline.MapElements.First();
             }
 
-            return _shortestPathService.GetShortestPath(start, end);
+			return _shortestPathService.GetShortestPath(genericStart, genericEnd);
         }
 
         public Map Model
