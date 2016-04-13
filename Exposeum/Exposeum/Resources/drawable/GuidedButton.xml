@@ -2,8 +2,8 @@
 <selector
   xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_focused="true" 
-        android:drawable="@drawable/tourSelectionExplorerTap"/>
+        android:drawable="@drawable/tourSelectionGuidedTap"/>
   <item android:state_pressed="true" 
-        android:drawable="@drawable/tourSelectionExplorerTap"/>
-  <item android:drawable="@drawable/tourSelectionExplorerBttn" />
+        android:drawable="@drawable/tourSelectionGuidedTap"/>
+  <item android:drawable="@drawable/tourSelectionGuidedBttn" />
 </selector>
