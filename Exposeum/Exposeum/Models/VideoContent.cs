@@ -17,8 +17,8 @@ namespace Exposeum.Models
         public override string HtmlFormat()
         {
             return String.Format("<div><video width=\"320\" height=\"240\" controls>" +
-                                 "<source src = \"N3E.mp4\" type = \"video/mp4\" >" +
-                                 "</ video ></div>");
+                                 "<source src = \"{0}\" type = \"video/mp4\" >" +
+                                 "</ video ></div>", FilePath);
         }
     }
 }

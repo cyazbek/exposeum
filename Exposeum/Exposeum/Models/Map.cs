@@ -67,10 +67,7 @@ namespace Exposeum.Models
                               "Just keep your smart phone handy and walk. " +
                               "You will get notefied when you can listen to a audioclip, a video," +
                               " images or written information on the building and its fascinating history. " +
-                              "Happy walk!</p> "
-                              + " <div><video width =\"320\" height=\"240\" controls>" +
-                                 "<source src = \"N3E.mp4\" type = \"video/mp4\" >" +
-                                 "</video></div>",
+                              "Happy walk!</p> ",
                 Title = "<h1>MOEB Start for all tours</h1>"
             };
 
@@ -103,8 +100,11 @@ namespace Exposeum.Models
 
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;
-            VideoContent exhibition = new VideoContent();
-          //  p1.ExhibitionContent.Add(exhibition);
+            VideoContent exhibition = new VideoContent
+            {
+                FilePath = "N3E.mp4"
+            };
+            //p1.ExhibitionContent.Add(exhibition);
             p1.Visited = false;
             p1.Beacon = beacon1;
 

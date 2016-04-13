@@ -94,24 +94,24 @@ namespace Exposeum.Models
         {
             if (!Visited)
             {
-                return String.Format(Description.Title + Description.Summary);
+                return String.Format("<html><body>" + Description.Title + Description.Summary + "</body></html>");
             }
             else
             {
-                return String.Format(Description.Title + Description.Description + ExhibitionContentBuild());
+                return String.Format("<html><body>" + Description.Title + Description.Description + ExhibitionContentBuild()+ "</body></html>");
             }
         }
 
         private string ExhibitionContentBuild()
         {
-            if (ExhibitionContent.Count < 1)
+            if (ExhibitionContent == null || ExhibitionContent.Count < 1)
             {
                 return "";
             }
             else
             {
-                string str = "";
-                str += ExhibitionContent[0].HtmlFormat();
+                string str = "<h1>it works</h1>";
+                //str += ExhibitionContent[0].HtmlFormat();
                 return str;
             }
         }

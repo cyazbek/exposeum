@@ -33,13 +33,9 @@ namespace Exposeum.Views
 
             WebView popupWebView = popupView.FindViewById<WebView>(Resource.Id.pointofinterest_popup_webview);
 
-            if(poi.Visited)
-                popupWebView.LoadDataWithBaseURL("file:///android_asset/", poi.Description.GetFullDescriptionHtml(), "text/html", "utf-8", null);
+            popupWebView.LoadDataWithBaseURL("file:///android_asset/", poi.GetHtml(), "text/html", "utf-8", null);
             //popupWebView.LoadData(POI.description.getFullDescriptionHTML(), "text/html", "utf-8");
 
-            
-            else
-                popupWebView.LoadData(poi.Description.GetOnlySummaryHtml(), "text/html", "utf-8");
         }
 
 		public void Show()
