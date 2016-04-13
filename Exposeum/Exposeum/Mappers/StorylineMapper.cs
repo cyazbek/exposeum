@@ -83,10 +83,13 @@ namespace Exposeum.Mappers
                 FloorsCovered = storylineTable.FloorsCovered,
                 StorylineDescription = _storylineDescriptionMapper.GetStoryLineDescription(storylineTable.DescriptionId),
                 LastPointOfInterestVisited = _poiMapper.Get(storylineTable.LastVisitedPoi),
-                MapElements = _mapElementsMapper.GetAllElementsFromListOfMapElementIds(GetAllStorylineMapElementIds(storylineTable.Id)),
                 Status = _statusMapper.StatusTableToModel(storylineTable.Status),
 				Image = (BitmapDrawable)Drawable.CreateFromStream (System.IO.File.OpenRead (storylineTable.ImagePath), null)
             };
+			List<MapElement> mapeElement = _mapElementsMapper.GetAllElementsFromListOfMapElementIds (GetAllStorylineMapElementIds (storylineTable.Id));
+			foreach (var x in mapeElement) {
+				storyline.AddMapElement (x);
+			}
             return storyline; 
         }
 
