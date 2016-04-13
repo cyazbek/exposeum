@@ -111,7 +111,7 @@ namespace Exposeum.Models
             else
             {
                 string str = "<h1>it works</h1>";
-                //str += ExhibitionContent[0].HtmlFormat();
+                str += ExhibitionContent[0].HtmlFormat();
                 return str;
             }
         }

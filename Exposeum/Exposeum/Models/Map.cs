@@ -5,6 +5,7 @@ using Android.Graphics.Drawables;
 using System.Linq;
 using Exposeum.Mappers;
 using Exposeum.Observers;
+using Exposeum.Tables;
 
 namespace Exposeum.Models
 {
@@ -104,7 +105,9 @@ namespace Exposeum.Models
             {
                 FilePath = "N3E.mp4"
             };
-            //p1.ExhibitionContent.Add(exhibition);
+            p1.ExhibitionContent = new List<ExhibitionContent>();
+	   
+            p1.ExhibitionContent.Add(exhibition);
             p1.Visited = false;
             p1.Beacon = beacon1;
 
