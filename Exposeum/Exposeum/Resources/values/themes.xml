@@ -7,7 +7,7 @@
 <style name="MyActionBar"
        parent="@android:style/Widget.Holo.Light">
   <item name="android:height">60dp</item>
-  <item name="android:background">#CC0000</item>
+  <item name="android:background">#da1f1c</item>
 </style>
 <!-- Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme -->
 <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">

@@ -87,12 +87,12 @@ namespace Exposeum.Models
 
 
             //Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
-            Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 26793, 57400);
-            Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 60352, 3099);
-
+            //Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13, 57400);
             //Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
-            //Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
-            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 26515, 372);
+
+            Beacon beacon3 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 55339, 19185);
+            Beacon beacon2 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 13982, 54450);
+            Beacon beacon1 = new Beacon(UUID.FromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 59520, 56840);
 
             PointOfInterest p1 = new PointOfInterest(0.816326f, 0.218364f, floor1);
             p1.Description = DescriptionEn1;

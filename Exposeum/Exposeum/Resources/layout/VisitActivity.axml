@@ -3,39 +3,85 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroudlanguagefix"
+    android:background="@drawable/tour_selection_bg"
     android:minWidth="25px"
     android:minHeight="25px"
     android:weightSum="100">
-    <TextView
-        android:text="Choose your Tour Mode"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:textColor="#ffffff"
-        android:textSize="30dp"
-        android:layout_weight="20"
-        android:gravity="center" />
-    <Button
-        android:text="Explorer"
-        android:id="@+id/freeTour"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        style="@style/button_text"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5.00dp"
-        android:background="@android:color/transparent"
-        android:textColor="#ffffff"
-        android:layout_weight="40" />
-    <Button
-        android:id="@+id/storyLine"
-        android:text="Guided Tour"
-        android:layout_height="wrap_content"
-        android:layout_width="250dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:textColor="#ffffff"
+        android:layout_height="0dp"
         android:layout_weight="40"
-        style="@style/button_text" />
+        android:gravity="center"
+        android:id="@+id/linearLayout3">
+        <TextView
+            android:text="Choose your Tour Mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:textColor="#ffffff"
+            android:textSize="30dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="top"
+            android:layout_marginTop="35.0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:id="@+id/linearLayout2">
+        <Button
+            android:text="Explorer"
+            android:id="@+id/freeTour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/tourSelectionExplorerBttn"
+            android:textColor="#e2346d"
+            android:layout_marginRight="81.5dp"
+            android:layout_marginLeft="86.5dp"
+            android:layout_marginTop="16.5dp"
+            android:layout_marginBottom="20.0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:id="@+id/linearLayout3">
+        <ImageView
+            android:src="@drawable/tourSelectionSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:id="@+id/linearLayout2">
+        <Button
+            android:text="Guided"
+            android:id="@+id/storyLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/tourSelectionGuidedBttn"
+            android:textColor="#4593ed"
+            android:layout_marginRight="81.5dp"
+            android:layout_marginLeft="86.5dp"
+            android:layout_marginTop="16.5dp"
+            android:layout_marginBottom="20.0dp" />
+    </LinearLayout>
 </LinearLayout>

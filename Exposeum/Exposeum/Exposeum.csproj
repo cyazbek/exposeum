@@ -478,4 +478,22 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\treedots.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionGuidedTap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tour_selection_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionExplorerBttn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionExplorerTap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionGuidedBttn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionSeparator.png" />
+  </ItemGroup>
 </Project>
