@@ -37,10 +37,10 @@ namespace Exposeum.Services.Service_Providers
 			PointOfInterest p6 = new PointOfInterest (0.48f, 0.12f, _mapInstance.Floors [0]);
 			PointOfInterest p7 = new PointOfInterest (0.38f, 0.62f, _mapInstance.Floors [1]);
 			PointOfInterest p8 = new PointOfInterest (0.18f, 0.92f, _mapInstance.Floors [1]);
-			PointOfInterest p9 = new PointOfInterest (0.53f, 0.46f, _mapInstance.Floors [4]);
-			PointOfInterest p10 = new PointOfInterest (0.53f, 0.76f, _mapInstance.Floors [4]);
-			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, _mapInstance.Floors [3]);
-			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, _mapInstance.Floors [3]);
+			PointOfInterest p9 = new PointOfInterest (0.53f, 0.46f, _mapInstance.Floors [3]);
+			PointOfInterest p10 = new PointOfInterest (0.53f, 0.76f, _mapInstance.Floors [3]);
+			PointOfInterest p11 = new PointOfInterest (0.53f, 0.46f, _mapInstance.Floors [2]);
+			PointOfInterest p12 = new PointOfInterest (0.73f, 0.16f, _mapInstance.Floors [2]);
 
 
 			_genericStoryLine = new StoryLine
