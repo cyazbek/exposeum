@@ -101,16 +101,18 @@ namespace Exposeum.Models
 		/// </summary>
 		private void BeaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
-			if (e.Beacons == null || e.Beacons.Count == 0)
-			{
+			if ((e.Beacons == null )||( e.Beacons.Count == 0)){
 				//If the app is not in focus, clear all potential notification associated with a beacon
-				if(!_inFocus)
+				if(!_inFocus){
 					_notificationManager.Cancel (BeaconFoundNotificationId);
+
+				}
 
 				if(e.Beacons == null)
 					Log.Debug("BeaconFinder", "e.Beacons is null");
 				else
 					Log.Debug("BeaconFinder", "e.Beacons is empty");
+				
 				return;
 			}
 
