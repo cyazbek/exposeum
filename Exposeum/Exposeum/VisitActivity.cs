@@ -87,7 +87,7 @@ namespace Exposeum
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Layout.MenuExplorer, menu);
+            MenuInflater.Inflate(Resource.Layout.MainOptions, menu);
             return base.OnCreateOptionsMenu(menu);
 
         }
@@ -95,7 +95,6 @@ namespace Exposeum
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
 
-            //Toast.MakeText(this, txt, ToastLength.Long);
             switch (item.ItemId)
             {
 
@@ -110,6 +109,12 @@ namespace Exposeum
                 case Resource.Id.QRScannerItem:
                     QrController.GetInstance(this).BeginQrScanning();
                     return true;
+                case Resource.Id.ResetItem:
+                    QrController.GetInstance(this).BeginQrScanning();
+                    return true;
+                case Resource.Id.FetchItem:
+                    QrController.GetInstance(this).BeginQrScanning();
+                    return true;
             }
             return base.OnOptionsItemSelected(item);
         }
@@ -118,6 +123,8 @@ namespace Exposeum
         {
             var menuItem1 = menu.GetItem(0).SetTitle(_user.GetButtonText("LanguageItem"));
             var menuItem2 = menu.GetItem(1).SetTitle(_user.GetButtonText("QRScannerItem"));
+            var menuItem3 = menu.GetItem(2).SetTitle(_user.GetButtonText("FetchItem"));
+            var menuItem4 = menu.GetItem(3).SetTitle(_user.GetButtonText("ResetItem"));
             return true;
 
         }

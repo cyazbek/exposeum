@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000000"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#000000">
+    <item
+        android:id="@+id/LanguageItem"
+        android:title="@string/Language_option"
+        android:background="#000000" />
+    <item
+        android:id="@+id/QRScannerItem"
+        android:title="@string/QRScanner_option" />
+    <item
+        android:id="@+id/FetchItem"
+        android:title="n"
+        android:background="#000000" />
+    <item
+        android:id="@+id/ResetItem"
+        android:title=""
+        android:background="#000000" />
+</menu>
