@@ -11,7 +11,8 @@ namespace Exposeum.Mappers
         private readonly ExhibitionContentMapper _exhibitionMapper;
         private readonly BeaconMapper _beaconMapper;
         private readonly MapElementsTdg _mapElementsTdg;
-        private readonly FloorMapper _floorMapper; 
+        private readonly FloorMapper _floorMapper;
+		private Dictionary<int, PointOfInterest> _pointOfInterestIdentityMap;
 
         private PointOfInterestMapper()
         {
@@ -20,6 +21,7 @@ namespace Exposeum.Mappers
             _beaconMapper = BeaconMapper.GetInstance();
             _mapElementsTdg = MapElementsTdg.GetInstance();
             _floorMapper = FloorMapper.GetInstance();
+			_pointOfInterestIdentityMap = new Dictionary<int, PointOfInterest>();
 
         }
 
@@ -54,6 +56,13 @@ namespace Exposeum.Mappers
 
         public PointOfInterest PoiTableToModel(Tables.MapElements mapElement)
         {
+			PointOfInterest pointOfInterest;
+
+			//check if the POI is in the identity map
+			if(_pointOfInterestIdentityMap.TryGetValue(mapElement.Id, out pointOfInterest)){
+				return pointOfInterest;
+			}
+
             Floor floor = _floorMapper.GetFloor(mapElement.FloorId);
             PointOfInterestDescription description =
                 _descriptionMapper.GetPointOfInterestDescription(mapElement.PoiDescription);
@@ -66,7 +75,7 @@ namespace Exposeum.Mappers
             else
                 vis = true;
 
-            return new PointOfInterest()
+			pointOfInterest = new PointOfInterest()
             {
                 Beacon = beacon,
                 Description = description,
@@ -79,6 +88,11 @@ namespace Exposeum.Mappers
                 VCoordinate = mapElement.VCoordinate,
                 Visited = vis
             };
+
+			//add the POI to the identity map
+			_pointOfInterestIdentityMap.Add (pointOfInterest.Id, pointOfInterest);
+
+			return pointOfInterest;
         }
         public void Add(PointOfInterest poi)
         {
