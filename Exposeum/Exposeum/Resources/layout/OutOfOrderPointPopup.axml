@@ -35,7 +35,7 @@
             android:paddingTop="20dip"
             android:paddingLeft="85dip"
             android:paddingRight="5dip"
-            android:text="Continue the storyline from this point?" />
+            android:text="Do you want to be guided back to the last visited point?" />
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/linearLayout1"
@@ -51,7 +51,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0" />
             <Button
-                android:text="No"
+                android:text="No, continue"
                 android:id="@+id/wrongPointButton"
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
