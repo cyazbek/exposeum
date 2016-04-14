@@ -2,6 +2,7 @@ using Exposeum.TDGs;
 using System.Collections.Generic;
 using Android.Graphics.Drawables;
 using Floor = Exposeum.Models.Floor;
+using System.IO;
 
 namespace Exposeum.Mappers
 {
@@ -68,7 +69,9 @@ namespace Exposeum.Mappers
             Tables.Floor floorTable = new Tables.Floor
             {
                 Id = floor.Id,
-                ImagePath = floor.ImagePath
+                ImagePath = floor.ImagePath,
+                Height = floor.Height,
+                Width = floor.Width
             };
 
             return floorTable;
@@ -76,10 +79,12 @@ namespace Exposeum.Mappers
 
         public Floor FloorTableToModel(Tables.Floor floorTable)
         {
-            Floor modelFloor = new Floor((BitmapDrawable)Drawable.CreateFromStream(Android.App.Application.Context.Assets.Open(floorTable.ImagePath), null))
+			Floor modelFloor = new Floor(new ColorDrawable())
             {
                 ImagePath = floorTable.ImagePath,
-                Id = floorTable.Id
+                Id = floorTable.Id,
+                Height = floorTable.Height,
+                Width = floorTable.Width
             };
             return modelFloor;
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Exposeum.Mappers;
 using Exposeum.Observers;
 
 namespace Exposeum.Models
@@ -34,7 +35,7 @@ namespace Exposeum.Models
             EnglishButtonString.Add(new ButtonText("reject_pause", ""));
             EnglishButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Dismiss"));
             EnglishButtonString.Add(new ButtonText("PauseItem", "Pause"));
-            EnglishButtonString.Add(new ButtonText("LanguageItem", "Language"));
+            EnglishButtonString.Add(new ButtonText("LanguageItem", "Français"));
             EnglishButtonString.Add(new ButtonText("QRScannerItem", "Scan QR"));
             EnglishButtonString.Add(new ButtonText("TourModeTitle", "Exposeum"));
             EnglishButtonString.Add(new ButtonText("StorylinesListTitle", "Storylines"));
@@ -54,7 +55,7 @@ namespace Exposeum.Models
             FrenchButtonString.Add(new ButtonText("reject_pause", ""));
             FrenchButtonString.Add(new ButtonText("pointofinterest_popup_dismiss", "Fermer"));
             FrenchButtonString.Add(new ButtonText("PauseItem", "Pauser"));
-            FrenchButtonString.Add(new ButtonText("LanguageItem", "Langue"));
+            FrenchButtonString.Add(new ButtonText("LanguageItem", "English"));
             FrenchButtonString.Add(new ButtonText("QRScannerItem", "Scanner QR"));
             FrenchButtonString.Add(new ButtonText("TourModeTitle", "Exposeum"));
             FrenchButtonString.Add(new ButtonText("StorylinesListTitle", "Histoire"));
@@ -112,7 +113,7 @@ namespace Exposeum.Models
                 CurrentButtonString = EnglishButtonString;
                 CurrentImageList = EnglishImageList;
             }
-            //NotifyAll();
+            NotifyAll();
         }
 
         public void ToogleLanguage()
@@ -141,5 +142,13 @@ namespace Exposeum.Models
                 o.Update();
             }
         }
+
+        public void SetVisitor(bool visited)
+        {
+            Visitor = visited;
+            UserMapper.GetInstance().UpdateUser(this);
+        }
+
+
     }
 }

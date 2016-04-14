@@ -9,6 +9,7 @@ namespace Exposeum.Services
 		StoryLine GetActiveStoryLine ();
 		void SetActiveStoryLine (StoryLine storyline);
 		StoryLine GetStoryLineById(int id);
+		StoryLine GetGenericStoryLine ();
 	}
 }
 

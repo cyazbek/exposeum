@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using Java.Lang;
 
 namespace Exposeum.Models

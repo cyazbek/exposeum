@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Java.Util;
 using System.Collections.Generic;
+using Exposeum.Mappers;
 
 namespace Exposeum.Models
 {
@@ -78,7 +79,7 @@ namespace Exposeum.Models
         {
             canvas.Save();
 
-            canvas.Translate(UCoordinate * Floor.Image.IntrinsicWidth, VCoordinate * Floor.Image.IntrinsicHeight);
+			canvas.Translate(UCoordinate * Floor.Width, VCoordinate * Floor.Height);
             canvas.Scale(_iconScaleFactor, _iconScaleFactor);
             canvas.Translate(-_unvisitedIcon.IntrinsicWidth / 2.0f, -_unvisitedIcon.IntrinsicHeight / 2.0f);
 
@@ -162,6 +163,8 @@ namespace Exposeum.Models
                     StoryId == other.StoryId &&
                     Description.Equals(other.Description);
         }
+
+       
 
        
     }

@@ -54,15 +54,7 @@ namespace Exposeum
             var BarButton = FindViewById<Button>(Resource.Id.butonn);
             BarButton.Click += (s, e) =>
             {
-                //var intent = new Intent(this, typeof(TestUi));
-                //StartActivity(intent);
-
-                //pull up Dialog
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DDialog DDB = new DDialog();
-                DDB.Show(transaction, "Dialog Frag");
-
-
+                  OnBackPressed();         
             };
             */
 
@@ -92,7 +84,6 @@ namespace Exposeum
         {
             return;
         }
-
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

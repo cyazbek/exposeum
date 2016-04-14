@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,7 @@
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AssemblyName>Exposeum</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <XamarinInsightsApiKey>b45371e58dca0b0214285f3af7f35c14ddc61282</XamarinInsightsApiKey>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -30,48 +30,56 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Macaw.UIComponents">
       <HintPath>..\Components\MultiImageView-1.2\lib\android\Macaw.UIComponents.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite-net">
-      <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.1.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net.Core-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite.Net.Platform.XamarinAndroid, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net-PCL.3.1.1\lib\MonoAndroid\SQLite.Net.Platform.XamarinAndroid.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v13.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v13.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.10.6\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.20.0.0.2\lib\MonoAndroid10\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Estimote.Android, Version=1.0.8.7, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Estimote.Android.0.9.1.0\lib\MonoAndroid43\Xamarin.Estimote.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLite.Net, Version=3.0.5.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\MonoAndroid\SQLite.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLite.Net.Platform.XamarinAndroid, Version=3.0.5.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\MonoAndroid\SQLite.Net.Platform.XamarinAndroid.dll</HintPath>
     </Reference>
     <Reference Include="SQLiteNetExtensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\SQLiteNetExtensions.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
@@ -85,45 +93,75 @@
     <Reference Include="Xamarin.Estimote.Android">
       <HintPath>..\Components\estimotesdkandroid-0.9.1.0\lib\android\Xamarin.Estimote.Android.dll</HintPath>
     </Reference>
-    <Reference Include="ZXing.Net.Mobile.Core, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\ZXing.Net.Mobile.Core.dll</HintPath>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Xamarin.Insights, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Insights.1.12.3\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="zxing.portable, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\zxing.portable.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Portable.Ninject.3.3.1\lib\monoandroid\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="ZXingNetMobile, Version=2.0.4.17, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.17\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    <Reference Include="ZXing.Net.Mobile.Core, Version=2.0.4.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.46\lib\MonoAndroid403\ZXing.Net.Mobile.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.portable, Version=2.0.4.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.46\lib\MonoAndroid403\zxing.portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZXingNetMobile, Version=2.0.4.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.0.4.46\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeaconActivity.cs" />
     <Compile Include="Controllers\StorylineController.cs" />
+    <Compile Include="DDialog.cs" />
     <Compile Include="DialogStorylineInProgress.cs" />
     <Compile Include="DialogStoryline.cs" />
+    <Compile Include="Fragments\DirectToLastPointFragment.cs" />
+    <Compile Include="Fragments\SearchingForBeaconFragment.cs" />
+
+    <Compile Include="MainMenuAdapter.cs" />
+    <Compile Include="Mappers\AudioContentMapper.cs" />
     <Compile Include="Mappers\BeaconMapper.cs" />
-    <Compile Include="Mappers\EdgeMapper.cs" />
+    <Compile Include="Mappers\MapEdgeMapper.cs" />
     <Compile Include="Mappers\ExhibitionContentMapper.cs" />
     <Compile Include="Mappers\FloorMapper.cs" />
-    <Compile Include="Mappers\ImageMapper.cs" />
+    <Compile Include="Mappers\ImageContentMapper.cs" />
     <Compile Include="Mappers\MapElementsMapper.cs" />
     <Compile Include="Mappers\MapMapper.cs" />
     <Compile Include="Mappers\PointOfInterestDescriptionMapper.cs" />
+    <Compile Include="Mappers\PointOfInterestMapper.cs" />
     <Compile Include="Mappers\StatusMapper.cs" />
     <Compile Include="Mappers\StorylineDescriptionMapper.cs" />
-    <Compile Include="Mappers\StorylineDescriptionMapperFr.cs" />
-    <Compile Include="Mappers\StorylineDescriptionMapperEn.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Mappers\StorylineMapper.cs" />
+    <Compile Include="MapProgressFragmentView.cs" />
+    <Compile Include="Mappers\TextContentMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
+    <Compile Include="Mappers\VideoMapper.cs" />
+    <Compile Include="Mappers\WayPointMapper.cs" />
     <Compile Include="Menu Bar\DialogPauseStorylineConfirmation.cs" />
     <Compile Include="Fragments\OutOfOrderPointFragment.cs" />
     <Compile Include="Models\AudioContent.cs" />
     <Compile Include="Models\Beacon.cs" />
     <Compile Include="Models\ButtonText.cs" />
     <Compile Include="Models\ExhibitionContent.cs" />
+    <Compile Include="Models\ImageContent.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PointOfInterestDescription.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StoryLine.cs" />
+    <Compile Include="Fragments\FloorSelectorFragment.cs" />
+    <Compile Include="Models\StorylineDescription.cs" />
+    <Compile Include="Models\TextContent.cs" />
+    <Compile Include="Models\VideoContent.cs" />
+    <Compile Include="Models\WaypointLabel.cs" />
+    <Compile Include="Observers\LanguageObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Observers\LanguageSubject.cs" />
     <Compile Include="Services\IGraphService.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\Service Providers\GraphServiceProvider.cs" />
@@ -132,12 +170,10 @@
     <Compile Include="StoryLineListAdapter.cs" />
     <Compile Include="Tables\Beacon.cs" />
     <Compile Include="Tables\DBManager.cs" />
-    <Compile Include="Tables\Edge.cs" />
+    <Compile Include="Tables\MapEdge.cs" />
     <Compile Include="Tables\ExhibitionContentEn.cs" />
     <Compile Include="Tables\ExhibitionContentFr.cs" />
     <Compile Include="Tables\Floor.cs" />
-    <Compile Include="Tables\Icon.cs" />
-    <Compile Include="Tables\Images.cs" />
     <Compile Include="Tables\Map.cs" />
     <Compile Include="Tables\MapElements.cs" />
     <Compile Include="Tables\PoiDescriptionEn.cs" />
@@ -146,14 +182,12 @@
     <Compile Include="Tables\StoryLineDescriptionEn.cs" />
     <Compile Include="Tables\StoryLineDescriptionFr.cs" />
     <Compile Include="Tables\StoryLineMapElementList.cs" />
+    <Compile Include="Tables\User.cs" />
     <Compile Include="TDGs\BeaconTDG.cs" />
-    <Compile Include="TDGs\EdgeTDG.cs" />
+    <Compile Include="TDGs\MapEdgeTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentEnTDG.cs" />
     <Compile Include="TDGs\ExhibitionContentFrTDG.cs" />
-    <Compile Include="TDGs\ExhibitionContentTDG.cs" />
     <Compile Include="TDGs\FloorTDG.cs" />
-    <Compile Include="TDGs\IconTDG.cs" />
-    <Compile Include="TDGs\ImagesTDG.cs" />
     <Compile Include="TDGs\MapElementsTDG.cs" />
     <Compile Include="TDGs\MapTDG.cs" />
     <Compile Include="TDGs\PoiDescriptionEnTDG.cs" />
@@ -163,29 +197,13 @@
     <Compile Include="TDGs\StoryLineMapElementListTDG.cs" />
     <Compile Include="TDGs\StorylineTDG.cs" />
     <Compile Include="TDGs\TDG.cs" />
-    <Compile Include="TempModels\Audio.cs" />
-    <Compile Include="TempModels\Beacon.cs" />
-    <Compile Include="TempModels\Edge.cs" />
-    <Compile Include="TempModels\ExhibitionContent.cs" />
-    <Compile Include="TempModels\Floor.cs" />
-    <Compile Include="TempModels\Image.cs" />
-    <Compile Include="TempModels\Map.cs" />
-    <Compile Include="TempModels\MapElement.cs" />
-    <Compile Include="TempModels\PointOfInterest.cs" />
-    <Compile Include="TempModels\PointOfInterestDescription.cs" />
-    <Compile Include="TempModels\Storyline.cs" />
-    <Compile Include="TempModels\StorylineDescription.cs" />
-    <Compile Include="TempModels\Text.cs" />
-    <Compile Include="TempModels\Video.cs" />
-    <Compile Include="TempModels\WayPoint.cs" />
-    <Compile Include="TempModels\WaypointLabel.cs" />
+    <Compile Include="TestUi.cs" />
+    <Compile Include="TDGs\UserTDG.cs" />
     <Compile Include="VisitActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BeaconActivity.cs" />
     <Compile Include="LanguageActivity.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MainMenuAdapter.cs" />
     <Compile Include="Models\BeaconFinder.cs" />
     <Compile Include="Models\IBeaconFinderObservable.cs" />
     <Compile Include="Models\IBeaconFinderObserver.cs" />
@@ -218,19 +236,13 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Views\MapView.cs" />
     <Compile Include="Views\MapProgressionFragment.cs" />
-    <Compile Include="Models\PointOfTravel.cs" />
+    <Compile Include="Models\WayPoint.cs" />
     <Compile Include="Exceptions\PointOfInterestNotVisitedException.cs" />
-    <AndroidResource Include="Resources\drawable\floor_5.png" />
-    <AndroidResource Include="Resources\drawable\floor_4.png" />
-    <AndroidResource Include="Resources\drawable\floor_3.png" />
-    <AndroidResource Include="Resources\drawable\floor_2.png" />
-    <AndroidResource Include="Resources\drawable\floor_1.png" />
     <Compile Include="Services\IStoryLineService.cs" />
     <Compile Include="Services\Service Providers\StoryLineServiceProvider.cs" />
     <Compile Include="Controllers\ExplorerController.cs" />
     <Compile Include="Services\IExplorerService.cs" />
     <Compile Include="Services\Service Providers\ExplorerServiceProvider.cs" />
-<<<<<<< HEAD
     <Compile Include="Services\IShortestPathService.cs" />
     <Compile Include="Models\IPath.cs" />
     <Compile Include="Models\Path.cs" />
@@ -238,11 +250,11 @@
     <AndroidResource Include="Resources\layout\EndOfStoryLinePopup.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-=======
     <Compile Include="Controllers\QRController.cs" />
->>>>>>> b9bb13211929807d7d69f948746378afd097dfb7
+    <Compile Include="MapJSONParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config">
@@ -281,6 +293,21 @@
     <AndroidResource Include="Resources\layout\MenuExplorer.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DirectToLastPointDialog.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchingForBeaconDialog.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\webViewFragment.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ProgressFragLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FloorSelectorLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -309,11 +336,15 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
-      <Visible>False</Visible>
       <Version>23.1.1.1</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="zxing.net.mobile">
       <Version>2.0.4.17</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
+      <Version>23.1.1.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
@@ -417,18 +448,119 @@
     <AndroidResource Include="Resources\drawable-nodpi\army.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.10.6\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <Import Project="..\packages\SQLitePCL.raw.0.8.6\build\MonoAndroid\SQLitePCL.raw.targets" Condition="Exists('..\packages\SQLitePCL.raw.0.8.6\build\MonoAndroid\SQLitePCL.raw.targets')" />
+  <Import Project="..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\SQLitePCL.raw.0.8.6\build\MonoAndroid\SQLitePCL.raw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCL.raw.0.8.6\build\MonoAndroid\SQLitePCL.raw.targets'))" />
-    <Error Condition="!Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets'))" />
   </Target>
-  <Import Project="..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets" Condition="Exists('..\packages\SQLitePCL.raw_basic.0.8.6\build\MonoAndroid\SQLitePCL.raw_basic.targets')" />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Beacon_xmark.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\themes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DismissButton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_up.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_right.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floor_selector_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\seekthumb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\blue_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_up_up.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floor3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bblueW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cancel_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\treedots.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionGuidedTap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tour_selection_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionExplorerBttn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionExplorerTap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionGuidedBttn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tourSelectionSeparator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ExplorerButton.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\color\ExplorerText.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\color\GuidedText.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\GuidedButton.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Separator_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\languageBanner.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\languageBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\testa.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\N3E.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\J3E.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\popupbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DismissBoxBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\floorSelectionBackground.gif" />
+  </ItemGroup>
 </Project>

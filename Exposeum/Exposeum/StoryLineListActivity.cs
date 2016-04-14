@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Database;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -11,8 +12,11 @@ namespace Exposeum
     public class StoryLineListActivity : Activity
     {
         public Map Map;
-	    readonly StorylineController _storylineController = StorylineController.GetInstance();
+        readonly StorylineController _storylineController = StorylineController.GetInstance();
         private Bundle _bundle;
+        private ListView listView;
+        private StoryLineListAdapter adapter;
+        private DataSetObserver observer; 
         protected override void OnCreate(Bundle bundle)
         {
             _bundle = bundle;
@@ -41,8 +45,9 @@ namespace Exposeum
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.StoryLineListView);
-            var listView = FindViewById<ListView>(Resource.Id.List);
-			listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
+            listView = FindViewById<ListView>(Resource.Id.List);
+            listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
+			_storylineController.SetContext (this);
             listView.ItemClick += ListViewItemClick;
         }
 
@@ -54,9 +59,8 @@ namespace Exposeum
         private void ListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-			_storylineController.SelectStoryLine (e.Position);
-			_storylineController.ShowSelectedStoryLineDialog (transaction, this);
-
+            _storylineController.SelectStoryLine(e.Position);
+            _storylineController.ShowSelectedStoryLineDialog(transaction, this);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -72,6 +76,7 @@ namespace Exposeum
             {
                 case Resource.Id.LanguageItem:
                     User.GetInstance().ToogleLanguage();
+                    listView.Adapter = _storylineController.GetStoryLinesListAdapter(this);
                     return true;
                 case Resource.Id.QRScannerItem:
                     QrController.GetInstance(this).BeginQrScanning();
@@ -88,7 +93,7 @@ namespace Exposeum
             return true;
 
         }
-
     }
 }
+
 

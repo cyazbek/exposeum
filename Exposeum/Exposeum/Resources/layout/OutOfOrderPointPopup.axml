@@ -51,7 +51,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0" />
             <Button
-                android:text="No"
+                android:text="No (Skip)"
                 android:id="@+id/wrongPointButton"
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"

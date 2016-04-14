@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using Exposeum.Mappers;
 using Exposeum.Models;
 
 
@@ -23,8 +24,6 @@ namespace Exposeum
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             SetContentView(Resource.Layout.Language);
 
-
-
             WebView gifView = FindViewById<WebView>(Resource.Id.gifView);
 
             gifView.LoadDataWithBaseURL("file:///android_asset/",
@@ -36,32 +35,32 @@ namespace Exposeum
             {
                 "","Francais", "English"
             };
+            
             spinnerLang = FindViewById<Spinner>(Resource.Id.spinnerLang);
             spinnerLang.Adapter = new ArrayAdapter<string>(this, 
                 Android.Resource.Layout.SelectDialogItem, langList);
 
             spinnerLang.ItemSelected += (sender, args) =>
             {
+				var intent = new Intent(this, typeof(WalkthroughActivity));
                 if (args.Position == 1)
                 {
+	                MapMapper.GetInstance().ParseMap();
                     _user.SwitchLanguageTo(Language.Fr);
-                    var intent = new Intent(this, typeof(WalkthroughActivity));
+                    
                     StartActivity(intent);
                 }
                 else if (args.Position == 2)
                 {
                     _user.SwitchLanguageTo(Language.En);
-                    var intent = new Intent(this, typeof(WalkthroughActivity));
                     StartActivity(intent);
                 }
 
+                _user.SwitchLanguageTo(Language.En);
+                MapMapper.GetInstance().ParseMap();
+                StartActivity(intent);
             };
         }
 
     }
-    
-
 }
-
-
-

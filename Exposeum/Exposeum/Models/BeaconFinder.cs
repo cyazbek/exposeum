@@ -23,7 +23,7 @@ namespace Exposeum.Models
 		private bool _isServiceReady;
 		private const string Tag = "BeaconFinder";
 		private int _beaconCount;
-		private readonly LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
+		private LinkedList<IBeaconFinderObserver> _observers = new LinkedList<IBeaconFinderObserver>();
 		private SortedList<double, EstimoteSdk.Beacon> _immediateBeacons;
 		private IPath _path;
 		private readonly Context _context;
@@ -101,12 +101,18 @@ namespace Exposeum.Models
 		/// </summary>
 		private void BeaconManagerRanging(object sender, BeaconManager.RangingEventArgs e)
 		{
-			if (e.Beacons == null)
-			{
+			if ((e.Beacons == null )||( e.Beacons.Count == 0)){
 				//If the app is not in focus, clear all potential notification associated with a beacon
-				if(!_inFocus)
+				if(!_inFocus){
 					_notificationManager.Cancel (BeaconFoundNotificationId);
-				Log.Debug("BeaconFinder", "e.Beacons is null");
+
+				}
+
+				if(e.Beacons == null)
+					Log.Debug("BeaconFinder", "e.Beacons is null");
+				else
+					Log.Debug("BeaconFinder", "e.Beacons is empty");
+				
 				return;
 			}
 
@@ -118,7 +124,7 @@ namespace Exposeum.Models
 
 			EstimoteSdk.Beacon currentClosestBeacon = GetClosestBeacon ();
 
-			if (previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
+			if (currentClosestBeacon == null || previousClosestBeacon != null && currentClosestBeacon != null && previousClosestBeacon.Major == currentClosestBeacon.Major &&
 				previousClosestBeacon.Minor == currentClosestBeacon.Minor)
 				return;
 
@@ -149,7 +155,7 @@ namespace Exposeum.Models
 				var proximity = Utils.ComputeProximity(beacon);
 				var accuracy = Utils.ComputeAccuracy(beacon);
 
-				if (proximity == Utils.Proximity.Immediate) {
+				if (proximity == Utils.Proximity.Immediate || proximity == Utils.Proximity.Near) {
 					try {
 						_immediateBeacons.Add (accuracy, beacon);
 					} catch (ArgumentException ex) {
@@ -254,7 +260,11 @@ namespace Exposeum.Models
 		/// This method notifies IBeaconFinderObservers of an event.
 		/// </summary>
 		public void NotifyObservers(){
-			foreach (IBeaconFinderObserver observer in _observers) {
+
+			//create a copy and Iterate over opy so that you can change (add or remove) observer
+			//will iterating, the changes to the observers will take place during the next notification
+			List<IBeaconFinderObserver> observersCopy = new List<IBeaconFinderObserver>(_observers);
+			foreach (IBeaconFinderObserver observer in observersCopy) {
 				observer.BeaconFinderObserverUpdate (this);
 			}
 		}
@@ -314,6 +324,10 @@ namespace Exposeum.Models
 		/// This method sets the current instance of the path.
 		/// </summary>
 		public void SetPath(IPath path){
+			//clear the _immediateBeacons SortedList
+			if(_immediateBeacons != null)
+				_immediateBeacons.Clear();
+			//set the path
 			_path = path;
 		}
 

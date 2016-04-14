@@ -5,6 +5,8 @@ using Exposeum.Models;
 using Ninject;
 using Exposeum.Services;
 using Exposeum.Services.Service_Providers;
+using Exposeum.TDGs;
+using Exposeum.Mappers;
 
 namespace Exposeum
 {
@@ -26,6 +28,27 @@ namespace Exposeum
 			InitSingletons ();          
 			InitIoCContainer ();
 			InitIoCBindings ();
+
+            UserTdg userTdg = UserTdg.GetInstance();
+            User user = User.GetInstance(); 
+            if (userTdg.GetSize() == 0)
+            {
+                user.Id = 0; 
+                UserMapper.GetInstance().AddUser(user);
+            }
+            else
+            {
+                user = UserMapper.GetInstance().GetUser(0);
+            }
+
+		    if (user.Visitor == false)
+		    {
+                new MapJSONParser().FetchAndParseMapJSON();
+                user.SetVisitor(true);
+            }
+            MapMapper.GetInstance().ParseMap();
+
+
         }
 
 		protected void InitSingletons(){
@@ -37,9 +60,9 @@ namespace Exposeum
 		}
 
 		protected void InitIoCBindings(){
-			IoCContainer.Bind<IStoryLineService> ().To<StoryLineServiceProvider> ();
+			IoCContainer.Bind<IStoryLineService> ().To<StoryLineServiceProvider> ().InSingletonScope();
 			IoCContainer.Bind<IShortestPathService> ().To<ShortestPathServiceProvider> ();
-			IoCContainer.Bind<IGraphService> ().To<GraphServiceProviderS4Demo> ().InSingletonScope();
+			IoCContainer.Bind<IGraphService> ().To<GraphServiceProvider> ().InSingletonScope();
 			IoCContainer.Bind<IExplorerService> ().To<ExplorerServiceProvider> ();
 		}
        

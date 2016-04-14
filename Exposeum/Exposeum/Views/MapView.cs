@@ -9,26 +9,18 @@ using System.Linq;
 using Android.App;
 using Exposeum.Fragments;
 using Android.Util;
+using Android.Webkit;
 
 namespace Exposeum.Views
 {
 
-	public class MapView : View
+	public class MapView : WebView
     {
-		private readonly ScaleGestureDetector _scaleDetector;
-		private static readonly int InvalidPointerId = -1;
-		private int _activePointerId = InvalidPointerId;
-		private float _lastTouchX;
-		private float _lastTouchY;
-		private float _translateX;
-		private float _translateY;
-		private float _scaleFactor = 0.5f;
 		private readonly Context _context;
 		private readonly Map _map;
 		private readonly MapController _controller;
 		private readonly Paint _visitedEdge = new Paint ();
 		private readonly Paint _unvisitedEdge = new Paint ();
-		private float _canvasWidth, _canvasHeight; 
 
         private PointOfInterestPopup _newPointOfInterestPopup;
 		private OutOfOrderPointFragment _outOfOrderDialog;
@@ -37,7 +29,6 @@ namespace Exposeum.Views
 		public MapView (Context context, MapController controller) : base(context, null, 0)
 		{            
             _context = context;
-			_scaleDetector = new ScaleGestureDetector (context, new MyScaleListener (this));
 			_controller = controller;
 			_map = Map.GetInstance();
 
@@ -57,10 +48,19 @@ namespace Exposeum.Views
 				ViewGroup.LayoutParams.MatchParent,
 				ViewGroup.LayoutParams.MatchParent
 			);
+
+			Settings.BuiltInZoomControls = true;
+			Settings.DisplayZoomControls = false;
+
+			Settings.LoadWithOverviewMode = true; //load each floor initially fully zoomed out
+			Settings.UseWideViewPort = true;
+
+			LoadFloorPlan (_map.CurrentFloor);
 		}
 
-		public void Update(){
-			Invalidate();
+		public void LoadFloorPlan(Floor floor){
+			String html = String.Format("<html><body><img src=\"{0}\" width=\"{1}\" height=\"{2}\"></body></html>", floor.ImagePath, floor.Width, floor.Height);
+			LoadDataWithBaseURL ("file:///", html, "text/html", "UTF-8", null);
 		}
 
 		public void InitiatePointOfInterestPopup(PointOfInterest poi, PointOfInterestPopup.DismissCallback callback){
@@ -75,86 +75,28 @@ namespace Exposeum.Views
 
 		public override bool OnTouchEvent (MotionEvent ev)
 		{
-			_scaleDetector.OnTouchEvent (ev);
+			base.OnTouchEvent (ev);
 
 			MotionEventActions action = ev.Action & MotionEventActions.Mask;
 			int pointerIndex;
 
 			switch (action) {
-			case MotionEventActions.Down:
+			case MotionEventActions.Up:
 				PointOfInterest selected = GetSelectedPoi (ev.GetX (), ev.GetY ());
 				if (selected != null) {
 					_controller.DisplayPopUp (selected);
 				}
-				_lastTouchX = ev.GetX ();
-				_lastTouchY = ev.GetY ();
-				float u = (_lastTouchX-_translateX)/(_map.CurrentFloor.Image.IntrinsicWidth*_scaleFactor) + 0.50f;
-				float v = (_lastTouchY-_translateY)/(_map.CurrentFloor.Image.IntrinsicHeight*_scaleFactor) + 0.50f;
-				Log.Wtf("map_press", String.Format("Map Touched: (u,v):({0},{1}", u, v));
-				_activePointerId = ev.GetPointerId (0);
-				break;
-
-			case MotionEventActions.Move:
-				pointerIndex = ev.FindPointerIndex (_activePointerId);
-				float x = ev.GetX (pointerIndex);
-				float y = ev.GetY (pointerIndex);
-				if (!_scaleDetector.IsInProgress) {
-					// Only move the ScaleGestureDetector isn't already processing a gesture.
-					float deltaX = x - _lastTouchX;
-					float deltaY = y - _lastTouchY;
-					_translateX += deltaX;
-					_translateY += deltaY;
-
-					//clamp the translation to keep the map on-screen
-					float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-					float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-					float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-					float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-
-					_translateX = Clamp (minX, maxX, _translateX);
-					_translateY = Clamp (minY, maxY, _translateY);
-
-					Invalidate ();
-				}
-
-				_lastTouchX = x;
-				_lastTouchY = y;
-				break;
-
-			case MotionEventActions.Cancel:
-                    // This events occur when something cancels the gesture (for example the
-                    // activity going in the background) or when the pointer has been lifted up.
-                    // We no longer need to keep track of the active pointer.
-				_activePointerId = InvalidPointerId;
-				break;
-
-			case MotionEventActions.PointerUp:
-                    // We only want to update the last touch position if the the appropriate pointer
-                    // has been lifted off the screen.
-				pointerIndex = (int)(ev.Action & MotionEventActions.PointerIndexMask) >> (int)MotionEventActions.PointerIndexShift;
-				int pointerId = ev.GetPointerId (pointerIndex);
-				if (pointerId == _activePointerId) {
-					// This was our active pointer going up. Choose a new
-					// action pointer and adjust accordingly
-					int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-					_lastTouchX = ev.GetX (newPointerIndex);
-					_lastTouchY = ev.GetY (newPointerIndex);
-					_activePointerId = ev.GetPointerId (newPointerIndex);
-				}
 				break;
 			}
+
 			return true;
 		}
 
 		protected override void OnDraw (Canvas canvas)
 		{
 			base.OnDraw (canvas);
-
 			canvas.Save ();
-			canvas.Translate (_translateX + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2, _translateY + _scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2);
-			canvas.Scale (_scaleFactor, _scaleFactor);
-
-			_map.CurrentFloor.Image.Draw (canvas);
+			canvas.Scale (Scale, Scale);
 
 			DrawStoryLine (canvas);
 
@@ -167,7 +109,7 @@ namespace Exposeum.Views
 		}
 
 		private void DrawShortestPath(Canvas canvas){
-			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> shortestPathMapElements = _map.GetActiveShortestPath ().MapElements.Where(e => e.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			DrawMapElementsEdges (canvas, shortestPathMapElements, 255);
 			DrawMapElements (canvas, shortestPathMapElements);
@@ -179,7 +121,7 @@ namespace Exposeum.Views
 				storyLineAlpha = 50;
 				
 			//draw edges and POIs on top of map
-			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<MapElement> currentFloorMapElements = _map.CurrentStoryline.MapElements.Where(e => e.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			//draw the edges first, but only if we are in storyline mode
 			if (!ExposeumApplication.IsExplorerMode) {
@@ -229,66 +171,24 @@ namespace Exposeum.Views
 					MapElement next = mapElements[i + 1];
 
                     Android.Graphics.Path path = new Android.Graphics.Path ();
-					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, current.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
-					path.LineTo(next.UCoordinate * _map.CurrentFloor.Image.IntrinsicWidth, next.VCoordinate * _map.CurrentFloor.Image.IntrinsicHeight);
+					path.MoveTo(current.UCoordinate * _map.CurrentFloor.Width, current.VCoordinate * _map.CurrentFloor.Height);
+					path.LineTo(next.UCoordinate * _map.CurrentFloor.Width, next.VCoordinate * _map.CurrentFloor.Height);
 
 					canvas.DrawPath(path, appropriateEdgePaintBrush);
 				}
 			}
 		}
-			
-		protected override void OnSizeChanged(int w, int h, int oldw, int oldh) {
-			_canvasWidth = w;
-			_canvasHeight = h;
-
-			//center the image on canvas size change (rotation)
-			//is also called when canvas is first instantiated
-			float maxX = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-			float maxY = (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-			float minX = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicWidth / 2) + (_canvasWidth*0.5f);
-			float minY = (_scaleFactor * -_map.CurrentFloor.Image.IntrinsicHeight / 2) + (_canvasHeight*0.5f);
-
-			_translateX = minX + ((maxX - minX) / 2.0f); //translate half-way on both axes
-			_translateY = minY + ((maxY - minY) / 2.0f);
-		}
-			
-		private class MyScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener
-		{
-			private readonly MapView _view;
-
-			public MyScaleListener (MapView view)
-			{
-				_view = view;
-			}
-
-			public override bool OnScale (ScaleGestureDetector detector)
-			{
-				_view._scaleFactor *= detector.ScaleFactor;
-
-				// put a limit on how small or big the image can get.
-				if (_view._scaleFactor > 3.0f) {
-					_view._scaleFactor = 3.0f;
-				}
-				if (_view._scaleFactor < 0.5f) {
-					_view._scaleFactor = 0.5f;
-				}
-
-				_view.Invalidate ();
-
-				return true;
-			}
-		}
 
 		private PointOfInterest GetSelectedPoi(float screenX, float screenY){
 
-			List<PointOfInterest> currentFloorPoIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.Floor.Equals(_map.CurrentFloor)).ToList();
+			List<PointOfInterest> currentFloorPoIs = _map.CurrentStoryline.MapElements.OfType<PointOfInterest>().Where(poi => poi.Floor.Id.Equals(_map.CurrentFloor.Id)).ToList();
 
 			foreach (PointOfInterest poi in currentFloorPoIs) {
 
-				float poiX = _translateX + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth * poi.UCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicWidth) / 2);
-				float poiY = _translateY + (_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight * poi.VCoordinate) - ((_scaleFactor * _map.CurrentFloor.Image.IntrinsicHeight) / 2);
+				float poiX = (Scale * _map.CurrentFloor.Width * poi.UCoordinate) - ScrollX;
+				float poiY = (Scale * _map.CurrentFloor.Height * poi.VCoordinate) - ScrollY;
 
-				if (Math.Sqrt (Math.Pow (screenX - poiX, 2) + Math.Pow (screenY - poiY, 2)) <= poi.Radius * _scaleFactor) {
+				if (Math.Sqrt (Math.Pow (screenX - poiX, 2f) + Math.Pow (screenY - poiY, 2f)) <= poi.Radius * Scale) {
 					return poi;
 				}
 			}
@@ -296,15 +196,14 @@ namespace Exposeum.Views
 			return null;
 		}
 
-		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoi, OutOfOrderPointFragment.Callback callback)
+		public void InitiateOutOfOrderPointOfInterestPopup(PointOfInterest currentPoi, IEnumerable<MapElement> skippedPoi, OutOfOrderPointFragment.CallbackSkipUnvisitedPoints callbackSkip, OutOfOrderPointFragment.CallbackReturnToLastPoint callbackReturn)
 	    {
 	        using (FragmentTransaction tr = ((Activity) _context).FragmentManager.BeginTransaction())
 	        {
 				if (_outOfOrderDialog == null || !_outOfOrderDialog.IsVisible) {
-					_outOfOrderDialog = new OutOfOrderPointFragment(currentPoi, skippedPoi, callback);
+					_outOfOrderDialog = new OutOfOrderPointFragment(currentPoi, skippedPoi, callbackSkip, callbackReturn);
 					_outOfOrderDialog.Show(tr, "Wrong POI");
 				}
-                
             }
 	    }
 
@@ -315,10 +214,6 @@ namespace Exposeum.Views
 				_endOfStoryLinePopup = new EndOfStoryLineFragment(callback);
 				_endOfStoryLinePopup.Show(tr, "Storyline Complete!");
 			}
-		}
-
-		private float Clamp(float min, float max, float value){
-			return Math.Min(Math.Max(value, min), max);
 		}
     }
 }

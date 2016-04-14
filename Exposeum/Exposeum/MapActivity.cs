@@ -45,6 +45,7 @@ namespace Exposeum
 
 
             _mapController = MapController.GetInstance (this);
+			StorylineController.GetInstance().SetContext (this);
 
 			//Configure the BeaconFinder for this activity
 			_beaconFinder = BeaconFinder.GetInstance ();

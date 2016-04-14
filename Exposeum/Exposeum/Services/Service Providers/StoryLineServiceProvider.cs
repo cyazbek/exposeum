@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using Exposeum.Models;
+using Java.Util;
+using QuickGraph;
+using Ninject;
+using Android.Graphics.Drawables;
 
 namespace Exposeum.Services.Service_Providers
 {
@@ -7,10 +11,31 @@ namespace Exposeum.Services.Service_Providers
 	{
 		private readonly Map _mapInstance;
 		private readonly BeaconFinder _beaconFinder;
+		private UndirectedGraph<MapElement, MapEdge> _graphInstance;
+		private StoryLine _genericStoryLine;
 
 		public StoryLineServiceProvider(){
 			_mapInstance = Map.GetInstance ();
 			_beaconFinder = BeaconFinder.GetInstance ();
+			_graphInstance = ExposeumApplication.IoCContainer.Get<IGraphService>().GetGraph();
+			BuildGenericStoryLine ();
+		}
+
+		private void BuildGenericStoryLine(){
+			//build a generic storyline from all the edges of the graph
+
+			_genericStoryLine = new StoryLine
+			{
+				StorylineId = -1,
+				ImgPath = "",
+				Duration = 0,
+				FloorsCovered = 4,
+				Status = Status.IsNew,
+			};
+
+			foreach(MapElement vertice in _graphInstance.Vertices){
+				_genericStoryLine.AddMapElement (vertice);
+			}
 		}
 
 		public List<StoryLine> GetStoryLines (){
@@ -24,8 +49,6 @@ namespace Exposeum.Services.Service_Providers
 		public void SetActiveStoryLine (StoryLine storyline){
 			_mapInstance.CurrentStoryline = storyline;
 			_mapInstance.SetActiveShortestPath (null);
-			//update the beaconfinder with the new storyline
-			_beaconFinder.SetPath(storyline);
 		}
 
 		public StoryLine GetStoryLineById(int id){
@@ -39,6 +62,11 @@ namespace Exposeum.Services.Service_Providers
 			}
 
 			return null;
+		}
+
+		//TODO: implement properly
+		public StoryLine GetGenericStoryLine(){
+			return _genericStoryLine;
 		}
 	}
 }
