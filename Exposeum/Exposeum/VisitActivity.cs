@@ -48,20 +48,6 @@ namespace Exposeum
             _actionBarTitle = FindViewById<TextView>(Resource.Id.TitleActionBar);
             _actionBarTitle.Text = _user.GetButtonText("TourModeTitle");
 
-
-            //==========================================================================================================
-            /*
-            var BarButton = FindViewById<Button>(Resource.Id.butonn);
-            BarButton.Click += (s, e) =>
-            {
-                  OnBackPressed();         
-            };
-            */
-
-
-
-            //=========================================================================================================
-
             _freeVisitButton.Click += (sender, e) =>
             {
                 ExposeumApplication.IsExplorerMode = true;
