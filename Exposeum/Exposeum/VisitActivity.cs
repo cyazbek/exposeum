@@ -6,6 +6,7 @@ using Android.Widget;
 using Exposeum.Models;
 using Exposeum.Controllers;
 using Android.Content.PM;
+using Exposeum.Mappers;
 using Java.IO;
 
 namespace Exposeum
@@ -109,11 +110,20 @@ namespace Exposeum
                 case Resource.Id.QRScannerItem:
                     QrController.GetInstance(this).BeginQrScanning();
                     return true;
+
                 case Resource.Id.ResetItem:
-                    QrController.GetInstance(this).BeginQrScanning();
+                    foreach(var storyline in Map.GetInstance().Storylines)
+                        StorylineController.GetInstance().ResetStorylineProgress(storyline);
+
+                    var intent = new Intent(this, typeof(LanguageActivity));
+                    intent.SetFlags(ActivityFlags.NewTask);
+                    StartActivity(intent);
+
                     return true;
+
                 case Resource.Id.FetchItem:
-                    QrController.GetInstance(this).BeginQrScanning();
+                    // new MapJSONParser().FetchAndParseMapJSON();
+                    // MapMapper.GetInstance().ParseMap();
                     return true;
             }
             return base.OnOptionsItemSelected(item);
