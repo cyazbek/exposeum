@@ -95,7 +95,7 @@ namespace Exposeum.Models
         {
             if (!Visited)
             {
-                return String.Format("<html><body>" + Description.Title + Description.Summary + "</body></html>");
+				return String.Format("<html><body>" + Description.Title + Description.Description + "</body></html>");
             }
             else
             {

@@ -133,7 +133,7 @@ namespace Exposeum
 				PoiDescriptionEn newPOIDescriptionEN = new PoiDescriptionEn
 				{
 					Id = newPoiDescriptionId, //TODO: extract data from the html??
-					Title = poiOBJ["description"].First["description"].ToString(),
+					Title = poiOBJ["title"].First["title"].ToString(),
 					Summary = poiOBJ["description"].First["description"].ToString(),
 					Description = poiOBJ["description"].First["description"].ToString()
 				};
@@ -141,9 +141,9 @@ namespace Exposeum
 				PoiDescriptionFr newPOIDescriptionFR = new PoiDescriptionFr
 				{
 					Id = newPoiDescriptionId,
-					Title = poiOBJ["description"].First["description"].ToString(), //TODO: extract data from the html??
+					Title = poiOBJ["title"][1]["title"].ToString(), //TODO: extract data from the html??
 					Summary = poiOBJ["description"].First["description"].ToString(),
-					Description = poiOBJ["description"].First["description"].ToString()
+					Description = poiOBJ["description"][1]["description"].ToString()
 				};
 
 				englishPOIDescriptions.Add (newPOIDescriptionEN);
