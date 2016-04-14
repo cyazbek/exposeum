@@ -31,10 +31,6 @@ namespace Exposeum.Services.Service_Providers
         {
 			List<MapEdge> mapEdges = _mapEdgeMapper.GetAllMapEdges ();
 
-			int dsa = 2;
-			if (mapEdges[0].Target != mapEdges[1].Source){
-				dsa = 3;    
-			}
 			_graphInstance.AddVerticesAndEdgeRange(mapEdges);
             
 
