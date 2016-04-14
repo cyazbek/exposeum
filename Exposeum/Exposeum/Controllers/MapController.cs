@@ -24,6 +24,7 @@ namespace Exposeum.Controllers
         private readonly Map _mapModel;
         private readonly BeaconFinder _beaconFinder = BeaconFinder.GetInstance();
         private readonly IShortestPathService _shortestPathService;
+		private readonly IStoryLineService _storyLineServiceProvider;
 
 
         public static MapController GetInstance()
@@ -52,6 +53,7 @@ namespace Exposeum.Controllers
             ConfigureMapView(context);
 
 			_shortestPathService = ExposeumApplication.IoCContainer.Get<IShortestPathService>();
+			_storyLineServiceProvider = ExposeumApplication.IoCContainer.Get<IStoryLineService> ();
 
             _mapModel = Map.GetInstance();
 
@@ -101,7 +103,8 @@ namespace Exposeum.Controllers
             Floor newFloor = _mapModel.Floors[newFloorIndex];
             if (newFloor != null)
                 _mapModel.CurrentFloor = newFloor;
-            _mapView.Update();
+			_mapView.LoadFloorPlan (_mapModel.CurrentFloor);
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace Exposeum.Controllers
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
 
-            _mapView.Update();
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -224,7 +227,7 @@ namespace Exposeum.Controllers
 			//should be restored on the beacon finder
 			if (_mapModel.GetActiveShortestPath ().Status == Status.IsVisited){
 				_mapModel.SetActiveShortestPath (null);
-				_mapView.Update();
+				_mapView.Invalidate();
 				_beaconFinder.SetPath (_mapModel.CurrentStoryline);
 
 			}
@@ -259,7 +262,7 @@ namespace Exposeum.Controllers
 				mapElement.SetVisited(true);
 		    }
 
-            _mapView.Update();
+			_mapView.Invalidate();
 
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
@@ -284,7 +287,7 @@ namespace Exposeum.Controllers
                 callback = DisplayEndOfStoryLinePopUp;
 
             _mapView.InitiatePointOfInterestPopup(selectedPoi, callback);
-            _mapView.Update(); //technically unncecessary but included for completeness
+			_mapView.Invalidate(); //technically unncecessary but included for completeness
 
             if (!ExposeumApplication.IsExplorerMode)
                 _mapProgressionView.Update();
@@ -312,7 +315,7 @@ namespace Exposeum.Controllers
             Path path = GetShortestPathToStart(storyline);
             _mapModel.SetActiveShortestPath(path);
             _beaconFinder.SetPath(path);
-			_mapView.Update();
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -327,7 +330,16 @@ namespace Exposeum.Controllers
             MapElement end = storyline.MapElements.First();
 
 
-            return _shortestPathService.GetShortestPath(start, end);
+			//if the start and the end are POIs get their generic equivalent from the generic storyline that is found in the graph
+			MapElement genericStart = start;
+			if ( start.GetType() == typeof(PointOfInterest) )
+				genericStart = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)start).Beacon );
+
+			MapElement genericEnd = end;
+			if( end.GetType() == typeof(PointOfInterest) )
+				genericEnd = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)end).Beacon);
+
+			return _shortestPathService.GetShortestPath(genericStart, genericEnd);
         }
 
         /// <summary>
@@ -340,7 +352,7 @@ namespace Exposeum.Controllers
             Path path = GetShortestPathToLastPoint(start);
             _mapModel.SetActiveShortestPath(path);
             _beaconFinder.SetPath(path);
-            _mapView.Update();
+			_mapView.Invalidate();
         }
 
         /// <summary>
@@ -350,15 +362,23 @@ namespace Exposeum.Controllers
         /// <returns>Path</returns>
         public Path GetShortestPathToLastPoint(MapElement start)
         {
-            
 			MapElement end = _mapModel.CurrentStoryline.LastPointOfInterestVisited;
+
+			//if the start and the end are POIs get their generic equivalent from the generic storyline that is found in the graph
+			MapElement genericStart = start;
+			if ( start.GetType() == typeof(PointOfInterest) )
+				genericStart = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)start).Beacon );
+
+			MapElement genericEnd = end;
+			if( end.GetType() == typeof(PointOfInterest) )
+				genericEnd = _storyLineServiceProvider.GetGenericStoryLine().FindPoi( ((PointOfInterest)end).Beacon);
 
             if (end == null)
             {
                 end = _mapModel.CurrentStoryline.MapElements.First();
             }
 
-            return _shortestPathService.GetShortestPath(start, end);
+			return _shortestPathService.GetShortestPath(genericStart, genericEnd);
         }
 
         public Map Model
@@ -367,7 +387,7 @@ namespace Exposeum.Controllers
         }
 
 		public void MapViewUpdate(){
-			_mapView.Update();
+			_mapView.Invalidate();
 		}
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Exposeum
 	{
 		String JSONData;
 
-		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum";
+		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum2";
 		private readonly String JSON_SCHEMA_FILENAME = "Map.json";
 
 		public static readonly String LOCAL_VENUE_DATA_PATH = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/MuseeDesOndes/venue_data";
@@ -85,6 +85,8 @@ namespace Exposeum
 
 				newFloor.ImagePath = LOCAL_VENUE_DATA_PATH + (String)floorOBJ ["imagePath"];
 				newFloor.Id = int.Parse ((String)floorOBJ ["floorID"]);
+				newFloor.Width = float.Parse ((String)floorOBJ ["imageWidth"]);
+				newFloor.Height = float.Parse ((String)floorOBJ ["imageHeight"]);
 
 				floors.Add (newFloor);
 
@@ -107,7 +109,7 @@ namespace Exposeum
 			englishStorylineDescriptions = new List<StoryLineDescriptionEn> ();
 			frenchStorylineDescriptions = new List<StoryLineDescriptionFr> ();
 
-			foreach (var poiOBJ in JSONPayload["node"].First["poi"]) {
+			foreach (var poiOBJ in JSONPayload["node"]["poi"]) {
 
 				String newPOIBeaconUUID = poiOBJ ["ibeacon"] ["uuid"].ToString ();
 				int newPOIBeaconMaj = int.Parse (poiOBJ ["ibeacon"] ["major"].ToString ());
@@ -156,19 +158,17 @@ namespace Exposeum
 					StoryLineId = int.Parse(poiOBJ["storyPoint"].First["storylineID"].ToString()),
 					PoiDescription = newPoiDescriptionId++, //increment
 					FloorId = int.Parse (poiOBJ ["floorID"].ToString ()),
-					UCoordinate = float.Parse(poiOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (poiOBJ ["floorID"].ToString ())),
-					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (poiOBJ ["floorID"].ToString ()))
+					UCoordinate = float.Parse(poiOBJ ["x"].ToString ()) / floors.Where(floor => floor.Id == int.Parse (poiOBJ ["floorID"].ToString ())).First().Width,
+					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / floors.Where(floor => floor.Id == int.Parse (poiOBJ ["floorID"].ToString ())).First().Height,
 				};
 
-
-		
 				AddExhibitionContent (newPOI.Id, poiOBJ ["media"]);
 
 				mapelements.Add (newPOI);
 
 			}
 
-			foreach (var waypointOBJ in JSONPayload["node"].First["pot"]) {
+			foreach (var waypointOBJ in JSONPayload["node"]["pot"]) {
 
 				MapElements newWaypoint = new MapElements {
 
@@ -178,8 +178,8 @@ namespace Exposeum
 					Visited = 0, //default unvisited
 					Label = (waypointOBJ ["label"].ToString ()),
 					FloorId = int.Parse (waypointOBJ ["floorID"].ToString ()),
-					UCoordinate = float.Parse(waypointOBJ ["x"].ToString ()) / getFloorWidth(int.Parse (waypointOBJ ["floorID"].ToString ())),
-					VCoordinate = float.Parse(waypointOBJ ["y"].ToString ()) / getFloorHeight(int.Parse (waypointOBJ ["floorID"].ToString ()))
+					UCoordinate = float.Parse(waypointOBJ ["x"].ToString ()) / floors.Where(floor => floor.Id == int.Parse (waypointOBJ ["floorID"].ToString ())).First().Width,
+					VCoordinate = float.Parse(waypointOBJ ["y"].ToString ()) / floors.Where(floor => floor.Id == int.Parse (waypointOBJ ["floorID"].ToString ())).First().Height,
 				};
 
 				mapelements.Add (newWaypoint);
@@ -195,18 +195,18 @@ namespace Exposeum
 
 			foreach (var storylineOBJ in JSONPayload["storyline"]) {
 
-				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
-				{
-					Id = newStorylineDescriptionId, //TODO: extract data from the html??
-					Title = storylineOBJ["title"].ToString(),
-					Description = storylineOBJ["description"].ToString(),
-				};
-
 				StoryLineDescriptionFr newStorylineDescriptionFR = new StoryLineDescriptionFr
 				{
+					Id = newStorylineDescriptionId,
+					Title = storylineOBJ["title"].First["title"].ToString(),
+					Description = storylineOBJ["description"].First["description"].ToString()
+				};
+
+				StoryLineDescriptionEn newStorylineDescriptionEN = new StoryLineDescriptionEn
+				{
 					Id = newStorylineDescriptionId, //increment
-					Title = "Le demo de du storyline"/*storylineOBJ["title"].ToString()*/,
-					Description = "la description en Français" /*storylineOBJ["description"].ToString()*/,
+					Title = storylineOBJ["title"][1]["title"].ToString(),
+					Description = storylineOBJ["description"][1]["description"].ToString()
 				};
 
 				englishStorylineDescriptions.Add (newStorylineDescriptionEN);
@@ -435,34 +435,6 @@ namespace Exposeum
 				FetchAndSaveImage ("/" + (imageObj["path"]).ToString());
 				//FetchAndSaveImage (newFrenchExContent.Filepath);
 			}
-		}
-
-		private float getFloorWidth(int floorID){
-
-			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
-
-			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
-
-				if (int.Parse ((String)floorOBJ ["floorID"]) == floorID) {
-					return float.Parse ((String)floorOBJ ["imageWidth"]);
-				}
-			}
-
-			return -1.0f; //not found
-
-		}
-
-		private float getFloorHeight(int floorID){
-			var JSONPayload = JsonConvert.DeserializeObject (JSONData) as JObject;
-
-			foreach (var floorOBJ in JSONPayload["floorPlan"]) {
-
-				if (int.Parse ((String)floorOBJ ["floorID"]) == floorID) {
-					return float.Parse ((String)floorOBJ ["imageHeight"]);
-				}
-			}
-
-			return -1.0f; //not found
 		}
 	}
 }
