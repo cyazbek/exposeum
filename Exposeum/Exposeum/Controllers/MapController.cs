@@ -364,6 +364,10 @@ namespace Exposeum.Controllers
         {
 			MapElement end = _mapModel.CurrentStoryline.LastPointOfInterestVisited;
 
+			//if there is not LastPointOfInterestVisited, then it means that the first MapElement was skipped, so we get it
+			if(end == null)
+				end = _mapModel.CurrentStoryline.MapElements.First();
+
 			//if the start and the end are POIs get their generic equivalent from the generic storyline that is found in the graph
 			MapElement genericStart = start;
 			if ( start.GetType() == typeof(PointOfInterest) )
