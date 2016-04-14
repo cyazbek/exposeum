@@ -62,12 +62,6 @@ namespace Exposeum
             */
             //floorFrameLayout.SetOnTouchListener(this);
 
-		    var floorButton = FindViewById<Button>(Resource.Id.floor_select_button);
-            /*floorButton.Click += (sender, e) =>
-            {
-                PauseTrigger();
-            };
-            */
 
             //Bind the _totalMapView to the Activity
             SetContentView(_mapController.TotalMapView);

@@ -91,6 +91,13 @@ namespace Exposeum.Controllers
             SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
             //Bind an event handler to ProgressChanged
             floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
+
+            var floorButton = TotalMapView.FindViewById<Button>(Resource.Id.floor_select_button);
+            floorButton.Click += (sender, e) =>
+            {
+                //PauseTrigger();
+            };
+            
         }
 
         public void OnMapSliderProgressChange(object sender, SeekBar.ProgressChangedEventArgs e)
