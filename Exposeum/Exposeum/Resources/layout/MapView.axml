@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/floor_select_button"
-            android:background="@drawable/floorPuck"
+            android:background="@drawable/floorButtonStyle"
             android:gravity="center" />
     </FrameLayout>
 </FrameLayout>

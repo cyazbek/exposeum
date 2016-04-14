@@ -352,7 +352,9 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SplashButton.xml" />
+    <AndroidResource Include="Resources\drawable\SplashButton.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml">
@@ -571,6 +573,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\floorPuck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floorButtonStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floorPuckPressed.png" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets')" />
 </Project>
