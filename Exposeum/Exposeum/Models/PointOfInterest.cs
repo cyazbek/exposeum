@@ -78,7 +78,7 @@ namespace Exposeum.Models
         public override void Draw(Canvas canvas)
         {
             canvas.Save();
-
+        
 			canvas.Translate(UCoordinate * Floor.Width, VCoordinate * Floor.Height);
             canvas.Scale(_iconScaleFactor, _iconScaleFactor);
             canvas.Translate(-_unvisitedIcon.IntrinsicWidth / 2.0f, -_unvisitedIcon.IntrinsicHeight / 2.0f);

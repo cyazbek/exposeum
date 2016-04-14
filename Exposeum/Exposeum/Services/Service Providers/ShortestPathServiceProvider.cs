@@ -33,12 +33,22 @@ namespace Exposeum.Services.Service_Providers
             // delegate with edge costs acquired from Edge distance property
             Func<MapEdge, double> edgeCost = e => e.Distance;
 
+			if (!_graphInstance.ContainsVertex (startElement))
+				throw new Exception ("startElement not in graph");
+
+			if (!_graphInstance.ContainsVertex (targetElement))
+				throw new Exception ("targetElement not in graph");
+
             // compute paths
 			TryFunc<MapElement, IEnumerable<MapEdge>> tryGetPaths = _graphInstance.ShortestPathsDijkstra(edgeCost, startElement);
 
             // return path if found, null otherwise
             IEnumerable<MapEdge> path;
-			return tryGetPaths(targetElement, out path) ? FixPathEdgeOrder(startElement, path) : null;
+
+			if (tryGetPaths (targetElement, out path)) {
+				return  FixPathEdgeOrder(startElement, path);
+			}else
+				return null;
         }
 
 		/// <summary>

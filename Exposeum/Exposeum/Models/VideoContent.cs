@@ -14,6 +14,7 @@ namespace Exposeum.Models
             return FilePath.Equals(other.FilePath) && Duration == other.Duration && Resolution == other.Resolution && Encoding.Equals(other.Encoding);
         }
 
+        //Make sure its refrencing the correct path.
         public override string HtmlFormat()
         {
             return String.Format("<div><video width=\"320\" height=\"240\" controls>" +

@@ -30,7 +30,8 @@ namespace Exposeum.Services.Service_Providers
         private void PopulateGraph()
         {
 			List<MapEdge> mapEdges = _mapEdgeMapper.GetAllMapEdges ();
-            _graphInstance.AddVerticesAndEdgeRange(mapEdges);
+
+			_graphInstance.AddVerticesAndEdgeRange(mapEdges);
             
 
         }
