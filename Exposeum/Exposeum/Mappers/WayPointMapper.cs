@@ -2,6 +2,7 @@ using Android.Graphics.Drawables;
 using Exposeum.Tables;
 using Exposeum.TDGs;
 using Exposeum.Models;
+using System.Collections.Generic;
 
 namespace Exposeum.Mappers
 {
@@ -9,12 +10,14 @@ namespace Exposeum.Mappers
     {
         private static WayPointMapper _instance;
         private readonly FloorMapper _floorMapper;
-        private readonly MapElementsTdg _mapElementsTdg; 
+        private readonly MapElementsTdg _mapElementsTdg;
+		private Dictionary<int, WayPoint> _wayPointIdentityMap;
 
         private WayPointMapper()
         {
             _floorMapper = FloorMapper.GetInstance();
             _mapElementsTdg = MapElementsTdg.GetInstance();
+			_wayPointIdentityMap = new Dictionary<int, WayPoint>();
         }
 
         public static WayPointMapper GetInstance()
@@ -90,12 +93,18 @@ namespace Exposeum.Mappers
 
         public WayPoint WaypointTableToModel(MapElements element)
         {
+			WayPoint wayPoint;
+			//check if the waypoint is in the identity map
+			if(_wayPointIdentityMap.TryGetValue(element.Id, out wayPoint)){
+				return wayPoint;
+			}
+
             bool vis;
             if (element.Visited == 0)
                 vis = false;
             else vis = true;
 
-            return new WayPoint(element.UCoordinate, element.VCoordinate, _floorMapper.GetFloor(element.FloorId))
+			wayPoint = new WayPoint(element.UCoordinate, element.VCoordinate, _floorMapper.GetFloor(element.FloorId))
             {
                 Id = element.Id,
                 Visited = vis,
@@ -103,6 +112,11 @@ namespace Exposeum.Mappers
                 IconPath = element.IconPath,
 				//Icon = (BitmapDrawable)Drawable.CreateFromStream (System.IO.File.OpenRead (element.IconPath), null) //not yet implemented in JSON
             };
+
+			//add the POI to the identity map
+			_wayPointIdentityMap.Add (wayPoint.Id, wayPoint);
+
+			return wayPoint;
         }
 
         public void Add(WayPoint element)
