@@ -42,23 +42,23 @@ namespace Exposeum
 
             spinnerLang.ItemSelected += (sender, args) =>
             {
-				var intent = new Intent(this, typeof(WalkthroughActivity));
+                Intent intent;
                 if (args.Position == 1)
                 {
 	                MapMapper.GetInstance().ParseMap();
                     _user.SwitchLanguageTo(Language.Fr);
-                    
+                    intent = new Intent(this, typeof(WalkthroughActivity));
                     StartActivity(intent);
                 }
                 else if (args.Position == 2)
                 {
+                    MapMapper.GetInstance().ParseMap();
+                    intent = new Intent(this, typeof(WalkthroughActivity));
                     _user.SwitchLanguageTo(Language.En);
                     StartActivity(intent);
                 }
 
-                _user.SwitchLanguageTo(Language.En);
-                MapMapper.GetInstance().ParseMap();
-                StartActivity(intent);
+                
             };
         }
 

@@ -53,12 +53,12 @@ namespace Exposeum
 			_beaconFinder.SetNotificationDestination (this);
 
             FragmentTransaction fragmentTx = FragmentManager.BeginTransaction();
-
+            /*
             var floorselectofrag = new FloorSelectorFragment();
             FrameLayout floorFrameLayout = FindViewById<FrameLayout>(Resource.Id.map_frag_floorSelector);
             fragmentTx.Add(Resource.Id.map_frag_floorSelector, floorselectofrag);
             fragmentTx.Commit();
-
+            */
             //floorFrameLayout.SetOnTouchListener(this);
             
 

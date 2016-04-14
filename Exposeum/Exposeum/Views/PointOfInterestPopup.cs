@@ -33,12 +33,11 @@ namespace Exposeum.Views
 
             WebView popupWebView = popupView.FindViewById<WebView>(Resource.Id.pointofinterest_popup_webview);
 
-            popupWebView.LoadDataWithBaseURL("file:///android_asset/", poi.GetHtml(), "text/html", "utf-8", null);
-            //popupWebView.LoadData(POI.description.getFullDescriptionHTML(), "text/html", "utf-8");
+            popupWebView.LoadDataWithBaseURL("file:///", poi.GetHtml(), "text/html", "utf-8", null);
 
         }
 
-		public void Show()
+        public void Show()
 		{
 			_pwindow.ShowAtLocation(this, GravityFlags.Center,  0, 0);
 		}

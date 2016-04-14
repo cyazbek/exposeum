@@ -19,11 +19,12 @@
         android:layout_marginBottom="80dp"
         android:layout_gravity="bottom">
     <!-- Floor selector Button is placed here-->
-        <Button
+    <!--<Button
             android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/floor_select_button" />
+            -->
     </FrameLayout>
     <FrameLayout
         android:id="@+id/map_frag_frame_layout"

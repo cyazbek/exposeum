@@ -68,7 +68,7 @@ namespace Exposeum.Controllers
                 FragmentTransaction fragmentTx = ((Activity)_mapView.Context).FragmentManager.BeginTransaction();
                 _mapProgressionView = new MapProgressionFragment(_mapModel.CurrentStoryline);
 
-               // fragmentTx.Add(Resource.Id.map_frag_frame_lay, _mapProgressionView);
+                fragmentTx.Add(Resource.Id.map_frag_frame_layout, _mapProgressionView);
                 fragmentTx.Commit();
 
             }
