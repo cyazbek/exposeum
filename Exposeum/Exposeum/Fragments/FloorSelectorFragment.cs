@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
 
 namespace Exposeum.Resources.layout
@@ -28,8 +29,10 @@ namespace Exposeum.Resources.layout
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             View view = inflater.Inflate(Resource.Layout.FloorSelectorLayout, container, false);
 
-
-
+            var wv_bg = view.FindViewById<WebView>(Resource.Id.floor_bg_web);
+            wv_bg.LoadDataWithBaseURL("file:///android_asset/",
+                "<html><body><img src=\"floorSelectionBackground.gif\" style=\"max-width: 100%; max-height: 100%; \">" +
+                "</img></body></html>", "text/html", "utf-8", null);
 
             return view;
         }

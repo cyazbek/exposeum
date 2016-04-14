@@ -536,4 +536,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\DismissBoxBG.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\floorSelectionBackground.gif" />
+  </ItemGroup>
 </Project>

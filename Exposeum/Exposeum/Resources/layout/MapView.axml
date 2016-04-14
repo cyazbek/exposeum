@@ -15,7 +15,7 @@
     <FrameLayout
         android:id="@+id/map_frag_floorSelector"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="730dp"
         android:layout_marginBottom="80dp"
         android:layout_gravity="bottom">
     <!-- Floor selector Button is placed here-->
