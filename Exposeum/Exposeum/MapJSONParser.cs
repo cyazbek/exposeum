@@ -162,7 +162,7 @@ namespace Exposeum
 					VCoordinate = float.Parse(poiOBJ ["y"].ToString ()) / floors.Where(floor => floor.Id == int.Parse (poiOBJ ["floorID"].ToString ())).First().Height,
 				};
 
-				AddExhibitionContent (newPOI.Id, poiOBJ ["media"]);
+				AddExhibitionContent (newPOI.Id, poiOBJ["storyPoint"].First["media"]);
 
 				mapelements.Add (newPOI);
 
@@ -375,23 +375,23 @@ namespace Exposeum
 
 			//loop for video
 
-			foreach (var videoObj in JsonObj["video"]) {
+			for (int i = 0; i < JsonObj ["video"].Count () / 2; i += 2) {
 				
 				ExhibitionContentEn newEnglishExContent = new ExhibitionContentEn {
 					Id = videoId,
-					Title = (videoObj["caption"]).ToString(),
+					Title = JsonObj ["video"][i]["caption"].ToString(),
 					PoiId = PoiID,
-					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (videoObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH  + JsonObj ["video"][i]["path"].ToString(),
 					Duration = -1, //not given by map team
 					Encoding = string.Empty, //not gven by map team
 					Resolution = -1 //not given by map team
 				};
 
 				ExhibitionContentFr newFrenchExContent = new ExhibitionContentFr {
-					Id = videoId,
-					Title = (videoObj["caption"]).ToString(),
+					Id = videoId++,
+					Title = JsonObj ["video"][i+1]["caption"].ToString(),
 					PoiId = PoiID,
-					Filepath = LOCAL_VENUE_DATA_PATH + "/" + (videoObj["path"]).ToString(),
+					Filepath = LOCAL_VENUE_DATA_PATH + JsonObj ["video"][i+1]["path"].ToString(),
 					Duration = -1, //not given by map team
 					Encoding = string.Empty, //not gven by map team
 					Resolution = -1 //not given by map team
@@ -400,15 +400,39 @@ namespace Exposeum
 				englishExhibitionContent.Add (newEnglishExContent);
 				frenchExhibitionContent.Add (newFrenchExContent);
 
-				FetchAndSaveImage ("/" + (videoObj["path"]).ToString());
-				//FetchAndSaveImage (newFrenchExContent.Filepath);
-					
+				FetchAndSaveImage (JsonObj ["video"][i]["path"].ToString());
+				FetchAndSaveImage (JsonObj ["video"][i+1]["path"].ToString());
 			}
 
 			//loop for audio
 
-			foreach (var audioObj in JsonObj["audio"]) {
-				//not yet implemented by map team
+			for (int i = 0; i < JsonObj ["audio"].Count () / 2; i += 2) {
+
+				ExhibitionContentEn newEnglishExContent = new ExhibitionContentEn {
+					Id = audioId,
+					Title = JsonObj ["audio"][i]["caption"].ToString(),
+					PoiId = PoiID,
+					Filepath = LOCAL_VENUE_DATA_PATH  + JsonObj ["audio"][i]["path"].ToString(),
+					Duration = -1, //not given by map team
+					Encoding = string.Empty, //not gven by map team
+					Resolution = -1 //not given by map team
+				};
+
+				ExhibitionContentFr newFrenchExContent = new ExhibitionContentFr {
+					Id = audioId++,
+					Title = JsonObj ["audio"][i+1]["caption"].ToString(),
+					PoiId = PoiID,
+					Filepath = LOCAL_VENUE_DATA_PATH + JsonObj ["audio"][i+1]["path"].ToString(),
+					Duration = -1, //not given by map team
+					Encoding = string.Empty, //not gven by map team
+					Resolution = -1 //not given by map team
+				};
+
+				englishExhibitionContent.Add (newEnglishExContent);
+				frenchExhibitionContent.Add (newFrenchExContent);
+
+				FetchAndSaveImage (JsonObj ["audio"][i]["path"].ToString());
+				FetchAndSaveImage (JsonObj ["audio"][i+1]["path"].ToString());
 			}
 
 			//loop for images
