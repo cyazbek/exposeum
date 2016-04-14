@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -60,8 +61,6 @@ namespace Exposeum
             fragmentTx.Commit();
             */
             //floorFrameLayout.SetOnTouchListener(this);
-            
-
 
             //Bind the _totalMapView to the Activity
             SetContentView(_mapController.TotalMapView);

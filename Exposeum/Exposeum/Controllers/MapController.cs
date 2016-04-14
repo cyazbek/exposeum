@@ -59,6 +59,14 @@ namespace Exposeum.Controllers
 
             _beaconFinder.AddObserver(this);
 
+            var floorButton = TotalMapView.FindViewById<Button>(Resource.Id.floor_select_button);
+           /* floorButton.Click += (sender, e) =>
+            {
+                StorylineController storylineController = StorylineController.GetInstance();
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                storylineController.ShowPauseStoryLineDialog(transaction, context);
+            };
+            */
             //If we are not in free explorer mode (ie there exists a current storyline) then add the
             //current storyline progression fragment to the map activity
             if (!ExposeumApplication.IsExplorerMode)
@@ -88,9 +96,12 @@ namespace Exposeum.Controllers
             //Add a new MapView into the frame layout
             mapViewFrameLayout.AddView(_mapView);
             //Get a reference to the seek bar in the view
-            //SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
+            SeekBar floorSeekBar = TotalMapView.FindViewById<SeekBar>(Resource.Id.floor_seek_bar);
             //Bind an event handler to ProgressChanged
-            //floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
+            floorSeekBar.ProgressChanged += OnMapSliderProgressChange;
+
+            
+            
         }
 
         public void OnMapSliderProgressChange(object sender, SeekBar.ProgressChangedEventArgs e)
