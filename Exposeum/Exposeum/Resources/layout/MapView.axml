@@ -34,13 +34,12 @@
         android:isScrollContainer="true">
     <!-- map progression fragment will be placed here -->
     </FrameLayout>
-<!--    <SeekBar
+    <SeekBar
         android:id="@+id/floor_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="4"
+        android:max="3"
         android:progress="0" />
--->
 <!-- <FrameLayout
         android:id="@+id/floor_selector_frame"
         android:layout_width="match_parent"
