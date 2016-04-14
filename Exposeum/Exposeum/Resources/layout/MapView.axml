@@ -13,20 +13,6 @@
     <!-- map will be placed here -->
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/map_frag_floorSelector"
-        android:layout_width="match_parent"
-        android:layout_height="730dp"
-        android:layout_marginBottom="80dp"
-        android:layout_gravity="bottom">
-    <!-- Floor selector Button is placed here-->
-    <!--<Button
-            android:text="Button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/floor_select_button" />
-            -->
-    </FrameLayout>
-    <FrameLayout
         android:id="@+id/map_frag_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,8 +24,11 @@
         android:id="@+id/floor_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/seekbg"
         android:max="3"
-        android:progress="0" />
+        android:progress="0"
+        android:thumb="@drawable/seekthumb"
+        android:maxHeight="20dp" />
 <!-- <FrameLayout
         android:id="@+id/floor_selector_frame"
         android:layout_width="match_parent"
@@ -48,4 +37,22 @@
         android:translationY="10dp">
     </FrameLayout>
     -->
+    <FrameLayout
+        android:id="@+id/map_frag_floorSelector"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="bottom|right"
+        android:minWidth="25px"
+        android:minHeight="25px">
+    <!-- Floor selector Button is placed here-->
+        <Button
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/floor_select_button"
+            android:background="@drawable/floorPuck"
+            android:gravity="center" />
+    </FrameLayout>
 </FrameLayout>
