@@ -62,7 +62,6 @@ namespace Exposeum
             */
             //floorFrameLayout.SetOnTouchListener(this);
 
-
             //Bind the _totalMapView to the Activity
             SetContentView(_mapController.TotalMapView);
 		}
