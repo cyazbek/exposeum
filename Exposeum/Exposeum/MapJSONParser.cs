@@ -18,8 +18,8 @@ namespace Exposeum
 	{
 		String JSONData;
 
-		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum2";
-		private readonly String JSON_SCHEMA_FILENAME = "Map.json";
+		private readonly String JSON_BASE_URL = "http://mowbray.tech/exposeum";
+		private readonly String JSON_SCHEMA_FILENAME = "mapData.json";
 
 		public static readonly String LOCAL_VENUE_DATA_PATH = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/MuseeDesOndes/venue_data";
 
@@ -270,6 +270,8 @@ namespace Exposeum
 		//download and save an image to the device's storage
 		private void FetchAndSaveImage(string path)
 		{
+			if (path.Length == 0) return;
+				
 			using (HttpClient client = new HttpClient())
 			using (HttpResponseMessage response = client.GetAsync(JSON_BASE_URL + path).Result)
 			{
